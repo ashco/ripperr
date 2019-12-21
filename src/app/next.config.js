@@ -1,3 +1,3 @@
 ﻿module.exports = {
-  distDir: '../../dist/functions/next'
+  distDir: '../../dist/next',
 };
