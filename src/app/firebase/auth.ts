@@ -1,4 +1,4 @@
-﻿import { auth } from './firebase';
+﻿import { handleLogin } from './firebase';
 
 // Sign Up
 // export const doCreateUserWithEmailAndPassword = (email, password) =>
