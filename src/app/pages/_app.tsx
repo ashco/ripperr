@@ -2,14 +2,18 @@
 import App from 'next/app'
 import Page from '../components/Page';
 
+import Firebase, { FirebaseContext } from '../components/Firebase';
+
 export default class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props
     return (
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <FirebaseContext.Provider value={new Firebase()}>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </FirebaseContext.Provider>
     )
   }
 }
