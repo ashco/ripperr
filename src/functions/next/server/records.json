@@ -5,25 +5,40 @@
       "multi private-next-pages/_document.tsx": 1,
       "multi private-next-pages/about.tsx": 2,
       "multi private-next-pages/index.tsx": 3,
-      "multi next/dist/pages/_error": 4
+      "multi private-next-pages/signin.tsx": 4,
+      "multi next/dist/pages/_error": 5
     },
     "usedIds": {
       "0": 0,
       "1": 1,
       "2": 2,
       "3": 3,
-      "4": 4
+      "4": 4,
+      "5": 5
     }
   },
   "chunks": {
     "byName": {
       "init-server.js": 0,
       "on-error-server.js": 1,
-      "static/_TihxqpI7VphVPkTSYdb4/pages/_app.js": 2,
-      "static/_TihxqpI7VphVPkTSYdb4/pages/_document.js": 3,
-      "static/_TihxqpI7VphVPkTSYdb4/pages/_error.js": 4,
-      "static/_TihxqpI7VphVPkTSYdb4/pages/about.js": 5,
-      "static/_TihxqpI7VphVPkTSYdb4/pages/index.js": 6
+      "static/YaP7X5uSX3FFTl04DmpQT/pages/_app.js": 2,
+      "static/YaP7X5uSX3FFTl04DmpQT/pages/_document.js": 3,
+      "static/YaP7X5uSX3FFTl04DmpQT/pages/_error.js": 4,
+      "static/YaP7X5uSX3FFTl04DmpQT/pages/about.js": 5,
+      "static/YaP7X5uSX3FFTl04DmpQT/pages/index.js": 6,
+      "static/YaP7X5uSX3FFTl04DmpQT/pages/signin.js": 7,
+      "static/or4U_vEaLwHbTaKIxti1X/pages/_app.js": 8,
+      "static/or4U_vEaLwHbTaKIxti1X/pages/_document.js": 9,
+      "static/or4U_vEaLwHbTaKIxti1X/pages/_error.js": 10,
+      "static/or4U_vEaLwHbTaKIxti1X/pages/about.js": 11,
+      "static/or4U_vEaLwHbTaKIxti1X/pages/index.js": 12,
+      "static/or4U_vEaLwHbTaKIxti1X/pages/signin.js": 13,
+      "static/qERxSG_QRh7DqD3kD3mE5/pages/_app.js": 2,
+      "static/qERxSG_QRh7DqD3kD3mE5/pages/_document.js": 3,
+      "static/qERxSG_QRh7DqD3kD3mE5/pages/_error.js": 4,
+      "static/qERxSG_QRh7DqD3kD3mE5/pages/about.js": 5,
+      "static/qERxSG_QRh7DqD3kD3mE5/pages/index.js": 6,
+      "static/qERxSG_QRh7DqD3kD3mE5/pages/signin.js": 7
     },
     "bySource": {},
     "usedIds": [
@@ -33,7 +48,8 @@
       3,
       4,
       5,
-      6
+      6,
+      7
     ]
   }
 }

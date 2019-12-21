@@ -1,21 +1,21 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/about.js"],{
 
-/***/ "../../node_modules/@babel/runtime-corejs2/regenerator/index.js":
-/*!*******************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/@babel/runtime-corejs2/regenerator/index.js ***!
-  \*******************************************************************************************/
+/***/ "./node_modules/@babel/runtime-corejs2/regenerator/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/regenerator/index.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ "../../node_modules/regenerator-runtime/runtime.js");
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
 
 
 /***/ }),
 
-/***/ "../../node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx!./":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx ***!
-  \*************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx!./":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx ***!
+  \************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35,21 +35,21 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "../../node_modu
 
 /***/ }),
 
-/***/ "../../node_modules/react/index.js":
-/*!***********************************************************************************************!*\
-  !*** delegated ../../node_modules/react/index.js from dll-reference dll_ab2adf7162e4f57336bd ***!
-  \***********************************************************************************************/
+/***/ "./node_modules/react/index.js":
+/*!*******************************************************************************************!*\
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_5f137288facb1107b491 ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ab2adf7162e4f57336bd */ "dll-reference dll_ab2adf7162e4f57336bd"))("../../node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_5f137288facb1107b491 */ "dll-reference dll_5f137288facb1107b491"))("./node_modules/react/index.js");
 
 /***/ }),
 
-/***/ "../../node_modules/regenerator-runtime/runtime.js":
-/*!******************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/regenerator-runtime/runtime.js ***!
-  \******************************************************************************/
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -792,9 +792,9 @@ try {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "../../node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
 var _jsxFileName = "/Users/akc/CODE/25-ripperr/src/app/pages/about.tsx";
@@ -836,28 +836,28 @@ About.getInitialProps = function _callee(_ref2) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!****************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx ***!
   \****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx! */"../../node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fabout&absolutePagePath=%2FUsers%2Fakc%2FCODE%2F25-ripperr%2Fsrc%2Fapp%2Fpages%2Fabout.tsx!./");
 
 
 /***/ }),
 
-/***/ "dll-reference dll_ab2adf7162e4f57336bd":
+/***/ "dll-reference dll_5f137288facb1107b491":
 /*!*******************************************!*\
-  !*** external "dll_ab2adf7162e4f57336bd" ***!
+  !*** external "dll_5f137288facb1107b491" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_ab2adf7162e4f57336bd;
+module.exports = dll_5f137288facb1107b491;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[3,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=about.js.map

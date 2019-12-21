@@ -93,10 +93,10 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "../../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":
-/*!********************************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/@babel/runtime-corejs2/core-js/object/define-property.js ***!
-  \********************************************************************************************************/
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -104,10 +104,10 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/define-proper
 
 /***/ }),
 
-/***/ "../../node_modules/@babel/runtime-corejs2/core-js/set.js":
-/*!*************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/@babel/runtime-corejs2/core-js/set.js ***!
-  \*************************************************************************************/
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/set.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/set.js ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -115,10 +115,10 @@ module.exports = __webpack_require__(/*! core-js/library/fn/set */ "core-js/libr
 
 /***/ }),
 
-/***/ "../../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js":
-/*!*******************************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js ***!
-  \*******************************************************************************************************/
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -132,17 +132,17 @@ module.exports = _interopRequireDefault;
 
 /***/ }),
 
-/***/ "../../node_modules/next/dist/next-server/lib/amp-context.js":
-/*!****************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/next/dist/next-server/lib/amp-context.js ***!
-  \****************************************************************************************/
+/***/ "./node_modules/next/dist/next-server/lib/amp-context.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/amp-context.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
@@ -162,17 +162,17 @@ exports.AmpStateContext = React.createContext({});
 
 /***/ }),
 
-/***/ "../../node_modules/next/dist/next-server/lib/amp.js":
-/*!********************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/next/dist/next-server/lib/amp.js ***!
-  \********************************************************************************/
+/***/ "./node_modules/next/dist/next-server/lib/amp.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/amp.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -186,7 +186,7 @@ _Object$defineProperty(exports, "__esModule", {
 
 const react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 
-const amp_context_1 = __webpack_require__(/*! ./amp-context */ "../../node_modules/next/dist/next-server/lib/amp-context.js");
+const amp_context_1 = __webpack_require__(/*! ./amp-context */ "./node_modules/next/dist/next-server/lib/amp-context.js");
 
 function isInAmpMode({
   ampFirst = false,
@@ -207,17 +207,17 @@ exports.useAmp = useAmp;
 
 /***/ }),
 
-/***/ "../../node_modules/next/dist/next-server/lib/head-manager-context.js":
-/*!*************************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/next/dist/next-server/lib/head-manager-context.js ***!
-  \*************************************************************************************************/
+/***/ "./node_modules/next/dist/next-server/lib/head-manager-context.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/head-manager-context.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
@@ -237,19 +237,19 @@ exports.HeadManagerContext = React.createContext(null);
 
 /***/ }),
 
-/***/ "../../node_modules/next/dist/next-server/lib/head.js":
-/*!*********************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/next/dist/next-server/lib/head.js ***!
-  \*********************************************************************************/
+/***/ "./node_modules/next/dist/next-server/lib/head.js":
+/*!********************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/head.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Set = __webpack_require__(/*! @babel/runtime-corejs2/core-js/set */ "../../node_modules/@babel/runtime-corejs2/core-js/set.js");
+var _Set = __webpack_require__(/*! @babel/runtime-corejs2/core-js/set */ "./node_modules/@babel/runtime-corejs2/core-js/set.js");
 
-var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -263,13 +263,13 @@ _Object$defineProperty(exports, "__esModule", {
 
 const react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 
-const side_effect_1 = __importDefault(__webpack_require__(/*! ./side-effect */ "../../node_modules/next/dist/next-server/lib/side-effect.js"));
+const side_effect_1 = __importDefault(__webpack_require__(/*! ./side-effect */ "./node_modules/next/dist/next-server/lib/side-effect.js"));
 
-const amp_context_1 = __webpack_require__(/*! ./amp-context */ "../../node_modules/next/dist/next-server/lib/amp-context.js");
+const amp_context_1 = __webpack_require__(/*! ./amp-context */ "./node_modules/next/dist/next-server/lib/amp-context.js");
 
-const head_manager_context_1 = __webpack_require__(/*! ./head-manager-context */ "../../node_modules/next/dist/next-server/lib/head-manager-context.js");
+const head_manager_context_1 = __webpack_require__(/*! ./head-manager-context */ "./node_modules/next/dist/next-server/lib/head-manager-context.js");
 
-const amp_1 = __webpack_require__(/*! ./amp */ "../../node_modules/next/dist/next-server/lib/amp.js");
+const amp_1 = __webpack_require__(/*! ./amp */ "./node_modules/next/dist/next-server/lib/amp.js");
 
 function defaultHead(inAmpMode = false) {
   const head = [react_1.default.createElement("meta", {
@@ -414,19 +414,19 @@ exports.default = Head;
 
 /***/ }),
 
-/***/ "../../node_modules/next/dist/next-server/lib/side-effect.js":
-/*!****************************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/next/dist/next-server/lib/side-effect.js ***!
-  \****************************************************************************************/
+/***/ "./node_modules/next/dist/next-server/lib/side-effect.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/side-effect.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _Set = __webpack_require__(/*! @babel/runtime-corejs2/core-js/set */ "../../node_modules/@babel/runtime-corejs2/core-js/set.js");
+var _Set = __webpack_require__(/*! @babel/runtime-corejs2/core-js/set */ "./node_modules/@babel/runtime-corejs2/core-js/set.js");
 
-var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 
 _Object$defineProperty(exports, "__esModule", {
   value: true
@@ -489,24 +489,24 @@ exports.default = () => {
 
 /***/ }),
 
-/***/ "../../node_modules/next/dist/pages/_error.js":
-/*!*************************************************************************!*\
-  !*** /Users/akc/CODE/25-ripperr/node_modules/next/dist/pages/_error.js ***!
-  \*************************************************************************/
+/***/ "./node_modules/next/dist/pages/_error.js":
+/*!************************************************!*\
+  !*** ./node_modules/next/dist/pages/_error.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
 
 exports.__esModule = true;
 exports.default = void 0;
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 
-var _head = _interopRequireDefault(__webpack_require__(/*! ../next-server/lib/head */ "../../node_modules/next/dist/next-server/lib/head.js"));
+var _head = _interopRequireDefault(__webpack_require__(/*! ../next-server/lib/head */ "./node_modules/next/dist/next-server/lib/head.js"));
 
 var statusCodes = {
   400: 'Bad Request',
@@ -601,7 +601,7 @@ var styles = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next/dist/pages/_error */"../../node_modules/next/dist/pages/_error.js");
+module.exports = __webpack_require__(/*! next/dist/pages/_error */"./node_modules/next/dist/pages/_error.js");
 
 
 /***/ }),

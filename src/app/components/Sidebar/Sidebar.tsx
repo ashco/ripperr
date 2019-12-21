@@ -12,7 +12,9 @@ const Sidebar = () => (
       </Link>
     </LinksWrapper>
     <ProfileWrapper>
-      Profile
+      <Link href="/signin">
+        <a>Sign In</a>
+      </Link>
     </ProfileWrapper>
   </SidebarWrapper>
 );

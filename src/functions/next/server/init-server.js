@@ -88,12 +88,12 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "M4oA");
+/******/ 	return __webpack_require__(__webpack_require__.s = "GX0O");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "M4oA":
+/***/ "GX0O":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

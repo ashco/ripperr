@@ -4,8 +4,8 @@ const functions = require("firebase-functions");
 const next_1 = require("next");
 const path = require("path");
 // const dev = process.env.NODE_ENV !== 'production';
-// const app = next({ dev, conf: { distDir: 'next' } });
 const dev = false;
+// const app = next({ dev, conf: { distDir: 'next' } });
 const app = next_1.default({
     dev,
     conf: { distDir: `${path.relative(process.cwd(), __dirname)}/../next` }
