@@ -71,3 +71,4 @@ dist/
 # next.js
 .next/
 out/
+lib/

@@ -1,1 +1,0 @@
-{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport { auth } from '../firebase/firebase';\n\nvar Signin = function Signin() {\n  console.log(auth.currentUser);\n  return __jsx(\"div\", null, __jsx(\"h1\", null, \"Welcome to My Awesome App\"));\n};\n\nexport default Signin;","map":null,"metadata":{},"sourceType":"module"}
