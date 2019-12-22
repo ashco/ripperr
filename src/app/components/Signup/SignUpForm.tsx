@@ -1,6 +1,15 @@
-﻿import React, { useState, FormEvent } from 'react';
+﻿import React, { useState } from 'react';
 
-const INITIAL_STATE = {
+interface iState {
+  [key: string]: any
+  username: string
+  email: string
+  passwordOne: string
+  passwordTwo: string
+  error: null | object
+}
+
+const INITIAL_STATE: iState = {
   username: '',
   email: '',
   passwordOne: '',
@@ -10,48 +19,46 @@ const INITIAL_STATE = {
 
 const SignUpForm = () => {
   const [state, setState] = useState(INITIAL_STATE);
-  const {
-    username,
-    email,
-    passwordOne,
-    passwordTwo,
-    error,
-  } = state;
 
-  function onSubmit(event: FormEvent) {
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
   }
 
-  function onChange(event: FormEvent) {
-    // setState({ [event.target.name]: event.target.value });
+  function handleChange(event: { target: { name: string; value: any } }) {
+    const { name, value } = event.target;
+
+    let newState = { ...state };
+    newState[name] = value;
+
+    setState(newState);
   }
 
   return (
     <form onSubmit={onSubmit}>
       <input
         name="username"
-        value={username}
-        onChange={onChange}
+        value={state.username}
+        onChange={handleChange}
         type="text"
         placeholder="Full Name"
       />
       <input
         name="email"
-        value={email}
-        onChange={onChange}
+        value={state.email}
+        onChange={handleChange}
         type="text"
         placeholder="Email Address"
       />
       <input
         name="passwordOne"
-        value={passwordOne}
-        onChange={onChange}
+        value={state.passwordOne}
+        onChange={handleChange}
         type="password"
         placeholder="Password"
       />
       <input
         name="passwordTwo"
-        value={passwordTwo}
-        onChange={onChange}
+        value={state.passwordTwo}
+        onChange={handleChange}
         type="password"
         placeholder="Confirm Password"
       />
