@@ -1,4 +1,6 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useContext } from 'react';
+import { useRouter } from 'next/router'
+import Firebase, { FirebaseContext } from '../Firebase/index';
 
 interface iState {
   [key: string]: any
@@ -18,10 +20,22 @@ const INITIAL_STATE: iState = {
 };
 
 const SignUpForm = () => {
+  const firebase = useContext(FirebaseContext);
+  const router = useRouter();
   const [state, setState] = useState(INITIAL_STATE);
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-  }
+  const {
+    username,
+    email,
+    passwordOne,
+    passwordTwo,
+    error } = state;
+
+  const isInvalid =
+    passwordOne !== passwordTwo ||
+    passwordOne === '' ||
+    email === '' ||
+    username === '';
 
   function handleChange(event: { target: { name: string; value: any } }) {
     const { name, value } = event.target;
@@ -32,37 +46,53 @@ const SignUpForm = () => {
     setState(newState);
   }
 
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log('trigger!')
+    firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+        console.log(authUser);
+        setState({ ...INITIAL_STATE });
+        router.push('/');
+      })
+      .catch(error => {
+        setState({ error });
+      });
+
+  }
+
   return (
     <form onSubmit={onSubmit}>
       <input
         name="username"
-        value={state.username}
+        value={username}
         onChange={handleChange}
         type="text"
         placeholder="Full Name"
       />
       <input
         name="email"
-        value={state.email}
+        value={email}
         onChange={handleChange}
         type="text"
         placeholder="Email Address"
       />
       <input
         name="passwordOne"
-        value={state.passwordOne}
+        value={passwordOne}
         onChange={handleChange}
         type="password"
         placeholder="Password"
       />
       <input
         name="passwordTwo"
-        value={state.passwordTwo}
+        value={passwordTwo}
         onChange={handleChange}
         type="password"
         placeholder="Confirm Password"
       />
-      <button type="submit">Sign Up</button>
+      <button type="submit" disabled={isInvalid}>Sign Up</button>
       {/* {error && <p>{error.message}</p>} */}
     </form>
   );

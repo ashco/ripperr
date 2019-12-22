@@ -9,11 +9,12 @@ export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <FirebaseContext.Provider value={new Firebase()}>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
-      </FirebaseContext.Provider>
+      // <FirebaseContext.Provider value={new Firebase()}>
+      // <FirebaseContext.Provider>
+      < Page >
+        <Component {...pageProps} />
+      </Page >
+      // </FirebaseContext.Provider>
     )
   }
 }
