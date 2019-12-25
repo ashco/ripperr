@@ -4,13 +4,11 @@
   "author": "AshCo (https://ashco.io)",
   "license": "MIT",
   "scripts": {
-    "dev": "cd src/app && yarn dev",
-    "install": "yarn install-next && yarn install-firebase",
-    "install-next": "cd src/app && yarn install",
-    "install-firebase": "cd src/functions && yarn install",
+    "dev": "cd src/app && next -p 9999",
     "build": "yarn build-next && yarn build-firebase",
-    "build-next": "cd src/app && yarn build",
+    "build-next": "cd src/app && next build",
     "build-firebase": "cd src/functions && yarn build",
+    "start": "cd src/app && next start",
     "serve": "yarn build && firebase serve",
     "shell": "yarn build && firebase functions:shell",
     "deploy": "firebase deploy",
@@ -30,12 +28,12 @@
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/styled-components": "^4.4.1",
-    "@typescript-eslint/eslint-plugin": "^2.6.1",
-    "@typescript-eslint/parser": "^2.6.1",
-    "eslint-loader": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
+    "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "tslint": "^5.12.0",
+    "prettier": "^1.19.1",
     "typescript": "^3.2.2"
   }
 }

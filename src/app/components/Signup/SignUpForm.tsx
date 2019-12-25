@@ -2,28 +2,27 @@
 import { useRouter } from 'next/router'
 import Firebase, { FirebaseContext } from '../Firebase/index';
 
-interface iState {
-  [key: string]: any
-  username: string
-  email: string
-  passwordOne: string
-  passwordTwo: string
-  error: null | iError
+interface IState {
+  [key: string]: any;
+  username: string;
+  email: string;
+  passwordOne: string;
+  passwordTwo: string;
+  error: null | IError;
 }
 
-interface iError {
-  code: string
-  message: string
+interface IError {
+  code: string;
+  message: string;
 }
 
-const INITIAL_STATE: iState = {
+const INITIAL_STATE: IState = {
   username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
   error: null,
-};
-
+}
 
 
 const SignUpForm = () => {
@@ -44,16 +43,16 @@ const SignUpForm = () => {
     email === '' ||
     username === '';
 
-  function handleChange(event: { target: { name: string; value: any } }) {
+  function handleChange(event: { target: { name: string; value: any } }): void {
     const { name, value } = event.target;
 
-    let newState = { ...state };
+    const newState = { ...state };
     newState[name] = value
 
     setState(newState);
   }
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
     firebase
@@ -69,7 +68,6 @@ const SignUpForm = () => {
 
   }
 
-  // TODO Enable ESLint
 
   return (
     <form onSubmit={onSubmit}>

@@ -1,15 +1,13 @@
-﻿import { NextPage } from 'next';
+﻿import { NextPage } from "next";
+import SignInForm from "../components/Signin/SignInForm";
+import SignUpLink from "../components/Signup/SignUpLink";
 
-const Signin: NextPage<{ userAgent: string }> = () => {
+const SignInPage: NextPage<{ userAgent: string }> = () => (
+  <div>
+    <h1>SignIn</h1>
+    <SignInForm />
+    <SignUpLink />
+  </div>
+);
 
-  return (
-    <div>
-      <h1>Welcome to My Awesome App</h1>
-      <button>Sign In</button>
-    </div>
-  )
-
-}
-
-
-export default Signin;
+export default SignInPage;
