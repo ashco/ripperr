@@ -12,6 +12,9 @@ const Sidebar = () => (
       </Link>
     </LinksWrapper>
     <ProfileWrapper>
+      <Link href="/signup">
+        <a>Sign Up</a>
+      </Link>
       <Link href="/signin">
         <a>Sign In</a>
       </Link>

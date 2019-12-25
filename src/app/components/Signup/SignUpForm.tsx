@@ -8,7 +8,12 @@ interface iState {
   email: string
   passwordOne: string
   passwordTwo: string
-  error: null | object
+  error: null | iError
+}
+
+interface iError {
+  code: string
+  message: string
 }
 
 const INITIAL_STATE: iState = {
@@ -18,6 +23,8 @@ const INITIAL_STATE: iState = {
   passwordTwo: '',
   error: null,
 };
+
+
 
 const SignUpForm = () => {
   const firebase = useContext(FirebaseContext);
@@ -41,26 +48,28 @@ const SignUpForm = () => {
     const { name, value } = event.target;
 
     let newState = { ...state };
-    newState[name] = value;
+    newState[name] = value
 
     setState(newState);
   }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('trigger!')
+
     firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        console.log(authUser);
         setState({ ...INITIAL_STATE });
         router.push('/');
       })
-      .catch(error => {
-        setState({ error });
+      .catch((error: any) => {
+        console.log(error);
+        setState({ ...state, error });
       });
 
   }
+
+  // TODO Enable ESLint
 
   return (
     <form onSubmit={onSubmit}>
@@ -93,7 +102,7 @@ const SignUpForm = () => {
         placeholder="Confirm Password"
       />
       <button type="submit" disabled={isInvalid}>Sign Up</button>
-      {/* {error && <p>{error.message}</p>} */}
+      {error && <p>{error.message}</p>}
     </form>
   );
 }
