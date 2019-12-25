@@ -1,8 +1,10 @@
-﻿import styled from "styled-components";
+﻿import styled from 'styled-components';
 import Link from 'next/link';
 
-const Sidebar = () => (
-  <SidebarWrapper>
+import SignOutButton from './SignOutButton';
+
+const Navigation = () => (
+  <NavigationWrapper>
     <LinksWrapper>
       <Link href="/">
         <a>Home</a>
@@ -18,17 +20,18 @@ const Sidebar = () => (
       <Link href="/signin">
         <a>Sign In</a>
       </Link>
+      <SignOutButton />
     </ProfileWrapper>
-  </SidebarWrapper>
+  </NavigationWrapper>
 );
 
-const SidebarWrapper = styled.nav`
+const NavigationWrapper = styled.nav`
   display: grid;
   grid-template-rows: auto 80px;
   grid-area: sidebar;
   grid-template-areas:
-    "links"
-    "profile";
+    'links'
+    'profile';
   padding: 1rem;
 `;
 
@@ -37,5 +40,4 @@ const ProfileWrapper = styled.div`
   grid-area: profile;
 `;
 
-
-export default Sidebar;
+export default Navigation;

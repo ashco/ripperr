@@ -1,6 +1,6 @@
-﻿import { NextPage } from "next";
-import SignInForm from "../components/Signin/SignInForm";
-import SignUpLink from "../components/Signup/SignUpLink";
+﻿import { NextPage } from 'next';
+import SignInForm from '../components/Signin/SignInForm';
+import SignUpLink from '../components/Signup/SignUpLink';
 
 const SignInPage: NextPage<{ userAgent: string }> = () => (
   <div>
