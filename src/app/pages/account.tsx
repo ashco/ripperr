@@ -1,12 +1,14 @@
 ﻿import { NextPage } from 'next';
 
-const AccountPage: NextPage<{ userAgent: string }> = ({ userAgent }) => (
-  <h1>About world</h1>
-);
+import PasswordForgetForm from '../components/PasswordForgot/PasswordForgotForm';
+import PasswordChangeForm from '../components/PasswordChange/PasswordChangeForm';
 
-AccountPage.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers['user-agent'] || '' : navigator.userAgent;
-  return { userAgent };
-};
+const AccountPage: NextPage = () => (
+  <div>
+    <h1>Account Page</h1>
+    <PasswordForgetForm />
+    <PasswordChangeForm />
+  </div>
+);
 
 export default AccountPage;

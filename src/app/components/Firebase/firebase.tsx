@@ -40,7 +40,9 @@ class Firebase {
 
   doPasswordUpdate = (password: string) => {
     if (this.auth.currentUser) {
-      this.auth.currentUser.updatePassword(password);
+      return this.auth.currentUser.updatePassword(password);
+    } else {
+      throw Error('There is no current user!');
     }
   };
 }
