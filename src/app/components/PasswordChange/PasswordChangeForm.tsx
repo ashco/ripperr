@@ -1,41 +1,26 @@
 ﻿import React, { useState, useContext } from 'react';
-import { useRouter } from 'next/router';
-import { FirebaseContext } from '../Firebase/index';
+import { FirebaseContext } from '../Firebase';
+import { InterfaceError } from '../Signup/SignUpForm';
 
 interface InterfaceState {
   [key: string]: any;
-  username: string;
-  email: string;
   passwordOne: string;
   passwordTwo: string;
   error: null | InterfaceError;
 }
 
-export interface InterfaceError {
-  code: string;
-  message: string;
-}
-
 const INITIAL_STATE: InterfaceState = {
-  username: '',
-  email: '',
   passwordOne: '',
   passwordTwo: '',
   error: null,
 };
 
-const SignUpForm = () => {
+const PasswordChangeForm = () => {
   const firebase = useContext(FirebaseContext);
-  const router = useRouter();
   const [state, setState] = useState(INITIAL_STATE);
 
-  const { username, email, passwordOne, passwordTwo, error } = state;
-
-  const isInvalid =
-    passwordOne !== passwordTwo ||
-    passwordOne === '' ||
-    email === '' ||
-    username === '';
+  const { passwordOne, passwordTwo, error } = state;
+  const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
   function handleChange(event: { target: { name: string; value: any } }): void {
     const { name, value } = event.target;
@@ -50,53 +35,38 @@ const SignUpForm = () => {
     event.preventDefault();
 
     firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authUser => {
+      .doPasswordUpdate(passwordOne)
+      .then(() => {
         setState({ ...INITIAL_STATE });
-        router.push('/');
       })
       .catch(error => {
-        console.log(error);
         setState({ ...state, error });
+        console.error(error);
       });
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        name="username"
-        value={username}
-        onChange={handleChange}
-        type="text"
-        placeholder="Full Name"
-      />
-      <input
-        name="email"
-        value={email}
-        onChange={handleChange}
-        type="text"
-        placeholder="Email Address"
-      />
-      <input
         name="passwordOne"
         value={passwordOne}
         onChange={handleChange}
         type="password"
-        placeholder="Password"
+        placeholder="New Password"
       />
       <input
         name="passwordTwo"
         value={passwordTwo}
         onChange={handleChange}
         type="password"
-        placeholder="Confirm Password"
+        placeholder="Confirm New Password"
       />
-      <button type="submit" disabled={isInvalid}>
-        Sign Up
+      <button disabled={isInvalid} type="submit">
+        Reset My Password
       </button>
       {error && <p>{error.message}</p>}
     </form>
   );
 };
 
-export default SignUpForm;
+export default PasswordChangeForm;

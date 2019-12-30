@@ -1,11 +1,5 @@
 ﻿import React from 'react';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-// TODO Write authentication as context component, not wrapper
-
-export interface InterfaceAuthUserContext {
-  authUser: firebase.User | null;
-}
+import { InterfaceAuthUserContext } from '../Firebase/firebase';
 
 const AuthUserContext = React.createContext<InterfaceAuthUserContext>({
   authUser: null,

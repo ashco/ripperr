@@ -1,6 +1,6 @@
 ﻿import React, { useState, useContext, useEffect } from 'react';
 import { AuthUserContext } from './index';
-import { InterfaceAuthUserContext } from './context';
+import { InterfaceAuthUserContext } from '../Firebase/firebase';
 import { FirebaseContext } from '../Firebase';
 
 const withAuthentication = (Component: any) => {

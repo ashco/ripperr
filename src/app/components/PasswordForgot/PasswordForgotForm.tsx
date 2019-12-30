@@ -1,28 +1,25 @@
 ﻿import React, { useState, useContext } from 'react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { FirebaseContext } from '../Firebase';
 import { InterfaceError } from '../Signup/SignUpForm';
 
 interface InterfaceState {
   [key: string]: any;
   email: string;
-  password: string;
   error: null | InterfaceError;
 }
 
 const INITIAL_STATE: InterfaceState = {
   email: '',
-  password: '',
   error: null,
 };
 
-const SignInForm = () => {
+const PasswordForgotForm = () => {
   const firebase = useContext(FirebaseContext);
-  const router = useRouter();
-  const [state, setState] = useState({ ...INITIAL_STATE });
+  const [state, setState] = useState(INITIAL_STATE);
 
-  const { email, password, error } = state;
-  const isInvalid = password === '' || email === '';
+  const { email, error } = state;
+  const isInvalid = email === '';
 
   function handleChange(event: { target: { name: string; value: any } }): void {
     const { name, value } = event.target;
@@ -37,13 +34,13 @@ const SignInForm = () => {
     event.preventDefault();
 
     firebase
-      .doSignInWithEmailAndPassword(email, password)
+      .doPasswordReset(email)
       .then(() => {
         setState({ ...INITIAL_STATE });
-        router.push('/');
       })
       .catch(error => {
         setState({ ...state, error });
+        console.error(error);
       });
   }
 
@@ -56,19 +53,20 @@ const SignInForm = () => {
         type="text"
         placeholder="Email Address"
       />
-      <input
-        name="password"
-        value={password}
-        onChange={handleChange}
-        type="password"
-        placeholder="Password"
-      />
       <button disabled={isInvalid} type="submit">
-        Sign In
+        Reset My Password
       </button>
       {error && <p>{error.message}</p>}
     </form>
   );
 };
 
-export default SignInForm;
+export const PasswordForgotLink = () => (
+  <p>
+    <Link href="/forgot">
+      <a>Forgot Password?</a>
+    </Link>
+  </p>
+);
+
+export default PasswordForgotForm;
