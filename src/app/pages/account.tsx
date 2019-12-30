@@ -11,7 +11,7 @@ const AccountPage: NextPage = () => {
   const authUser = useContext(AuthUserContext);
   return (
     <div>
-      <h1>Account: {authUser.email}</h1>
+      <h1>{authUser ? `Account: ${authUser.email}` : `Account Page`}</h1>
       <PasswordForgetForm />
       <PasswordChangeForm />
     </div>

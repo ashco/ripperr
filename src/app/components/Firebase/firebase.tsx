@@ -1,5 +1,6 @@
 ﻿import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
 const config = {
   apiKey: process.env.API_KEY,
@@ -16,6 +17,7 @@ export type InterfaceAuthUserContext = firebase.User | null;
 
 class Firebase {
   auth: firebase.auth.Auth;
+  db: firebase.database.Database;
 
   constructor() {
     if (!firebase.apps.length) {
@@ -23,26 +25,40 @@ class Firebase {
     }
 
     this.auth = firebase.auth();
+    this.db = firebase.database();
   }
 
   // Auth API
-  doCreateUserWithEmailAndPassword = (email: string, password: string) =>
+  doCreateUserWithEmailAndPassword = (
+    email: string,
+    password: string,
+  ): Promise<firebase.auth.UserCredential> =>
     this.auth.createUserWithEmailAndPassword(email, password);
 
-  doSignInWithEmailAndPassword = (email: string, password: string) =>
+  doSignInWithEmailAndPassword = (
+    email: string,
+    password: string,
+  ): Promise<firebase.auth.UserCredential> =>
     this.auth.signInWithEmailAndPassword(email, password);
 
-  doSignOut = () => this.auth.signOut();
+  doSignOut = (): Promise<void> => this.auth.signOut();
 
-  doPasswordReset = (email: string) => this.auth.sendPasswordResetEmail(email);
+  doPasswordReset = (email: string): Promise<void> =>
+    this.auth.sendPasswordResetEmail(email);
 
-  doPasswordUpdate = (password: string) => {
+  doPasswordUpdate = (password: string): Promise<void> => {
     if (this.auth.currentUser) {
       return this.auth.currentUser.updatePassword(password);
     } else {
       throw Error('There is no current user!');
     }
   };
+
+  // User API
+  user = (uid: string): firebase.database.Reference =>
+    this.db.ref(`users/${uid}`);
+
+  users = (): firebase.database.Reference => this.db.ref('users');
 }
 
 export default Firebase;
