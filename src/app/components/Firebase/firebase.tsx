@@ -12,9 +12,7 @@ const config = {
   measurementId: process.env.MEASUREMENT_ID,
 };
 
-export interface InterfaceAuthUserContext {
-  authUser: firebase.User | null;
-}
+export type InterfaceAuthUserContext = firebase.User | null;
 
 class Firebase {
   auth: firebase.auth.Auth;

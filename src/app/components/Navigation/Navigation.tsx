@@ -7,10 +7,7 @@ import SignOutButton from './SignOutButton';
 
 const Navigation = () => {
   const authUser = useContext(AuthUserContext);
-  console.log(authUser);
-  return (
-    <div>{authUser.authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
-  );
+  return <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>;
 };
 
 const NavigationAuth = () => (
