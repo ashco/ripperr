@@ -1,12 +1,15 @@
 ﻿import { NextPage } from 'next';
+import { withAuthorization } from '../components/Session';
+import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
 
-const HomePage: NextPage<{ userAgent: string }> = ({ userAgent }) => (
-  <h1>Home world</h1>
+const HomePage: NextPage<{ userAgent: string }> = () => (
+  <div>
+    <h1>Home world</h1>
+    <p>The Home Page is accessible by every signed in user.</p>
+  </div>
 );
 
-HomePage.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers['user-agent'] || '' : navigator.userAgent;
-  return { userAgent };
-};
+const condition = (authUser: InterfaceAuthUserContext): boolean =>
+  authUser !== null;
 
-export default HomePage;
+export default withAuthorization(condition)(HomePage);
