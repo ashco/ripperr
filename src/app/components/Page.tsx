@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/GlobalStyle';
 import Meta from './Meta';
 import Header from './Header';
-import Sidebar from './Navigation/Sidebar';
+import Navigation from './Navigation/Navigation';
 // // import SelectRow from "./SelectRow";
 // import Nav from "./Nav";
 
@@ -46,7 +46,7 @@ class Page extends Component {
           <GlobalStyle />
           <Meta />
           <Header />
-          <Sidebar />
+          <Navigation />
           <Inner>{this.props.children}</Inner>
           {/* <SelectRow /> */}
           {/* <Nav /> */}
