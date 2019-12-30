@@ -13,7 +13,9 @@
     "shell": "yarn build && firebase functions:shell",
     "deploy": "firebase deploy",
     "deploy-fns": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "dotenv": "^8.2.0",

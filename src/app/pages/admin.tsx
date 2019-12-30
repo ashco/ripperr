@@ -1,6 +1,8 @@
 ﻿import { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
+import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
+import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
 
 import UserList from '../components/Admin/UserList';
 
@@ -57,4 +59,9 @@ const AdminPage: NextPage = () => {
   );
 };
 
-export default AdminPage;
+const condition = (authUser: InterfaceAuthUserContext): boolean => {
+  console.log(authUser);
+  return authUser !== null;
+};
+
+export default withAuthorization(condition)(AdminPage);

@@ -7,14 +7,18 @@ import SignOutButton from './SignOutButton';
 
 const Navigation = () => {
   const authUser = useContext(AuthUserContext);
-  return <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>;
+  return (
+    <NavigationWrapper>
+      {authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+    </NavigationWrapper>
+  );
 };
 
 const NavigationAuth = () => (
   <ul>
     <li>
       <Link href="/">
-        <a>Landing</a>
+        <a>Ripperr</a>
       </Link>
     </li>
     <li>
@@ -27,11 +31,11 @@ const NavigationAuth = () => (
         <a>Account</a>
       </Link>
     </li>
-    <li>
+    {/* <li>
       <Link href="/admin">
         <a>Admin</a>
       </Link>
-    </li>
+    </li> */}
     <li>
       <SignOutButton />
     </li>
@@ -42,7 +46,7 @@ const NavigationNonAuth = () => (
   <ul>
     <li>
       <Link href="/">
-        <a>Landing</a>
+        <a>Ripperr</a>
       </Link>
     </li>
     <li>
@@ -54,13 +58,18 @@ const NavigationNonAuth = () => (
 );
 
 const NavigationWrapper = styled.nav`
-  display: grid;
-  grid-template-rows: auto 80px;
-  grid-area: sidebar;
-  grid-template-areas:
-    'links'
-    'profile';
-  padding: 1rem;
+  background-color: #eee;
+  grid-area: navigation;
+  ul {
+    display: flex;
+    justify-content: center;
+    li:first-child {
+      margin-right: auto;
+    }
+    li {
+      padding: 16px;
+    }
+  }
 `;
 
 const LinksWrapper = styled.div``;

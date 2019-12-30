@@ -23,11 +23,11 @@ const StyledPage = styled.div`
   color: ${({ theme }) => theme.colors.black};
   height: 100vh;
   display: grid;
-  grid-template-rows: 80px auto;
-  grid-template-columns: 200px auto;
+  grid-template-rows: auto 1fr;
+  /* grid-template-columns: auto; */
   grid-template-areas:
-    'header header'
-    'sidebar main';
+    'navigation'
+    'main';
 `;
 
 const Inner = styled.div`
@@ -45,7 +45,7 @@ class Page extends Component {
         <StyledPage>
           <GlobalStyle />
           <Meta />
-          <Header />
+          {/* <Header /> */}
           <Navigation />
           <Inner>{this.props.children}</Inner>
           {/* <SelectRow /> */}
