@@ -31,7 +31,9 @@ const AdminPage: NextPage = () => {
 
     firebase.users().on('value', snapshot => {
       const usersObject = snapshot.val();
-      console.log(usersObject);
+
+      if (usersObject === null) return;
+
       const usersList = Object.keys(usersObject).map(key => ({
         ...usersObject[key],
         uid: key,
@@ -43,7 +45,7 @@ const AdminPage: NextPage = () => {
       });
     });
 
-    return () => firebase.users().off();
+    return (): void => firebase.users().off();
   }, [users]);
 
   return (
