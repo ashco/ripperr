@@ -21,8 +21,8 @@ const PasswordForgotForm = () => {
   const { email, error } = state;
   const isInvalid = email === '';
 
-  function handleChange(event: { target: { name: string; value: any } }): void {
-    const { name, value } = event.target;
+  function handleChange(e: { target: { name: string; value: any } }): void {
+    const { name, value } = e.target;
 
     const newState = { ...state };
     newState[name] = value;
@@ -30,8 +30,8 @@ const PasswordForgotForm = () => {
     setState(newState);
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
 
     firebase
       .doPasswordReset(email)

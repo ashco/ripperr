@@ -1,6 +1,5 @@
 ﻿import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
 
 const Modal = (props: any) => {
   let modalRoot: any;

@@ -22,8 +22,13 @@ const NavigationAuth = () => (
       </Link>
     </li>
     <li>
-      <Link href="/home">
-        <a>Home</a>
+      <Link href="/exercises">
+        <a>Exercises</a>
+      </Link>
+    </li>
+    <li>
+      <Link href="/workouts">
+        <a>Workouts</a>
       </Link>
     </li>
     <li>

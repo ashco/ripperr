@@ -4,7 +4,7 @@ import { withAuthorization } from '../components/Session';
 import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
 import { Modal, ModalWrapper } from '../components/Modal';
 
-const HomePage: NextPage<{ userAgent: string }> = () => {
+const ExercisesPage: NextPage<{ userAgent: string }> = () => {
   const [showModal, setShowModal] = useState(false);
 
   const hide = () => setShowModal(false);
@@ -21,8 +21,7 @@ const HomePage: NextPage<{ userAgent: string }> = () => {
 
   return (
     <div>
-      <h1>Home world</h1>
-      <p>The Home Page is accessible by every signed in user.</p>
+      <h1>Workouts</h1>
       <button onClick={show}>Show</button>
       {modal}
     </div>
@@ -32,4 +31,4 @@ const HomePage: NextPage<{ userAgent: string }> = () => {
 const condition = (authUser: InterfaceAuthUserContext): boolean =>
   authUser !== null;
 
-export default withAuthorization(condition)(HomePage);
+export default withAuthorization(condition)(ExercisesPage);
