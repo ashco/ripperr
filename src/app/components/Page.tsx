@@ -30,6 +30,11 @@ const StyledPage = styled.div`
     'main';
 `;
 
+const ModalRoot = styled.div`
+  position: relative;
+  z-index: 999;
+`;
+
 const Inner = styled.div`
   max-width: ${props => props.theme.maxWidth};
   margin: 0 auto;
@@ -38,22 +43,18 @@ const Inner = styled.div`
   grid-area: main;
 `;
 
-class Page extends Component {
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <StyledPage>
-          <GlobalStyle />
-          <Meta />
-          {/* <Header /> */}
-          <Navigation />
-          <Inner>{this.props.children}</Inner>
-          {/* <SelectRow /> */}
-          {/* <Nav /> */}
-        </StyledPage>
-      </ThemeProvider>
-    );
-  }
-}
+const Page = (props: any) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <StyledPage>
+        <GlobalStyle />
+        <Meta />
+        <ModalRoot id="modal-root" />
+        <Navigation />
+        <Inner>{props.children}</Inner>
+      </StyledPage>
+    </ThemeProvider>
+  );
+};
 
 export default Page;
