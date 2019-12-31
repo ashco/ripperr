@@ -31,23 +31,30 @@ const AdminPage: NextPage = () => {
   useEffect(() => {
     setState({ ...state, loading: true });
 
-    firebase.users().on('value', snapshot => {
-      const usersObject = snapshot.val();
+    firebase
+      .users()
+      .get()
+      .then(snapshot => {
+        const usersList: InterfaceUser[] = [];
 
-      if (usersObject === null) return;
+        snapshot.forEach(doc => {
+          const { username, email } = doc.data();
+          const userObj: InterfaceUser = {
+            uid: doc.id,
+            username,
+            email,
+          };
 
-      const usersList = Object.keys(usersObject).map(key => ({
-        ...usersObject[key],
-        uid: key,
-      }));
+          usersList.push(userObj);
+        });
 
-      setState({
-        users: usersList,
-        loading: false,
+        setState({
+          users: usersList,
+          loading: false,
+        });
       });
-    });
 
-    return (): void => firebase.users().off();
+    // return (): void => firebase.users().off();
   }, [users]);
 
   return (
@@ -60,7 +67,6 @@ const AdminPage: NextPage = () => {
 };
 
 const condition = (authUser: InterfaceAuthUserContext): boolean => {
-  console.log(authUser);
   return authUser !== null;
 };
 

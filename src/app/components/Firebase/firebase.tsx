@@ -1,6 +1,7 @@
 ﻿import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+// import 'firebase/database';
+import 'firebase/firestore';
 
 const config = {
   apiKey: process.env.API_KEY,
@@ -17,7 +18,7 @@ export type InterfaceAuthUserContext = firebase.User | null;
 
 class Firebase {
   auth: firebase.auth.Auth;
-  db: firebase.database.Database;
+  db: firebase.firestore.Firestore;
 
   constructor() {
     if (!firebase.apps.length) {
@@ -25,7 +26,8 @@ class Firebase {
     }
 
     this.auth = firebase.auth();
-    this.db = firebase.database();
+    // this.db = firebase.database();
+    this.db = firebase.firestore();
   }
 
   // Auth API
@@ -55,10 +57,14 @@ class Firebase {
   };
 
   // User API
-  user = (uid: string): firebase.database.Reference =>
-    this.db.ref(`users/${uid}`);
+  // user = (uid: string): firebase.database.Reference =>
+  //   this.db.ref(`users/${uid}`);
+  user = (uid: string): firebase.firestore.CollectionReference =>
+    this.db.collection(`user/${uid}`);
 
-  users = (): firebase.database.Reference => this.db.ref('users');
+  // users = (): firebase.database.Reference => this.db.ref('users');
+  users = (): firebase.firestore.CollectionReference =>
+    this.db.collection('users');
 }
 
 export default Firebase;

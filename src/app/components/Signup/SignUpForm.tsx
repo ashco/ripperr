@@ -54,7 +54,7 @@ const SignUpForm = () => {
       .then(authUser => {
         // Create a user in your Firebase realtime database
         if (authUser.user) {
-          return firebase.user(authUser.user.uid).set({
+          return firebase.user(authUser.user.uid).add({
             username,
             email,
           });
