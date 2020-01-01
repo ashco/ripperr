@@ -21,7 +21,9 @@ const withAuthorization = (condition: any) => (Component: any) => {
       return () => unsubscribe();
     }, []);
 
-    return condition(authUser) ? <Component {...props} /> : null;
+    return condition(authUser) ? (
+      <Component authUser={authUser} {...props} />
+    ) : null;
   };
 
   return WithAuthorization;

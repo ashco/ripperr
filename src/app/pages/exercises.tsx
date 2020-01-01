@@ -1,20 +1,71 @@
-﻿import { useState } from 'react';
+﻿import { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
+import styled from 'styled-components';
 import { withAuthorization } from '../components/Session';
+import { FirebaseContext } from '../components/Firebase';
 import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
 import { Modal, ModalWrapper } from '../components/Modal';
-import ExercisesForm from '../components/Exercises/ExercisesForm';
+import ExerciseFormModal from '../components/Exercises/ExercisesFormModal';
+import ExerciseList from '../components/Exercises/ExerciseList';
 
-const ExercisesPage: NextPage<{ userAgent: string }> = () => {
+export interface InterfaceExercise {
+  name: string;
+}
+
+interface InterfaceExerciseState {
+  loading: boolean;
+  exercises: InterfaceExercise[];
+}
+
+const INITIAL_EXERCISE_STATE: InterfaceExerciseState = {
+  loading: false,
+  exercises: [],
+};
+
+const ExercisesPage: NextPage<{ userAgent: string; authUser: any }> = ({
+  authUser,
+}) => {
+  const firebase = useContext(FirebaseContext);
   const [showModal, setShowModal] = useState(false);
+  const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
+
+  const { loading, exercises } = exerciseState;
 
   const hide = () => setShowModal(false);
   const show = () => setShowModal(true);
 
+  useEffect(() => {
+    setExerciseState({ ...exerciseState, loading: true });
+
+    const unsubscribe = firebase
+      .exercises(authUser.uid)
+      .onSnapshot(snapshot => {
+        const exerciseList: InterfaceExercise[] = [];
+
+        snapshot.forEach(doc => {
+          const { name } = doc.data();
+          const exerciseObj: InterfaceExercise = {
+            name,
+          };
+
+          exerciseList.push(exerciseObj);
+        });
+
+        setExerciseState({
+          loading: false,
+          exercises: exerciseList,
+        });
+      });
+
+    return (): void => unsubscribe();
+  }, []);
+
+  console.log(exercises);
+
   const modal = showModal ? (
     <Modal>
       <ModalWrapper>
-        <ExercisesForm hide={hide} />
+        <ExerciseFormModal hide={hide} />
       </ModalWrapper>
     </Modal>
   ) : null;
@@ -23,6 +74,8 @@ const ExercisesPage: NextPage<{ userAgent: string }> = () => {
     <div>
       <h1>Exercises</h1>
       <button onClick={show}>Show</button>
+      {loading && <div>Loading ...</div>}
+      <ExerciseList exercises={exercises} />
       {modal}
     </div>
   );

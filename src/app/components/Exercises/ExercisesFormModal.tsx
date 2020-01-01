@@ -11,7 +11,7 @@ const INITIAL_STATE: InterfaceState = {
   exerciseName: '',
 };
 
-const ExercisesForm = ({ hide }: any) => {
+const ExerciseFormModal = ({ hide }: any) => {
   const firebase = useContext(FirebaseContext);
   const [state, setState] = useState(INITIAL_STATE);
 
@@ -30,14 +30,23 @@ const ExercisesForm = ({ hide }: any) => {
 
     const authUser = firebase.auth.currentUser;
     if (authUser) {
-      firebase.exercise(authUser.uid, exerciseName).set({
-        name: exerciseName,
-      });
+      firebase
+        .exercise(authUser.uid, exerciseName)
+        .set({
+          name: exerciseName,
+        })
+        .then(() => {
+          console.log('Exercise added successfully!');
+          hide();
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   }
 
   return (
-    <ExercisesFormWrapper>
+    <ExerciseFormModalWrapper>
       <button onClick={hide}>Close</button>
       <h1>Create New Exercise</h1>
       <form onSubmit={handleSubmit}>
@@ -54,14 +63,14 @@ const ExercisesForm = ({ hide }: any) => {
           Submit
         </button>
       </form>
-    </ExercisesFormWrapper>
+    </ExerciseFormModalWrapper>
   );
 };
 
-const ExercisesFormWrapper = styled.div`
+const ExerciseFormModalWrapper = styled.div`
   background: white;
   height: 500px;
   width: 500px;
 `;
 
-export default ExercisesForm;
+export default ExerciseFormModal;
