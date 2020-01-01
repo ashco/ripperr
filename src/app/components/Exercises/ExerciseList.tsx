@@ -1,25 +1,15 @@
 ﻿import styled from 'styled-components';
 import { InterfaceExercise } from '../../pages/exercises';
+import ExerciseListItem from './ExerciseListItem';
 
 const ExerciseList = ({ exercises }: any) => (
   <ExerciseListWrapper>
     {exercises.map((exercise: InterfaceExercise) => (
-      <ExerciseListItem key={exercise.name}>
-        <span>
-          <strong>Exercise Name:</strong> {exercise.name}
-        </span>
-      </ExerciseListItem>
+      <ExerciseListItem key={exercise.name} exercise={exercise} />
     ))}
   </ExerciseListWrapper>
 );
 
 const ExerciseListWrapper = styled.ul``;
-
-const ExerciseListItem = styled.li`
-  height: 200px;
-  width: 400px;
-  background: #eee;
-  margin-bottom: 2rem;
-`;
 
 export default ExerciseList;

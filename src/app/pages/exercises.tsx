@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
 import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
-import { Modal, ModalWrapper } from '../components/Modal';
-import ExerciseFormModal from '../components/Exercises/ExercisesFormModal';
+// import { Modal, ModalWrapper } from '../components/Modal';
+import ExerciseFormModal from '../components/Modal/ExercisesFormModal';
 import ExerciseList from '../components/Exercises/ExerciseList';
 
 export interface InterfaceExercise {
@@ -60,15 +60,13 @@ const ExercisesPage: NextPage<{ userAgent: string; authUser: any }> = ({
     return (): void => unsubscribe();
   }, []);
 
-  console.log(exercises);
-
   const modal = showModal ? (
-    <Modal>
-      <ModalWrapper>
-        <ExerciseFormModal hide={hide} />
-      </ModalWrapper>
-    </Modal>
-  ) : null;
+    // <Modal>
+    //   <ModalWrapper>
+    <ExerciseFormModal hide={hide} authUser={authUser} />
+  ) : //   </ModalWrapper>
+  // </Modal>
+  null;
 
   return (
     <div>

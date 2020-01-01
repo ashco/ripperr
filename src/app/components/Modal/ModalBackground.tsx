@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-const ModalWrapper = styled.div`
+const ModalBackground = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   height: 100%;
@@ -12,4 +12,4 @@ const ModalWrapper = styled.div`
   justify-content: center;
 `;
 
-export default ModalWrapper;
+export default ModalBackground;
