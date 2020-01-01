@@ -24,6 +24,7 @@ const SignInContainer = styled.div`
 
   h1 {
     font-size: 24px;
+    margin-bottom: 8px;
   }
 `;
 

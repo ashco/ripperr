@@ -52,7 +52,7 @@ const AdminPage: NextPage = () => {
     });
 
     return (): void => unsubscribe();
-  }, [users]);
+  }, []);
 
   return (
     <div>

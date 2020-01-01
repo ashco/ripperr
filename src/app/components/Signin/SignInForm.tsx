@@ -75,6 +75,14 @@ const SignInForm = () => {
 
 const FormWrapper = styled.form`
   /* border: black 4px solid; */
+  display: flex;
+  flex-direction: column;
+  * {
+    margin-bottom: 4px;
+  }
+  input {
+    height: 2rem;
+  }
 `;
 
 export default SignInForm;
