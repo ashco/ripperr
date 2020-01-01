@@ -1,6 +1,6 @@
 ﻿import Modal from './Modal';
-import ModalNodeAttatcher from './ModalNodeAttatcher';
+import ModalNodeAttacher from './ModalNodeAttacher';
 import ModalBackground from './ModalBackground';
 import DeleteModal from './DeleteModal';
 
-export { Modal, ModalNodeAttatcher, ModalBackground, DeleteModal };
+export { Modal, ModalNodeAttacher, ModalBackground, DeleteModal };

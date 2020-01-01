@@ -1,9 +1,9 @@
-﻿import { ModalNodeAttatcher, ModalBackground } from '../Modal';
+﻿import { ModalNodeAttacher, ModalBackground } from '../Modal';
 
 const Modal = (props: any) => (
-  <ModalNodeAttatcher>
+  <ModalNodeAttacher>
     <ModalBackground>{props.children}</ModalBackground>
-  </ModalNodeAttatcher>
+  </ModalNodeAttacher>
 );
 
 export default Modal;

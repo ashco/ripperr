@@ -1,26 +1,26 @@
-﻿import { useState } from 'react';
+﻿// import { useState } from 'react';
 import styled from 'styled-components';
-
-import { Modal, DeleteModal } from '../Modal';
+import { DeleteButton } from '../Buttons';
 
 const ExerciseListItem = ({ exercise }: any) => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  // const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const hide = () => setShowDeleteModal(false);
-  const show = () => setShowDeleteModal(true);
+  // const hide = (): void => setShowDeleteModal(false);
+  // const show = (): void => setShowDeleteModal(true);
 
-  const modal = showDeleteModal ? <DeleteModal hide={hide} /> : null;
+  // const modal = showDeleteModal ? <DeleteModal hide={hide} /> : null;
 
   return (
     <ExerciseListItemWrapper>
       <span>
         <strong>Exercise Name:</strong> {exercise.name}
-        {/* TODO - Write delete logic */}
-        <button onClick={show}>Delete</button>
+        <DeleteButton
+          text="Do you want to delete this?"
+          handleDelete={() => console.log('Hi mom')}
+        />
         {/* TODO - Write edit logic */}
         <button>Edit</button>
       </span>
-      {modal}
     </ExerciseListItemWrapper>
   );
 };

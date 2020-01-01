@@ -1,7 +1,7 @@
 ﻿import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-const ModalNodeAttatcher = (props: any) => {
+const ModalNodeAttacher = (props: any) => {
   let modalRoot: any;
   let el: any;
   if (window !== undefined) {
@@ -30,4 +30,4 @@ const ModalNodeAttatcher = (props: any) => {
   );
 };
 
-export default ModalNodeAttatcher;
+export default ModalNodeAttacher;
