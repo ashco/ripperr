@@ -37,8 +37,8 @@ const SignUpForm = () => {
     email === '' ||
     username === '';
 
-  function handleChange(event: { target: { name: string; value: any } }): void {
-    const { name, value } = event.target;
+  function handleChange(e: { target: { name: string; value: any } }): void {
+    const { name, value } = e.target;
 
     const newState = { ...state };
     newState[name] = value;
@@ -46,15 +46,15 @@ const SignUpForm = () => {
     setState(newState);
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
 
     firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your Firebase realtime database
         if (authUser.user) {
-          return firebase.user(authUser.user.uid).add({
+          return firebase.user(authUser.user.uid).set({
             username,
             email,
           });

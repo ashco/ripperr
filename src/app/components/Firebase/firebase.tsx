@@ -59,12 +59,19 @@ class Firebase {
   // User API
   // user = (uid: string): firebase.database.Reference =>
   //   this.db.ref(`users/${uid}`);
-  user = (uid: string): firebase.firestore.CollectionReference =>
-    this.db.collection(`user/${uid}`);
+  user = (uid: string): firebase.firestore.DocumentReference =>
+    this.db.doc(`users/${uid}`);
 
   // users = (): firebase.database.Reference => this.db.ref('users');
   users = (): firebase.firestore.CollectionReference =>
     this.db.collection('users');
+
+  // Exercise API
+  exercise = (
+    uid: string,
+    exerciseName: string,
+  ): firebase.firestore.DocumentReference =>
+    this.db.doc(`users/${uid}/exercise/${exerciseName}`);
 }
 
 export default Firebase;

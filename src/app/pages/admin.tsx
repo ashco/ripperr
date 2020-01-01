@@ -31,30 +31,27 @@ const AdminPage: NextPage = () => {
   useEffect(() => {
     setState({ ...state, loading: true });
 
-    firebase
-      .users()
-      .get()
-      .then(snapshot => {
-        const usersList: InterfaceUser[] = [];
+    const unsubscribe = firebase.users().onSnapshot(snapshot => {
+      const usersList: InterfaceUser[] = [];
 
-        snapshot.forEach(doc => {
-          const { username, email } = doc.data();
-          const userObj: InterfaceUser = {
-            uid: doc.id,
-            username,
-            email,
-          };
+      snapshot.forEach(doc => {
+        const { username, email } = doc.data();
+        const userObj: InterfaceUser = {
+          uid: doc.id,
+          username,
+          email,
+        };
 
-          usersList.push(userObj);
-        });
-
-        setState({
-          users: usersList,
-          loading: false,
-        });
+        usersList.push(userObj);
       });
 
-    // return (): void => firebase.users().off();
+      setState({
+        users: usersList,
+        loading: false,
+      });
+    });
+
+    return (): void => unsubscribe();
   }, [users]);
 
   return (

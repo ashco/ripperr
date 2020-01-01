@@ -1,5 +1,7 @@
 ﻿import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
 import { FirebaseContext } from '../Firebase';
 import { InterfaceError } from '../Signup/SignUpForm';
 
@@ -48,7 +50,7 @@ const SignInForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <FormWrapper onSubmit={handleSubmit}>
       <input
         name="email"
         value={email}
@@ -67,8 +69,12 @@ const SignInForm = () => {
         Sign In
       </button>
       {error && <p>{error.message}</p>}
-    </form>
+    </FormWrapper>
   );
 };
+
+const FormWrapper = styled.form`
+  /* border: black 4px solid; */
+`;
 
 export default SignInForm;

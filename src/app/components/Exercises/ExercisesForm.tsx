@@ -4,30 +4,36 @@ import { FirebaseContext } from '../Firebase';
 
 interface InterfaceState {
   [key: string]: any;
-  exName: string;
+  exerciseName: string;
 }
 
 const INITIAL_STATE: InterfaceState = {
-  exName: '',
+  exerciseName: '',
 };
 
 const ExercisesForm = ({ hide }: any) => {
   const firebase = useContext(FirebaseContext);
   const [state, setState] = useState(INITIAL_STATE);
 
-  const { exName } = state;
-  const isInvalid = exName === '';
+  const { exerciseName } = state;
+  const isInvalid = exerciseName === '';
 
   function handleChange(e: { target: { name: string; value: any } }): void {
     const { name, value } = e.target;
     const newState = { ...state };
     newState[name] = value;
-    console.log(newState);
     setState(newState);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
+
+    const authUser = firebase.auth.currentUser;
+    if (authUser) {
+      firebase.exercise(authUser.uid, exerciseName).set({
+        name: exerciseName,
+      });
+    }
   }
 
   return (
@@ -38,8 +44,8 @@ const ExercisesForm = ({ hide }: any) => {
         <label>
           Name
           <input
-            name="exName"
-            value={exName}
+            name="exerciseName"
+            value={exerciseName}
             onChange={handleChange}
             type="text"
           />
