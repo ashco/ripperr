@@ -2,7 +2,7 @@
 import { NextPage } from 'next';
 import { withAuthorization } from '../components/Session';
 import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
-import { Modal, ModalWrapper } from '../components/Modal';
+import { Modal } from '../components/Modal';
 
 const ExercisesPage: NextPage<{ userAgent: string }> = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,10 +12,10 @@ const ExercisesPage: NextPage<{ userAgent: string }> = () => {
 
   const modal = showModal ? (
     <Modal>
-      <ModalWrapper>
-        <p>this works</p>
-        <button onClick={hide}>Hide</button>
-      </ModalWrapper>
+      {/* <ModalWrapper> */}
+      <p>this works</p>
+      <button onClick={hide}>Hide</button>
+      {/* </ModalWrapper> */}
     </Modal>
   ) : null;
 

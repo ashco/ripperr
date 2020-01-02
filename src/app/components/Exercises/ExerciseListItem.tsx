@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
-import { DeleteButton } from '../Buttons';
+import { DeleteButton, ExerciseFormButton } from '../Buttons';
 
 const ExerciseListItem = ({ exercise }: any) => {
   const firebase = useContext(FirebaseContext);
@@ -11,12 +11,12 @@ const ExerciseListItem = ({ exercise }: any) => {
 
   const deleteText = 'Do you want to delete this exercise?';
 
-  function handleDelete() {
+  function handleDelete(): void {
     if (authUser) {
       firebase
         .exercise(authUser.uid, exercise.name)
         .delete()
-        .then(() => console.log(`Deleted exercise ${exercise.name}`))
+        .then(() => console.log(`Exercise Deleted: ${exercise.name}`))
         .catch(err => console.error(err));
     }
   }
@@ -27,7 +27,8 @@ const ExerciseListItem = ({ exercise }: any) => {
         <strong>Exercise Name:</strong> {exercise.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
         {/* TODO - Write edit logic */}
-        <button>Edit</button>
+        {/* <button>Edit</button> */}
+        <ExerciseFormButton mode="Edit" />
       </span>
     </ExerciseListItemWrapper>
   );

@@ -1,8 +1,9 @@
 ﻿import React, { useState, useContext } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
-import { Modal } from '../Modal';
+
+import { Mode } from '../Buttons/ExerciseFormButton';
 
 interface InterfaceState {
   [key: string]: any;
@@ -14,7 +15,10 @@ const INITIAL_STATE: InterfaceState = {
   // TODO - Add in exerciseType
 };
 
-const ExerciseFormModal = ({ hide }: any) => {
+const ExerciseFormModal: React.FunctionComponent<{
+  hide: () => void;
+  mode: Mode;
+}> = ({ hide }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const [state, setState] = useState(INITIAL_STATE);
@@ -32,7 +36,6 @@ const ExerciseFormModal = ({ hide }: any) => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    // const authUser = firebase.auth.currentUser;
     if (authUser) {
       firebase
         .exercise(authUser.uid, exerciseName)
@@ -40,7 +43,7 @@ const ExerciseFormModal = ({ hide }: any) => {
           name: exerciseName,
         })
         .then(() => {
-          console.log('Exercise added successfully!');
+          console.log(`Exercise Added: ${exerciseName}`);
           hide();
         })
         .catch(err => {

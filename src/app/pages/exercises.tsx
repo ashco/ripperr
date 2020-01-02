@@ -5,8 +5,9 @@ import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
 import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
-import ExerciseFormModal from '../components/Modal/ExercisesFormModal';
+import ExerciseFormModal from '../components/Modal/ExerciseFormModal';
 import ExerciseList from '../components/Exercises/ExerciseList';
+import { ExerciseFormButton } from '../components/Buttons';
 
 export interface InterfaceExercise {
   name: string;
@@ -22,57 +23,63 @@ const INITIAL_EXERCISE_STATE: InterfaceExerciseState = {
   exercises: [],
 };
 
-const ExercisesPage: NextPage<{ userAgent: string; authUser: any }> = ({
-  authUser,
-}) => {
+const ExercisesPage: NextPage<{
+  userAgent: string;
+  authUser: InterfaceAuthUserContext;
+}> = ({ authUser }) => {
   const firebase = useContext(FirebaseContext);
   const [showModal, setShowModal] = useState(false);
   const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
 
   const { loading, exercises } = exerciseState;
 
-  const hide = () => setShowModal(false);
-  const show = () => setShowModal(true);
+  const hide = (): void => setShowModal(false);
+  const show = (): void => setShowModal(true);
 
   useEffect(() => {
     setExerciseState({ ...exerciseState, loading: true });
 
-    const unsubscribe = firebase
-      .exercises(authUser.uid)
-      .onSnapshot(snapshot => {
-        const exerciseList: InterfaceExercise[] = [];
+    if (authUser) {
+      const unsubscribe = firebase
+        .exercises(authUser.uid)
+        .onSnapshot(snapshot => {
+          const exerciseList: InterfaceExercise[] = [];
 
-        snapshot.forEach(doc => {
-          const { name } = doc.data();
-          const exerciseObj: InterfaceExercise = {
-            name,
-          };
+          snapshot.forEach(doc => {
+            const { name } = doc.data();
+            const exerciseObj: InterfaceExercise = {
+              name,
+            };
 
-          exerciseList.push(exerciseObj);
+            exerciseList.push(exerciseObj);
+          });
+
+          setExerciseState({
+            loading: false,
+            exercises: exerciseList,
+          });
         });
 
-        setExerciseState({
-          loading: false,
-          exercises: exerciseList,
-        });
-      });
-
-    return (): void => unsubscribe();
+      return (): void => unsubscribe();
+    } else {
+      console.error('authUser is null');
+    }
   }, []);
 
-  const modal = showModal ? (
-    <Modal>
-      <ExerciseFormModal hide={hide} />
-    </Modal>
-  ) : null;
+  // const modal = showModal ? (
+  //   <Modal>
+  //     <ExerciseFormModal hide={hide} />
+  //   </Modal>
+  // ) : null;
 
   return (
     <div>
       <h1>Exercises</h1>
-      <button onClick={show}>Show</button>
+      {/* <button onClick={show}>Add Exercise</button> */}
+      <ExerciseFormButton mode="Add" />
       {loading && <div>Loading ...</div>}
       <ExerciseList exercises={exercises} />
-      {modal}
+      {/* {modal} */}
     </div>
   );
 };

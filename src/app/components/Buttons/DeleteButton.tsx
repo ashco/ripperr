@@ -2,12 +2,12 @@
 import { Modal, DeleteModal } from '../Modal';
 
 const DeleteButton = ({ text, handleDelete }: any) => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const hide = (): void => setShowDeleteModal(false);
-  const show = (): void => setShowDeleteModal(true);
+  const hide = (): void => setShowModal(false);
+  const show = (): void => setShowModal(true);
 
-  const modal = showDeleteModal ? (
+  const modal = showModal ? (
     <Modal>
       <DeleteModal text={text} handleDelete={handleDelete} hide={hide} />
     </Modal>
