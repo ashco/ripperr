@@ -1,11 +1,13 @@
 ﻿import React, { useState } from 'react';
 import { Modal, ExerciseFormModal } from '../Modal';
+import { InterfaceExercise } from '../../pages/exercises';
 
 export type Mode = 'Add' | 'Edit';
 
 const ExerciseFormButton: React.FunctionComponent<{
   mode: Mode;
-}> = ({ mode }) => {
+  exercise?: InterfaceExercise;
+}> = ({ mode, exercise }) => {
   const [showModal, setShowModal] = useState(false);
 
   const hide = (): void => setShowModal(false);
@@ -21,7 +23,7 @@ const ExerciseFormButton: React.FunctionComponent<{
 
   const modal = showModal ? (
     <Modal>
-      <ExerciseFormModal mode={mode} hide={hide} />
+      <ExerciseFormModal mode={mode} hide={hide} exercise={exercise} />
     </Modal>
   ) : null;
 

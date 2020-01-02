@@ -4,27 +4,43 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
 import { Mode } from '../Buttons/ExerciseFormButton';
+import { InterfaceExercise } from '../../pages/exercises';
 
 interface InterfaceState {
   [key: string]: any;
-  exerciseName: string;
+  name: string;
 }
 
 const INITIAL_STATE: InterfaceState = {
-  exerciseName: '',
+  name: '',
   // TODO - Add in exerciseType
 };
 
 const ExerciseFormModal: React.FunctionComponent<{
   hide: () => void;
   mode: Mode;
-}> = ({ hide, mode }) => {
+  exercise?: InterfaceExercise;
+}> = ({ hide, mode, exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
-  const [state, setState] = useState(INITIAL_STATE);
 
-  const { exerciseName } = state;
-  const isInvalid = exerciseName === '';
+  let initialState;
+
+  if (mode === 'Edit' && exercise) {
+    initialState = exercise;
+  } else {
+    initialState = INITIAL_STATE;
+  }
+
+  const [state, setState] = useState(initialState);
+  const { name } = state;
+
+  let isInvalidUpdate = false;
+  if (mode === 'Edit' && exercise) {
+    // There must be a change to be valid update
+    isInvalidUpdate = name === exercise.name;
+  }
+  const isInvalid = isInvalidUpdate || name === '';
 
   function handleChange(e: { target: { name: string; value: any } }): void {
     const { name, value } = e.target;
@@ -33,17 +49,15 @@ const ExerciseFormModal: React.FunctionComponent<{
     setState(newState);
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-
+  function handleCreate(): void {
     if (authUser) {
       firebase
-        .exercise(authUser.uid, exerciseName)
+        .exercise(authUser.uid, name)
         .set({
-          name: exerciseName,
+          name: name,
         })
         .then(() => {
-          console.log(`Exercise Added: ${exerciseName}`);
+          console.log(`Exercise Added: ${name}`);
           hide();
         })
         .catch(err => {
@@ -54,6 +68,21 @@ const ExerciseFormModal: React.FunctionComponent<{
     }
   }
 
+  function handleUpdate(): void {
+    console.log('Updating!');
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+
+    if (mode === 'Add') {
+      handleCreate();
+    } else if (mode === 'Edit') {
+      handleUpdate();
+    }
+  }
+
+  // Text assignment for different modes
   let titleText;
   let submitButtonText;
   if (mode === 'Add') {
@@ -71,12 +100,7 @@ const ExerciseFormModal: React.FunctionComponent<{
       <form onSubmit={handleSubmit}>
         <label>
           Name
-          <input
-            name="exerciseName"
-            value={exerciseName}
-            onChange={handleChange}
-            type="text"
-          />
+          <input name="name" value={name} onChange={handleChange} type="text" />
         </label>
         <button disabled={isInvalid} type="submit">
           {submitButtonText}

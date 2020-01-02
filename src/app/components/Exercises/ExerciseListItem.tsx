@@ -1,11 +1,14 @@
-﻿import { useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { DeleteButton, ExerciseFormButton } from '../Buttons';
+import { InterfaceExercise } from '../../pages/exercises';
 
-const ExerciseListItem = ({ exercise }: any) => {
+const ExerciseListItem: React.FunctionComponent<{
+  exercise: InterfaceExercise;
+}> = ({ exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
@@ -26,9 +29,7 @@ const ExerciseListItem = ({ exercise }: any) => {
       <span>
         <strong>Exercise Name:</strong> {exercise.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        {/* TODO - Write edit logic */}
-        {/* <button>Edit</button> */}
-        <ExerciseFormButton mode="Edit" />
+        <ExerciseFormButton mode="Edit" exercise={exercise} />
       </span>
     </ExerciseListItemWrapper>
   );
