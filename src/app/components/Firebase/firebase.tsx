@@ -68,12 +68,12 @@ class Firebase {
   // Exercise API
   exercise = (
     uid: string,
-    name: string,
+    exerciseId: string,
   ): firebase.firestore.DocumentReference =>
-    this.db.doc(`users/${uid}/exercise/${name}`);
+    this.db.doc(`users/${uid}/exercises/${exerciseId}`);
 
   exercises = (uid: string): firebase.firestore.CollectionReference =>
-    this.db.collection(`users/${uid}/exercise`);
+    this.db.collection(`users/${uid}/exercises`);
 }
 
 export default Firebase;

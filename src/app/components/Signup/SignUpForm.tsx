@@ -24,7 +24,7 @@ const INITIAL_STATE: InterfaceState = {
   error: null,
 };
 
-const SignUpForm = () => {
+const SignUpForm: React.FunctionComponent = () => {
   const firebase = useContext(FirebaseContext);
   const router = useRouter();
   const [state, setState] = useState(INITIAL_STATE);

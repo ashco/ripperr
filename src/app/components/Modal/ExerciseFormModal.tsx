@@ -35,26 +35,28 @@ const ExerciseFormModal: React.FunctionComponent<{
   const [state, setState] = useState(initialState);
   const { name } = state;
 
+  // There must be a change to be valid update
   let isInvalidUpdate = false;
   if (mode === 'Edit' && exercise) {
-    // There must be a change to be valid update
     isInvalidUpdate = name === exercise.name;
   }
   const isInvalid = isInvalidUpdate || name === '';
 
   function handleChange(e: { target: { name: string; value: any } }): void {
-    const { name, value } = e.target;
     const newState = { ...state };
-    newState[name] = value;
+    newState[e.target.name] = e.target.value;
     setState(newState);
   }
 
   function handleCreate(): void {
     if (authUser) {
-      firebase
-        .exercise(authUser.uid, name)
+      const docRef = firebase.exercises(authUser.uid).doc();
+      const { id } = docRef;
+
+      docRef
         .set({
-          name: name,
+          id,
+          name,
         })
         .then(() => {
           console.log(`Exercise Added: ${name}`);
@@ -69,7 +71,22 @@ const ExerciseFormModal: React.FunctionComponent<{
   }
 
   function handleUpdate(): void {
-    console.log('Updating!');
+    if (authUser && exercise) {
+      firebase
+        .exercise(authUser.uid, exercise.id)
+        .update({
+          name: name,
+        })
+        .then(() => {
+          console.log(`Exercise Updated: ${name}`);
+          hide();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      console.log('There is no authUser || exercise!');
+    }
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {

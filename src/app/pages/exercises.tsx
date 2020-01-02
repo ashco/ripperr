@@ -10,6 +10,7 @@ import ExerciseList from '../components/Exercises/ExerciseList';
 import { ExerciseFormButton } from '../components/Buttons';
 
 export interface InterfaceExercise {
+  id: string;
   name: string;
 }
 
@@ -28,13 +29,9 @@ const ExercisesPage: NextPage<{
   authUser: InterfaceAuthUserContext;
 }> = ({ authUser }) => {
   const firebase = useContext(FirebaseContext);
-  const [showModal, setShowModal] = useState(false);
   const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
 
   const { loading, exercises } = exerciseState;
-
-  const hide = (): void => setShowModal(false);
-  const show = (): void => setShowModal(true);
 
   useEffect(() => {
     setExerciseState({ ...exerciseState, loading: true });
@@ -46,8 +43,10 @@ const ExercisesPage: NextPage<{
           const exerciseList: InterfaceExercise[] = [];
 
           snapshot.forEach(doc => {
+            const { id } = doc;
             const { name } = doc.data();
             const exerciseObj: InterfaceExercise = {
+              id,
               name,
             };
 
@@ -66,20 +65,12 @@ const ExercisesPage: NextPage<{
     }
   }, []);
 
-  // const modal = showModal ? (
-  //   <Modal>
-  //     <ExerciseFormModal hide={hide} />
-  //   </Modal>
-  // ) : null;
-
   return (
     <div>
       <h1>Exercises</h1>
-      {/* <button onClick={show}>Add Exercise</button> */}
       <ExerciseFormButton mode="Add" />
       {loading && <div>Loading ...</div>}
       <ExerciseList exercises={exercises} />
-      {/* {modal} */}
     </div>
   );
 };
