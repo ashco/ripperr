@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import { DeleteModal } from '../Modal';
+import { Modal, DeleteModal } from '../Modal';
 
 const DeleteButton = ({ text, handleDelete }: any) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -8,7 +8,9 @@ const DeleteButton = ({ text, handleDelete }: any) => {
   const show = (): void => setShowDeleteModal(true);
 
   const modal = showDeleteModal ? (
-    <DeleteModal text={text} handleDelete={handleDelete} hide={hide} />
+    <Modal>
+      <DeleteModal text={text} handleDelete={handleDelete} hide={hide} />
+    </Modal>
   ) : null;
 
   return (

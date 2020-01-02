@@ -1,23 +1,31 @@
-﻿// import { useState } from 'react';
+﻿import { useContext } from 'react';
 import styled from 'styled-components';
+
+import { FirebaseContext } from '../Firebase';
+import { AuthUserContext } from '../Session';
 import { DeleteButton } from '../Buttons';
 
 const ExerciseListItem = ({ exercise }: any) => {
-  // const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const firebase = useContext(FirebaseContext);
+  const authUser = useContext(AuthUserContext);
 
-  // const hide = (): void => setShowDeleteModal(false);
-  // const show = (): void => setShowDeleteModal(true);
+  const deleteText = 'Do you want to delete this exercise?';
 
-  // const modal = showDeleteModal ? <DeleteModal hide={hide} /> : null;
+  function handleDelete() {
+    if (authUser) {
+      firebase
+        .exercise(authUser.uid, exercise.name)
+        .delete()
+        .then(() => console.log(`Deleted exercise ${exercise.name}`))
+        .catch(err => console.error(err));
+    }
+  }
 
   return (
     <ExerciseListItemWrapper>
       <span>
         <strong>Exercise Name:</strong> {exercise.name}
-        <DeleteButton
-          text="Do you want to delete this?"
-          handleDelete={() => console.log('Hi mom')}
-        />
+        <DeleteButton text={deleteText} handleDelete={handleDelete} />
         {/* TODO - Write edit logic */}
         <button>Edit</button>
       </span>

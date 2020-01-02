@@ -1,6 +1,7 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { FirebaseContext } from '../Firebase';
+import { AuthUserContext } from '../Session';
 import { Modal } from '../Modal';
 
 interface InterfaceState {
@@ -13,8 +14,9 @@ const INITIAL_STATE: InterfaceState = {
   // TODO - Add in exerciseType
 };
 
-const ExerciseFormModal = ({ hide, authUser }: any) => {
+const ExerciseFormModal = ({ hide }: any) => {
   const firebase = useContext(FirebaseContext);
+  const authUser = useContext(AuthUserContext);
   const [state, setState] = useState(INITIAL_STATE);
 
   const { exerciseName } = state;
@@ -31,43 +33,43 @@ const ExerciseFormModal = ({ hide, authUser }: any) => {
     e.preventDefault();
 
     // const authUser = firebase.auth.currentUser;
-    // if (authUser) {
-    firebase
-      .exercise(authUser.uid, exerciseName)
-      .set({
-        name: exerciseName,
-      })
-      .then(() => {
-        console.log('Exercise added successfully!');
-        hide();
-      })
-      .catch(err => {
-        console.error(err);
-      });
-    // }
+    if (authUser) {
+      firebase
+        .exercise(authUser.uid, exerciseName)
+        .set({
+          name: exerciseName,
+        })
+        .then(() => {
+          console.log('Exercise added successfully!');
+          hide();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      console.log('There is no authUser!');
+    }
   }
 
   return (
-    <Modal>
-      <ExerciseFormModalWrapper>
-        <button onClick={hide}>Close</button>
-        <h1>Create New Exercise</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Name
-            <input
-              name="exerciseName"
-              value={exerciseName}
-              onChange={handleChange}
-              type="text"
-            />
-          </label>
-          <button disabled={isInvalid} type="submit">
-            Submit
-          </button>
-        </form>
-      </ExerciseFormModalWrapper>
-    </Modal>
+    <ExerciseFormModalWrapper>
+      <button onClick={hide}>Close</button>
+      <h1>Create New Exercise</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name
+          <input
+            name="exerciseName"
+            value={exerciseName}
+            onChange={handleChange}
+            type="text"
+          />
+        </label>
+        <button disabled={isInvalid} type="submit">
+          Submit
+        </button>
+      </form>
+    </ExerciseFormModalWrapper>
   );
 };
 
