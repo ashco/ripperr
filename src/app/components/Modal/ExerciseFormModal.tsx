@@ -18,7 +18,7 @@ const INITIAL_STATE: InterfaceState = {
 const ExerciseFormModal: React.FunctionComponent<{
   hide: () => void;
   mode: Mode;
-}> = ({ hide }) => {
+}> = ({ hide, mode }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const [state, setState] = useState(INITIAL_STATE);
@@ -54,10 +54,20 @@ const ExerciseFormModal: React.FunctionComponent<{
     }
   }
 
+  let titleText;
+  let submitButtonText;
+  if (mode === 'Add') {
+    titleText = 'Create New Exercise';
+    submitButtonText = 'Submit';
+  } else if (mode === 'Edit') {
+    titleText = 'Edit Exercise';
+    submitButtonText = 'Update';
+  }
+
   return (
     <ExerciseFormModalWrapper>
       <button onClick={hide}>Close</button>
-      <h1>Create New Exercise</h1>
+      <h1>{titleText}</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Name
@@ -69,7 +79,7 @@ const ExerciseFormModal: React.FunctionComponent<{
           />
         </label>
         <button disabled={isInvalid} type="submit">
-          Submit
+          {submitButtonText}
         </button>
       </form>
     </ExerciseFormModalWrapper>
