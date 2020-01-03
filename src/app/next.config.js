@@ -1,7 +1,7 @@
-﻿require("dotenv").config({ path: "../../.env" });
+﻿require('dotenv').config({ path: '../../.env' });
 
 module.exports = {
-  distDir: "../../dist/next",
+  distDir: '../../dist/next',
   env: {
     API_KEY: process.env.API_KEY,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
@@ -10,6 +10,6 @@ module.exports = {
     STORAGE_BUCKET: process.env.STORAGE_BUCKET,
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
     APP_ID: process.env.APP_ID,
-    MEASUREMENT_ID: process.env.MEASUREMENT_ID
-  }
+    MEASUREMENT_ID: process.env.MEASUREMENT_ID,
+  },
 };

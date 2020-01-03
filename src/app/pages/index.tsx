@@ -1,12 +1,6 @@
-﻿import { NextPage } from 'next';
+﻿import * as React from 'react';
+import { NextPage } from 'next';
 
-const IndexPage: NextPage<{ userAgent: string }> = ({ userAgent }) => (
-  <h1>Welcome to Ripperr</h1>
-);
-
-IndexPage.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers['user-agent'] || '' : navigator.userAgent;
-  return { userAgent };
-};
+const IndexPage: NextPage = () => <h1>Welcome to Ripperr</h1>;
 
 export default IndexPage;

@@ -53,6 +53,8 @@ const ExerciseFormModal: React.FunctionComponent<{
       const docRef = firebase.exercises(authUser.uid).doc();
       const { id } = docRef;
 
+      // TODO - Check that exercise name is unique
+
       docRef
         .set({
           id,
@@ -70,6 +72,7 @@ const ExerciseFormModal: React.FunctionComponent<{
     }
   }
 
+  // TODO - Fix memory leak issue that occurs on update
   function handleUpdate(): void {
     if (authUser && exercise) {
       firebase
