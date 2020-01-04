@@ -1,27 +1,25 @@
-﻿module.exports = {
-//   roots: ['<rootDir>/src/app'],
-//   preset: 'ts-jest/presets/js-with-ts',
+// module.exports = {
+//   preset: 'ts-jest',
 //   testEnvironment: 'node',
-  moduleFileExtensions: ['ts', 'tsx', 'js'],
-//   moduleNameMapper: {
-//     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
-//   },
-//   transform: {
-//     '^.+\\.(ts|tsx)$': 'ts-jest',
-//   },
-  testMatch: [
-    '**/__tests__/**/*.+(ts|tsx|js)',
-    '**/?(*.)+(spec|test).+(ts|tsx|js)',
-  ],
-//   setupFiles: ['./jest.setup.js', 'dotenv/config'],
-//   testPathIgnorePatterns: ['./.next/', './node_modules/'],
-//   globals: {
-//     'ts-jest': {
-//       tsConfig: 'tsconfig.jest.json',
-//     },
-//   },
 // };
 
-// {
-//   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
-// }
+module.exports = {
+  preset: 'ts-jest/presets/js-with-ts',
+  testEnvironment: 'node',
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
+  // moduleNameMapper: {
+  //   '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
+  // },
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
+  // testMatch: ['**/__tests__/*.(ts|tsx)'],
+  testRegex: '((\\.|/*.)(test))\\.(js|ts|tsx)?$',
+  setupFiles: ['./jest.setup.js'],
+  testPathIgnorePatterns: ['./dist/', './node_modules/', '.firebase'],
+  globals: {
+    'ts-jest': {
+      tsConfig: 'tsconfig.jest.json',
+    },
+  },
+};
