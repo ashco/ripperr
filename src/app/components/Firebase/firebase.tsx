@@ -18,6 +18,7 @@ export type InterfaceAuthUserContext = firebase.User | null;
 class Firebase {
   auth: firebase.auth.Auth;
   db: firebase.firestore.Firestore;
+  testAuth: any;
 
   constructor() {
     if (!firebase.apps.length) {
