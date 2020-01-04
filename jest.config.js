@@ -5,7 +5,7 @@
 
 module.exports = {
   preset: 'ts-jest/presets/js-with-ts',
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   // moduleNameMapper: {
   //   '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
@@ -15,7 +15,7 @@ module.exports = {
   },
   // testMatch: ['**/__tests__/*.(ts|tsx)'],
   testRegex: '((\\.|/*.)(test))\\.(js|ts|tsx)?$',
-  setupFiles: ['./jest.setup.js'],
+  setupFiles: ['./jest.setup.js', 'dotenv/config'],
   testPathIgnorePatterns: ['./dist/', './node_modules/', '.firebase'],
   globals: {
     'ts-jest': {

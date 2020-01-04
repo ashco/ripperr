@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignInForm snapshot renders 1`] = `
+<form
+  className="sc-bdVaJa bxnvBF"
+  onSubmit={[Function]}
+>
+  <input
+    name="email"
+    onChange={[Function]}
+    placeholder="Email Address"
+    type="text"
+    value=""
+  />
+  <input
+    name="password"
+    onChange={[Function]}
+    placeholder="Password"
+    type="password"
+    value=""
+  />
+  <button
+    disabled={true}
+    type="submit"
+  >
+    Sign In
+  </button>
+</form>
+`;
