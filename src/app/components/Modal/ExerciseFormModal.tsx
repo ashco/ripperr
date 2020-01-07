@@ -4,14 +4,14 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
 import { Mode } from '../Buttons/ExerciseFormButton';
-import { InterfaceExercise } from '../../pages/exercises';
+import { IExercise } from '../../pages/exercises';
 
-interface InterfaceState {
+interface IState {
   [key: string]: any;
   name: string;
 }
 
-const INITIAL_STATE: InterfaceState = {
+const INITIAL_STATE: IState = {
   name: '',
   // TODO - Add in exerciseType
 };
@@ -19,7 +19,7 @@ const INITIAL_STATE: InterfaceState = {
 const ExerciseFormModal: React.FunctionComponent<{
   hide: () => void;
   mode: Mode;
-  exercise?: InterfaceExercise;
+  exercise?: IExercise;
 }> = ({ hide, mode, exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);

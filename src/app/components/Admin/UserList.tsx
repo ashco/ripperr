@@ -1,9 +1,9 @@
 ﻿// import { FunctionComponent } from 'react';
-import { InterfaceUser } from '../../pages/admin';
+import { IUser } from '../../pages/admin';
 
 const UserList = ({ users }: any) => (
   <ul>
-    {users.map((user: InterfaceUser) => (
+    {users.map((user: IUser) => (
       <li key={user.uid}>
         <span>
           <strong>ID:</strong> {user.uid}

@@ -1,34 +1,80 @@
-﻿import { useState } from 'react';
+﻿import { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
+import styled from 'styled-components';
 import { withAuthorization } from '../components/Session';
-import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
+import { FirebaseContext } from '../components/Firebase';
+import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
+import ExerciseFormModal from '../components/Modal/ExerciseFormModal';
+import ExerciseList from '../components/Exercises/ExerciseList';
+import { ExerciseFormButton } from '../components/Buttons';
 
-const ExercisesPage: NextPage<{ userAgent: string }> = () => {
-  const [showModal, setShowModal] = useState(false);
+export interface IExercise {
+  id: string;
+  name: string;
+}
 
-  const hide = () => setShowModal(false);
-  const show = () => setShowModal(true);
+interface IExerciseState {
+  loading: boolean;
+  exercises: IExercise[];
+}
 
-  const modal = showModal ? (
-    <Modal>
-      {/* <ModalWrapper> */}
-      <p>this works</p>
-      <button onClick={hide}>Hide</button>
-      {/* </ModalWrapper> */}
-    </Modal>
-  ) : null;
+const INITIAL_EXERCISE_STATE: IExerciseState = {
+  loading: false,
+  exercises: [],
+};
+
+const WorkoutsPage: NextPage<{
+  userAgent: string;
+  authUser: IAuthUserContext;
+}> = ({ authUser }) => {
+  const firebase = useContext(FirebaseContext);
+  const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
+
+  const { loading, exercises } = exerciseState;
+
+  useEffect(() => {
+    setExerciseState({ ...exerciseState, loading: true });
+
+    if (authUser) {
+      const unsubscribe = firebase
+        .exercises(authUser.uid)
+        .onSnapshot(snapshot => {
+          const exerciseList: IExercise[] = [];
+
+          snapshot.forEach(doc => {
+            const { id } = doc;
+            const { name } = doc.data();
+            const exerciseObj: IExercise = {
+              id,
+              name,
+            };
+
+            exerciseList.push(exerciseObj);
+          });
+
+          setExerciseState({
+            loading: false,
+            exercises: exerciseList,
+          });
+        });
+
+      return (): void => unsubscribe();
+    } else {
+      console.error('authUser is null');
+    }
+  }, []);
 
   return (
     <div>
-      <h1>Workouts</h1>
-      <button onClick={show}>Show</button>
-      {modal}
+      <h1>Exercises</h1>
+      <ExerciseFormButton mode="Add" />
+      {loading && <div>Loading ...</div>}
+      <ExerciseList exercises={exercises} />
     </div>
   );
 };
 
-const condition = (authUser: InterfaceAuthUserContext): boolean =>
-  authUser !== null;
+const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 
-export default withAuthorization(condition)(ExercisesPage);
+export default withAuthorization(condition)(WorkoutsPage);

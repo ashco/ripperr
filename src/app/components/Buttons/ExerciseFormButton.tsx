@@ -1,12 +1,12 @@
 ﻿import React, { useState } from 'react';
 import { Modal, ExerciseFormModal } from '../Modal';
-import { InterfaceExercise } from '../../pages/exercises';
+import { IExercise } from '../../pages/exercises';
 
 export type Mode = 'Add' | 'Edit';
 
 const ExerciseFormButton: React.FunctionComponent<{
   mode: Mode;
-  exercise?: InterfaceExercise;
+  exercise?: IExercise;
 }> = ({ mode, exercise }) => {
   const [showModal, setShowModal] = useState(false);
 

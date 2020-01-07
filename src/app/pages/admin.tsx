@@ -2,22 +2,22 @@
 import { NextPage } from 'next';
 import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
-import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
+import { IAuthUserContext } from '../components/Firebase/firebase';
 
 import UserList from '../components/Admin/UserList';
 
-export interface InterfaceUser {
+export interface IUser {
   uid: string;
   email: string;
   username: string;
 }
 
-interface InterfaceState {
+interface IState {
   loading: boolean;
-  users: InterfaceUser[];
+  users: IUser[];
 }
 
-const INITIAL_STATE: InterfaceState = {
+const INITIAL_STATE: IState = {
   loading: false,
   users: [],
 };
@@ -32,11 +32,11 @@ const AdminPage: NextPage = () => {
     setState({ ...state, loading: true });
 
     const unsubscribe = firebase.users().onSnapshot(snapshot => {
-      const usersList: InterfaceUser[] = [];
+      const usersList: IUser[] = [];
 
       snapshot.forEach(doc => {
         const { username, email } = doc.data();
-        const userObj: InterfaceUser = {
+        const userObj: IUser = {
           uid: doc.id,
           username,
           email,
@@ -63,7 +63,7 @@ const AdminPage: NextPage = () => {
   );
 };
 
-const condition = (authUser: InterfaceAuthUserContext): boolean => {
+const condition = (authUser: IAuthUserContext): boolean => {
   return authUser !== null;
 };
 

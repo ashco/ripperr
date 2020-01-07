@@ -3,16 +3,16 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { FirebaseContext } from '../Firebase';
-import { InterfaceError } from '../Signup/SignUpForm';
+import { IError } from '../Signup/SignUpForm';
 
-interface InterfaceState {
+interface IState {
   [key: string]: any;
   email: string;
   password: string;
-  error: null | InterfaceError;
+  error: null | IError;
 }
 
-const INITIAL_STATE: InterfaceState = {
+const INITIAL_STATE: IState = {
   email: '',
   password: '',
   error: null,

@@ -2,21 +2,21 @@
 import { useRouter } from 'next/router';
 import { FirebaseContext } from '../Firebase/index';
 
-interface InterfaceState {
+interface IState {
   [key: string]: any;
   username: string;
   email: string;
   passwordOne: string;
   passwordTwo: string;
-  error: null | InterfaceError;
+  error: null | IError;
 }
 
-export interface InterfaceError {
+export interface IError {
   code: string;
   message: string;
 }
 
-const INITIAL_STATE: InterfaceState = {
+const INITIAL_STATE: IState = {
   username: '',
   email: '',
   passwordOne: '',

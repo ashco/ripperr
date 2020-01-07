@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-import { InterfaceAuthUserContext } from '../Firebase/firebase';
+import { IAuthUserContext } from '../Firebase/firebase';
 
-const AuthUserContext = React.createContext<InterfaceAuthUserContext>(null);
+const AuthUserContext = React.createContext<IAuthUserContext>(null);
 
 export default AuthUserContext;

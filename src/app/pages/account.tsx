@@ -1,7 +1,7 @@
 ﻿import { useContext } from 'react';
 import { NextPage } from 'next';
 import { withAuthorization } from '../components/Session';
-import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
+import { IAuthUserContext } from '../components/Firebase/firebase';
 import { AuthUserContext } from '../components/Session';
 
 import PasswordForgetForm from '../components/PasswordForgot/PasswordForgotForm';
@@ -17,7 +17,6 @@ const AccountPage: NextPage = () => {
     </div>
   );
 };
-const condition = (authUser: InterfaceAuthUserContext): boolean =>
-  authUser !== null;
+const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 
 export default withAuthorization(condition)(AccountPage);

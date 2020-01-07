@@ -1,15 +1,15 @@
 ﻿import React, { useState, useContext } from 'react';
 import { FirebaseContext } from '../Firebase';
-import { InterfaceError } from '../Signup/SignUpForm';
+import { IError } from '../Signup/SignUpForm';
 
-interface InterfaceState {
+interface IState {
   [key: string]: any;
   passwordOne: string;
   passwordTwo: string;
-  error: null | InterfaceError;
+  error: null | IError;
 }
 
-const INITIAL_STATE: InterfaceState = {
+const INITIAL_STATE: IState = {
   passwordOne: '',
   passwordTwo: '',
   error: null,

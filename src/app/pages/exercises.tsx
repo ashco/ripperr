@@ -3,30 +3,30 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
-import { InterfaceAuthUserContext } from '../components/Firebase/firebase';
+import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
 import ExerciseFormModal from '../components/Modal/ExerciseFormModal';
 import ExerciseList from '../components/Exercises/ExerciseList';
 import { ExerciseFormButton } from '../components/Buttons';
 
-export interface InterfaceExercise {
+export interface IExercise {
   id: string;
   name: string;
 }
 
-interface InterfaceExerciseState {
+interface IExerciseState {
   loading: boolean;
-  exercises: InterfaceExercise[];
+  exercises: IExercise[];
 }
 
-const INITIAL_EXERCISE_STATE: InterfaceExerciseState = {
+const INITIAL_EXERCISE_STATE: IExerciseState = {
   loading: false,
   exercises: [],
 };
 
 const ExercisesPage: NextPage<{
   userAgent: string;
-  authUser: InterfaceAuthUserContext;
+  authUser: IAuthUserContext;
 }> = ({ authUser }) => {
   const firebase = useContext(FirebaseContext);
   const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
@@ -40,12 +40,12 @@ const ExercisesPage: NextPage<{
       const unsubscribe = firebase
         .exercises(authUser.uid)
         .onSnapshot(snapshot => {
-          const exerciseList: InterfaceExercise[] = [];
+          const exerciseList: IExercise[] = [];
 
           snapshot.forEach(doc => {
             const { id } = doc;
             const { name } = doc.data();
-            const exerciseObj: InterfaceExercise = {
+            const exerciseObj: IExercise = {
               id,
               name,
             };
@@ -75,7 +75,6 @@ const ExercisesPage: NextPage<{
   );
 };
 
-const condition = (authUser: InterfaceAuthUserContext): boolean =>
-  authUser !== null;
+const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 
 export default withAuthorization(condition)(ExercisesPage);
