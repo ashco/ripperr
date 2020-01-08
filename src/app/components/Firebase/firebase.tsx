@@ -75,6 +75,16 @@ class Firebase {
 
   exercises = (uid: string): firebase.firestore.CollectionReference =>
     this.db.collection(`users/${uid}/exercises`);
+
+  // Exercise API
+  workout = (
+    uid: string,
+    workoutId: string,
+  ): firebase.firestore.DocumentReference =>
+    this.db.doc(`users/${uid}/workouts/${workoutId}`);
+
+  workouts = (uid: string): firebase.firestore.CollectionReference =>
+    this.db.collection(`users/${uid}/workouts`);
 }
 
 export default Firebase;

@@ -5,23 +5,23 @@ import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
-import ExerciseFormModal from '../components/Modal/ExerciseFormModal';
-import ExerciseList from '../components/Exercises/ExerciseList';
-import { ExerciseFormButton } from '../components/Buttons';
+import WorkoutFormModal from '../components/Modal/WorkoutFormModal';
+import WorkoutList from '../components/Workouts/WorkoutList';
+import { WorkoutFormButton } from '../components/Buttons';
 
-export interface IExercise {
+export interface IWorkout {
   id: string;
   name: string;
 }
 
-interface IExerciseState {
+interface IWorkoutState {
   loading: boolean;
-  exercises: IExercise[];
+  workouts: IWorkout[];
 }
 
-const INITIAL_EXERCISE_STATE: IExerciseState = {
+const INITIAL_WORKOUT_STATE: IWorkoutState = {
   loading: false,
-  exercises: [],
+  workouts: [],
 };
 
 const WorkoutsPage: NextPage<{
@@ -29,33 +29,33 @@ const WorkoutsPage: NextPage<{
   authUser: IAuthUserContext;
 }> = ({ authUser }) => {
   const firebase = useContext(FirebaseContext);
-  const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
+  const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
 
-  const { loading, exercises } = exerciseState;
+  const { loading, workouts } = workoutState;
 
   useEffect(() => {
-    setExerciseState({ ...exerciseState, loading: true });
+    setWorkoutState({ ...workoutState, loading: true });
 
     if (authUser) {
       const unsubscribe = firebase
-        .exercises(authUser.uid)
+        .workouts(authUser.uid)
         .onSnapshot(snapshot => {
-          const exerciseList: IExercise[] = [];
+          const workouts: IWorkout[] = [];
 
           snapshot.forEach(doc => {
             const { id } = doc;
             const { name } = doc.data();
-            const exerciseObj: IExercise = {
+            const workoutObj: IWorkout = {
               id,
               name,
             };
 
-            exerciseList.push(exerciseObj);
+            workouts.push(workoutObj);
           });
 
-          setExerciseState({
+          setWorkoutState({
             loading: false,
-            exercises: exerciseList,
+            workouts,
           });
         });
 
@@ -67,10 +67,10 @@ const WorkoutsPage: NextPage<{
 
   return (
     <div>
-      <h1>Exercises</h1>
-      <ExerciseFormButton mode="Add" />
+      <h1>Workouts</h1>
+      <WorkoutFormButton mode="Add" />
       {loading && <div>Loading ...</div>}
-      <ExerciseList exercises={exercises} />
+      <WorkoutList workouts={workouts} />
     </div>
   );
 };
