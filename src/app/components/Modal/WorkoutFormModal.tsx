@@ -122,6 +122,12 @@ const WorkoutFormModal: React.FunctionComponent<{
           Name
           <input name="name" value={name} onChange={handleChange} type="text" />
         </label>
+        <label>
+          Exercise 1
+          <select name="ex1" id="ex1">
+            <option value=""></option>
+          </select>
+        </label>
         <button disabled={isInvalid} type="submit">
           {submitButtonText}
         </button>

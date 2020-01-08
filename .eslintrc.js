@@ -10,9 +10,6 @@
   ],
   rules: {
     'prettier/prettier': ['error'],
-    '@typescript-eslint/interface-name-prefix': {
-      prefixWithI: 'always',
-      "allowUnderscorePrefix": true
-    },
+    '@typescript-eslint/interface-name-prefix': 0,
   },
 };

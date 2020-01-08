@@ -2,7 +2,7 @@
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
-import SignInForm from './SignInForm';
+import SignInForm from '../SignInForm';
 
 describe('SignInForm', () => {
   // it('My Test Case', () => {
