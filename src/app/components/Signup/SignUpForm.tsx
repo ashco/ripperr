@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 
-import { TextField, signUpValidation } from '../Forms';
+import { TextField, signUpVal } from '../Forms';
 
 import { FirebaseContext } from '../Firebase/index';
 
@@ -14,12 +14,7 @@ interface ISignUpFormValues {
   // error: null | IError;
 }
 
-export interface IError {
-  code: string;
-  message: string;
-}
-
-const initialValues: ISignUpFormValues = {
+const INITIAL_VALUES: ISignUpFormValues = {
   username: '',
   email: '',
   passwordOne: '',
@@ -33,12 +28,12 @@ const SignUpForm: React.FC = () => {
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={signUpValidation}
+      initialValues={INITIAL_VALUES}
+      validationSchema={signUpVal}
       onSubmit={({ username, email, passwordOne }, { resetForm }) => {
         firebase
           .doCreateUserWithEmailAndPassword(email, passwordOne)
-          .then(authUser => {
+          .then((authUser) => {
             // Create a user in your Firebase realtime database
             if (authUser.user) {
               return firebase.user(authUser.user.uid).set({
@@ -51,7 +46,7 @@ const SignUpForm: React.FC = () => {
             resetForm();
             router.push('/');
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
           });
       }}

@@ -2,25 +2,41 @@
 
 exports[`SignInForm snapshot renders 1`] = `
 <form
-  className="sc-bdVaJa bxnvBF"
+  action="#"
+  onReset={[Function]}
   onSubmit={[Function]}
 >
-  <input
-    name="email"
-    onChange={[Function]}
-    placeholder="Email Address"
-    type="text"
-    value=""
-  />
-  <input
-    name="password"
-    onChange={[Function]}
-    placeholder="Password"
-    type="password"
-    value=""
-  />
+  <label
+    htmlFor="email"
+  >
+    <div>
+      Email
+    </div>
+    <input
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="janedoe@gmail.com"
+      type="email"
+      value=""
+    />
+  </label>
+  <label
+    htmlFor="password"
+  >
+    <div>
+      Password
+    </div>
+    <input
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="password123"
+      type="password"
+      value=""
+    />
+  </label>
   <button
-    disabled={true}
     type="submit"
   >
     Sign In

@@ -1,25 +1,22 @@
 ﻿import { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
+
 import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
 import ExerciseFormModal from '../components/Modal/ExerciseFormModal';
 import ExerciseList from '../components/Exercises/ExerciseList';
-import { ExerciseFormButton } from '../components/Buttons';
+import ExerciseFormButton from '../components/Exercises/ExerciseFormButton';
+import { IExercise } from '../common/types';
 
-export interface IExercise {
-  id: string;
-  name: string;
-}
-
-interface IExerciseState {
+interface IExercisePageState {
   loading: boolean;
   exercises: IExercise[];
 }
 
-const INITIAL_EXERCISE_STATE: IExerciseState = {
+const INITIAL_EXERCISE_STATE: IExercisePageState = {
   loading: false,
   exercises: [],
 };

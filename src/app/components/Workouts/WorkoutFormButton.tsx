@@ -1,13 +1,13 @@
 ﻿import React, { useState } from 'react';
-import { Modal, ExerciseFormModal } from '../Modal';
-import { IExercise } from '../../pages/exercises';
+import { Modal, WorkoutFormModal } from '../Modal';
+import { IWorkout } from '../../pages/workouts';
 
 export type Mode = 'Add' | 'Edit';
 
-const ExerciseFormButton: React.FunctionComponent<{
+const WorkoutFormButton: React.FC<{
   mode: Mode;
-  exercise?: IExercise;
-}> = ({ mode, exercise }) => {
+  workout?: IWorkout;
+}> = ({ mode, workout }) => {
   const [showModal, setShowModal] = useState(false);
 
   const hide = (): void => setShowModal(false);
@@ -16,14 +16,14 @@ const ExerciseFormButton: React.FunctionComponent<{
   let buttonText;
 
   if (mode === 'Add') {
-    buttonText = 'Add Exercise';
+    buttonText = 'Add Workout';
   } else if (mode === 'Edit') {
-    buttonText = 'Edit Exercise';
+    buttonText = 'Edit Workout';
   }
 
   const modal = showModal ? (
     <Modal>
-      <ExerciseFormModal mode={mode} hide={hide} exercise={exercise} />
+      <WorkoutFormModal mode={mode} hide={hide} workout={workout} />
     </Modal>
   ) : null;
 
@@ -35,4 +35,4 @@ const ExerciseFormButton: React.FunctionComponent<{
   );
 };
 
-export default ExerciseFormButton;
+export default WorkoutFormButton;

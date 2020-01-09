@@ -1,10 +1,9 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
-
-import { Mode } from '../Buttons/ExerciseFormButton';
-import { IExercise } from '../../pages/exercises';
+import { FormMode, IExercise } from '../../common/types';
 
 interface IState {
   [key: string]: any;
@@ -16,9 +15,9 @@ const INITIAL_STATE: IState = {
   // TODO - Add in exerciseType
 };
 
-const ExerciseFormModal: React.FunctionComponent<{
+const ExerciseFormModal: React.FC<{
   hide: () => void;
-  mode: Mode;
+  mode: FormMode;
   exercise?: IExercise;
 }> = ({ hide, mode, exercise }) => {
   const firebase = useContext(FirebaseContext);
@@ -64,7 +63,7 @@ const ExerciseFormModal: React.FunctionComponent<{
           console.log(`Exercise Added: ${name}`);
           hide();
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     } else {
@@ -84,7 +83,7 @@ const ExerciseFormModal: React.FunctionComponent<{
           console.log(`Exercise Updated: ${name}`);
           hide();
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     } else {

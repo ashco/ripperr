@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
-import { DeleteButton, ExerciseFormButton } from '../Buttons';
-import { IExercise } from '../../pages/exercises';
+import { DeleteButton } from '../Buttons';
+import { IExercise } from '../../common/types';
+import ExerciseFormButton from './ExerciseFormButton';
 
-const ExerciseListItem: React.FunctionComponent<{
+const ExerciseListItem: React.FC<{
   exercise: IExercise;
 }> = ({ exercise }) => {
   const firebase = useContext(FirebaseContext);

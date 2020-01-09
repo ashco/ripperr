@@ -1,13 +1,15 @@
 ﻿import TextField from './TextField';
 import {
-  signInValidation,
-  signUpValidation,
-  passwordForgotValidation,
+  signInVal,
+  signUpVal,
+  passwordForgotVal,
+  passwordChangeVal,
 } from './validationSchema';
 
 export {
   TextField,
-  signInValidation,
-  signUpValidation,
-  passwordForgotValidation,
+  signInVal,
+  signUpVal,
+  passwordForgotVal,
+  passwordChangeVal,
 };

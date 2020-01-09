@@ -3,18 +3,18 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import { TextField, signInValidation } from '../Forms';
+import { TextField, signInVal } from '../Forms';
 
 import { FirebaseContext } from '../Firebase';
-import { IError } from '../Signup/SignUpForm';
+// import { IError } from '../Signup/SignUpForm';
 
-export interface ISignInForm {
+export interface ISignInFormValues {
   email: string;
   password: string;
   // error: null | IError;
 }
 
-const initialValues: ISignInForm = {
+const INITIAL_VALUES: ISignInFormValues = {
   email: '',
   password: '',
   // error: null,
@@ -26,8 +26,8 @@ const SignInForm = () => {
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={signInValidation}
+      initialValues={INITIAL_VALUES}
+      validationSchema={signInVal}
       onSubmit={({ email, password }, { resetForm }) => {
         firebase
           .doSignInWithEmailAndPassword(email, password)
@@ -35,7 +35,7 @@ const SignInForm = () => {
             resetForm();
             router.push('/');
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
           });
       }}
@@ -53,7 +53,7 @@ const SignInForm = () => {
           type="password"
           placeholder="password123"
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Sign In</button>
       </Form>
     </Formik>
   );

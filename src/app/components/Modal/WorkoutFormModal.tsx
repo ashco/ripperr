@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
-import { Mode } from '../Buttons/WorkoutFormButton';
+import { Mode } from '../Workouts/WorkoutFormButton';
 import { IWorkout } from '../../pages/workouts';
 
 interface IState {
@@ -16,7 +16,7 @@ const INITIAL_STATE: IState = {
   // TODO - Add in workoutType
 };
 
-const WorkoutFormModal: React.FunctionComponent<{
+const WorkoutFormModal: React.FC<{
   hide: () => void;
   mode: Mode;
   workout?: IWorkout;

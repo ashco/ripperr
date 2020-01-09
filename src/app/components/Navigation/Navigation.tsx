@@ -1,11 +1,11 @@
-﻿import { useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
 import { AuthUserContext } from '../Session';
 import SignOutButton from './SignOutButton';
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   const authUser = useContext(AuthUserContext);
   return (
     <NavigationWrapper>
@@ -14,7 +14,7 @@ const Navigation = () => {
   );
 };
 
-const NavigationAuth = () => (
+const NavigationAuth: React.FC = () => (
   <ul>
     <li>
       <Link href="/">
@@ -47,7 +47,7 @@ const NavigationAuth = () => (
   </ul>
 );
 
-const NavigationNonAuth = () => (
+const NavigationNonAuth: React.FC = () => (
   <ul>
     <li>
       <Link href="/">

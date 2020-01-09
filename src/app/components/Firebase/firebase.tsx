@@ -18,7 +18,7 @@ export type IAuthUserContext = firebase.User | null;
 class Firebase {
   auth: firebase.auth.Auth;
   db: firebase.firestore.Firestore;
-  testAuth: any;
+  // testAuth: any;
 
   constructor() {
     if (!firebase.apps.length) {
@@ -26,7 +26,6 @@ class Firebase {
     }
 
     this.auth = firebase.auth();
-    // this.db = firebase.database();
     this.db = firebase.firestore();
   }
 
