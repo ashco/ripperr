@@ -1,28 +1,20 @@
 ﻿import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  useField,
-  FormikProps,
-} from 'formik';
+import { Formik, Form } from 'formik';
 
-import { signInValidation } from '../Forms/validationSchema';
-// import TextInput from '../Forms/TextInput';
+import { TextField, signInValidation } from '../Forms';
 
 import { FirebaseContext } from '../Firebase';
 import { IError } from '../Signup/SignUpForm';
 
-interface IFormValues {
+export interface ISignInForm {
   email: string;
   password: string;
   // error: null | IError;
 }
 
-const INITIAL_FORM_VALUES: IFormValues = {
+const initialValues: ISignInForm = {
   email: '',
   password: '',
   // error: null,
@@ -34,7 +26,7 @@ const SignInForm = () => {
 
   return (
     <Formik
-      initialValues={INITIAL_FORM_VALUES}
+      initialValues={initialValues}
       validationSchema={signInValidation}
       onSubmit={({ email, password }, { resetForm }) => {
         firebase
@@ -49,18 +41,18 @@ const SignInForm = () => {
       }}
     >
       <Form>
-        {/* <TextInput
+        <TextField
           label="Email"
           name="email"
           type="email"
           placeholder="janedoe@gmail.com"
-        /> */}
-        <label htmlFor="email">Password</label>
-        <Field name="email" type="email" />
-        <ErrorMessage name="email" />
-        <label htmlFor="password">Password</label>
-        <Field name="password" type="password" />
-        <ErrorMessage name="password" />
+        />
+        <TextField
+          label="Password"
+          name="password"
+          type="password"
+          placeholder="password123"
+        />
         <button type="submit">Submit</button>
       </Form>
     </Formik>

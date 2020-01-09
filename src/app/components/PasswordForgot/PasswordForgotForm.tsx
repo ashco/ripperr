@@ -1,67 +1,81 @@
 ﻿import React, { useState, useContext } from 'react';
 import Link from 'next/link';
+import { Formik, Form } from 'formik';
+
+import { TextField, passwordForgotValidation } from '../Forms';
 import { FirebaseContext } from '../Firebase';
 import { IError } from '../Signup/SignUpForm';
 
-interface IState {
-  [key: string]: any;
+interface IPasswordForgotForm {
   email: string;
-  error: null | IError;
+  // error: null | IError;
 }
 
-const INITIAL_STATE: IState = {
+const initialValues: IPasswordForgotForm = {
   email: '',
-  error: null,
+  // error: null,
 };
 
-const PasswordForgotForm = () => {
+const PasswordForgotForm: React.FC = () => {
   const firebase = useContext(FirebaseContext);
-  const [state, setState] = useState(INITIAL_STATE);
+  // const [state, setState] = useState(initialValues);
 
-  const { email, error } = state;
-  const isInvalid = email === '';
+  // const { email, error } = state;
+  // const isInvalid = email === '';
 
-  function handleChange(e: { target: { name: string; value: any } }): void {
-    const { name, value } = e.target;
+  // function handleChange(e: { target: { name: string; value: any } }): void {
+  //   const { name, value } = e.target;
 
-    const newState = { ...state };
-    newState[name] = value;
+  //   const newState = { ...state };
+  //   newState[name] = value;
 
-    setState(newState);
-  }
+  //   setState(newState);
+  // }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  //   e.preventDefault();
 
-    firebase
-      .doPasswordReset(email)
-      .then(() => {
-        setState({ ...INITIAL_STATE });
-      })
-      .catch(error => {
-        setState({ ...state, error });
-        console.error(error);
-      });
-  }
+  //   firebase
+  //     .doPasswordReset(email)
+  //     .then(() => {
+  //       setState({ ...INITIAL_STATE });
+  //     })
+  //     .catch(error => {
+  //       setState({ ...state, error });
+  //       console.error(error);
+  //     });
+  // }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="email"
-        value={email}
-        onChange={handleChange}
-        type="text"
-        placeholder="Email Address"
-      />
-      <button disabled={isInvalid} type="submit">
-        Reset My Password
-      </button>
-      {error && <p>{error.message}</p>}
-    </form>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={passwordForgotValidation}
+      onSubmit={({ email }, { resetForm }) => {
+        firebase
+          .doPasswordReset(email)
+          .then(() => {
+            resetForm();
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }}
+    >
+      <Form>
+        <TextField
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="janedoe@gmail.com"
+        />
+        <button type="submit">Reset My Password</button>
+      </Form>
+      {/* {error && <p>{error.message}</p>} */}
+    </Formik>
   );
 };
 
-export const PasswordForgotLink = () => (
+export const PasswordForgotLink: React.FC = () => (
   <p>
     <Link href="/forgot">
       <a>Forgot Password?</a>

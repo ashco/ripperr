@@ -1,14 +1,17 @@
 ﻿import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { Formik, Form } from 'formik';
+
+import { TextField, signUpValidation } from '../Forms';
+
 import { FirebaseContext } from '../Firebase/index';
 
-interface IState {
-  [key: string]: any;
+interface ISignUpFormValues {
   username: string;
   email: string;
   passwordOne: string;
   passwordTwo: string;
-  error: null | IError;
+  // error: null | IError;
 }
 
 export interface IError {
@@ -16,95 +19,72 @@ export interface IError {
   message: string;
 }
 
-const INITIAL_STATE: IState = {
+const initialValues: ISignUpFormValues = {
   username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  error: null,
+  // error: null,
 };
 
-const SignUpForm: React.FunctionComponent = () => {
+const SignUpForm: React.FC = () => {
   const firebase = useContext(FirebaseContext);
   const router = useRouter();
-  const [state, setState] = useState(INITIAL_STATE);
-
-  const { username, email, passwordOne, passwordTwo, error } = state;
-
-  const isInvalid =
-    passwordOne !== passwordTwo ||
-    passwordOne === '' ||
-    email === '' ||
-    username === '';
-
-  function handleChange(e: { target: { name: string; value: any } }): void {
-    const { name, value } = e.target;
-
-    const newState = { ...state };
-    newState[name] = value;
-
-    setState(newState);
-  }
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-
-    firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authUser => {
-        // Create a user in your Firebase realtime database
-        if (authUser.user) {
-          return firebase.user(authUser.user.uid).set({
-            username,
-            email,
-          });
-        }
-      })
-      .then(() => {
-        setState({ ...INITIAL_STATE });
-        router.push('/');
-      })
-      .catch(error => {
-        console.log(error);
-        setState({ ...state, error });
-      });
-  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        value={username}
-        onChange={handleChange}
-        type="text"
-        placeholder="Full Name"
-      />
-      <input
-        name="email"
-        value={email}
-        onChange={handleChange}
-        type="text"
-        placeholder="Email Address"
-      />
-      <input
-        name="passwordOne"
-        value={passwordOne}
-        onChange={handleChange}
-        type="password"
-        placeholder="Password"
-      />
-      <input
-        name="passwordTwo"
-        value={passwordTwo}
-        onChange={handleChange}
-        type="password"
-        placeholder="Confirm Password"
-      />
-      <button type="submit" disabled={isInvalid}>
-        Sign Up
-      </button>
-      {error && <p>{error.message}</p>}
-    </form>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={signUpValidation}
+      onSubmit={({ username, email, passwordOne }, { resetForm }) => {
+        firebase
+          .doCreateUserWithEmailAndPassword(email, passwordOne)
+          .then(authUser => {
+            // Create a user in your Firebase realtime database
+            if (authUser.user) {
+              return firebase.user(authUser.user.uid).set({
+                username,
+                email,
+              });
+            }
+          })
+          .then(() => {
+            resetForm();
+            router.push('/');
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }}
+    >
+      <Form>
+        <TextField
+          label="Username"
+          name="username"
+          type="text"
+          placeholder="Hotdaddy69"
+        />
+        <TextField
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="janedoe@gmail.com"
+        />
+        <TextField
+          label="Password"
+          name="passwordOne"
+          type="password"
+          placeholder="something secret"
+        />
+        <TextField
+          label="Confirm Password"
+          name="passwordTwo"
+          type="password"
+          placeholder="something secret"
+        />
+        <button type="submit">Sign Up</button>
+        {/* {error && <p>{error.message}</p>} */}
+      </Form>
+    </Formik>
   );
 };
 

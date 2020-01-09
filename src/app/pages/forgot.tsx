@@ -3,7 +3,7 @@ import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm'
 
 const PasswordForgotPage: NextPage = () => (
   <div>
-    <h1>PasswordForget</h1>
+    <h1>Forgot Password?</h1>
     <PasswordForgotForm />
   </div>
 );
