@@ -1,6 +1,7 @@
 ﻿import styled from 'styled-components';
-import { IWorkout } from '../../pages/workouts';
-import WorkoutListItem from './WorkoutListItem';
+
+import { WorkoutListItem } from '../Workouts';
+import { IWorkout } from '../../common/types';
 
 const WorkoutList = ({ workouts }: any) => (
   <WorkoutListWrapper>

@@ -6,23 +6,23 @@ import { Formik, Form } from 'formik';
 import { TextField, signInVal } from '../Forms';
 
 import { FirebaseContext } from '../Firebase';
-// import { IError } from '../Signup/SignUpForm';
+import { AuthErrorSchema } from '../../common/types';
 
 export interface ISignInFormValues {
   email: string;
   password: string;
-  // error: null | IError;
 }
 
 const INITIAL_VALUES: ISignInFormValues = {
   email: '',
   password: '',
-  // error: null,
 };
 
 const SignInForm = () => {
   const firebase = useContext(FirebaseContext);
   const router = useRouter();
+
+  const [error, setError] = useState<AuthErrorSchema>(false);
 
   return (
     <Formik
@@ -36,6 +36,7 @@ const SignInForm = () => {
             router.push('/');
           })
           .catch((error) => {
+            setError(error);
             console.log(error);
           });
       }}
@@ -54,6 +55,7 @@ const SignInForm = () => {
           placeholder="password123"
         />
         <button type="submit">Sign In</button>
+        {error && <p>{error.message}</p>}
       </Form>
     </Formik>
   );

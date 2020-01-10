@@ -4,20 +4,20 @@ import { Formik, Form } from 'formik';
 
 import { TextField, passwordForgotVal } from '../Forms';
 import { FirebaseContext } from '../Firebase';
-// import { IError } from '../Signup/SignUpForm';
+import { AuthErrorSchema } from '../../common/types';
 
 interface IPasswordForgotForm {
   email: string;
-  // error: null | IError;
 }
 
 const INITIAL_VALUES: IPasswordForgotForm = {
   email: '',
-  // error: null,
 };
 
 const PasswordForgotForm: React.FC = () => {
   const firebase = useContext(FirebaseContext);
+
+  const [error, setError] = useState<AuthErrorSchema>(false);
 
   return (
     <Formik
@@ -30,6 +30,7 @@ const PasswordForgotForm: React.FC = () => {
             resetForm();
           })
           .catch((error) => {
+            setError(error);
             console.error(error);
           });
       }}
@@ -42,8 +43,8 @@ const PasswordForgotForm: React.FC = () => {
           placeholder="janedoe@gmail.com"
         />
         <button type="submit">Reset My Password</button>
+        {error && <p>{error.message}</p>}
       </Form>
-      {/* {error && <p>{error.message}</p>} */}
     </Formik>
   );
 };

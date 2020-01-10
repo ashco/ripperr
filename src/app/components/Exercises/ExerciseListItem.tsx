@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { DeleteButton } from '../Buttons';
+import { ExerciseFormButton } from '../Exercises';
+
 import { IExercise } from '../../common/types';
-import ExerciseFormButton from './ExerciseFormButton';
 
 const ExerciseListItem: React.FC<{
   exercise: IExercise;
@@ -21,7 +22,7 @@ const ExerciseListItem: React.FC<{
         .exercise(authUser.uid, exercise.id)
         .delete()
         .then(() => console.log(`Exercise Deleted: ${exercise.name}`))
-        .catch(err => console.error(err));
+        .catch((err) => console.error(err));
     }
   }
 

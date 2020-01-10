@@ -5,14 +5,10 @@ import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
-import WorkoutFormModal from '../components/Modal/WorkoutFormModal';
+import WorkoutFormModal from '../components/Workouts/WorkoutFormModal';
 import WorkoutList from '../components/Workouts/WorkoutList';
-import { WorkoutFormButton } from '../components/Buttons';
-
-export interface IWorkout {
-  id: string;
-  name: string;
-}
+import WorkoutFormButton from '../components/Workouts/WorkoutFormButton';
+import { IWorkout } from '../common/types';
 
 interface IWorkoutState {
   loading: boolean;
@@ -39,10 +35,10 @@ const WorkoutsPage: NextPage<{
     if (authUser) {
       const unsubscribe = firebase
         .workouts(authUser.uid)
-        .onSnapshot(snapshot => {
+        .onSnapshot((snapshot) => {
           const workouts: IWorkout[] = [];
 
-          snapshot.forEach(doc => {
+          snapshot.forEach((doc) => {
             const { id } = doc;
             const { name } = doc.data();
             const workoutObj: IWorkout = {

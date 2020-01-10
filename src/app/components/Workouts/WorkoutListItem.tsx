@@ -3,8 +3,9 @@ import styled from 'styled-components';
 
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
-import { DeleteButton, WorkoutFormButton } from '../Buttons';
-import { IWorkout } from '../../pages/workouts';
+import { DeleteButton } from '../Buttons';
+import { WorkoutFormButton } from '../Workouts';
+import { IWorkout } from '../../common/types';
 
 const WorkoutListItem: React.FunctionComponent<{
   workout: IWorkout;
@@ -20,7 +21,7 @@ const WorkoutListItem: React.FunctionComponent<{
         .workout(authUser.uid, workout.id)
         .delete()
         .then(() => console.log(`Workout Deleted: ${workout.name}`))
-        .catch(err => console.error(err));
+        .catch((err) => console.error(err));
     }
   }
 

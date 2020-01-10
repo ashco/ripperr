@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
-import { Mode } from '../Workouts/WorkoutFormButton';
-import { IWorkout } from '../../pages/workouts';
+import { Mode } from './WorkoutFormButton';
+import { IWorkout } from '../../common/types';
 
 interface IState {
   [key: string]: any;
@@ -64,7 +64,7 @@ const WorkoutFormModal: React.FC<{
           console.log(`Workout Added: ${name}`);
           hide();
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     } else {
@@ -84,7 +84,7 @@ const WorkoutFormModal: React.FC<{
           console.log(`Workout Updated: ${name}`);
           hide();
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     } else {

@@ -1,6 +1,8 @@
 ﻿import React, { useState } from 'react';
-import { Modal, WorkoutFormModal } from '../Modal';
-import { IWorkout } from '../../pages/workouts';
+
+import { Modal } from '../Modal';
+import { WorkoutFormModal } from '../Workouts';
+import { IWorkout } from '../../common/types';
 
 export type Mode = 'Add' | 'Edit';
 

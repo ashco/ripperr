@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
+import { ExerciseListItem } from '../Exercises';
 import { IExercise } from '../../common/types';
-import ExerciseListItem from './ExerciseListItem';
 
 const ExerciseList: React.FC<{ exercises: IExercise[] }> = ({ exercises }) => (
   <ExerciseListWrapper>

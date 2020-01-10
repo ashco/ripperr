@@ -3,15 +3,14 @@ import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 
 import { TextField, signUpVal } from '../Forms';
-
 import { FirebaseContext } from '../Firebase/index';
+import { AuthErrorSchema } from '../../common/types';
 
 interface ISignUpFormValues {
   username: string;
   email: string;
   passwordOne: string;
   passwordTwo: string;
-  // error: null | IError;
 }
 
 const INITIAL_VALUES: ISignUpFormValues = {
@@ -19,12 +18,13 @@ const INITIAL_VALUES: ISignUpFormValues = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  // error: null,
 };
 
 const SignUpForm: React.FC = () => {
   const firebase = useContext(FirebaseContext);
   const router = useRouter();
+
+  const [error, setError] = useState<AuthErrorSchema>(false);
 
   return (
     <Formik
@@ -47,6 +47,7 @@ const SignUpForm: React.FC = () => {
             router.push('/');
           })
           .catch((error) => {
+            setError(error);
             console.log(error);
           });
       }}
@@ -77,7 +78,7 @@ const SignUpForm: React.FC = () => {
           placeholder="something secret"
         />
         <button type="submit">Sign Up</button>
-        {/* {error && <p>{error.message}</p>} */}
+        {error && <p>{error.message}</p>}
       </Form>
     </Formik>
   );

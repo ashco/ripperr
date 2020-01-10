@@ -1,6 +1,7 @@
 ﻿import React, { useState } from 'react';
 
-import { Modal, ExerciseFormModal } from '../Modal';
+import { Modal } from '../Modal';
+import { ExerciseFormModal } from '../Exercises';
 import { FormMode, IExercise } from '../../common/types';
 
 const ExerciseFormButton: React.FC<{
