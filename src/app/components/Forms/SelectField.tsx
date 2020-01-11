@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { useField, Field, FieldAttributes } from 'formik';
+import { useField, FieldAttributes } from 'formik';
 
 type ISelectFieldProps = {
   label: string;

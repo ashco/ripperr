@@ -12,7 +12,7 @@ const INITIAL_VALUES: IWorkoutFormValues = {
   type: '',
 };
 
-const WorkoutFormModal: React.FC<{
+const WorkoutForm: React.FC<{
   hide: () => void;
   mode: FormMode;
   workout?: IWorkout;
@@ -103,7 +103,7 @@ const WorkoutFormModal: React.FC<{
         }
       }}
     >
-      <WorkoutFormModalWrapper>
+      <WorkoutFormWrapper>
         <button onClick={hide}>Close</button>
         <h1>{titleText}</h1>
         <Form>
@@ -130,15 +130,15 @@ const WorkoutFormModal: React.FC<{
           </label> */}
           <button disabled={!isValid}>{submitButtonText}</button>
         </Form>
-      </WorkoutFormModalWrapper>
+      </WorkoutFormWrapper>
     </Formik>
   );
 };
 
-const WorkoutFormModalWrapper = styled.div`
+const WorkoutFormWrapper = styled.div`
   background: white;
   height: 500px;
   width: 500px;
 `;
 
-export default WorkoutFormModal;
+export default WorkoutForm;

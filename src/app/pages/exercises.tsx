@@ -6,7 +6,7 @@ import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
-import ExerciseFormModal from '../components/Exercises/ExerciseFormModal';
+import ExerciseForm from '../components/Exercises/ExerciseForm';
 import ExerciseList from '../components/Exercises/ExerciseList';
 import ExerciseFormButton from '../components/Exercises/ExerciseFormButton';
 import { IExercise } from '../common/types';

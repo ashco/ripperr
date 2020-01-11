@@ -1,11 +1,6 @@
 ﻿import ExerciseFormButton from './ExerciseFormButton';
-import ExerciseFormModal from './ExerciseFormModal';
+import ExerciseForm from './ExerciseForm';
 import ExerciseList from './ExerciseList';
 import ExerciseListItem from './ExerciseListItem';
 
-export {
-  ExerciseFormButton,
-  ExerciseFormModal,
-  ExerciseList,
-  ExerciseListItem,
-};
+export { ExerciseFormButton, ExerciseForm, ExerciseList, ExerciseListItem };

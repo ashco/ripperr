@@ -5,7 +5,7 @@ import { withAuthorization } from '../components/Session';
 import { FirebaseContext } from '../components/Firebase';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
-import WorkoutFormModal from '../components/Workouts/WorkoutFormModal';
+import WorkoutForm from '../components/Workouts/WorkoutForm';
 import WorkoutList from '../components/Workouts/WorkoutList';
 import WorkoutFormButton from '../components/Workouts/WorkoutFormButton';
 import { IWorkout } from '../common/types';

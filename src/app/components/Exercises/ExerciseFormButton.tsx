@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
 
 import { Modal } from '../Modal';
-import { ExerciseFormModal } from '../Exercises';
+import { ExerciseForm } from '../Exercises';
 import { FormMode, IExercise } from '../../common/types';
 
 const ExerciseFormButton: React.FC<{
@@ -23,7 +23,7 @@ const ExerciseFormButton: React.FC<{
 
   const modal = showModal ? (
     <Modal>
-      <ExerciseFormModal mode={mode} hide={hide} exercise={exercise} />
+      <ExerciseForm mode={mode} hide={hide} exercise={exercise} />
     </Modal>
   ) : null;
 

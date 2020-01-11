@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import { TextField, exerciseFormVal } from '../Forms';
+import { InputField, exerciseFormVal } from '../Forms';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { FormMode, IExercise } from '../../common/types';
@@ -16,7 +16,7 @@ const INITIAL_VALUES: IExerciseFormValues = {
   // TODO - Add in exerciseType
 };
 
-const ExerciseFormModal: React.FC<{
+const ExerciseForm: React.FC<{
   hide: () => void;
   mode: FormMode;
   exercise?: IExercise;
@@ -114,11 +114,11 @@ const ExerciseFormModal: React.FC<{
         }
       }}
     >
-      <ExerciseFormModalWrapper>
+      <ExerciseFormWrapper>
         <button onClick={hide}>Close</button>
         <h1>{titleText}</h1>
         <Form>
-          <TextField
+          <InputField
             label="Name"
             name="name"
             type="text"
@@ -126,15 +126,15 @@ const ExerciseFormModal: React.FC<{
           />
           <button disabled={!isValid}>{submitButtonText}</button>
         </Form>
-      </ExerciseFormModalWrapper>
+      </ExerciseFormWrapper>
     </Formik>
   );
 };
 
-const ExerciseFormModalWrapper = styled.div`
+const ExerciseFormWrapper = styled.div`
   background: white;
   height: 500px;
   width: 500px;
 `;
 
-export default ExerciseFormModal;
+export default ExerciseForm;
