@@ -32,3 +32,7 @@ export const passwordChangeVal = yup.object({
   passwordOne: yup.string().required('Password is required'),
   passwordTwo: yup.string().required('Password is required'),
 });
+
+export const exerciseFormVal = yup.object({
+  name: yup.string().required('Exercise name is required.'),
+});
