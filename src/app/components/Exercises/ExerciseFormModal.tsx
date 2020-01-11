@@ -8,7 +8,6 @@ import { AuthUserContext } from '../Session';
 import { FormMode, IExercise } from '../../common/types';
 
 interface IExerciseFormValues {
-  [key: string]: any;
   name: string;
 }
 
@@ -25,7 +24,7 @@ const ExerciseFormModal: React.FC<{
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
-  // Form fill exercise if in edit mode
+  // Form fill if in edit mode
   let initialFormState;
   if (mode === 'Edit' && exercise) {
     initialFormState = exercise;

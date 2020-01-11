@@ -1,4 +1,5 @@
-﻿import TextField from './TextField';
+﻿import InputField from './InputField';
+import SelectField from './SelectField';
 import {
   signInVal,
   signUpVal,
@@ -9,7 +10,8 @@ import {
 } from './validationSchema';
 
 export {
-  TextField,
+  InputField,
+  SelectField,
   signInVal,
   signUpVal,
   passwordForgotVal,

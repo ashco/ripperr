@@ -4,16 +4,12 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { Formik, Form } from 'formik';
 
-import { TextField, workoutFormVal } from '../Forms';
-import { FormMode, IWorkout } from '../../common/types';
-
-interface IWorkoutFormValues {
-  name: string;
-}
+import { InputField, SelectField, workoutFormVal } from '../Forms';
+import { FormMode, IWorkoutFormValues, IWorkout } from '../../common/types';
 
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
-  // TODO - Add in workoutType
+  type: '',
 };
 
 const WorkoutFormModal: React.FC<{
@@ -47,16 +43,15 @@ const WorkoutFormModal: React.FC<{
       const docRef = firebase.workouts(authUser.uid).doc();
       const { id } = docRef;
 
-      const { name } = values;
       // TODO - Check that workout name is unique
 
       docRef
         .set({
           id,
-          name,
+          ...values,
         })
         .then(() => {
-          console.log(`Workout Added: ${name}`);
+          console.log(`Workout Added: ${values.name}`);
           hide();
         })
         .catch((err) => {
@@ -70,15 +65,11 @@ const WorkoutFormModal: React.FC<{
   // TODO - Fix memory leak issue that occurs on update
   function handleUpdate(values: IWorkoutFormValues): void {
     if (authUser && workout) {
-      const { name } = values;
-
       firebase
         .workout(authUser.uid, workout.id)
-        .update({
-          name,
-        })
+        .update(values)
         .then(() => {
-          console.log(`Workout Updated: ${name}`);
+          console.log(`Workout Updated: ${values.name}`);
           hide();
         })
         .catch((err) => {
@@ -116,35 +107,31 @@ const WorkoutFormModal: React.FC<{
         <button onClick={hide}>Close</button>
         <h1>{titleText}</h1>
         <Form>
-          <TextField
+          <InputField
             label="Name"
             name="name"
             type="text"
             placeholder="Burpees"
           />
+          <SelectField
+            label="Type"
+            name="type"
+            placeholder="Sets"
+            options={['reps-sets', 'circuit']}
+          />
+          {/* <label htmlFor="type">
+            <div>Type</div>
+            <select {...field} {...props}>
+              <option label="" value="" />
+              <option label="Reps + Sets" value="reps-sets" />
+              <option label="Circuit" value="circuit" />
+            </select>
+            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+          </label> */}
           <button disabled={!isValid}>{submitButtonText}</button>
         </Form>
       </WorkoutFormModalWrapper>
     </Formik>
-    // <WorkoutFormModalWrapper>
-    //   <button onClick={hide}>Close</button>
-    //   <h1>{titleText}</h1>
-    //   <form onSubmit={handleSubmit}>
-    //     <label>
-    //       Name
-    //       <input name="name" value={name} onChange={handleChange} type="text" />
-    //     </label>
-    //     <label>
-    //       Exercise 1
-    //       <select name="ex1" id="ex1">
-    //         <option value=""></option>
-    //       </select>
-    //     </label>
-    //     <button disabled={isInvalid} type="submit">
-    //       {submitButtonText}
-    //     </button>
-    //   </form>
-    // </WorkoutFormModalWrapper>
   );
 };
 

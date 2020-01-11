@@ -12,7 +12,11 @@ export interface IExercise {
   name: string;
 }
 
-export interface IWorkout {
-  id: string;
+export interface IWorkoutFormValues {
   name: string;
+  type: '' | 'reps-sets' | 'circuit';
+}
+
+export interface IWorkout extends IWorkoutFormValues {
+  id: string;
 }
