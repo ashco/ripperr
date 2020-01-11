@@ -111,23 +111,17 @@ const WorkoutForm: React.FC<{
             label="Name"
             name="name"
             type="text"
-            placeholder="Burpees"
+            placeholder="Push + Pull"
           />
           <SelectField
             label="Type"
             name="type"
             placeholder="Sets"
-            options={['reps-sets', 'circuit']}
+            options={[
+              { label: 'Reps + Sets', value: 'reps-sets' },
+              { label: 'Circuit', value: 'circuit' },
+            ]}
           />
-          {/* <label htmlFor="type">
-            <div>Type</div>
-            <select {...field} {...props}>
-              <option label="" value="" />
-              <option label="Reps + Sets" value="reps-sets" />
-              <option label="Circuit" value="circuit" />
-            </select>
-            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
-          </label> */}
           <button disabled={!isValid}>{submitButtonText}</button>
         </Form>
       </WorkoutFormWrapper>

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Formik, Form } from 'formik';
 
-import { TextField, passwordForgotVal } from '../Forms';
+import { InputField, passwordForgotVal } from '../Forms';
 import { FirebaseContext } from '../Firebase';
 import { AuthErrorSchema } from '../../common/types';
 
@@ -36,7 +36,7 @@ const PasswordForgotForm: React.FC = () => {
       }}
     >
       <Form>
-        <TextField
+        <InputField
           label="Email"
           name="email"
           type="email"

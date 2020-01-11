@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 
-import { TextField, signUpVal } from '../Forms';
+import { InputField, signUpVal } from '../Forms';
 import { FirebaseContext } from '../Firebase/index';
 import { AuthErrorSchema } from '../../common/types';
 
@@ -53,25 +53,25 @@ const SignUpForm: React.FC = () => {
       }}
     >
       <Form>
-        <TextField
+        <InputField
           label="Username"
           name="username"
           type="text"
           placeholder="Hotdaddy69"
         />
-        <TextField
+        <InputField
           label="Email"
           name="email"
           type="email"
           placeholder="janedoe@gmail.com"
         />
-        <TextField
+        <InputField
           label="Password"
           name="passwordOne"
           type="password"
           placeholder="something secret"
         />
-        <TextField
+        <InputField
           label="Confirm Password"
           name="passwordTwo"
           type="password"

@@ -1,9 +1,14 @@
 ﻿import React from 'react';
 import { useField, FieldAttributes } from 'formik';
 
+type ISelectFieldOption = {
+  label: string;
+  value: string;
+};
+
 type ISelectFieldProps = {
   label: string;
-  options: string[];
+  options: ISelectFieldOption[];
 } & FieldAttributes<{}>;
 
 const SelectField: React.FC<ISelectFieldProps> = ({
@@ -18,8 +23,12 @@ const SelectField: React.FC<ISelectFieldProps> = ({
       <div>{label}</div>
       <select {...field} name={name} placeholder={placeholder}>
         <option label="" value="" />
-        {options.map((value) => (
-          <option label={value} value={value} key={value} />
+        {options.map((option) => (
+          <option
+            label={option.label}
+            value={option.value}
+            key={option.value}
+          />
         ))}
       </select>
       {meta.touched && meta.error ? <div>{meta.error}</div> : null}

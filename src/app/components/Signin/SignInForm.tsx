@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import { TextField, signInVal } from '../Forms';
+import { InputField, signInVal } from '../Forms';
 
 import { FirebaseContext } from '../Firebase';
 import { AuthErrorSchema } from '../../common/types';
@@ -42,13 +42,13 @@ const SignInForm = () => {
       }}
     >
       <Form>
-        <TextField
+        <InputField
           label="Email"
           name="email"
           type="email"
           placeholder="janedoe@gmail.com"
         />
-        <TextField
+        <InputField
           label="Password"
           name="password"
           type="password"
