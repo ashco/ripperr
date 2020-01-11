@@ -1,11 +1,13 @@
 ﻿import { NextPage } from 'next';
+
+import { AuthFormContainer } from './signin';
 import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';
 
 const PasswordForgotPage: NextPage = () => (
-  <div>
+  <AuthFormContainer>
     <h1>Forgot Password?</h1>
     <PasswordForgotForm />
-  </div>
+  </AuthFormContainer>
 );
 
 export default PasswordForgotPage;

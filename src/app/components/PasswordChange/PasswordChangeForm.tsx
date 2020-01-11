@@ -25,7 +25,7 @@ const PasswordChangeForm: React.FC = () => {
     <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={passwordChangeVal}
-      onSubmit={({ passwordOne, passwordTwo }, { resetForm }) => {
+      onSubmit={({ passwordOne }, { resetForm }) => {
         firebase
           .doPasswordUpdate(passwordOne)
           .then(() => {
@@ -56,46 +56,6 @@ const PasswordChangeForm: React.FC = () => {
       </Form>
     </Formik>
   );
-
-  // const { passwordOne, passwordTwo, error } = state;
-  // const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
-
-  // function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-  //   event.preventDefault();
-
-  //   firebase
-  //     .doPasswordUpdate(passwordOne)
-  //     .then(() => {
-  //       setState({ ...INITIAL_STATE });
-  //     })
-  //     .catch((error) => {
-  //       setState({ ...state, error });
-  //       console.error(error);
-  //     });
-  // }
-
-  // return (
-  //   <form onSubmit={handleSubmit}>
-  //     <input
-  //       name="passwordOne"
-  //       value={passwordOne}
-  //       onChange={handleChange}
-  //       type="password"
-  //       placeholder="New Password"
-  //     />
-  //     <input
-  //       name="passwordTwo"
-  //       value={passwordTwo}
-  //       onChange={handleChange}
-  //       type="password"
-  //       placeholder="Confirm New Password"
-  //     />
-  //     <button disabled={isInvalid} type="submit">
-  //       Reset My Password
-  //     </button>
-  //     {error && <p>{error.message}</p>}
-  //   </form>
-  // );
 };
 
 export default PasswordChangeForm;

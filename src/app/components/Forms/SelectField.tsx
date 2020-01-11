@@ -31,7 +31,7 @@ const SelectField: React.FC<ISelectFieldProps> = ({
           />
         ))}
       </select>
-      {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+      {meta.touched && meta.error && <div>{meta.error}</div>}
     </label>
   );
 };

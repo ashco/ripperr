@@ -5,22 +5,20 @@ import { PasswordForgotLink } from '../components/PasswordForgot/PasswordForgotF
 import SignUpLink from '../components/Signup/SignUpLink';
 
 const SignInPage: NextPage<{ userAgent: string }> = () => (
-  <div>
-    <SignInContainer>
-      <h1>Sign In</h1>
-      <SignInForm />
-      <PasswordForgotLink />
-      <SignUpLink />
-    </SignInContainer>
-  </div>
+  <AuthFormContainer>
+    <h1>Sign In</h1>
+    <SignInForm />
+    <PasswordForgotLink />
+    <SignUpLink />
+  </AuthFormContainer>
 );
 
-const SignInContainer = styled.div`
+export const AuthFormContainer = styled.div`
   max-width: 500px;
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.5);
   padding: 24px;
   border-radius: 5px;
-  margin: auto;
+  margin-bottom: 2rem;
 
   h1 {
     font-size: 24px;
