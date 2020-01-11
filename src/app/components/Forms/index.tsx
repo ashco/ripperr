@@ -5,6 +5,7 @@ import {
   passwordForgotVal,
   passwordChangeVal,
   exerciseFormVal,
+  workoutFormVal,
 } from './validationSchema';
 
 export {
@@ -14,4 +15,5 @@ export {
   passwordForgotVal,
   passwordChangeVal,
   exerciseFormVal,
+  workoutFormVal,
 };
