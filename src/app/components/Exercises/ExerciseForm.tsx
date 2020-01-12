@@ -18,15 +18,15 @@ const INITIAL_VALUES: IExerciseFormValues = {
 
 const ExerciseForm: React.FC<{
   hide: () => void;
-  mode: FormMode;
+  formMode: FormMode;
   exercise?: IExercise;
-}> = ({ hide, mode, exercise }) => {
+}> = ({ hide, formMode, exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
-  // Form fill if in edit mode
+  // Form fill if in edit formMode
   let initialFormState;
-  if (mode === 'Edit' && exercise) {
+  if (formMode === 'Edit' && exercise) {
     initialFormState = exercise;
     // validUpdate = name !== exercise.name;
   } else {
@@ -91,13 +91,13 @@ const ExerciseForm: React.FC<{
     }
   }
 
-  // Text assignment for different modes
+  // Text assignment for different formModes
   let titleText;
   let submitButtonText;
-  if (mode === 'Add') {
+  if (formMode === 'Add') {
     titleText = 'Create New Exercise';
     submitButtonText = 'Submit';
-  } else if (mode === 'Edit') {
+  } else if (formMode === 'Edit') {
     titleText = 'Edit Exercise';
     submitButtonText = 'Update';
   }
@@ -107,9 +107,9 @@ const ExerciseForm: React.FC<{
       initialValues={initialFormState}
       validationSchema={exerciseFormVal}
       onSubmit={(values) => {
-        if (mode === 'Add') {
+        if (formMode === 'Add') {
           handleCreate(values);
-        } else if (mode === 'Edit') {
+        } else if (formMode === 'Edit') {
           handleUpdate(values);
         }
       }}

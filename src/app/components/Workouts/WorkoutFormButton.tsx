@@ -2,14 +2,12 @@
 
 import { Modal } from '../Modal';
 import { WorkoutForm } from '../Workouts';
-import { IWorkout } from '../../common/types';
-
-export type Mode = 'Add' | 'Edit';
+import { FormMode, IWorkout } from '../../common/types';
 
 const WorkoutFormButton: React.FC<{
-  mode: Mode;
+  formMode: FormMode;
   workout?: IWorkout;
-}> = ({ mode, workout }) => {
+}> = ({ formMode, workout }) => {
   const [showModal, setShowModal] = useState(false);
 
   const hide = (): void => setShowModal(false);
@@ -17,15 +15,15 @@ const WorkoutFormButton: React.FC<{
 
   let buttonText;
 
-  if (mode === 'Add') {
+  if (formMode === 'Add') {
     buttonText = 'Add Workout';
-  } else if (mode === 'Edit') {
+  } else if (formMode === 'Edit') {
     buttonText = 'Edit Workout';
   }
 
   const modal = showModal ? (
     <Modal>
-      <WorkoutForm mode={mode} hide={hide} workout={workout} />
+      <WorkoutForm formMode={formMode} hide={hide} workout={workout} />
     </Modal>
   ) : null;
 

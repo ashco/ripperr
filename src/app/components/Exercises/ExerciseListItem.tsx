@@ -31,7 +31,7 @@ const ExerciseListItem: React.FC<{
       <span>
         <strong>Exercise Name:</strong> {exercise.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <ExerciseFormButton mode="Edit" exercise={exercise} />
+        <ExerciseFormButton formMode="Edit" exercise={exercise} />
       </span>
     </ExerciseListItemWrapper>
   );

@@ -1,4 +1,5 @@
 ﻿export type FormMode = 'Add' | 'Edit';
+export type WorkoutMode = '' | 'reps-sets' | 'tabata';
 
 export interface IAuthError {
   code: string;
@@ -14,7 +15,7 @@ export interface IExercise {
 
 export interface IWorkoutFormValues {
   name: string;
-  type: '' | 'reps-sets' | 'circuit';
+  workoutMode: WorkoutMode;
 }
 
 export interface IWorkout extends IWorkoutFormValues {

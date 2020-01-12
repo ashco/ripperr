@@ -11,17 +11,12 @@ type ISelectFieldProps = {
   options: ISelectFieldOption[];
 } & FieldAttributes<{}>;
 
-const SelectField: React.FC<ISelectFieldProps> = ({
-  label,
-  name,
-  placeholder,
-  options,
-}) => {
+const SelectField: React.FC<ISelectFieldProps> = ({ label, name, options }) => {
   const [field, meta] = useField(name);
   return (
     <label htmlFor={name}>
       <div>{label}</div>
-      <select {...field} name={name} placeholder={placeholder}>
+      <select {...field} name={name}>
         <option label="" value="" />
         {options.map((option) => (
           <option

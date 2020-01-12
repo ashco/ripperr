@@ -1,13 +1,14 @@
 ﻿import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import { Modal } from '../Modal';
 import { ExerciseForm } from '../Exercises';
 import { FormMode, IExercise } from '../../common/types';
 
 const ExerciseFormButton: React.FC<{
-  mode: FormMode;
+  formMode: FormMode;
   exercise?: IExercise;
-}> = ({ mode, exercise }) => {
+}> = ({ formMode, exercise }) => {
   const [showModal, setShowModal] = useState(false);
 
   const hide = (): void => setShowModal(false);
@@ -15,15 +16,15 @@ const ExerciseFormButton: React.FC<{
 
   let buttonText;
 
-  if (mode === 'Add') {
+  if (formMode === 'Add') {
     buttonText = 'Add Exercise';
-  } else if (mode === 'Edit') {
+  } else if (formMode === 'Edit') {
     buttonText = 'Edit Exercise';
   }
 
   const modal = showModal ? (
     <Modal>
-      <ExerciseForm mode={mode} hide={hide} exercise={exercise} />
+      <ExerciseForm formMode={formMode} hide={hide} exercise={exercise} />
     </Modal>
   ) : null;
 
@@ -34,5 +35,12 @@ const ExerciseFormButton: React.FC<{
     </>
   );
 };
+
+// const NewFormButton = styled.button`
+//   padding: 1rem;
+//   position: fixed;
+//   bottom: 2rem;
+//   right: 2rem;
+// `;
 
 export default ExerciseFormButton;

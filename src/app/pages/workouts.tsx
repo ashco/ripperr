@@ -2,7 +2,6 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import { withAuthorization } from '../components/Session';
-import { FirebaseContext } from '../components/Firebase';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
 import WorkoutForm from '../components/Workouts/WorkoutForm';
@@ -10,6 +9,7 @@ import WorkoutList from '../components/Workouts/WorkoutList';
 import WorkoutFormButton from '../components/Workouts/WorkoutFormButton';
 import { IWorkout } from '../common/types';
 
+import { FirebaseContext } from '../components/Firebase';
 interface IWorkoutState {
   loading: boolean;
   workouts: IWorkout[];
@@ -40,11 +40,11 @@ const WorkoutsPage: NextPage<{
 
           snapshot.forEach((doc) => {
             const { id } = doc;
-            const { name, type } = doc.data();
+            const { name, workoutMode } = doc.data();
             const workoutObj: IWorkout = {
               id,
               name,
-              type,
+              workoutMode,
             };
 
             workouts.push(workoutObj);
@@ -65,7 +65,7 @@ const WorkoutsPage: NextPage<{
   return (
     <div>
       <h1>Workouts</h1>
-      <WorkoutFormButton mode="Add" />
+      <WorkoutFormButton formMode="Add" />
       {loading && <div>Loading ...</div>}
       <WorkoutList workouts={workouts} />
     </div>

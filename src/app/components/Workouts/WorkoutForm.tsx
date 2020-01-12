@@ -4,25 +4,26 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { Formik, Form } from 'formik';
 
+import WorkoutModeFormFields from './WorkoutModeFormFields';
 import { InputField, SelectField, workoutFormVal } from '../Forms';
 import { FormMode, IWorkoutFormValues, IWorkout } from '../../common/types';
 
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
-  type: '',
+  workoutMode: '',
 };
 
 const WorkoutForm: React.FC<{
   hide: () => void;
-  mode: FormMode;
+  formMode: FormMode;
   workout?: IWorkout;
-}> = ({ hide, mode, workout }) => {
+}> = ({ hide, formMode, workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
-  // Form fill if in edit mode
+  // Form fill if in edit formMode
   let initialFormState;
-  if (mode === 'Edit' && workout) {
+  if (formMode === 'Edit' && workout) {
     initialFormState = workout;
   } else {
     initialFormState = INITIAL_VALUES;
@@ -80,13 +81,13 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  // Text assignment for different modes
+  // Text assignment for different formModes
   let titleText;
   let submitButtonText;
-  if (mode === 'Add') {
+  if (formMode === 'Add') {
     titleText = 'Create New Workout';
     submitButtonText = 'Submit';
-  } else if (mode === 'Edit') {
+  } else if (formMode === 'Edit') {
     titleText = 'Edit Workout';
     submitButtonText = 'Update';
   }
@@ -96,9 +97,9 @@ const WorkoutForm: React.FC<{
       initialValues={initialFormState}
       validationSchema={workoutFormVal}
       onSubmit={(values) => {
-        if (mode === 'Add') {
+        if (formMode === 'Add') {
           handleCreate(values);
-        } else if (mode === 'Edit') {
+        } else if (formMode === 'Edit') {
           handleUpdate(values);
         }
       }}
@@ -114,14 +115,15 @@ const WorkoutForm: React.FC<{
             placeholder="Push + Pull"
           />
           <SelectField
-            label="Type"
-            name="type"
-            placeholder="Sets"
+            label="Workout Mode"
+            name="workoutMode"
             options={[
               { label: 'Reps + Sets', value: 'reps-sets' },
-              { label: 'Circuit', value: 'circuit' },
+              { label: 'Tabata', value: 'tabata' },
             ]}
           />
+          <WorkoutModeFormFields />
+
           <button disabled={!isValid}>{submitButtonText}</button>
         </Form>
       </WorkoutFormWrapper>

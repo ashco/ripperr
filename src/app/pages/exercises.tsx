@@ -65,12 +65,21 @@ const ExercisesPage: NextPage<{
   return (
     <div>
       <h1>Exercises</h1>
-      <ExerciseFormButton mode="Add" />
+      <ExerciseFormButton formMode="Add" />
       {loading && <div>Loading ...</div>}
       <ExerciseList exercises={exercises} />
     </div>
   );
 };
+
+// const NewExerciseFormButton = styled(ExerciseFormButton)`
+//   button {
+//     padding: 1rem;
+//     position: fixed;
+//     bottom: 2rem;
+//     right: 2rem;
+//   }
+// `;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 

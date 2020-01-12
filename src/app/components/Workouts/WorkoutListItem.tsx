@@ -30,7 +30,7 @@ const WorkoutListItem: React.FunctionComponent<{
       <span>
         <strong>Workout Name:</strong> {workout.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <WorkoutFormButton mode="Edit" workout={workout} />
+        <WorkoutFormButton formMode="Edit" workout={workout} />
       </span>
     </WorkoutListItemWrapper>
   );
