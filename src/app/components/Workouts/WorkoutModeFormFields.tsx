@@ -39,21 +39,23 @@ import { WorkoutMode } from '../../common/types';
 
 export const RepsSetsFormRow: React.FC<{ num: string }> = ({ num }) => (
   <RepsSetsFormRowWrapper>
-    <SelectField
+    {/* <SelectField
       label={`Exercise ${num}`}
       name={`ex-${num}`}
       options={[{ label: 'Burpees', value: 'Burpees' }]}
-    />
-    <InputField
+    /> */}
+    {/* <InputField
       label={`Exercise ${num} Reps`}
       name={`ex-${num}-reps`}
       type="number"
+      placeholder="0"
     />
     <InputField
       label={`Exercise ${num} Sets`}
       name={`ex-${num}-sets`}
       type="number"
-    />
+      placeholder="0"
+    /> */}
   </RepsSetsFormRowWrapper>
 );
 
@@ -78,7 +80,7 @@ const RepsSetsFormRowWrapper = styled.div`
 // export default WorkoutModeFormFields;
 
 const WorkoutModeFormFields: React.FC<{ num: number }> = ({ num }) => {
-  const { values } = useFormikContext();
+  // const { values } = useFormikContext();
 
   // let formFields = <div />;
 

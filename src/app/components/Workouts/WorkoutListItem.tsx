@@ -18,7 +18,7 @@ const WorkoutListItem: React.FunctionComponent<{
   function handleDelete(): void {
     if (authUser) {
       firebase
-        .workout(authUser.uid, workout.id)
+        .workout(authUser.uid, workout.workoutId)
         .delete()
         .then(() => console.log(`Workout Deleted: ${workout.name}`))
         .catch((err) => console.error(err));

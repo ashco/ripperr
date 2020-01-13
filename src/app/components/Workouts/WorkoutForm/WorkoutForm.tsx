@@ -12,7 +12,8 @@ import { FormMode, IWorkoutFormValues, IWorkout } from '../../../common/types';
 
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
-  workoutMode: '',
+  mode: '',
+  exercises: [],
 };
 
 const WorkoutForm: React.FC<{
@@ -31,6 +32,8 @@ const WorkoutForm: React.FC<{
     initialFormState = INITIAL_VALUES;
   }
 
+  const [formState, setFormState] = useState(initialFormState);
+
   // Only update if a value is different and none are blank.
   let isValid = true;
   let isValidName = true;
@@ -41,6 +44,17 @@ const WorkoutForm: React.FC<{
 
   isValid = isValidName;
 
+  // Text assignment for different formModes
+  let titleText;
+  let submitButtonText;
+  if (formMode === 'Add') {
+    titleText = 'Create New Workout';
+    submitButtonText = 'Submit';
+  } else if (formMode === 'Edit') {
+    titleText = 'Edit Workout';
+    submitButtonText = 'Update';
+  }
+
   function handleCreate(values: IWorkoutFormValues): void {
     if (authUser) {
       const docRef = firebase.workouts(authUser.uid).doc();
@@ -50,7 +64,7 @@ const WorkoutForm: React.FC<{
 
       docRef
         .set({
-          id,
+          workoutId: id,
           ...values,
         })
         .then(() => {
@@ -65,11 +79,10 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  // TODO - Fix memory leak issue that occurs on update
   function handleUpdate(values: IWorkoutFormValues): void {
     if (authUser && workout) {
       firebase
-        .workout(authUser.uid, workout.id)
+        .workout(authUser.uid, workout.workoutId)
         .update(values)
         .then(() => {
           console.log(`Workout Updated: ${values.name}`);
@@ -83,72 +96,96 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  // Text assignment for different formModes
-  let titleText;
-  let submitButtonText;
-  if (formMode === 'Add') {
-    titleText = 'Create New Workout';
-    submitButtonText = 'Submit';
-  } else if (formMode === 'Edit') {
-    titleText = 'Edit Workout';
-    submitButtonText = 'Update';
+  // function handleAddField(): void {
+  // setExFieldCount(exFieldCount + 1);
+  // console.log(exFieldCount);
+  // }
+
+  function handleChange(e: { target: { name: string; value: any } }): void {
+    const { name, value } = e.target;
+    const newFormState = { ...formState };
+    newFormState[name] = value;
+    setFormState(newFormState);
   }
 
-  // Exercise field count
-  const [exFieldCount, setExFieldCount] = useState(1);
-
-  function handleAddField(): void {
-    setExFieldCount(exFieldCount + 1);
-    console.log(exFieldCount);
+  /**
+   * Determine if creating or updating existing workout
+   */
+  function handleSubmit(): void {
+    if (formMode === 'Add') {
+      handleCreate(formState);
+    } else if (formMode === 'Edit') {
+      handleUpdate(formState);
+    }
   }
 
   return (
-    <Formik
-      initialValues={initialFormState}
-      validationSchema={workoutFormVal}
-      onSubmit={(values): void => {
-        if (formMode === 'Add') {
-          handleCreate(values);
-        } else if (formMode === 'Edit') {
-          handleUpdate(values);
-        }
-      }}
-    >
-      <WorkoutFormWrapper>
-        <button onClick={hide}>Close</button>
-        <h1>{titleText}</h1>
-        <Form>
-          <InputField
-            label="Name"
-            name="name"
+    <WorkoutFormWrapper>
+      <button onClick={hide}>Close</button>
+      <h1>{titleText}</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="workout-name">Workout Name</label>
+          <input
             type="text"
-            placeholder="Push + Pull"
+            name="workout-name"
+            placeholder="Body Weight Tabata"
+            onChange={handleChange}
+            value={formState.name}
           />
-          <SelectField
-            label="Workout Mode"
-            name="workoutMode"
-            options={[
-              { label: 'Reps + Sets', value: 'reps-sets' },
-              { label: 'Tabata', value: 'tabata' },
-            ]}
-          />
-          {/* <WorkoutModeFormFields num={exFieldCount} /> */}
-          {/* {[...Array(exFieldCount)].map((e, i) => (
-            <RepsSetsFormRow num={i} key={i} />
-          ))} */}
+        </div>
+        <div>
+          <select name="workout-mode" value={formState.mode}>
+            <option label="Reps + Sets" value="reps-sets" />
+            <option label="Tabata" value="tabata" />
+          </select>
+        </div>
+      </form>
+    </WorkoutFormWrapper>
+    // <Formik
+    //   initialValues={initialFormState}
+    //   validationSchema={workoutFormVal}
+    //   onSubmit={(values): void => {
+    //     if (formMode === 'Add') {
+    //       handleCreate(values);
+    //     } else if (formMode === 'Edit') {
+    //       handleUpdate(values);
+    //     }
+    //   }}
+    // >
+    //   <WorkoutFormWrapper>
+    //     <button onClick={hide}>Close</button>
+    //     <h1>{titleText}</h1>
+    //     <Form>
+    //       <InputField
+    //         label="Name"
+    //         name="name"
+    //         type="text"
+    //         placeholder="Push + Pull"
+    //       />
+    //       <SelectField
+    //         label="Workout Mode"
+    //         name="workoutMode"
+    //         options={[
+    //           { label: 'Reps + Sets', value: 'reps-sets' },
+    //           { label: 'Tabata', value: 'tabata' },
+    //         ]}
+    //       />
+    //       {/* <WorkoutModeFormFields num={exFieldCount} /> */}
+    //       {/* {[...Array(exFieldCount)].map((e, i) => (
+    //         <RepsSetsFormRow num={i} key={i} />
+    //       ))} */}
 
-          <RepsSetsFormRow num="1" />
-          <RepsSetsFormRow num="2" />
-          <RepsSetsFormRow num="3" />
+    //       <RepsSetsFormRow num="1" />
 
-          <button type="button" onClick={handleAddField}>
-            Add Exercise +
-          </button>
+    //       <button type="button" onClick={handleAddField}>
+    //         Add Exercise +
+    //       </button>
 
-          <button disabled={!isValid}>{submitButtonText}</button>
-        </Form>
-      </WorkoutFormWrapper>
-    </Formik>
+    //       <button disabled={!isValid}>{submitButtonText}</button>
+    //     </Form>
+    //   </WorkoutFormWrapper>
+    // </Formik>
   );
 };
 

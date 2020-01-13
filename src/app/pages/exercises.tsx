@@ -43,7 +43,7 @@ const ExercisesPage: NextPage<{
             const { id } = doc;
             const { name } = doc.data();
             const exerciseObj: IExercise = {
-              id,
+              exerciseId: id,
               name,
             };
 

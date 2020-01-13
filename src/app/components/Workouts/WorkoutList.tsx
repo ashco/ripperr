@@ -6,7 +6,7 @@ import { IWorkout } from '../../common/types';
 const WorkoutList = ({ workouts }: any) => (
   <WorkoutListWrapper>
     {workouts.map((workout: IWorkout) => (
-      <WorkoutListItem key={workout.id} workout={workout} />
+      <WorkoutListItem key={workout.workoutId} workout={workout} />
     ))}
   </WorkoutListWrapper>
 );

@@ -39,5 +39,5 @@ export const exerciseFormVal = yup.object({
 
 export const workoutFormVal = yup.object({
   name: yup.string().required('Workout name is required.'),
-  workoutMode: yup.string().required('Workout mode is required.'),
+  mode: yup.string().required('Workout mode is required.'),
 });
