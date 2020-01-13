@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { withAuthorization } from '../components/Session';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import { Modal } from '../components/Modal';
-import WorkoutForm from '../components/Workouts/WorkoutForm';
+import WorkoutForm from '../components/Workouts/WorkoutForm/WorkoutForm';
 import WorkoutList from '../components/Workouts/WorkoutList';
-import WorkoutFormButton from '../components/Workouts/WorkoutFormButton';
+import WorkoutFormButton from '../components/Workouts/WorkoutForm/WorkoutFormButton';
 import { IWorkout } from '../common/types';
 
 import { FirebaseContext } from '../components/Firebase';

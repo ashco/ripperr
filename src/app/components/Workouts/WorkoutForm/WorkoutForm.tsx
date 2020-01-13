@@ -1,12 +1,14 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { FirebaseContext } from '../Firebase';
-import { AuthUserContext } from '../Session';
+import { FirebaseContext } from '../../Firebase';
+import { AuthUserContext } from '../../Session';
 import { Formik, Form } from 'formik';
 
-import WorkoutModeFormFields from './WorkoutModeFormFields';
-import { InputField, SelectField, workoutFormVal } from '../Forms';
-import { FormMode, IWorkoutFormValues, IWorkout } from '../../common/types';
+import WorkoutModeFormFields, {
+  RepsSetsFormRow,
+} from '../WorkoutModeFormFields';
+import { InputField, SelectField, workoutFormVal } from '../../Forms';
+import { FormMode, IWorkoutFormValues, IWorkout } from '../../../common/types';
 
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
@@ -92,11 +94,19 @@ const WorkoutForm: React.FC<{
     submitButtonText = 'Update';
   }
 
+  // Exercise field count
+  const [exFieldCount, setExFieldCount] = useState(1);
+
+  function handleAddField(): void {
+    setExFieldCount(exFieldCount + 1);
+    console.log(exFieldCount);
+  }
+
   return (
     <Formik
       initialValues={initialFormState}
       validationSchema={workoutFormVal}
-      onSubmit={(values) => {
+      onSubmit={(values): void => {
         if (formMode === 'Add') {
           handleCreate(values);
         } else if (formMode === 'Edit') {
@@ -122,7 +132,18 @@ const WorkoutForm: React.FC<{
               { label: 'Tabata', value: 'tabata' },
             ]}
           />
-          <WorkoutModeFormFields />
+          {/* <WorkoutModeFormFields num={exFieldCount} /> */}
+          {/* {[...Array(exFieldCount)].map((e, i) => (
+            <RepsSetsFormRow num={i} key={i} />
+          ))} */}
+
+          <RepsSetsFormRow num="1" />
+          <RepsSetsFormRow num="2" />
+          <RepsSetsFormRow num="3" />
+
+          <button type="button" onClick={handleAddField}>
+            Add Exercise +
+          </button>
 
           <button disabled={!isValid}>{submitButtonText}</button>
         </Form>

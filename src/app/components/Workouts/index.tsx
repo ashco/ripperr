@@ -1,6 +1,13 @@
-﻿import WorkoutFormButton from './WorkoutFormButton';
-import WorkoutForm from './WorkoutForm';
-import WorkoutList from './WorkoutList';
+﻿import WorkoutList from './WorkoutList';
 import WorkoutListItem from './WorkoutListItem';
+import WorkoutForm from './WorkoutForm/WorkoutForm';
+import WorkoutFormButton from './WorkoutForm/WorkoutFormButton';
+import WorkoutFormFieldTabata from './WorkoutForm/WorkoutFormFieldTabata';
 
-export { WorkoutFormButton, WorkoutForm, WorkoutList, WorkoutListItem };
+export {
+  WorkoutList,
+  WorkoutListItem,
+  WorkoutForm,
+  WorkoutFormButton,
+  WorkoutFormFieldTabata,
+};
