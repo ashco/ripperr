@@ -13,7 +13,18 @@ import { FormMode, IWorkoutFormValues, IWorkout } from '../../../common/types';
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
   mode: '',
-  exercises: [],
+  exercises: [
+    {
+      exerciseId: '12345',
+      reps: 5,
+      sets: 4,
+    },
+    {
+      exerciseId: '1222345',
+      reps: 52,
+      sets: 42,
+    },
+  ],
 };
 
 const WorkoutForm: React.FC<{
@@ -32,7 +43,7 @@ const WorkoutForm: React.FC<{
     initialFormState = INITIAL_VALUES;
   }
 
-  const [formState, setFormState] = useState(initialFormState);
+  const [form, setForm] = useState(initialFormState);
 
   // Only update if a value is different and none are blank.
   let isValid = true;
@@ -101,11 +112,22 @@ const WorkoutForm: React.FC<{
   // console.log(exFieldCount);
   // }
 
-  function handleChange(e: { target: { name: string; value: any } }): void {
+  function handleChange(
+    exIndex: number | undefined,
+    e: { target: { name: string; value: any } },
+  ): void {
     const { name, value } = e.target;
-    const newFormState = { ...formState };
-    newFormState[name] = value;
-    setFormState(newFormState);
+    const newForm = { ...form };
+    // const newForm = { ...form, [name]: value };
+
+    // Sets exercise object
+    if (exIndex !== undefined) {
+      newForm.exercises[exIndex][name] = value;
+    } else {
+      newForm[name] = value;
+    }
+    console.log(newForm);
+    setForm(newForm);
   }
 
   /**
@@ -113,9 +135,9 @@ const WorkoutForm: React.FC<{
    */
   function handleSubmit(): void {
     if (formMode === 'Add') {
-      handleCreate(formState);
+      handleCreate(form);
     } else if (formMode === 'Edit') {
-      handleUpdate(formState);
+      handleUpdate(form);
     }
   }
 
@@ -125,21 +147,67 @@ const WorkoutForm: React.FC<{
       <h1>{titleText}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="workout-name">Workout Name</label>
-          <input
-            type="text"
-            name="workout-name"
-            placeholder="Body Weight Tabata"
-            onChange={handleChange}
-            value={formState.name}
-          />
+          <label htmlFor="name">
+            Workout Name
+            <input
+              type="text"
+              name="name"
+              placeholder="Body Weight Tabata"
+              value={form.name}
+              onChange={handleChange.bind(null, undefined)}
+            />
+          </label>
         </div>
         <div>
-          <select name="workout-mode" value={formState.mode}>
+          <select
+            name="mode"
+            value={form.mode}
+            onChange={handleChange.bind(null, undefined)}
+          >
             <option label="Reps + Sets" value="reps-sets" />
             <option label="Tabata" value="tabata" />
           </select>
         </div>
+        {form.exercises &&
+          form.exercises.map((exercise, i) => (
+            <div>
+              <div>
+                <label htmlFor={`exercise-${i}`}>
+                  Exercise {i}
+                  <select
+                    name="exerciseId"
+                    onChange={handleChange.bind(null, i)}
+                    value={form.exercises[i].exerciseId}
+                  >
+                    <option label="Burpees" value="123" />
+                    <option label="Mountain Climbers" value="456" />
+                  </select>
+                </label>
+              </div>
+              <div>
+                <label htmlFor="reps">
+                  <input
+                    name="reps"
+                    type="number"
+                    placeholder="0"
+                    value={form.exercises[i].reps}
+                    onChange={handleChange.bind(null, i)}
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="sets">
+                  <input
+                    name="sets"
+                    type="number"
+                    placeholder="0"
+                    value={form.exercises[i].sets}
+                    onChange={handleChange.bind(null, i)}
+                  />
+                </label>
+              </div>
+            </div>
+          ))}
       </form>
     </WorkoutFormWrapper>
     // <Formik

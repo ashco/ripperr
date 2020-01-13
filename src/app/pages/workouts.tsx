@@ -40,11 +40,12 @@ const WorkoutsPage: NextPage<{
 
           snapshot.forEach((doc) => {
             const { id } = doc;
-            const { name, mode } = doc.data();
+            const { name, mode, exercises } = doc.data();
             const workoutObj: IWorkout = {
               workoutId: id,
               name,
               mode,
+              exercises,
             };
 
             workouts.push(workoutObj);

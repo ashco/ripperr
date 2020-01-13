@@ -16,6 +16,7 @@ export interface IExercise {
 
 // How exercise data object in workout data object is structured
 interface IWorkoutExercise {
+  [key: string]: any;
   exerciseId: string;
   sets: number;
   reps: number;
@@ -26,7 +27,7 @@ export interface IWorkoutFormValues {
   [key: string]: any;
   name: string;
   mode: WorkoutMode;
-  exercises?: IWorkoutExercise[];
+  exercises: IWorkoutExercise[];
 }
 
 // workout data structure. This object is what goes into trainer mode
