@@ -143,6 +143,25 @@ const WorkoutForm: React.FC<{
     }
   }
 
+  function handleExAdd(): void {
+    const newForm = { ...form };
+    const newExercise = {
+      exerciseId: '',
+      sets: 0,
+      reps: 0,
+    };
+
+    newForm.exercises.push(newExercise);
+    setForm(newForm);
+  }
+
+  function handleExDelete(exIndex: number): void {
+    const newForm = { ...form };
+
+    newForm.exercises.splice(exIndex, 1);
+    setForm(newForm);
+  }
+
   return (
     <WorkoutFormWrapper>
       <button onClick={hide}>Close</button>
@@ -175,7 +194,7 @@ const WorkoutForm: React.FC<{
             <div key={i}>
               <div>
                 <label htmlFor={`exercise-${i}`}>
-                  Exercise {i}
+                  Exercise {i + 1}
                   <select
                     name="exerciseId"
                     onChange={handleChange.bind(null, i)}
@@ -208,8 +227,14 @@ const WorkoutForm: React.FC<{
                   />
                 </label>
               </div>
+              <button type="button" onClick={() => handleExDelete(i)}>
+                -
+              </button>
             </div>
           ))}
+        <button type="button" onClick={handleExAdd}>
+          +
+        </button>
         <button type="submit">Submit</button>
       </form>
     </WorkoutFormWrapper>
