@@ -133,7 +133,9 @@ const WorkoutForm: React.FC<{
   /**
    * Determine if creating or updating existing workout
    */
-  function handleSubmit(): void {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+
     if (formMode === 'Add') {
       handleCreate(form);
     } else if (formMode === 'Edit') {
@@ -169,8 +171,8 @@ const WorkoutForm: React.FC<{
           </select>
         </div>
         {form.exercises &&
-          form.exercises.map((exercise, i) => (
-            <div>
+          form.exercises.map((ex, i) => (
+            <div key={i}>
               <div>
                 <label htmlFor={`exercise-${i}`}>
                   Exercise {i}
@@ -208,6 +210,7 @@ const WorkoutForm: React.FC<{
               </div>
             </div>
           ))}
+        <button type="submit">Submit</button>
       </form>
     </WorkoutFormWrapper>
     // <Formik
