@@ -29,7 +29,7 @@ export interface IWorkoutsState {
 }
 
 // How exercise data object in workout data object is structured
-interface IWorkoutExercise {
+export interface IWorkoutExercise {
   [key: string]: any;
   exId: string;
   sets: string;

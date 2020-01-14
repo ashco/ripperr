@@ -5,6 +5,7 @@ import WorkoutFormButton from './WorkoutForm/WorkoutFormButton';
 import WorkoutFormFieldTabata from './WorkoutForm/WorkoutFormFieldTabata';
 import WorkoutsContext from './context';
 import withWorkouts from './withWorkouts';
+import RepsSetsField from './WorkoutForm/RepsSetsField';
 
 export {
   WorkoutList,
@@ -14,4 +15,5 @@ export {
   WorkoutFormFieldTabata,
   WorkoutsContext,
   withWorkouts,
+  RepsSetsField,
 };

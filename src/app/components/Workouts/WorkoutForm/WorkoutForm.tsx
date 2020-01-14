@@ -4,6 +4,7 @@ import { FirebaseContext } from '../../Firebase';
 import { AuthUserContext } from '../../Session';
 
 import { withExercises, ExercisesContext } from '../../Exercises';
+import { RepsSetsField } from '../index';
 
 import { WorkoutsContext } from '../index';
 // import WorkoutModeFormFields, {
@@ -23,7 +24,7 @@ const WorkoutForm: React.FC<{
   // ============ LOAD CONTEXT ============
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
-  const { exercises, exLoading } = useContext(ExercisesContext);
+
   const { workouts, woLoading } = useContext(WorkoutsContext);
 
   // ============ SET UP FORM STATE ============
@@ -233,54 +234,16 @@ const WorkoutForm: React.FC<{
             </select>
           </label>
         </div>
-        {form.mode !== '' &&
+        {form.mode === 'reps-sets' &&
           form.exercises &&
-          form.exercises.map((ex, i) => (
-            <div key={i}>
-              <div>
-                <label htmlFor={`exercise-${i}`}>
-                  {`Exercise ${i + 1}`}
-                  <select
-                    name="exId"
-                    onChange={handleChange.bind(null, i)}
-                    value={form.exercises[i].exId}
-                  >
-                    <option
-                      label={exLoading ? 'loading...' : 'Select an exercise'}
-                      value=""
-                    />
-                    {exercises.map((ex) => (
-                      <option label={ex.name} value={ex.exId} key={ex.exId} />
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <div>
-                <label htmlFor="reps">
-                  <input
-                    name="reps"
-                    type="number"
-                    placeholder="0"
-                    value={form.exercises[i].reps}
-                    onChange={handleChange.bind(null, i)}
-                  />
-                </label>
-              </div>
-              <div>
-                <label htmlFor="sets">
-                  <input
-                    name="sets"
-                    type="number"
-                    placeholder="0"
-                    value={form.exercises[i].sets}
-                    onChange={handleChange.bind(null, i)}
-                  />
-                </label>
-              </div>
-              <button type="button" onClick={(): void => handleDeleteEx(i)}>
-                -
-              </button>
-            </div>
+          form.exercises.map((formEx, i) => (
+            <RepsSetsField
+              formEx={formEx}
+              i={i}
+              key={i}
+              handleChange={handleChange}
+              handleDeleteEx={handleDeleteEx}
+            />
           ))}
         {form.mode !== '' && (
           <button type="button" onClick={handleAddEx}>
