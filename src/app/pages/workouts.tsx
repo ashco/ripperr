@@ -6,7 +6,6 @@ import { withAuthorization } from '../components/Session';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import WorkoutList from '../components/Workouts/WorkoutList';
 import WorkoutFormButton from '../components/Workouts/WorkoutForm/WorkoutFormButton';
-import { IWorkout, IExercise } from '../common/types';
 import { WorkoutsContext, withWorkouts } from '../components/Workouts';
 import { ExercisesContext, withExercises } from '../components/Exercises';
 

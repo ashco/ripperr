@@ -220,15 +220,18 @@ const WorkoutForm: React.FC<{
           </label>
         </div>
         <div>
-          <select
-            name="mode"
-            value={form.mode}
-            onChange={handleChange.bind(null, undefined)}
-          >
-            <option label="Select a workout mode" value="" />
-            <option label="Reps + Sets" value="reps-sets" />
-            <option label="Tabata" value="tabata" />
-          </select>
+          <label htmlFor="mode">
+            Workout Mode
+            <select
+              name="mode"
+              value={form.mode}
+              onChange={handleChange.bind(null, undefined)}
+            >
+              <option label="Select a workout mode" value="" />
+              <option label="Reps + Sets" value="reps-sets" />
+              <option label="Tabata" value="tabata" />
+            </select>
+          </label>
         </div>
         {form.mode !== '' &&
           form.exercises &&
