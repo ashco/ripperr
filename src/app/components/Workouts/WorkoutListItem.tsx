@@ -5,11 +5,12 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { DeleteButton } from '../Buttons';
 import { WorkoutFormButton } from '../Workouts';
-import { IWorkout } from '../../common/types';
+import { IWorkout, IExercise } from '../../common/types';
 
 const WorkoutListItem: React.FunctionComponent<{
   workout: IWorkout;
-}> = ({ workout }) => {
+  exercises: IExercise[];
+}> = ({ workout, exercises }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
@@ -18,7 +19,7 @@ const WorkoutListItem: React.FunctionComponent<{
   function handleDelete(): void {
     if (authUser) {
       firebase
-        .workout(authUser.uid, workout.workoutId)
+        .workout(authUser.uid, workout.woId)
         .delete()
         .then(() => console.log(`Workout Deleted: ${workout.name}`))
         .catch((err) => console.error(err));
@@ -30,7 +31,11 @@ const WorkoutListItem: React.FunctionComponent<{
       <span>
         <strong>Workout Name:</strong> {workout.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <WorkoutFormButton formMode="Edit" workout={workout} />
+        <WorkoutFormButton
+          formMode="Edit"
+          workout={workout}
+          exercises={exercises}
+        />
       </span>
     </WorkoutListItemWrapper>
   );

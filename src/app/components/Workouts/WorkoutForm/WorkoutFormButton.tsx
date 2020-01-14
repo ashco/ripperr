@@ -2,11 +2,12 @@
 
 import { Modal } from '../../Modal';
 import { WorkoutForm } from '..';
-import { FormMode, IWorkout } from '../../../common/types';
+import { FormMode, IWorkout, IExercise } from '../../../common/types';
 
 const WorkoutFormButton: React.FC<{
   formMode: FormMode;
   workout?: IWorkout;
+  exercises: IExercise[];
 }> = ({ formMode, workout }) => {
   const [showModal, setShowModal] = useState(false);
 

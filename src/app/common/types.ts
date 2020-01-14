@@ -10,14 +10,19 @@ export type AuthErrorSchema = false | IAuthError;
 
 // how individual exercise data is structured
 export interface IExercise {
-  exerciseId: string;
+  exId: string;
   name: string;
+}
+
+export interface IExercisePageState {
+  exLoading: boolean;
+  exercises: IExercise[];
 }
 
 // How exercise data object in workout data object is structured
 interface IWorkoutExercise {
   [key: string]: any;
-  exerciseId: string;
+  exId: string;
   sets: number;
   reps: number;
 }
@@ -32,5 +37,5 @@ export interface IWorkoutFormValues {
 
 // workout data structure. This object is what goes into trainer mode
 export interface IWorkout extends IWorkoutFormValues {
-  workoutId: string;
+  woId: string;
 }

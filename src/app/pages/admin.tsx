@@ -13,12 +13,12 @@ export interface IUser {
 }
 
 interface IState {
-  loading: boolean;
+  uLoading: boolean;
   users: IUser[];
 }
 
 const INITIAL_STATE: IState = {
-  loading: false,
+  uLoading: false,
   users: [],
 };
 
@@ -26,15 +26,15 @@ const AdminPage: NextPage = () => {
   const firebase = useContext(FirebaseContext);
   const [state, setState] = useState(INITIAL_STATE);
 
-  const { loading, users } = state;
+  const { uLoading, users } = state;
 
   useEffect(() => {
-    setState({ ...state, loading: true });
+    setState({ ...state, uLoading: true });
 
-    const unsubscribe = firebase.users().onSnapshot(snapshot => {
+    const unsubscribe = firebase.users().onSnapshot((snapshot) => {
       const usersList: IUser[] = [];
 
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         const { username, email } = doc.data();
         const userObj: IUser = {
           uid: doc.id,
@@ -47,7 +47,7 @@ const AdminPage: NextPage = () => {
 
       setState({
         users: usersList,
-        loading: false,
+        uLoading: false,
       });
     });
 
@@ -57,7 +57,7 @@ const AdminPage: NextPage = () => {
   return (
     <div>
       <h1>Admin Page</h1>
-      {loading && <div>Loading ...</div>}
+      {uLoading && <div>Loading ...</div>}
       <UserList users={users} />
     </div>
   );

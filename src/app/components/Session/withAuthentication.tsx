@@ -8,10 +8,8 @@ const withAuthentication = (Component: any) => {
     const firebase = useContext(FirebaseContext);
     const [authUser, setAuthUser] = useState<IAuthUserContext>(null);
 
-    let unsubscribe: any;
-
     useEffect(() => {
-      unsubscribe = firebase.auth.onAuthStateChanged(authUser => {
+      const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
         authUser ? setAuthUser(authUser) : setAuthUser(null);
       });
 

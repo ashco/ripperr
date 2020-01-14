@@ -1,12 +1,20 @@
-﻿import styled from 'styled-components';
+﻿import React from 'react';
+import styled from 'styled-components';
 
 import { WorkoutListItem } from '../Workouts';
-import { IWorkout } from '../../common/types';
+import { IWorkout, IExercise } from '../../common/types';
 
-const WorkoutList = ({ workouts }: any) => (
+const WorkoutList: React.FC<{
+  workouts: IWorkout[];
+  exercises: IExercise[];
+}> = ({ workouts, exercises }) => (
   <WorkoutListWrapper>
     {workouts.map((workout: IWorkout) => (
-      <WorkoutListItem key={workout.workoutId} workout={workout} />
+      <WorkoutListItem
+        key={workout.woId}
+        workout={workout}
+        exercises={exercises}
+      />
     ))}
   </WorkoutListWrapper>
 );

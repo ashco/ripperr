@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { FirebaseContext } from '../../Firebase';
 import { AuthUserContext } from '../../Session';
@@ -13,18 +13,7 @@ import { FormMode, IWorkoutFormValues, IWorkout } from '../../../common/types';
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
   mode: '',
-  exercises: [
-    {
-      exerciseId: '12345',
-      reps: 5,
-      sets: 4,
-    },
-    {
-      exerciseId: '1222345',
-      reps: 52,
-      sets: 42,
-    },
-  ],
+  exercises: [],
 };
 
 const WorkoutForm: React.FC<{
@@ -66,6 +55,34 @@ const WorkoutForm: React.FC<{
     submitButtonText = 'Update';
   }
 
+  // useEffect(() => {
+  //   setExerciseState({ ...exerciseState, exLoading: true });
+
+  //   if (authUser) {
+  //     const unsubscribe = firebase
+  //       .exercises(authUser.uid)
+  //       .onSnapshot((snapshot) => {
+  //         const exerciseList: IExercise[] = [];
+
+  //         snapshot.forEach((doc) => {
+  //           const { id } = doc;
+  //           const { name } = doc.data();
+  //           const exerciseObj: IExercise = {
+  //             exId: id,
+  //             name,
+  //           };
+
+  //           exerciseList.push(exerciseObj);
+  //         });
+
+  //         setExerciseState({
+  //           exLoading: false,
+  //           exercises: exerciseList,
+  //         });
+  //       });
+  //   }
+  // });
+
   function handleCreate(values: IWorkoutFormValues): void {
     if (authUser) {
       const docRef = firebase.workouts(authUser.uid).doc();
@@ -75,7 +92,7 @@ const WorkoutForm: React.FC<{
 
       docRef
         .set({
-          workoutId: id,
+          woId: id,
           ...values,
         })
         .then(() => {
@@ -93,7 +110,7 @@ const WorkoutForm: React.FC<{
   function handleUpdate(values: IWorkoutFormValues): void {
     if (authUser && workout) {
       firebase
-        .workout(authUser.uid, workout.workoutId)
+        .workout(authUser.uid, workout.woId)
         .update(values)
         .then(() => {
           console.log(`Workout Updated: ${values.name}`);
@@ -126,7 +143,6 @@ const WorkoutForm: React.FC<{
     } else {
       newForm[name] = value;
     }
-    console.log(newForm);
     setForm(newForm);
   }
 
@@ -146,7 +162,7 @@ const WorkoutForm: React.FC<{
   function handleExAdd(): void {
     const newForm = { ...form };
     const newExercise = {
-      exerciseId: '',
+      exId: '',
       sets: 0,
       reps: 0,
     };
@@ -185,6 +201,7 @@ const WorkoutForm: React.FC<{
             value={form.mode}
             onChange={handleChange.bind(null, undefined)}
           >
+            <option label="" value="" />
             <option label="Reps + Sets" value="reps-sets" />
             <option label="Tabata" value="tabata" />
           </select>
@@ -196,9 +213,9 @@ const WorkoutForm: React.FC<{
                 <label htmlFor={`exercise-${i}`}>
                   Exercise {i + 1}
                   <select
-                    name="exerciseId"
+                    name="exId"
                     onChange={handleChange.bind(null, i)}
-                    value={form.exercises[i].exerciseId}
+                    value={form.exercises[i].exId}
                   >
                     <option label="Burpees" value="123" />
                     <option label="Mountain Climbers" value="456" />
@@ -227,7 +244,7 @@ const WorkoutForm: React.FC<{
                   />
                 </label>
               </div>
-              <button type="button" onClick={() => handleExDelete(i)}>
+              <button type="button" onClick={(): void => handleExDelete(i)}>
                 -
               </button>
             </div>
@@ -238,50 +255,6 @@ const WorkoutForm: React.FC<{
         <button type="submit">Submit</button>
       </form>
     </WorkoutFormWrapper>
-    // <Formik
-    //   initialValues={initialFormState}
-    //   validationSchema={workoutFormVal}
-    //   onSubmit={(values): void => {
-    //     if (formMode === 'Add') {
-    //       handleCreate(values);
-    //     } else if (formMode === 'Edit') {
-    //       handleUpdate(values);
-    //     }
-    //   }}
-    // >
-    //   <WorkoutFormWrapper>
-    //     <button onClick={hide}>Close</button>
-    //     <h1>{titleText}</h1>
-    //     <Form>
-    //       <InputField
-    //         label="Name"
-    //         name="name"
-    //         type="text"
-    //         placeholder="Push + Pull"
-    //       />
-    //       <SelectField
-    //         label="Workout Mode"
-    //         name="workoutMode"
-    //         options={[
-    //           { label: 'Reps + Sets', value: 'reps-sets' },
-    //           { label: 'Tabata', value: 'tabata' },
-    //         ]}
-    //       />
-    //       {/* <WorkoutModeFormFields num={exFieldCount} /> */}
-    //       {/* {[...Array(exFieldCount)].map((e, i) => (
-    //         <RepsSetsFormRow num={i} key={i} />
-    //       ))} */}
-
-    //       <RepsSetsFormRow num="1" />
-
-    //       <button type="button" onClick={handleAddField}>
-    //         Add Exercise +
-    //       </button>
-
-    //       <button disabled={!isValid}>{submitButtonText}</button>
-    //     </Form>
-    //   </WorkoutFormWrapper>
-    // </Formik>
   );
 };
 

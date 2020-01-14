@@ -19,7 +19,7 @@ const ExerciseListItem: React.FC<{
   function handleDelete(): void {
     if (authUser) {
       firebase
-        .exercise(authUser.uid, exercise.exerciseId)
+        .exercise(authUser.uid, exercise.exId)
         .delete()
         .then(() => console.log(`Exercise Deleted: ${exercise.name}`))
         .catch((err) => console.error(err));
