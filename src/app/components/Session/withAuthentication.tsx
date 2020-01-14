@@ -13,7 +13,7 @@ const withAuthentication = (Component: any) => {
         authUser ? setAuthUser(authUser) : setAuthUser(null);
       });
 
-      return () => unsubscribe();
+      return (): void => unsubscribe();
     }, []);
 
     return (

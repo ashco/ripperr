@@ -9,10 +9,8 @@ const withAuthorization = (condition: any) => (Component: any) => {
     const authUser = useContext(AuthUserContext);
     const router = useRouter();
 
-    let unsubscribe: any;
-
     useEffect(() => {
-      unsubscribe = firebase.auth.onAuthStateChanged(authUser => {
+      const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
         if (!condition(authUser)) {
           router.push('/signin');
         }

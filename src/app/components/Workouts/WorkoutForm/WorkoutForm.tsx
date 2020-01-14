@@ -2,7 +2,8 @@
 import styled from 'styled-components';
 import { FirebaseContext } from '../../Firebase';
 import { AuthUserContext } from '../../Session';
-import { Formik, Form } from 'formik';
+
+import { withExercises, ExercisesContext } from '../../Exercises';
 
 import WorkoutModeFormFields, {
   RepsSetsFormRow,
@@ -23,6 +24,8 @@ const WorkoutForm: React.FC<{
 }> = ({ hide, formMode, workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
+
+  const { exercises, exLoading } = useContext(ExercisesContext);
 
   // Form fill if in edit formMode
   let initialFormState;
@@ -54,34 +57,6 @@ const WorkoutForm: React.FC<{
     titleText = 'Edit Workout';
     submitButtonText = 'Update';
   }
-
-  // useEffect(() => {
-  //   setExerciseState({ ...exerciseState, exLoading: true });
-
-  //   if (authUser) {
-  //     const unsubscribe = firebase
-  //       .exercises(authUser.uid)
-  //       .onSnapshot((snapshot) => {
-  //         const exerciseList: IExercise[] = [];
-
-  //         snapshot.forEach((doc) => {
-  //           const { id } = doc;
-  //           const { name } = doc.data();
-  //           const exerciseObj: IExercise = {
-  //             exId: id,
-  //             name,
-  //           };
-
-  //           exerciseList.push(exerciseObj);
-  //         });
-
-  //         setExerciseState({
-  //           exLoading: false,
-  //           exercises: exerciseList,
-  //         });
-  //       });
-  //   }
-  // });
 
   function handleCreate(values: IWorkoutFormValues): void {
     if (authUser) {
@@ -211,14 +186,19 @@ const WorkoutForm: React.FC<{
             <div key={i}>
               <div>
                 <label htmlFor={`exercise-${i}`}>
-                  Exercise {i + 1}
+                  {`Exercise ${i + 1}`}
                   <select
                     name="exId"
                     onChange={handleChange.bind(null, i)}
                     value={form.exercises[i].exId}
                   >
-                    <option label="Burpees" value="123" />
-                    <option label="Mountain Climbers" value="456" />
+                    <option
+                      label={exLoading ? 'loading...' : 'Select an exercise'}
+                      value=""
+                    />
+                    {exercises.map((ex) => (
+                      <option label={ex.name} value={ex.exId} key={ex.exId} />
+                    ))}
                   </select>
                 </label>
               </div>
@@ -264,4 +244,4 @@ const WorkoutFormWrapper = styled.div`
   width: 500px;
 `;
 
-export default WorkoutForm;
+export default withExercises(WorkoutForm);
