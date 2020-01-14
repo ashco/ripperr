@@ -10,89 +10,12 @@ import { IWorkout, IExercise } from '../common/types';
 import { WorkoutsContext, withWorkouts } from '../components/Workouts';
 import { ExercisesContext, withExercises } from '../components/Exercises';
 
-// import { INITIAL_EXERCISE_STATE } from './exercises';
-import { FirebaseContext } from '../components/Firebase';
-
-// const INITIAL_WORKOUT_STATE: IWorkoutsState = {
-//   woLoading: false,
-//   workouts: [],
-// };
-
 const WorkoutsPage: NextPage<{
   userAgent: string;
   authUser: IAuthUserContext;
 }> = ({ authUser }) => {
   const { workouts, woLoading } = useContext(WorkoutsContext);
   const { exercises } = useContext(ExercisesContext);
-  // const firebase = useContext(FirebaseContext);
-
-  // // Load workouts from firebase
-  // const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
-  // const { woLoading, workouts } = workoutState;
-
-  // useEffect(() => {
-  //   setWorkoutState({ ...workoutState, woLoading: true });
-
-  //   if (authUser) {
-  //     const unsubscribe = firebase
-  //       .workouts(authUser.uid)
-  //       .onSnapshot((snapshot) => {
-  //         const workouts: IWorkout[] = [];
-
-  //         snapshot.forEach((doc) => {
-  //           const { id } = doc;
-  //           const { name, mode, exercises } = doc.data();
-  //           const workoutObj: IWorkout = {
-  //             woId: id,
-  //             name,
-  //             mode,
-  //             exercises,
-  //           };
-
-  //           workouts.push(workoutObj);
-  //         });
-
-  //         setWorkoutState({
-  //           woLoading: false,
-  //           workouts,
-  //         });
-  //       });
-
-  //     return (): void => unsubscribe();
-  //   } else {
-  //     console.error('authUser is null');
-  //   }
-  // }, []);
-
-  // Load exercises from firebase
-  // const [exercises, setExercises] = useState<IExercise[]>([]);
-
-  // useEffect(() => {
-  //   if (authUser) {
-  //     const unsubscribe = firebase
-  //       .exercises(authUser.uid)
-  //       .onSnapshot((snapshot) => {
-  //         const exerciseArr: IExercise[] = [];
-
-  //         snapshot.forEach((doc) => {
-  //           const { id } = doc;
-  //           const { name } = doc.data();
-  //           const exerciseObj: IExercise = {
-  //             exId: id,
-  //             name,
-  //           };
-
-  //           exerciseArr.push(exerciseObj);
-  //         });
-
-  //         setExercises(exerciseArr);
-  //       });
-
-  //     return (): void => unsubscribe();
-  //   } else {
-  //     console.error('authUser is null');
-  //   }
-  // }, []);
 
   return (
     <div>

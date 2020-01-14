@@ -5,46 +5,51 @@ import { AuthUserContext } from '../../Session';
 
 import { withExercises, ExercisesContext } from '../../Exercises';
 
-import WorkoutModeFormFields, {
-  RepsSetsFormRow,
-} from '../WorkoutModeFormFields';
-import { InputField, SelectField, workoutFormVal } from '../../Forms';
-import { FormMode, IWorkoutFormValues, IWorkout } from '../../../common/types';
-
-const INITIAL_VALUES: IWorkoutFormValues = {
-  name: '',
-  mode: '',
-  exercises: [
-    {
-      exId: '',
-      sets: '0',
-      reps: '0',
-    },
-  ],
-};
+import { WorkoutsContext } from '../index';
+// import WorkoutModeFormFields, {
+// } from '../WorkoutModeFormFields';
+import {
+  FormMode,
+  IWorkoutFormValues,
+  IWorkout,
+  IFormError,
+} from '../../../common/types';
 
 const WorkoutForm: React.FC<{
   hide: () => void;
   formMode: FormMode;
   workout?: IWorkout;
 }> = ({ hide, formMode, workout }) => {
-  // ============ LOAD CONTEXT VARS ============
+  // ============ LOAD CONTEXT ============
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const { exercises, exLoading } = useContext(ExercisesContext);
+  const { workouts, woLoading } = useContext(WorkoutsContext);
 
   // ============ SET UP FORM STATE ============
+  const INITIAL_VALUES: IWorkoutFormValues = {
+    name: '',
+    mode: '',
+    exercises: [
+      {
+        exId: '',
+        sets: '0',
+        reps: '0',
+      },
+    ],
+  };
+
   let initialFormState;
   if (formMode === 'Edit' && workout) {
     initialFormState = workout;
   } else {
-    initialFormState = INITIAL_VALUES;
+    initialFormState = { ...INITIAL_VALUES };
   }
 
   const [form, setForm] = useState(initialFormState);
+  const [error, setError] = useState<null | IFormError>(null);
 
   // ============ VALIDATION ============
-  // Check that name is valid
   const isValidName = form.name !== '';
   const isValidMode = form.mode !== '';
   const isValidExercises = form.exercises.every((ex) => {
@@ -98,15 +103,18 @@ const WorkoutForm: React.FC<{
     submitButtonText = 'Update';
   }
 
-  // ============ COMPONENT FUNCTIONS ============
+  // ============ FIREBASE FUNCTIONS ============
 
   function handleCreate(values: IWorkoutFormValues): void {
     if (authUser) {
       const docRef = firebase.workouts(authUser.uid).doc();
       const { id } = docRef;
 
-      // TODO - Check that workout name is unique
-      const { name } = values;
+      const workoutNames = workouts.map((wo) => wo.name.toLowerCase());
+      if (workoutNames.includes(values.name.toLowerCase())) {
+        setError({ message: 'Workout name already in use.' });
+        return;
+      }
 
       docRef
         .set({
@@ -121,7 +129,9 @@ const WorkoutForm: React.FC<{
           console.error(err);
         });
     } else {
-      console.log('There is no authUser!');
+      setError({
+        message: 'There is no authUser!',
+      });
     }
   }
 
@@ -142,10 +152,7 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  // function handleAddField(): void {
-  // setExFieldCount(exFieldCount + 1);
-  // console.log(exFieldCount);
-  // }
+  // ============ FORM FUNCTIONS ============
 
   function handleChange(
     exIndex: number | undefined,
@@ -176,7 +183,7 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  function handleExAdd(): void {
+  function handleAddEx(): void {
     const newForm = { ...form };
     const newExercise = {
       exId: '',
@@ -188,7 +195,7 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
-  function handleExDelete(exIndex: number): void {
+  function handleDeleteEx(exIndex: number): void {
     const newForm = { ...form };
 
     newForm.exercises.splice(exIndex, 1);
@@ -267,19 +274,20 @@ const WorkoutForm: React.FC<{
                   />
                 </label>
               </div>
-              <button type="button" onClick={(): void => handleExDelete(i)}>
+              <button type="button" onClick={(): void => handleDeleteEx(i)}>
                 -
               </button>
             </div>
           ))}
         {form.mode !== '' && (
-          <button type="button" onClick={handleExAdd}>
+          <button type="button" onClick={handleAddEx}>
             +
           </button>
         )}
         <button type="submit" disabled={!isValid}>
           {submitButtonText}
         </button>
+        {error && <div>{error.message}</div>}
       </form>
     </WorkoutFormWrapper>
   );

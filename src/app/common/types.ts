@@ -1,6 +1,10 @@
 ﻿export type FormMode = 'Add' | 'Edit';
 export type WorkoutMode = '' | 'reps-sets' | 'tabata';
 
+export interface IFormError {
+  message: string;
+}
+
 export interface IAuthError {
   code: string;
   message: string;
@@ -30,6 +34,11 @@ interface IWorkoutExercise {
   exId: string;
   sets: string;
   reps: string;
+}
+
+export interface IExerciseFormValues {
+  [key: string]: any;
+  name: string;
 }
 
 // what to expect from workout form
