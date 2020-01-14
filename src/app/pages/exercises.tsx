@@ -10,7 +10,7 @@ import { Modal } from '../components/Modal';
 import ExerciseForm from '../components/Exercises/ExerciseForm';
 import ExerciseList from '../components/Exercises/ExerciseList';
 import ExerciseFormButton from '../components/Exercises/ExerciseFormButton';
-import { IExercise, IExercisePageState } from '../common/types';
+import { IExercise, IExerciseState } from '../common/types';
 
 const ExercisesPage: NextPage<{
   authUser: IAuthUserContext;

@@ -3,6 +3,8 @@ import WorkoutListItem from './WorkoutListItem';
 import WorkoutForm from './WorkoutForm/WorkoutForm';
 import WorkoutFormButton from './WorkoutForm/WorkoutFormButton';
 import WorkoutFormFieldTabata from './WorkoutForm/WorkoutFormFieldTabata';
+import WorkoutsContext from './context';
+import withWorkouts from './withWorkouts';
 
 export {
   WorkoutList,
@@ -10,4 +12,6 @@ export {
   WorkoutForm,
   WorkoutFormButton,
   WorkoutFormFieldTabata,
+  WorkoutsContext,
+  withWorkouts,
 };

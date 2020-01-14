@@ -14,17 +14,22 @@ export interface IExercise {
   name: string;
 }
 
-export interface IExercisePageState {
+export interface IExerciseState {
   exLoading: boolean;
   exercises: IExercise[];
+}
+
+export interface IWorkoutsState {
+  woLoading: boolean;
+  workouts: IWorkout[];
 }
 
 // How exercise data object in workout data object is structured
 interface IWorkoutExercise {
   [key: string]: any;
   exId: string;
-  sets: number;
-  reps: number;
+  sets: string;
+  reps: string;
 }
 
 // what to expect from workout form
