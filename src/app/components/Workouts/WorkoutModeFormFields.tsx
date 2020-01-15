@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { useFormikContext } from 'formik';
 
 import { InputField, SelectField } from '../Forms';
-import { WorkoutMode } from '../../common/types';
+import { WorkoutModeValue } from '../../common/types';
 
-// const WorkoutModeFormFields: React.FC = () => {
+// const WorkoutModeValueFormFields: React.FC = () => {
 //   const { values } = useFormikContext();
 
 //   let formField = null;
-//   // if (values.workoutMode === 'reps-sets') {
+//   // if (values.WorkoutModeValue === 'reps-sets') {
 //   //   formField = <RepsSetsFormRow />;
-//   // } else if (values.workoutMode === 'tabata') {
+//   // } else if (values.WorkoutModeValue === 'tabata') {
 //   //   formField = <TabataFormRow />;
 //   // }
 
@@ -77,14 +77,14 @@ const RepsSetsFormRowWrapper = styled.div`
 //   display: flex;
 // `;
 
-// export default WorkoutModeFormFields;
+// export default WorkoutModeValueFormFields;
 
-const WorkoutModeFormFields: React.FC<{ num: number }> = ({ num }) => {
+const WorkoutModeValueFormFields: React.FC<{ num: number }> = ({ num }) => {
   // const { values } = useFormikContext();
 
   // let formFields = <div />;
 
-  // if (values.workoutMode === 'reps-sets') {
+  // if (values.WorkoutModeValue === 'reps-sets') {
   //   formFields = [...Array(num)].map((e, i) => (
   //     <RepsSetsFormRow num={i} key={i} />
   //   ));
@@ -99,4 +99,4 @@ const WorkoutModeFormFields: React.FC<{ num: number }> = ({ num }) => {
   );
 };
 
-export default WorkoutModeFormFields;
+export default WorkoutModeValueFormFields;

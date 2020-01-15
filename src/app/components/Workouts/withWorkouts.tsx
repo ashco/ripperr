@@ -4,9 +4,9 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { WorkoutsContext } from './index';
 
-import { IWorkout, IWorkoutsState } from '../../common/types';
+import { IWorkout, IWorkoutsFirebaseQuery } from '../../common/types';
 
-export const INITIAL_WORKOUT_STATE: IWorkoutsState = {
+export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
   woLoading: false,
   workouts: [],
 };

@@ -1,8 +1,8 @@
 ﻿import React from 'react';
-import { IExerciseState } from '../../common/types';
+import { IExercisesFirebaseQuery } from '../../common/types';
 import { INITIAL_EXERCISE_STATE } from './withExercises';
 
-const ExercisesContext = React.createContext<IExerciseState>(
+const ExercisesContext = React.createContext<IExercisesFirebaseQuery>(
   INITIAL_EXERCISE_STATE,
 );
 

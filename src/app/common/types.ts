@@ -1,6 +1,11 @@
-﻿export type FormMode = 'Add' | 'Edit';
-export type WorkoutMode = '' | 'reps-sets' | 'tabata';
+﻿// =============== TYPES ===============
 
+export type FormMode = 'Add' | 'Edit';
+export type WorkoutModeLabel = '' | 'Reps + Sets' | 'Tabata' | 'Circuit';
+export type WorkoutModeValue = '' | 'reps-sets' | 'tabata' | 'circuit';
+export type AuthErrorSchema = false | IAuthError;
+
+// =============== ERRORS ===============
 export interface IFormError {
   message: string;
 }
@@ -10,46 +15,104 @@ export interface IAuthError {
   message: string;
 }
 
-export type AuthErrorSchema = false | IAuthError;
+// =============== FIREBASE QUERIES ===============
 
-// how individual exercise data is structured
-export interface IExercise {
-  exId: string;
-  name: string;
-}
-
-export interface IExerciseState {
+export interface IExercisesFirebaseQuery {
   exLoading: boolean;
   exercises: IExercise[];
 }
 
-export interface IWorkoutsState {
+export interface IWorkoutsFirebaseQuery {
   woLoading: boolean;
   workouts: IWorkout[];
 }
 
-// How exercise data object in workout data object is structured
-export interface IWorkoutExercise {
-  [key: string]: any;
-  exId: string;
-  sets: string;
-  reps: string;
-}
-
+// =============== FORMS ===============
 export interface IExerciseFormValues {
   [key: string]: any;
   name: string;
 }
 
-// what to expect from workout form
 export interface IWorkoutFormValues {
   [key: string]: any;
   name: string;
-  mode: WorkoutMode;
-  exercises: IWorkoutExercise[];
+  mode: WorkoutModeValue;
+  exercises: IWorkoutExerciseRepsSets[];
 }
 
-// workout data structure. This object is what goes into trainer mode
+// =============== DATA OBJECT STRUCTURES ===============
 export interface IWorkout extends IWorkoutFormValues {
   woId: string;
+}
+
+export interface IExercise {
+  exId: string;
+  name: string;
+}
+
+interface IWorkoutExercise {
+  [key: string]: any;
+  exId: string;
+}
+
+export interface IWorkoutExerciseRepsSets extends IWorkoutExercise {
+  sets: number;
+  reps: number;
+}
+
+// export interface IWorkoutExerciseCircuit extends IWorkoutExercise {
+//   rounds: ;
+// }
+
+// export interface IWorkoutExerciseTabata extends IWorkoutExercise {
+//   rounds: number;
+// }
+
+// =============== MISC ===============
+export interface IWorkoutModeOption {
+  label: WorkoutModeLabel;
+  value: WorkoutModeValue;
+}
+
+export interface IMovement {
+  id: string;
+  type: MovementTypes;
+  name: string;
+  notes: string;
+  mode: WorkoutModeTypes | null;
+  movements: IMovement[] | null;
+  rest: IMovementRest | null;
+  config:
+    | IMovementConfigRepsSetsEx
+    | IMovementConfigRepsSetsWo
+    | IMovementConfigCircuitEx
+    | IMovementConfigCircuitWo
+    | null;
+}
+
+type MovementTypes = 'workout' | 'exercise';
+type WorkoutModeTypes = 'reps-sets' | 'circuit' | 'chaining';
+// // type ExerciseModeTypes = 'manual' | 'timed';
+
+interface IMovementRest {
+  automatic: boolean;
+  inner: number | null;
+  outer: number;
+}
+
+interface IMovementConfigRepsSetsEx {
+  reps: number;
+  sets: number;
+}
+interface IMovementConfigRepsSetsWo {
+  reps: number;
+  sets: number;
+}
+
+interface IMovementConfigCircuitEx {
+  interval: number;
+}
+
+interface IMovementConfigCircuitWo {
+  rounds: number;
 }

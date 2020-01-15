@@ -4,11 +4,10 @@ import { FirebaseContext } from '../../Firebase';
 import { AuthUserContext } from '../../Session';
 
 import { withExercises, ExercisesContext } from '../../Exercises';
-import { RepsSetsField } from '../index';
+import { WorkoutsContext, RepsSetsField } from '../index';
 
-import { WorkoutsContext } from '../index';
-// import WorkoutModeFormFields, {
-// } from '../WorkoutModeFormFields';
+import { workoutModeOptions } from '../../../common/data';
+
 import {
   FormMode,
   IWorkoutFormValues,
@@ -34,8 +33,8 @@ const WorkoutForm: React.FC<{
     exercises: [
       {
         exId: '',
-        sets: '0',
-        reps: '0',
+        sets: 0,
+        reps: 0,
       },
     ],
   };
@@ -55,8 +54,8 @@ const WorkoutForm: React.FC<{
   const isValidMode = form.mode !== '';
   const isValidExercises = form.exercises.every((ex) => {
     const hasId = ex.exId !== '';
-    const hasReps = parseInt(ex.reps) > 0;
-    const hasSets = parseInt(ex.sets) > 0;
+    const hasReps = ex.reps > 0;
+    const hasSets = ex.sets > 0;
 
     return hasId && hasReps && hasSets;
   });
@@ -188,8 +187,8 @@ const WorkoutForm: React.FC<{
     const newForm = { ...form };
     const newExercise = {
       exId: '',
-      sets: '0',
-      reps: '0',
+      sets: 0,
+      reps: 0,
     };
 
     newForm.exercises.push(newExercise);
@@ -228,9 +227,9 @@ const WorkoutForm: React.FC<{
               value={form.mode}
               onChange={handleChange.bind(null, undefined)}
             >
-              <option label="Select a workout mode" value="" />
-              <option label="Reps + Sets" value="reps-sets" />
-              <option label="Tabata" value="tabata" />
+              {workoutModeOptions.map((option, i) => (
+                <option label={option.label} value={option.value} key={i} />
+              ))}
             </select>
           </label>
         </div>

@@ -4,9 +4,9 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { ExercisesContext } from './index';
 
-import { IExercise, IExerciseState } from '../../common/types';
+import { IExercise, IExercisesFirebaseQuery } from '../../common/types';
 
-export const INITIAL_EXERCISE_STATE: IExerciseState = {
+export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
   exLoading: false,
   exercises: [],
 };
