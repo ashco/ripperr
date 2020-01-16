@@ -29,6 +29,15 @@ export interface IWorkoutsFirebaseQuery {
   workouts: IWorkout[];
 }
 
+export interface IMovementsFirebaseQuery {
+  loading: {
+    exercise: boolean;
+    workout: boolean;
+  };
+  exercises: IExercise[];
+  workouts: IWorkout[];
+}
+
 // =============== FORMS ===============
 export interface IExerciseFormValues {
   [key: string]: any;
@@ -38,8 +47,12 @@ export interface IExerciseFormValues {
 export interface IWorkoutFormValues {
   [key: string]: any;
   name: string;
+  notes: string;
+  tags: string[];
   mode: WorkoutMode;
-  exercises: IWorkoutExerciseRepsSets[];
+  movements: IMovementRefs[];
+  rest: IWorkoutRest;
+  config: any;
 }
 
 // =============== DATA OBJECT STRUCTURES ===============
@@ -64,6 +77,7 @@ export interface IExercise {
 }
 
 interface IMovementRefs {
+  [key: string]: any;
   id: string;
   config: any;
 }

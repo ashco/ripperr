@@ -29,14 +29,24 @@ const WorkoutForm: React.FC<{
   // ============ SET UP FORM STATE ============
   const INITIAL_VALUES: IWorkoutFormValues = {
     name: '',
+    notes: '',
+    tags: [],
     mode: WorkoutMode.Reps,
-    exercises: [
+    movements: [
       {
         id: '',
-        sets: 0,
-        reps: 0,
+        config: {
+          reps: 0,
+          sets: 0,
+        },
       },
     ],
+    rest: {
+      automatic: true,
+      inner: 45,
+      outer: 60,
+    },
+    config: {},
   };
 
   let initialFormState;
@@ -51,45 +61,41 @@ const WorkoutForm: React.FC<{
 
   // ============ VALIDATION ============
   const isValidName = form.name !== '';
-  const isValidMode = form.mode !== WorkoutMode._;
-  const isValidExercises = form.exercises.every((ex) => {
-    const hasId = ex.id !== '';
-    const hasReps = ex.reps > 0;
-    const hasSets = ex.sets > 0;
+  // const isValidExercises = form.movements.every((ex) => {
+  //   const hasId = ex.id !== '';
+  //   const hasReps = ex.reps > 0;
+  //   const hasSets = ex.sets > 0;
 
-    return hasId && hasReps && hasSets;
-  });
+  //   return hasId && hasReps && hasSets;
+  // });
 
-  let isValidUpdate = true;
-  // Check that there has been a change from previous workout
-  if (workout) {
-    const nameUpdate = form.name !== workout.name;
-    const modeUpdate = form.mode !== workout.mode;
+  // let isValidUpdate = true;
+  // // Check that there has been a change from previous workout
+  // if (workout) {
+  //   const nameUpdate = form.name !== workout.name;
+  //   const modeUpdate = form.mode !== workout.mode;
 
-    // TODO - Get this to work correctly
-    const exUpdate = form.exercises.some((ex, i) => {
-      const workoutEx = workout.exercises[i];
+  //   // TODO - Get form validation to work correctly
+  //   const exUpdate = form.movements.some((ex, i) => {
+  //     const workoutEx = workout.movements[i];
 
-      const idUpdate = ex.id !== workoutEx.id;
-      const repsUpdate = ex.reps !== workoutEx.reps;
-      const setsUpdate = ex.sets !== workoutEx.sets;
+  //     const idUpdate = ex.id !== workoutEx.id;
+  //     const repsUpdate = ex.reps !== workoutEx.reps;
+  //     const setsUpdate = ex.sets !== workoutEx.sets;
 
-      return idUpdate || repsUpdate || setsUpdate;
-    });
+  //     return idUpdate || repsUpdate || setsUpdate;
+  //   });
 
-    const lengthUpdate = form.exercises.length !== workout.exercises.length;
+  //   const lengthUpdate = form.movements.length !== workout.movements.length;
 
-    isValidUpdate = nameUpdate || modeUpdate || exUpdate || lengthUpdate;
-  }
-  // Check that there is at least 1 exercise
-  const isValidExLength = form.exercises.length > 0;
+  //   isValidUpdate = nameUpdate || modeUpdate || exUpdate || lengthUpdate;
+  // }
+  // // Check that there is at least 1 exercise
+  // const isValidExLength = form.movements.length > 0;
 
-  const isValid =
-    isValidName &&
-    isValidMode &&
-    isValidExercises &&
-    isValidUpdate &&
-    isValidExLength;
+  // const isValid =
+  //   isValidName && isValidExercises && isValidUpdate && isValidExLength;
+  const isValid = isValidName;
 
   // ============ TEXT VALUES ============
 
@@ -162,11 +168,11 @@ const WorkoutForm: React.FC<{
     const newForm = { ...form };
 
     // Sets exercise object
-    if (exIndex !== undefined) {
-      newForm.exercises[exIndex][name] = value;
-    } else {
-      newForm[name] = value;
-    }
+    // if (exIndex !== undefined) {
+    //   newForm.movements[exIndex][name] = value;
+    // } else {
+    //   newForm[name] = value;
+    // }
     setForm(newForm);
   }
 
@@ -187,18 +193,19 @@ const WorkoutForm: React.FC<{
     const newForm = { ...form };
     const newExercise = {
       id: '',
-      sets: 0,
-      reps: 0,
+      config: {},
+      // sets: 0,
+      // reps: 0,
     };
 
-    newForm.exercises.push(newExercise);
+    newForm.movements.push(newExercise);
     setForm(newForm);
   }
 
   function handleDeleteEx(exIndex: number): void {
     const newForm = { ...form };
 
-    newForm.exercises.splice(exIndex, 1);
+    newForm.movements.splice(exIndex, 1);
     setForm(newForm);
   }
 
@@ -233,22 +240,20 @@ const WorkoutForm: React.FC<{
             </select>
           </label>
         </div>
-        {form.mode === WorkoutMode.repsSets &&
-          form.exercises &&
-          form.exercises.map((formEx, i) => (
+        {/* {form.mode === WorkoutMode.Reps &&
+          form.movements &&
+          form.movements.map((move, i) => (
             <RepsSetsField
-              formEx={formEx}
+              move={move}
               i={i}
               key={i}
               handleChange={handleChange}
               handleDeleteEx={handleDeleteEx}
             />
-          ))}
-        {form.mode !== WorkoutMode._ && (
-          <button type="button" onClick={handleAddEx}>
-            +
-          </button>
-        )}
+          ))} */}
+        <button type="button" onClick={handleAddEx}>
+          +
+        </button>
         <button type="submit" disabled={!isValid}>
           {submitButtonText}
         </button>

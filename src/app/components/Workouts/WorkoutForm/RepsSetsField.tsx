@@ -4,14 +4,14 @@ import { ExercisesContext } from '../../Exercises';
 import { IWorkoutExerciseRepsSets } from '../../../common/types';
 
 const RepsSetsField: React.FC<{
-  formEx: IWorkoutExerciseRepsSets;
+  move: IWorkoutExerciseRepsSets;
   i: number;
   handleChange: (
     exIndex: number | undefined,
     e: { target: { name: string; value: any } },
   ) => void;
   handleDeleteEx: (i: number) => void;
-}> = ({ formEx, i, handleChange, handleDeleteEx }) => {
+}> = ({ move, i, handleChange, handleDeleteEx }) => {
   const { exercises, exLoading } = useContext(ExercisesContext);
 
   return (
@@ -22,7 +22,7 @@ const RepsSetsField: React.FC<{
           <select
             name="id"
             onChange={handleChange.bind(null, i)}
-            value={formEx.id}
+            value={move.id}
           >
             <option
               label={exLoading ? 'loading...' : 'Select an exercise'}
@@ -40,7 +40,7 @@ const RepsSetsField: React.FC<{
             name="reps"
             type="number"
             placeholder="0"
-            value={formEx.reps}
+            value={move.reps}
             onChange={handleChange.bind(null, i)}
           />
         </label>
@@ -51,7 +51,7 @@ const RepsSetsField: React.FC<{
             name="sets"
             type="number"
             placeholder="0"
-            value={formEx.sets}
+            value={move.sets}
             onChange={handleChange.bind(null, i)}
           />
         </label>
