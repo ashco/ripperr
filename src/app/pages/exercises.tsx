@@ -8,6 +8,8 @@ import { IAuthUserContext } from '../components/Firebase/firebase';
 import ExerciseList from '../components/Exercises/ExerciseList';
 import ExerciseFormButton from '../components/Exercises/ExerciseForm/ExerciseFormButton';
 
+import { FormMode } from '../common/enums';
+
 const ExercisesPage: NextPage<{
   authUser: IAuthUserContext;
 }> = ({ authUser }) => {
@@ -17,7 +19,7 @@ const ExercisesPage: NextPage<{
   return (
     <div>
       <h1>Exercises</h1>
-      <ExerciseFormButton formMode="Add" />
+      <ExerciseFormButton formMode={FormMode.Add} />
       {exLoading && <div>Loading ...</div>}
       <ExerciseList exercises={exercises} />
     </div>

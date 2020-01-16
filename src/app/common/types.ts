@@ -1,9 +1,11 @@
-﻿// =============== TYPES ===============
+﻿import { WorkoutMode } from './enums';
 
-export type FormMode = 'Add' | 'Edit';
-export type WorkoutModeLabel = '' | 'Reps + Sets' | 'Tabata' | 'Circuit';
-export type WorkoutModeValue = '' | 'reps-sets' | 'tabata' | 'circuit';
-export type AuthErrorSchema = false | IAuthError;
+// =============== TYPES ===============
+
+// export type FormMode = 'Add' | 'Edit';
+// export type WorkoutModeLabel = '' | 'Reps + Sets' | 'Tabata' | 'Circuit';
+// export type WorkoutMode = '' | 'reps-sets' | 'tabata' | 'circuit';
+// export type AuthErrorSchema = false | IAuthError;
 
 // =============== ERRORS ===============
 export interface IFormError {
@@ -36,18 +38,40 @@ export interface IExerciseFormValues {
 export interface IWorkoutFormValues {
   [key: string]: any;
   name: string;
-  mode: WorkoutModeValue;
+  mode: WorkoutMode;
   exercises: IWorkoutExerciseRepsSets[];
 }
 
 // =============== DATA OBJECT STRUCTURES ===============
-export interface IWorkout extends IWorkoutFormValues {
-  woId: string;
+export interface IWorkout {
+  readonly id: string;
+  name: string;
+  notes: string;
+  tags: string[];
+  history: any;
+  mode: WorkoutMode;
+  movements: IMovementRefs[];
+  rest: IWorkoutRest;
+  config: any;
 }
 
 export interface IExercise {
-  exId: string;
+  readonly id: string;
   name: string;
+  notes: string;
+  tags: string[];
+  history: any;
+}
+
+interface IMovementRefs {
+  id: string;
+  config: any;
+}
+
+interface IWorkoutRest {
+  automatic: boolean;
+  inner: number;
+  outer: number;
 }
 
 interface IWorkoutExercise {
@@ -69,50 +93,50 @@ export interface IWorkoutExerciseRepsSets extends IWorkoutExercise {
 // }
 
 // =============== MISC ===============
-export interface IWorkoutModeOption {
-  label: WorkoutModeLabel;
-  value: WorkoutModeValue;
-}
+// export interface IWorkoutModeOption {
+//   label: WorkoutModeLabel;
+//   value: WorkoutModeValue;
+// }
 
-export interface IMovement {
-  id: string;
-  type: MovementTypes;
-  name: string;
-  notes: string;
-  mode: WorkoutModeTypes | null;
-  movements: IMovement[] | null;
-  rest: IMovementRest | null;
-  config:
-    | IMovementConfigRepsSetsEx
-    | IMovementConfigRepsSetsWo
-    | IMovementConfigCircuitEx
-    | IMovementConfigCircuitWo
-    | null;
-}
+// export interface IMovement {
+//   id: string;
+//   type: MovementTypes;
+//   name: string;
+//   notes: string;
+//   tags: string[];
+//   mode: WorkoutModeTypes | null;
+//   movements: IMovementRefs[] | null;
+//   rest: IMovementRest | null;
+//   config: MovementConfig | null;
+//   history: null;
+// }
 
-type MovementTypes = 'workout' | 'exercise';
-type WorkoutModeTypes = 'reps-sets' | 'circuit' | 'chaining';
-// // type ExerciseModeTypes = 'manual' | 'timed';
+// type MovementTypes = 'workout' | 'exercise';
+// // type WorkoutModeTypes = 'reps-sets' | 'circuit' | 'chaining';
+// type WorkoutModeTypes = 'reps' | 'timed' | 'wo-group';
+// // // type ExerciseModeTypes = 'manual' | 'timed';
 
-interface IMovementRest {
-  automatic: boolean;
-  inner: number | null;
-  outer: number;
-}
+// type timedWorkoutModes = 'timed' | 'circuit' | 'tabata' | 'follow-along';
 
-interface IMovementConfigRepsSetsEx {
-  reps: number;
-  sets: number;
-}
-interface IMovementConfigRepsSetsWo {
-  reps: number;
-  sets: number;
-}
+// type MovementConfig =
+//   | IMovementConfigRepsSetsEx
+//   | IMovementConfigRepsSetsWo
+//   | IMovementConfigCircuitEx
+//   | IMovementConfigCircuitWo;
 
-interface IMovementConfigCircuitEx {
-  interval: number;
-}
+// interface IMovementConfigRepsSetsEx {
+//   reps: number;
+//   sets: number;
+// }
+// interface IMovementConfigRepsSetsWo {
+//   reps: number;
+//   sets: number;
+// }
 
-interface IMovementConfigCircuitWo {
-  rounds: number;
-}
+// interface IMovementConfigCircuitEx {
+//   interval: number;
+// }
+
+// interface IMovementConfigCircuitWo {
+//   rounds: number;
+// }

@@ -9,7 +9,7 @@ import { WorkoutModeValue } from '../../common/types';
 //   const { values } = useFormikContext();
 
 //   let formField = null;
-//   // if (values.WorkoutModeValue === 'reps-sets') {
+//   // if (values.WorkoutModeValue === 'repsSets') {
 //   //   formField = <RepsSetsFormRow />;
 //   // } else if (values.WorkoutModeValue === 'tabata') {
 //   //   formField = <TabataFormRow />;
@@ -84,7 +84,7 @@ const WorkoutModeValueFormFields: React.FC<{ num: number }> = ({ num }) => {
 
   // let formFields = <div />;
 
-  // if (values.WorkoutModeValue === 'reps-sets') {
+  // if (values.WorkoutModeValue === 'repsSets') {
   //   formFields = [...Array(num)].map((e, i) => (
   //     <RepsSetsFormRow num={i} key={i} />
   //   ));

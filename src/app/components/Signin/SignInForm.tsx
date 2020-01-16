@@ -6,7 +6,7 @@ import { Formik, Form } from 'formik';
 import { InputField, signInVal } from '../Forms';
 
 import { FirebaseContext } from '../Firebase';
-import { AuthErrorSchema } from '../../common/types';
+import { IAuthError } from '../../common/types';
 
 export interface ISignInFormValues {
   email: string;
@@ -22,7 +22,7 @@ const SignInForm = () => {
   const firebase = useContext(FirebaseContext);
   const router = useRouter();
 
-  const [error, setError] = useState<AuthErrorSchema>(false);
+  const [error, setError] = useState<IAuthError | false>(false);
 
   return (
     <Formik

@@ -7,6 +7,7 @@ import { DeleteButton } from '../Buttons';
 import { ExerciseFormButton } from '../Exercises';
 
 import { IExercise } from '../../common/types';
+import { FormMode } from '../../common/enums';
 
 const ExerciseListItem: React.FC<{
   exercise: IExercise;
@@ -31,7 +32,7 @@ const ExerciseListItem: React.FC<{
       <span>
         <strong>Exercise Name:</strong> {exercise.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <ExerciseFormButton formMode="Edit" exercise={exercise} />
+        <ExerciseFormButton formMode={FormMode.Edit} exercise={exercise} />
       </span>
     </ExerciseListItemWrapper>
   );

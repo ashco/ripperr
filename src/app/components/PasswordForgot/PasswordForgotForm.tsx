@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 
 import { InputField, passwordForgotVal } from '../Forms';
 import { FirebaseContext } from '../Firebase';
-import { AuthErrorSchema } from '../../common/types';
+import { IAuthError } from '../../common/types';
 
 interface IPasswordForgotForm {
   email: string;
@@ -17,7 +17,7 @@ const INITIAL_VALUES: IPasswordForgotForm = {
 const PasswordForgotForm: React.FC = () => {
   const firebase = useContext(FirebaseContext);
 
-  const [error, setError] = useState<AuthErrorSchema>(false);
+  const [error, setError] = useState<IAuthError | false>(false);
 
   return (
     <Formik

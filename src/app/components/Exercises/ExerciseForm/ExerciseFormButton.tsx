@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 import { Modal } from '../../Modal';
 import { ExerciseForm } from '../index';
-import { FormMode, IExercise } from '../../../common/types';
+import { IExercise } from '../../../common/types';
+import { FormMode } from '../../../common/enums';
 
 const ExerciseFormButton: React.FC<{
   formMode: FormMode;
@@ -16,9 +17,9 @@ const ExerciseFormButton: React.FC<{
 
   let buttonText;
 
-  if (formMode === 'Add') {
+  if (formMode === FormMode.Add) {
     buttonText = 'Add Exercise';
-  } else if (formMode === 'Edit') {
+  } else if (formMode === FormMode.Edit) {
     buttonText = 'Edit Exercise';
   }
 

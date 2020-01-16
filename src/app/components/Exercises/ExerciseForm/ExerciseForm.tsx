@@ -5,11 +5,8 @@ import { Formik, Form } from 'formik';
 import { InputField, exerciseFormVal } from '../../Forms';
 import { FirebaseContext } from '../../Firebase';
 import { AuthUserContext } from '../../Session';
-import {
-  FormMode,
-  IExercise,
-  IExerciseFormValues,
-} from '../../../common/types';
+import { IExercise, IExerciseFormValues } from '../../../common/types';
+import { FormMode } from '../../../common/enums';
 
 const INITIAL_VALUES: IExerciseFormValues = {
   name: '',
@@ -27,7 +24,7 @@ const ExerciseForm: React.FC<{
   // ============ SET UP FORM STATE ============
 
   let initialFormState;
-  if (formMode === 'Edit' && exercise) {
+  if (formMode === FormMode.Edit && exercise) {
     initialFormState = exercise;
   } else {
     initialFormState = INITIAL_VALUES;
@@ -50,10 +47,10 @@ const ExerciseForm: React.FC<{
 
   let titleText;
   let submitButtonText;
-  if (formMode === 'Add') {
+  if (formMode === FormMode.Add) {
     titleText = 'Create New Exercise';
     submitButtonText = 'Submit';
-  } else if (formMode === 'Edit') {
+  } else if (formMode === FormMode.Edit) {
     titleText = 'Edit Exercise';
     submitButtonText = 'Update';
   }
@@ -120,9 +117,9 @@ const ExerciseForm: React.FC<{
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (formMode === 'Add') {
+    if (formMode === FormMode.Add) {
       handleCreate(form);
-    } else if (formMode === 'Edit') {
+    } else if (formMode === FormMode.Edit) {
       handleUpdate(form);
     }
   }

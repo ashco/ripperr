@@ -9,11 +9,11 @@ import { WorkoutsContext, RepsSetsField } from '../index';
 import { workoutModeOptions } from '../../../common/data';
 
 import {
-  FormMode,
   IWorkoutFormValues,
   IWorkout,
   IFormError,
 } from '../../../common/types';
+import { FormMode, WorkoutMode } from '../../../common/enums';
 
 const WorkoutForm: React.FC<{
   hide: () => void;
@@ -29,7 +29,7 @@ const WorkoutForm: React.FC<{
   // ============ SET UP FORM STATE ============
   const INITIAL_VALUES: IWorkoutFormValues = {
     name: '',
-    mode: '',
+    mode: WorkoutMode._,
     exercises: [
       {
         exId: '',
@@ -40,7 +40,7 @@ const WorkoutForm: React.FC<{
   };
 
   let initialFormState;
-  if (formMode === 'Edit' && workout) {
+  if (formMode === FormMode.Edit && workout) {
     initialFormState = workout;
   } else {
     initialFormState = { ...INITIAL_VALUES };
@@ -51,7 +51,7 @@ const WorkoutForm: React.FC<{
 
   // ============ VALIDATION ============
   const isValidName = form.name !== '';
-  const isValidMode = form.mode !== '';
+  const isValidMode = form.mode !== WorkoutMode._;
   const isValidExercises = form.exercises.every((ex) => {
     const hasId = ex.exId !== '';
     const hasReps = ex.reps > 0;
@@ -95,10 +95,10 @@ const WorkoutForm: React.FC<{
 
   let titleText;
   let submitButtonText;
-  if (formMode === 'Add') {
+  if (formMode === FormMode.Add) {
     titleText = 'Create New Workout';
     submitButtonText = 'Submit';
-  } else if (formMode === 'Edit') {
+  } else if (formMode === FormMode.Edit) {
     titleText = 'Edit Workout';
     submitButtonText = 'Update';
   }
@@ -176,9 +176,9 @@ const WorkoutForm: React.FC<{
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (formMode === 'Add') {
+    if (formMode === FormMode.Add) {
       handleCreate(form);
-    } else if (formMode === 'Edit') {
+    } else if (formMode === FormMode.Edit) {
       handleUpdate(form);
     }
   }
@@ -233,7 +233,7 @@ const WorkoutForm: React.FC<{
             </select>
           </label>
         </div>
-        {form.mode === 'reps-sets' &&
+        {form.mode === WorkoutMode.repsSets &&
           form.exercises &&
           form.exercises.map((formEx, i) => (
             <RepsSetsField
@@ -244,7 +244,7 @@ const WorkoutForm: React.FC<{
               handleDeleteEx={handleDeleteEx}
             />
           ))}
-        {form.mode !== '' && (
+        {form.mode !== WorkoutMode._ && (
           <button type="button" onClick={handleAddEx}>
             +
           </button>

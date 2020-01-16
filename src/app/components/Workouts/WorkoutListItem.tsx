@@ -5,7 +5,9 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { DeleteButton } from '../Buttons';
 import { WorkoutFormButton } from '../Workouts';
+
 import { IWorkout, IExercise } from '../../common/types';
+import { FormMode } from '../../common/enums';
 
 const WorkoutListItem: React.FunctionComponent<{
   workout: IWorkout;
@@ -32,7 +34,7 @@ const WorkoutListItem: React.FunctionComponent<{
         <strong>Workout Name:</strong> {workout.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
         <WorkoutFormButton
-          formMode="Edit"
+          formMode={FormMode.Edit}
           workout={workout}
           exercises={exercises}
         />

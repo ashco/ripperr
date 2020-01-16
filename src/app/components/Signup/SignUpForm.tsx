@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 
 import { InputField, signUpVal } from '../Forms';
 import { FirebaseContext } from '../Firebase/index';
-import { AuthErrorSchema } from '../../common/types';
+import { IAuthError } from '../../common/types';
 
 interface ISignUpFormValues {
   username: string;
@@ -24,7 +24,7 @@ const SignUpForm: React.FC = () => {
   const firebase = useContext(FirebaseContext);
   const router = useRouter();
 
-  const [error, setError] = useState<AuthErrorSchema>(false);
+  const [error, setError] = useState<IAuthError | false>(false);
 
   return (
     <Formik

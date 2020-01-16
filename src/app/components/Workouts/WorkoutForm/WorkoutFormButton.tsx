@@ -2,7 +2,8 @@
 
 import { Modal } from '../../Modal';
 import { WorkoutForm } from '../index';
-import { FormMode, IWorkout, IExercise } from '../../../common/types';
+import { IWorkout, IExercise } from '../../../common/types';
+import { FormMode } from '../../../common/enums';
 
 const WorkoutFormButton: React.FC<{
   formMode: FormMode;
@@ -16,9 +17,9 @@ const WorkoutFormButton: React.FC<{
 
   let buttonText;
 
-  if (formMode === 'Add') {
+  if (formMode === FormMode.Add) {
     buttonText = 'Add Workout';
-  } else if (formMode === 'Edit') {
+  } else if (formMode === FormMode.Edit) {
     buttonText = 'Edit Workout';
   }
 

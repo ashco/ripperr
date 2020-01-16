@@ -9,6 +9,8 @@ import WorkoutFormButton from '../components/Workouts/WorkoutForm/WorkoutFormBut
 import { WorkoutsContext, withWorkouts } from '../components/Workouts';
 import { ExercisesContext, withExercises } from '../components/Exercises';
 
+import { FormMode } from '../common/enums';
+
 const WorkoutsPage: NextPage<{
   userAgent: string;
   authUser: IAuthUserContext;
@@ -19,7 +21,7 @@ const WorkoutsPage: NextPage<{
   return (
     <div>
       <h1>Workouts</h1>
-      <WorkoutFormButton formMode="Add" exercises={exercises} />
+      <WorkoutFormButton formMode={FormMode.Add} exercises={exercises} />
       {woLoading && <div>Loading ...</div>}
       <WorkoutList workouts={workouts} exercises={exercises} />
     </div>

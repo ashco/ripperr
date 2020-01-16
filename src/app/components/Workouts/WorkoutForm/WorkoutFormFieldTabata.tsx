@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useFormikContext } from 'formik';
 
 import { InputField, SelectField } from '../../Forms';
-import { WorkoutModeValue } from '../../../common/types';
 
 const WorkoutFormFieldTabata = () => (
   <WorkoutFormFieldTabataWrapper>
