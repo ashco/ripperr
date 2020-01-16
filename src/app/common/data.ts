@@ -208,7 +208,7 @@ export const workoutObj: IWorkout = {
   notes: 'This routine will get you ready for the day in less than 10 minutes!',
   tags: ['stretch'],
   history: [],
-  mode: WorkoutMode.Timed,
+  mode: WorkoutMode.Reps,
   movements: [
     {
       id: '1111',

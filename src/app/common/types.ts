@@ -76,7 +76,7 @@ interface IWorkoutRest {
 
 interface IWorkoutExercise {
   [key: string]: any;
-  exId: string;
+  id: string;
 }
 
 export interface IWorkoutExerciseRepsSets extends IWorkoutExercise {

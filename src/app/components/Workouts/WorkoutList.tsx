@@ -11,7 +11,7 @@ const WorkoutList: React.FC<{
   <WorkoutListWrapper>
     {workouts.map((workout: IWorkout) => (
       <WorkoutListItem
-        key={workout.woId}
+        key={workout.id}
         workout={workout}
         exercises={exercises}
       />

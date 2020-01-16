@@ -68,7 +68,7 @@ const ExerciseForm: React.FC<{
 
       docRef
         .set({
-          exId: id,
+          id: id,
           name,
         })
         .then(() => {
@@ -88,7 +88,7 @@ const ExerciseForm: React.FC<{
       const { name } = values;
 
       firebase
-        .exercise(authUser.uid, exercise.exId)
+        .exercise(authUser.uid, exercise.id)
         .update({
           name: name,
         })

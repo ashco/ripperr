@@ -3,6 +3,6 @@
   Edit = 'EDIT',
 }
 export enum WorkoutMode {
-  reps = 'REPS',
-  timed = 'TIMED',
+  Reps = 'REPS',
+  Timed = 'TIMED',
 }

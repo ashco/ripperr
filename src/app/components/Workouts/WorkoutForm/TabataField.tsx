@@ -17,19 +17,19 @@ const RepsSetsField: React.FC<{
   return (
     <div>
       <div>
-        <label htmlFor="exId">
+        <label htmlFor="id">
           {`Exercise ${i + 1}`}
           <select
-            name="exId"
+            name="id"
             onChange={handleChange.bind(null, i)}
-            value={formEx.exId}
+            value={formEx.id}
           >
             <option
               label={exLoading ? 'loading...' : 'Select an exercise'}
               value=""
             />
             {exercises.map((ex) => (
-              <option label={ex.name} value={ex.exId} key={ex.exId} />
+              <option label={ex.name} value={ex.id} key={ex.id} />
             ))}
           </select>
         </label>

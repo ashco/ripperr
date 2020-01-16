@@ -29,10 +29,13 @@ const withExercises = (Component: any) => {
 
             snapshot.forEach((doc) => {
               const { id } = doc;
-              const { name } = doc.data();
+              const { name, notes, tags, history } = doc.data();
               const obj: IExercise = {
-                exId: id,
+                id,
                 name,
+                notes,
+                tags,
+                history,
               };
 
               exerciseList.push(obj);

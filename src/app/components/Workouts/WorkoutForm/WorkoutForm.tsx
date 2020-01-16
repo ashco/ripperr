@@ -29,10 +29,10 @@ const WorkoutForm: React.FC<{
   // ============ SET UP FORM STATE ============
   const INITIAL_VALUES: IWorkoutFormValues = {
     name: '',
-    mode: WorkoutMode._,
+    mode: WorkoutMode.Reps,
     exercises: [
       {
-        exId: '',
+        id: '',
         sets: 0,
         reps: 0,
       },
@@ -53,7 +53,7 @@ const WorkoutForm: React.FC<{
   const isValidName = form.name !== '';
   const isValidMode = form.mode !== WorkoutMode._;
   const isValidExercises = form.exercises.every((ex) => {
-    const hasId = ex.exId !== '';
+    const hasId = ex.id !== '';
     const hasReps = ex.reps > 0;
     const hasSets = ex.sets > 0;
 
@@ -70,7 +70,7 @@ const WorkoutForm: React.FC<{
     const exUpdate = form.exercises.some((ex, i) => {
       const workoutEx = workout.exercises[i];
 
-      const idUpdate = ex.exId !== workoutEx.exId;
+      const idUpdate = ex.id !== workoutEx.id;
       const repsUpdate = ex.reps !== workoutEx.reps;
       const setsUpdate = ex.sets !== workoutEx.sets;
 
@@ -118,7 +118,7 @@ const WorkoutForm: React.FC<{
 
       docRef
         .set({
-          woId: id,
+          id: id,
           ...values,
         })
         .then(() => {
@@ -138,7 +138,7 @@ const WorkoutForm: React.FC<{
   function handleUpdate(values: IWorkoutFormValues): void {
     if (authUser && workout) {
       firebase
-        .workout(authUser.uid, workout.woId)
+        .workout(authUser.uid, workout.id)
         .update(values)
         .then(() => {
           console.log(`Workout Updated: ${values.name}`);
@@ -186,7 +186,7 @@ const WorkoutForm: React.FC<{
   function handleAddEx(): void {
     const newForm = { ...form };
     const newExercise = {
-      exId: '',
+      id: '',
       sets: 0,
       reps: 0,
     };

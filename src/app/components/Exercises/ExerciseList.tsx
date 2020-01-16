@@ -7,7 +7,7 @@ import { IExercise } from '../../common/types';
 const ExerciseList: React.FC<{ exercises: IExercise[] }> = ({ exercises }) => (
   <ExerciseListWrapper>
     {exercises.map((exercise: IExercise) => (
-      <ExerciseListItem key={exercise.exId} exercise={exercise} />
+      <ExerciseListItem key={exercise.id} exercise={exercise} />
     ))}
   </ExerciseListWrapper>
 );

@@ -29,12 +29,27 @@ const withWorkouts = (Component: any) => {
 
             snapshot.forEach((doc) => {
               const { id } = doc;
-              const { name, mode, exercises } = doc.data();
-              const obj: IWorkout = {
-                woId: id,
+              const {
                 name,
+                notes,
+                tags,
+                history,
                 mode,
-                exercises,
+                movements,
+                rest,
+                config,
+              } = doc.data();
+
+              const obj: IWorkout = {
+                id,
+                name,
+                notes,
+                tags,
+                history,
+                mode,
+                movements,
+                rest,
+                config,
               };
 
               workoutList.push(obj);
