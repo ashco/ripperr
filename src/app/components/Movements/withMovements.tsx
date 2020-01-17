@@ -2,13 +2,25 @@
 
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
-import { MovementsState } from './index';
+import { MovementsContext } from './index';
 
 import {
   IExercise,
   IWorkout,
+  IExercisesFirebaseQuery,
+  IWorkoutsFirebaseQuery,
   IMovementsFirebaseQuery,
 } from '../../common/types';
+
+export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
+  loading: false,
+  exercises: [],
+};
+
+export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
+  loading: false,
+  workouts: [],
+};
 
 export const INITIAL_MOVEMENT_STATE: IMovementsFirebaseQuery = {
   loading: {
@@ -24,15 +36,48 @@ const withMovements = (Component: any) => {
     const firebase = useContext(FirebaseContext);
     const authUser = useContext(AuthUserContext);
 
+    // const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
+    // const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
     const [movementState, setMovementState] = useState(INITIAL_MOVEMENT_STATE);
 
+    // Exercises
     useEffect(() => {
       const newState = { ...movementState };
-      newState.loading.exercise = true;
-      setMovementState();
-      // setMovementState({ ...movementState, loading: { exercise: true } });
+      newState.loading = {
+        exercise: true,
+        workout: true,
+      };
+
+      setMovementState(newState);
 
       if (authUser) {
+        const unsubscribeEx = firebase
+          .exercises(authUser.uid)
+          .onSnapshot((snapshot) => {
+            const exerciseList: IExercise[] = [];
+
+            snapshot.forEach((doc) => {
+              const { id } = doc;
+              const { name, notes, tags, history } = doc.data();
+              const obj: IExercise = {
+                id,
+                name,
+                notes,
+                tags,
+                history,
+              };
+
+              exerciseList.push(obj);
+            });
+
+            const newWoState = { ...movementState };
+            newWoState.exercises = exerciseList;
+            newWoState.loading.exercise = false;
+            setMovementState(newWoState);
+
+            return (): void => unsubscribeEx();
+          });
+
         const unsubscribeWo = firebase
           .workouts(authUser.uid)
           .onSnapshot((snapshot) => {
@@ -64,51 +109,24 @@ const withMovements = (Component: any) => {
               };
 
               workoutList.push(obj);
-            });
 
-            setMovementState({
-              ...movementState,
-              loadingWo: false,
-              workouts: workoutList,
-            });
+              const newWoState = { ...movementState };
+              newWoState.workouts = workoutList;
+              newWoState.loading.workout = false;
+              setMovementState(newWoState);
 
-            return (): void => unsubscribeWo();
+              return (): void => unsubscribeWo();
+            });
           });
-
-        const unsubscribeEx = firebase
-          .exercises(authUser.uid)
-          .onSnapshot((snapshot) => {
-            const exerciseList: IExercise[] = [];
-
-            snapshot.forEach((doc) => {
-              const { id } = doc;
-              const { name, notes, tags, history } = doc.data();
-              const obj: IExercise = {
-                id,
-                name,
-                notes,
-                tags,
-                history,
-              };
-
-              exerciseList.push(obj);
-            });
-
-            setMovementState({
-              ...movementState,
-              loadingEx: false,
-              exercises: exerciseList,
-            });
-
-            return (): void => unsubscribeEx();
-          });
+      } else {
+        console.log('No authUser!');
       }
     }, []);
 
     return (
-      <MovementsState.Provider value={movementState}>
+      <MovementsContext.Provider value={movementState}>
         <Component {...props} />
-      </MovementsState.Provider>
+      </MovementsContext.Provider>
     );
   };
 

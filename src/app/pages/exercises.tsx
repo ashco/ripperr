@@ -14,13 +14,13 @@ const ExercisesPage: NextPage<{
   authUser: IAuthUserContext;
 }> = ({ authUser }) => {
   const exerciseState = useContext(ExercisesContext);
-  const { exercises, exLoading } = exerciseState;
+  const { exercises, loading } = exerciseState;
 
   return (
     <div>
       <h1>Exercises</h1>
       <ExerciseFormButton formMode={FormMode.Add} />
-      {exLoading && <div>Loading ...</div>}
+      {loading && <div>Loading ...</div>}
       <ExerciseList exercises={exercises} />
     </div>
   );

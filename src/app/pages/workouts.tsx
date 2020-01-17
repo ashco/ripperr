@@ -15,14 +15,14 @@ const WorkoutsPage: NextPage<{
   userAgent: string;
   authUser: IAuthUserContext;
 }> = ({ authUser }) => {
-  const { workouts, woLoading } = useContext(WorkoutsContext);
+  const { workouts, loading } = useContext(WorkoutsContext);
   const { exercises } = useContext(ExercisesContext);
 
   return (
     <div>
       <h1>Workouts</h1>
       <WorkoutFormButton formMode={FormMode.Add} exercises={exercises} />
-      {woLoading && <div>Loading ...</div>}
+      {loading && <div>Loading ...</div>}
       <WorkoutList workouts={workouts} exercises={exercises} />
     </div>
   );

@@ -7,7 +7,7 @@ import { WorkoutsContext } from './index';
 import { IWorkout, IWorkoutsFirebaseQuery } from '../../common/types';
 
 export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
-  woLoading: false,
+  loading: false,
   workouts: [],
 };
 
@@ -19,7 +19,7 @@ const withWorkouts = (Component: any) => {
     const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
 
     useEffect(() => {
-      setWorkoutState({ ...workoutState, woLoading: true });
+      setWorkoutState({ ...workoutState, loading: true });
 
       if (authUser) {
         const unsubscribe = firebase
@@ -56,7 +56,7 @@ const withWorkouts = (Component: any) => {
             });
 
             setWorkoutState({
-              woLoading: false,
+              loading: false,
               workouts: workoutList,
             });
 

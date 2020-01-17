@@ -7,7 +7,7 @@ import { ExercisesContext } from './index';
 import { IExercise, IExercisesFirebaseQuery } from '../../common/types';
 
 export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
-  exLoading: false,
+  loading: false,
   exercises: [],
 };
 
@@ -19,7 +19,7 @@ const withExercises = (Component: any) => {
     const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
 
     useEffect(() => {
-      setExerciseState({ ...exerciseState, exLoading: true });
+      setExerciseState({ ...exerciseState, loading: true });
 
       if (authUser) {
         const unsubscribe = firebase
@@ -42,7 +42,7 @@ const withExercises = (Component: any) => {
             });
 
             setExerciseState({
-              exLoading: false,
+              loading: false,
               exercises: exerciseList,
             });
 

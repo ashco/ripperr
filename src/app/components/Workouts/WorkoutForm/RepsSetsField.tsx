@@ -12,7 +12,7 @@ const RepsSetsField: React.FC<{
   ) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
-  const { exercises, exLoading } = useContext(ExercisesContext);
+  const { exercises, loading } = useContext(ExercisesContext);
 
   return (
     <div>
@@ -25,7 +25,7 @@ const RepsSetsField: React.FC<{
             value={move.id}
           >
             <option
-              label={exLoading ? 'loading...' : 'Select an exercise'}
+              label={loading ? 'loading...' : 'Select an exercise'}
               value=""
             />
             {exercises.map((ex) => (

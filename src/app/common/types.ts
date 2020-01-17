@@ -20,12 +20,12 @@ export interface IAuthError {
 // =============== FIREBASE QUERIES ===============
 
 export interface IExercisesFirebaseQuery {
-  exLoading: boolean;
+  loading: boolean;
   exercises: IExercise[];
 }
 
 export interface IWorkoutsFirebaseQuery {
-  woLoading: boolean;
+  loading: boolean;
   workouts: IWorkout[];
 }
 

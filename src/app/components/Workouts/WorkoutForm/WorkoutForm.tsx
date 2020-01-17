@@ -24,7 +24,7 @@ const WorkoutForm: React.FC<{
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
-  const { workouts, woLoading } = useContext(WorkoutsContext);
+  const { workouts, loading } = useContext(WorkoutsContext);
 
   // ============ SET UP FORM STATE ============
   const INITIAL_VALUES: IWorkoutFormValues = {
