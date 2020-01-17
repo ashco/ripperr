@@ -12,21 +12,18 @@ import {
   IMovementsFirebaseQuery,
 } from '../../common/types';
 
-export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
-  loading: false,
-  exercises: [],
-};
+// export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
+//   loading: false,
+//   exercises: [],
+// };
 
-export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
-  loading: false,
-  workouts: [],
-};
+// export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
+//   loading: false,
+//   workouts: [],
+// };
 
 export const INITIAL_MOVEMENT_STATE: IMovementsFirebaseQuery = {
-  loading: {
-    exercise: false,
-    workout: false,
-  },
+  loading: false,
   exercises: [],
   workouts: [],
 };
@@ -41,7 +38,7 @@ const withMovements = (Component: any) => {
     useEffect(() => {
       setMovementState({
         ...movementState,
-        loading: { exercise: true, workout: false },
+        loading: true,
       });
 
       if (authUser) {
@@ -105,7 +102,7 @@ const withMovements = (Component: any) => {
         setMovementState({
           exercises: exerciseList,
           workouts: workoutList,
-          loading: { exercise: false, workout: false },
+          loading: false,
         });
       } else {
         console.log('No authUser!');

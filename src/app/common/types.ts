@@ -30,10 +30,7 @@ export interface IWorkoutsFirebaseQuery {
 }
 
 export interface IMovementsFirebaseQuery {
-  loading: {
-    exercise: boolean;
-    workout: boolean;
-  };
+  loading: boolean;
   exercises: IExercise[];
   workouts: IWorkout[];
 }
