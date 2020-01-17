@@ -36,26 +36,21 @@ const withMovements = (Component: any) => {
     const firebase = useContext(FirebaseContext);
     const authUser = useContext(AuthUserContext);
 
-    // const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
-    // const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
     const [movementState, setMovementState] = useState(INITIAL_MOVEMENT_STATE);
 
-    // Exercises
     useEffect(() => {
-      const newState = { ...movementState };
-      newState.loading = {
-        exercise: true,
-        workout: true,
-      };
-
-      setMovementState(newState);
+      setMovementState({
+        ...movementState,
+        loading: { exercise: true, workout: false },
+      });
 
       if (authUser) {
+        const exerciseList: IExercise[] = [];
+        const workoutList: IWorkout[] = [];
+
         const unsubscribeEx = firebase
           .exercises(authUser.uid)
           .onSnapshot((snapshot) => {
-            const exerciseList: IExercise[] = [];
-
             snapshot.forEach((doc) => {
               const { id } = doc;
               const { name, notes, tags, history } = doc.data();
@@ -70,19 +65,12 @@ const withMovements = (Component: any) => {
               exerciseList.push(obj);
             });
 
-            const newWoState = { ...movementState };
-            newWoState.exercises = exerciseList;
-            newWoState.loading.exercise = false;
-            setMovementState(newWoState);
-
             return (): void => unsubscribeEx();
           });
 
         const unsubscribeWo = firebase
           .workouts(authUser.uid)
           .onSnapshot((snapshot) => {
-            const workoutList: IWorkout[] = [];
-
             snapshot.forEach((doc) => {
               const { id } = doc;
               const {
@@ -110,14 +98,15 @@ const withMovements = (Component: any) => {
 
               workoutList.push(obj);
 
-              const newWoState = { ...movementState };
-              newWoState.workouts = workoutList;
-              newWoState.loading.workout = false;
-              setMovementState(newWoState);
-
               return (): void => unsubscribeWo();
             });
           });
+
+        setMovementState({
+          exercises: exerciseList,
+          workouts: workoutList,
+          loading: { exercise: false, workout: false },
+        });
       } else {
         console.log('No authUser!');
       }
