@@ -87,6 +87,7 @@ export interface IMovementRefs {
 }
 
 export interface IWorkoutRest {
+  [key: string]: boolean | number;
   automatic: boolean;
   inner: number;
   outer: number;

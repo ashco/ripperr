@@ -184,6 +184,21 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
+  // function handleChangeRest(e: {
+  //   target: { name: string; value: any; checked: any };
+  // }): void {
+  function handleChangeRest(e: {
+    target: { type: string; name: string; value: any; checked: any };
+  }): void {
+    const { type, name, checked, value } = e.target;
+    const val = type === 'checkbox' ? checked : value;
+
+    const newForm = { ...form };
+    newForm.rest[name] = val;
+
+    setForm(newForm);
+  }
+
   function handleAddEx(): void {
     const newForm = { ...form };
     const newMovement: IMovementRefs = {
@@ -276,7 +291,7 @@ const WorkoutForm: React.FC<{
             +
           </button>
           {/* REST */}
-          <RestField rest={form.rest} handleChange={handleChange} />
+          <RestField rest={form.rest} handleChange={handleChangeRest} />
         </div>
         <button type="submit" disabled={!isValid}>
           {submitButtonText}

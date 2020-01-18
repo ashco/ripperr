@@ -1,51 +1,45 @@
-﻿import React, { useContext } from 'react';
+﻿import React from 'react';
 
-import { ExercisesContext } from '../Exercises';
 import { IWorkoutRest } from '../../common/types';
 
 const RestField: React.FC<{
   rest: IWorkoutRest;
-  handleChange: (e: { target: { name: string; value: any } }) => void;
+  handleChange: (e: {
+    target: { type: string; name: string; value: any; checked: any };
+  }) => void;
 }> = ({ rest, handleChange }) => {
-  // const { exercises, loading } = useContext(ExercisesContext);
-
   return (
     <div>
       <div>
-        <label htmlFor="rest-automatic">
+        <label htmlFor="automatic">
           <input
             type="checkbox"
-            name="rest-automatic"
+            name="automatic"
             onChange={handleChange}
             checked={rest.automatic}
           />
         </label>
       </div>
-      {/* <div>
-        <label htmlFor="reps">
+      <div>
+        <label htmlFor="inner">
           <input
-            name="reps"
+            name="inner"
             type="number"
-            placeholder="0"
-            value={move.reps}
+            value={rest.inner}
             onChange={handleChange}
           />
         </label>
-      </div> */}
-      {/* <div>
-        <label htmlFor="sets">
+      </div>
+      <div>
+        <label htmlFor="outer">
           <input
-            name="sets"
+            name="outer"
             type="number"
-            placeholder="0"
-            value={move.sets}
+            value={rest.outer}
             onChange={handleChange}
           />
         </label>
-      </div> */}
-      {/* <button type="button" onClick={(): void => handleDeleteEx(i)}>
-        -
-      </button> */}
+      </div>
     </div>
   );
 };
