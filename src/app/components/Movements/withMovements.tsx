@@ -47,7 +47,6 @@ const withMovements = (Component: any) => {
             const exerciseList: IExercise[] = [];
 
             snapshot.forEach((doc) => {
-              const { id } = doc;
               const {
                 lastModified,
                 type,
@@ -57,7 +56,7 @@ const withMovements = (Component: any) => {
                 history,
               } = doc.data();
               const obj: IExercise = {
-                id,
+                id: doc.id,
                 lastModified,
                 type,
                 name,

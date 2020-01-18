@@ -2,7 +2,6 @@
 import styled from 'styled-components';
 
 import { MovementsContext } from '../Movements';
-// import { ExerciseListItem } from '../Es';
 import { ExerciseListItem, WorkoutListItem } from '../ListItems';
 import { IWorkout, IExercise, IMovementState } from '../../common/types';
 import { MovementType } from '../../common/enums';
@@ -10,12 +9,29 @@ import { MovementType } from '../../common/enums';
 // const MovementList: React.FC<{
 //   movements: IMovementsFirebaseQuery;
 
+function sortMovements(
+  a: IExercise | IWorkout,
+  b: IExercise | IWorkout,
+): number {
+  if (a.lastModified !== null && b.lastModified !== null) {
+    const aTime = (a.lastModified as firebase.firestore.Timestamp)
+      .toDate()
+      .getTime();
+    const bTime = (b.lastModified as firebase.firestore.Timestamp)
+      .toDate()
+      .getTime();
+
+    return bTime - aTime;
+  } else {
+    return 0;
+  }
+}
+
 const MovementList: React.FC = () => {
   const movements = useContext(MovementsContext);
 
   const movementList = [...movements.exercises, ...movements.workouts];
-
-  console.log(movementList);
+  movementList.sort((a, b) => sortMovements(a, b));
 
   // TODO - sort by most recently updated
 

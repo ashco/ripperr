@@ -58,7 +58,7 @@ export interface IWorkoutFormValues {
 
 export interface IExercise {
   readonly id: string;
-  lastModified: firebase.firestore.FieldValue;
+  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   readonly type: MovementType;
   name: string;
   notes: string;
@@ -68,7 +68,7 @@ export interface IExercise {
 
 export interface IWorkout {
   readonly id: string;
-  lastModified: firebase.firestore.FieldValue;
+  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   readonly type: MovementType;
   name: string;
   notes: string;
