@@ -27,16 +27,6 @@ const NavigationAuth: React.FC = () => (
       </Link>
     </li>
     <li>
-      <Link href="/exercises">
-        <a>Exercises</a>
-      </Link>
-    </li>
-    <li>
-      <Link href="/workouts">
-        <a>Workouts</a>
-      </Link>
-    </li>
-    <li>
       <Link href="/account">
         <a>Account</a>
       </Link>
