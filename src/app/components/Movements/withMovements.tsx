@@ -36,27 +36,18 @@ const withMovements = (Component: any) => {
     const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
     const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
 
+    // EXERCISE EFFECT
     useEffect(() => {
-      setExerciseState({
-        // ...exerciseState,
-        exercises: [],
-        loading: true,
-      });
-
-      setWorkoutState({
-        // ...workoutState,
-        workouts: [],
-        loading: true,
-      });
+      setExerciseState({ ...exerciseState, loading: true });
 
       if (authUser) {
-        const exerciseList: IExercise[] = [];
-        const workoutList: IWorkout[] = [];
-
-        const unsubscribeEx = firebase
+        const unsubscribe = firebase
           .exercises(authUser.uid)
           .onSnapshot((snapshot) => {
+            const exerciseList: IExercise[] = [];
+
             snapshot.forEach((doc) => {
+              const { id } = doc;
               const {
                 lastModified,
                 type,
@@ -65,9 +56,8 @@ const withMovements = (Component: any) => {
                 tags,
                 history,
               } = doc.data();
-
               const obj: IExercise = {
-                id: doc.id,
+                id,
                 lastModified,
                 type,
                 name,
@@ -80,21 +70,30 @@ const withMovements = (Component: any) => {
             });
 
             setExerciseState({
-              exercises: exerciseList,
               loading: false,
+              exercises: exerciseList,
             });
 
-            return (): void => unsubscribeEx();
+            return (): void => unsubscribe();
           });
+      }
+    }, []);
 
-        const unsubscribeWo = firebase
+    // WORKOUT EFFECT
+    useEffect(() => {
+      setWorkoutState({ ...workoutState, loading: true });
+
+      if (authUser) {
+        const unsubscribe = firebase
           .workouts(authUser.uid)
           .onSnapshot((snapshot) => {
+            const workoutList: IWorkout[] = [];
+
             snapshot.forEach((doc) => {
               const {
                 lastModified,
-                name,
                 type,
+                name,
                 notes,
                 tags,
                 history,
@@ -119,17 +118,15 @@ const withMovements = (Component: any) => {
               };
 
               workoutList.push(obj);
-
-              setWorkoutState({
-                workouts: workoutList,
-                loading: false,
-              });
-
-              return (): void => unsubscribeWo();
             });
+
+            setWorkoutState({
+              loading: false,
+              workouts: workoutList,
+            });
+
+            return (): void => unsubscribe();
           });
-      } else {
-        console.log('No authUser!');
       }
     }, []);
 
