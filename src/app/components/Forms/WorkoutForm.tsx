@@ -5,7 +5,11 @@ import { RepsField, RestField } from '../Forms';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
-import { IWorkout, IWorkoutFormValues } from '../../common/types';
+import {
+  IWorkout,
+  IWorkoutFormValues,
+  IMovementRefs,
+} from '../../common/types';
 import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
 
 const INITIAL_VALUES: IWorkoutFormValues = {
@@ -16,7 +20,10 @@ const INITIAL_VALUES: IWorkoutFormValues = {
   movements: [
     {
       id: '',
-      config: {},
+      config: {
+        reps: 0,
+        sets: 0,
+      },
     },
   ],
   rest: {
@@ -127,7 +134,7 @@ const WorkoutForm: React.FC<{
   //   }
   // }
 
-  // // ============ FORM FUNCTIONS ============
+  // ============ FORM FUNCTIONS ============
 
   function handleChange(e: { target: { name: string; value: any } }): void {
     const { name, value } = e.target;
@@ -160,21 +167,41 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  function handleAddEx(): void {
+  function handleChangeEx(
+    i: number,
+    config: boolean,
+    e: { target: { name: string; value: any } },
+  ): void {
+    const { name, value } = e.target;
     const newForm = { ...form };
-    const newExercise = {
-      id: '',
-      config: {},
-    };
 
-    newForm.movements.push(newExercise);
+    if (config) {
+      newForm.movements[i]['config'][name] = value;
+    } else {
+      newForm.movements[i][name] = value;
+    }
+
     setForm(newForm);
   }
 
-  function handleDeleteEx(exIndex: number): void {
+  function handleAddEx(): void {
+    const newForm = { ...form };
+    const newMovement: IMovementRefs = {
+      id: '',
+      config: {
+        reps: 0,
+        sets: 0,
+      },
+    };
+
+    newForm.movements.push(newMovement);
+    setForm(newForm);
+  }
+
+  function handleDeleteEx(i: number): void {
     const newForm = { ...form };
 
-    newForm.movements.splice(exIndex, 1);
+    newForm.movements.splice(i, 1);
     setForm(newForm);
   }
 
@@ -220,21 +247,34 @@ const WorkoutForm: React.FC<{
           {/* MODE */}
           <label htmlFor="mode">
             Mode
-            <input type="radio" name="mode" value={WorkoutMode.Reps} />
-            <input type="radio" name="mode" value={WorkoutMode.Timed} />
+            <input
+              type="radio"
+              name="mode"
+              value={WorkoutMode.Reps}
+              onChange={handleChange}
+            />
+            <input
+              type="radio"
+              name="mode"
+              value={WorkoutMode.Timed}
+              onChange={handleChange}
+            />
           </label>
           {/* EXERCISES */}
           {form.mode === WorkoutMode.Reps &&
             form.movements &&
             form.movements.map((move, i) => (
               <RepsField
+                key={i}
                 move={move}
                 i={i}
-                key={i}
-                handleChange={handleChange}
+                handleChange={handleChangeEx}
                 handleDeleteEx={handleDeleteEx}
               />
             ))}
+          <button type="button" onClick={handleAddEx}>
+            +
+          </button>
           {/* REST */}
           <RestField rest={form.rest} handleChange={handleChange} />
         </div>

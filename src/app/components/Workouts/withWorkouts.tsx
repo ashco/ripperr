@@ -28,8 +28,8 @@ const withWorkouts = (Component: any) => {
             const workoutList: IWorkout[] = [];
 
             snapshot.forEach((doc) => {
-              const { id } = doc;
               const {
+                lastModified,
                 type,
                 name,
                 notes,
@@ -42,7 +42,8 @@ const withWorkouts = (Component: any) => {
               } = doc.data();
 
               const obj: IWorkout = {
-                id,
+                id: doc.id,
+                lastModified,
                 type,
                 name,
                 notes,
@@ -56,6 +57,8 @@ const withWorkouts = (Component: any) => {
 
               workoutList.push(obj);
             });
+
+            // TODO - Fix this to show arrs if workouts or ex are missing
 
             setWorkoutState({
               loading: false,

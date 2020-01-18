@@ -1,22 +1,30 @@
 ﻿import React, { useContext } from 'react';
 
-import { ExercisesContext } from '../Exercises';
+import { MovementsContext } from '../Movements';
 import { IMovementRefs } from '../../common/types';
 
 const RepsField: React.FC<{
   move: IMovementRefs;
   i: number;
-  handleChange: (e: { target: { name: string; value: any } }) => void;
+  handleChange: (
+    i: number,
+    config: boolean,
+    e: { target: { name: string; value: any } },
+  ) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
-  const { exercises, loading } = useContext(ExercisesContext);
+  const { exercises, loading } = useContext(MovementsContext);
 
   return (
     <div>
       <div>
         <label htmlFor="id">
           {`Exercise ${i + 1}`}
-          <select name="id" onChange={handleChange} value={move.id}>
+          <select
+            name="id"
+            onChange={handleChange.bind(null, i, false)}
+            value={move.id}
+          >
             <option
               label={loading ? 'loading...' : 'Select an exercise'}
               value=""
@@ -33,8 +41,8 @@ const RepsField: React.FC<{
             name="reps"
             type="number"
             placeholder="0"
-            value={move.reps}
-            onChange={handleChange}
+            value={move.config.reps}
+            onChange={handleChange.bind(null, i, true)}
           />
         </label>
       </div>
@@ -44,8 +52,8 @@ const RepsField: React.FC<{
             name="sets"
             type="number"
             placeholder="0"
-            value={move.sets}
-            onChange={handleChange}
+            value={move.config.sets}
+            onChange={handleChange.bind(null, i, true)}
           />
         </label>
       </div>
