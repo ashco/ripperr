@@ -6,8 +6,10 @@ import { AuthUserContext } from '../Session';
 
 import { ListItem } from './index';
 import { DeleteButton } from '../Buttons';
+import { MovementFormButton } from '../Movements';
 
 import { IExercise } from '../../common/types';
+import { FormMode } from '../../common/enums';
 
 const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
   const firebase = useContext(FirebaseContext);
@@ -31,6 +33,7 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
         <strong>Exercise: </strong>
         {exercise.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
+        <MovementFormButton formMode={FormMode.Edit} movement={exercise} />
       </span>
     </ExerciseListItemWrapper>
   );

@@ -1,7 +1,7 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { RepsField, RestField } from '../Forms';
+import { RepsField, RestField, ModeField } from './index';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
@@ -257,23 +257,7 @@ const WorkoutForm: React.FC<{
             </select>
           </label>
           {/* MODE */}
-          <label htmlFor="mode">
-            Mode
-            <input
-              type="radio"
-              name="mode"
-              value={WorkoutMode.Reps}
-              checked={form.mode === WorkoutMode.Reps}
-              onChange={handleChange}
-            />
-            <input
-              type="radio"
-              name="mode"
-              value={WorkoutMode.Timed}
-              checked={form.mode === WorkoutMode.Timed}
-              onChange={handleChange}
-            />
-          </label>
+          <ModeField mode={form.mode} handleChange={handleChange} />
           {/* EXERCISES */}
           {form.mode === WorkoutMode.Reps &&
             form.movements &&

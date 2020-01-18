@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import styled from 'styled-components';
 
 import { IWorkoutRest } from '../../common/types';
 
@@ -9,7 +10,8 @@ const RestField: React.FC<{
   }) => void;
 }> = ({ rest, handleChange }) => {
   return (
-    <div>
+    <FieldRow>
+      Rest Options
       <div>
         <label htmlFor="automatic">
           <input
@@ -18,6 +20,7 @@ const RestField: React.FC<{
             onChange={handleChange}
             checked={rest.automatic}
           />
+          Automatic
         </label>
       </div>
       <div>
@@ -28,6 +31,7 @@ const RestField: React.FC<{
             value={rest.inner}
             onChange={handleChange}
           />
+          Inner Rest Time
         </label>
       </div>
       <div>
@@ -38,10 +42,15 @@ const RestField: React.FC<{
             value={rest.outer}
             onChange={handleChange}
           />
+          Outer Rest Time
         </label>
       </div>
-    </div>
+    </FieldRow>
   );
 };
+
+const FieldRow = styled.div`
+  display: flex;
+`;
 
 export default RestField;

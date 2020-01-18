@@ -1,9 +1,12 @@
-﻿import InputField from './InputField';
-import SelectField from './SelectField';
+﻿import ExerciseForm from './ExerciseForm';
+import WorkoutForm from './WorkoutForm';
+
 import RepsField from './RepsField';
 import RestField from './RestField';
-import ExerciseForm from './ExerciseForm';
-import WorkoutForm from './WorkoutForm';
+import ModeField from './ModeField';
+
+import InputField from './InputField';
+import SelectField from './SelectField';
 
 import {
   signInVal,
@@ -27,4 +30,5 @@ export {
   RestField,
   ExerciseForm,
   WorkoutForm,
+  ModeField,
 };

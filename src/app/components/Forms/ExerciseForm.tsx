@@ -18,24 +18,20 @@ const INITIAL_VALUES: IExerciseFormValues = {
 const ExerciseForm: React.FC<{
   formMode: FormMode;
   hide: () => void;
-  // exercise?: IExercise;
-}> = ({ formMode, hide }) => {
-  // }> = ({ hide, formMode, exercise }) => {
+  exercise?: IExercise;
+}> = ({ formMode, hide, exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
   // ============ SET UP FORM STATE ============
-
-  // let initialFormState;
-  // if (formMode === FormMode.Edit && exercise) {
-  //   initialFormState = exercise;
-  // } else {
-  const initialFormState = INITIAL_VALUES;
-  // }
+  let initialFormState = INITIAL_VALUES;
+  if (formMode === FormMode.Edit && exercise) {
+    initialFormState = exercise;
+  }
 
   const [form, setForm] = useState(initialFormState);
 
-  // // ============ VALIDATION ============
+  // ============ VALIDATION ============
 
   const isValid = true;
   // let isValidName = true;
@@ -46,21 +42,23 @@ const ExerciseForm: React.FC<{
 
   // isValid = isValidName;
 
-  // // ============ TEXT VALUES ============
+  // ============ TEXT VALUES ============
 
-  let titleText;
-  let submitButtonText;
+  const text = {
+    title: '',
+    submitButton: '',
+  };
   if (formMode === FormMode.Add) {
-    titleText = 'Create New Exercise';
-    submitButtonText = 'Submit';
+    text.title = 'Create New Exercise';
+    text.submitButton = 'Submit';
   } else if (formMode === FormMode.Edit) {
-    titleText = 'Edit Exercise';
-    submitButtonText = 'Update';
+    text.title = 'Edit Exercise';
+    text.submitButton = 'Update';
   }
 
   // ============ FIREBASE FUNCTIONS ============
 
-  function handleCreate(values: IExerciseFormValues): void {
+  function handleCreate(form: IExerciseFormValues): void {
     if (authUser) {
       const docRef = firebase.exercises(authUser.uid).doc();
 
@@ -70,9 +68,9 @@ const ExerciseForm: React.FC<{
         id: docRef.id,
         lastModified: firebase.getTimestamp(),
         type: MovementType.Exercise,
-        name: values.name,
-        notes: values.notes,
-        tags: values.tags,
+        name: form.name,
+        notes: form.notes,
+        tags: form.tags,
         history: [],
       };
 
@@ -90,28 +88,31 @@ const ExerciseForm: React.FC<{
     }
   }
 
-  // function handleUpdate(values: IExerciseFormValues): void {
-  //   if (authUser && exercise) {
-  //     const { name } = values;
+  function handleUpdate(form: IExerciseFormValues): void {
+    if (authUser && exercise) {
+      const exerciseObj: IExerciseFormValues = {
+        lastModified: firebase.getTimestamp(),
+        name: form.name,
+        notes: form.notes,
+        tags: form.tags,
+      };
 
-  //     firebase
-  //       .exercise(authUser.uid, exercise.id)
-  //       .update({
-  //         name: name,
-  //       })
-  //       .then(() => {
-  //         console.log(`Exercise Updated: ${name}`);
-  //         hide();
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //       });
-  //   } else {
-  //     console.log('There is no authUser || exercise!');
-  //   }
-  // }
+      firebase
+        .exercise(authUser.uid, exercise.id)
+        .update(exerciseObj)
+        .then(() => {
+          console.log(`Exercise Updated: ${exerciseObj.name}`);
+          hide();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      console.log('There is no authUser || exercise!');
+    }
+  }
 
-  // // ============ FORM FUNCTIONS ============
+  // ============ FORM FUNCTIONS ============
 
   function handleChange(e: { target: { name: string; value: any } }): void {
     const { name, value } = e.target;
@@ -139,14 +140,14 @@ const ExerciseForm: React.FC<{
 
     if (formMode === FormMode.Add) {
       handleCreate(form);
-      // } else if (formMode === FormMode.Edit) {
-      //   handleUpdate(form);
+    } else if (formMode === FormMode.Edit) {
+      handleUpdate(form);
     }
   }
 
   return (
     <ExerciseFormWrapper>
-      <h1>{titleText}</h1>
+      <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">
@@ -182,7 +183,7 @@ const ExerciseForm: React.FC<{
           </label>
         </div>
         <button type="submit" disabled={!isValid}>
-          {submitButtonText}
+          {text.submitButton}
         </button>
       </form>
     </ExerciseFormWrapper>

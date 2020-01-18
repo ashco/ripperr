@@ -5,7 +5,6 @@ import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
 import { DeleteButton } from '../Buttons';
-import { WorkoutFormButton } from '../Workouts';
 
 import { IWorkout, IExercise } from '../../common/types';
 import { FormMode } from '../../common/enums';

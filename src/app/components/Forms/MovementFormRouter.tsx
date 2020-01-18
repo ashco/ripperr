@@ -11,12 +11,18 @@ import { ExerciseForm, WorkoutForm } from './index';
 import { workoutModeOptions } from '../../common/data';
 
 import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
-import { IWorkoutFormValues, IWorkout, IFormError } from '../../common/types';
+import {
+  IWorkoutFormValues,
+  IWorkout,
+  IFormError,
+  IExercise,
+} from '../../common/types';
 
-const MovementForm: React.FC<{
+const MovementFormRouter: React.FC<{
   formMode: FormMode;
   hide: () => void;
-}> = ({ formMode, hide }) => {
+  movement?: IExercise | IWorkout;
+}> = ({ formMode, hide, movement }) => {
   // Determine type to add
   const [addMovementType, setAddMovementType] = useState<MovementType | null>(
     null,
@@ -221,10 +227,28 @@ const MovementForm: React.FC<{
     }
   }
 
+  function renderEditForm() {
+    if (movement && movement.type === MovementType.Exercise) {
+      return (
+        <ExerciseForm formMode={formMode} hide={hide} exercise={movement} />
+      );
+    } else if (movement && movement.type === MovementType.Workout) {
+      return <WorkoutForm formMode={formMode} hide={hide} />;
+    }
+  }
+
+  function renderForm() {
+    if (formMode === FormMode.Add) {
+      return renderAddForm();
+    } else if (formMode === FormMode.Edit) {
+      return renderEditForm();
+    }
+  }
+
   return (
     <WorkoutFormWrapper>
       <button onClick={hide}>Close</button>
-      {renderAddForm()}
+      {renderForm()}
       {/* <h1>{titleText}</h1> */}
       {/* <form onSubmit={handleSubmit}>
         <div>
@@ -294,4 +318,4 @@ const WorkoutFormWrapper = styled.div`
   width: 500px;
 `;
 
-export default MovementForm;
+export default MovementFormRouter;
