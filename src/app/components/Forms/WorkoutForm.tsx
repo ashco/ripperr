@@ -184,9 +184,6 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
-  // function handleChangeRest(e: {
-  //   target: { name: string; value: any; checked: any };
-  // }): void {
   function handleChangeRest(e: {
     target: { type: string; name: string; value: any; checked: any };
   }): void {
@@ -266,12 +263,14 @@ const WorkoutForm: React.FC<{
               type="radio"
               name="mode"
               value={WorkoutMode.Reps}
+              checked={form.mode === WorkoutMode.Reps}
               onChange={handleChange}
             />
             <input
               type="radio"
               name="mode"
               value={WorkoutMode.Timed}
+              checked={form.mode === WorkoutMode.Timed}
               onChange={handleChange}
             />
           </label>
