@@ -21,7 +21,7 @@ const MovementsPage: NextPage<{
     <div>
       <h1>Movements</h1>
       {/* <MovementsFormButton formMode={FormMode.Add} exercises={exercises} /> */}
-      {movements.loading && <div>Loading ...</div>}
+      {/* {movements.loading && <div>Loading ...</div>} */}
       <MovementList
         movements={movements}
         // exercises={exercises}

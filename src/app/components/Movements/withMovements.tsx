@@ -12,18 +12,18 @@ import {
   IMovementsFirebaseQuery,
 } from '../../common/types';
 
-// export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
-//   loading: false,
-//   exercises: [],
-// };
+export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
+  loading: false,
+  exercises: [],
+};
 
-// export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
-//   loading: false,
-//   workouts: [],
-// };
+export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
+  loading: false,
+  workouts: [],
+};
 
 export const INITIAL_MOVEMENT_STATE: IMovementsFirebaseQuery = {
-  loading: false,
+  // loading: false,
   exercises: [],
   workouts: [],
 };
@@ -33,11 +33,23 @@ const withMovements = (Component: any) => {
     const firebase = useContext(FirebaseContext);
     const authUser = useContext(AuthUserContext);
 
-    const [movementState, setMovementState] = useState(INITIAL_MOVEMENT_STATE);
+    // const [movementState, setMovementState] = useState(INITIAL_MOVEMENT_STATE);
+    const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
+    const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
+    // const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      setMovementState({
-        ...movementState,
+      // setMovementState({
+      //   ...movementState,
+      //   loading: true,
+      // });
+      setExerciseState({
+        ...exerciseState,
+        loading: true,
+      });
+
+      setWorkoutState({
+        ...workoutState,
         loading: true,
       });
 
@@ -60,6 +72,11 @@ const withMovements = (Component: any) => {
               };
 
               exerciseList.push(obj);
+            });
+
+            setExerciseState({
+              exercises: exerciseList,
+              loading: false,
             });
 
             return (): void => unsubscribeEx();
@@ -95,19 +112,30 @@ const withMovements = (Component: any) => {
 
               workoutList.push(obj);
 
+              setWorkoutState({
+                workouts: workoutList,
+                loading: false,
+              });
+              // setMovementState({
+              //   ...movementState,
+              //   workouts: workoutList,
+              //   // exercises: exerciseList,
+              //   // loading: false,
+              // });
+
               return (): void => unsubscribeWo();
             });
           });
-
-        setMovementState({
-          exercises: exerciseList,
-          workouts: workoutList,
-          loading: false,
-        });
       } else {
         console.log('No authUser!');
       }
     }, []);
+
+    const movementState = {
+      exercises: exerciseState.exercises,
+      workouts: workoutState.workouts,
+      loading: exerciseState.loading || workoutState.loading,
+    };
 
     return (
       <MovementsContext.Provider value={movementState}>

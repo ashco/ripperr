@@ -12,7 +12,7 @@ import {
 //   movements: IMovementsFirebaseQuery;
 
 // }> = ({ movements }) => {
-const MovementList: React.FC<any> = (props) => {
+const MovementList: React.FC<any> = ({ movements }) => {
   // const MovementList: React.FC<any> = (props) => {
   // const movementList = [...movements.workouts];
   // console.log(props);
@@ -21,7 +21,7 @@ const MovementList: React.FC<any> = (props) => {
   //   ...props.movements.workouts,
   //   ...props.movements.exercises,
   // ];
-  const movementList = props.movements.workouts;
+  const movementList = [...movements.exercises, ...movements.workouts];
   console.log(movementList);
 
   // console.log(exercises);
@@ -30,7 +30,7 @@ const MovementList: React.FC<any> = (props) => {
     <MovementListWrapper>
       {movementList.map((move: IWorkout) => {
         return (
-          <div>hello</div>
+          <div key={move.id}>{move.name}</div>
           // <WorkoutListItem
           // key={workout.id}
           // workout={workout}
