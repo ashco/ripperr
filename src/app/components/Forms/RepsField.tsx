@@ -40,7 +40,6 @@ const RepsField: React.FC<{
           <input
             name="reps"
             type="number"
-            placeholder="0"
             value={move.config.reps}
             onChange={handleChange.bind(null, i, true)}
           />
@@ -51,7 +50,6 @@ const RepsField: React.FC<{
           <input
             name="sets"
             type="number"
-            placeholder="0"
             value={move.config.sets}
             onChange={handleChange.bind(null, i, true)}
           />

@@ -6,14 +6,16 @@ import { AuthUserContext } from '../Session';
 
 import { ListItem } from './index';
 import { DeleteButton } from '../Buttons';
+import { MovementFormButton } from '../Movements';
 
 import { IWorkout } from '../../common/types';
+import { FormMode } from '../../common/enums';
 
 const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
-  const text = `Do you want to delete this workout: ${workout.name}?`;
+  const deleteText = `Do you want to delete this workout: ${workout.name}?`;
 
   function handleDelete(): void {
     if (authUser) {
@@ -30,7 +32,8 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
       <span>
         <strong>Workout: </strong>
         {workout.name}
-        <DeleteButton text={text} handleDelete={handleDelete} />
+        <DeleteButton text={deleteText} handleDelete={handleDelete} />
+        <MovementFormButton formMode={FormMode.Edit} movement={workout} />
       </span>
     </WorkoutListItemWrapper>
   );

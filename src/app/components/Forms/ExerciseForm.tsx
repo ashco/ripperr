@@ -1,6 +1,5 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { Formik, Form } from 'formik';
 
 import { InputField, exerciseFormVal } from '.';
 import { FirebaseContext } from '../Firebase';
@@ -58,7 +57,7 @@ const ExerciseForm: React.FC<{
 
   // ============ FIREBASE FUNCTIONS ============
 
-  function handleCreate(form: IExerciseFormValues): void {
+  function handleCreateExercise(form: IExerciseFormValues): void {
     if (authUser) {
       const docRef = firebase.exercises(authUser.uid).doc();
 
@@ -88,7 +87,7 @@ const ExerciseForm: React.FC<{
     }
   }
 
-  function handleUpdate(form: IExerciseFormValues): void {
+  function handleUpdateExercise(form: IExerciseFormValues): void {
     if (authUser && exercise) {
       const exerciseObj: IExerciseFormValues = {
         lastModified: firebase.getTimestamp(),
@@ -139,9 +138,9 @@ const ExerciseForm: React.FC<{
     e.preventDefault();
 
     if (formMode === FormMode.Add) {
-      handleCreate(form);
+      handleCreateExercise(form);
     } else if (formMode === FormMode.Edit) {
-      handleUpdate(form);
+      handleUpdateExercise(form);
     }
   }
 

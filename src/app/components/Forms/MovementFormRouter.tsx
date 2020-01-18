@@ -230,10 +230,20 @@ const MovementFormRouter: React.FC<{
   function renderEditForm() {
     if (movement && movement.type === MovementType.Exercise) {
       return (
-        <ExerciseForm formMode={formMode} hide={hide} exercise={movement} />
+        <ExerciseForm
+          formMode={formMode}
+          hide={hide}
+          exercise={movement as IExercise}
+        />
       );
     } else if (movement && movement.type === MovementType.Workout) {
-      return <WorkoutForm formMode={formMode} hide={hide} />;
+      return (
+        <WorkoutForm
+          formMode={formMode}
+          hide={hide}
+          workout={movement as IWorkout}
+        />
+      );
     }
   }
 

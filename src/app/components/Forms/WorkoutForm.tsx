@@ -37,24 +37,21 @@ const INITIAL_VALUES: IWorkoutFormValues = {
 const WorkoutForm: React.FC<{
   formMode: FormMode;
   hide: () => void;
-  // exercise?: IWorkout;
-}> = ({ formMode, hide }) => {
-  // }> = ({ hide, formMode, exercise }) => {
+  workout?: IWorkout;
+}> = ({ formMode, hide, workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
   // ============ SET UP FORM STATE ============
 
-  // let initialFormState;
-  // if (formMode === FormMode.Edit && exercise) {
-  //   initialFormState = exercise;
-  // } else {
-  const initialFormState = INITIAL_VALUES;
-  // }
+  let initialFormState = INITIAL_VALUES;
+  if (formMode === FormMode.Edit && workout) {
+    initialFormState = workout;
+  }
 
   const [form, setForm] = useState(initialFormState);
 
-  // // ============ VALIDATION ============
+  // ============ VALIDATION ============
 
   const isValid = true;
   // let isValidName = true;
@@ -65,21 +62,23 @@ const WorkoutForm: React.FC<{
 
   // isValid = isValidName;
 
-  // // ============ TEXT VALUES ============
+  // ============ TEXT VALUES ============
 
-  let titleText;
-  let submitButtonText;
+  const text = {
+    title: '',
+    submitButton: '',
+  };
   if (formMode === FormMode.Add) {
-    titleText = 'Create New Workout';
-    submitButtonText = 'Submit';
+    text.title = 'Create New Workout';
+    text.submitButton = 'Submit';
   } else if (formMode === FormMode.Edit) {
-    titleText = 'Edit Workout';
-    submitButtonText = 'Update';
+    text.title = 'Edit Workout';
+    text.submitButton = 'Update';
   }
 
   // ============ FIREBASE FUNCTIONS ============
 
-  function handleCreateWorkout(values: IWorkoutFormValues): void {
+  function handleCreateWorkout(form: IWorkoutFormValues): void {
     if (authUser) {
       const docRef = firebase.workouts(authUser.uid).doc();
 
@@ -89,13 +88,13 @@ const WorkoutForm: React.FC<{
         id: docRef.id,
         lastModified: firebase.getTimestamp(),
         type: MovementType.Workout,
-        name: values.name,
-        notes: values.notes,
-        tags: values.tags,
+        name: form.name,
+        notes: form.notes,
+        tags: form.tags,
         history: [],
-        mode: values.mode,
-        movements: values.movements,
-        rest: values.rest,
+        mode: form.mode,
+        movements: form.movements,
+        rest: form.rest,
         config: {},
       };
 
@@ -113,26 +112,33 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  // function handleUpdate(values: IWorkoutFormValues): void {
-  //   if (authUser && workout) {
-  //     const { name } = values;
+  function handleUpdateWorkout(form: IWorkoutFormValues): void {
+    if (authUser && workout) {
+      const workoutObj: IWorkoutFormValues = {
+        lastModified: firebase.getTimestamp(),
+        name: form.name,
+        notes: form.notes,
+        tags: form.tags,
+        mode: form.mode,
+        movements: form.movements,
+        rest: form.rest,
+        config: {},
+      };
 
-  //     firebase
-  //       .workout(authUser.uid, workout.id)
-  //       .update({
-  //         name: name,
-  //       })
-  //       .then(() => {
-  //         console.log(`Workout Updated: ${name}`);
-  //         hide();
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //       });
-  //   } else {
-  //     console.log('There is no authUser || workout!');
-  //   }
-  // }
+      firebase
+        .workout(authUser.uid, workout.id)
+        .update(workoutObj)
+        .then(() => {
+          console.log(`Workout Updated: ${workoutObj.name}`);
+          hide();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      console.log('There is no authUser || workout!');
+    }
+  }
 
   // ============ FORM FUNCTIONS ============
 
@@ -162,8 +168,8 @@ const WorkoutForm: React.FC<{
 
     if (formMode === FormMode.Add) {
       handleCreateWorkout(form);
-      // } else if (formMode === FormMode.Edit) {
-      //   handleUpdate(form);
+    } else if (formMode === FormMode.Edit) {
+      handleUpdateWorkout(form);
     }
   }
 
@@ -219,7 +225,7 @@ const WorkoutForm: React.FC<{
 
   return (
     <WorkoutFormWrapper>
-      <h1>{titleText}</h1>
+      <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
           {/* NAME */}
@@ -277,7 +283,7 @@ const WorkoutForm: React.FC<{
           <RestField rest={form.rest} handleChange={handleChangeRest} />
         </div>
         <button type="submit" disabled={!isValid}>
-          {submitButtonText}
+          {text.submitButton}
         </button>
       </form>
     </WorkoutFormWrapper>
