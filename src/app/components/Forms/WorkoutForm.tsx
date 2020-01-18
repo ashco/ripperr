@@ -176,7 +176,7 @@ const WorkoutForm: React.FC<{
     const newForm = { ...form };
 
     if (config) {
-      newForm.movements[i]['config'][name] = value;
+      newForm.movements[i]['config'][name] = parseInt(value);
     } else {
       newForm.movements[i][name] = value;
     }
@@ -188,7 +188,7 @@ const WorkoutForm: React.FC<{
     target: { type: string; name: string; value: any; checked: any };
   }): void {
     const { type, name, checked, value } = e.target;
-    const val = type === 'checkbox' ? checked : value;
+    const val = type === 'checkbox' ? checked : parseInt(value);
 
     const newForm = { ...form };
     newForm.rest[name] = val;

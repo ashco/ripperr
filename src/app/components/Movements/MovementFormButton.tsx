@@ -14,9 +14,9 @@ const MovementFormButton: React.FC<{
 
   let buttonText;
   if (formMode === FormMode.Add) {
-    buttonText = 'Add Workout';
+    buttonText = 'Add Movement';
   } else if (formMode === FormMode.Edit) {
-    buttonText = 'Edit Workout';
+    buttonText = 'Edit Movement';
   }
 
   const modal = showModal ? (

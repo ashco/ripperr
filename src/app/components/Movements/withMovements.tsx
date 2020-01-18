@@ -38,12 +38,14 @@ const withMovements = (Component: any) => {
 
     useEffect(() => {
       setExerciseState({
-        ...exerciseState,
+        // ...exerciseState,
+        exercises: [],
         loading: true,
       });
 
       setWorkoutState({
-        ...workoutState,
+        // ...workoutState,
+        workouts: [],
         loading: true,
       });
 

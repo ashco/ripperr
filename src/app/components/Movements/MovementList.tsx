@@ -15,6 +15,8 @@ const MovementList: React.FC = () => {
 
   const movementList = [...movements.exercises, ...movements.workouts];
 
+  console.log(movementList);
+
   // TODO - sort by most recently updated
 
   function renderListItem(move: IWorkout | IExercise) {

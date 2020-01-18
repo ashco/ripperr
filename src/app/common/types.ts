@@ -81,9 +81,15 @@ export interface IWorkout {
 }
 
 export interface IMovementRefs {
-  [key: string]: any;
+  [key: string]: string | IMovementRefRepsConfig;
   id: string;
-  config: any;
+  config: IMovementRefRepsConfig;
+}
+
+export interface IMovementRefRepsConfig {
+  [key: string]: number;
+  sets: number;
+  reps: number;
 }
 
 export interface IWorkoutRest {
@@ -93,15 +99,10 @@ export interface IWorkoutRest {
   outer: number;
 }
 
-interface IWorkoutExercise {
-  [key: string]: any;
-  id: string;
-}
-
-export interface IWorkoutExerciseReps extends IWorkoutExercise {
-  sets: number;
-  reps: number;
-}
+// interface IWorkoutExercise {
+//   [key: string]: any;
+//   id: string;
+// }
 
 // export interface IWorkoutExerciseCircuit extends IWorkoutExercise {
 //   rounds: ;
