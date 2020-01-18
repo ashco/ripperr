@@ -202,48 +202,48 @@ export const workoutModeOptions = [
 //   history: null,
 // };
 
-export const workoutObj: IWorkout = {
-  id: '5678',
-  type: MovementType.Workout,
-  name: 'Morning Stretch Routine',
-  notes: 'This routine will get you ready for the day in less than 10 minutes!',
-  tags: ['stretch'],
-  history: [],
-  mode: WorkoutMode.Reps,
-  movements: [
-    {
-      id: '1111',
-      config: {
-        interval: 45,
-      },
-    },
-    {
-      id: '2222',
-      config: {
-        interval: 45,
-      },
-    },
-  ],
-  rest: {
-    automatic: true, // have rest timers automatically run
-    inner: 15, // rest time transitioning from one ex to another
-    outer: 60, // rest time between full cycles of movements
-  },
-  config: {
-    // mode specific info
-    rounds: 4,
-  },
-};
+// export const workoutObj: IWorkout = {
+//   id: '5678',
+//   type: MovementType.Workout,
+//   name: 'Morning Stretch Routine',
+//   notes: 'This routine will get you ready for the day in less than 10 minutes!',
+//   tags: ['stretch'],
+//   history: [],
+//   mode: WorkoutMode.Reps,
+//   movements: [
+//     {
+//       id: '1111',
+//       config: {
+//         interval: 45,
+//       },
+//     },
+//     {
+//       id: '2222',
+//       config: {
+//         interval: 45,
+//       },
+//     },
+//   ],
+//   rest: {
+//     automatic: true, // have rest timers automatically run
+//     inner: 15, // rest time transitioning from one ex to another
+//     outer: 60, // rest time between full cycles of movements
+//   },
+//   config: {
+//     // mode specific info
+//     rounds: 4,
+//   },
+// };
 
-export const exerciseObj: IExercise = {
-  id: '1234',
-  type: MovementType.Exercise,
-  name: 'Toe touches',
-  notes: 'Penny picker upper.',
-  tags: ['stretch'],
-  history: [
-    {
-      time: '12-2-2:13:00:11',
-    },
-  ],
-};
+// export const exerciseObj: IExercise = {
+//   id: '1234',
+//   type: MovementType.Exercise,
+//   name: 'Toe touches',
+//   notes: 'Penny picker upper.',
+//   tags: ['stretch'],
+//   history: [
+//     {
+//       time: '12-2-2:13:00:11',
+//     },
+//   ],
+// };

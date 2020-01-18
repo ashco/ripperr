@@ -39,6 +39,8 @@ export interface IMovementState {
 export interface IExerciseFormValues {
   [key: string]: any;
   name: string;
+  notes: string;
+  tags: string[];
 }
 
 export interface IWorkoutFormValues {
@@ -53,6 +55,17 @@ export interface IWorkoutFormValues {
 }
 
 // =============== DATA OBJECT STRUCTURES ===============
+
+export interface IExercise {
+  readonly id: string;
+  lastModified: firebase.firestore.FieldValue;
+  readonly type: MovementType;
+  name: string;
+  notes: string;
+  tags: string[];
+  history: any;
+}
+
 export interface IWorkout {
   readonly id: string;
   lastModified: firebase.firestore.FieldValue;
@@ -67,23 +80,13 @@ export interface IWorkout {
   config: any;
 }
 
-export interface IExercise {
-  readonly id: string;
-  lastModified: firebase.firestore.FieldValue;
-  readonly type: MovementType;
-  name: string;
-  notes: string;
-  tags: string[];
-  history: any;
-}
-
-interface IMovementRefs {
+export interface IMovementRefs {
   [key: string]: any;
   id: string;
   config: any;
 }
 
-interface IWorkoutRest {
+export interface IWorkoutRest {
   automatic: boolean;
   inner: number;
   outer: number;
@@ -94,7 +97,7 @@ interface IWorkoutExercise {
   id: string;
 }
 
-export interface IWorkoutExerciseRepsSets extends IWorkoutExercise {
+export interface IWorkoutExerciseReps extends IWorkoutExercise {
   sets: number;
   reps: number;
 }

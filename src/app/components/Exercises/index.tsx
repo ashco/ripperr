@@ -1,13 +1,13 @@
 ﻿import ExercisesContext from './context';
-import ExerciseFormButton from './ExerciseForm/ExerciseFormButton';
-import ExerciseForm from './ExerciseForm/ExerciseForm';
+// import ExerciseFormButton from '../ExerciseForm/ExerciseFormButton';
+import ExerciseForm from '../Forms/ExerciseForm';
 import ExerciseList from './ExerciseList';
 import ExerciseListItem from './ExerciseListItem';
 import withExercises from './withExercises';
 
 export {
   ExercisesContext,
-  ExerciseFormButton,
+  // ExerciseFormButton,
   ExerciseForm,
   ExerciseList,
   ExerciseListItem,

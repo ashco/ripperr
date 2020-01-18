@@ -1,15 +1,12 @@
 ﻿import React, { useContext } from 'react';
 
-import { ExercisesContext } from '../../Exercises';
-import { IWorkoutExerciseRepsSets } from '../../../common/types';
+import { ExercisesContext } from '../Exercises';
+import { IMovementRefs } from '../../common/types';
 
-const RepsSetsField: React.FC<{
-  move: IWorkoutExerciseRepsSets;
+const RepsField: React.FC<{
+  move: IMovementRefs;
   i: number;
-  handleChange: (
-    exIndex: number | undefined,
-    e: { target: { name: string; value: any } },
-  ) => void;
+  handleChange: (e: { target: { name: string; value: any } }) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
   const { exercises, loading } = useContext(ExercisesContext);
@@ -19,11 +16,7 @@ const RepsSetsField: React.FC<{
       <div>
         <label htmlFor="id">
           {`Exercise ${i + 1}`}
-          <select
-            name="id"
-            onChange={handleChange.bind(null, i)}
-            value={move.id}
-          >
+          <select name="id" onChange={handleChange} value={move.id}>
             <option
               label={loading ? 'loading...' : 'Select an exercise'}
               value=""
@@ -41,7 +34,7 @@ const RepsSetsField: React.FC<{
             type="number"
             placeholder="0"
             value={move.reps}
-            onChange={handleChange.bind(null, i)}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -52,7 +45,7 @@ const RepsSetsField: React.FC<{
             type="number"
             placeholder="0"
             value={move.sets}
-            onChange={handleChange.bind(null, i)}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -63,4 +56,4 @@ const RepsSetsField: React.FC<{
   );
 };
 
-export default RepsSetsField;
+export default RepsField;

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { withAuthorization } from '../components/Session';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import MovementList from '../components/Movements/MovementList';
-// import MovementsFormButton from '../components/Movements/WorkoutForm/MovementsFormButton';
+import { MovementFormButton } from '../components/Movements';
 import { MovementsContext, withMovements } from '../components/Movements';
 // import { ExercisesContext, withExercises } from '../components/Exercises';
 
@@ -14,14 +14,11 @@ import { FormMode } from '../common/enums';
 const MovementsPage: NextPage<{
   authUser: IAuthUserContext;
 }> = ({ authUser }) => {
-  const movements = useContext(MovementsContext);
-
   return (
     <div>
       <h1>Movements</h1>
-      {/* <MovementsFormButton formMode={FormMode.Add} exercises={exercises} /> */}
-      {movements.loading && <div>Loading ...</div>}
-      <MovementList movements={movements} />
+      <MovementFormButton formMode={FormMode.Add} />
+      <MovementList />
     </div>
   );
 };

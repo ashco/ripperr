@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 import { DeleteButton } from '../Buttons';
-import { ExerciseFormButton } from '../Exercises';
+// import { ExerciseFormButton } from '../Exercises';
 
 import { IExercise } from '../../common/types';
 import { FormMode } from '../../common/enums';
@@ -32,7 +32,7 @@ const ExerciseListItem: React.FC<{
       <span>
         <strong>Exercise Name:</strong> {exercise.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <ExerciseFormButton formMode={FormMode.Edit} exercise={exercise} />
+        {/* <ExerciseFormButton formMode={FormMode.Edit} exercise={exercise} /> */}
       </span>
     </ExerciseListItemWrapper>
   );
