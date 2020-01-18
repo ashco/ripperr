@@ -1,7 +1,10 @@
-﻿import { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Modal, DeleteModal } from '../Modal';
 
-const DeleteButton = ({ text, handleDelete }: any) => {
+const DeleteButton: React.FC<{
+  text: string;
+  handleDelete: () => void;
+}> = ({ text, handleDelete }) => {
   const [showModal, setShowModal] = useState(false);
 
   const hide = (): void => setShowModal(false);

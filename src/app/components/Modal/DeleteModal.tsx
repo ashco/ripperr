@@ -1,7 +1,11 @@
 ﻿import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-const DeleteModal = ({ text, handleDelete, hide }: any) => {
+const DeleteModal: React.FC<{
+  text: string;
+  hide: () => void;
+  handleDelete: () => void;
+}> = ({ text, hide, handleDelete }) => {
   function onDelete() {
     handleDelete();
     hide();

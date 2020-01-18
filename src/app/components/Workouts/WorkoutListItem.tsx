@@ -3,20 +3,20 @@ import styled from 'styled-components';
 
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
+
 import { DeleteButton } from '../Buttons';
 import { WorkoutFormButton } from '../Workouts';
 
 import { IWorkout, IExercise } from '../../common/types';
 import { FormMode } from '../../common/enums';
 
-const WorkoutListItem: React.FunctionComponent<{
+const WorkoutListItem: React.FC<{
   workout: IWorkout;
-  // exercises: IExercise[];
 }> = ({ workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
-  const deleteText = 'Do you want to delete this workout?';
+  const deleteText = `Do you want to delete this workout: ${workout.name}?`;
 
   function handleDelete(): void {
     if (authUser) {

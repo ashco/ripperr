@@ -14,6 +14,8 @@ const MovementList: React.FC<{ movements: IMovementState }> = ({
 }) => {
   const movementList = [...movements.exercises, ...movements.workouts];
 
+  // TODO - sort by most recently updated
+
   function renderListItem(move: IWorkout | IExercise) {
     if (move.type === MovementType.Exercise) {
       return <ExerciseListItem key={move.id} exercise={move as IExercise} />;
