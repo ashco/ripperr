@@ -55,6 +55,7 @@ class Firebase {
     }
   };
 
+  // DATABASE
   // User API
   // user = (uid: string): firebase.database.Reference =>
   //   this.db.ref(`users/${uid}`);
@@ -78,6 +79,9 @@ class Firebase {
 
   workouts = (uid: string): firebase.firestore.CollectionReference =>
     this.db.collection(`users/${uid}/workouts`);
+
+  getTimestamp = (): firebase.firestore.FieldValue =>
+    firebase.firestore.FieldValue.serverTimestamp();
 }
 
 export default Firebase;

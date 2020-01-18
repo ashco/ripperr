@@ -9,7 +9,7 @@ import {
   IWorkout,
   IExercisesFirebaseQuery,
   IWorkoutsFirebaseQuery,
-  IMovementsFirebaseQuery,
+  IMovementState,
 } from '../../common/types';
 
 export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
@@ -22,8 +22,8 @@ export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
   workouts: [],
 };
 
-export const INITIAL_MOVEMENT_STATE: IMovementsFirebaseQuery = {
-  // loading: false,
+export const INITIAL_MOVEMENT_STATE: IMovementState = {
+  loading: false,
   exercises: [],
   workouts: [],
 };
@@ -33,16 +33,10 @@ const withMovements = (Component: any) => {
     const firebase = useContext(FirebaseContext);
     const authUser = useContext(AuthUserContext);
 
-    // const [movementState, setMovementState] = useState(INITIAL_MOVEMENT_STATE);
     const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
     const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
-    // const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      // setMovementState({
-      //   ...movementState,
-      //   loading: true,
-      // });
       setExerciseState({
         ...exerciseState,
         loading: true,
@@ -61,10 +55,19 @@ const withMovements = (Component: any) => {
           .exercises(authUser.uid)
           .onSnapshot((snapshot) => {
             snapshot.forEach((doc) => {
-              const { id } = doc;
-              const { name, notes, tags, history } = doc.data();
+              const {
+                lastModified,
+                type,
+                name,
+                notes,
+                tags,
+                history,
+              } = doc.data();
+
               const obj: IExercise = {
-                id,
+                id: doc.id,
+                lastModified,
+                type,
                 name,
                 notes,
                 tags,
@@ -86,9 +89,10 @@ const withMovements = (Component: any) => {
           .workouts(authUser.uid)
           .onSnapshot((snapshot) => {
             snapshot.forEach((doc) => {
-              const { id } = doc;
               const {
+                lastModified,
                 name,
+                type,
                 notes,
                 tags,
                 history,
@@ -99,7 +103,9 @@ const withMovements = (Component: any) => {
               } = doc.data();
 
               const obj: IWorkout = {
-                id,
+                id: doc.id,
+                lastModified,
+                type,
                 name,
                 notes,
                 tags,
@@ -116,12 +122,6 @@ const withMovements = (Component: any) => {
                 workouts: workoutList,
                 loading: false,
               });
-              // setMovementState({
-              //   ...movementState,
-              //   workouts: workoutList,
-              //   // exercises: exerciseList,
-              //   // loading: false,
-              // });
 
               return (): void => unsubscribeWo();
             });
@@ -131,7 +131,7 @@ const withMovements = (Component: any) => {
       }
     }, []);
 
-    const movementState = {
+    const movementState: IMovementState = {
       exercises: exerciseState.exercises,
       workouts: workoutState.workouts,
       loading: exerciseState.loading || workoutState.loading,

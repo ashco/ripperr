@@ -6,3 +6,7 @@ export enum WorkoutMode {
   Reps = 'REPS',
   Timed = 'TIMED',
 }
+export enum MovementType {
+  Exercise = 'EXERCISE',
+  Workout = 'WORKOUT',
+}

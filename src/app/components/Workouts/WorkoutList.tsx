@@ -13,7 +13,7 @@ const WorkoutList: React.FC<{
       <WorkoutListItem
         key={workout.id}
         workout={workout}
-        exercises={exercises}
+        // exercises={exercises}
       />
     ))}
   </WorkoutListWrapper>

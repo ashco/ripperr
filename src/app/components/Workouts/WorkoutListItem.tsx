@@ -11,8 +11,8 @@ import { FormMode } from '../../common/enums';
 
 const WorkoutListItem: React.FunctionComponent<{
   workout: IWorkout;
-  exercises: IExercise[];
-}> = ({ workout, exercises }) => {
+  // exercises: IExercise[];
+}> = ({ workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
 
@@ -33,11 +33,11 @@ const WorkoutListItem: React.FunctionComponent<{
       <span>
         <strong>Workout Name:</strong> {workout.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <WorkoutFormButton
+        {/* <WorkoutFormButton
           formMode={FormMode.Edit}
           workout={workout}
-          exercises={exercises}
-        />
+          // exercises={exercises}
+        /> */}
       </span>
     </WorkoutListItemWrapper>
   );

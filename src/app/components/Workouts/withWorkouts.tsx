@@ -30,6 +30,7 @@ const withWorkouts = (Component: any) => {
             snapshot.forEach((doc) => {
               const { id } = doc;
               const {
+                type,
                 name,
                 notes,
                 tags,
@@ -42,6 +43,7 @@ const withWorkouts = (Component: any) => {
 
               const obj: IWorkout = {
                 id,
+                type,
                 name,
                 notes,
                 tags,

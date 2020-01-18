@@ -1,8 +1,8 @@
 ﻿import React from 'react';
-import { IMovementsFirebaseQuery } from '../../common/types';
+import { IMovementState } from '../../common/types';
 import { INITIAL_MOVEMENT_STATE } from './withMovements';
 
-const MovementsContext = React.createContext<IMovementsFirebaseQuery>(
+const MovementsContext = React.createContext<IMovementState>(
   INITIAL_MOVEMENT_STATE,
 );
 

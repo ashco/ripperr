@@ -1,4 +1,4 @@
-﻿import { WorkoutMode } from './enums';
+﻿import { WorkoutMode, MovementType } from './enums';
 
 // =============== TYPES ===============
 
@@ -29,8 +29,8 @@ export interface IWorkoutsFirebaseQuery {
   workouts: IWorkout[];
 }
 
-export interface IMovementsFirebaseQuery {
-  // loading: boolean;
+export interface IMovementState {
+  loading: boolean;
   exercises: IExercise[];
   workouts: IWorkout[];
 }
@@ -55,6 +55,8 @@ export interface IWorkoutFormValues {
 // =============== DATA OBJECT STRUCTURES ===============
 export interface IWorkout {
   readonly id: string;
+  lastModified: firebase.firestore.FieldValue;
+  readonly type: MovementType;
   name: string;
   notes: string;
   tags: string[];
@@ -67,6 +69,8 @@ export interface IWorkout {
 
 export interface IExercise {
   readonly id: string;
+  lastModified: firebase.firestore.FieldValue;
+  readonly type: MovementType;
   name: string;
   notes: string;
   tags: string[];

@@ -15,18 +15,13 @@ const MovementsPage: NextPage<{
   authUser: IAuthUserContext;
 }> = ({ authUser }) => {
   const movements = useContext(MovementsContext);
-  // const { exercises, workouts } = movements;
 
   return (
     <div>
       <h1>Movements</h1>
       {/* <MovementsFormButton formMode={FormMode.Add} exercises={exercises} /> */}
-      {/* {movements.loading && <div>Loading ...</div>} */}
-      <MovementList
-        movements={movements}
-        // exercises={exercises}
-        // workouts={workouts}
-      />
+      {movements.loading && <div>Loading ...</div>}
+      <MovementList movements={movements} />
     </div>
   );
 };
