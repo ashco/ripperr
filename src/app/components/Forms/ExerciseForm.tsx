@@ -11,7 +11,7 @@ import { FormMode, MovementType } from '../../common/enums';
 
 const INITIAL_VALUES: IExerciseFormValues = {
   name: '',
-  notes: '',
+  description: '',
   tags: [],
 };
 
@@ -69,7 +69,7 @@ const ExerciseForm: React.FC<{
         lastModified: firebase.getTimestamp(),
         type: MovementType.Exercise,
         name: form.name,
-        notes: form.notes,
+        description: form.description,
         tags: form.tags,
         history: [],
       };
@@ -93,7 +93,7 @@ const ExerciseForm: React.FC<{
       const exerciseObj: IExerciseFormValues = {
         lastModified: firebase.getTimestamp(),
         name: form.name,
-        notes: form.notes,
+        description: form.description,
         tags: form.tags,
       };
 
@@ -155,37 +155,6 @@ const ExerciseForm: React.FC<{
             handleChange={handleChange}
             handleMultiSelectChange={handleMultiSelectChange}
           />
-          {/* <label htmlFor="name">
-            Name
-            <input
-              type="text"
-              name="name"
-              placeholder="Burpees"
-              value={form.name}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="notes">
-            Notes
-            <textarea
-              name="notes"
-              placeholder="Describe your exercise.."
-              value={form.notes}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="tags">
-            Tags
-            <select
-              multiple
-              name="tags"
-              value={form.tags}
-              onChange={handleMultiSelectChange}
-            >
-              <option label="tag-1" value="tag-1" />
-              <option label="tag-2" value="tag-2" />
-            </select>
-          </label> */}
         </div>
         <button type="submit" disabled={!isValid}>
           {text.submitButton}

@@ -1,6 +1,8 @@
 ﻿import React, { useContext } from 'react';
 
 import { MovementsContext } from '../../Movements';
+
+import { Row } from '../FormStyles';
 import { IMovementRefs, IMovementRefRepsConfig } from '../../../common/types';
 
 const RepsField: React.FC<{
@@ -16,49 +18,53 @@ const RepsField: React.FC<{
   const { exercises, loading } = useContext(MovementsContext);
 
   return (
-    <div>
-      <div>
-        <label htmlFor="id">
-          {`Exercise ${i + 1}`}
-          <select
-            name="id"
-            onChange={handleChange.bind(null, i, false)}
-            value={move.id}
-          >
-            <option
-              label={loading ? 'loading...' : 'Select an exercise'}
-              value=""
+    <>
+      <Row>Exercise {i + 1}</Row>
+      <Row>
+        <div>
+          <label htmlFor="id">
+            <select
+              name="id"
+              onChange={handleChange.bind(null, i, false)}
+              value={move.id}
+            >
+              <option
+                label={loading ? 'loading...' : 'Select an exercise'}
+                value=""
+              />
+              {exercises.map((ex) => (
+                <option label={ex.name} value={ex.id} key={ex.id} />
+              ))}
+            </select>
+          </label>
+        </div>
+        <div>
+          <label htmlFor="reps">
+            <input
+              name="reps"
+              type="number"
+              value={move.config.reps}
+              onChange={handleChange.bind(null, i, true)}
             />
-            {exercises.map((ex) => (
-              <option label={ex.name} value={ex.id} key={ex.id} />
-            ))}
-          </select>
-        </label>
-      </div>
-      <div>
-        <label htmlFor="reps">
-          <input
-            name="reps"
-            type="number"
-            value={move.config.reps}
-            onChange={handleChange.bind(null, i, true)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="sets">
-          <input
-            name="sets"
-            type="number"
-            value={move.config.sets}
-            onChange={handleChange.bind(null, i, true)}
-          />
-        </label>
-      </div>
-      <button type="button" onClick={(): void => handleDeleteEx(i)}>
-        -
-      </button>
-    </div>
+            Reps
+          </label>
+        </div>
+        <div>
+          <label htmlFor="sets">
+            <input
+              name="sets"
+              type="number"
+              value={move.config.sets}
+              onChange={handleChange.bind(null, i, true)}
+            />
+            Sets
+          </label>
+        </div>
+        <button type="button" onClick={(): void => handleDeleteEx(i)}>
+          -
+        </button>
+      </Row>
+    </>
   );
 };
 

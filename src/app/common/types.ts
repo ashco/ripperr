@@ -39,14 +39,14 @@ export interface IMovementState {
 export interface IExerciseFormValues {
   [key: string]: any;
   name: string;
-  notes: string;
+  description: string;
   tags: string[];
 }
 
 export interface IWorkoutFormValues {
   [key: string]: any;
   name: string;
-  notes: string;
+  description: string;
   tags: string[];
   mode: WorkoutMode;
   movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
@@ -61,7 +61,7 @@ export interface IExercise {
   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   readonly type: MovementType;
   name: string;
-  notes: string;
+  description: string;
   tags: string[];
   history: any;
 }
@@ -71,7 +71,7 @@ export interface IWorkout {
   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   readonly type: MovementType;
   name: string;
-  notes: string;
+  description: string;
   tags: string[];
   history: any;
   mode: WorkoutMode;
@@ -94,7 +94,7 @@ export interface IMovementRefRepsConfig {
 
 export interface IMovementRefTimedConfig {
   [key: string]: number;
-  interval: number;
+  duration: number;
 }
 
 export interface IWorkoutRest {
@@ -127,7 +127,7 @@ export interface IWorkoutRest {
 //   id: string;
 //   type: MovementTypes;
 //   name: string;
-//   notes: string;
+//   description: string;
 //   tags: string[];
 //   mode: WorkoutModeTypes | null;
 //   movements: IMovementRefs[] | null;
@@ -159,7 +159,7 @@ export interface IWorkoutRest {
 // }
 
 // interface IMovementConfigCircuitEx {
-//   interval: number;
+//   duration: number;
 // }
 
 // interface IMovementConfigCircuitWo {

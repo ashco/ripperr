@@ -18,8 +18,7 @@ const TimedField: React.FC<{
   return (
     <div>
       <div>
-        timed
-        {/* <label htmlFor="id">
+        <label htmlFor="id">
           {`Exercise ${i + 1}`}
           <select
             name="id"
@@ -37,16 +36,17 @@ const TimedField: React.FC<{
         </label>
       </div>
       <div>
-        <label htmlFor="reps">
+        <label htmlFor="duration">
           <input
-            name="reps"
+            name="duration"
             type="number"
-            value={move.config.reps}
+            value={move.config.duration}
             onChange={handleChange.bind(null, i, true)}
           />
+          Duration
         </label>
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="sets">
           <input
             name="sets"
@@ -54,8 +54,8 @@ const TimedField: React.FC<{
             value={move.config.sets}
             onChange={handleChange.bind(null, i, true)}
           />
-        </label> */}
-      </div>
+        </label>
+      </div> */}
       <button type="button" onClick={(): void => handleDeleteEx(i)}>
         -
       </button>

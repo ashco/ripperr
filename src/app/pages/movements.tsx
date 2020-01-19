@@ -6,8 +6,7 @@ import { withAuthorization } from '../components/Session';
 import { IAuthUserContext } from '../components/Firebase/firebase';
 import MovementList from '../components/Movements/MovementList';
 import { MovementFormButton } from '../components/Movements';
-import { MovementsContext, withMovements } from '../components/Movements';
-// import { ExercisesContext, withExercises } from '../components/Exercises';
+import { withMovements } from '../components/Movements';
 
 import { FormMode } from '../common/enums';
 
@@ -17,11 +16,17 @@ const MovementsPage: NextPage<{
   return (
     <div>
       <h1>Movements</h1>
-      <MovementFormButton formMode={FormMode.Add} />
+      <StyledMovementFormButton formMode={FormMode.Add} />
       <MovementList />
     </div>
   );
 };
+
+const StyledMovementFormButton = styled(MovementFormButton)`
+  button {
+    background-color: red;
+  }
+`;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 

@@ -70,7 +70,7 @@ export const workoutModeOptions = [
 //       id: '222223333', // id points to exercise
 //       type: 'exercise', // end of chain, do not to look for movements
 //       config: {
-//         interval: 45, // how long to perform circuit movement
+//         duration: 45, // how long to perform circuit movement
 //       },
 //     },
 //   ],
@@ -94,14 +94,14 @@ export const workoutModeOptions = [
 //       id: '222223333', // id points to exercise
 //       type: 'exercise', // end of chain, do not to look for movements
 //       config: {
-//         interval: 20, // how long to perform circuit movement
+//         duration: 20, // how long to perform circuit movement
 //       },
 //     },
 //     {
 //       id: '222223333', // id points to exercise
 //       type: 'exercise', // end of chain, do not to look for movements
 //       config: {
-//         interval: 20, // how long to perform circuit movement
+//         duration: 20, // how long to perform circuit movement
 //       },
 //     },
 //   ],
@@ -141,7 +141,7 @@ export const workoutModeOptions = [
 // interface Exercise {
 //   id: string;
 //   name: string;
-//   notes: string;
+//   description: string;
 //   history: [];
 // }
 
@@ -153,7 +153,7 @@ export const workoutModeOptions = [
 //   id: '5678',
 //   type: MovementType.Workout,
 //   name: 'Morning Stretch Routine',
-//   notes: 'This routine will get you ready for the day in less than 10 minutes!',
+//   description: 'This routine will get you ready for the day in less than 10 minutes!',
 //   tags: ['stretch'],
 //   history: [],
 //   mode: WorkoutMode.Reps,
@@ -161,13 +161,13 @@ export const workoutModeOptions = [
 //     {
 //       id: '1111',
 //       config: {
-//         interval: 45,
+//         duration: 45,
 //       },
 //     },
 //     {
 //       id: '2222',
 //       config: {
-//         interval: 45,
+//         duration: 45,
 //       },
 //     },
 //   ],
@@ -186,7 +186,7 @@ export const workoutModeOptions = [
 //   id: '1234',
 //   type: MovementType.Exercise,
 //   name: 'Toe touches',
-//   notes: 'Penny picker upper.',
+//   description: 'Penny picker upper.',
 //   tags: ['stretch'],
 //   history: [
 //     {

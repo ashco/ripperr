@@ -23,7 +23,6 @@ const MovementFormButton: React.FC<{
 
   const modal = showModal ? (
     <Modal>
-      {/* <MovementFormRouter formMode={formMode} hide={hide} movement={movement} /> */}
       <MovementForm formMode={formMode} hide={hide} movement={movement} />
     </Modal>
   ) : null;

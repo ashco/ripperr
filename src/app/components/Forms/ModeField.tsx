@@ -3,30 +3,45 @@ import styled from 'styled-components';
 
 import { Row } from './FormStyles';
 
-// import {} from '../../common/types';
+import { IWorkoutFormValues } from '../../common/types';
 import { WorkoutMode } from '../../common/enums';
 
 const ModeField: React.FC<{
-  mode: WorkoutMode;
+  form: IWorkoutFormValues;
+  setForm: (form: IWorkoutFormValues) => void;
   handleChange: (e: { target: { name: string; value: any } }) => void;
-}> = ({ mode, handleChange }) => {
+}> = ({ form, setForm, handleChange }) => {
+  function handleChangeMode(e: { target: { name: string; value: any } }) {
+    handleChange(e);
+
+    // Clear out config property + set to default for new mode
+    const newMoves = form.movements.map((move) => ({
+      id: move.id,
+      config: {},
+    }));
+    const newForm = { ...form, movements: newMoves };
+    // setForm(newForm);
+  }
+
   return (
     <Row>
-      <label htmlFor="mode">
+      <label>
         <input
           type="radio"
           name="mode"
           value={WorkoutMode.Reps}
-          checked={mode === WorkoutMode.Reps}
-          onChange={handleChange}
+          checked={form.mode === WorkoutMode.Reps}
+          onChange={handleChangeMode}
         />
         Reps
+      </label>
+      <label>
         <input
           type="radio"
           name="mode"
           value={WorkoutMode.Timed}
-          checked={mode === WorkoutMode.Timed}
-          onChange={handleChange}
+          checked={form.mode === WorkoutMode.Timed}
+          onChange={handleChangeMode}
         />
         Timed
       </label>

@@ -24,11 +24,11 @@ const FirstFields: React.FC<{
         </label>
       </Row>
       <Row>
-        <label htmlFor="notes">
+        <label htmlFor="description">
           <textarea
-            name="notes"
-            placeholder="Notes..."
-            value={form.notes}
+            name="description"
+            placeholder="description..."
+            value={form.description}
             onChange={handleChange}
           />
         </label>

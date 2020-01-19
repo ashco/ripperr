@@ -22,7 +22,7 @@ import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
 
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
-  notes: '',
+  description: '',
   tags: [],
   mode: WorkoutMode.Reps,
   movements: [
@@ -97,7 +97,7 @@ const WorkoutForm: React.FC<{
         lastModified: firebase.getTimestamp(),
         type: MovementType.Workout,
         name: form.name,
-        notes: form.notes,
+        description: form.description,
         tags: form.tags,
         history: [],
         mode: form.mode,
@@ -125,7 +125,7 @@ const WorkoutForm: React.FC<{
       const workoutObj: IWorkoutFormValues = {
         lastModified: firebase.getTimestamp(),
         name: form.name,
-        notes: form.notes,
+        description: form.description,
         tags: form.tags,
         mode: form.mode,
         movements: form.movements,
@@ -158,6 +158,23 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
+  function handleChangeEx(
+    i: number,
+    config: boolean,
+    e: { target: { name: string; value: any } },
+  ): void {
+    const { name, value } = e.target;
+    const newForm = { ...form };
+
+    if (config) {
+      newForm.movements[i]['config'][name] = parseInt(value);
+    } else {
+      newForm.movements[i][name] = value;
+    }
+
+    setForm(newForm);
+  }
+
   function handleMultiSelectChange(e: { target: { options: any } }): void {
     const { options } = e.target;
     const tags = [];
@@ -179,23 +196,6 @@ const WorkoutForm: React.FC<{
     } else if (formMode === FormMode.Edit) {
       handleUpdateWorkout(form);
     }
-  }
-
-  function handleChangeEx(
-    i: number,
-    config: boolean,
-    e: { target: { name: string; value: any } },
-  ): void {
-    const { name, value } = e.target;
-    const newForm = { ...form };
-
-    if (config) {
-      newForm.movements[i]['config'][name] = parseInt(value);
-    } else {
-      newForm.movements[i][name] = value;
-    }
-
-    setForm(newForm);
   }
 
   function handleChangeRest(e: {
@@ -225,7 +225,7 @@ const WorkoutForm: React.FC<{
       };
     } else if (mode === WorkoutMode.Timed) {
       (newMovement.config as IMovementRefTimedConfig) = {
-        interval: 0,
+        duration: 0,
       };
     }
 
@@ -277,15 +277,15 @@ const WorkoutForm: React.FC<{
             handleChange={handleChange}
             handleMultiSelectChange={handleMultiSelectChange}
           />
-          {/* MODE */}
-          <ModeField mode={form.mode} handleChange={handleChange} />
-          {/* EXERCISES */}
-
+          <ModeField
+            form={form}
+            setForm={setForm}
+            handleChange={handleChange}
+          />
           {renderMovementFields()}
           <button type="button" onClick={() => handleAddEx(form.mode)}>
             +
           </button>
-          {/* REST */}
           <RestField rest={form.rest} handleChange={handleChangeRest} />
         </div>
         <button type="submit" disabled={!isValid}>
