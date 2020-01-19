@@ -49,7 +49,7 @@ export interface IWorkoutFormValues {
   notes: string;
   tags: string[];
   mode: WorkoutMode;
-  movements: IMovementRefs[];
+  movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
   rest: IWorkoutRest;
   config: any;
 }
@@ -75,21 +75,26 @@ export interface IWorkout {
   tags: string[];
   history: any;
   mode: WorkoutMode;
-  movements: IMovementRefs[];
+  movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
   rest: IWorkoutRest;
   config: any;
 }
 
-export interface IMovementRefs {
-  [key: string]: string | IMovementRefRepsConfig;
+export interface IMovementRefs<T> {
+  [key: string]: any;
   id: string;
-  config: IMovementRefRepsConfig;
+  config: T; // IMovementRefRepsConfig | IMovementRefTimedConfig;
 }
 
 export interface IMovementRefRepsConfig {
   [key: string]: number;
   sets: number;
   reps: number;
+}
+
+export interface IMovementRefTimedConfig {
+  [key: string]: number;
+  interval: number;
 }
 
 export interface IWorkoutRest {

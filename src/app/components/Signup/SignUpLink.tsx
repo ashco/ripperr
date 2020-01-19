@@ -2,7 +2,10 @@
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link href="/signup">Sign Up</Link>
+    Don't have an account?{' '}
+    <Link href="/signup">
+      <a>Sign Up</a>
+    </Link>
   </p>
 );
 

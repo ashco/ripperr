@@ -1,7 +1,13 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { RepsField, RestField, ModeField } from './index';
+import {
+  FirstFields,
+  RepsField,
+  TimedField,
+  RestField,
+  ModeField,
+} from './index';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
 
@@ -9,6 +15,8 @@ import {
   IWorkout,
   IWorkoutFormValues,
   IMovementRefs,
+  IMovementRefRepsConfig,
+  IMovementRefTimedConfig,
 } from '../../common/types';
 import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
 
@@ -202,15 +210,24 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
-  function handleAddEx(): void {
+  function handleAddEx(mode: WorkoutMode): void {
     const newForm = { ...form };
-    const newMovement: IMovementRefs = {
+
+    const newMovement: IMovementRefs<any> = {
       id: '',
-      config: {
+      config: {},
+    };
+
+    if (mode === WorkoutMode.Reps) {
+      (newMovement.config as IMovementRefRepsConfig) = {
         reps: 0,
         sets: 0,
-      },
-    };
+      };
+    } else if (mode === WorkoutMode.Timed) {
+      (newMovement.config as IMovementRefTimedConfig) = {
+        interval: 0,
+      };
+    }
 
     newForm.movements.push(newMovement);
     setForm(newForm);
@@ -223,60 +240,49 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
+  // ============ RENDER FUNCTION ============
+  function renderMovementFields() {
+    if (form.movements) {
+      if (form.mode === WorkoutMode.Reps) {
+        return form.movements.map((move, i) => (
+          <RepsField
+            key={i}
+            move={move as IMovementRefs<IMovementRefRepsConfig>}
+            i={i}
+            handleChange={handleChangeEx}
+            handleDeleteEx={handleDeleteEx}
+          />
+        ));
+      } else if (form.mode === WorkoutMode.Timed) {
+        return form.movements.map((move, i) => (
+          <TimedField
+            key={i}
+            move={move as IMovementRefs<IMovementRefTimedConfig>}
+            i={i}
+            handleChange={handleChangeEx}
+            handleDeleteEx={handleDeleteEx}
+          />
+        ));
+      }
+    }
+  }
+
   return (
     <WorkoutFormWrapper>
       <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          {/* NAME */}
-          <label htmlFor="name">
-            Name
-            <input
-              type="text"
-              name="name"
-              placeholder="Total Body"
-              value={form.name}
-              onChange={handleChange}
-            />
-          </label>
-          {/* NOTES */}
-          <label htmlFor="notes">
-            Notes
-            <textarea
-              name="notes"
-              placeholder="Describe your workout.."
-              value={form.notes}
-              onChange={handleChange}
-            />
-          </label>
-          {/* TAGS */}
-          <label htmlFor="tags">
-            Tags
-            <select
-              multiple
-              name="tags"
-              value={form.tags}
-              onChange={handleMultiSelectChange}
-            >
-              <option label="tag-1" value="tag-1" />
-              <option label="tag-2" value="tag-2" />
-            </select>
-          </label>
+          <FirstFields
+            form={form}
+            handleChange={handleChange}
+            handleMultiSelectChange={handleMultiSelectChange}
+          />
           {/* MODE */}
           <ModeField mode={form.mode} handleChange={handleChange} />
           {/* EXERCISES */}
-          {form.mode === WorkoutMode.Reps &&
-            form.movements &&
-            form.movements.map((move, i) => (
-              <RepsField
-                key={i}
-                move={move}
-                i={i}
-                handleChange={handleChangeEx}
-                handleDeleteEx={handleDeleteEx}
-              />
-            ))}
-          <button type="button" onClick={handleAddEx}>
+
+          {renderMovementFields()}
+          <button type="button" onClick={() => handleAddEx(form.mode)}>
             +
           </button>
           {/* REST */}

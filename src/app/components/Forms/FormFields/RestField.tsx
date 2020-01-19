@@ -1,7 +1,9 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { IWorkoutRest } from '../../common/types';
+import { Row } from '../FormStyles';
+
+import { IWorkoutRest } from '../../../common/types';
 
 const RestField: React.FC<{
   rest: IWorkoutRest;
@@ -10,7 +12,7 @@ const RestField: React.FC<{
   }) => void;
 }> = ({ rest, handleChange }) => {
   return (
-    <FieldRow>
+    <Row>
       Rest Options
       <div>
         <label htmlFor="automatic">
@@ -45,12 +47,8 @@ const RestField: React.FC<{
           Outer Rest Time
         </label>
       </div>
-    </FieldRow>
+    </Row>
   );
 };
-
-const FieldRow = styled.div`
-  display: flex;
-`;
 
 export default RestField;

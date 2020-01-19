@@ -1,0 +1,54 @@
+﻿import React from 'react';
+import styled from 'styled-components';
+
+import { Row } from '../FormStyles';
+
+import { IExerciseFormValues, IWorkoutFormValues } from '../../../common/types';
+
+const FirstFields: React.FC<{
+  form: IExerciseFormValues | IWorkoutFormValues;
+  handleChange: (e: { target: { name: string; value: any } }) => void;
+  handleMultiSelectChange: (e: { target: { options: any } }) => void;
+}> = ({ form, handleChange, handleMultiSelectChange }) => {
+  return (
+    <>
+      <Row>
+        <label htmlFor="name">
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={form.name}
+            onChange={handleChange}
+          />
+        </label>
+      </Row>
+      <Row>
+        <label htmlFor="notes">
+          <textarea
+            name="notes"
+            placeholder="Notes..."
+            value={form.notes}
+            onChange={handleChange}
+          />
+        </label>
+      </Row>
+      <Row>
+        <label htmlFor="tags">
+          Tags
+          <select
+            multiple
+            name="tags"
+            value={form.tags}
+            onChange={handleMultiSelectChange}
+          >
+            <option label="tag-1" value="tag-1" />
+            <option label="tag-2" value="tag-2" />
+          </select>
+        </label>
+      </Row>
+    </>
+  );
+};
+
+export default FirstFields;

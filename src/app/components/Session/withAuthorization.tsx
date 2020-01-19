@@ -9,6 +9,7 @@ const withAuthorization = (condition: any) => (Component: any) => {
     const authUser = useContext(AuthUserContext);
     const router = useRouter();
 
+    console.log(authUser);
     useEffect(() => {
       const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
         if (!condition(authUser)) {

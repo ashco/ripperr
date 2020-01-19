@@ -1,9 +1,10 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { InputField, exerciseFormVal } from '.';
 import { FirebaseContext } from '../Firebase';
 import { AuthUserContext } from '../Session';
+
+import { FirstFields } from './index';
 
 import { IExercise, IExerciseFormValues } from '../../common/types';
 import { FormMode, MovementType } from '../../common/enums';
@@ -149,7 +150,12 @@ const ExerciseForm: React.FC<{
       <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">
+          <FirstFields
+            form={form}
+            handleChange={handleChange}
+            handleMultiSelectChange={handleMultiSelectChange}
+          />
+          {/* <label htmlFor="name">
             Name
             <input
               type="text"
@@ -179,7 +185,7 @@ const ExerciseForm: React.FC<{
               <option label="tag-1" value="tag-1" />
               <option label="tag-2" value="tag-2" />
             </select>
-          </label>
+          </label> */}
         </div>
         <button type="submit" disabled={!isValid}>
           {text.submitButton}

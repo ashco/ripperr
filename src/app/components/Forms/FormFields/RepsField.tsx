@@ -1,10 +1,10 @@
 ﻿import React, { useContext } from 'react';
 
-import { MovementsContext } from '../Movements';
-import { IMovementRefs } from '../../common/types';
+import { MovementsContext } from '../../Movements';
+import { IMovementRefs, IMovementRefRepsConfig } from '../../../common/types';
 
 const RepsField: React.FC<{
-  move: IMovementRefs;
+  move: IMovementRefs<IMovementRefRepsConfig>;
   i: number;
   handleChange: (
     i: number,

@@ -149,59 +149,6 @@ export const workoutModeOptions = [
 //   id: string;
 // }
 
-// const exerciseObj = {
-//   id: '12345678',
-//   name: 'Burpees',
-//   notes: "Just flop around like you know what you're doing",
-//   type: 'exercise',
-//   tags: ['full body'],
-//   mode: null, //only for workouts
-//   movements: null, // only for workouts
-//   rest: null, // only for workouts
-//   config: null, // only for workouts
-//   history: null,
-// };
-
-// export const workoutObj = {
-//   id: '234567',
-//   name: 'Ab Ripper X',
-//   notes: 'Tony will be proud',
-//   type: 'workout',
-//   tags: ['abs', 'p90x'],
-//   mode: 'circuit',
-//   movements: [
-//     {
-//       id: '1111',
-//       config: {
-//         // mode specific info
-//         interval: 45,
-//       },
-//     },
-//     {
-//       id: '2222',
-//       config: {
-//         interval: 45,
-//       },
-//     },
-//     {
-//       id: '3333',
-//       config: {
-//         interval: 45,
-//       },
-//     },
-//   ],
-//   rest: {
-//     automatic: true, // have rest timers automatically run
-//     inner: 15, // rest time transitioning from one ex to another
-//     outer: 60, // rest time between full cycles of movements
-//   },
-//   config: {
-//     // mode specific info
-//     rounds: 4,
-//   },
-//   history: null,
-// };
-
 // export const workoutObj: IWorkout = {
 //   id: '5678',
 //   type: MovementType.Workout,

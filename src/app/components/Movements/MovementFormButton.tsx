@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react';
 
 import { Modal } from '../Modal';
-import { MovementFormRouter } from './index';
+import { MovementForm } from '../Forms';
 
 import { IExercise, IWorkout } from '../../common/types';
 import { FormMode } from '../../common/enums';
@@ -23,7 +23,8 @@ const MovementFormButton: React.FC<{
 
   const modal = showModal ? (
     <Modal>
-      <MovementFormRouter formMode={formMode} hide={hide} movement={movement} />
+      {/* <MovementFormRouter formMode={formMode} hide={hide} movement={movement} /> */}
+      <MovementForm formMode={formMode} hide={hide} movement={movement} />
     </Modal>
   ) : null;
 

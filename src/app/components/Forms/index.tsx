@@ -1,12 +1,16 @@
-﻿import ExerciseForm from './ExerciseForm';
+﻿import MovementForm from './MovementForm';
+import ExerciseForm from './ExerciseForm';
 import WorkoutForm from './WorkoutForm';
+import MovementFormRouter from './MovementFormRouter';
 
-import RepsField from './RepsField';
-import RestField from './RestField';
+import FirstFields from './FormFields/FirstFields';
+import RepsField from './FormFields/RepsField';
+import TimedField from './FormFields/TimedField';
+import RestField from './FormFields/RestField';
 import ModeField from './ModeField';
 
 import InputField from './InputField';
-import SelectField from './SelectField';
+import SelectField from './FormFields/SelectField';
 
 import {
   signInVal,
@@ -18,6 +22,8 @@ import {
 } from './validationSchema';
 
 export {
+  MovementForm,
+  MovementFormRouter,
   InputField,
   SelectField,
   signInVal,
@@ -31,4 +37,6 @@ export {
   ExerciseForm,
   WorkoutForm,
   ModeField,
+  FirstFields,
+  TimedField,
 };
