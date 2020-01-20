@@ -146,7 +146,7 @@ const ExerciseForm: React.FC<{
 
   return (
     <ExerciseFormWrapper>
-      <h1>{text.title}</h1>
+      {/* <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <FirstFields
@@ -158,7 +158,7 @@ const ExerciseForm: React.FC<{
         <button type="submit" disabled={!isValid}>
           {text.submitButton}
         </button>
-      </form>
+      </form> */}
     </ExerciseFormWrapper>
   );
 };

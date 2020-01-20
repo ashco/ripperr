@@ -10,6 +10,7 @@ import {
   ModeField,
 } from './index';
 import { AuthUserContext, FirebaseContext } from '../../context';
+import { handleChange } from '../../common/formHelpers';
 
 import {
   IWorkout,
@@ -34,14 +35,11 @@ const INITIAL_VALUES: IWorkoutFormValues = {
       },
     },
   ],
-  // rest: {
-  //   automatic: true,
-  //   inner: 45,
-  //   outer: 60,
-  // },
-  restAuto: true,
-  restInner: 45,
-  restOuter: 60,
+  rest: {
+    automatic: true,
+    inner: 45,
+    outer: 60,
+  },
   config: {},
 };
 
@@ -153,13 +151,58 @@ const WorkoutForm: React.FC<{
 
   // ============ FORM FUNCTIONS ============
 
-  function handleChange(e: { target: { name: string; value: any } }): void {
-    const { name, value } = e.target;
-    const newForm = { ...form };
-    newForm[name] = value;
+  // function handleChange(e: {
+  //   target: {
+  //     name: string;
+  //     value: any;
+  //     type: string;
+  //     checked: boolean;
+  //     options?: any;
+  //     multiple?: boolean;
+  //   };
+  // }): void {
+  //   const newForm = { ...form };
 
-    setForm(newForm);
-  }
+  //   const { name, options } = e.target;
+  //   let { value } = e.target;
+  //   // Checkbox
+  //   if (e.target.type === 'checkbox') {
+  //     value = e.target.checked;
+  //   } else if (options) {
+  //     // Select
+  //     if (e.target.multiple) {
+  //       // Multiple
+  //       const arr: string[] = [];
+
+  //       for (let i = 0, l = options.length; i < l; i += 1) {
+  //         if (options[i].selected) {
+  //           arr.push(options[i].value);
+  //         }
+  //       }
+
+  //       console.log(arr);
+
+  //       setForm({ ...form, [name]: arr });
+  //     } else {
+  //       // Single
+  //     }
+
+  //     // const tags = [];
+
+  //     // for (let i = 0, l = options.length; i < l; i += 1) {
+  //     //   if (options[i].selected) {
+  //     //     tags.push(options[i].value);
+  //     //   }
+  //     // }
+
+  //     // setForm({ ...form, tags });
+  //   }
+
+  //   newForm[name] = value;
+  //   setForm(newForm);
+
+  //   console.log(newForm);
+  // }
   // function handleChange(property: string, e: { target: { name: string; value: any } }): void {
   //   let value = e.target.value;
 
@@ -167,24 +210,21 @@ const WorkoutForm: React.FC<{
 
   //   setForm(newForm);
   // }
-  function handleChangeUpdate (e: any, property: string): void {
-    const newForm = {...form}
-    
-    let { value } = e.target;
-    // Checkbox
-    if (e.target.type === 'checkbox') {
-      value = e.target.checked;
-    }
+  // function handleChangeUpdate(e: any): void {
+  //   const newForm = { ...form };
 
-    console.log(e.target.type);
+  //   const { name } = e.target;
+  //   let { value } = e.target;
+  //   // Checkbox
+  //   if (e.target.type === 'checkbox') {
+  //     value = e.target.checked;
+  //   }
 
+  //   newForm[name] = value;
+  //   setForm(newForm);
 
-    newForm[property] = value
-    setForm(newForm);
-
-    console.log(newForm);
-    }
-
+  //   console.log(newForm);
+  // }
 
   // function getNested(theObject: object, path: string, separator = '.') {
   //   try {
@@ -199,8 +239,6 @@ const WorkoutForm: React.FC<{
   //     return undefined;
   //   }
   // }
-
-
 
   function handleChangeEx(
     i: number,
@@ -286,30 +324,36 @@ const WorkoutForm: React.FC<{
 
   // ============ RENDER FUNCTION ============
   function renderMovementFields() {
-    if (form.movements) {
-      if (form.mode === WorkoutMode.Reps) {
-        return form.movements.map((move, i) => (
-          <RepsField
-            key={i}
-            move={move as IMovementRefs<IMovementRefRepsConfig>}
-            i={i}
-            // handleChange={handleChangeEx}
-            handleChange={handleChangeUpdate}
-            handleDeleteEx={handleDeleteEx}
-          />
-        ));
-      } else if (form.mode === WorkoutMode.Timed) {
-        return form.movements.map((move, i) => (
-          <TimedField
-            key={i}
-            move={move as IMovementRefs<IMovementRefTimedConfig>}
-            i={i}
-            handleChange={handleChangeEx}
-            handleDeleteEx={handleDeleteEx}
-          />
-        ));
-      }
-    }
+    // if (form.movements) {
+    //   if (form.mode === WorkoutMode.Reps) {
+    //     return form.movements.map((move, i) => (
+    //       <RepsField
+    //         key={i}
+    //         move={move as IMovementRefs<IMovementRefRepsConfig>}
+    //         i={i}
+    //         // handleChange={handleChangeEx}
+    //         handleChange={handleChangeUpdate}
+    //         handleDeleteEx={handleDeleteEx}
+    //       />
+    //     ));
+    //   } else if (form.mode === WorkoutMode.Timed) {
+    //     return form.movements.map((move, i) => (
+    //       <TimedField
+    //         key={i}
+    //         move={move as IMovementRefs<IMovementRefTimedConfig>}
+    //         i={i}
+    //         handleChange={handleChangeEx}
+    //         handleDeleteEx={handleDeleteEx}
+    //       />
+    //     ));
+    //   }
+    // }
+  }
+
+  function handleChangeForm(e: any) {
+    console.log(e, form);
+
+    return handleChange(e, form, setForm);
   }
 
   return (
@@ -319,19 +363,19 @@ const WorkoutForm: React.FC<{
         <div>
           <FirstFields
             form={form}
-            handleChange={handleChangeUpdate}
-            handleMultiSelectChange={handleMultiSelectChange}
+            handleChange={handleChangeForm}
+            // handleMultiSelectChange={handleMultiSelectChange}
           />
-          <ModeField
+          {/* <ModeField
             form={form}
             setForm={setForm}
-            handleChange={handleChangeUpdate}
+            handleChange={handleChange}
           />
           {renderMovementFields()}
           <button type="button" onClick={() => handleAddEx(form.mode)}>
             +
           </button>
-          <RestField form={form} handleChange={handleChangeUpdate} />
+          <RestField form={form} handleChange={handleChangeUpdate} /> */}
           {/* <RestField form={form} handleChange={handleChangeRest} /> */}
         </div>
         <button type="submit" disabled={!isValid}>
