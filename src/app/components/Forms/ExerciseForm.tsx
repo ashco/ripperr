@@ -1,8 +1,7 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { FirebaseContext } from '../Firebase';
-import { AuthUserContext } from '../Session';
+import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { FirstFields } from './index';
 

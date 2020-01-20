@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 
 import { InputField, signUpVal } from '../Forms';
-import { FirebaseContext } from '../Firebase/index';
+import { FirebaseContext } from '../../context';
 import { IAuthError } from '../../common/types';
 
 interface ISignUpFormValues {

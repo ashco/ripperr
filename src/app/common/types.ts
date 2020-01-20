@@ -18,6 +18,7 @@ export interface IAuthError {
 }
 
 // =============== FIREBASE QUERIES ===============
+export type IAuthUserContext = firebase.User | null;
 
 export interface IExercisesFirebaseQuery {
   loading: boolean;

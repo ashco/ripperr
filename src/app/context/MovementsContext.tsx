@@ -1,6 +1,8 @@
 ﻿import React from 'react';
-import { IMovementState } from '../../common/types';
+
 import { INITIAL_MOVEMENT_STATE } from './withMovements';
+
+import { IMovementState } from '../common/types';
 
 const MovementsContext = React.createContext<IMovementState>(
   INITIAL_MOVEMENT_STATE,

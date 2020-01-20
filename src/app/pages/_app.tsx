@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import App from 'next/app';
 import Page from '../components/Page';
-import { withAuthentication } from '../components/Session';
+import { withAuthentication } from '../context';
 
 class MyApp extends App {
   render() {

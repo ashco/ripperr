@@ -1,10 +1,11 @@
 ﻿import { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
-import { withAuthorization } from '../components/Session';
-import { FirebaseContext } from '../components/Firebase';
-import { IAuthUserContext } from '../components/Firebase/firebase';
+
+import { FirebaseContext, withAuthorization } from '../context';
 
 import UserList from '../components/Admin/UserList';
+
+import { IAuthUserContext } from '../common/types';
 
 export interface IUser {
   uid: string;

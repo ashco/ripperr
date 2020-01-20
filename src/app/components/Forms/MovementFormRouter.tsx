@@ -1,14 +1,7 @@
 ﻿import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
-// import { FirebaseContext } from '../Firebase';
-// import { AuthUserContext } from '../Session';
-import { MovementsContext } from '../Movements/index';
-
-// import { WorkoutsContext, RepsSetsField } from '../index';
 import { ExerciseForm, WorkoutForm } from './index';
-
-import { workoutModeOptions } from '../../common/data';
 
 import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
 import {

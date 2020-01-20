@@ -1,4 +1,6 @@
-﻿import * as firebase from 'firebase/app';
+﻿import React from 'react';
+
+import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
@@ -13,12 +15,9 @@ const config = {
   measurementId: process.env.MEASUREMENT_ID,
 };
 
-export type IAuthUserContext = firebase.User | null;
-
 class Firebase {
   auth: firebase.auth.Auth;
   db: firebase.firestore.Firestore;
-  // testAuth: any;
 
   constructor() {
     if (!firebase.apps.length) {
@@ -84,4 +83,6 @@ class Firebase {
     firebase.firestore.FieldValue.serverTimestamp();
 }
 
-export default Firebase;
+const FirebaseContext = React.createContext<Firebase>(new Firebase());
+
+export default FirebaseContext;

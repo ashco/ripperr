@@ -1,8 +1,10 @@
 ﻿import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { MovementsContext } from '../Movements';
+import { MovementsContext } from '../../context';
+
 import { ExerciseListItem, WorkoutListItem } from '../ListItems';
+
 import { IWorkout, IExercise, IMovementState } from '../../common/types';
 import { MovementType } from '../../common/enums';
 

@@ -2,7 +2,8 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import { AuthUserContext } from '../Session';
+import { AuthUserContext } from '../../context';
+
 import SignOutButton from './SignOutButton';
 
 const Navigation: React.FC = () => {

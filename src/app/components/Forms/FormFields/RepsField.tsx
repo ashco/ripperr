@@ -1,8 +1,9 @@
 ﻿import React, { useContext } from 'react';
 
-import { MovementsContext } from '../../Movements';
+import { MovementsContext } from '../../../context';
 
 import { Row } from '../FormStyles';
+
 import { IMovementRefs, IMovementRefRepsConfig } from '../../../common/types';
 
 const RepsField: React.FC<{
@@ -22,7 +23,7 @@ const RepsField: React.FC<{
       <Row>Exercise {i + 1}</Row>
       <Row>
         <div>
-          <label htmlFor="id">
+          <label>
             <select
               name="id"
               onChange={handleChange.bind(null, i, false)}
@@ -39,7 +40,7 @@ const RepsField: React.FC<{
           </label>
         </div>
         <div>
-          <label htmlFor="reps">
+          <label>
             <input
               name="reps"
               type="number"
@@ -50,7 +51,7 @@ const RepsField: React.FC<{
           </label>
         </div>
         <div>
-          <label htmlFor="sets">
+          <label>
             <input
               name="sets"
               type="number"

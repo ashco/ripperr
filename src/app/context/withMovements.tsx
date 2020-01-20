@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect, useContext } from 'react';
 
-import { FirebaseContext } from '../Firebase';
-import { AuthUserContext } from '../Session';
+import { AuthUserContext, FirebaseContext } from '.';
 import { MovementsContext } from './index';
 
 import {
@@ -10,7 +9,7 @@ import {
   IExercisesFirebaseQuery,
   IWorkoutsFirebaseQuery,
   IMovementState,
-} from '../../common/types';
+} from '../common/types';
 
 export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
   loading: false,

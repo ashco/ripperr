@@ -1,12 +1,13 @@
 ﻿import { useContext } from 'react';
 import { NextPage } from 'next';
 
+import { AuthUserContext, withAuthorization } from '../context';
+
 import { AuthFormContainer } from './signin';
-import { withAuthorization } from '../components/Session';
-import { IAuthUserContext } from '../components/Firebase/firebase';
-import { AuthUserContext } from '../components/Session';
 import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChangeForm';
+
+import { IAuthUserContext } from '../common/types';
 
 const AccountPage: NextPage = () => {
   const authUser = useContext(AuthUserContext);

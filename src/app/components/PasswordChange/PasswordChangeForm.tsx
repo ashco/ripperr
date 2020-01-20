@@ -2,7 +2,7 @@
 import { Formik, Form } from 'formik';
 
 import { InputField, passwordChangeVal } from '../Forms';
-import { FirebaseContext } from '../Firebase';
+import { FirebaseContext } from '../../context';
 // import { IError } from '../Signup/SignUpForm';
 
 interface IPasswordChangeForm {

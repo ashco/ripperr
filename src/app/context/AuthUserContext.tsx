@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { IAuthUserContext } from '../Firebase/firebase';
+import { IAuthUserContext } from '../common/types';
 
 const AuthUserContext = React.createContext<IAuthUserContext>(null);
 

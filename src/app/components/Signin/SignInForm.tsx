@@ -5,7 +5,7 @@ import { Formik, Form } from 'formik';
 
 import { InputField, signInVal } from '../Forms';
 
-import { FirebaseContext } from '../Firebase';
+import { FirebaseContext } from '../../context';
 import { IAuthError } from '../../common/types';
 
 export interface ISignInFormValues {

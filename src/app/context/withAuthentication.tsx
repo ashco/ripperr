@@ -1,7 +1,8 @@
 ﻿import React, { useState, useContext, useEffect } from 'react';
-import { AuthUserContext } from './index';
-import { IAuthUserContext } from '../Firebase/firebase';
-import { FirebaseContext } from '../Firebase';
+
+import { AuthUserContext, FirebaseContext } from './index';
+
+import { IAuthUserContext } from '../common/types';
 
 const withAuthentication = (Component: any) => {
   const WithAuthentication = (props: any) => {

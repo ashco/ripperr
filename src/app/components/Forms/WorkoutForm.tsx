@@ -8,8 +8,7 @@ import {
   RestField,
   ModeField,
 } from './index';
-import { FirebaseContext } from '../Firebase';
-import { AuthUserContext } from '../Session';
+import { AuthUserContext, FirebaseContext } from '../../context';
 
 import {
   IWorkout,

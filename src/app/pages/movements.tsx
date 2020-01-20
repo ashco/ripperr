@@ -2,12 +2,12 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { withAuthorization } from '../components/Session';
-import { IAuthUserContext } from '../components/Firebase/firebase';
 import MovementList from '../components/Movements/MovementList';
 import { MovementFormButton } from '../components/Movements';
-import { withMovements } from '../components/Movements';
 
+import { withAuthorization, withMovements } from '../context';
+
+import { IAuthUserContext } from '../common/types';
 import { FormMode } from '../common/enums';
 
 const MovementsPage: NextPage<{

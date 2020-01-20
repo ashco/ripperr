@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Formik, Form } from 'formik';
 
 import { InputField, passwordForgotVal } from '../Forms';
-import { FirebaseContext } from '../Firebase';
+import { FirebaseContext } from '../../context';
 import { IAuthError } from '../../common/types';
 
 interface IPasswordForgotForm {
