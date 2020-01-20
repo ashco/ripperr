@@ -7,7 +7,7 @@ import { IExerciseFormValues, IWorkoutFormValues } from '../../../common/types';
 
 const FirstFields: React.FC<{
   form: IExerciseFormValues | IWorkoutFormValues;
-  handleChange: (e: any, object: any, type?: string) => void;
+  handleChange: (e: any, property: string) => void;
   handleMultiSelectChange: (e: { target: { options: any } }) => void;
 }> = ({ form, handleChange, handleMultiSelectChange }) => {
   return (
@@ -19,7 +19,7 @@ const FirstFields: React.FC<{
             name="name"
             placeholder="Name"
             value={form.name}
-            onChange={(e) => handleChange(e, form)}
+            onChange={(e) => handleChange(e, 'name')}
           />
         </label>
       </Row>
@@ -27,9 +27,9 @@ const FirstFields: React.FC<{
         <label htmlFor="description">
           <textarea
             name="description"
-            placeholder="description..."
+            placeholder="Enter a description..."
             value={form.description}
-            onChange={(e) => handleChange(e, form)}
+            onChange={(e) => handleChange(e, 'description')}
           />
         </label>
       </Row>

@@ -34,11 +34,14 @@ const INITIAL_VALUES: IWorkoutFormValues = {
       },
     },
   ],
-  rest: {
-    automatic: true,
-    inner: 45,
-    outer: 60,
-  },
+  // rest: {
+  //   automatic: true,
+  //   inner: 45,
+  //   outer: 60,
+  // },
+  restAuto: true,
+  restInner: 45,
+  restOuter: 60,
   config: {},
 };
 
@@ -164,18 +167,24 @@ const WorkoutForm: React.FC<{
 
   //   setForm(newForm);
   // }
-  function handleChangeUpdate (e: any, property: string) {
+  function handleChangeUpdate (e: any, property: string): void {
     const newForm = {...form}
-    const { value } = e.target;
+    
+    let { value } = e.target;
+    // Checkbox
+    if (e.target.type === 'checkbox') {
+      value = e.target.checked;
+    }
+
+    console.log(e.target.type);
+
 
     newForm[property] = value
     setForm(newForm);
-    }
-
 
     console.log(newForm);
-    setForm(newForm);
-  }
+    }
+
 
   // function getNested(theObject: object, path: string, separator = '.') {
   //   try {
@@ -322,7 +331,8 @@ const WorkoutForm: React.FC<{
           <button type="button" onClick={() => handleAddEx(form.mode)}>
             +
           </button>
-          <RestField rest={form.rest} handleChange={handleChangeRest} />
+          <RestField form={form} handleChange={handleChangeUpdate} />
+          {/* <RestField form={form} handleChange={handleChangeRest} /> */}
         </div>
         <button type="submit" disabled={!isValid}>
           {text.submitButton}

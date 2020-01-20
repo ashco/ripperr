@@ -9,7 +9,7 @@ import { IMovementRefs, IMovementRefRepsConfig } from '../../../common/types';
 const RepsField: React.FC<{
   move: IMovementRefs<IMovementRefRepsConfig>;
   i: number;
-  handleChange: (e: any, object: any, type?: any) => void;
+  handleChange: (e: any, property: string) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
   const { exercises, loading } = useContext(MovementsContext);
@@ -36,17 +36,17 @@ const RepsField: React.FC<{
             </select>
           </label>
         </div> */}
-        <div>
+        {/* <div>
           <label>
             <input
               name="reps"
               type="number"
               value={move.config.reps}
-              onChange={(e) => handleChange(e, move, {type: 'movement', index: i})}
+              onChange={(e) => handleChange(e, move, {type: 'movements', index: i})}
             />
             Reps
           </label>
-        </div>
+        </div> */}
         {/* <div>
           <label>
             <input

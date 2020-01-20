@@ -51,9 +51,21 @@ export interface IWorkoutFormValues {
   tags: string[];
   mode: WorkoutMode;
   movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
-  rest: IWorkoutRest;
+  restAuto: boolean;
+  restInner: number;
+  restOuter: number;
   config: any;
 }
+// export interface IWorkoutFormValues {
+//   [key: string]: any;
+//   name: string;
+//   description: string;
+//   tags: string[];
+//   mode: WorkoutMode;
+//   movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
+//   rest: IWorkoutRest;
+//   config: any;
+// }
 
 // =============== DATA OBJECT STRUCTURES ===============
 

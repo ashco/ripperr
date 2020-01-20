@@ -3,14 +3,12 @@ import styled from 'styled-components';
 
 import { Row } from '../FormStyles';
 
-import { IWorkoutRest } from '../../../common/types';
+import { IExerciseFormValues, IWorkoutFormValues } from '../../../common/types';
 
 const RestField: React.FC<{
-  rest: IWorkoutRest;
-  handleChange: (e: {
-    target: { type: string; name: string; value: any; checked: any };
-  }) => void;
-}> = ({ rest, handleChange }) => {
+  form: IExerciseFormValues | IWorkoutFormValues;
+  handleChange: (e: any, property: string) => void;
+}> = ({ form, handleChange }) => {
   return (
     <>
       <Row>Rest Options</Row>
@@ -19,9 +17,9 @@ const RestField: React.FC<{
           <label>
             <input
               type="checkbox"
-              name="automatic"
-              onChange={handleChange}
-              checked={rest.automatic}
+              name="rest-auto"
+              onChange={(e) => handleChange(e, "rest-auto")}
+              checked={form["rest-auto"]}
             />
             Automatic
           </label>
@@ -29,10 +27,10 @@ const RestField: React.FC<{
         <div>
           <label>
             <input
-              name="inner"
+              name="rest-inner"
               type="number"
-              value={rest.inner}
-              onChange={handleChange}
+              value={form['rest-inner']}
+              onChange={(e) => handleChange(e, "rest-inner")}
             />
             Inner Rest Time
           </label>
@@ -40,10 +38,10 @@ const RestField: React.FC<{
         <div>
           <label>
             <input
-              name="outer"
+              name="rest-outer"
               type="number"
-              value={rest.outer}
-              onChange={handleChange}
+              value={form['rest-outer']}
+              onChange={(e) => handleChange(e, "rest-outer")}
             />
             Outer Rest Time
           </label>
