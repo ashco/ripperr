@@ -9,11 +9,7 @@ import { IMovementRefs, IMovementRefRepsConfig } from '../../../common/types';
 const RepsField: React.FC<{
   move: IMovementRefs<IMovementRefRepsConfig>;
   i: number;
-  handleChange: (
-    i: number,
-    config: boolean,
-    e: { target: { name: string; value: any } },
-  ) => void;
+  handleChange: (e: any, object: any, type?: any) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
   const { exercises, loading } = useContext(MovementsContext);
@@ -22,11 +18,12 @@ const RepsField: React.FC<{
     <>
       <Row>Exercise {i + 1}</Row>
       <Row>
-        <div>
+        {/* <div>
           <label>
             <select
               name="id"
-              onChange={handleChange.bind(null, i, false)}
+              onChange={(e) => handleChange(e, form.movements[i], 'movement')}
+              // onChange={handleChange.bind(null, i, false)}
               value={move.id}
             >
               <option
@@ -38,19 +35,19 @@ const RepsField: React.FC<{
               ))}
             </select>
           </label>
-        </div>
+        </div> */}
         <div>
           <label>
             <input
               name="reps"
               type="number"
               value={move.config.reps}
-              onChange={handleChange.bind(null, i, true)}
+              onChange={(e) => handleChange(e, move, {type: 'movement', index: i})}
             />
             Reps
           </label>
         </div>
-        <div>
+        {/* <div>
           <label>
             <input
               name="sets"
@@ -60,7 +57,7 @@ const RepsField: React.FC<{
             />
             Sets
           </label>
-        </div>
+        </div> */}
         <button type="button" onClick={(): void => handleDeleteEx(i)}>
           -
         </button>

@@ -9,43 +9,57 @@ import { WorkoutMode } from '../../common/enums';
 const ModeField: React.FC<{
   form: IWorkoutFormValues;
   setForm: (form: IWorkoutFormValues) => void;
-  handleChange: (e: { target: { name: string; value: any } }) => void;
+  handleChange: (e: any, object: any, type?: string) => void;
 }> = ({ form, setForm, handleChange }) => {
-  function handleChangeMode(e: { target: { name: string; value: any } }) {
-    handleChange(e);
+  // function handleChangeMode(e: { target: { name: string; value: any } }) {
+  //   handleChange(e);
 
-    // Clear out config property + set to default for new mode
-    const newMoves = form.movements.map((move) => ({
-      id: move.id,
-      config: {},
-    }));
-    const newForm = { ...form, movements: newMoves };
-    // setForm(newForm);
-  }
+  //   // TODO Clear out config property + set to default for new mode
+  //   const newMoves = form.movements.map((move) => ({
+  //     id: move.id,
+  //     config: {},
+  //   }));
+  //   const newForm = { ...form, movements: newMoves };
+  //   // setForm(newForm);
+  // }
 
   return (
-    <Row>
-      <label>
-        <input
-          type="radio"
-          name="mode"
-          value={WorkoutMode.Reps}
-          checked={form.mode === WorkoutMode.Reps}
-          onChange={handleChangeMode}
-        />
-        Reps
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="mode"
-          value={WorkoutMode.Timed}
-          checked={form.mode === WorkoutMode.Timed}
-          onChange={handleChangeMode}
-        />
-        Timed
-      </label>
-    </Row>
+    <>
+      <Row>
+        <label>
+          <input
+            type="radio"
+            name="mode"
+            value={WorkoutMode.Reps}
+            checked={form.mode === WorkoutMode.Reps}
+            onChange={(e) => handleChange(e, form)}
+          />
+          Reps
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="mode"
+            value={WorkoutMode.Timed}
+            checked={form.mode === WorkoutMode.Timed}
+            onChange={(e) => handleChange(e, form)}
+          />
+          Timed
+        </label>
+      </Row>
+      <Row>
+        {form.mode === WorkoutMode.Reps && <p>Reps Mode Config</p>}
+        {form.mode === WorkoutMode.Timed && <p>Timed Mode Config</p>}
+      </Row>
+    </>
+  );
+};
+
+const TimedModeConfigFields = () => {
+  return (
+    <label>
+      <input type="number" />
+    </label>
   );
 };
 

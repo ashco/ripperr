@@ -1,5 +1,6 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import _ from 'underscore';
 
 import {
   FirstFields,
@@ -156,6 +157,41 @@ const WorkoutForm: React.FC<{
 
     setForm(newForm);
   }
+  // function handleChange(property: string, e: { target: { name: string; value: any } }): void {
+  //   let value = e.target.value;
+
+  //   const newForm = { ...form, [property]: value }
+
+  //   setForm(newForm);
+  // }
+  function handleChangeUpdate (e: any, property: string) {
+    const newForm = {...form}
+    const { value } = e.target;
+
+    newForm[property] = value
+    setForm(newForm);
+    }
+
+
+    console.log(newForm);
+    setForm(newForm);
+  }
+
+  // function getNested(theObject: object, path: string, separator = '.') {
+  //   try {
+  //     return path
+  //       .replace('[', separator)
+  //       .replace(']', '')
+  //       .split(separator)
+  //       .reduce(function(obj: any, property) {
+  //         return obj[property];
+  //       }, theObject);
+  //   } catch (err) {
+  //     return undefined;
+  //   }
+  // }
+
+
 
   function handleChangeEx(
     i: number,
@@ -248,7 +284,8 @@ const WorkoutForm: React.FC<{
             key={i}
             move={move as IMovementRefs<IMovementRefRepsConfig>}
             i={i}
-            handleChange={handleChangeEx}
+            // handleChange={handleChangeEx}
+            handleChange={handleChangeUpdate}
             handleDeleteEx={handleDeleteEx}
           />
         ));
@@ -273,13 +310,13 @@ const WorkoutForm: React.FC<{
         <div>
           <FirstFields
             form={form}
-            handleChange={handleChange}
+            handleChange={handleChangeUpdate}
             handleMultiSelectChange={handleMultiSelectChange}
           />
           <ModeField
             form={form}
             setForm={setForm}
-            handleChange={handleChange}
+            handleChange={handleChangeUpdate}
           />
           {renderMovementFields()}
           <button type="button" onClick={() => handleAddEx(form.mode)}>
