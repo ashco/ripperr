@@ -2,10 +2,14 @@
 import styled from 'styled-components';
 
 import { AuthUserContext, FirebaseContext } from '../../context';
-
+import { handleChange } from '../../common/formHelpers';
 import { FirstFields } from './index';
 
-import { IExercise, IExerciseFormValues } from '../../common/types';
+import {
+  IHandleChange,
+  IExercise,
+  IExerciseFormValues,
+} from '../../common/types';
 import { FormMode, MovementType } from '../../common/enums';
 
 const INITIAL_VALUES: IExerciseFormValues = {
@@ -112,26 +116,8 @@ const ExerciseForm: React.FC<{
   }
 
   // ============ FORM FUNCTIONS ============
-
-  function handleChange(e: { target: { name: string; value: any } }): void {
-    const { name, value } = e.target;
-    const newForm = { ...form };
-    newForm[name] = value;
-
-    setForm(newForm);
-  }
-
-  function handleMultiSelectChange(e: { target: { options: any } }): void {
-    const { options } = e.target;
-    const tags = [];
-
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        tags.push(options[i].value);
-      }
-    }
-
-    setForm({ ...form, tags });
+  function handleChangeForm(e: IHandleChange): void {
+    handleChange(e, form, setForm);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
@@ -146,19 +132,15 @@ const ExerciseForm: React.FC<{
 
   return (
     <ExerciseFormWrapper>
-      {/* <h1>{text.title}</h1>
+      <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <FirstFields
-            form={form}
-            handleChange={handleChange}
-            handleMultiSelectChange={handleMultiSelectChange}
-          />
+          <FirstFields form={form} handleChange={handleChangeForm} />
         </div>
         <button type="submit" disabled={!isValid}>
           {text.submitButton}
         </button>
-      </form> */}
+      </form>
     </ExerciseFormWrapper>
   );
 };

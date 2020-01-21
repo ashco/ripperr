@@ -45,8 +45,10 @@ const FirstFields: React.FC<{
             value={form.tags}
             onChange={handleChange}
           >
-            <option label="tag-1" value="tag-1" />
-            <option label="tag-2" value="tag-2" />
+            <option label="PUSH" value="Push" />
+            <option label="PULL" value="Pull" />
+            <option label="SQUAT" value="Squat" />
+            <option label="CORE" value="Core" />
           </select>
         </label>
       </Row>

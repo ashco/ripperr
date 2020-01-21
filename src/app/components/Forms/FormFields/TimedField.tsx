@@ -10,8 +10,8 @@ const TimedField: React.FC<{
   move: IMovementRefTimed;
   i: number;
   handleChange: (e: IHandleChange, i: number) => void;
-  handleDeleteEx: (i: number) => void;
-}> = ({ move, i, handleChange, handleDeleteEx }) => {
+  handleDeleteMovementRef: (i: number) => void;
+}> = ({ move, i, handleChange, handleDeleteMovementRef }) => {
   const { exercises, loading } = useContext(MovementsContext);
 
   return (
@@ -46,7 +46,7 @@ const TimedField: React.FC<{
             Duration
           </label>
         </div>
-        <button type="button" onClick={(): void => handleDeleteEx(i)}>
+        <button type="button" onClick={(): void => handleDeleteMovementRef(i)}>
           -
         </button>
       </Row>

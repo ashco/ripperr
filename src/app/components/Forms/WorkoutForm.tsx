@@ -1,6 +1,5 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import _ from 'underscore';
 
 import {
   FirstFields,
@@ -57,7 +56,12 @@ const WorkoutForm: React.FC<{
 
   // ============ SET UP FORM STATE ============
 
-  let initialFormState = INITIAL_VALUES;
+  let initialFormState = {
+    ...INITIAL_VALUES,
+    movements: INITIAL_VALUES.movements.map((move) => ({ ...move })),
+    rest: { ...INITIAL_VALUES.rest },
+  };
+  console.log(initialFormState);
   if (formMode === FormMode.Edit && workout) {
     initialFormState = workout;
   }
@@ -115,7 +119,6 @@ const WorkoutForm: React.FC<{
         .set(workoutObj)
         .then(() => {
           console.log(`Workout Added: ${workoutObj.name}`);
-          hide();
         })
         .catch((err) => {
           console.error(err);
@@ -143,7 +146,6 @@ const WorkoutForm: React.FC<{
         .update(workoutObj)
         .then(() => {
           console.log(`Workout Updated: ${workoutObj.name}`);
-          hide();
         })
         .catch((err) => {
           console.error(err);
@@ -158,9 +160,18 @@ const WorkoutForm: React.FC<{
     handleChange(e, form, setForm);
   }
 
-  function handleChangeFormMovement(e: IHandleChange, i: number): void {
-    handleChange(e, form, setForm, { type: FormFieldProp.Movements, index: i });
-  }
+  const handleChangeFormMovement = (e: IHandleChange, i: number): void => {
+    handleChange(e, form, setForm, {
+      type: FormFieldProp.Movements,
+      index: i,
+    });
+  };
+  // function handleChangeFormMovement(e: IHandleChange, i: number): void {
+  //   handleChange(e, form, setForm, {
+  //     type: FormFieldProp.Movements,
+  //     index: i,
+  //   });
+  // }
 
   function handleChangeFormRest(e: IHandleChange): void {
     handleChange(e, form, setForm, { type: FormFieldProp.Rest });
@@ -174,9 +185,13 @@ const WorkoutForm: React.FC<{
     } else if (formMode === FormMode.Edit) {
       handleUpdateWorkout(form);
     }
+
+    hide();
   }
 
-  function handleAddEx(mode: WorkoutMode): void {
+  // ============ MOVEMENT FIELD HANDLERS ============
+
+  function handleAddMovementRef(mode: WorkoutMode): void {
     const newForm = { ...form };
 
     const newMovement: IMovementRefs = {
@@ -194,7 +209,7 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
-  function handleDeleteEx(i: number): void {
+  function handleDeleteMovementRef(i: number): void {
     const newForm = { ...form };
 
     newForm.movements.splice(i, 1);
@@ -211,7 +226,7 @@ const WorkoutForm: React.FC<{
             move={move as IMovementRefReps}
             i={i}
             handleChange={handleChangeFormMovement}
-            handleDeleteEx={handleDeleteEx}
+            handleDeleteMovementRef={handleDeleteMovementRef}
           />
         ));
       } else if (form.mode === WorkoutMode.Timed) {
@@ -221,7 +236,7 @@ const WorkoutForm: React.FC<{
             move={move as IMovementRefTimed}
             i={i}
             handleChange={handleChangeFormMovement}
-            handleDeleteEx={handleDeleteEx}
+            handleDeleteMovementRef={handleDeleteMovementRef}
           />
         ));
       }
@@ -236,7 +251,10 @@ const WorkoutForm: React.FC<{
           <FirstFields form={form} handleChange={handleChangeForm} />
           <ModeField form={form} handleChange={handleChangeForm} />
           {renderMovementFields()}
-          <button type="button" onClick={() => handleAddEx(form.mode)}>
+          <button
+            type="button"
+            onClick={(): void => handleAddMovementRef(form.mode)}
+          >
             +
           </button>
           <RestField form={form} handleChange={handleChangeFormRest} />

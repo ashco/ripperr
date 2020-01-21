@@ -17,12 +17,12 @@ export function handleChange(
 ): void {
   const newState = { ...state };
   const { name } = e.target;
-  const options = (e.target as HTMLSelectElement).options;
+  const { options, multiple } = e.target as HTMLSelectElement;
 
   let value;
 
   // Determine Value
-  if (options) {
+  if (options && multiple) {
     // Multi Select
     value = [];
     for (let i = 0, l = options.length; i < l; i += 1) {
@@ -33,7 +33,10 @@ export function handleChange(
     // Checkbox
   } else if (e.target.type === 'checkbox') {
     value = (e.target as HTMLInputElement).checked as boolean;
-    // text | number | select
+    // number
+  } else if (e.target.type === 'number') {
+    value = parseInt(e.target.value);
+    //  text | select
   } else {
     value = e.target.value;
   }

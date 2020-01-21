@@ -10,8 +10,8 @@ const RepsField: React.FC<{
   move: IMovementRefReps;
   i: number;
   handleChange: (e: IHandleChange, i: number) => void;
-  handleDeleteEx: (i: number) => void;
-}> = ({ move, i, handleChange, handleDeleteEx }) => {
+  handleDeleteMovementRef: (i: number) => void;
+}> = ({ move, i, handleChange, handleDeleteMovementRef }) => {
   const { exercises, loading } = useContext(MovementsContext);
 
   return (
@@ -41,7 +41,7 @@ const RepsField: React.FC<{
               name="reps"
               type="number"
               value={move.reps}
-              onChange={(e) => handleChange(e, i)}
+              onChange={(e): void => handleChange(e, i)}
             />
             Reps
           </label>
@@ -52,12 +52,12 @@ const RepsField: React.FC<{
               name="sets"
               type="number"
               value={move.sets}
-              onChange={(e) => handleChange(e, i)}
+              onChange={(e): void => handleChange(e, i)}
             />
             Sets
           </label>
         </div>
-        <button type="button" onClick={(): void => handleDeleteEx(i)}>
+        <button type="button" onClick={(): void => handleDeleteMovementRef(i)}>
           -
         </button>
       </Row>
