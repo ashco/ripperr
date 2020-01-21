@@ -1,24 +1,23 @@
-﻿import { IExerciseFormValues, IWorkoutFormValues } from './types';
+﻿import {
+  IHandleChange,
+  IExerciseFormValues,
+  IWorkoutFormValues,
+} from './types';
+
+import { FormFieldProp } from './enums';
 
 export function handleChange(
-  e: {
-    target: {
-      name: string;
-      value: string | number | boolean;
-      type: string;
-      checked?: boolean;
-      options?: any;
-    };
-  },
+  e: IHandleChange,
   state: IExerciseFormValues | IWorkoutFormValues,
-  setState: any,
+  setState: (state: any) => void,
   config?: {
-    type: string;
+    type: FormFieldProp;
     index?: number;
   },
 ): void {
   const newState = { ...state };
-  const { name, options } = e.target;
+  const { name } = e.target;
+  const options = (e.target as HTMLSelectElement).options;
 
   let value;
 
@@ -33,20 +32,21 @@ export function handleChange(
     }
     // Checkbox
   } else if (e.target.type === 'checkbox') {
-    value = e.target.checked as boolean;
+    value = (e.target as HTMLInputElement).checked as boolean;
     // text | number | select
   } else {
     value = e.target.value;
   }
 
   // State Assignment
-  if (config && config.type === 'rest') {
-    newState.rest[name] = value;
-  } else if (config && config.type === 'movements') {
+  if (config && config.type === FormFieldProp.Movements) {
     newState.movements[config.index as number][name] = value;
+  } else if (config && config.type === FormFieldProp.Rest) {
+    newState.rest[name] = value;
   } else {
     newState[name] = value;
   }
+
   console.log(newState);
   setState(newState);
 }

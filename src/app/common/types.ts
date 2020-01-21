@@ -36,7 +36,13 @@ export interface IMovementState {
   workouts: IWorkout[];
 }
 
+// =============== FORM HELPERS ===============
+export interface IHandleChange {
+  target: HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement;
+}
+
 // =============== FORMS ===============
+
 export interface IExerciseFormValues {
   [key: string]: any;
   name: string;

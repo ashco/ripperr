@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import { Row } from './FormStyles';
 
-import { IWorkoutFormValues } from '../../common/types';
+import { IHandleChange, IWorkoutFormValues } from '../../common/types';
 import { WorkoutMode } from '../../common/enums';
 
 const ModeField: React.FC<{
   form: IWorkoutFormValues;
-  handleChange: (e: any) => void;
+  handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   //   // TODO Clear out config property + set to default for new mode
   //   const newMoves = form.movements.map((move) => ({

@@ -4,12 +4,12 @@ import { MovementsContext } from '../../../context';
 
 import { Row } from '../FormStyles';
 
-import { IMovementRefs, IMovementRefReps } from '../../../common/types';
+import { IHandleChange, IMovementRefReps } from '../../../common/types';
 
 const RepsField: React.FC<{
   move: IMovementRefReps;
   i: number;
-  handleChange: (e: any, i: number) => void;
+  handleChange: (e: IHandleChange, i: number) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
   const { exercises, loading } = useContext(MovementsContext);

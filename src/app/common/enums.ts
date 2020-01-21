@@ -2,6 +2,10 @@
   Add = 'ADD',
   Edit = 'EDIT',
 }
+export enum FormFieldProp {
+  Movements = 'MOVEMENTS',
+  Rest = 'REST',
+}
 export enum WorkoutMode {
   Reps = 'REPS',
   Timed = 'TIMED',

@@ -3,24 +3,15 @@ import styled from 'styled-components';
 
 import { Row } from '../FormStyles';
 
-import { IExerciseFormValues, IWorkoutFormValues } from '../../../common/types';
+import {
+  IHandleChange,
+  IExerciseFormValues,
+  IWorkoutFormValues,
+} from '../../../common/types';
 
 const FirstFields: React.FC<{
   form: IExerciseFormValues | IWorkoutFormValues;
-  // handleChange: (
-  //   e: {
-  //     target: {
-  //       name: string;
-  //       value: string | number | boolean;
-  //       type: string;
-  //       checked?: boolean;
-  //     };
-  //   },
-  //   state: IExerciseFormValues | IWorkoutFormValues,
-  //   setState: (state: IExerciseFormValues | IWorkoutFormValues) => void,
-  // ) => void;
-  handleChange: (e: any) => void;
-  // handleMultiSelectChange: (e: { target: { options: any } }) => void;
+  handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   return (
     <>

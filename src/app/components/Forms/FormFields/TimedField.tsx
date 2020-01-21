@@ -4,16 +4,12 @@ import { MovementsContext } from '../../../context';
 
 import { Row } from '../FormStyles';
 
-import { IMovementRefTimed } from '../../../common/types';
+import { IHandleChange, IMovementRefTimed } from '../../../common/types';
 
 const TimedField: React.FC<{
   move: IMovementRefTimed;
   i: number;
-  handleChange: (
-    i: number,
-    config: boolean,
-    e: { target: { name: string; value: any } },
-  ) => void;
+  handleChange: (e: IHandleChange, i: number) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
   const { exercises, loading } = useContext(MovementsContext);
@@ -26,7 +22,7 @@ const TimedField: React.FC<{
           <label>
             <select
               name="id"
-              onChange={handleChange.bind(null, i, false)}
+              onChange={(e) => handleChange(e, i)}
               value={move.id}
             >
               <option
@@ -45,7 +41,7 @@ const TimedField: React.FC<{
               name="duration"
               type="number"
               value={move.duration}
-              onChange={handleChange.bind(null, i, true)}
+              onChange={(e) => handleChange(e, i)}
             />
             Duration
           </label>

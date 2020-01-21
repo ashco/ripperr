@@ -3,11 +3,15 @@ import styled from 'styled-components';
 
 import { Row } from '../FormStyles';
 
-import { IExerciseFormValues, IWorkoutFormValues } from '../../../common/types';
+import {
+  IHandleChange,
+  IExerciseFormValues,
+  IWorkoutFormValues,
+} from '../../../common/types';
 
 const RestField: React.FC<{
   form: IExerciseFormValues | IWorkoutFormValues;
-  handleChange: (e: any) => void;
+  handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   return (
     <>

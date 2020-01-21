@@ -13,13 +13,19 @@ import { AuthUserContext, FirebaseContext } from '../../context';
 import { handleChange } from '../../common/formHelpers';
 
 import {
+  IHandleChange,
   IWorkout,
   IWorkoutFormValues,
   IMovementRefs,
   IMovementRefReps,
   IMovementRefTimed,
 } from '../../common/types';
-import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
+import {
+  FormFieldProp,
+  FormMode,
+  WorkoutMode,
+  MovementType,
+} from '../../common/enums';
 
 const INITIAL_VALUES: IWorkoutFormValues = {
   name: '',
@@ -148,22 +154,16 @@ const WorkoutForm: React.FC<{
   }
 
   // ============ FORM FUNCTIONS ============
+  function handleChangeForm(e: IHandleChange): void {
+    handleChange(e, form, setForm);
+  }
 
-  function handleChangeEx(
-    i: number,
-    config: boolean,
-    e: { target: { name: string; value: any } },
-  ): void {
-    const { name, value } = e.target;
-    const newForm = { ...form };
+  function handleChangeFormMovement(e: IHandleChange, i: number): void {
+    handleChange(e, form, setForm, { type: FormFieldProp.Movements, index: i });
+  }
 
-    if (config) {
-      newForm.movements[i]['config'][name] = parseInt(value);
-    } else {
-      newForm.movements[i][name] = value;
-    }
-
-    setForm(newForm);
+  function handleChangeFormRest(e: IHandleChange): void {
+    handleChange(e, form, setForm, { type: FormFieldProp.Rest });
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
@@ -201,18 +201,6 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
-  function handleChangeForm(e: any) {
-    handleChange(e, form, setForm);
-  }
-
-  function handleChangeFormMovement(e: any, i: number) {
-    handleChange(e, form, setForm, { type: 'movements', index: i });
-  }
-
-  function handleChangeFormRest(e: any) {
-    handleChange(e, form, setForm, { type: 'rest' });
-  }
-
   // ============ RENDER FUNCTION ============
   function renderMovementFields() {
     if (form.movements) {
@@ -226,16 +214,16 @@ const WorkoutForm: React.FC<{
             handleDeleteEx={handleDeleteEx}
           />
         ));
-        // } else if (form.mode === WorkoutMode.Timed) {
-        //   return form.movements.map((move, i) => (
-        //     <TimedField
-        //       key={i}
-        //       move={move as IMovementRefs<IMovementRefReps>}
-        //       i={i}
-        //       handleChange={handleChangeEx}
-        //       handleDeleteEx={handleDeleteEx}
-        //     />
-        //   ));
+      } else if (form.mode === WorkoutMode.Timed) {
+        return form.movements.map((move, i) => (
+          <TimedField
+            key={i}
+            move={move as IMovementRefTimed}
+            i={i}
+            handleChange={handleChangeFormMovement}
+            handleDeleteEx={handleDeleteEx}
+          />
+        ));
       }
     }
   }
