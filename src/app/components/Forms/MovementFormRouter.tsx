@@ -1,15 +1,10 @@
-﻿import React, { useState, useContext, useEffect } from 'react';
+﻿import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { ExerciseForm, WorkoutForm } from './index';
 
-import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
-import {
-  IWorkoutFormValues,
-  IWorkout,
-  IFormError,
-  IExercise,
-} from '../../common/types';
+import { FormMode, MovementType } from '../../common/enums';
+import { IWorkout, IExercise } from '../../common/types';
 
 const MovementFormRouter: React.FC<{
   formMode: FormMode;

@@ -1,3 +1,4 @@
 ﻿import DeleteButton from './DeleteButton';
+import MovementFormButton from './MovementFormButton';
 
-export { DeleteButton };
+export { DeleteButton, MovementFormButton };

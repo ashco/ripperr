@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
 
 import { Row } from './FormStyles';
 
@@ -10,7 +9,7 @@ const ModeField: React.FC<{
   form: IWorkoutFormValues;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
-  //   // TODO Clear out config property + set to default for new mode
+  // TODO Clear out config property + set to default for new mode
   //   const newMoves = form.movements.map((move) => ({
   //     id: move.id,
   //     config: {},

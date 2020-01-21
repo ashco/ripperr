@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { ListItem } from './index';
-import { DeleteButton } from '../Buttons';
-import { MovementFormButton } from '../Movements';
+import { DeleteButton, MovementFormButton } from '../Buttons';
 
 import { IExercise } from '../../common/types';
 import { FormMode } from '../../common/enums';

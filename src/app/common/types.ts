@@ -1,12 +1,5 @@
 ﻿import { WorkoutMode, MovementType } from './enums';
 
-// =============== TYPES ===============
-
-// export type FormMode = 'Add' | 'Edit';
-// export type WorkoutModeLabel = '' | 'Reps + Sets' | 'Tabata' | 'Circuit';
-// export type WorkoutMode = '' | 'reps-sets' | 'tabata' | 'circuit';
-// export type AuthErrorSchema = false | IAuthError;
-
 // =============== ERRORS ===============
 export interface IFormError {
   message: string;
@@ -15,6 +8,13 @@ export interface IFormError {
 export interface IAuthError {
   code: string;
   message: string;
+}
+
+// =============== USERS ===============
+export interface IUser {
+  uid: string;
+  email: string;
+  username: string;
 }
 
 // =============== FIREBASE QUERIES ===============
@@ -50,18 +50,6 @@ export interface IExerciseFormValues {
   tags: string[];
 }
 
-// export interface IWorkoutFormValues {
-//   [key: string]: any;
-//   name: string;
-//   description: string;
-//   tags: string[];
-//   mode: WorkoutMode;
-//   movements: IMovementRefs<IMovementRefReps | IMovementRefTimed>[];
-//   restAuto: boolean;
-//   restInner: number;
-//   restOuter: number;
-//   config: any;
-// }
 export interface IWorkoutFormValues {
   [key: string]: any;
   name: string;
@@ -123,65 +111,3 @@ export interface IWorkoutRest {
 export interface IWorkoutConfig {
   rounds?: number;
 }
-
-// interface IWorkoutExercise {
-//   [key: string]: any;
-//   id: string;
-// }
-
-// export interface IWorkoutExerciseCircuit extends IWorkoutExercise {
-//   rounds: ;
-// }
-
-// export interface IWorkoutExerciseTabata extends IWorkoutExercise {
-//   rounds: number;
-// }
-
-// =============== MISC ===============
-// export interface IWorkoutModeOption {
-//   label: WorkoutModeLabel;
-//   value: WorkoutModeValue;
-// }
-
-// export interface IMovement {
-//   id: string;
-//   type: MovementTypes;
-//   name: string;
-//   description: string;
-//   tags: string[];
-//   mode: WorkoutModeTypes | null;
-//   movements: IMovementRefs[] | null;
-//   rest: IMovementRest | null;
-//   config: MovementConfig | null;
-//   history: null;
-// }
-
-// type MovementTypes = 'workout' | 'exercise';
-// // type WorkoutModeTypes = 'reps-sets' | 'circuit' | 'chaining';
-// type WorkoutModeTypes = 'reps' | 'timed' | 'wo-group';
-// // // type ExerciseModeTypes = 'manual' | 'timed';
-
-// type timedWorkoutModes = 'timed' | 'circuit' | 'tabata' | 'follow-along';
-
-// type MovementConfig =
-//   | IMovementConfigRepsSetsEx
-//   | IMovementConfigRepsSetsWo
-//   | IMovementConfigCircuitEx
-//   | IMovementConfigCircuitWo;
-
-// interface IMovementConfigRepsSetsEx {
-//   reps: number;
-//   sets: number;
-// }
-// interface IMovementConfigRepsSetsWo {
-//   reps: number;
-//   sets: number;
-// }
-
-// interface IMovementConfigCircuitEx {
-//   duration: number;
-// }
-
-// interface IMovementConfigCircuitWo {
-//   rounds: number;
-// }

@@ -22,7 +22,7 @@ const RepsField: React.FC<{
           <label>
             <select
               name="id"
-              onChange={(e) => handleChange(e, i)}
+              onChange={(e): void => handleChange(e, i)}
               value={move.id}
             >
               <option

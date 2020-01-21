@@ -16,7 +16,8 @@ export function handleChange(
   },
 ): void {
   const newState = { ...state };
-  const { name } = e.target;
+  // const { name } = e.target;
+  const name: string = e.target.name;
   const { options, multiple } = e.target as HTMLSelectElement;
 
   let value;

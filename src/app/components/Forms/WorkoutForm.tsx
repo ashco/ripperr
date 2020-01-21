@@ -169,12 +169,6 @@ const WorkoutForm: React.FC<{
       index: i,
     });
   };
-  // function handleChangeFormMovement(e: IHandleChange, i: number): void {
-  //   handleChange(e, form, setForm, {
-  //     type: FormFieldProp.Movements,
-  //     index: i,
-  //   });
-  // }
 
   function handleChangeFormRest(e: IHandleChange): void {
     handleChange(e, form, setForm, { type: FormFieldProp.Rest });

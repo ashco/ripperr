@@ -1,17 +1,11 @@
-﻿import { useState, useContext, useEffect } from 'react';
+﻿import React, { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
 
 import { FirebaseContext, withAuthorization } from '../context';
 
 import UserList from '../components/Admin/UserList';
 
-import { IAuthUserContext } from '../common/types';
-
-export interface IUser {
-  uid: string;
-  email: string;
-  username: string;
-}
+import { IAuthUserContext, IUser } from '../common/types';
 
 interface IState {
   uLoading: boolean;

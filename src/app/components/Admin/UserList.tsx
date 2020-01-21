@@ -1,7 +1,7 @@
-﻿// import { FunctionComponent } from 'react';
-import { IUser } from '../../pages/admin';
+﻿import React from 'react';
+import { IUser } from '../../common/types';
 
-const UserList = ({ users }: any) => (
+const UserList: React.FC<{ users: IUser[] }> = ({ users }) => (
   <ul>
     {users.map((user: IUser) => (
       <li key={user.uid}>

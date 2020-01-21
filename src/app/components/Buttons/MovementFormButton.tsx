@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
-
 import { Modal } from '../Modal';
+
 import { MovementForm } from '../Forms';
 
 import { IExercise, IWorkout } from '../../common/types';
