@@ -4,10 +4,10 @@ import { MovementsContext } from '../../../context';
 
 import { Row } from '../FormStyles';
 
-import { IMovementRefs, IMovementRefTimedConfig } from '../../../common/types';
+import { IMovementRefTimed } from '../../../common/types';
 
 const TimedField: React.FC<{
-  move: IMovementRefs<IMovementRefTimedConfig>;
+  move: IMovementRefTimed;
   i: number;
   handleChange: (
     i: number,
@@ -44,7 +44,7 @@ const TimedField: React.FC<{
             <input
               name="duration"
               type="number"
-              value={move.config.duration}
+              value={move.duration}
               onChange={handleChange.bind(null, i, true)}
             />
             Duration

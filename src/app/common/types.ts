@@ -50,7 +50,7 @@ export interface IExerciseFormValues {
 //   description: string;
 //   tags: string[];
 //   mode: WorkoutMode;
-//   movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
+//   movements: IMovementRefs<IMovementRefReps | IMovementRefTimed>[];
 //   restAuto: boolean;
 //   restInner: number;
 //   restOuter: number;
@@ -62,7 +62,7 @@ export interface IWorkoutFormValues {
   description: string;
   tags: string[];
   mode: WorkoutMode;
-  movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
+  movements: IMovementRefs<IMovementRefReps | IMovementRefTimed>[];
   rest: IWorkoutRest;
   config: any;
 }
@@ -88,25 +88,22 @@ export interface IWorkout {
   tags: string[];
   history: any;
   mode: WorkoutMode;
-  movements: IMovementRefs<IMovementRefRepsConfig | IMovementRefTimedConfig>[];
+  movements: IMovementRefReps[] | IMovementRefTimed[];
   rest: IWorkoutRest;
   config: any;
 }
 
-export interface IMovementRefs<T> {
-  [key: string]: any;
+export interface IMovementRefs {
+  [key: string]: string | number;
   id: string;
-  config: T; // IMovementRefRepsConfig | IMovementRefTimedConfig;
 }
 
-export interface IMovementRefRepsConfig {
-  [key: string]: number;
+export interface IMovementRefReps extends IMovementRefs {
   sets: number;
   reps: number;
 }
 
-export interface IMovementRefTimedConfig {
-  [key: string]: number;
+export interface IMovementRefTimed extends IMovementRefs {
   duration: number;
 }
 

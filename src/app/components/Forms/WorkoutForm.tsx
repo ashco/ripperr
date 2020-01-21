@@ -16,8 +16,8 @@ import {
   IWorkout,
   IWorkoutFormValues,
   IMovementRefs,
-  IMovementRefRepsConfig,
-  IMovementRefTimedConfig,
+  IMovementRefReps,
+  IMovementRefTimed,
 } from '../../common/types';
 import { FormMode, WorkoutMode, MovementType } from '../../common/enums';
 
@@ -29,10 +29,8 @@ const INITIAL_VALUES: IWorkoutFormValues = {
   movements: [
     {
       id: '',
-      config: {
-        reps: 0,
-        sets: 0,
-      },
+      reps: 0,
+      sets: 0,
     },
   ],
   rest: {
@@ -178,35 +176,18 @@ const WorkoutForm: React.FC<{
     }
   }
 
-  function handleChangeRest(e: {
-    target: { type: string; name: string; value: any; checked: any };
-  }): void {
-    const { type, name, checked, value } = e.target;
-    const val = type === 'checkbox' ? checked : parseInt(value);
-
-    const newForm = { ...form };
-    newForm.rest[name] = val;
-
-    setForm(newForm);
-  }
-
   function handleAddEx(mode: WorkoutMode): void {
     const newForm = { ...form };
 
-    const newMovement: IMovementRefs<any> = {
+    const newMovement: IMovementRefs = {
       id: '',
-      config: {},
     };
 
     if (mode === WorkoutMode.Reps) {
-      (newMovement.config as IMovementRefRepsConfig) = {
-        reps: 0,
-        sets: 0,
-      };
+      newMovement.reps = 0;
+      newMovement.sets = 0;
     } else if (mode === WorkoutMode.Timed) {
-      (newMovement.config as IMovementRefTimedConfig) = {
-        duration: 0,
-      };
+      newMovement.duration = 0;
     }
 
     newForm.movements.push(newMovement);
@@ -220,44 +201,43 @@ const WorkoutForm: React.FC<{
     setForm(newForm);
   }
 
-  // ============ RENDER FUNCTION ============
-  function renderMovementFields() {
-    // if (form.movements) {
-    //   if (form.mode === WorkoutMode.Reps) {
-    //     return form.movements.map((move, i) => (
-    //       <RepsField
-    //         key={i}
-    //         move={move as IMovementRefs<IMovementRefRepsConfig>}
-    //         i={i}
-    //         // handleChange={handleChangeEx}
-    //         handleChange={handleChangeUpdate}
-    //         handleDeleteEx={handleDeleteEx}
-    //       />
-    //     ));
-    //   } else if (form.mode === WorkoutMode.Timed) {
-    //     return form.movements.map((move, i) => (
-    //       <TimedField
-    //         key={i}
-    //         move={move as IMovementRefs<IMovementRefTimedConfig>}
-    //         i={i}
-    //         handleChange={handleChangeEx}
-    //         handleDeleteEx={handleDeleteEx}
-    //       />
-    //     ));
-    //   }
-    // }
-  }
-
   function handleChangeForm(e: any) {
     handleChange(e, form, setForm);
+  }
 
-    console.log(e, form);
+  function handleChangeFormMovement(e: any, i: number) {
+    handleChange(e, form, setForm, { type: 'movements', index: i });
   }
 
   function handleChangeFormRest(e: any) {
-    handleChange(e, form, setForm, 'rest');
+    handleChange(e, form, setForm, { type: 'rest' });
+  }
 
-    console.log(e, form);
+  // ============ RENDER FUNCTION ============
+  function renderMovementFields() {
+    if (form.movements) {
+      if (form.mode === WorkoutMode.Reps) {
+        return form.movements.map((move, i) => (
+          <RepsField
+            key={i}
+            move={move as IMovementRefReps}
+            i={i}
+            handleChange={handleChangeFormMovement}
+            handleDeleteEx={handleDeleteEx}
+          />
+        ));
+        // } else if (form.mode === WorkoutMode.Timed) {
+        //   return form.movements.map((move, i) => (
+        //     <TimedField
+        //       key={i}
+        //       move={move as IMovementRefs<IMovementRefReps>}
+        //       i={i}
+        //       handleChange={handleChangeEx}
+        //       handleDeleteEx={handleDeleteEx}
+        //     />
+        //   ));
+      }
+    }
   }
 
   return (

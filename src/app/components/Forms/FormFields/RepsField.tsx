@@ -4,12 +4,12 @@ import { MovementsContext } from '../../../context';
 
 import { Row } from '../FormStyles';
 
-import { IMovementRefs, IMovementRefRepsConfig } from '../../../common/types';
+import { IMovementRefs, IMovementRefReps } from '../../../common/types';
 
 const RepsField: React.FC<{
-  move: IMovementRefs<IMovementRefRepsConfig>;
+  move: IMovementRefReps;
   i: number;
-  handleChange: (e: any, property: string) => void;
+  handleChange: (e: any, i: number) => void;
   handleDeleteEx: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteEx }) => {
   const { exercises, loading } = useContext(MovementsContext);
@@ -18,12 +18,11 @@ const RepsField: React.FC<{
     <>
       <Row>Exercise {i + 1}</Row>
       <Row>
-        {/* <div>
+        <div>
           <label>
             <select
               name="id"
-              onChange={(e) => handleChange(e, form.movements[i], 'movement')}
-              // onChange={handleChange.bind(null, i, false)}
+              onChange={(e) => handleChange(e, i)}
               value={move.id}
             >
               <option
@@ -35,29 +34,29 @@ const RepsField: React.FC<{
               ))}
             </select>
           </label>
-        </div> */}
-        {/* <div>
+        </div>
+        <div>
           <label>
             <input
               name="reps"
               type="number"
-              value={move.config.reps}
-              onChange={(e) => handleChange(e, move, {type: 'movements', index: i})}
+              value={move.reps}
+              onChange={(e) => handleChange(e, i)}
             />
             Reps
           </label>
-        </div> */}
-        {/* <div>
+        </div>
+        <div>
           <label>
             <input
               name="sets"
               type="number"
-              value={move.config.sets}
-              onChange={handleChange.bind(null, i, true)}
+              value={move.sets}
+              onChange={(e) => handleChange(e, i)}
             />
             Sets
           </label>
-        </div> */}
+        </div>
         <button type="button" onClick={(): void => handleDeleteEx(i)}>
           -
         </button>

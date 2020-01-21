@@ -12,34 +12,41 @@ export function handleChange(
   },
   state: IExerciseFormValues | IWorkoutFormValues,
   setState: any,
-  type?: string,
+  config?: {
+    type: string;
+    index?: number;
+  },
 ): void {
   const newState = { ...state };
   const { name, options } = e.target;
 
   let value;
 
+  // Determine Value
   if (options) {
     // Multi Select
-    const optionsArr = [];
+    value = [];
     for (let i = 0, l = options.length; i < l; i += 1) {
       if (options[i].selected) {
-        optionsArr.push(options[i].value);
+        value.push(options[i].value);
       }
     }
-    newState[name] = optionsArr;
+    // Checkbox
+  } else if (e.target.type === 'checkbox') {
+    value = e.target.checked as boolean;
+    // text | number | select
   } else {
-    let { value } = e.target;
-    if (e.target.type === 'checkbox') {
-      value = e.target.checked as boolean;
-    }
-
-    if (type === 'rest') {
-      newState.rest[name] = value;
-    } else {
-      newState[name] = value;
-    }
+    value = e.target.value;
   }
 
+  // State Assignment
+  if (config && config.type === 'rest') {
+    newState.rest[name] = value;
+  } else if (config && config.type === 'movements') {
+    newState.movements[config.index as number][name] = value;
+  } else {
+    newState[name] = value;
+  }
+  console.log(newState);
   setState(newState);
 }
