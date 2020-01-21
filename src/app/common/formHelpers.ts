@@ -12,6 +12,7 @@ export function handleChange(
   },
   state: IExerciseFormValues | IWorkoutFormValues,
   setState: any,
+  type?: string,
 ): void {
   const newState = { ...state };
   const { name, options } = e.target;
@@ -32,7 +33,12 @@ export function handleChange(
     if (e.target.type === 'checkbox') {
       value = e.target.checked as boolean;
     }
-    newState[name] = value;
+
+    if (type === 'rest') {
+      newState.rest[name] = value;
+    } else {
+      newState[name] = value;
+    }
   }
 
   setState(newState);

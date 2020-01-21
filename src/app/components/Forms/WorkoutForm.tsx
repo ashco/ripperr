@@ -36,7 +36,7 @@ const INITIAL_VALUES: IWorkoutFormValues = {
     },
   ],
   rest: {
-    automatic: true,
+    auto: true,
     inner: 45,
     outer: 60,
   },
@@ -151,95 +151,6 @@ const WorkoutForm: React.FC<{
 
   // ============ FORM FUNCTIONS ============
 
-  // function handleChange(e: {
-  //   target: {
-  //     name: string;
-  //     value: any;
-  //     type: string;
-  //     checked: boolean;
-  //     options?: any;
-  //     multiple?: boolean;
-  //   };
-  // }): void {
-  //   const newForm = { ...form };
-
-  //   const { name, options } = e.target;
-  //   let { value } = e.target;
-  //   // Checkbox
-  //   if (e.target.type === 'checkbox') {
-  //     value = e.target.checked;
-  //   } else if (options) {
-  //     // Select
-  //     if (e.target.multiple) {
-  //       // Multiple
-  //       const arr: string[] = [];
-
-  //       for (let i = 0, l = options.length; i < l; i += 1) {
-  //         if (options[i].selected) {
-  //           arr.push(options[i].value);
-  //         }
-  //       }
-
-  //       console.log(arr);
-
-  //       setForm({ ...form, [name]: arr });
-  //     } else {
-  //       // Single
-  //     }
-
-  //     // const tags = [];
-
-  //     // for (let i = 0, l = options.length; i < l; i += 1) {
-  //     //   if (options[i].selected) {
-  //     //     tags.push(options[i].value);
-  //     //   }
-  //     // }
-
-  //     // setForm({ ...form, tags });
-  //   }
-
-  //   newForm[name] = value;
-  //   setForm(newForm);
-
-  //   console.log(newForm);
-  // }
-  // function handleChange(property: string, e: { target: { name: string; value: any } }): void {
-  //   let value = e.target.value;
-
-  //   const newForm = { ...form, [property]: value }
-
-  //   setForm(newForm);
-  // }
-  // function handleChangeUpdate(e: any): void {
-  //   const newForm = { ...form };
-
-  //   const { name } = e.target;
-  //   let { value } = e.target;
-  //   // Checkbox
-  //   if (e.target.type === 'checkbox') {
-  //     value = e.target.checked;
-  //   }
-
-  //   newForm[name] = value;
-  //   setForm(newForm);
-
-  //   console.log(newForm);
-  // }
-
-  // function getNested(theObject: object, path: string, separator = '.') {
-  //   try {
-  //     return path
-  //       .replace('[', separator)
-  //       .replace(']', '')
-  //       .split(separator)
-  //       .reduce(function(obj: any, property) {
-  //         return obj[property];
-  //       }, theObject);
-  //   } catch (err) {
-  //     return undefined;
-  //   }
-  // }
-
   function handleChangeEx(
     i: number,
     config: boolean,
@@ -255,19 +166,6 @@ const WorkoutForm: React.FC<{
     }
 
     setForm(newForm);
-  }
-
-  function handleMultiSelectChange(e: { target: { options: any } }): void {
-    const { options } = e.target;
-    const tags = [];
-
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        tags.push(options[i].value);
-      }
-    }
-
-    setForm({ ...form, tags });
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
@@ -351,9 +249,15 @@ const WorkoutForm: React.FC<{
   }
 
   function handleChangeForm(e: any) {
-    console.log(e, form);
+    handleChange(e, form, setForm);
 
-    return handleChange(e, form, setForm);
+    console.log(e, form);
+  }
+
+  function handleChangeFormRest(e: any) {
+    handleChange(e, form, setForm, 'rest');
+
+    console.log(e, form);
   }
 
   return (
@@ -361,22 +265,13 @@ const WorkoutForm: React.FC<{
       <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <FirstFields
-            form={form}
-            handleChange={handleChangeForm}
-            // handleMultiSelectChange={handleMultiSelectChange}
-          />
-          {/* <ModeField
-            form={form}
-            setForm={setForm}
-            handleChange={handleChange}
-          />
+          <FirstFields form={form} handleChange={handleChangeForm} />
+          <ModeField form={form} handleChange={handleChangeForm} />
           {renderMovementFields()}
           <button type="button" onClick={() => handleAddEx(form.mode)}>
             +
           </button>
-          <RestField form={form} handleChange={handleChangeUpdate} /> */}
-          {/* <RestField form={form} handleChange={handleChangeRest} /> */}
+          <RestField form={form} handleChange={handleChangeFormRest} />
         </div>
         <button type="submit" disabled={!isValid}>
           {text.submitButton}

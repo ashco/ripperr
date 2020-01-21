@@ -112,7 +112,7 @@ export interface IMovementRefTimedConfig {
 
 export interface IWorkoutRest {
   [key: string]: boolean | number;
-  automatic: boolean;
+  auto: boolean;
   inner: number;
   outer: number;
 }

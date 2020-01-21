@@ -8,12 +8,8 @@ import { WorkoutMode } from '../../common/enums';
 
 const ModeField: React.FC<{
   form: IWorkoutFormValues;
-  setForm: (form: IWorkoutFormValues) => void;
-  handleChange: (e: any, property: string) => void;
-}> = ({ form, setForm, handleChange }) => {
-  // function handleChangeMode(e: { target: { name: string; value: any } }) {
-  //   handleChange(e);
-
+  handleChange: (e: any) => void;
+}> = ({ form, handleChange }) => {
   //   // TODO Clear out config property + set to default for new mode
   //   const newMoves = form.movements.map((move) => ({
   //     id: move.id,
@@ -28,19 +24,21 @@ const ModeField: React.FC<{
       <Row>
         <label>
           <input
+            name="mode"
             type="radio"
             value={WorkoutMode.Reps}
             checked={form.mode === WorkoutMode.Reps}
-            onChange={(e) => handleChange(e, 'mode')}
+            onChange={handleChange}
           />
           Reps
         </label>
         <label>
           <input
+            name="mode"
             type="radio"
             value={WorkoutMode.Timed}
             checked={form.mode === WorkoutMode.Timed}
-            onChange={(e) => handleChange(e, 'mode')}
+            onChange={handleChange}
           />
           Timed
         </label>
