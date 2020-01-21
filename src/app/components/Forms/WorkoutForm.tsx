@@ -43,7 +43,10 @@ const INITIAL_VALUES: IWorkoutFormValues = {
     inner: 45,
     outer: 60,
   },
-  config: {},
+  config: {
+    // TIMED
+    rounds: 0,
+  },
 };
 
 const WorkoutForm: React.FC<{
@@ -60,8 +63,8 @@ const WorkoutForm: React.FC<{
     ...INITIAL_VALUES,
     movements: INITIAL_VALUES.movements.map((move) => ({ ...move })),
     rest: { ...INITIAL_VALUES.rest },
+    config: { ...INITIAL_VALUES.config },
   };
-  console.log(initialFormState);
   if (formMode === FormMode.Edit && workout) {
     initialFormState = workout;
   }

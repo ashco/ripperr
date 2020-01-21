@@ -70,7 +70,7 @@ export interface IWorkoutFormValues {
   mode: WorkoutMode;
   movements: IMovementRefs<IMovementRefReps | IMovementRefTimed>[];
   rest: IWorkoutRest;
-  config: any;
+  config: IWorkoutConfig;
 }
 
 // =============== DATA OBJECT STRUCTURES ===============
@@ -96,7 +96,7 @@ export interface IWorkout {
   mode: WorkoutMode;
   movements: IMovementRefReps[] | IMovementRefTimed[];
   rest: IWorkoutRest;
-  config: any;
+  config: IWorkoutConfig;
 }
 
 export interface IMovementRefs {
@@ -118,6 +118,10 @@ export interface IWorkoutRest {
   auto: boolean;
   inner: number;
   outer: number;
+}
+
+export interface IWorkoutConfig {
+  rounds?: number;
 }
 
 // interface IWorkoutExercise {
