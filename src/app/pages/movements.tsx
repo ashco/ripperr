@@ -1,18 +1,16 @@
-﻿import { useState, useContext, useEffect } from 'react';
+﻿import React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import MovementList from '../components/Movements/MovementList';
-import { MovementFormButton } from '../components/Movements';
+import { MovementFormButton } from '../components/Buttons';
 
 import { withAuthorization, withMovements } from '../context';
 
 import { IAuthUserContext } from '../common/types';
 import { FormMode } from '../common/enums';
 
-const MovementsPage: NextPage<{
-  authUser: IAuthUserContext;
-}> = ({ authUser }) => {
+const MovementsPage: NextPage = () => {
   return (
     <div>
       <h1>Movements</h1>
