@@ -4,10 +4,10 @@ import { MovementsContext } from '../../../context';
 
 import { Row } from '../FormStyles';
 
-import { IHandleChange, IMovementRefReps } from '../../../common/types';
+import { IHandleChange, IMovementRefs } from '../../../common/types';
 
 const RepsField: React.FC<{
-  move: IMovementRefReps;
+  move: IMovementRefs;
   i: number;
   handleChange: (e: IHandleChange, i: number) => void;
   handleDeleteMovementRef: (i: number) => void;
@@ -40,7 +40,7 @@ const RepsField: React.FC<{
             <input
               name="reps"
               type="number"
-              value={move.reps}
+              value={move.reps as number}
               onChange={(e): void => handleChange(e, i)}
             />
             Reps
@@ -51,7 +51,7 @@ const RepsField: React.FC<{
             <input
               name="sets"
               type="number"
-              value={move.sets}
+              value={move.sets as number}
               onChange={(e): void => handleChange(e, i)}
             />
             Sets

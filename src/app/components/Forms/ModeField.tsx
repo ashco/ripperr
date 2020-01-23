@@ -5,19 +5,30 @@ import { Row } from './FormStyles';
 import { IHandleChange, IWorkoutFormValues } from '../../common/types';
 import { WorkoutMode } from '../../common/enums';
 
-const ModeField: React.FC<{
+const TimedModeConfigFields: React.FC<{
   form: IWorkoutFormValues;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
-  // TODO Clear out config property + set to default for new mode
-  //   const newMoves = form.movements.map((move) => ({
-  //     id: move.id,
-  //     config: {},
-  //   }));
-  //   const newForm = { ...form, movements: newMoves };
-  //   // setForm(newForm);
-  // }
+  return (
+    <Row>
+      <label>
+        <input
+          type="number"
+          name="rounds"
+          value={form.config.rounds}
+          onChange={handleChange}
+        />
+        Rounds
+      </label>
+    </Row>
+  );
+};
 
+const ModeField: React.FC<{
+  form: IWorkoutFormValues;
+  handleChange: (e: IHandleChange) => void;
+  handleChangeConfig: (e: IHandleChange) => void;
+}> = ({ form, handleChange, handleChangeConfig }) => {
   return (
     <>
       <Row>
@@ -43,18 +54,15 @@ const ModeField: React.FC<{
         </label>
       </Row>
       <Row>
-        {form.mode === WorkoutMode.Reps && <p>Reps Mode Config</p>}
-        {form.mode === WorkoutMode.Timed && <p>Timed Mode Config</p>}
+        {/* {form.mode === WorkoutMode.Reps && ()} */}
+        {form.mode === WorkoutMode.Timed && (
+          <TimedModeConfigFields
+            form={form}
+            handleChange={handleChangeConfig}
+          />
+        )}
       </Row>
     </>
-  );
-};
-
-const TimedModeConfigFields = () => {
-  return (
-    <label>
-      <input type="number" />
-    </label>
   );
 };
 

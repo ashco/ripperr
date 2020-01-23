@@ -5,6 +5,7 @@
 export enum FormFieldProp {
   Movements = 'MOVEMENTS',
   Rest = 'REST',
+  Config = 'CONFIG',
 }
 export enum WorkoutMode {
   Reps = 'REPS',

@@ -4,7 +4,7 @@
   IWorkoutFormValues,
 } from './types';
 
-import { FormFieldProp } from './enums';
+import { FormFieldProp, WorkoutMode } from './enums';
 
 export function handleChange(
   e: IHandleChange,
@@ -16,7 +16,6 @@ export function handleChange(
   },
 ): void {
   const newState = { ...state };
-  // const { name } = e.target;
   const name: string = e.target.name;
   const { options, multiple } = e.target as HTMLSelectElement;
 
@@ -47,6 +46,8 @@ export function handleChange(
     newState.movements[config.index as number][name] = value;
   } else if (config && config.type === FormFieldProp.Rest) {
     newState.rest[name] = value;
+  } else if (config && config.type === FormFieldProp.Config) {
+    newState.config[name] = value;
   } else {
     newState[name] = value;
   }

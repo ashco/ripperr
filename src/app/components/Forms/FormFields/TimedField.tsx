@@ -4,10 +4,10 @@ import { MovementsContext } from '../../../context';
 
 import { Row } from '../FormStyles';
 
-import { IHandleChange, IMovementRefTimed } from '../../../common/types';
+import { IHandleChange, IMovementRefs } from '../../../common/types';
 
 const TimedField: React.FC<{
-  move: IMovementRefTimed;
+  move: IMovementRefs;
   i: number;
   handleChange: (e: IHandleChange, i: number) => void;
   handleDeleteMovementRef: (i: number) => void;
@@ -22,7 +22,7 @@ const TimedField: React.FC<{
           <label>
             <select
               name="id"
-              onChange={(e) => handleChange(e, i)}
+              onChange={(e): void => handleChange(e, i)}
               value={move.id}
             >
               <option
@@ -40,8 +40,8 @@ const TimedField: React.FC<{
             <input
               name="duration"
               type="number"
-              value={move.duration}
-              onChange={(e) => handleChange(e, i)}
+              value={move.duration as number}
+              onChange={(e): void => handleChange(e, i)}
             />
             Duration
           </label>

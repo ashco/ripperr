@@ -16,8 +16,8 @@ import {
   IWorkout,
   IWorkoutFormValues,
   IMovementRefs,
-  IMovementRefReps,
-  IMovementRefTimed,
+  // IMovementRefReps,
+  // IMovementRefTimed,
 } from '../../common/types';
 import {
   FormFieldProp,
@@ -36,6 +36,7 @@ const INITIAL_VALUES: IWorkoutFormValues = {
       id: '',
       reps: 0,
       sets: 0,
+      duration: 0,
     },
   ],
   rest: {
@@ -45,7 +46,7 @@ const INITIAL_VALUES: IWorkoutFormValues = {
   },
   config: {
     // TIMED
-    rounds: 0,
+    rounds: 1,
   },
 };
 
@@ -61,7 +62,9 @@ const WorkoutForm: React.FC<{
 
   let initialFormState = {
     ...INITIAL_VALUES,
-    movements: INITIAL_VALUES.movements.map((move) => ({ ...move })),
+    movements: INITIAL_VALUES.movements.map((move) => ({
+      ...move,
+    })),
     rest: { ...INITIAL_VALUES.rest },
     config: { ...INITIAL_VALUES.config },
   };
@@ -174,6 +177,10 @@ const WorkoutForm: React.FC<{
     handleChange(e, form, setForm, { type: FormFieldProp.Rest });
   }
 
+  function handleChangeFormConfig(e: IHandleChange): void {
+    handleChange(e, form, setForm, { type: FormFieldProp.Config });
+  }
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
@@ -193,14 +200,10 @@ const WorkoutForm: React.FC<{
 
     const newMovement: IMovementRefs = {
       id: '',
+      reps: 0,
+      sets: 0,
+      duration: 0,
     };
-
-    if (mode === WorkoutMode.Reps) {
-      newMovement.reps = 0;
-      newMovement.sets = 0;
-    } else if (mode === WorkoutMode.Timed) {
-      newMovement.duration = 0;
-    }
 
     newForm.movements.push(newMovement);
     setForm(newForm);
@@ -220,7 +223,7 @@ const WorkoutForm: React.FC<{
         return form.movements.map((move, i) => (
           <RepsField
             key={i}
-            move={move as IMovementRefReps}
+            move={move}
             i={i}
             handleChange={handleChangeFormMovement}
             handleDeleteMovementRef={handleDeleteMovementRef}
@@ -230,7 +233,7 @@ const WorkoutForm: React.FC<{
         return form.movements.map((move, i) => (
           <TimedField
             key={i}
-            move={move as IMovementRefTimed}
+            move={move}
             i={i}
             handleChange={handleChangeFormMovement}
             handleDeleteMovementRef={handleDeleteMovementRef}
@@ -246,12 +249,13 @@ const WorkoutForm: React.FC<{
       <form onSubmit={handleSubmit}>
         <div>
           <FirstFields form={form} handleChange={handleChangeForm} />
-          <ModeField form={form} handleChange={handleChangeForm} />
+          <ModeField
+            form={form}
+            handleChange={handleChangeForm}
+            handleChangeConfig={handleChangeFormConfig}
+          />
           {renderMovementFields()}
-          <button
-            type="button"
-            onClick={(): void => handleAddMovementRef(form.mode)}
-          >
+          <button type="button" onClick={() => handleAddMovementRef(form.mode)}>
             +
           </button>
           <RestField form={form} handleChange={handleChangeFormRest} />
