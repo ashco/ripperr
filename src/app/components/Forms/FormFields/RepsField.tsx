@@ -2,7 +2,7 @@
 
 import { MovementsContext } from '../../../context';
 
-import { Row } from '../FormStyles';
+import { Row } from '../styles';
 
 import { IHandleChange, IMovementRefs } from '../../../common/types';
 

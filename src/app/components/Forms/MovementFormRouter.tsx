@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 
 import { ExerciseForm, WorkoutForm } from './index';
+import { FormWrapper } from './styles';
 
 import { FormMode, MovementType } from '../../common/enums';
 import { IWorkout, IExercise } from '../../common/types';
@@ -68,17 +69,19 @@ const SelectAddForm: React.FC<{
   addWorkout: () => void;
 }> = ({ addExercise, addWorkout }) => {
   return (
-    <div>
+    <SelectAddFormWrapper>
       <button onClick={addExercise}>Add Exercise</button>
       <button onClick={addWorkout}>Add Workout</button>
-    </div>
+    </SelectAddFormWrapper>
   );
 };
 
-const WorkoutFormWrapper = styled.div`
-  background: white;
-  height: 500px;
-  width: 500px;
+const SelectAddFormWrapper = styled(FormWrapper)`
+  button {
+    font-size: 1.8rem;
+    margin: 0.25rem;
+    padding: 0.6rem;
+  }
 `;
 
 export default MovementFormRouter;

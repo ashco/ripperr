@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { Row } from '../FormStyles';
+import { Row } from '../styles';
 
 import {
   IHandleChange,

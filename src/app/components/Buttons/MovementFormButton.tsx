@@ -1,12 +1,12 @@
 ﻿import React, { useState } from 'react';
 import { Modal } from '../Modal';
 
-import { MovementForm } from '../Forms';
+import { MovementModal } from '../Forms';
 
 import { IExercise, IWorkout } from '../../common/types';
 import { FormMode } from '../../common/enums';
 
-const MovementFormButton: React.FC<{
+const MovementModalButton: React.FC<{
   formMode: FormMode;
   movement?: IExercise | IWorkout;
 }> = ({ formMode, movement }) => {
@@ -23,7 +23,7 @@ const MovementFormButton: React.FC<{
 
   const modal = showModal ? (
     <Modal>
-      <MovementForm formMode={formMode} hide={hide} movement={movement} />
+      <MovementModal formMode={formMode} hide={hide} movement={movement} />
     </Modal>
   ) : null;
 
@@ -35,4 +35,4 @@ const MovementFormButton: React.FC<{
   );
 };
 
-export default MovementFormButton;
+export default MovementModalButton;

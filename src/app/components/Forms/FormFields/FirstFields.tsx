@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { Row } from '../FormStyles';
+import { Row } from '../styles';
 
 import {
   IHandleChange,

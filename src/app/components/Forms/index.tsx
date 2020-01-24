@@ -1,4 +1,4 @@
-﻿import MovementForm from './MovementForm';
+﻿import MovementModal from '../Modal/MovementModal';
 import ExerciseForm from './ExerciseForm';
 import WorkoutForm from './WorkoutForm';
 import MovementFormRouter from './MovementFormRouter';
@@ -22,7 +22,7 @@ import {
 } from './validationSchema';
 
 export {
-  MovementForm,
+  MovementModal,
   MovementFormRouter,
   InputField,
   SelectField,

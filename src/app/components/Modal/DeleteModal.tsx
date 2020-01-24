@@ -1,5 +1,7 @@
-﻿import React, { useContext } from 'react';
+﻿import React from 'react';
 import styled from 'styled-components';
+
+import { ModalWrapper } from './styles';
 
 const DeleteModal: React.FC<{
   text: string;
@@ -20,8 +22,7 @@ const DeleteModal: React.FC<{
   );
 };
 
-const DeleteModalWrapper = styled.div`
-  background: white;
+const DeleteModalWrapper = styled(ModalWrapper)`
   height: 360px;
   width: 360px;
 `;

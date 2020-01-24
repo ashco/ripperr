@@ -1,28 +1,42 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { MovementFormRouter } from './index';
+import { ModalWrapper } from './index';
+import { MovementFormRouter } from '../Forms';
 
 import { FormMode } from '../../common/enums';
 import { IExercise, IWorkout } from '../../common/types';
 
-const MovementForm: React.FC<{
+const MovementModal: React.FC<{
   formMode: FormMode;
   hide: () => void;
   movement?: IExercise | IWorkout;
 }> = ({ formMode, hide, movement }) => {
   return (
     <WorkoutFormWrapper>
-      <button onClick={hide}>Close</button>
+      <button className="btn-close" onClick={hide}>
+        X
+      </button>
       <MovementFormRouter formMode={formMode} hide={hide} movement={movement} />
     </WorkoutFormWrapper>
   );
 };
 
-const WorkoutFormWrapper = styled.div`
-  background: white;
+const WorkoutFormWrapper = styled(ModalWrapper)`
+  position: relative;
+  display: flex;
+  flex-direction: column;
   height: 500px;
   width: 500px;
+  .btn-close {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+  .main {
+    margin: 2rem auto;
+    /* margin: 1rem auto; */
+  }
 `;
 
-export default MovementForm;
+export default MovementModal;

@@ -14,17 +14,12 @@ const MovementsPage: NextPage = () => {
   return (
     <div>
       <h1>Movements</h1>
-      <StyledMovementFormButton formMode={FormMode.Add} />
+      <MovementFormButton formMode={FormMode.Add} />
       <MovementList />
     </div>
   );
 };
 
-const StyledMovementFormButton = styled(MovementFormButton)`
-  button {
-    background-color: red;
-  }
-`;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 
