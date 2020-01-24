@@ -76,7 +76,10 @@ const SelectAddForm: React.FC<{
   );
 };
 
-const SelectAddFormWrapper = styled(FormWrapper)`
+const SelectAddFormWrapper = styled.div`
+  margin: auto;
+  display: flex;
+  flex-direction: column;
   button {
     font-size: 1.8rem;
     margin: 0.25rem;

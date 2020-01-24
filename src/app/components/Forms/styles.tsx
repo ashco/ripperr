@@ -9,4 +9,9 @@ export const FormWrapper = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
 `;

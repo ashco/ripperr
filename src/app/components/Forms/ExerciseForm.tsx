@@ -12,7 +12,9 @@ import {
   handleValidation,
   validateForm,
 } from '../../common/formHelpers';
+
 import { FirstFields } from './index';
+import { FormWrapper } from './styles';
 
 import {
   IHandleChange,
@@ -171,23 +173,23 @@ const ExerciseForm: React.FC<{
     <ExerciseFormWrapper>
       <h1>{text.title}</h1>
       <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <FirstFields
-            form={form}
-            errors={errors}
-            handleChange={handleChangeForm}
-          />
-        </div>
+        <FirstFields
+          form={form}
+          errors={errors}
+          handleChange={handleChangeForm}
+        />
         <button type="submit">{text.submitButton}</button>
       </form>
     </ExerciseFormWrapper>
   );
 };
 
-const ExerciseFormWrapper = styled.div`
-  background: white;
-  height: 500px;
-  width: 500px;
+const ExerciseFormWrapper = styled(FormWrapper)`
+  /* button {
+    font-size: 1.8rem;
+    margin: 0.25rem;
+    padding: 0.6rem;
+  } */
 `;
 
 export default ExerciseForm;
