@@ -1,5 +1,6 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 import {
   FirstFields,
@@ -8,13 +9,22 @@ import {
   RestField,
   ModeField,
 } from './index';
-import { AuthUserContext, FirebaseContext } from '../../context';
-import { handleChange } from '../../common/formHelpers';
+import {
+  AuthUserContext,
+  FirebaseContext,
+  MovementsContext,
+} from '../../context';
+import {
+  handleChange,
+  handleValidation,
+  validateForm,
+} from '../../common/formHelpers';
 
 import {
   IHandleChange,
   IWorkout,
   IWorkoutFormValues,
+  IWorkoutFormErrors,
   IMovementRefs,
   // IMovementRefReps,
   // IMovementRefTimed,
@@ -26,7 +36,7 @@ import {
   MovementType,
 } from '../../common/enums';
 
-const INITIAL_VALUES: IWorkoutFormValues = {
+const INITIAL_FORM_VALUES: IWorkoutFormValues = {
   name: '',
   description: '',
   tags: [],
@@ -50,6 +60,18 @@ const INITIAL_VALUES: IWorkoutFormValues = {
   },
 };
 
+const INITIAL_ERROR_VALUES = {
+  name: '',
+  description: '',
+  tags: '',
+  mode: '',
+  // movements: [''],
+  // rest: '',
+  // config: {
+  //   rounds: '',
+  // },
+};
+
 const WorkoutForm: React.FC<{
   formMode: FormMode;
   hide: () => void;
@@ -57,26 +79,28 @@ const WorkoutForm: React.FC<{
 }> = ({ formMode, hide, workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
+  const { workouts } = useContext(MovementsContext);
 
   // ============ SET UP FORM STATE ============
-
   let initialFormState = {
-    ...INITIAL_VALUES,
-    movements: INITIAL_VALUES.movements.map((move) => ({
+    ...INITIAL_FORM_VALUES,
+    movements: INITIAL_FORM_VALUES.movements.map((move) => ({
       ...move,
     })),
-    rest: { ...INITIAL_VALUES.rest },
-    config: { ...INITIAL_VALUES.config },
+    rest: { ...INITIAL_FORM_VALUES.rest },
+    config: { ...INITIAL_FORM_VALUES.config },
   };
   if (formMode === FormMode.Edit && workout) {
     initialFormState = workout;
   }
 
   const [form, setForm] = useState(initialFormState);
+  const [errors, setErrors] = useState(INITIAL_ERROR_VALUES);
 
   // ============ VALIDATION ============
 
   const isValid = true;
+
   // let isValidName = true;
 
   // if (exercise) {
@@ -105,7 +129,12 @@ const WorkoutForm: React.FC<{
     if (authUser) {
       const docRef = firebase.workouts(authUser.uid).doc();
 
-      // TODO - Check that workout name is unique
+      // Check that name is unique
+      const woNames = workouts.map((wo) => wo.name);
+      if (woNames.includes(form.name)) {
+        toast.error('Workout name is already in use.');
+        return;
+      }
 
       const workoutObj: IWorkout = {
         id: docRef.id,
@@ -164,6 +193,7 @@ const WorkoutForm: React.FC<{
   // ============ FORM FUNCTIONS ============
   function handleChangeForm(e: IHandleChange): void {
     handleChange(e, form, setForm);
+    handleValidation(e, errors, setErrors);
   }
 
   const handleChangeFormMovement = (e: IHandleChange, i: number): void => {
@@ -248,9 +278,14 @@ const WorkoutForm: React.FC<{
       <h1>{text.title}</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <FirstFields form={form} handleChange={handleChangeForm} />
+          <FirstFields
+            form={form}
+            errors={errors}
+            handleChange={handleChangeForm}
+          />
           <ModeField
             form={form}
+            errors={errors}
             handleChange={handleChangeForm}
             handleChangeConfig={handleChangeFormConfig}
           />

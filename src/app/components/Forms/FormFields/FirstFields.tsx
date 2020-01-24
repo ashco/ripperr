@@ -6,12 +6,15 @@ import {
   IHandleChange,
   IExerciseFormValues,
   IWorkoutFormValues,
+  IExerciseFormErrors,
+  // IWorkoutFormErrors,
 } from '../../../common/types';
 
 const FirstFields: React.FC<{
   form: IExerciseFormValues | IWorkoutFormValues;
+  errors: IExerciseFormErrors;
   handleChange: (e: IHandleChange) => void;
-}> = ({ form, handleChange }) => {
+}> = ({ form, errors, handleChange }) => {
   return (
     <>
       <Row>
@@ -24,6 +27,7 @@ const FirstFields: React.FC<{
             onChange={handleChange}
           />
         </label>
+        <span className="error">{errors.name}</span>
       </Row>
       <Row>
         <label htmlFor="description">
@@ -34,6 +38,7 @@ const FirstFields: React.FC<{
             onChange={handleChange}
           />
         </label>
+        <span className="error">{errors.description}</span>
       </Row>
       <Row>
         <label htmlFor="tags">
@@ -50,6 +55,7 @@ const FirstFields: React.FC<{
             <option label="CORE" value="Core" />
           </select>
         </label>
+        <span className="error">{errors.tags}</span>
       </Row>
     </>
   );

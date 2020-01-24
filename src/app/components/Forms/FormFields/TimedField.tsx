@@ -40,6 +40,7 @@ const TimedField: React.FC<{
             <input
               name="duration"
               type="number"
+              min="0"
               value={move.duration as number}
               onChange={(e): void => handleChange(e, i)}
             />

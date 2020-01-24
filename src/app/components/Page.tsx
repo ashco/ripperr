@@ -1,7 +1,9 @@
 ﻿import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 
 import GlobalStyle from '../styles/GlobalStyle';
+
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
@@ -36,7 +38,7 @@ const ModalRoot = styled.div`
 `;
 
 const Inner = styled.div`
-  max-width: ${props => props.theme.maxWidth};
+  max-width: ${(props) => props.theme.maxWidth};
   margin: 0 auto;
   padding: 2rem;
   height: auto;
@@ -51,6 +53,7 @@ const Page = (props: any) => {
         <Meta />
         <ModalRoot id="modal-root" />
         <Navigation />
+        <ToastContainer />
         <Inner>{props.children}</Inner>
       </StyledPage>
     </ThemeProvider>

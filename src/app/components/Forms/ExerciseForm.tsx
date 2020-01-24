@@ -1,21 +1,38 @@
 ﻿import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
-import { AuthUserContext, FirebaseContext } from '../../context';
-import { handleChange } from '../../common/formHelpers';
+import {
+  AuthUserContext,
+  FirebaseContext,
+  MovementsContext,
+} from '../../context';
+import {
+  handleChange,
+  handleValidation,
+  validateForm,
+} from '../../common/formHelpers';
 import { FirstFields } from './index';
 
 import {
   IHandleChange,
   IExercise,
   IExerciseFormValues,
+  IExerciseFormErrors,
+  IWorkoutFormValues,
 } from '../../common/types';
 import { FormMode, MovementType } from '../../common/enums';
 
-const INITIAL_VALUES: IExerciseFormValues = {
+const INITIAL_FORM_VALUES: IExerciseFormValues = {
   name: '',
   description: '',
   tags: [],
+};
+
+const INITIAL_ERROR_VALUES: IExerciseFormErrors = {
+  name: '',
+  description: '',
+  tags: '',
 };
 
 const ExerciseForm: React.FC<{
@@ -25,18 +42,20 @@ const ExerciseForm: React.FC<{
 }> = ({ formMode, hide, exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
+  const { exercises } = useContext(MovementsContext);
 
   // ============ SET UP FORM STATE ============
-  let initialFormState = INITIAL_VALUES;
+  let initialFormState = INITIAL_FORM_VALUES;
   if (formMode === FormMode.Edit && exercise) {
     initialFormState = exercise;
   }
 
   const [form, setForm] = useState(initialFormState);
+  const [errors, setErrors] = useState(INITIAL_ERROR_VALUES);
 
   // ============ VALIDATION ============
 
-  const isValid = true;
+  // const isValid = true;
   // let isValidName = true;
 
   // if (exercise) {
@@ -65,7 +84,12 @@ const ExerciseForm: React.FC<{
     if (authUser) {
       const docRef = firebase.exercises(authUser.uid).doc();
 
-      // TODO - Check that exercise name is unique
+      // Check that name is unique
+      const exNames = exercises.map((ex) => ex.name);
+      if (exNames.includes(form.name)) {
+        toast.error('Exercise name is already in use.');
+        return;
+      }
 
       const exerciseObj: IExercise = {
         id: docRef.id,
@@ -93,6 +117,13 @@ const ExerciseForm: React.FC<{
 
   function handleUpdateExercise(form: IExerciseFormValues): void {
     if (authUser && exercise) {
+      // Check that name is unique or matches with current id
+      const exNames = exercises.map((ex) => ex.name);
+      if (exNames.includes(form.name) && exercise.name !== form.name) {
+        toast.error('Exercise name is already in use.');
+        return;
+      }
+
       const exerciseObj: IExerciseFormValues = {
         lastModified: firebase.getTimestamp(),
         name: form.name,
@@ -116,30 +147,38 @@ const ExerciseForm: React.FC<{
   }
 
   // ============ FORM FUNCTIONS ============
+
   function handleChangeForm(e: IHandleChange): void {
     handleChange(e, form, setForm);
+    handleValidation(e, errors, setErrors);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (formMode === FormMode.Add) {
-      handleCreateExercise(form);
-    } else if (formMode === FormMode.Edit) {
-      handleUpdateExercise(form);
+    if (validateForm(errors)) {
+      if (formMode === FormMode.Add) {
+        handleCreateExercise(form);
+      } else if (formMode === FormMode.Edit) {
+        handleUpdateExercise(form);
+      }
+    } else {
+      toast.error('There is a problem with your configuration..');
     }
   }
 
   return (
     <ExerciseFormWrapper>
       <h1>{text.title}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div>
-          <FirstFields form={form} handleChange={handleChangeForm} />
+          <FirstFields
+            form={form}
+            errors={errors}
+            handleChange={handleChangeForm}
+          />
         </div>
-        <button type="submit" disabled={!isValid}>
-          {text.submitButton}
-        </button>
+        <button type="submit">{text.submitButton}</button>
       </form>
     </ExerciseFormWrapper>
   );

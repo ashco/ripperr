@@ -40,6 +40,7 @@ const RepsField: React.FC<{
             <input
               name="reps"
               type="number"
+              min="0"
               value={move.reps as number}
               onChange={(e): void => handleChange(e, i)}
             />
@@ -51,6 +52,7 @@ const RepsField: React.FC<{
             <input
               name="sets"
               type="number"
+              min="0"
               value={move.sets as number}
               onChange={(e): void => handleChange(e, i)}
             />

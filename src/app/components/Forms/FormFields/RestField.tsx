@@ -33,6 +33,7 @@ const RestField: React.FC<{
             <input
               type="number"
               name="inner"
+              min="0"
               onChange={handleChange}
               value={form.rest.inner}
             />
@@ -44,6 +45,7 @@ const RestField: React.FC<{
             <input
               type="number"
               name="outer"
+              min="0"
               onChange={handleChange}
               value={form.rest.outer}
             />

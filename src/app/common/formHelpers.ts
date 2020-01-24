@@ -1,27 +1,19 @@
 ﻿import {
+  IExercise,
+  IWorkout,
   IHandleChange,
   IExerciseFormValues,
   IWorkoutFormValues,
+  IExerciseFormErrors,
+  IWorkoutFormErrors,
 } from './types';
 
-import { FormFieldProp, WorkoutMode } from './enums';
+import { FormFieldProp, WorkoutMode, MovementType } from './enums';
 
-export function handleChange(
-  e: IHandleChange,
-  state: IExerciseFormValues | IWorkoutFormValues,
-  setState: (state: any) => void,
-  config?: {
-    type: FormFieldProp;
-    index?: number;
-  },
-): void {
-  const newState = { ...state };
-  const name: string = e.target.name;
+function getValue(e: IHandleChange): string | number | boolean | string[] {
   const { options, multiple } = e.target as HTMLSelectElement;
-
   let value;
 
-  // Determine Value
   if (options && multiple) {
     // Multi Select
     value = [];
@@ -41,6 +33,23 @@ export function handleChange(
     value = e.target.value;
   }
 
+  return value;
+}
+
+export function handleChange(
+  e: IHandleChange,
+  state: IExerciseFormValues | IWorkoutFormValues,
+  setState: (state: any) => void,
+  config?: {
+    type: FormFieldProp;
+    index?: number;
+  },
+): void {
+  const newState = { ...state };
+  const name: string = e.target.name;
+
+  const value = getValue(e);
+
   // State Assignment
   if (config && config.type === FormFieldProp.Movements) {
     newState.movements[config.index as number][name] = value;
@@ -52,6 +61,46 @@ export function handleChange(
     newState[name] = value;
   }
 
-  console.log(newState);
   setState(newState);
+}
+
+export function handleValidation(
+  e: IHandleChange,
+  errors: any,
+  setErrors: (state: any) => void,
+): void {
+  const name: string = e.target.name;
+
+  const value = getValue(e);
+
+  let errorMsg = '';
+
+  switch (name) {
+    case 'name':
+      if ((value as string).length < 2) {
+        errorMsg = 'Name is too short!';
+      }
+      break;
+    case 'description':
+      if ((value as string).length > 140) {
+        errorMsg = 'Description is too long!';
+      }
+      break;
+    case 'tags':
+      break;
+    default:
+      break;
+  }
+  setErrors({ ...errors, [name]: errorMsg });
+}
+
+export function validateForm(
+  errors: IExerciseFormErrors | IWorkoutFormErrors,
+): boolean {
+  let valid = true;
+  Object.values(errors).forEach(
+    // if we have an error string set valid to false
+    (val) => val.length > 0 && (valid = false),
+  );
+  return valid;
 }

@@ -49,6 +49,11 @@ export interface IExerciseFormValues {
   description: string;
   tags: string[];
 }
+export interface IExerciseFormErrors {
+  name: string;
+  description: string;
+  tags: string;
+}
 
 export interface IWorkoutFormValues {
   [key: string]: any;
@@ -60,6 +65,12 @@ export interface IWorkoutFormValues {
   movements: IMovementRefs[];
   rest: IWorkoutRest;
   config: IWorkoutConfig;
+}
+
+export interface IWorkoutFormErrors {
+  name: string;
+  description: string;
+  tags: string;
 }
 
 // =============== DATA OBJECT STRUCTURES ===============

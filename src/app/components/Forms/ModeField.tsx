@@ -2,7 +2,11 @@
 
 import { Row } from './FormStyles';
 
-import { IHandleChange, IWorkoutFormValues } from '../../common/types';
+import {
+  IHandleChange,
+  IWorkoutFormValues,
+  IWorkoutFormErrors,
+} from '../../common/types';
 import { WorkoutMode } from '../../common/enums';
 
 const TimedModeConfigFields: React.FC<{
@@ -15,6 +19,7 @@ const TimedModeConfigFields: React.FC<{
         <input
           type="number"
           name="rounds"
+          min="0"
           value={form.config.rounds}
           onChange={handleChange}
         />
@@ -26,6 +31,7 @@ const TimedModeConfigFields: React.FC<{
 
 const ModeField: React.FC<{
   form: IWorkoutFormValues;
+  errors: IWorkoutFormErrors;
   handleChange: (e: IHandleChange) => void;
   handleChangeConfig: (e: IHandleChange) => void;
 }> = ({ form, handleChange, handleChangeConfig }) => {
