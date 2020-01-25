@@ -47,6 +47,7 @@ const INITIAL_FORM_VALUES: IWorkoutFormValues = {
   movements: [
     {
       id: '',
+      name: '',
       reps: 0,
       sets: 0,
       duration: 0,
@@ -83,6 +84,8 @@ const WorkoutForm: React.FC<{
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const { workouts } = useContext(MovementsContext);
+
+  // console.log(workouts);
 
   // ============ SET UP FORM STATE ============
   let initialFormState = {
@@ -221,6 +224,7 @@ const WorkoutForm: React.FC<{
 
     const newMovement: IMovementRefs = {
       id: '',
+      name: '',
       reps: 0,
       sets: 0,
       duration: 0,

@@ -103,6 +103,7 @@ export interface IWorkout {
 export interface IMovementRefs {
   [key: string]: string | number;
   id: string;
+  name: string;
   sets: number;
   reps: number;
   duration: number;

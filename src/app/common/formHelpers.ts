@@ -36,6 +36,20 @@ function getValue(e: IHandleChange): string | number | boolean | string[] {
   return value;
 }
 
+function getName(e: IHandleChange): string | null {
+  const { options } = e.target as HTMLSelectElement;
+  let value = null;
+
+  if (options) {
+    for (let i = 0, l = options.length; i < l; i += 1) {
+      if (options[i].selected) {
+        value = options[i].label;
+      }
+    }
+  }
+
+  return value;
+}
 export function handleChange(
   e: IHandleChange,
   state: IExerciseFormValues | IWorkoutFormValues,
@@ -53,6 +67,10 @@ export function handleChange(
   // State Assignment
   if (config && config.type === FormFieldProp.Movements) {
     newState.movements[config.index as number][name] = value;
+    if (name === 'id') {
+      const optionName = getName(e);
+      newState.movements[config.index as number]['name'] = optionName;
+    }
   } else if (config && config.type === FormFieldProp.Rest) {
     newState.rest[name] = value;
   } else if (config && config.type === FormFieldProp.Config) {
