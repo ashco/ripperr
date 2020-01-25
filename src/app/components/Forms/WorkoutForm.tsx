@@ -100,18 +100,6 @@ const WorkoutForm: React.FC<{
   const [form, setForm] = useState(initialFormState);
   const [errors, setErrors] = useState(INITIAL_ERROR_VALUES);
 
-  // ============ VALIDATION ============
-
-  const isValid = true;
-
-  // let isValidName = true;
-
-  // if (exercise) {
-  //   isValidName = name !== '' || name !== exercise.name;
-  // }
-
-  // isValid = isValidName;
-
   // ============ TEXT VALUES ============
 
   const text = {
@@ -293,15 +281,13 @@ const WorkoutForm: React.FC<{
             handleChangeConfig={handleChangeFormConfig}
           />
           {renderMovementFields()}
-          {/* <Row> */}
-          <Button
+          <button
             type="button"
             className="add-btn"
             onClick={() => handleAddMovementRef(form.mode)}
           >
             +
-          </Button>
-          {/* </Row> */}
+          </button>
           <RestField form={form} handleChange={handleChangeFormRest} />
         </div>
         <ButtonRow hide={hide} submitText={text.submitButton} />

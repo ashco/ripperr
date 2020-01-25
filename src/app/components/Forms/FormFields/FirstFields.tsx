@@ -36,11 +36,12 @@ const FirstFields: React.FC<{
       <span className="error">{errors.description}</span>
       <label htmlFor="tags">
         Tags
+        <div></div>
         <select multiple name="tags" value={form.tags} onChange={handleChange}>
-          <option label="PUSH" value="Push" />
-          <option label="PULL" value="Pull" />
-          <option label="SQUAT" value="Squat" />
-          <option label="CORE" value="Core" />
+          <TagOption label="PUSH" value="Push" />
+          <TagOption label="PULL" value="Pull" />
+          <TagOption label="SQUAT" value="Squat" />
+          <TagOption label="CORE" value="Core" />
         </select>
       </label>
       <span className="error">{errors.tags}</span>
@@ -59,6 +60,19 @@ const FirstFieldsWrapper = styled.div`
   #description {
     height: 3rem;
     resize: none;
+  }
+`;
+
+const TagOption = styled.option`
+  height: auto;
+  width: auto;
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  &:hover {
+    background: grey;
   }
 `;
 

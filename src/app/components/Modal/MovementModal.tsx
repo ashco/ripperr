@@ -20,11 +20,12 @@ const MovementModal: React.FC<{
   const addWorkout = () => setAddMovementType(MovementType.Workout);
 
   function renderForm() {
-    if (addMovementType === null) {
-      return (
-        <SelectAddForm addExercise={addExercise} addWorkout={addWorkout} />
-      );
-    } else if (addMovementType === MovementType.Exercise) {
+    console.log(addMovementType);
+    console.log(movement);
+    if (
+      addMovementType === MovementType.Exercise ||
+      (movement && movement.type === MovementType.Exercise)
+    ) {
       return (
         <ExerciseForm
           formMode={formMode}
@@ -32,7 +33,10 @@ const MovementModal: React.FC<{
           exercise={movement as IExercise}
         />
       );
-    } else if (addMovementType === MovementType.Workout) {
+    } else if (
+      addMovementType === MovementType.Workout ||
+      (movement && movement.type === MovementType.Workout)
+    ) {
       return (
         <WorkoutForm
           formMode={formMode}
@@ -40,8 +44,10 @@ const MovementModal: React.FC<{
           workout={movement as IWorkout}
         />
       );
-    } else {
-      return <div>Nothing to see here...</div>;
+    } else if (addMovementType === null) {
+      return (
+        <SelectAddForm addExercise={addExercise} addWorkout={addWorkout} />
+      );
     }
   }
 

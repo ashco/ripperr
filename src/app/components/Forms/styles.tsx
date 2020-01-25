@@ -12,7 +12,7 @@ export const FormWrapper = styled.div`
   flex-direction: column;
   /* max-width: 70%; */
   h1 {
-    font-size: 2rem;
+    font-size: 24px;
     font-weight: 600;
     margin-bottom: 0.75rem;
   }
@@ -23,7 +23,7 @@ export const FormWrapper = styled.div`
     text-align: center;
   }
   input {
-    font-size: 1.5rem;
+    font-size: 20px;
   }
   input[type='number'] {
     width: 3rem;
@@ -33,14 +33,27 @@ export const FormWrapper = styled.div`
     font-size: 1rem;
   }
   input,
+  textarea {
+    border: 1px solid black;
+  }
+  input,
   textarea,
   select {
-    border: 1px solid black;
     padding: 0.5rem;
+  }
+  select {
+    border: none;
+  }
+  select[name='tags'] {
+    display: flex;
+    flex-directon: column;
   }
   .error {
     margin-bottom: 0.5rem;
     font-size: 0.75rem;
+  }
+  .add-btn {
+    width: 100%;
   }
   .add-btn,
   .rem-btn {
