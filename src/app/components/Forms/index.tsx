@@ -9,6 +9,8 @@ import TimedField from './FormFields/TimedField';
 import RestField from './FormFields/RestField';
 import ModeField from './ModeField';
 
+import FormButtonRow from './FormButtonRow';
+import SelectAddForm from './SelectAddForm';
 import InputField from './InputField';
 import SelectField from './FormFields/SelectField';
 
@@ -39,4 +41,6 @@ export {
   ModeField,
   FirstFields,
   TimedField,
+  FormButtonRow,
+  SelectAddForm,
 };

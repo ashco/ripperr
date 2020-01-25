@@ -1,4 +1,5 @@
-﻿import { ModalNodeAttacher, ModalBackground } from '../Modal';
+﻿import React from 'react';
+import { ModalNodeAttacher, ModalBackground } from '../Modal';
 
 const Modal = (props: any) => (
   <ModalNodeAttacher>

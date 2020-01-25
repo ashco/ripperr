@@ -8,7 +8,9 @@ import {
   TimedField,
   RestField,
   ModeField,
+  FormButtonRow,
 } from './index';
+import { FormWrapper } from './styles';
 import {
   AuthUserContext,
   FirebaseContext,
@@ -295,18 +297,18 @@ const WorkoutForm: React.FC<{
           </button>
           <RestField form={form} handleChange={handleChangeFormRest} />
         </div>
-        <button type="submit" disabled={!isValid}>
-          {text.submitButton}
-        </button>
+        <FormButtonRow hide={hide} submitText={text.submitButton} />
       </form>
     </WorkoutFormWrapper>
   );
 };
 
-const WorkoutFormWrapper = styled.div`
-  background: white;
-  height: 500px;
-  width: 500px;
+const WorkoutFormWrapper = styled(FormWrapper)`
+  /* button {
+    font-size: 1.8rem;
+    margin: 0.25rem;
+    padding: 0.6rem;
+  } */
 `;
 
 export default WorkoutForm;

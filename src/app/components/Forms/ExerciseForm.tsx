@@ -13,7 +13,7 @@ import {
   validateForm,
 } from '../../common/formHelpers';
 
-import { FirstFields } from './index';
+import { FirstFields, FormButtonRow } from './index';
 import { FormWrapper } from './styles';
 
 import {
@@ -178,7 +178,7 @@ const ExerciseForm: React.FC<{
           errors={errors}
           handleChange={handleChangeForm}
         />
-        <button type="submit">{text.submitButton}</button>
+        <FormButtonRow hide={hide} submitText={text.submitButton} />
       </form>
     </ExerciseFormWrapper>
   );
