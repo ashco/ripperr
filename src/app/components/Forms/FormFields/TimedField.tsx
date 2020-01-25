@@ -2,6 +2,7 @@
 
 import { MovementsContext } from '../../../context';
 
+import { Button } from '../../Buttons';
 import { Row } from '../styles';
 
 import { IHandleChange, IMovementRefs } from '../../../common/types';
@@ -15,43 +16,37 @@ const TimedField: React.FC<{
   const { exercises, loading } = useContext(MovementsContext);
 
   return (
-    <>
-      <Row>Exercise {i + 1}</Row>
-      <Row>
-        <div>
-          <label>
-            <select
-              name="id"
-              onChange={(e): void => handleChange(e, i)}
-              value={move.id}
-            >
-              <option
-                label={loading ? 'loading...' : 'Select an exercise'}
-                value=""
-              />
-              {exercises.map((ex) => (
-                <option label={ex.name} value={ex.id} key={ex.id} />
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              name="duration"
-              type="number"
-              min="0"
-              value={move.duration as number}
-              onChange={(e): void => handleChange(e, i)}
-            />
-            Duration
-          </label>
-        </div>
-        <button type="button" onClick={(): void => handleDeleteMovementRef(i)}>
-          -
-        </button>
-      </Row>
-    </>
+    <Row>
+      <label>
+        <select
+          name="id"
+          onChange={(e): void => handleChange(e, i)}
+          value={move.id}
+        >
+          <option label={`Exercise ${i + 1}`} value="" />
+          {exercises.map((ex) => (
+            <option label={ex.name} value={ex.id} key={ex.id} />
+          ))}
+        </select>
+      </label>
+      <label>
+        <input
+          name="duration"
+          type="number"
+          min="0"
+          value={move.duration as number}
+          onChange={(e): void => handleChange(e, i)}
+        />
+        Duration
+      </label>
+      <button
+        type="button"
+        className="rem-btn"
+        onClick={(): void => handleDeleteMovementRef(i)}
+      >
+        -
+      </button>
+    </Row>
   );
 };
 

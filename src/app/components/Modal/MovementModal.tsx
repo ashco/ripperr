@@ -45,16 +45,15 @@ const MovementModal: React.FC<{
     }
   }
 
-  return <WorkoutFormWrapper>{renderForm()}</WorkoutFormWrapper>;
+  return <MovementModalWrapper>{renderForm()}</MovementModalWrapper>;
 };
 
-const WorkoutFormWrapper = styled(ModalWrapper)`
-  position: relative;
+const MovementModalWrapper = styled(ModalWrapper)`
+  /* position: relative;
   display: flex;
-  flex-direction: column;
-  height: auto;
+  flex-direction: column; */
   width: 90%;
-  padding: 4rem 3rem;
+  padding: 3rem 2rem;
 `;
 
 export default MovementModal;

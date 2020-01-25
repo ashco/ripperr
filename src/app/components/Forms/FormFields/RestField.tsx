@@ -17,41 +17,35 @@ const RestField: React.FC<{
     <>
       <Row>Rest Options</Row>
       <Row>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              name="auto"
-              onChange={handleChange}
-              checked={form.rest.auto}
-            />
-            Automatic
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="number"
-              name="inner"
-              min="0"
-              onChange={handleChange}
-              value={form.rest.inner}
-            />
-            Inner Rest Time
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="number"
-              name="outer"
-              min="0"
-              onChange={handleChange}
-              value={form.rest.outer}
-            />
-            Outer Rest Time
-          </label>
-        </div>
+        <label>
+          <input
+            type="checkbox"
+            name="auto"
+            onChange={handleChange}
+            checked={form.rest.auto}
+          />
+          Automatic
+        </label>
+        <label>
+          <input
+            type="number"
+            name="inner"
+            min="0"
+            onChange={handleChange}
+            value={form.rest.inner}
+          />
+          Inner Time
+        </label>
+        <label>
+          <input
+            type="number"
+            name="outer"
+            min="0"
+            onChange={handleChange}
+            value={form.rest.outer}
+          />
+          Outer Time
+        </label>
       </Row>
     </>
   );

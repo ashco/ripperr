@@ -13,7 +13,7 @@ import {
   validateForm,
 } from '../../common/formHelpers';
 
-import { FirstFields, FormButtonRow } from './index';
+import { FirstFields, ButtonRow } from './index';
 import { FormWrapper } from './styles';
 
 import {
@@ -54,17 +54,6 @@ const ExerciseForm: React.FC<{
 
   const [form, setForm] = useState(initialFormState);
   const [errors, setErrors] = useState(INITIAL_ERROR_VALUES);
-
-  // ============ VALIDATION ============
-
-  // const isValid = true;
-  // let isValidName = true;
-
-  // if (exercise) {
-  //   isValidName = name !== '' || name !== exercise.name;
-  // }
-
-  // isValid = isValidName;
 
   // ============ TEXT VALUES ============
 
@@ -178,7 +167,7 @@ const ExerciseForm: React.FC<{
           errors={errors}
           handleChange={handleChangeForm}
         />
-        <FormButtonRow hide={hide} submitText={text.submitButton} />
+        <ButtonRow hide={hide} submitText={text.submitButton} />
       </form>
     </ExerciseFormWrapper>
   );

@@ -27,6 +27,7 @@ const FirstFields: React.FC<{
       />
       <span className="error">{errors.name}</span>
       <textarea
+        id="description"
         name="description"
         placeholder="Enter a description..."
         value={form.description}
@@ -50,18 +51,14 @@ const FirstFields: React.FC<{
 const FirstFieldsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  input,
+  /* input,
   textarea {
     margin-bottom: 0.25rem;
     font-size: 1rem;
-  }
-  textarea {
+  } */
+  #description {
     height: 3rem;
     resize: none;
-  }
-  .error {
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
   }
 `;
 

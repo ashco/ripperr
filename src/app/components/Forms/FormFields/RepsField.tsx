@@ -12,58 +12,48 @@ const RepsField: React.FC<{
   handleChange: (e: IHandleChange, i: number) => void;
   handleDeleteMovementRef: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteMovementRef }) => {
-  const { exercises, loading } = useContext(MovementsContext);
+  const { exercises } = useContext(MovementsContext);
 
   return (
-    <>
-      <Row>Exercise {i + 1}</Row>
-      <Row>
-        <div>
-          <label>
-            <select
-              name="id"
-              onChange={(e): void => handleChange(e, i)}
-              value={move.id}
-            >
-              <option
-                label={loading ? 'loading...' : 'Select an exercise'}
-                value=""
-              />
-              {exercises.map((ex) => (
-                <option label={ex.name} value={ex.id} key={ex.id} />
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              name="reps"
-              type="number"
-              min="0"
-              value={move.reps as number}
-              onChange={(e): void => handleChange(e, i)}
-            />
-            Reps
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              name="sets"
-              type="number"
-              min="0"
-              value={move.sets as number}
-              onChange={(e): void => handleChange(e, i)}
-            />
-            Sets
-          </label>
-        </div>
-        <button type="button" onClick={(): void => handleDeleteMovementRef(i)}>
-          -
-        </button>
-      </Row>
-    </>
+    <Row>
+      <select
+        name="id"
+        onChange={(e): void => handleChange(e, i)}
+        value={move.id}
+      >
+        <option label={`Exercise ${i + 1}`} value="" />
+        {exercises.map((ex) => (
+          <option label={ex.name} value={ex.id} key={ex.id} />
+        ))}
+      </select>
+      <label>
+        <input
+          name="reps"
+          type="number"
+          min="0"
+          value={move.reps as number}
+          onChange={(e): void => handleChange(e, i)}
+        />
+        Reps
+      </label>
+      <label>
+        <input
+          name="sets"
+          type="number"
+          min="0"
+          value={move.sets as number}
+          onChange={(e): void => handleChange(e, i)}
+        />
+        Sets
+      </label>
+      <button
+        type="button"
+        className="rem-btn"
+        onClick={(): void => handleDeleteMovementRef(i)}
+      >
+        -
+      </button>
+    </Row>
   );
 };
 

@@ -2,7 +2,8 @@
 
 export const Row = styled.div`
   display: flex;
-  padding: 0 0.5rem 0.5rem 0;
+  justify-content: space-around;
+  padding-bottom: 0.5rem;
 `;
 
 export const FormWrapper = styled.div`
@@ -11,9 +12,40 @@ export const FormWrapper = styled.div`
   flex-direction: column;
   /* max-width: 70%; */
   h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  input {
+    font-size: 1.5rem;
+  }
+  input[type='number'] {
+    width: 3rem;
+    text-align: center;
+  }
+  textarea {
+    font-size: 1rem;
+  }
+  input,
+  textarea,
+  select {
+    border: 1px solid black;
+    padding: 0.5rem;
+  }
+  .error {
     margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+  }
+  .add-btn,
+  .rem-btn {
+    font-size: 1.5rem;
+    border: 1px solid black;
   }
 `;
 

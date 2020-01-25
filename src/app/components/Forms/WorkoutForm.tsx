@@ -8,9 +8,10 @@ import {
   TimedField,
   RestField,
   ModeField,
-  FormButtonRow,
+  ButtonRow,
 } from './index';
-import { FormWrapper } from './styles';
+import { FormWrapper, Row } from './styles';
+import { Button } from '../Buttons';
 import {
   AuthUserContext,
   FirebaseContext,
@@ -292,12 +293,18 @@ const WorkoutForm: React.FC<{
             handleChangeConfig={handleChangeFormConfig}
           />
           {renderMovementFields()}
-          <button type="button" onClick={() => handleAddMovementRef(form.mode)}>
+          {/* <Row> */}
+          <Button
+            type="button"
+            className="add-btn"
+            onClick={() => handleAddMovementRef(form.mode)}
+          >
             +
-          </button>
+          </Button>
+          {/* </Row> */}
           <RestField form={form} handleChange={handleChangeFormRest} />
         </div>
-        <FormButtonRow hide={hide} submitText={text.submitButton} />
+        <ButtonRow hide={hide} submitText={text.submitButton} />
       </form>
     </WorkoutFormWrapper>
   );

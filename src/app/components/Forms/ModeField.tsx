@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import styled from 'styled-components';
 
 import { Row } from './styles';
 
@@ -20,6 +21,7 @@ const TimedModeConfigFields: React.FC<{
           type="number"
           name="rounds"
           min="0"
+          max="999"
           value={form.config.rounds}
           onChange={handleChange}
         />
@@ -36,7 +38,7 @@ const ModeField: React.FC<{
   handleChangeConfig: (e: IHandleChange) => void;
 }> = ({ form, handleChange, handleChangeConfig }) => {
   return (
-    <>
+    <ModeFieldWrapper>
       <Row>
         <label>
           <input
@@ -59,17 +61,14 @@ const ModeField: React.FC<{
           Timed
         </label>
       </Row>
-      <Row>
-        {/* {form.mode === WorkoutMode.Reps && ()} */}
-        {form.mode === WorkoutMode.Timed && (
-          <TimedModeConfigFields
-            form={form}
-            handleChange={handleChangeConfig}
-          />
-        )}
-      </Row>
-    </>
+      {/* {form.mode === WorkoutMode.Reps && ()} */}
+      {form.mode === WorkoutMode.Timed && (
+        <TimedModeConfigFields form={form} handleChange={handleChangeConfig} />
+      )}
+    </ModeFieldWrapper>
   );
 };
+
+const ModeFieldWrapper = styled.div``;
 
 export default ModeField;
