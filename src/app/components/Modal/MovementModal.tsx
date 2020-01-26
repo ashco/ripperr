@@ -20,8 +20,6 @@ const MovementModal: React.FC<{
   const addWorkout = () => setAddMovementType(MovementType.Workout);
 
   function renderForm() {
-    console.log(addMovementType);
-    console.log(movement);
     if (
       addMovementType === MovementType.Exercise ||
       (movement && movement.type === MovementType.Exercise)
@@ -46,7 +44,11 @@ const MovementModal: React.FC<{
       );
     } else if (addMovementType === null) {
       return (
-        <SelectAddForm addExercise={addExercise} addWorkout={addWorkout} />
+        <SelectAddForm
+          addExercise={addExercise}
+          addWorkout={addWorkout}
+          hide={hide}
+        />
       );
     }
   }

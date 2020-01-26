@@ -3,22 +3,13 @@ import styled, { ThemeProvider } from 'styled-components';
 import { ToastContainer } from 'react-toastify';
 
 import GlobalStyle from '../styles/GlobalStyle';
+import theme from '../styles/theme';
 
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
 // // import SelectRow from "./SelectRow";
 // import Nav from "./Nav";
-
-const theme = {
-  colors: {
-    black: '#393939',
-    grey: '#3A3A3A',
-    red: '#FF0000',
-  },
-  boxShadow: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
-  maxWidth: '1000px',
-};
 
 const StyledPage = styled.div`
   background: white;

@@ -8,7 +8,10 @@ const Button = styled.button<{ size?: string }>`
   width: 100%;
   cursor: pointer;
   &:hover {
-    background: grey;
+    background: lightgray;
+  }
+  &:active {
+    background: gray;
   }
 `;
 
