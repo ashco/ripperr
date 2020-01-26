@@ -13,13 +13,11 @@ import { FormMode } from '../common/enums';
 const MovementsPage: NextPage = () => {
   return (
     <div>
-      <h1>Movements</h1>
       <MovementFormButton formMode={FormMode.Add} />
       <MovementList />
     </div>
   );
 };
-
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 

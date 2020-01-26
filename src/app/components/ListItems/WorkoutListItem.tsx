@@ -28,8 +28,8 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
   return (
     <WorkoutListItemWrapper>
       <div className="color-bar" />
+      <p className="name">{workout.name}</p>
       <span>
-        {workout.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
         <MovementFormButton formMode={FormMode.Edit} movement={workout} />
       </span>

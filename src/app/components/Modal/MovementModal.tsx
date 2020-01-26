@@ -57,7 +57,7 @@ const MovementModal: React.FC<{
 };
 
 const MovementModalWrapper = styled(ModalWrapper)`
-  padding: 3rem 2rem;
+  /* padding: 3rem 2rem; */
 `;
 
 export default MovementModal;

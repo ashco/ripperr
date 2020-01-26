@@ -2,6 +2,7 @@
 import { Modal } from '../Modal';
 
 import { MovementModal } from '../Forms';
+import { Button } from '../Buttons';
 
 import { IExercise, IWorkout } from '../../common/types';
 import { FormMode } from '../../common/enums';
@@ -29,7 +30,7 @@ const MovementModalButton: React.FC<{
 
   return (
     <>
-      <button onClick={show}>{buttonText}</button>
+      <Button onClick={show}>{buttonText}</Button>
       {modal}
     </>
   );

@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { Modal, DeleteModal } from '../Modal';
+import { Button } from '../Buttons';
 
 const DeleteButton: React.FC<{
   text: string;
@@ -18,7 +19,7 @@ const DeleteButton: React.FC<{
 
   return (
     <>
-      <button onClick={show}>Delete</button>
+      <Button onClick={show}>Delete</Button>
       {modal}
     </>
   );

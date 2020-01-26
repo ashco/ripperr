@@ -11,9 +11,15 @@ export const ListItem = styled.div`
   background: ${({ theme }) => theme.color.neutral[100]};
   box-shadow: ${(props) => props.theme.shadow[1]};
   border-radius: 3px;
+  display: grid;
+  grid-auto-rows: 3px 1fr auto;
   .color-bar {
     height: 3px;
     width: 100%;
+  }
+  .name {
+    font-size: ${(p) => p.theme.font[4]};
+    padding: ${(p) => p.theme.space[1]};
   }
 `;
 
