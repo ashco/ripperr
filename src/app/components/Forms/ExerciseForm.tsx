@@ -14,7 +14,7 @@ import {
 } from '../../common/formHelpers';
 
 import { FirstFields, ButtonRow } from './index';
-import { FormWrapper } from './styles';
+import { MovementFormWrapper } from './styles';
 
 import {
   IHandleChange,
@@ -173,7 +173,8 @@ const ExerciseForm: React.FC<{
   );
 };
 
-const ExerciseFormWrapper = styled(FormWrapper)`
+const ExerciseFormWrapper = styled(MovementFormWrapper)`
+  width: ${(p) => p.theme.space[13]};
   /* button {
     font-size: 1.8rem;
     margin: 0.25rem;

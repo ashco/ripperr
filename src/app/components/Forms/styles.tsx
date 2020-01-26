@@ -8,6 +8,17 @@ export const Row = styled.div`
 
 export const FormWrapper = styled.div`
   margin: auto;
+  display: grid;
+  /* width: ${(p) => p.theme.space[12]}; */
+  max-width: 100%;
+  button {
+    margin: ${(p) => p.theme.space[0]} 0;
+  }
+`;
+
+// export const FormWrapper = styled.div`
+export const MovementFormWrapper = styled(FormWrapper)`
+  margin: auto;
   display: flex;
   flex-direction: column;
   /* max-width: 70%; */

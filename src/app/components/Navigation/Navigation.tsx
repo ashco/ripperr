@@ -19,7 +19,7 @@ const NavigationAuth: React.FC = () => (
   <ul>
     <li>
       <Link href="/">
-        <a>Ripperr</a>
+        <a className="logo">Ripperr</a>
       </Link>
     </li>
     <li>
@@ -47,7 +47,7 @@ const NavigationNonAuth: React.FC = () => (
   <ul>
     <li>
       <Link href="/">
-        <a>Ripperr</a>
+        <a className="logo">Ripperr</a>
       </Link>
     </li>
     <li>
@@ -59,7 +59,8 @@ const NavigationNonAuth: React.FC = () => (
 );
 
 const NavigationWrapper = styled.nav`
-  background-color: ${(props) => props.theme.color.neutral[300]};
+  background-color: ${(props) => props.theme.color.blue[100]};
+  box-shadow: ${(props) => props.theme.shadow[0]};
   grid-area: navigation;
   ul {
     display: flex;
@@ -69,6 +70,9 @@ const NavigationWrapper = styled.nav`
     }
     li {
       padding: 16px;
+    }
+    .logo {
+      font-size: ${(props) => props.theme.font[4]};
     }
   }
 `;

@@ -10,7 +10,7 @@ import {
   ModeField,
   ButtonRow,
 } from './index';
-import { FormWrapper, Row } from './styles';
+import { MovementFormWrapper, Row } from './styles';
 import { Button } from '../Buttons';
 import {
   AuthUserContext,
@@ -300,7 +300,8 @@ const WorkoutForm: React.FC<{
   );
 };
 
-const WorkoutFormWrapper = styled(FormWrapper)`
+const WorkoutFormWrapper = styled(MovementFormWrapper)`
+  width: ${(p) => p.theme.space[14]};
   /* button {
     font-size: 1.8rem;
     margin: 0.25rem;

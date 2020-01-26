@@ -57,10 +57,6 @@ const MovementModal: React.FC<{
 };
 
 const MovementModalWrapper = styled(ModalWrapper)`
-  /* position: relative;
-  display: flex;
-  flex-direction: column; */
-  width: 90%;
   padding: 3rem 2rem;
 `;
 

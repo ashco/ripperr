@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
+import { FormWrapper } from './styles';
 import { Button } from '../Buttons';
 
 const SelectAddForm: React.FC<{
@@ -17,9 +18,17 @@ const SelectAddForm: React.FC<{
   );
 };
 
-const SelectAddFormWrapper = styled.div`
-  margin: auto;
-  display: grid;
+const SelectAddFormWrapper = styled(FormWrapper)`
+  width: ${(p) => p.theme.space[12]};
 `;
+// const SelectAddFormWrapper = styled.div`
+//   margin: auto;
+//   display: grid;
+//   width: ${(p) => p.theme.space[12]};
+//   max-width: 100%;
+//   button {
+//     margin: ${(p) => p.theme.space[0]} 0;
+//   }
+// `;
 
 export default SelectAddForm;
