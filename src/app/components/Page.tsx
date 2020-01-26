@@ -13,7 +13,7 @@ import Navigation from './Navigation/Navigation';
 
 const StyledPage = styled.div`
   background: white;
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.neutral[900]};
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;

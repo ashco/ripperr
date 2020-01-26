@@ -1,4 +1,4 @@
-﻿import { createGlobalStyle } from "styled-components";
+﻿import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   /* @font-face {
@@ -19,13 +19,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
-    font-family: 'arial';
+    font-family: -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Ubuntu, Cantarell, 'Helvetica Neue';
   }
   a {
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.neutral[900]};
   }
-  /* button {  font-family: 'radnika_next'; } */
 
 /* CSS RESET */
   html,
