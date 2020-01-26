@@ -30,7 +30,7 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
     <ExerciseListItemWrapper>
       <div className="color-bar" />
       <p className="name">{exercise.name}</p>
-      <span>
+      <span className="btn-row">
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
         <MovementFormButton formMode={FormMode.Edit} movement={exercise} />
       </span>

@@ -12,10 +12,10 @@ import { FormMode } from '../common/enums';
 
 const MovementsPage: NextPage = () => {
   return (
-    <div>
+    <>
       <MovementFormButton formMode={FormMode.Add} />
       <MovementList />
-    </div>
+    </>
   );
 };
 

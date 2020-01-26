@@ -1,4 +1,6 @@
 ﻿import React, { useState } from 'react';
+import styled from 'styled-components';
+
 import { Modal } from '../Modal';
 
 import { MovementModal } from '../Forms';
@@ -15,11 +17,11 @@ const MovementModalButton: React.FC<{
   const hide = (): void => setShowModal(false);
   const show = (): void => setShowModal(true);
 
-  let buttonText;
+  let ButtonEl;
   if (formMode === FormMode.Add) {
-    buttonText = 'Add';
+    ButtonEl = <AddMovementButton onClick={show}>Add</AddMovementButton>;
   } else if (formMode === FormMode.Edit) {
-    buttonText = 'Edit';
+    ButtonEl = <Button onClick={show}>Edit</Button>;
   }
 
   const modal = showModal ? (
@@ -30,10 +32,17 @@ const MovementModalButton: React.FC<{
 
   return (
     <>
-      <Button onClick={show}>{buttonText}</Button>
+      {ButtonEl}
       {modal}
     </>
   );
 };
+
+const AddMovementButton = styled(Button)`
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: ${(p) => p.theme.space[8]};
+`;
 
 export default MovementModalButton;

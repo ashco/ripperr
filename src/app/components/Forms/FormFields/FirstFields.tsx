@@ -16,30 +16,30 @@ const FirstFields: React.FC<{
   errors: IExerciseFormErrors;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, errors, handleChange }) => {
-  const tags = [
-    'Push',
-    'Pull',
-    'Squat',
-    'Core',
-    'Push2',
-    'Pull2',
-    'Squat2',
-    'Core2',
-  ];
+  // const tags = [
+  //   'Push',
+  //   'Pull',
+  //   'Squat',
+  //   'Core',
+  //   'Push2',
+  //   'Pull2',
+  //   'Squat2',
+  //   'Core2',
+  // ];
 
-  const selectedTags = [...form.tags];
+  // const selectedTags = [...form.tags];
 
-  function handleTag(tag: string) {
-    const tagIndex = selectedTags.indexOf(tag);
+  // function handleTag(tag: string) {
+  //   const tagIndex = selectedTags.indexOf(tag);
 
-    selectedTags.includes(tag)
-      ? selectedTags.splice(tagIndex, 1)
-      : selectedTags.push(tag);
+  //   selectedTags.includes(tag)
+  //     ? selectedTags.splice(tagIndex, 1)
+  //     : selectedTags.push(tag);
 
-    console.log(selectedTags);
-  }
+  //   console.log(selectedTags);
+  // }
 
-  console.log(selectedTags);
+  // console.log(selectedTags);
 
   return (
     <FirstFieldsWrapper>
@@ -119,6 +119,7 @@ const FirstFieldsWrapper = styled.div`
     padding: 0.5rem;
     font-size: 14px;
     margin-right: 0.25rem;
+    cursor: pointer;
   }
 `;
 

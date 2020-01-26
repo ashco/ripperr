@@ -5,7 +5,7 @@ const Button = styled.button<{ size?: string }>`
   font-size: ${(p) => p.size || p.theme.font[2]};
   /* margin: 0.25rem 0; */
   padding: 0.5rem;
-  /* width: 100%; */
+  width: 100%;
   cursor: pointer;
   &:hover {
     background: lightgray;
