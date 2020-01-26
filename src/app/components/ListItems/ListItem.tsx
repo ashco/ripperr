@@ -23,6 +23,9 @@ export const ListItem = styled.div`
   }
   span.btn-row {
     display: flex;
+    button {
+      border: none;
+    }
   }
 `;
 

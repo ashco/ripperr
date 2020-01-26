@@ -1,6 +1,8 @@
 ﻿import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import sizes from '../../styles/sizes';
+
 import { Modal } from '../Modal';
 
 import { MovementModal } from '../Forms';
@@ -41,8 +43,15 @@ const MovementModalButton: React.FC<{
 const AddMovementButton = styled(Button)`
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
-  width: ${(p) => p.theme.space[8]};
+  left: 0;
+  width: 90vw;
+  margin: 0 5vw;
+  @media (min-width: ${sizes.tablet}px) {
+    left: inherit;
+    right: 2rem;
+    width: ${(p) => p.theme.space[8]};
+    margin: 0;
+  }
 `;
 
 export default MovementModalButton;
