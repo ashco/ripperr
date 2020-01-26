@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { ListItem } from './index';
+// import { ListItemWrapper } from './ListItem';
 import { DeleteButton, MovementFormButton } from '../Buttons';
 
 import { IExercise } from '../../common/types';
@@ -27,8 +28,8 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
 
   return (
     <ExerciseListItemWrapper>
+      <div className="color-bar" />
       <span>
-        <strong>Exercise: </strong>
         {exercise.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
         <MovementFormButton formMode={FormMode.Edit} movement={exercise} />
@@ -38,8 +39,10 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
 };
 
 const ExerciseListItemWrapper = styled(ListItem)`
-  height: 140px;
-  background: green;
+  height: ${(props) => props.theme.space[8]};
+  .color-bar {
+    background-color: ${(props) => props.theme.color.green[500]};
+  }
 `;
 
 export default ExerciseListItem;

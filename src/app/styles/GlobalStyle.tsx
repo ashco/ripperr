@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.neutral[900]};
+    color: ${({ theme }) => theme.color.neutral[900]};
   }
 
 /* CSS RESET */

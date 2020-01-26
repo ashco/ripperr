@@ -59,7 +59,7 @@ const NavigationNonAuth: React.FC = () => (
 );
 
 const NavigationWrapper = styled.nav`
-  background-color: #eee;
+  background-color: ${(props) => props.theme.color.neutral[300]};
   grid-area: navigation;
   ul {
     display: flex;

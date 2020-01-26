@@ -27,8 +27,8 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
 
   return (
     <WorkoutListItemWrapper>
+      <div className="color-bar" />
       <span>
-        <strong>Workout: </strong>
         {workout.name}
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
         <MovementFormButton formMode={FormMode.Edit} movement={workout} />
@@ -38,8 +38,10 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
 };
 
 const WorkoutListItemWrapper = styled(ListItem)`
-  height: 200px;
-  background: orange;
+  height: ${(props) => props.theme.space[9]};
+  .color-bar {
+    background-color: ${(props) => props.theme.color.yellow[500]};
+  }
 `;
 
 export default WorkoutListItem;

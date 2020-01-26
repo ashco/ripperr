@@ -6,16 +6,16 @@ import 'styled-components';
 // This modifies the Styled Component theme object declaration
 declare module 'styled-components' {
   export interface DefaultTheme {
-    colors: {
+    color: {
       neutral: any;
-      blue: object;
-      green: object;
-      yellow: object;
-      red: object;
+      blue: any;
+      green: any;
+      yellow: any;
+      red: any;
     };
-    font: object;
-    shadow: object;
-    space: object;
+    font: any;
+    shadow: any;
+    space: any;
     maxWidth: string;
   }
 }

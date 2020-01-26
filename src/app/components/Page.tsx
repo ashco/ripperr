@@ -12,9 +12,11 @@ import Navigation from './Navigation/Navigation';
 // import Nav from "./Nav";
 
 const StyledPage = styled.div`
-  background: white;
-  color: ${({ theme }) => theme.colors.neutral[900]};
-  height: 100vh;
+  /* background: white; */
+  color: ${({ theme }) => theme.color.neutral[900]};
+  background: ${(props) => props.theme.color.neutral[200]};
+  min-height: 100vh;
+  width: 100vw;
   display: grid;
   grid-template-rows: auto 1fr;
   /* grid-template-columns: auto; */
@@ -29,7 +31,7 @@ const ModalRoot = styled.div`
 `;
 
 const Inner = styled.div`
-  max-width: ${(props) => props.theme.maxWidth};
+  max-width: ${(props) => props.theme.space[15]};
   margin: 0 auto;
   padding: 2rem;
   height: auto;
