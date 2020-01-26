@@ -14,23 +14,28 @@ const RepsField: React.FC<{
 }> = ({ move, i, handleChange, handleDeleteMovementRef }) => {
   const { exercises } = useContext(MovementsContext);
 
-  // check if move is still in database
-  const moveIsAvailable = exercises.map((ex) => ex.name).includes(move.name);
-  console.log(moveIsAvailable, move.name);
+  // // check if move is still in database
+  // const moveIsAvailable = exercises.map((ex) => ex.name).includes(move.name);
+  // const moveIsAvailable = exercises.map((ex) => ex.id).includes(move.id);
+  // if (!moveIsAvailable) {
+  //   exercises.push(move);
+  // }
+
   return (
     <Row>
       <select
         name="id"
         onChange={(e): void => handleChange(e, i)}
         value={move.id}
+        // className={!moveIsAvailable ? 'missing-option' : ''}
       >
         <option label={`Exercise ${i + 1}`} value="" />
-        {!moveIsAvailable && (
-          <option label={move.name} value={move.id} key={move.id} />
-        )}
         {exercises.map((ex) => (
           <option label={ex.name} value={ex.id} key={ex.id} />
         ))}
+        {/* {!moveIsAvailable && move.id !== '' && (
+          <option label={move.name} value={move.id} key={move.id} />
+        )} */}
       </select>
       <label>
         <input

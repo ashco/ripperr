@@ -26,7 +26,7 @@ export const FormWrapper = styled.div`
     font-size: 20px;
   }
   input[type='number'] {
-    width: 3rem;
+    width: 4.5rem;
     text-align: center;
   }
   textarea {
@@ -44,10 +44,6 @@ export const FormWrapper = styled.div`
   select {
     border: none;
   }
-  select[name='tags'] {
-    display: flex;
-    flex-directon: column;
-  }
   .error {
     margin-bottom: 0.5rem;
     font-size: 0.75rem;
@@ -59,6 +55,9 @@ export const FormWrapper = styled.div`
   .rem-btn {
     font-size: 1.5rem;
     border: 1px solid black;
+  }
+  .missing-option {
+    background: yellow;
   }
 `;
 
