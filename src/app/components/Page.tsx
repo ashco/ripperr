@@ -33,7 +33,7 @@ const ModalRoot = styled.div`
 const Inner = styled.div`
   max-width: ${(props) => props.theme.space[15]};
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   height: auto;
   grid-area: main;
 `;

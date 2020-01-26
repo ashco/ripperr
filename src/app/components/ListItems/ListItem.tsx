@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { IExercise, IWorkout } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-export const ListItem = styled.div`
+export const ListItem = styled.li`
   /* margin-right: ${({ theme }) => theme.space[3]}; */
   margin-bottom: ${({ theme }) => theme.space[3]};
   width: ${({ theme }) => theme.space[11]};

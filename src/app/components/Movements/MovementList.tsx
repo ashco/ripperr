@@ -58,6 +58,8 @@ const MovementList: React.FC = () => {
   );
 };
 
-const MovementListWrapper = styled.ul``;
+const MovementListWrapper = styled.ul`
+  margin-top: ${(p) => p.theme.space[4]};
+`;
 
 export default MovementList;
