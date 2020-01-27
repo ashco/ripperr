@@ -15,7 +15,7 @@ const StyledPage = styled.div`
   /* background: white; */
   color: ${({ theme }) => theme.color.neutral[900]};
   background: ${(props) => props.theme.color.neutral[200]};
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
   display: grid;
   grid-template-rows: auto 1fr;
@@ -31,10 +31,10 @@ const ModalRoot = styled.div`
 `;
 
 const Inner = styled.div`
-  max-width: ${(props) => props.theme.space[15]};
-  margin: 0 auto;
+  /* max-width: ${(props) => props.theme.space[15]}; */
+  /* margin: 0 auto; */
   /* padding: 2rem; */
-  height: auto;
+  height: calc(100vh - ${(p) => p.theme.space[7]});
   grid-area: main;
 `;
 

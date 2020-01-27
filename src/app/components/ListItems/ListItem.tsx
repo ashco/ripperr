@@ -6,7 +6,7 @@ import { MovementType } from '../../common/enums';
 
 export const ListItem = styled.li`
   /* margin-right: ${({ theme }) => theme.space[3]}; */
-  margin-bottom: ${({ theme }) => theme.space[3]};
+  margin: ${({ theme }) => theme.space[1]};
   width: ${({ theme }) => theme.space[11]};
   background: ${({ theme }) => theme.color.neutral[100]};
   box-shadow: ${(props) => props.theme.shadow[1]};
@@ -28,16 +28,5 @@ export const ListItem = styled.li`
     }
   }
 `;
-
-// const ListItem: React.FC<{ movement: IExercise | IWorkout }> = ({
-//   movement,
-// }) => {
-//   return (
-//     <div>
-//       <div className="color-bar" />
-//       <strong>{movement.name}</strong>
-//     </div>
-//   );
-// };
 
 export default ListItem;

@@ -42,13 +42,13 @@ const MovementModalButton: React.FC<{
 
 const AddMovementButton = styled(Button)`
   position: fixed;
-  bottom: 2rem;
+  bottom: 1.5rem;
   left: 0;
   width: 90vw;
   margin: 0 5vw;
   @media (min-width: ${sizes.tablet}px) {
     left: inherit;
-    right: 2rem;
+    right: 1.5rem;
     width: ${(p) => p.theme.space[8]};
     margin: 0;
   }

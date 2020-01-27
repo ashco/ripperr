@@ -41,7 +41,7 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
 const ExerciseListItemWrapper = styled(ListItem)`
   height: ${(props) => props.theme.space[8]};
   .color-bar {
-    background-color: ${(props) => props.theme.color.green[500]};
+    background-color: ${(props) => props.theme.color.blue[500]};
   }
 `;
 
