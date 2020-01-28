@@ -19,7 +19,10 @@ const NavigationAuth: React.FC = () => (
   <ul>
     <li>
       <Link href="/movements">
-        <a className="logo">Ripperr</a>
+        <a className="logo">
+          <img src="/icon.png" alt="Ripperr Icon" />
+          Ripperr
+        </a>
       </Link>
     </li>
     {/* <li>
