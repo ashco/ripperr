@@ -96,12 +96,12 @@ export function handleValidation(
   switch (name) {
     case 'name':
       if ((value as string).length < 2) {
-        errorMsg = 'Name is too short!';
+        errorMsg = 'Name is too short.';
       }
       break;
     case 'description':
       if ((value as string).length > 140) {
-        errorMsg = 'Description is too long!';
+        errorMsg = 'Description is too long.';
       }
       break;
     case 'tags':

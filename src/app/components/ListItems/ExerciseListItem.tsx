@@ -30,16 +30,18 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
     <ExerciseListItemWrapper>
       <div className="color-bar" />
       <p className="name">{exercise.name}</p>
-      <span className="btn-row">
-        <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <MovementFormButton formMode={FormMode.Edit} movement={exercise} />
-      </span>
+      <div className="btn-container">
+        <span className="row">
+          <DeleteButton text={deleteText} handleDelete={handleDelete} />
+          <MovementFormButton formMode={FormMode.Edit} movement={exercise} />
+        </span>
+      </div>
     </ExerciseListItemWrapper>
   );
 };
 
 const ExerciseListItemWrapper = styled(ListItem)`
-  height: ${(props) => props.theme.space[8]};
+  /* height: ${(props) => props.theme.space[8]}; */
   .color-bar {
     background-color: ${(props) => props.theme.color.blue[500]};
   }

@@ -56,7 +56,8 @@ export const MovementFormWrapper = styled(FormWrapper)`
     border: none;
   }
   .error {
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
+    margin: auto 0.25rem;
     font-size: 0.75rem;
   }
   .add-btn {

@@ -60,7 +60,7 @@ const FirstFields: React.FC<{
       />
       <span className="error">{errors.description}</span>
       {/* <label htmlFor="tags"> */}
-      Tags
+      {/* Tags */}
       {/* <div id="data"> */}
       <select multiple name="tags" value={form.tags} onChange={handleChange}>
         <option label="PUSH" value="Push" />
@@ -85,13 +85,18 @@ const FirstFields: React.FC<{
 };
 
 const FirstFieldsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* flex-direction: column; */
+  grid-template-rows: auto 1rem auto 1rem auto 1rem;
   /* input,
   textarea {
     margin-bottom: 0.25rem;
     font-size: 1rem;
   } */
+  .input-wrapper {
+    display: grid;
+    grid-template-rows: 1fr 1rem;
+  }
   #description {
     height: 4rem;
     resize: none;

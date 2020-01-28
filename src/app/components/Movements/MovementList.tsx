@@ -30,95 +30,69 @@ const MovementList: React.FC = () => {
   const [scrollState, setScrollState] = useState({
     isScrolling: false,
     scrollLeft: 0,
-    scrollTop: 0,
     clientX: 0,
-    clientY: 0,
   });
-  const listRef = useRef<HTMLUListElement>(null);
 
-  // function onMouseMove(event: any) {
-  //   // const { scrollLeft, scrollTop, clientX, clientY } = scrollState;
+  // const listRef = useRef<HTMLUListElement>(null);
 
-  //   console.log(event.clientX);
-  //   console.log(event.clientY);
+
+  // function onMouseDown(e: any) {
+  //   // const { scrollLeft, scrollTop } = listRef;
+  //   console.log('mouse down');
+
+  //   setScrollState({
+  //     isScrolling: true,
+  //     scrollLeft: 0,
+  //     clientX: e.clientX,
+  //   });
+  // }
+
+  // function onMouseMove(e: any) {
+  //   if (scrollState.isScrolling) {
+  //     const {clientX, scrollLeft} = scrollState;
+
+  //     // console.log(scrollState);
+  //     // console.log(e.clientX);
+
+  //     // const x = scrollLeft - clientX + e.clientX;
+  //     // console.log(x);
+
+  //     // setScrollState({ ...scrollState, scrollLeft: x })
+  //     if (listRef && listRef.current) {
+
+  //       // console.log(scrollLeft);
+  //       // console.log(clientX);
+  //       // console.log(e.clientX);
+  //       console.log(e.clientX - clientX);
+  //       listRef.current.scrollLeft = scrollLeft - e.clientX - clientX;
+  //       console.log(listRef.current.scrollLeft)
+  //     }
+  //     // console.log(scrollState);
+  //   }
+  //   // const {clientX, scrollLeft} = this.state;
   //   // this._scroller.scrollLeft = scrollLeft - clientX + event.clientX;
-  //   // this._scroller.scrollTop = scrollTop - clientY + event.clientY;
   // }
 
-  function onMouseDown(e: any) {
-    // const { scrollLeft, scrollTop } = listRef;
+  // function onMouseUp() {
+  //   console.log('mouse up');
 
-    setScrollState({
-      isScrolling: true,
-      scrollLeft: 0,
-      scrollTop: 0,
-      clientX: e.clientX,
-      clientY: e.clientY,
-    });
-  }
-
-  function onMouseMove(e: any) {
-    console.log(e);
-    // const {clientX, scrollLeft, scrollTop, clientY} = this.state;
-    // this._scroller.scrollLeft = scrollLeft - clientX + event.clientX;
-    // this._scroller.scrollTop = scrollTop - clientY + event.clientY;
-  }
-
-  function onMouseUp() {
-    console.log('mouses up');
-
-    setScrollState({
-      isScrolling: false,
-      scrollLeft: 0,
-      scrollTop: 0,
-      clientX: 0,
-      clientY: 0,
-    });
-  }
-
-  function toggleScrolling(isEnabled: boolean) {
-    console.log(isEnabled);
-    if (isEnabled) {
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('mouseup', onMouseUp);
-    } else {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-    }
-  }
-
-  useEffect(() => {
-    toggleScrolling(scrollState.isScrolling);
-  }, [scrollState.isScrolling]);
-
-  // function handleMouseDown(e: any) {
-  //   console.log(e.clientX);
-  //   const { clientX, scrollLeft, scrollTop, clientY } = scrollState;
-  //   console.log(scrollLeft - clientX + e.clientX);
-  //   if (listRef && listRef.current) {
-  //     console.log(listRef.current.scrollLeft);
-  //   }
-  //   // listRef.scrollLeft = scrollLeft - clientX + e.clientX;
-  //   // listRef.scrollTop = scrollTop - clientY + e.clientY;
+  //   setScrollState({
+  //     isScrolling: false,
+  //     scrollLeft: 0,
+  //     clientX: 0,
+  //   });
   // }
 
-  // function onScroll(event: any) {
-  // }
 
-  // function attachScroller(scroller: any) {
-  //   this._scroller = ReactDOM.findDOMNode(scroller);
-  // }
+  // useEffect(() => {
+  //   window.addEventListener('mouseup', onMouseUp);
+  //   window.addEventListener('mousemove', onMouseMove);
 
-  // function toggleScrolling(isEnable: boolean) {
-  //   if (isEnable) {
-  //     window.addEventListener('mousemove', onMouseMove);
-  //     window.addEventListener('mouseup', onMouseUp);
-  //   } else {
-  //     window.removeEventListener('mousemove', onMouseMove);
-  //   }
-  // }
-
-  // useEffect(() => {}, [scrollState]);
+  //   return () => {
+  //     window.removeEventListener('mouseup', onMouseUp)
+  //     window.removeEventListener('mousemove', onMouseMove)
+  //   };
+  // }, [scrollState.isScrolling]);
 
   const movements = useContext(MovementsContext);
 
@@ -137,8 +111,8 @@ const MovementList: React.FC = () => {
 
   return (
     <MovementListWrapper
-      ref={listRef}
-      onMouseDown={onMouseDown}
+      // ref={listRef}
+      // onMouseDown={onMouseDown}
       // onScroll={onMouseMove}
     >
       {movements.loading ? (

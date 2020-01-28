@@ -18,15 +18,15 @@ const Navigation: React.FC = () => {
 const NavigationAuth: React.FC = () => (
   <ul>
     <li>
-      <Link href="/">
+      <Link href="/movements">
         <a className="logo">Ripperr</a>
       </Link>
     </li>
-    <li>
+    {/* <li>
       <Link href="/movements">
         <a>Movements</a>
       </Link>
-    </li>
+    </li> */}
     <li>
       <Link href="/account">
         <a>Account</a>
@@ -46,7 +46,7 @@ const NavigationAuth: React.FC = () => (
 const NavigationNonAuth: React.FC = () => (
   <ul>
     <li>
-      <Link href="/">
+      <Link href="/movements">
         <a className="logo">Ripperr</a>
       </Link>
     </li>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { ListItem } from './index';
-import { DeleteButton, MovementFormButton } from '../Buttons';
+import { Button, DeleteButton, MovementFormButton } from '../Buttons';
 
 import { IWorkout } from '../../common/types';
 import { FormMode } from '../../common/enums';
@@ -29,16 +29,21 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
     <WorkoutListItemWrapper>
       <div className="color-bar" />
       <p className="name">{workout.name}</p>
-      <span className="btn-row">
-        <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        <MovementFormButton formMode={FormMode.Edit} movement={workout} />
-      </span>
+      <div className="btn-container">
+        <span className="row">
+          <DeleteButton text={deleteText} handleDelete={handleDelete} />
+          <MovementFormButton formMode={FormMode.Edit} movement={workout} />
+        </span>
+        <span className="row">
+          <Button>Rip Rip</Button>
+        </span>
+      </div>
     </WorkoutListItemWrapper>
   );
 };
 
 const WorkoutListItemWrapper = styled(ListItem)`
-  height: ${(props) => props.theme.space[9]};
+  /* height: ${(props) => props.theme.space[8]}; */
   .color-bar {
     background-color: ${(props) => props.theme.color.yellow[500]};
   }

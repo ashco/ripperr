@@ -5,6 +5,7 @@ import { IExercise, IWorkout } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
 export const ListItem = styled.li`
+  /* height: ${(props) => props.theme.space[8]}; */
   /* margin-right: ${({ theme }) => theme.space[3]}; */
   margin: ${({ theme }) => theme.space[1]};
   width: ${({ theme }) => theme.space[11]};
@@ -19,10 +20,14 @@ export const ListItem = styled.li`
   }
   .name {
     font-size: ${(p) => p.theme.font[4]};
-    padding: ${(p) => p.theme.space[1]};
+    padding: 1rem 0.5rem;
+
   }
-  span.btn-row {
+  .row {
     display: flex;
+  }
+  .btn-container {
+    /* display: flex; */
     button {
       border: none;
     }

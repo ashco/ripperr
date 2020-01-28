@@ -21,7 +21,6 @@ import {
   IExercise,
   IExerciseFormValues,
   IExerciseFormErrors,
-  IWorkoutFormValues,
 } from '../../common/types';
 import { FormMode, MovementType } from '../../common/enums';
 
