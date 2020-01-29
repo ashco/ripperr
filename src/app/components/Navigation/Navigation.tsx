@@ -6,6 +6,8 @@ import { AuthUserContext } from '../../context';
 
 import SignOutButton from './SignOutButton';
 
+import img from './icon.png';
+
 const Navigation: React.FC = () => {
   const authUser = useContext(AuthUserContext);
   return (
@@ -17,12 +19,10 @@ const Navigation: React.FC = () => {
 
 const NavigationAuth: React.FC = () => (
   <ul>
+    <img src={img} alt="Ripperr Icon" />
     <li>
       <Link href="/movements">
-        <a className="logo">
-          <img src="/icon.png" alt="Ripperr Icon" />
-          Ripperr
-        </a>
+        <a className="logo">Ripperr</a>
       </Link>
     </li>
     {/* <li>

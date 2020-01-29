@@ -1,6 +1,7 @@
 ﻿require('dotenv').config({ path: '../../.env' });
+const withImages = require('next-images');
 
-module.exports = {
+module.exports = withImages({
   distDir: '../../dist/next',
   env: {
     API_KEY: process.env.API_KEY,
@@ -12,4 +13,4 @@ module.exports = {
     APP_ID: process.env.APP_ID,
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
   },
-};
+});
