@@ -6,7 +6,7 @@ import { AuthUserContext } from '../../context';
 
 import SignOutButton from './SignOutButton';
 
-import img from './icon.png';
+import Logo from '../../static/images/fire-alt-solid.svg';
 
 const Navigation: React.FC = () => {
   const authUser = useContext(AuthUserContext);
@@ -19,10 +19,12 @@ const Navigation: React.FC = () => {
 
 const NavigationAuth: React.FC = () => (
   <ul>
-    <img src={img} alt="Ripperr Icon" />
     <li>
       <Link href="/movements">
-        <a className="logo">Ripperr</a>
+        <a className="logo">
+          <img src={Logo} alt="Ripperr Icon" />
+          Ripperr
+        </a>
       </Link>
     </li>
     {/* <li>
@@ -68,15 +70,25 @@ const NavigationWrapper = styled.nav`
   grid-area: navigation;
   ul {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
     li:first-child {
       margin-right: auto;
+      height: 100%;
     }
     li {
       padding: 16px;
     }
     .logo {
       font-size: ${(props) => props.theme.font[4]};
+      display: flex;
+      align-items: center;
+      height: 100%;
+      img {
+        height: 100%;
+        margin-right: 0.5rem;
+      }
     }
   }
 `;
