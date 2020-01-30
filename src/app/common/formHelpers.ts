@@ -2,8 +2,10 @@
   IExercise,
   IWorkout,
   IHandleChange,
+  IArchetypeFormValues,
   IExerciseFormValues,
   IWorkoutFormValues,
+  IArchetypeFormErrors,
   IExerciseFormErrors,
   IWorkoutFormErrors,
 } from './types';
@@ -52,7 +54,7 @@ function getName(e: IHandleChange): string | null {
 }
 export function handleChange(
   e: IHandleChange,
-  state: IExerciseFormValues | IWorkoutFormValues,
+  state: IArchetypeFormValues | IExerciseFormValues | IWorkoutFormValues,
   setState: (state: any) => void,
   config?: {
     type: FormFieldProp;
@@ -113,7 +115,7 @@ export function handleValidation(
 }
 
 export function validateForm(
-  errors: IExerciseFormErrors | IWorkoutFormErrors,
+  errors: IArchetypeFormErrors | IExerciseFormErrors | IWorkoutFormErrors,
 ): boolean {
   let valid = true;
   Object.values(errors).forEach(

@@ -5,15 +5,17 @@ import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
+  IArchetypeFormValues,
   IExerciseFormValues,
   IWorkoutFormValues,
+  IArchetypeFormErrors,
   IExerciseFormErrors,
   // IWorkoutFormErrors,
 } from '../../../common/types';
 
 const FirstFields: React.FC<{
-  form: IExerciseFormValues | IWorkoutFormValues;
-  errors: IExerciseFormErrors;
+  form: IArchetypeFormValues | IExerciseFormValues | IWorkoutFormValues;
+  errors: IArchetypeFormErrors | IExerciseFormErrors;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, errors, handleChange }) => {
   // const tags = [
@@ -62,24 +64,6 @@ const FirstFields: React.FC<{
       {/* <label htmlFor="tags"> */}
       {/* Tags */}
       {/* <div id="data"> */}
-      <select multiple name="tags" value={form.tags} onChange={handleChange}>
-        <option label="PUSH" value="Push" />
-        <option label="PULL" value="Pull" />
-        <option label="SQUAT" value="Squat" />
-        <option label="CORE" value="Core" />
-        {/* <option label="CORE2" value="Core2" />
-        <option label="CORE3" value="Core3" /> */}
-      </select>
-      {/* </div> */}
-      {/* </label> */}
-      {/* <TagListWrapper>
-        {tags.map((tag) => (
-          <li key={tag} onClick={handleChange} label="PUSH" value="">
-            {tag}
-          </li>
-        ))}
-      </TagListWrapper> */}
-      <FormError>{errors.tags}</FormError>
     </FirstFieldsWrapper>
   );
 };
@@ -101,14 +85,12 @@ const FirstFieldsWrapper = styled.div`
     height: 4rem;
     resize: none;
   }
-  select {
+  /* select {
     padding: 0;
     padding-left: 1px;
     border: none;
-    /* background-color: #eee; */
     overflow-x: auto;
     overflow-y: hidden;
-    /* width: 100vw; */
     height: 46px;
     width: fit-content;
     align-self: center;
@@ -125,7 +107,7 @@ const FirstFieldsWrapper = styled.div`
     font-size: 14px;
     margin-right: 0.25rem;
     cursor: pointer;
-  }
+  } */
 `;
 
 const TagListWrapper = styled.ul`

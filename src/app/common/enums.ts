@@ -12,6 +12,7 @@ export enum WorkoutMode {
   Timed = 'TIMED',
 }
 export enum MovementType {
+  Archetype = 'ARCHETYPE',
   Exercise = 'EXERCISE',
   Workout = 'WORKOUT',
 }

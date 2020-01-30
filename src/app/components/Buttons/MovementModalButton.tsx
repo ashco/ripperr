@@ -8,12 +8,12 @@ import { Modal } from '../Modal';
 import { MovementModal } from '../Forms';
 import { Button } from '../Buttons';
 
-import { IExercise, IWorkout } from '../../common/types';
+import { IMovements } from '../../common/types';
 import { FormMode } from '../../common/enums';
 
 const MovementModalButton: React.FC<{
   formMode: FormMode;
-  movement?: IExercise | IWorkout;
+  movement?: IMovements;
 }> = ({ formMode, movement }) => {
   const [showModal, setShowModal] = useState(false);
   const hide = (): void => setShowModal(false);

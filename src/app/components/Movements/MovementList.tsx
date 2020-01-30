@@ -3,15 +3,22 @@ import styled from 'styled-components';
 
 import { MovementsContext } from '../../context';
 
-import { ExerciseListItem, WorkoutListItem } from '../ListItems';
+import {
+  ArchetypeListItem,
+  ExerciseListItem,
+  WorkoutListItem,
+} from '../ListItems';
 
-import { IWorkout, IExercise, IMovementState } from '../../common/types';
+import {
+  IMovements,
+  IArchetype,
+  IExercise,
+  IWorkout,
+  IMovementState,
+} from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-function sortMovements(
-  a: IExercise | IWorkout,
-  b: IExercise | IWorkout,
-): number {
+function sortMovements(a: IMovements, b: IMovements): number {
   if (a.lastModified !== null && b.lastModified !== null) {
     const aTime = (a.lastModified as firebase.firestore.Timestamp)
       .toDate()
@@ -34,7 +41,6 @@ const MovementList: React.FC = () => {
   });
 
   // const listRef = useRef<HTMLUListElement>(null);
-
 
   // function onMouseDown(e: any) {
   //   // const { scrollLeft, scrollTop } = listRef;
@@ -83,7 +89,6 @@ const MovementList: React.FC = () => {
   //   });
   // }
 
-
   // useEffect(() => {
   //   window.addEventListener('mouseup', onMouseUp);
   //   window.addEventListener('mousemove', onMouseMove);
@@ -96,11 +101,19 @@ const MovementList: React.FC = () => {
 
   const movements = useContext(MovementsContext);
 
-  const movementList = [...movements.exercises, ...movements.workouts];
+  const movementList = [
+    ...movements.archetypes,
+    ...movements.exercises,
+    ...movements.workouts,
+  ];
   movementList.sort((a, b) => sortMovements(a, b));
 
-  function renderListItem(move: IWorkout | IExercise) {
-    if (move.type === MovementType.Exercise) {
+  console.log(movementList);
+
+  function renderListItem(move: IMovements) {
+    if (move.type === MovementType.Archetype) {
+      return <ArchetypeListItem key={move.id} archetype={move as IArchetype} />;
+    } else if (move.type === MovementType.Exercise) {
       return <ExerciseListItem key={move.id} exercise={move as IExercise} />;
     } else if (move.type === MovementType.Workout) {
       return <WorkoutListItem key={move.id} workout={move as IWorkout} />;
@@ -111,16 +124,16 @@ const MovementList: React.FC = () => {
 
   return (
     <MovementListWrapper
-      // ref={listRef}
-      // onMouseDown={onMouseDown}
-      // onScroll={onMouseMove}
+    // ref={listRef}
+    // onMouseDown={onMouseDown}
+    // onScroll={onMouseMove}
     >
       {movements.loading ? (
         <div>Loading ...</div>
       ) : movementList.length === 0 ? (
         <div>Get out there and make something of yourself.</div>
       ) : (
-        movementList.map((move: IWorkout | IExercise) => renderListItem(move))
+        movementList.map((move: IMovements) => renderListItem(move))
       )}
     </MovementListWrapper>
   );

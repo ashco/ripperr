@@ -1,5 +1,7 @@
 ﻿import { WorkoutMode, MovementType } from './enums';
 
+export type IMovements = IArchetype | IExercise | IWorkout;
+
 // =============== ERRORS ===============
 export interface IFormError {
   message: string;
@@ -20,6 +22,11 @@ export interface IUser {
 // =============== FIREBASE QUERIES ===============
 export type IAuthUserContext = firebase.User | null;
 
+export interface IArchetypesFirebaseQuery {
+  loading: boolean;
+  archetypes: IArchetype[];
+}
+
 export interface IExercisesFirebaseQuery {
   loading: boolean;
   exercises: IExercise[];
@@ -32,6 +39,7 @@ export interface IWorkoutsFirebaseQuery {
 
 export interface IMovementState {
   loading: boolean;
+  archetypes: IArchetype[];
   exercises: IExercise[];
   workouts: IWorkout[];
 }
@@ -43,6 +51,15 @@ export interface IHandleChange {
 
 // =============== FORMS ===============
 
+export interface IArchetypeFormValues {
+  [key: string]: any;
+  name: string;
+  description: string;
+}
+export interface IArchetypeFormErrors {
+  name: string;
+  description: string;
+}
 export interface IExerciseFormValues {
   [key: string]: any;
   name: string;
@@ -74,6 +91,15 @@ export interface IWorkoutFormErrors {
 }
 
 // =============== DATA OBJECT STRUCTURES ===============
+
+export interface IArchetype {
+  readonly id: string;
+  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
+  readonly type: MovementType;
+  name: string;
+  description: string;
+  history: any;
+}
 
 export interface IExercise {
   readonly id: string;

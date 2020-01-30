@@ -4,24 +4,26 @@ import styled from 'styled-components';
 import { FormWrapper } from './styles';
 import { Button } from '../Buttons';
 
-const SelectAddForm: React.FC<{
+const AddForm: React.FC<{
+  addArchetype: () => void;
   addExercise: () => void;
   addWorkout: () => void;
   hide: () => void;
-}> = ({ addExercise, addWorkout, hide }) => {
+}> = ({ addArchetype, addExercise, addWorkout, hide }) => {
   return (
-    <SelectAddFormWrapper>
+    <AddFormWrapper>
+      <Button onClick={addArchetype}>Add Archetype</Button>
       <Button onClick={addExercise}>Add Exercise</Button>
       <Button onClick={addWorkout}>Add Workout</Button>
       <Button onClick={hide}>Cancel</Button>
-    </SelectAddFormWrapper>
+    </AddFormWrapper>
   );
 };
 
-const SelectAddFormWrapper = styled(FormWrapper)`
+const AddFormWrapper = styled(FormWrapper)`
   width: ${(p) => p.theme.space[12]};
 `;
-// const SelectAddFormWrapper = styled.div`
+// const AddFormWrapper = styled.div`
 //   margin: auto;
 //   display: grid;
 //   width: ${(p) => p.theme.space[12]};
@@ -31,4 +33,4 @@ const SelectAddFormWrapper = styled(FormWrapper)`
 //   }
 // `;
 
-export default SelectAddForm;
+export default AddForm;

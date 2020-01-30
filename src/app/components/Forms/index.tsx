@@ -9,7 +9,7 @@ import RestField from './FormFields/RestField';
 import ModeField from './ModeField';
 
 import ButtonRow from './ButtonRow';
-import SelectAddForm from './SelectAddForm';
+import AddForm from './AddForm';
 import InputField from './InputField';
 import SelectField from './FormFields/SelectField';
 
@@ -21,6 +21,9 @@ import {
   exerciseFormVal,
   workoutFormVal,
 } from './validationSchema';
+
+export * from './ArchetypeForm';
+export * from './FormFields/TagField';
 
 export {
   MovementModal,
@@ -40,5 +43,5 @@ export {
   FirstFields,
   TimedField,
   ButtonRow,
-  SelectAddForm,
+  AddForm,
 };

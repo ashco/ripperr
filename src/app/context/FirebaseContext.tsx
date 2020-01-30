@@ -65,6 +65,13 @@ class Firebase {
   users = (): firebase.firestore.CollectionReference =>
     this.db.collection('users');
 
+  // Archetype API
+  archetype = (uid: string, id: string): firebase.firestore.DocumentReference =>
+    this.db.doc(`users/${uid}/archetypes/${id}`);
+
+  archetypes = (uid: string): firebase.firestore.CollectionReference =>
+    this.db.collection(`users/${uid}/archetypes`);
+
   // Exercise API
   exercise = (uid: string, id: string): firebase.firestore.DocumentReference =>
     this.db.doc(`users/${uid}/exercises/${id}`);

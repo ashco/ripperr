@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import {
   FirstFields,
+  TagField,
   RepsField,
   TimedField,
   RestField,
@@ -278,6 +279,7 @@ const WorkoutForm: React.FC<{
             errors={errors}
             handleChange={handleChangeForm}
           />
+          <TagField form={form} handleChange={handleChangeForm} />
           <ModeField
             form={form}
             errors={errors}
