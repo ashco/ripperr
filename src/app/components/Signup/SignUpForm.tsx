@@ -3,6 +3,9 @@ import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 
 import { InputField, signUpVal } from '../Forms';
+import { FormError } from '../Forms/styles';
+import { Button } from '../Buttons';
+
 import { FirebaseContext } from '../../context';
 import { IAuthError } from '../../common/types';
 
@@ -54,31 +57,31 @@ const SignUpForm: React.FC = () => {
     >
       <Form>
         <InputField
-          label="Username"
+          // label="Username"
           name="username"
           type="text"
-          placeholder="Hotdaddy69"
+          placeholder="Username"
         />
         <InputField
-          label="Email"
+          // label="Email"
           name="email"
           type="email"
-          placeholder="janedoe@gmail.com"
+          placeholder="Email"
         />
         <InputField
-          label="Password"
+          // label="Password"
           name="passwordOne"
           type="password"
-          placeholder="something secret"
+          placeholder="Password"
         />
         <InputField
-          label="Confirm Password"
+          // label="Confirm Password"
           name="passwordTwo"
           type="password"
-          placeholder="something secret"
+          placeholder="Confirm Password"
         />
-        <button type="submit">Sign Up</button>
-        {error && <p>{error.message}</p>}
+        <Button type="submit">Sign Up</Button>
+        {error && <FormError>{error.message}</FormError>}
       </Form>
     </Formik>
   );

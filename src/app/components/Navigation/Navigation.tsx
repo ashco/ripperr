@@ -52,7 +52,10 @@ const NavigationNonAuth: React.FC = () => (
   <ul>
     <li>
       <Link href="/movements">
-        <a className="logo">Ripperr</a>
+        <a className="logo">
+          <img src={Logo} alt="Ripperr Icon" />
+          Ripperr
+        </a>
       </Link>
     </li>
     <li>
@@ -66,7 +69,7 @@ const NavigationNonAuth: React.FC = () => (
 const NavigationWrapper = styled.nav`
   background-color: ${(props) => props.theme.color.blue[100]};
   box-shadow: ${(props) => props.theme.shadow[0]};
-  height: ${(p) => p.theme.space[7]}
+  height: ${(p) => p.theme.space[7]};
   grid-area: navigation;
   ul {
     display: flex;

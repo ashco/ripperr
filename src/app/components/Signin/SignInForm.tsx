@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
 import { InputField, signInVal } from '../Forms';
+import { FormError } from '../Forms/styles';
+import { Button } from '../Buttons';
 
 import { FirebaseContext } from '../../context';
 import { IAuthError } from '../../common/types';
@@ -41,36 +43,36 @@ const SignInForm = () => {
           });
       }}
     >
-      <Form>
+      <StyledForm>
         <InputField
-          label="Email"
+          // label="Email"
           name="email"
           type="email"
-          placeholder="janedoe@gmail.com"
+          placeholder="Email"
         />
         <InputField
-          label="Password"
+          // label="Password"
           name="password"
           type="password"
-          placeholder="password123"
+          placeholder="Password"
         />
-        <button type="submit">Sign In</button>
-        {error && <p>{error.message}</p>}
-      </Form>
+        <Button type="submit">Sign In</Button>
+        {error && <FormError>{error.message}</FormError>}
+      </StyledForm>
     </Formik>
   );
 };
 
-const FormWrapper = styled.form`
+const StyledForm = styled(Form)`
   /* border: black 4px solid; */
-  display: flex;
-  flex-direction: column;
-  * {
+  display: grid;
+  grid-template-rows: auto auto auto 2rem;
+  /* * {
     margin-bottom: 4px;
-  }
-  input {
+  } */
+  /* input {
     height: 2rem;
-  }
+  } */
 `;
 
 export default SignInForm;

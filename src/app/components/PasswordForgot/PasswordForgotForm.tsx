@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { Formik, Form } from 'formik';
 
+import { Button } from '../Buttons';
 import { InputField, passwordForgotVal } from '../Forms';
 import { FirebaseContext } from '../../context';
 import { IAuthError } from '../../common/types';
@@ -36,13 +37,8 @@ const PasswordForgotForm: React.FC = () => {
       }}
     >
       <Form>
-        <InputField
-          label="Email"
-          name="email"
-          type="email"
-          placeholder="janedoe@gmail.com"
-        />
-        <button type="submit">Reset My Password</button>
+        <InputField name="email" type="email" placeholder="Email" />
+        <Button type="submit">Reset Password</Button>
         {error && <p>{error.message}</p>}
       </Form>
     </Formik>
@@ -50,11 +46,9 @@ const PasswordForgotForm: React.FC = () => {
 };
 
 export const PasswordForgotLink: React.FC = () => (
-  <p>
-    <Link href="/forgot">
-      <a>Forgot Password?</a>
-    </Link>
-  </p>
+  <Link href="/forgot">
+    <a>Forgot your password?</a>
+  </Link>
 );
 
 export default PasswordForgotForm;

@@ -1,4 +1,5 @@
-﻿import { NextPage } from 'next';
+﻿import React from 'react';
+import { NextPage } from 'next';
 
 import { AuthFormContainer } from './signin';
 import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';

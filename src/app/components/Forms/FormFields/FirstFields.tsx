@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { Row } from '../styles';
+import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
@@ -50,7 +50,7 @@ const FirstFields: React.FC<{
         value={form.name}
         onChange={handleChange}
       />
-      <span className="error">{errors.name}</span>
+      <FormError>{errors.name}</FormError>
       <textarea
         id="description"
         name="description"
@@ -58,7 +58,7 @@ const FirstFields: React.FC<{
         value={form.description}
         onChange={handleChange}
       />
-      <span className="error">{errors.description}</span>
+      <FormError>{errors.description}</FormError>
       {/* <label htmlFor="tags"> */}
       {/* Tags */}
       {/* <div id="data"> */}
@@ -79,7 +79,7 @@ const FirstFields: React.FC<{
           </li>
         ))}
       </TagListWrapper> */}
-      <span className="error">{errors.tags}</span>
+      <FormError>{errors.tags}</FormError>
     </FirstFieldsWrapper>
   );
 };

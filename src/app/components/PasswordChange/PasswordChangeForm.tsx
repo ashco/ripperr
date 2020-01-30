@@ -2,6 +2,7 @@
 import { Formik, Form } from 'formik';
 
 import { InputField, passwordChangeVal } from '../Forms';
+import { Button } from '../Buttons';
 import { FirebaseContext } from '../../context';
 // import { IError } from '../Signup/SignUpForm';
 
@@ -39,19 +40,13 @@ const PasswordChangeForm: React.FC = () => {
       }}
     >
       <Form>
+        <InputField name="passwordOne" type="password" placeholder="Password" />
         <InputField
-          label="Password"
-          name="passwordOne"
-          type="password"
-          placeholder="Password Here"
-        />
-        <InputField
-          label="Confirm New Password"
           name="passwordTwo"
           type="password"
-          placeholder="Password Here Again"
+          placeholder="Confirm Password"
         />
-        <button>Change Password</button>
+        <Button type="submit">Change Password</Button>
         {/* {error && <p>{error.message}</p>} */}
       </Form>
     </Formik>

@@ -6,6 +6,11 @@ export const Row = styled.div`
   padding-bottom: 0.5rem;
 `;
 
+export const FormError = styled.span`
+  margin: auto 0.25rem;
+  font-size: 0.75rem;
+`;
+
 export const FormWrapper = styled.div`
   margin: auto;
   display: grid;
@@ -55,11 +60,10 @@ export const MovementFormWrapper = styled(FormWrapper)`
   select {
     border: none;
   }
-  .error {
-    /* margin-bottom: 0.5rem; */
+  /* .error {
     margin: auto 0.25rem;
     font-size: 0.75rem;
-  }
+  } */
   .add-btn {
     width: 100%;
   }
