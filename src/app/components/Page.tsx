@@ -36,6 +36,7 @@ const Inner = styled.div`
   /* padding: 2rem; */
   height: calc(100vh - ${(p) => p.theme.space[7]});
   grid-area: main;
+  overflow-y: auto;
 `;
 
 const Page = (props: any) => {

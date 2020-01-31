@@ -34,12 +34,33 @@ function sortMovements(a: IMovements, b: IMovements): number {
 }
 
 const MovementList: React.FC = () => {
-  const [scrollState, setScrollState] = useState({
-    isScrolling: false,
-    scrollLeft: 0,
-    clientX: 0,
-  });
+  // const [scrollState, setScrollState] = useState({
+  //   isScrolling: false,
+  //   scrollLeft: 0,
+  //   clientX: 0,
+  // });
 
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const [width, setWidth] = useState(0);
+
+  // useEffect(() => {
+  // setWidth(listRef.current.offsetWidth);
+  // });
+
+  function calcColumns() {
+    let elementWidth = 0;
+    if (listRef && listRef.current) {
+      elementWidth = listRef.current.offsetWidth;
+    }
+    const remPixels = parseFloat(
+      getComputedStyle(document.documentElement).fontSize,
+    );
+    const listItemWidth = 16 * remPixels;
+    const columnNum = Math.floor(elementWidth / listItemWidth);
+
+    return columnNum;
+  }
   // const listRef = useRef<HTMLUListElement>(null);
 
   // function onMouseDown(e: any) {
@@ -105,10 +126,20 @@ const MovementList: React.FC = () => {
     ...movements.archetypes,
     ...movements.exercises,
     ...movements.workouts,
-  ];
-  movementList.sort((a, b) => sortMovements(a, b));
+  ].sort((a, b) => sortMovements(a, b));
 
-  console.log(movementList);
+  // create sorted movement lists
+  const movementColumnList: any[] = [];
+  const columnNum = calcColumns();
+  for (let i = 0; i < columnNum; i += 1) {
+    movementColumnList.push([]);
+  }
+  movementList.forEach((move, i) => {
+    const index = i % columnNum;
+    movementColumnList[index].push(move);
+  });
+
+  console.log(movementColumnList);
 
   function renderListItem(move: IMovements) {
     if (move.type === MovementType.Archetype) {
@@ -122,31 +153,71 @@ const MovementList: React.FC = () => {
     }
   }
 
+  calcColumns();
+
   return (
     <MovementListWrapper
-    // ref={listRef}
-    // onMouseDown={onMouseDown}
-    // onScroll={onMouseMove}
+      ref={listRef}
+      // onMouseDown={onMouseDown}
+      // onScroll={onMouseMove}
     >
       {movements.loading ? (
         <div>Loading ...</div>
       ) : movementList.length === 0 ? (
         <div>Get out there and make something of yourself.</div>
       ) : (
-        movementList.map((move: IMovements) => renderListItem(move))
+        <>
+          {movementColumnList.map((column, i) => (
+            <div key={i}>
+              {column.map((move: IMovements) => renderListItem(move))}
+            </div>
+          ))}
+          {/* <div>
+            {movementList.map(
+              (move: IMovements, i: number) =>
+                i % 2 === 0 && renderListItem(move),
+            )}
+          </div>
+          <div>
+            {movementList.map(
+              (move: IMovements, i: number) =>
+                i % 2 === 1 && renderListItem(move),
+            )}
+          </div> */}
+          {/* <div>
+            {movementList.map(
+              (move: IMovements, i: number) =>
+                i % 3 === 2 && renderListItem(move),
+            )}
+          </div> */}
+        </>
       )}
     </MovementListWrapper>
   );
 };
 
 const MovementListWrapper = styled.ul`
-  /* margin-top: ${(p) => p.theme.space[2]}; */
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  height: 100%;
-  overflow-x: auto;
+  justify-content: center;
+  /* margin-top: ${(p) => p.theme.space[2]}; */
+  /* display: flex;
+  flex-direction: column; */
+  /* flex-wrap: wrap; */
+  /* align-content: center; */
+  /* height: 100%; */
+  /* overflow-y: auto;
+  li {
+    &:nth-child(3n+1) { order: 1; }
+    &:nth-child(3n+2) { order: 2; }
+    &:nth-child(3n)   { order: 3; }
+  }
+  &::before,
+  &::after {
+    content: "";
+    flex-basis: 100%;
+    width: 0;
+    order: 2;
+  } */
 `;
 
 export default MovementList;

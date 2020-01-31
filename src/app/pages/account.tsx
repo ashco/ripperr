@@ -28,6 +28,10 @@ const AccountPage: NextPage = () => {
 const AccountPageWrapper = styled.div`
   display: grid;
   justify-content: center;
+  h1 {
+    font-size: 20px;
+    margin-top: 2rem;
+  }
 `;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;

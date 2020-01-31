@@ -15,13 +15,18 @@ const AddForm: React.FC<{
       <Button onClick={addArchetype}>Add Archetype</Button>
       <Button onClick={addExercise}>Add Exercise</Button>
       <Button onClick={addWorkout}>Add Workout</Button>
-      <Button onClick={hide}>Cancel</Button>
+      <Button className="cancel-btn" onClick={hide}>
+        Cancel
+      </Button>
     </AddFormWrapper>
   );
 };
 
 const AddFormWrapper = styled(FormWrapper)`
   width: ${(p) => p.theme.space[12]};
+  .cancel-btn {
+    margin-top: 2rem;
+  }
 `;
 // const AddFormWrapper = styled.div`
 //   margin: auto;

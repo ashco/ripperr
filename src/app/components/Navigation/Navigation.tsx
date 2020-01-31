@@ -71,6 +71,7 @@ const NavigationWrapper = styled.nav`
   box-shadow: ${(props) => props.theme.shadow[0]};
   height: ${(p) => p.theme.space[7]};
   grid-area: navigation;
+  z-index: 99;
   ul {
     display: flex;
     /* justify-content: center; */
