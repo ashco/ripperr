@@ -33,92 +33,49 @@ function sortMovements(a: IMovements, b: IMovements): number {
   }
 }
 
-const MovementList: React.FC = () => {
-  // const [scrollState, setScrollState] = useState({
-  //   isScrolling: false,
-  //   scrollLeft: 0,
-  //   clientX: 0,
-  // });
+function createMovementColList(colNum: number, moveList: IMovements[]) {
+  // create sorted movement lists
+  const movementColList: any[] = [];
 
+  for (let i = 0; i < colNum; i += 1) {
+    movementColList.push([]);
+  }
+  moveList.forEach((move, i) => {
+    const index = i % colNum;
+    movementColList[index].push(move);
+  });
+
+  return movementColList;
+}
+
+const MovementList: React.FC = () => {
   const listRef = useRef<HTMLUListElement>(null);
 
   const [width, setWidth] = useState(0);
+  const [columnNum, setColumnNum] = useState(0);
 
-  // useEffect(() => {
-  // setWidth(listRef.current.offsetWidth);
-  // });
-
-  function calcColumns() {
-    let elementWidth = 0;
-    if (listRef && listRef.current) {
-      elementWidth = listRef.current.offsetWidth;
-    }
+  function updateColumnNum(): void {
     const remPixels = parseFloat(
       getComputedStyle(document.documentElement).fontSize,
     );
+
+    let colWidth = 0;
+    if (listRef && listRef.current) {
+      colWidth = listRef.current.offsetWidth;
+    }
+
     const listItemWidth = 16 * remPixels;
-    const columnNum = Math.floor(elementWidth / listItemWidth);
+    const colNum = Math.floor(colWidth / listItemWidth);
 
-    return columnNum;
+    setColumnNum(colNum);
   }
-  // const listRef = useRef<HTMLUListElement>(null);
 
-  // function onMouseDown(e: any) {
-  //   // const { scrollLeft, scrollTop } = listRef;
-  //   console.log('mouse down');
-
-  //   setScrollState({
-  //     isScrolling: true,
-  //     scrollLeft: 0,
-  //     clientX: e.clientX,
-  //   });
-  // }
-
-  // function onMouseMove(e: any) {
-  //   if (scrollState.isScrolling) {
-  //     const {clientX, scrollLeft} = scrollState;
-
-  //     // console.log(scrollState);
-  //     // console.log(e.clientX);
-
-  //     // const x = scrollLeft - clientX + e.clientX;
-  //     // console.log(x);
-
-  //     // setScrollState({ ...scrollState, scrollLeft: x })
-  //     if (listRef && listRef.current) {
-
-  //       // console.log(scrollLeft);
-  //       // console.log(clientX);
-  //       // console.log(e.clientX);
-  //       console.log(e.clientX - clientX);
-  //       listRef.current.scrollLeft = scrollLeft - e.clientX - clientX;
-  //       console.log(listRef.current.scrollLeft)
-  //     }
-  //     // console.log(scrollState);
-  //   }
-  //   // const {clientX, scrollLeft} = this.state;
-  //   // this._scroller.scrollLeft = scrollLeft - clientX + event.clientX;
-  // }
-
-  // function onMouseUp() {
-  //   console.log('mouse up');
-
-  //   setScrollState({
-  //     isScrolling: false,
-  //     scrollLeft: 0,
-  //     clientX: 0,
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener('mouseup', onMouseUp);
-  //   window.addEventListener('mousemove', onMouseMove);
-
-  //   return () => {
-  //     window.removeEventListener('mouseup', onMouseUp)
-  //     window.removeEventListener('mousemove', onMouseMove)
-  //   };
-  // }, [scrollState.isScrolling]);
+  useEffect(() => {
+    window.addEventListener('resize', updateColumnNum);
+    return () => {
+      window.removeEventListener('resize', updateColumnNum);
+    };
+  }, []);
 
   const movements = useContext(MovementsContext);
 
@@ -128,18 +85,7 @@ const MovementList: React.FC = () => {
     ...movements.workouts,
   ].sort((a, b) => sortMovements(a, b));
 
-  // create sorted movement lists
-  const movementColumnList: any[] = [];
-  const columnNum = calcColumns();
-  for (let i = 0; i < columnNum; i += 1) {
-    movementColumnList.push([]);
-  }
-  movementList.forEach((move, i) => {
-    const index = i % columnNum;
-    movementColumnList[index].push(move);
-  });
-
-  console.log(movementColumnList);
+  const movementColList = createMovementColList(columnNum, movementList);
 
   function renderListItem(move: IMovements) {
     if (move.type === MovementType.Archetype) {
@@ -153,44 +99,18 @@ const MovementList: React.FC = () => {
     }
   }
 
-  calcColumns();
-
   return (
-    <MovementListWrapper
-      ref={listRef}
-      // onMouseDown={onMouseDown}
-      // onScroll={onMouseMove}
-    >
+    <MovementListWrapper ref={listRef}>
       {movements.loading ? (
         <div>Loading ...</div>
       ) : movementList.length === 0 ? (
         <div>Get out there and make something of yourself.</div>
       ) : (
-        <>
-          {movementColumnList.map((column, i) => (
-            <div key={i}>
-              {column.map((move: IMovements) => renderListItem(move))}
-            </div>
-          ))}
-          {/* <div>
-            {movementList.map(
-              (move: IMovements, i: number) =>
-                i % 2 === 0 && renderListItem(move),
-            )}
+        movementColList.map((col, i) => (
+          <div key={i}>
+            {col.map((move: IMovements) => renderListItem(move))}
           </div>
-          <div>
-            {movementList.map(
-              (move: IMovements, i: number) =>
-                i % 2 === 1 && renderListItem(move),
-            )}
-          </div> */}
-          {/* <div>
-            {movementList.map(
-              (move: IMovements, i: number) =>
-                i % 3 === 2 && renderListItem(move),
-            )}
-          </div> */}
-        </>
+        ))
       )}
     </MovementListWrapper>
   );
