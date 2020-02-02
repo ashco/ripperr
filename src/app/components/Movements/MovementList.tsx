@@ -33,15 +33,23 @@ function sortMovements(a: IMovements, b: IMovements): number {
   }
 }
 
+interface IMovementColList {
+  [key: number]: IMovements[];
+}
+
 function createMovementColList(colNum: number, moveList: IMovements[]) {
   // create sorted movement lists
-  const movementColList: any[] = [];
+  const movementColList: IMovements[][] = [];
 
   for (let i = 0; i < colNum; i += 1) {
     movementColList.push([]);
   }
+  console.log(movementColList);
   moveList.forEach((move, i) => {
     const index = i % colNum;
+    // if (movementColList[index] === undefined) {
+    //   movementColList.push([]);
+    // }
     movementColList[index].push(move);
   });
 
@@ -71,6 +79,8 @@ const MovementList: React.FC = () => {
   }
 
   useEffect(() => {
+    updateColumnNum();
+
     window.addEventListener('resize', updateColumnNum);
     return () => {
       window.removeEventListener('resize', updateColumnNum);
@@ -119,6 +129,7 @@ const MovementList: React.FC = () => {
 const MovementListWrapper = styled.ul`
   display: flex;
   justify-content: center;
+  margin: 0 4rem;
   /* margin-top: ${(p) => p.theme.space[2]}; */
   /* display: flex;
   flex-direction: column; */

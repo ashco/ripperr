@@ -7,7 +7,7 @@ import { MovementType } from '../../common/enums';
 export const ListItem = styled.li`
   /* height: ${(props) => props.theme.space[8]}; */
   /* margin-right: ${({ theme }) => theme.space[3]}; */
-  margin: ${({ theme }) => theme.space[1]};
+  margin: 0.5rem;
   width: ${({ theme }) => theme.space[11]};
   background: ${({ theme }) => theme.color.neutral[100]};
   box-shadow: ${(props) => props.theme.shadow[1]};
