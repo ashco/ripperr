@@ -8,21 +8,15 @@ import theme from '../styles/theme';
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
-// // import SelectRow from "./SelectRow";
-// import Nav from "./Nav";
 
 const StyledPage = styled.div`
-  /* background: white; */
   color: ${({ theme }) => theme.color.neutral[900]};
   background: ${(props) => props.theme.color.neutral[200]};
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-template-rows: auto 1fr;
-  /* grid-template-columns: auto; */
-  grid-template-areas:
-    'navigation'
-    'main';
+  grid-template-columns: 12rem 1fr;
+  grid-template-areas: 'navigation main';
 `;
 
 const ModalRoot = styled.div`
@@ -31,10 +25,7 @@ const ModalRoot = styled.div`
 `;
 
 const Inner = styled.div`
-  /* max-width: ${(props) => props.theme.space[15]}; */
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  height: calc(100vh - ${(p) => p.theme.space[7]});
+  height: 100%;
   grid-area: main;
   overflow-y: auto;
 `;

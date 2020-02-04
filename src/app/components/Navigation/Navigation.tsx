@@ -6,7 +6,7 @@ import { AuthUserContext } from '../../context';
 
 import SignOutButton from './SignOutButton';
 
-import Logo from '../../static/images/fire-alt-solid.svg';
+import Logo from '../../static/icons/fire-alt-solid.svg';
 
 const Navigation: React.FC = () => {
   const authUser = useContext(AuthUserContext);
@@ -19,32 +19,36 @@ const Navigation: React.FC = () => {
 
 const NavigationAuth: React.FC = () => (
   <ul>
-    <li>
-      <Link href="/movements">
-        <a className="logo">
-          <img src={Logo} alt="Ripperr Icon" />
-          Ripperr
-        </a>
-      </Link>
-    </li>
-    {/* <li>
-      <Link href="/movements">
-        <a>Movements</a>
-      </Link>
-    </li> */}
-    <li>
-      <Link href="/account">
-        <a>Account</a>
-      </Link>
-    </li>
-    {/* <li>
-      <Link href="/admin">
-        <a>Admin</a>
-      </Link>
-    </li> */}
-    <li>
-      <SignOutButton />
-    </li>
+    <div className="top-group">
+      <li>
+        <Link href="/movements">
+          <a className="logo">
+            <img src={Logo} alt="Ripperr Icon" />
+            Ripperr
+          </a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/movements">
+          <a>Movements</a>
+        </Link>
+      </li>
+    </div>
+    <div className="bottom-group">
+      <li>
+        <Link href="/account">
+          <a>Account</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/admin">
+          <a>Admin</a>
+        </Link>
+      </li>
+      <li>
+        <SignOutButton />
+      </li>
+    </div>
   </ul>
 );
 
@@ -69,12 +73,26 @@ const NavigationNonAuth: React.FC = () => (
 const NavigationWrapper = styled.nav`
   background-color: ${(props) => props.theme.color.blue[100]};
   box-shadow: ${(props) => props.theme.shadow[0]};
-  height: ${(p) => p.theme.space[7]};
+  height: 100%;
   grid-area: navigation;
   z-index: 99;
   ul {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: 100%;
+    li {
+      padding: 16px;
+    }
+    .logo {
+      font-size: 22px;
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: 40px auto;
+      align-items: center;
+    }
+  }
+  /* ul {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     height: 100%;
     li:first-child {
@@ -94,7 +112,7 @@ const NavigationWrapper = styled.nav`
         margin-right: 0.5rem;
       }
     }
-  }
+  } */
 `;
 
 const LinksWrapper = styled.div``;
