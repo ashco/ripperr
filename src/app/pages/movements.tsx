@@ -2,7 +2,7 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import MovementList from '../components/Movements/MovementList';
+import { FilterBar, ArchetypeRow, MovementList } from '../components/Movements';
 import { MovementFormButton } from '../components/Buttons';
 
 import { withAuthorization, withMovements } from '../context';
@@ -12,12 +12,20 @@ import { FormMode } from '../common/enums';
 
 const MovementsPage: NextPage = () => {
   return (
-    <>
-      <MovementFormButton formMode={FormMode.Add} />
+    <MovementsPageWrapper>
+      <FilterBar />
+      <ArchetypeRow />
       <MovementList />
-    </>
+      <MovementFormButton formMode={FormMode.Add} />
+    </MovementsPageWrapper>
   );
 };
+
+const MovementsPageWrapper = styled.div`
+  display: grid;
+  grid-template-rows: 4rem 4rem 1fr;
+  height: 100%;
+`;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 

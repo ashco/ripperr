@@ -47,16 +47,13 @@ function createMovementColList(colNum: number, moveList: IMovements[]) {
   console.log(movementColList);
   moveList.forEach((move, i) => {
     const index = i % colNum;
-    // if (movementColList[index] === undefined) {
-    //   movementColList.push([]);
-    // }
     movementColList[index].push(move);
   });
 
   return movementColList;
 }
 
-const MovementList: React.FC = () => {
+export const MovementList: React.FC = () => {
   const listRef = useRef<HTMLUListElement>(null);
 
   const [width, setWidth] = useState(0);
@@ -132,25 +129,4 @@ const MovementListWrapper = styled.ul`
   display: flex;
   justify-content: center;
   margin: 0 4rem;
-  /* margin-top: ${(p) => p.theme.space[2]}; */
-  /* display: flex;
-  flex-direction: column; */
-  /* flex-wrap: wrap; */
-  /* align-content: center; */
-  /* height: 100%; */
-  /* overflow-y: auto;
-  li {
-    &:nth-child(3n+1) { order: 1; }
-    &:nth-child(3n+2) { order: 2; }
-    &:nth-child(3n)   { order: 3; }
-  }
-  &::before,
-  &::after {
-    content: "";
-    flex-basis: 100%;
-    width: 0;
-    order: 2;
-  } */
 `;
-
-export default MovementList;

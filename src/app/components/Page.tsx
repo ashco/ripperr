@@ -25,7 +25,7 @@ const ModalRoot = styled.div`
 `;
 
 const Inner = styled.div`
-  height: 100%;
+  height: 100vh;
   grid-area: main;
   overflow-y: auto;
 `;
