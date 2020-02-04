@@ -23,7 +23,7 @@ const MovementsPage: NextPage = () => {
 
 const MovementsPageWrapper = styled.div`
   display: grid;
-  grid-template-rows: 4rem 4rem 1fr;
+  grid-template-rows: auto auto 1fr;
   height: 100%;
 `;
 

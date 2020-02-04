@@ -34,9 +34,6 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
           <DeleteButton text={deleteText} handleDelete={handleDelete} />
           <MovementFormButton formMode={FormMode.Edit} movement={workout} />
         </span>
-        <span className="row">
-          <Button>Rip Rip</Button>
-        </span>
       </div>
     </WorkoutListItemWrapper>
   );
@@ -44,6 +41,7 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
 
 const WorkoutListItemWrapper = styled(ListItem)`
   /* height: ${(props) => props.theme.space[8]}; */
+  height: 180px;
   .color-bar {
     background-color: ${(props) => props.theme.color.yellow[500]};
   }
