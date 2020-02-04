@@ -73,7 +73,9 @@ const MovementList: React.FC = () => {
     }
 
     const listItemWidth = 16 * remPixels;
-    const colNum = Math.floor(colWidth / listItemWidth);
+    let colNum = Math.floor(colWidth / listItemWidth);
+
+    if (colNum < 1) colNum = 1;
 
     setColumnNum(colNum);
   }
