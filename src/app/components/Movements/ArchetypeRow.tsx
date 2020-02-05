@@ -31,7 +31,8 @@ export const ArchetypeRow: React.FC = () => {
 
 const MovementListWrapper = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 8rem);
+  grid-template-columns: repeat(auto-fit, 8rem);
+  justify-content: center;
   gap: 0.5rem;
   margin: 0 1rem;
   margin: 0 1rem;

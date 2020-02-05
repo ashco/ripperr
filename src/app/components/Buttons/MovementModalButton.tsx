@@ -47,21 +47,8 @@ const MovementModalButton: React.FC<{
 };
 
 const AddMovementButton = styled(Button)`
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 3rem;
-  height: 3rem;
-  /*
-  width: 90vw;
-  */
   img {
     width: 1.5rem;
-  }
-  @media (min-width: ${sizes.tablet}px) {
-    /* left: inherit;
-    width: ${(p) => p.theme.space[8]};
-    margin: 0; */
   }
 `;
 

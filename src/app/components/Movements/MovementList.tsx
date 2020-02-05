@@ -87,7 +87,14 @@ export const MovementList: React.FC = () => {
 const MovementListWrapper = styled.ul`
   margin: 0 1rem;
   display: grid;
-  gap: 0.5rem;
+  gap: 1rem;
   grid-template-columns: repeat(auto-fill, 8rem);
-  grid-template-rows: repeat(auto-fill, 8rem);
+  grid-auto-rows: 8fr;
+  grid-auto-flow: row dense;
+  /* grid-template-columns: repeat(auto-fit, 8rem); */
+  /* grid-template-rows: repeat(auto-fill, 8rem); */
+  justify-content: center;
+  overflow-y: auto;
+  /* grid-template-columns: repeat(auto-fill, 8rem);
+  grid-template-rows: repeat(auto-fill, 8rem); */
 `;

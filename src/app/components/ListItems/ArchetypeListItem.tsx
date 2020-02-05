@@ -47,6 +47,9 @@ const ArchetypeListItemWrapper = styled(ListItem)`
   .color-bar {
     background-color: ${(props) => props.theme.color.green[500]};
   }
+  .name {
+    padding: 0.5rem;
+  }
 `;
 
 export default ArchetypeListItem;

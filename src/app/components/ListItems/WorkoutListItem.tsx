@@ -41,7 +41,9 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
 
 const WorkoutListItemWrapper = styled(ListItem)`
   /* height: ${(props) => props.theme.space[8]}; */
-  height: 180px;
+  /* height: 180px;
+  width: 16rem; */
+  grid-area: auto / auto / span 2 / span 2;
   .color-bar {
     background-color: ${(props) => props.theme.color.yellow[500]};
   }
