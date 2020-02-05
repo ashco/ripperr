@@ -32,18 +32,18 @@ const ArchetypeListItem: React.FC<{ archetype: IArchetype }> = ({
     <ArchetypeListItemWrapper>
       <div className="color-bar" />
       <p className="name">{archetype.name}</p>
-      <div className="btn-container">
+      {/* <div className="btn-container">
         <span className="row">
           <DeleteButton text={deleteText} handleDelete={handleDelete} />
           <MovementFormButton formMode={FormMode.Edit} movement={archetype} />
         </span>
-      </div>
+      </div> */}
     </ArchetypeListItemWrapper>
   );
 };
 
 const ArchetypeListItemWrapper = styled(ListItem)`
-  /* height: ${(props) => props.theme.space[8]}; */
+  height: 100%;
   .color-bar {
     background-color: ${(props) => props.theme.color.green[500]};
   }

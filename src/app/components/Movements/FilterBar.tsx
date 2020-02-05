@@ -3,19 +3,16 @@ import styled from 'styled-components';
 
 export const FilterBar = () => {
   return (
-    <FilterBarWrapper>
-      <input className="filter-bar" type="text" placeholder="Filter..." />
-    </FilterBarWrapper>
+    <StyledFilterBar
+      className="filter-bar"
+      type="text"
+      placeholder="Filter..."
+    />
   );
 };
 
-const FilterBarWrapper = styled.div`
-  /* width: 90%; */
-  /* margin: auto; */
-  padding: 1rem;
-  .filter-bar {
-    font-size: 24px;
-    width: 100%;
-    padding: 0.5rem;
-  }
+const StyledFilterBar = styled.input`
+  margin: 1rem 1rem 0;
+  font-size: 24px;
+  padding: 0.5rem;
 `;

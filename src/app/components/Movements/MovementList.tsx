@@ -61,8 +61,6 @@ export const MovementList: React.FC = () => {
     ...movements.workouts,
   ].sort((a, b) => sortMovements(a, b));
 
-  // const movementColList = createMovementColList(columnNum, movementList);
-
   function renderListItem(move: IMovements) {
     if (move.type === MovementType.Exercise) {
       return <ExerciseListItem key={move.id} exercise={move as IExercise} />;
@@ -87,7 +85,9 @@ export const MovementList: React.FC = () => {
 };
 
 const MovementListWrapper = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin: 0 1rem;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, 8rem);
+  grid-template-rows: repeat(auto-fill, 8rem);
 `;

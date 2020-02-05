@@ -30,6 +30,10 @@ export const ArchetypeRow: React.FC = () => {
 };
 
 const MovementListWrapper = styled.ul`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 8rem);
+  gap: 0.5rem;
+  margin: 0 1rem;
+  margin: 0 1rem;
+  overflow-x: auto;
 `;
