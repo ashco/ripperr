@@ -5,7 +5,11 @@ import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { ListItem } from './index';
 // import { ListItemWrapper } from './ListItem';
-import { DeleteButton, MovementFormButton } from '../Buttons';
+import {
+  DeleteButton,
+  MovementFormButton,
+  ListItemMenuButton,
+} from '../Buttons';
 
 import { IArchetype } from '../../common/types';
 import { FormMode } from '../../common/enums';
@@ -38,6 +42,7 @@ const ArchetypeListItem: React.FC<{ archetype: IArchetype }> = ({
           <MovementFormButton formMode={FormMode.Edit} movement={archetype} />
         </span>
       </div> */}
+      <ListItemMenuButton />
     </ArchetypeListItemWrapper>
   );
 };
