@@ -16,7 +16,7 @@ export const SearchContainer = () => {
 const SearchContainerWrapper = styled.div`
   display: grid;
   grid-template-rows: auto 3rem;
-  gap: 0.5rem;
+  gap: 1rem;
   background-color: ${(props) => props.theme.color.neutral[300]};
   box-shadow: ${(props) => props.theme.shadow[0]};
   padding-bottom: 0.5rem;

@@ -25,7 +25,7 @@ const MovementsPage: NextPage = () => {
 
 const MovementsPageWrapper = styled.div`
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto 1fr;
   gap: 1rem;
   height: 100%;
 `;

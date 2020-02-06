@@ -29,12 +29,6 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
     <WorkoutListItemWrapper>
       <div className="color-bar" />
       <p className="name">{workout.name}</p>
-      <div className="btn-container">
-        <span className="row">
-          <DeleteButton text={deleteText} handleDelete={handleDelete} />
-          <MovementFormButton formMode={FormMode.Edit} movement={workout} />
-        </span>
-      </div>
     </WorkoutListItemWrapper>
   );
 };

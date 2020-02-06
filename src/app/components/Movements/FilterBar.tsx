@@ -19,7 +19,7 @@ export const FilterBar = () => {
 const FilterBarWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 3rem;
-  gap: 0.5rem;
+  gap: 1rem;
   margin: 1rem 1rem 0;
   input {
     font-size: 24px;
