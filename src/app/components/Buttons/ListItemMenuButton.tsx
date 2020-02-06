@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 // import Bars from '../../static/icons/bars-solid.svg';
@@ -7,14 +7,25 @@ import Bars from '../../icons/Bars';
 
 const ListItemMenuButton: React.FC = () => {
   const [menu, setMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  function openMenu(): void {
+  function closeMenu(e: any): void {
+    if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
+      setMenu(false);
+    }
+  }
+
+  function openMenu(e: any): void {
     setMenu(true);
   }
 
-  function closeMenu(): void {
-    setMenu(false);
-  }
+  useEffect(() => {
+    if (menu) {
+      document.addEventListener('click', closeMenu);
+    } else {
+      document.removeEventListener('click', closeMenu);
+    }
+  }, [menu]);
 
   return (
     <ListItemMenuButtonWrapper>
@@ -22,7 +33,7 @@ const ListItemMenuButton: React.FC = () => {
         <Bars color="grey" />
       </button>
       {menu ? (
-        <div className="menu">
+        <div ref={menuRef} className="menu">
           <Button>Start</Button>
           <Button>Edit</Button>
           <Button>Delete</Button>
