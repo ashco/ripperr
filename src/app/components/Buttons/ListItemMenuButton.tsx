@@ -15,21 +15,50 @@ const ListItemMenuButton: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // function closeMenu(e: any): void {
+  //   // if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
+  //   if (menuOpen) {
+  //     setMenuOpen(false);
+  //     document.removeEventListener('click', closeMenu);
+  //     // console.log('in close menu');
+  //   }
+  //   // console.log('out close menu');
+  // }
+
+  // function openMenu(): void {
+  //   if (!menuOpen) {
+  //     console.log(menuOpen);
+  //     setMenuOpen(true);
+  //     console.log(menuOpen);
+  //     document.addEventListener('click', closeMenu);
+  //   }
+  // }
+
+  // function testBtn(): void {
+  //   setMenuOpen((menu) => !menu);
+  // }
+
+  function openMenu(): void {
+    setMenuOpen(true);
+  }
+
   function closeMenu(e: any): void {
+    console.log(e.target);
     if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
       setMenuOpen(false);
       document.removeEventListener('click', closeMenu);
-      console.log('in close menu');
     }
-    console.log('out close menu');
+    // TODO - Need to have menu close when menu btns are clicked. Use refs?
   }
 
-  function openMenu(): void {
-    if (!menuOpen) {
-      setMenuOpen(true);
+  useEffect(() => {
+    if (menuOpen) {
+      console.log('open');
       document.addEventListener('click', closeMenu);
+    } else {
+      console.log('closed');
     }
-  }
+  }, [menuOpen]);
 
   return (
     <div>
@@ -66,6 +95,7 @@ const ListItemMenuWrapper = styled.div`
   background-color: ${(props) => props.theme.color.neutral[200]};
   box-shadow: ${(props) => props.theme.shadow[2]};
   width: 6rem;
+  padding: 1rem;
 `;
 
 export default ListItemMenuButton;
