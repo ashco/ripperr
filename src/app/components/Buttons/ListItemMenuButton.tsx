@@ -19,10 +19,12 @@ const ListItemMenuButton: React.FC<{
     if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
       setMenuOpen(false);
       document.removeEventListener('click', closeMenu);
+      console.log('in close menu');
     }
+    console.log('out close menu');
   }
 
-  function openMenu(e: any): void {
+  function openMenu(): void {
     if (!menuOpen) {
       setMenuOpen(true);
       document.addEventListener('click', closeMenu);
@@ -36,7 +38,7 @@ const ListItemMenuButton: React.FC<{
       </StyledListItemMenuButton>
       {menuOpen ? (
         <ListItemMenuWrapper ref={menuRef}>
-          {type === MovementType.Workout && <Button size="14px">Start</Button>}
+          {type === MovementType.Workout && <Button>Start</Button>}
           <MovementFormButton formMode={FormMode.Edit} movement={movement} />
           <DeleteButton text={deleteText} handleDelete={handleDelete} />
         </ListItemMenuWrapper>

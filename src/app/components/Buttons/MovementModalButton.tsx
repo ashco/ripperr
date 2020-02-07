@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, RefObject } from 'react';
 import styled from 'styled-components';
 
 import sizes from '../../styles/sizes';
@@ -16,6 +16,7 @@ import PlusIcon from '../../static/icons/plus-solid.svg';
 const MovementModalButton: React.FC<{
   formMode: FormMode;
   movement?: IMovements;
+  ref?: RefObject<HTMLButtonElement>;
 }> = ({ formMode, movement }) => {
   const [showModal, setShowModal] = useState(false);
   const hide = (): void => setShowModal(false);

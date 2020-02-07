@@ -9,7 +9,11 @@ const DeleteButton: React.FC<{
   const [showModal, setShowModal] = useState(false);
 
   const hide = (): void => setShowModal(false);
-  const show = (): void => setShowModal(true);
+  const show = (e: any): void => {
+    console.log('show fnc');
+    // closeMenuHard();
+    setShowModal(true);
+  };
 
   const modal = showModal ? (
     <Modal>
@@ -19,7 +23,7 @@ const DeleteButton: React.FC<{
 
   return (
     <>
-      <Button onClick={show}>Delete</Button>
+      <Button onClick={(e) => show(e)}>Delete</Button>
       {modal}
     </>
   );
