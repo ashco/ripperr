@@ -12,7 +12,7 @@ import {
 } from '../Buttons';
 
 import { IExercise } from '../../common/types';
-import { FormMode } from '../../common/enums';
+import { FormMode, MovementType } from '../../common/enums';
 
 const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
   const firebase = useContext(FirebaseContext);
@@ -34,7 +34,12 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
     <ExerciseListItemWrapper>
       <div className="color-bar" />
       <p className="name">{exercise.name}</p>
-      <ListItemMenuButton />
+      <ListItemMenuButton
+        type={MovementType.Exercise}
+        movement={exercise}
+        deleteText={deleteText}
+        handleDelete={handleDelete}
+      />
     </ExerciseListItemWrapper>
   );
 };
@@ -44,6 +49,10 @@ const ExerciseListItemWrapper = styled(ListItem)`
   .color-bar {
     background-color: ${(props) => props.theme.color.blue[500]};
   }
+  /* StyledListItemMenuButton {
+    position: absolute;
+
+  } */
 `;
 
 export default ExerciseListItem;

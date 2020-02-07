@@ -1,11 +1,17 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-// import Bars from '../../static/icons/bars-solid.svg';
-import { Button } from '../Buttons';
+import { Button, MovementFormButton, DeleteButton } from '../Buttons';
 import Bars from '../../icons/Bars';
+import { MovementType, FormMode } from '../../common/enums';
+import { IMovements } from '../../common/types';
 
-const ListItemMenuButton: React.FC = () => {
+const ListItemMenuButton: React.FC<{
+  type: MovementType;
+  movement: IMovements;
+  deleteText: string;
+  handleDelete: () => void;
+}> = ({ type, movement, deleteText, handleDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -24,43 +30,40 @@ const ListItemMenuButton: React.FC = () => {
   }
 
   return (
-    <ListItemMenuButtonWrapper>
-      <button className="menu-btn" onClick={openMenu}>
+    <div>
+      <StyledListItemMenuButton onClick={openMenu}>
         <Bars color="grey" />
-      </button>
+      </StyledListItemMenuButton>
       {menuOpen ? (
-        <div ref={menuRef} className="menu">
-          <Button>Start</Button>
-          <Button>Edit</Button>
-          <Button>Delete</Button>
-        </div>
+        <ListItemMenuWrapper ref={menuRef}>
+          {type === MovementType.Workout && <Button size="14px">Start</Button>}
+          <MovementFormButton formMode={FormMode.Edit} movement={movement} />
+          <DeleteButton text={deleteText} handleDelete={handleDelete} />
+        </ListItemMenuWrapper>
       ) : null}
-    </ListItemMenuButtonWrapper>
+    </div>
   );
 };
 
-const ListItemMenuButtonWrapper = styled.div`
-  .menu-btn {
-    justify-self: end;
-    border: none;
-    background: none;
-    height: 2rem;
-    width: 2rem;
-    margin: 0.25rem;
-    cursor: pointer;
-    svg {
-      height: 100%;
-      width: 100%;
-    }
+const StyledListItemMenuButton = styled.button`
+  border: none;
+  background: none;
+  height: 1.75rem;
+  width: 1.75rem;
+  cursor: pointer;
+  svg {
+    height: 100%;
+    width: 100%;
   }
-  .menu {
-    position: absolute;
-    display: grid;
-    grid-auto-rows: auto;
-    background-color: ${(props) => props.theme.color.neutral[200]};
-    box-shadow: ${(props) => props.theme.shadow[2]};
-    width: 8rem;
-  }
+`;
+
+const ListItemMenuWrapper = styled.div`
+  position: absolute;
+  display: grid;
+  grid-auto-rows: auto;
+  background-color: ${(props) => props.theme.color.neutral[200]};
+  box-shadow: ${(props) => props.theme.shadow[2]};
+  width: 6rem;
 `;
 
 export default ListItemMenuButton;

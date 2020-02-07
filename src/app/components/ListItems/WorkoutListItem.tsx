@@ -4,15 +4,10 @@ import styled from 'styled-components';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { ListItem } from './index';
-import {
-  Button,
-  DeleteButton,
-  MovementFormButton,
-  ListItemMenuButton,
-} from '../Buttons';
+import { Button, MovementFormButton, ListItemMenuButton } from '../Buttons';
 
 import { IWorkout } from '../../common/types';
-import { FormMode } from '../../common/enums';
+import { FormMode, MovementType } from '../../common/enums';
 
 const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
   const firebase = useContext(FirebaseContext);
@@ -34,7 +29,12 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
     <WorkoutListItemWrapper>
       <div className="color-bar" />
       <p className="name">{workout.name}</p>
-      <ListItemMenuButton />
+      <ListItemMenuButton
+        type={MovementType.Workout}
+        movement={workout}
+        deleteText={deleteText}
+        handleDelete={handleDelete}
+      />
     </WorkoutListItemWrapper>
   );
 };
