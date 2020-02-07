@@ -5,7 +5,11 @@ import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { ListItem } from './index';
 // import { ListItemWrapper } from './ListItem';
-import { DeleteButton, MovementFormButton } from '../Buttons';
+import {
+  DeleteButton,
+  MovementFormButton,
+  ListItemMenuButton,
+} from '../Buttons';
 
 import { IExercise } from '../../common/types';
 import { FormMode } from '../../common/enums';
@@ -30,6 +34,7 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
     <ExerciseListItemWrapper>
       <div className="color-bar" />
       <p className="name">{exercise.name}</p>
+      <ListItemMenuButton />
     </ExerciseListItemWrapper>
   );
 };

@@ -42,7 +42,7 @@ const ArchetypeListItem: React.FC<{ archetype: IArchetype }> = ({
           <MovementFormButton formMode={FormMode.Edit} movement={archetype} />
         </span>
       </div> */}
-      <ListItemMenuButton />
+      {/* <ListItemMenuButton /> */}
     </ArchetypeListItemWrapper>
   );
 };

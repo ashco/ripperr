@@ -6,33 +6,29 @@ import { Button } from '../Buttons';
 import Bars from '../../icons/Bars';
 
 const ListItemMenuButton: React.FC = () => {
-  const [menu, setMenu] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   function closeMenu(e: any): void {
     if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
-      setMenu(false);
+      setMenuOpen(false);
+      document.removeEventListener('click', closeMenu);
     }
   }
 
   function openMenu(e: any): void {
-    setMenu(true);
-  }
-
-  useEffect(() => {
-    if (menu) {
+    if (!menuOpen) {
+      setMenuOpen(true);
       document.addEventListener('click', closeMenu);
-    } else {
-      document.removeEventListener('click', closeMenu);
     }
-  }, [menu]);
+  }
 
   return (
     <ListItemMenuButtonWrapper>
       <button className="menu-btn" onClick={openMenu}>
         <Bars color="grey" />
       </button>
-      {menu ? (
+      {menuOpen ? (
         <div ref={menuRef} className="menu">
           <Button>Start</Button>
           <Button>Edit</Button>
