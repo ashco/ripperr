@@ -6,18 +6,18 @@ import sizes from '../../styles/sizes';
 import { Modal } from '../Modal';
 
 import { MovementModal } from '../Forms';
-import { Button } from '../Buttons';
+import { Button } from '.';
 
 import { IMovements } from '../../common/types';
 import { FormMode } from '../../common/enums';
 
 import PlusIcon from '../../static/icons/plus-solid.svg';
 
-const MovementModalButton: React.FC<{
+const MovementFormButton: React.FC<{
   formMode: FormMode;
   movement?: IMovements;
-  ref?: RefObject<HTMLButtonElement>;
-}> = ({ formMode, movement }) => {
+  btnRef?: RefObject<HTMLButtonElement>;
+}> = ({ formMode, movement, btnRef }) => {
   const [showModal, setShowModal] = useState(false);
   const hide = (): void => setShowModal(false);
   const show = (): void => setShowModal(true);
@@ -30,7 +30,11 @@ const MovementModalButton: React.FC<{
       </AddMovementButton>
     );
   } else if (formMode === FormMode.Edit) {
-    ButtonEl = <Button onClick={show}>Edit</Button>;
+    ButtonEl = (
+      <Button ref={btnRef} onClick={show}>
+        Edit
+      </Button>
+    );
   }
 
   const modal = showModal ? (
@@ -53,4 +57,4 @@ const AddMovementButton = styled(Button)`
   }
 `;
 
-export default MovementModalButton;
+export default MovementFormButton;

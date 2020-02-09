@@ -32,17 +32,21 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
 
   return (
     <ExerciseListItemWrapper>
-      <div className="color-bar" />
-      <p className="name">{exercise.name}</p>
-      <ListItemMenuButton
-        type={MovementType.Exercise}
-        movement={exercise}
-        deleteText={deleteText}
-        handleDelete={handleDelete}
-      />
+        <div className="color-bar" />
+        <p className="name">{exercise.name}</p>
+        <ListItemMenuButton
+          type={MovementType.Exercise}
+          movement={exercise}
+          deleteText={deleteText}
+          handleDelete={handleDelete}
+          />
     </ExerciseListItemWrapper>
   );
 };
+
+// const ClickHandler = styled.div`
+//   cursor: pointer;
+// `;
 
 const ExerciseListItemWrapper = styled(ListItem)`
   /* height: ${(props) => props.theme.space[8]}; */

@@ -14,6 +14,7 @@ const ListItemMenuButton: React.FC<{
 }> = ({ type, movement, deleteText, handleDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   // function closeMenu(e: any): void {
   //   // if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
@@ -49,6 +50,10 @@ const ListItemMenuButton: React.FC<{
       document.removeEventListener('click', closeMenu);
     }
     // TODO - Need to have menu close when menu btns are clicked. Use refs?
+    // else if (btnRef && btnRef.current && btnRef.current.contains(e.target)) {
+    //   setMenuOpen(false);
+    //   document.removeEventListener('click', closeMenu);
+    // }
   }
 
   useEffect(() => {
@@ -65,13 +70,17 @@ const ListItemMenuButton: React.FC<{
       <StyledListItemMenuButton onClick={openMenu}>
         <Bars color="grey" />
       </StyledListItemMenuButton>
-      {menuOpen ? (
-        <ListItemMenuWrapper ref={menuRef}>
-          {type === MovementType.Workout && <Button>Start</Button>}
-          <MovementFormButton formMode={FormMode.Edit} movement={movement} />
-          <DeleteButton text={deleteText} handleDelete={handleDelete} />
-        </ListItemMenuWrapper>
-      ) : null}
+      <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
+        {type === MovementType.Workout && (
+          <Button onClick={() => console.log('Starting!!')}>Start</Button>
+        )}
+        <MovementFormButton
+          btnRef={btnRef}
+          formMode={FormMode.Edit}
+          movement={movement}
+        />
+        <DeleteButton text={deleteText} handleDelete={handleDelete} />
+      </ListItemMenuWrapper>
     </div>
   );
 };
@@ -88,9 +97,10 @@ const StyledListItemMenuButton = styled.button`
   }
 `;
 
-const ListItemMenuWrapper = styled.div`
+const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   position: absolute;
-  display: grid;
+  display: ${(props) => (props.open ? 'grid' : 'none')};
+  /* display: grid; */
   grid-auto-rows: auto;
   background-color: ${(props) => props.theme.color.neutral[200]};
   box-shadow: ${(props) => props.theme.shadow[2]};
