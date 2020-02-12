@@ -118,8 +118,8 @@ export interface IExercise {
   readonly type: MovementType;
   name: string;
   description: string;
-  tags: string[];
   history: any;
+  tags: string[];
 }
 
 export interface IWorkout {

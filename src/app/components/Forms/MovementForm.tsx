@@ -18,8 +18,10 @@ import { MovementFormWrapper } from './styles';
 
 import {
   IHandleChange,
-  IExercise,
   IMovements,
+  IArchetype,
+  IExercise,
+  IWorkout,
   IArchetypeFormValues,
   IArchetypeFormErrors,
   IExerciseFormValues,
@@ -188,26 +190,37 @@ const MovementForm: React.FC<{
       const docRef = firebaseFnc(authUser.uid).doc();
 
       // Check that name is unique
-      const exNames = movementList.map((ex) => ex.name);
-      if (exNames.includes(form.name)) {
+      const moveNames = movementList.map((move) => move.name);
+      if (moveNames.includes(form.name)) {
         toast.error(`${movementText} name is already in use.`);
         return;
       }
 
-      const exerciseObj: IExercise = {
+      const movementObj: IMovements = {
         id: docRef.id,
         lastModified: firebase.getTimestamp(),
-        type: MovementType.Exercise,
+        type: movementType,
         name: form.name,
         description: form.description,
-        tags: form.tags,
         history: [],
       };
 
+      if (movementType === MovementType.Archetype) {
+        // Add nothing..
+      } else if (movementType === MovementType.Exercise) {
+        (movementObj as IExercise).tags = form.tags;
+      } else if (movementType === MovementType.Workout) {
+        (movementObj as IWorkout).tags = form.tags;
+        (movementObj as IWorkout).mode = form.mode;
+        (movementObj as IWorkout).movements = form.movements;
+        (movementObj as IWorkout).rest = form.rest;
+        (movementObj as IWorkout).config = {};
+      }
+
       docRef
-        .set(exerciseObj)
+        .set(movementObj)
         .then(() => {
-          console.log(`${movementText} Added: ${exerciseObj.name}`);
+          console.log(`${movementText} Added: ${movementObj.name}`);
           hide();
         })
         .catch((err) => {
@@ -221,13 +234,13 @@ const MovementForm: React.FC<{
   // function handleUpdateExercise(form: IExerciseFormValues): void {
   //   if (authUser && exercise) {
   //     // Check that name is unique or matches with current id
-  //     const exNames = exercises.map((ex) => ex.name);
-  //     if (exNames.includes(form.name) && exercise.name !== form.name) {
+  //     const moveNames = exercises.map((ex) => ex.name);
+  //     if (moveNames.includes(form.name) && exercise.name !== form.name) {
   //       toast.error('Exercise name is already in use.');
   //       return;
   //     }
 
-  //     const exerciseObj: IExerciseFormValues = {
+  //     const movementObj: IExerciseFormValues = {
   //       lastModified: firebase.getTimestamp(),
   //       name: form.name,
   //       description: form.description,
@@ -236,9 +249,9 @@ const MovementForm: React.FC<{
 
   //     firebase
   //       .exercise(authUser.uid, exercise.id)
-  //       .update(exerciseObj)
+  //       .update(movementObj)
   //       .then(() => {
-  //         console.log(`Exercise Updated: ${exerciseObj.name}`);
+  //         console.log(`Exercise Updated: ${movementObj.name}`);
   //         hide();
   //       })
   //       .catch((err) => {
