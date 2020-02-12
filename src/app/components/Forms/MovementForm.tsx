@@ -13,7 +13,15 @@ import {
   validateForm,
 } from '../../common/formHelpers';
 
-import { FirstFields, ButtonRow } from './index';
+import {
+  FirstFields,
+  TagField,
+  RepsField,
+  TimedField,
+  RestField,
+  ModeField,
+  ButtonRow,
+} from './index';
 import { MovementFormWrapper } from './styles';
 
 import {
@@ -316,7 +324,26 @@ const MovementForm: React.FC<{
           formMode={formMode}
           handleChange={handleChangeForm}
         />
-        {/* <ButtonRow hide={hide} submitText={text.submitButton} /> */}
+        {movementType === MovementType.Workout && (
+          <>
+            {/* <TagField form={form} handleChange={handleChangeForm} />
+            <ModeField
+              form={form}
+              errors={errors}
+              handleChange={handleChangeForm}
+              handleChangeConfig={handleChangeFormConfig}
+            />
+            {renderMovementFields()}
+            <button
+              type="button"
+              className="add-btn"
+              onClick={() => handleAddMovementRef(form.mode)}
+            >
+              +
+            </button>
+            <RestField form={form} handleChange={handleChangeFormRest} /> */}
+          </>
+        )}
         <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
       </form>
     </ExerciseFormWrapper>

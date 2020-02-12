@@ -1,6 +1,7 @@
 ﻿import MovementModal from '../Modal/MovementModal';
 import ExerciseForm from './ExerciseForm';
 import WorkoutForm from './WorkoutForm';
+import MovementForm from './MovementForm';
 
 import FirstFields from './FormFields/FirstFields';
 import RepsField from './FormFields/RepsField';
@@ -44,4 +45,5 @@ export {
   TimedField,
   ButtonRow,
   AddForm,
+  MovementForm,
 };

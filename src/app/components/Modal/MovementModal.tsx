@@ -2,7 +2,13 @@
 import styled from 'styled-components';
 
 import { ModalWrapper } from './index';
-import { ArchetypeForm, ExerciseForm, WorkoutForm, AddForm } from '../Forms';
+import {
+  MovementForm,
+  ArchetypeForm,
+  ExerciseForm,
+  WorkoutForm,
+  AddForm,
+} from '../Forms';
 
 import { FormMode, MovementType } from '../../common/enums';
 import {
@@ -14,8 +20,8 @@ import {
 
 const MovementModal: React.FC<{
   formMode: FormMode;
-  hide: () => void;
   movement?: IMovements;
+  hide: () => void;
 }> = ({ formMode, hide, movement }) => {
   // Determine type to add
   const [addMovementType, setAddMovementType] = useState<MovementType | null>(
@@ -26,39 +32,59 @@ const MovementModal: React.FC<{
   const addWorkout = () => setAddMovementType(MovementType.Workout);
 
   function renderForm() {
-    if (
-      addMovementType === MovementType.Archetype ||
-      (movement && movement.type === MovementType.Archetype)
-    ) {
+    console.log(addMovementType);
+    console.log(movement);
+    if (addMovementType) {
       return (
-        <ArchetypeForm
+        <MovementForm
+          movementType={addMovementType}
           formMode={formMode}
+          movement={movement}
           hide={hide}
-          archetype={movement as IArchetype}
         />
       );
-    } else if (
-      addMovementType === MovementType.Exercise ||
-      (movement && movement.type === MovementType.Exercise)
-    ) {
+    } else if (movement) {
       return (
-        <ExerciseForm
+        <MovementForm
+          movementType={movement.type}
           formMode={formMode}
+          movement={movement}
           hide={hide}
-          exercise={movement as IExercise}
         />
       );
-    } else if (
-      addMovementType === MovementType.Workout ||
-      (movement && movement.type === MovementType.Workout)
-    ) {
-      return (
-        <WorkoutForm
-          formMode={formMode}
-          hide={hide}
-          workout={movement as IWorkout}
-        />
-      );
+      // if (
+      //   addMovementType === MovementType.Archetype ||
+      //   (movement && movement.type === MovementType.Archetype)
+      // ) {
+      //   return (
+      //     <ArchetypeForm
+      //       formMode={formMode}
+      //       hide={hide}
+      //       archetype={movement as IArchetype}
+      //     />
+      //   );
+      // } else if (
+      //   addMovementType === MovementType.Exercise ||
+      //   (movement && movement.type === MovementType.Exercise)
+      // ) {
+      //   return (
+      //     <ExerciseForm
+      //       formMode={formMode}
+      //       hide={hide}
+      //       exercise={movement as IExercise}
+      //     />
+      //   );
+      // } else if (
+      //   addMovementType === MovementType.Workout ||
+      //   (movement && movement.type === MovementType.Workout)
+      // ) {
+      //   return (
+      //     <WorkoutForm
+      //       formMode={formMode}
+      //       hide={hide}
+      //       workout={movement as IWorkout}
+      //     />
+      //   );
     } else if (addMovementType === null) {
       return (
         <AddForm
