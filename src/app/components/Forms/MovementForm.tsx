@@ -22,11 +22,13 @@ import {
   IArchetype,
   IExercise,
   IWorkout,
+  IMovementFormValues,
   IArchetypeFormValues,
   IArchetypeFormErrors,
   IExerciseFormValues,
   IExerciseFormErrors,
   IWorkoutFormValues,
+  IWorkoutFormErrors,
   IButtonRowBtn,
 } from '../../common/types';
 import { FormMode, MovementType, WorkoutMode } from '../../common/enums';
@@ -78,11 +80,11 @@ const INITIAL_FORM_VALUES_WO: IWorkoutFormValues = {
   },
 };
 
-const INITIAL_ERROR_VALUES_WO = {
+const INITIAL_ERROR_VALUES_WO: IWorkoutFormErrors = {
   name: '',
   description: '',
   tags: '',
-  mode: '',
+  // mode: '',
   // movements: [''],
   // rest: '',
   // config: {
@@ -95,15 +97,13 @@ const MovementForm: React.FC<{
   formMode: FormMode;
   movement?: IMovements;
   hide: () => void;
-  // exercise?: IExercise;
-  // }> = ({ formMode, hide, exercise }) => {
 }> = ({ formMode, movementType, movement, hide }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const { archetypes, exercises, workouts } = useContext(MovementsContext);
 
   // ============ SET UP FORM STATE ============
-  let initialFormState;
+  let initialFormState: IMovements | IMovementFormValues;
   if (
     (movement && formMode === FormMode.View) ||
     (movement && formMode === FormMode.Edit)
@@ -115,6 +115,8 @@ const MovementForm: React.FC<{
     initialFormState = INITIAL_FORM_VALUES_EX;
   } else if (movementType === MovementType.Workout) {
     initialFormState = INITIAL_FORM_VALUES_WO;
+  } else {
+    return <div>This will never show</div>;
   }
 
   let movementText = '';
@@ -128,6 +130,8 @@ const MovementForm: React.FC<{
   } else if (movementType === MovementType.Workout) {
     movementText = 'Workout';
     initialErrorValues = INITIAL_ERROR_VALUES_WO;
+  } else {
+    return <div>Make this error handling cleaner</div>;
   }
 
   const [form, setForm] = useState(initialFormState);
@@ -169,7 +173,7 @@ const MovementForm: React.FC<{
 
   // ============ FIREBASE FUNCTIONS ============
 
-  function handleCreateMovement(form: IExerciseFormValues): void {
+  function handleCreateMovement(form: IMovementFormValues): void {
     let firebaseFnc;
     let movementList;
     if (movementType === MovementType.Archetype) {
@@ -231,77 +235,92 @@ const MovementForm: React.FC<{
     }
   }
 
-  // function handleUpdateExercise(form: IExerciseFormValues): void {
-  //   if (authUser && exercise) {
-  //     // Check that name is unique or matches with current id
-  //     const moveNames = exercises.map((ex) => ex.name);
-  //     if (moveNames.includes(form.name) && exercise.name !== form.name) {
-  //       toast.error('Exercise name is already in use.');
-  //       return;
-  //     }
+  function handleUpdateMovement(form: IMovementFormValues): void {
+    let firebaseFnc;
+    let movementList;
+    if (movementType === MovementType.Archetype) {
+      firebaseFnc = firebase.archetype;
+      movementList = archetypes;
+    } else if (movementType === MovementType.Exercise) {
+      firebaseFnc = firebase.exercise;
+      movementList = exercises;
+    } else if (movementType === MovementType.Workout) {
+      firebaseFnc = firebase.workout;
+      movementList = workouts;
+    } else {
+      console.log('No MovementType specified!');
+      return;
+    }
 
-  //     const movementObj: IExerciseFormValues = {
-  //       lastModified: firebase.getTimestamp(),
-  //       name: form.name,
-  //       description: form.description,
-  //       tags: form.tags,
-  //     };
+    if (authUser && movement) {
+      // Check that name is unique or matches with current id
+      const moveNames = movementList.map((move) => move.name);
+      if (moveNames.includes(form.name) && movement.name !== form.name) {
+        toast.error(`${movementText} name is already in use.`);
+        return;
+      }
 
-  //     firebase
-  //       .exercise(authUser.uid, exercise.id)
-  //       .update(movementObj)
-  //       .then(() => {
-  //         console.log(`Exercise Updated: ${movementObj.name}`);
-  //         hide();
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //       });
-  //   } else {
-  //     console.log('There is no authUser || exercise!');
-  //   }
-  // }
+      const movementObj: IExerciseFormValues = {
+        lastModified: firebase.getTimestamp(),
+        name: form.name,
+        description: form.description,
+        tags: form.tags,
+      };
 
-  // // ============ FORM FUNCTIONS ============
+      firebaseFnc(authUser.uid, movement.id)
+        .update(movementObj)
+        .then(() => {
+          console.log(`${movementText} Updated: ${movementObj.name}`);
+          hide();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      console.log('There is no authUser || movement!');
+    }
+  }
 
-  // function handleChangeForm(e: IHandleChange): void {
-  //   handleChange(e, form, setForm);
-  //   handleValidation(e, errors, setErrors);
-  // }
+  // ============ FORM FUNCTIONS ============
 
-  // function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-  //   e.preventDefault();
+  function handleChangeForm(e: IHandleChange): void {
+    handleChange(e, form, setForm);
+    handleValidation(e, errors, setErrors);
+  }
 
-  //   if (validateForm(errors)) {
-  //     if (formMode === FormMode.Add) {
-  //       handleCreateExercise(form);
-  //     } else if (formMode === FormMode.Edit) {
-  //       handleUpdateExercise(form);
-  //     }
-  //   } else {
-  //     toast.error('There is a problem with your configuration..');
-  //   }
-  // }
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
 
-  // return (
-  //   <ExerciseFormWrapper>
-  //     <h1>{text.title}</h1>
-  //     <form
-  //       onSubmit={handleSubmit}
-  //       className={formMode === FormMode.View ? 'view-mode' : 'edit-mode'}
-  //       noValidate
-  //     >
-  //       <FirstFields
-  //         form={form}
-  //         errors={errors}
-  //         formMode={formMode}
-  //         handleChange={handleChangeForm}
-  //       />
-  //       {/* <ButtonRow hide={hide} submitText={text.submitButton} /> */}
-  //       <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
-  //     </form>
-  //   </ExerciseFormWrapper>
-  // );
+    if (validateForm(errors)) {
+      if (formMode === FormMode.Add) {
+        handleCreateMovement(form);
+      } else if (formMode === FormMode.Edit) {
+        handleUpdateMovement(form);
+      }
+    } else {
+      toast.error('There is a problem with your configuration..');
+    }
+  }
+
+  return (
+    <ExerciseFormWrapper>
+      <h1>{text.title}</h1>
+      <form
+        onSubmit={handleSubmit}
+        className={formMode === FormMode.View ? 'view-mode' : 'edit-mode'}
+        noValidate
+      >
+        <FirstFields
+          form={form}
+          errors={errors}
+          formMode={formMode}
+          handleChange={handleChangeForm}
+        />
+        {/* <ButtonRow hide={hide} submitText={text.submitButton} /> */}
+        <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
+      </form>
+    </ExerciseFormWrapper>
+  );
 };
 
 const ExerciseFormWrapper = styled(MovementFormWrapper)`

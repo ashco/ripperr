@@ -1,6 +1,10 @@
 ﻿import { WorkoutMode, MovementType } from './enums';
 
 export type IMovements = IArchetype | IExercise | IWorkout;
+export type IMovementFormValues =
+  | IArchetypeFormValues
+  | IExerciseFormValues
+  | IWorkoutFormValues;
 
 // =============== ERRORS ===============
 export interface IFormError {
