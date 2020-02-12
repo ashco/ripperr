@@ -1,6 +1,7 @@
 ﻿export enum FormMode {
   Add = 'ADD',
   Edit = 'EDIT',
+  View = 'VIEW',
 }
 export enum FormFieldProp {
   Movements = 'MOVEMENTS',

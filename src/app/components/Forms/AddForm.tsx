@@ -24,6 +24,8 @@ const AddForm: React.FC<{
 
 const AddFormWrapper = styled(FormWrapper)`
   width: ${(p) => p.theme.space[12]};
+  display: grid;
+  gap: 0.5rem;
   .cancel-btn {
     margin-top: 2rem;
   }

@@ -32,6 +32,7 @@ import {
   IMovementRefs,
   // IMovementRefReps,
   // IMovementRefTimed,
+  IButtonRowBtn,
 } from '../../common/types';
 import {
   FormFieldProp,
@@ -86,8 +87,6 @@ const WorkoutForm: React.FC<{
   const authUser = useContext(AuthUserContext);
   const { workouts } = useContext(MovementsContext);
 
-  // console.log(workouts);
-
   // ============ SET UP FORM STATE ============
   let initialFormState = {
     ...INITIAL_FORM_VALUES,
@@ -97,25 +96,47 @@ const WorkoutForm: React.FC<{
     rest: { ...INITIAL_FORM_VALUES.rest },
     config: { ...INITIAL_FORM_VALUES.config },
   };
-  if (formMode === FormMode.Edit && workout) {
+  if (
+    (formMode === FormMode.View && workout) ||
+    (formMode === FormMode.Edit && workout)
+  ) {
     initialFormState = workout;
   }
 
   const [form, setForm] = useState(initialFormState);
   const [errors, setErrors] = useState(INITIAL_ERROR_VALUES);
 
-  // ============ TEXT VALUES ============
+  // ============ FORMMODE SPECIFIC VALUES ============
 
   const text = {
     title: '',
     submitButton: '',
   };
+  const cancelBtn: IButtonRowBtn = {
+    text: '',
+  };
+  const actionBtn: IButtonRowBtn = {
+    text: '',
+  };
+
   if (formMode === FormMode.Add) {
     text.title = 'Create New Workout';
     text.submitButton = 'Submit';
+    cancelBtn.text = 'Cancel';
+    cancelBtn.onClick = hide;
+    actionBtn.text = 'Create';
   } else if (formMode === FormMode.Edit) {
     text.title = 'Edit Workout';
     text.submitButton = 'Update';
+    cancelBtn.text = 'Cancel';
+    cancelBtn.onClick = hide; // switch to view mode
+    actionBtn.text = 'Update';
+  } else if (formMode === FormMode.View) {
+    text.title = 'View Workout';
+    text.submitButton = 'Update';
+    cancelBtn.text = 'Close';
+    cancelBtn.onClick = hide;
+    actionBtn.text = 'Edit';
   }
 
   // ============ FIREBASE FUNCTIONS ============
@@ -272,11 +293,15 @@ const WorkoutForm: React.FC<{
   return (
     <WorkoutFormWrapper>
       <h1>{text.title}</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className={formMode === FormMode.View ? 'view-mode' : 'edit-mode'}
+      >
         <div>
           <FirstFields
             form={form}
             errors={errors}
+            formMode={formMode}
             handleChange={handleChangeForm}
           />
           <TagField form={form} handleChange={handleChangeForm} />
@@ -296,7 +321,8 @@ const WorkoutForm: React.FC<{
           </button>
           <RestField form={form} handleChange={handleChangeFormRest} />
         </div>
-        <ButtonRow hide={hide} submitText={text.submitButton} />
+        {/* <ButtonRow hide={hide} submitText={text.submitButton} /> */}
+        <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
       </form>
     </WorkoutFormWrapper>
   );
@@ -304,11 +330,6 @@ const WorkoutForm: React.FC<{
 
 const WorkoutFormWrapper = styled(MovementFormWrapper)`
   width: ${(p) => p.theme.space[14]};
-  /* button {
-    font-size: 1.8rem;
-    margin: 0.25rem;
-    padding: 0.6rem;
-  } */
 `;
 
 export default WorkoutForm;

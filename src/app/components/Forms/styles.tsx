@@ -16,9 +16,6 @@ export const FormWrapper = styled.div`
   display: grid;
   /* width: ${(p) => p.theme.space[12]}; */
   max-width: 100%;
-  button {
-    margin: ${(p) => p.theme.space[0]} 0;
-  }
 `;
 
 // export const FormWrapper = styled.div`
@@ -45,12 +42,12 @@ export const MovementFormWrapper = styled(FormWrapper)`
     width: 4.5rem;
     text-align: center;
   }
-  textarea {
-    font-size: 1rem;
-  }
   input,
   textarea {
     border: 1px solid black;
+  }
+  textarea {
+    font-size: 1rem;
   }
   input,
   textarea,
@@ -59,6 +56,17 @@ export const MovementFormWrapper = styled(FormWrapper)`
   }
   select {
     border: none;
+  }
+  .view-mode {
+    input,
+    textarea {
+      border: none;
+      background: none;
+      padding-left: 0;
+      color: ${(props) => props.theme.color.neutral[900]};
+    }
+  }
+  .edit-mode {
   }
   /* .error {
     margin: auto 0.25rem;

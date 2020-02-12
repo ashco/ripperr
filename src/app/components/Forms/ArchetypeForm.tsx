@@ -64,6 +64,9 @@ const ArchetypeForm: React.FC<{
   } else if (formMode === FormMode.Edit) {
     text.title = 'Edit Archetype';
     text.submitButton = 'Update';
+  } else if (formMode === FormMode.View) {
+    text.title = 'View Archetype';
+    text.submitButton = 'Update';
   }
 
   // ============ FIREBASE FUNCTIONS ============
@@ -154,16 +157,31 @@ const ArchetypeForm: React.FC<{
     }
   }
 
+  const cancelBtn = {
+    onClick: hide,
+    text: 'Cancel',
+  };
+  const actionBtn = {
+    // onClick: ,
+    text: 'Submit',
+  };
+
   return (
     <ArchetypeFormWrapper>
       <h1>{text.title}</h1>
-      <form onSubmit={handleSubmit} noValidate>
+      <form
+        onSubmit={handleSubmit}
+        className={formMode === FormMode.View ? 'view-mode' : 'edit-mode'}
+        noValidate
+      >
         <FirstFields
           form={form}
           errors={errors}
+          formMode={formMode}
           handleChange={handleChangeForm}
         />
-        <ButtonRow hide={hide} submitText={text.submitButton} />
+        {/* <ButtonRow hide={hide} submitText={text.submitButton} /> */}
+        <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
       </form>
     </ArchetypeFormWrapper>
   );
@@ -171,11 +189,6 @@ const ArchetypeForm: React.FC<{
 
 const ArchetypeFormWrapper = styled(MovementFormWrapper)`
   width: ${(p) => p.theme.space[13]};
-  /* button {
-    font-size: 1.8rem;
-    margin: 0.25rem;
-    padding: 0.6rem;
-  } */
 `;
 
 export { ArchetypeForm };

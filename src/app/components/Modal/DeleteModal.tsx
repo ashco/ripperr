@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ModalWrapper } from './styles';
 
 import { FormWrapper } from '../Forms/styles';
+import ButtonRow from '../Forms/ButtonRow';
 import { Button } from '../Buttons';
 
 const DeleteModal: React.FC<{
@@ -16,23 +17,30 @@ const DeleteModal: React.FC<{
     hide();
   }
 
+  const cancelBtn = {
+    onClick: hide,
+    text: 'Cancel',
+  };
+  const actionBtn = {
+    onClick: onDelete,
+    text: 'Delete',
+  };
+
   return (
     <DeleteModalWrapper>
-      <FormWrapper>
-        <p>{text}</p>
-        <Button onClick={hide}>Cancel</Button>
-        <Button onClick={onDelete}>Delete</Button>
-      </FormWrapper>
+      <p>{text}</p>
+      <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
     </DeleteModalWrapper>
   );
 };
 
 const DeleteModalWrapper = styled(ModalWrapper)`
-  /* height: 360px;
-  width: 360px; */
+  display: grid;
+  /* grid-template-rows: auto auto auto; */
+  gap: 1rem;
   p {
     font-size: ${(p) => p.theme.font[3]};
-    padding-bottom: ${(p) => p.theme.space[2]};
+    /* padding-bottom: ${(p) => p.theme.space[2]}; */
   }
 `;
 

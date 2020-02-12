@@ -12,12 +12,14 @@ import {
   IExerciseFormErrors,
   // IWorkoutFormErrors,
 } from '../../../common/types';
+import { FormMode } from '../../../common/enums';
 
 const FirstFields: React.FC<{
   form: IArchetypeFormValues | IExerciseFormValues | IWorkoutFormValues;
   errors: IArchetypeFormErrors | IExerciseFormErrors;
+  formMode: FormMode;
   handleChange: (e: IHandleChange) => void;
-}> = ({ form, errors, handleChange }) => {
+}> = ({ form, errors, formMode, handleChange }) => {
   // const tags = [
   //   'Push',
   //   'Pull',
@@ -51,6 +53,7 @@ const FirstFields: React.FC<{
         placeholder="Name"
         value={form.name}
         onChange={handleChange}
+        disabled={formMode === FormMode.View}
       />
       <FormError>{errors.name}</FormError>
       <textarea
@@ -59,6 +62,7 @@ const FirstFields: React.FC<{
         placeholder="Enter a description..."
         value={form.description}
         onChange={handleChange}
+        disabled={formMode === FormMode.View}
       />
       <FormError>{errors.description}</FormError>
       {/* <label htmlFor="tags"> */}
@@ -72,19 +76,11 @@ const FirstFieldsWrapper = styled.div`
   display: grid;
   /* flex-direction: column; */
   grid-template-rows: auto 1rem auto 1rem auto 1rem;
-  /* input,
-  textarea {
-    margin-bottom: 0.25rem;
-    font-size: 1rem;
-  } */
-  .input-wrapper {
-    display: grid;
-    grid-template-rows: 1fr 1rem;
-  }
   #description {
     height: 4rem;
     resize: none;
   }
+
   /* select {
     padding: 0;
     padding-left: 1px;

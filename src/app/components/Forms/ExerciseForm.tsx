@@ -21,6 +21,7 @@ import {
   IExercise,
   IExerciseFormValues,
   IExerciseFormErrors,
+  IButtonRowBtn,
 } from '../../common/types';
 import { FormMode, MovementType } from '../../common/enums';
 
@@ -47,25 +48,48 @@ const ExerciseForm: React.FC<{
 
   // ============ SET UP FORM STATE ============
   let initialFormState = INITIAL_FORM_VALUES;
-  if (formMode === FormMode.Edit && exercise) {
+  if (
+    (exercise && formMode === FormMode.View) ||
+    (exercise && formMode === FormMode.Edit)
+  ) {
     initialFormState = exercise;
   }
 
   const [form, setForm] = useState(initialFormState);
   const [errors, setErrors] = useState(INITIAL_ERROR_VALUES);
 
-  // ============ TEXT VALUES ============
+  // ============ FORMMODE SPECIFIC VALUES ============
 
   const text = {
     title: '',
     submitButton: '',
   };
+  const cancelBtn: IButtonRowBtn = {
+    text: '',
+  };
+  const actionBtn: IButtonRowBtn = {
+    text: '',
+  };
+
   if (formMode === FormMode.Add) {
     text.title = 'Create New Exercise';
     text.submitButton = 'Submit';
+    cancelBtn.text = 'Cancel';
+    cancelBtn.onClick = hide;
+    actionBtn.text = 'Create';
   } else if (formMode === FormMode.Edit) {
     text.title = 'Edit Exercise';
     text.submitButton = 'Update';
+    cancelBtn.text = 'Cancel';
+    cancelBtn.onClick = hide; // switch to view mode
+    actionBtn.text = 'Update';
+  } else if (formMode === FormMode.View) {
+    text.title = 'View Exercise';
+    text.submitButton = 'Update';
+    cancelBtn.text = 'Close';
+    cancelBtn.onClick = hide;
+    actionBtn.text = 'Edit';
+    // actionBtn.onClick = edit; // switch to edit mode
   }
 
   // ============ FIREBASE FUNCTIONS ============
@@ -160,13 +184,19 @@ const ExerciseForm: React.FC<{
   return (
     <ExerciseFormWrapper>
       <h1>{text.title}</h1>
-      <form onSubmit={handleSubmit} noValidate>
+      <form
+        onSubmit={handleSubmit}
+        className={formMode === FormMode.View ? 'view-mode' : 'edit-mode'}
+        noValidate
+      >
         <FirstFields
           form={form}
           errors={errors}
+          formMode={formMode}
           handleChange={handleChangeForm}
         />
-        <ButtonRow hide={hide} submitText={text.submitButton} />
+        {/* <ButtonRow hide={hide} submitText={text.submitButton} /> */}
+        <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
       </form>
     </ExerciseFormWrapper>
   );
@@ -174,11 +204,6 @@ const ExerciseForm: React.FC<{
 
 const ExerciseFormWrapper = styled(MovementFormWrapper)`
   width: ${(p) => p.theme.space[13]};
-  /* button {
-    font-size: 1.8rem;
-    margin: 0.25rem;
-    padding: 0.6rem;
-  } */
 `;
 
 export default ExerciseForm;

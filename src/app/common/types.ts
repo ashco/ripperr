@@ -90,6 +90,17 @@ export interface IWorkoutFormErrors {
   tags: string;
 }
 
+// =============== FORM BUTTONS ===============
+
+export interface IButtonRowBtn {
+  text: string;
+  onClick?: () => void;
+}
+export interface IButtonRow {
+  cancelBtn: IButtonRowBtn;
+  actionBtn: IButtonRowBtn;
+}
+
 // =============== DATA OBJECT STRUCTURES ===============
 
 export interface IArchetype {

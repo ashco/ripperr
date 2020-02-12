@@ -16,8 +16,7 @@ import PlusIcon from '../../static/icons/plus-solid.svg';
 const MovementFormButton: React.FC<{
   formMode: FormMode;
   movement?: IMovements;
-  btnRef?: RefObject<HTMLButtonElement>;
-}> = ({ formMode, movement, btnRef }) => {
+}> = ({ formMode, movement }) => {
   const [showModal, setShowModal] = useState(false);
   const hide = (): void => setShowModal(false);
   const show = (): void => setShowModal(true);
@@ -30,11 +29,9 @@ const MovementFormButton: React.FC<{
       </AddMovementButton>
     );
   } else if (formMode === FormMode.Edit) {
-    ButtonEl = (
-      <Button ref={btnRef} onClick={show}>
-        Edit
-      </Button>
-    );
+    ButtonEl = <Button onClick={show}>Edit</Button>;
+  } else if (formMode === FormMode.View) {
+    ButtonEl = <Button onClick={show}>View</Button>;
   }
 
   const modal = showModal ? (

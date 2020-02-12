@@ -13,46 +13,15 @@ const ListItemMenuButton: React.FC<{
   handleDelete: () => void;
 }> = ({ type, movement, deleteText, handleDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const btnRef = useRef<HTMLButtonElement>(null);
-
-  // function closeMenu(e: any): void {
-  //   // if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
-  //   if (menuOpen) {
-  //     setMenuOpen(false);
-  //     document.removeEventListener('click', closeMenu);
-  //     // console.log('in close menu');
-  //   }
-  //   // console.log('out close menu');
-  // }
-
-  // function openMenu(): void {
-  //   if (!menuOpen) {
-  //     console.log(menuOpen);
-  //     setMenuOpen(true);
-  //     console.log(menuOpen);
-  //     document.addEventListener('click', closeMenu);
-  //   }
-  // }
-
-  // function testBtn(): void {
-  //   setMenuOpen((menu) => !menu);
-  // }
 
   function openMenu(): void {
     setMenuOpen(true);
   }
 
-  function closeMenu(e: any): void {
-    console.log(e.target);
-    if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
-      setMenuOpen(false);
-      document.removeEventListener('click', closeMenu);
-    }
-    // TODO - Need to have menu close when menu btns are clicked. Use refs?
-    // else if (btnRef && btnRef.current && btnRef.current.contains(e.target)) {
-    //   setMenuOpen(false);
-    //   document.removeEventListener('click', closeMenu);
+  function closeMenu(): void {
+    // if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
+    setMenuOpen(false);
+    document.removeEventListener('click', closeMenu);
     // }
   }
 
@@ -70,15 +39,12 @@ const ListItemMenuButton: React.FC<{
       <StyledListItemMenuButton onClick={openMenu}>
         <Bars color="grey" />
       </StyledListItemMenuButton>
-      <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
+      <ListItemMenuWrapper open={menuOpen}>
         {type === MovementType.Workout && (
           <Button onClick={() => console.log('Starting!!')}>Start</Button>
         )}
-        <MovementFormButton
-          btnRef={btnRef}
-          formMode={FormMode.Edit}
-          movement={movement}
-        />
+        <MovementFormButton formMode={FormMode.View} movement={movement} />
+        <MovementFormButton formMode={FormMode.Edit} movement={movement} />
         <DeleteButton text={deleteText} handleDelete={handleDelete} />
       </ListItemMenuWrapper>
     </div>
@@ -105,7 +71,7 @@ const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   background-color: ${(props) => props.theme.color.neutral[200]};
   box-shadow: ${(props) => props.theme.shadow[2]};
   width: 6rem;
-  padding: 1rem;
+  /* padding: 1rem; */
 `;
 
 export default ListItemMenuButton;
