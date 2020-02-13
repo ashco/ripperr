@@ -1,6 +1,4 @@
 ﻿import MovementModal from '../Modal/MovementModal';
-import ExerciseForm from './ExerciseForm';
-import WorkoutForm from './WorkoutForm';
 import MovementForm from './MovementForm';
 
 import FirstFields from './FormFields/FirstFields';
@@ -23,7 +21,6 @@ import {
   workoutFormVal,
 } from './validationSchema';
 
-export * from './ArchetypeForm';
 export * from './FormFields/TagField';
 
 export {
@@ -38,8 +35,6 @@ export {
   workoutFormVal,
   RepsField,
   RestField,
-  ExerciseForm,
-  WorkoutForm,
   ModeField,
   FirstFields,
   TimedField,

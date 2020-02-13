@@ -3,15 +3,30 @@ import styled from 'styled-components';
 
 import { Row, FormError } from '../styles';
 
-import { IHandleChange, IWorkoutFormValues } from '../../../common/types';
+import {
+  IHandleChange,
+  IExerciseFormValues,
+  IWorkoutFormValues,
+  IFormReducerAction,
+} from '../../../common/types';
+import { FormActionType } from '../../../common/enums';
 
 const TagField: React.FC<{
-  form: IWorkoutFormValues;
-  handleChange: (e: IHandleChange) => void;
-}> = ({ form, handleChange }) => {
+  form: IExerciseFormValues | IWorkoutFormValues;
+  // form: IWorkoutFormValues;
+  // handleChange: (e: IHandleChange) => void;
+  formDispatch: React.Dispatch<IFormReducerAction>;
+}> = ({ form, formDispatch }) => {
   return (
     <TagFieldWrapper>
-      <select multiple name="tags" value={form.tags} onChange={handleChange}>
+      <select
+        multiple
+        name="tags"
+        value={form.tags}
+        onChange={(e: any) =>
+          formDispatch({ type: FormActionType.Tag, value: e.target.value })
+        }
+      >
         <option label="PUSH" value="Push" />
         <option label="PULL" value="Pull" />
         <option label="SQUAT" value="Squat" />

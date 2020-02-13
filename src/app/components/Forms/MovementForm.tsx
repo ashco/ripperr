@@ -184,26 +184,27 @@ const MovementForm: React.FC<{
         return { ...state, name: action.value };
       case FormActionType.Description:
         return { ...state, description: action.value };
-      case FormActionType.AddTag:
+      case FormActionType.Tag:
         if (
           movementType !== MovementType.Exercise &&
           movementType !== MovementType.Workout
         ) {
           throw Error();
         }
+
         return { ...state, tags: [...state.tags, action.value] };
-      case FormActionType.RemoveTag: {
-        if (
-          movementType !== MovementType.Exercise &&
-          movementType !== MovementType.Workout
-        ) {
-          throw Error();
-        }
-        const tags = (state as
-          | IExerciseFormValues
-          | IWorkoutFormValues).tags.filter((tag) => tag === action.value);
-        return { ...state, tags };
-      }
+      // case FormActionType.RemoveTag: {
+      //   if (
+      //     movementType !== MovementType.Exercise &&
+      //     movementType !== MovementType.Workout
+      //   ) {
+      //     throw Error();
+      //   }
+      //   const tags = (state as
+      //     | IExerciseFormValues
+      //     | IWorkoutFormValues).tags.filter((tag) => tag === action.value);
+      //   return { ...state, tags };
+      // }
       default:
         throw Error();
     }
@@ -429,26 +430,28 @@ const MovementForm: React.FC<{
           formMode={formMode}
           formDispatch={formDispatch}
         />
-        {movementType === MovementType.Workout && (
-          <>
-            {/* <TagField form={form} handleChange={handleChangeForm} />
-            <ModeField
-              form={form}
-              errors={errors}
-              handleChange={handleChangeForm}
-              handleChangeConfig={handleChangeFormConfig}
-            /> */}
-            {/* {renderMovementFields()}
-            <button
-              type="button"
-              className="add-btn"
-              onClick={() => handleAddMovementRef(form.mode)}
-            >
-              +
-            </button> */}
-            {/* <RestField form={form} handleChange={handleChangeFormRest} /> */}
-          </>
-        )}
+        {movementType === MovementType.Exercise ||
+          (movementType === MovementType.Workout && (
+            <TagField
+              form={form as IExerciseFormValues | IWorkoutFormValues}
+              formDispatch={formDispatch}
+            />
+          ))}
+        {/* <ModeField
+          form={form}
+          errors={errors}
+          handleChange={handleChangeForm}
+          handleChangeConfig={handleChangeFormConfig}
+        />
+        {renderMovementFields()}
+        <button
+          type="button"
+          className="add-btn"
+          onClick={() => handleAddMovementRef(form.mode)}
+        >
+          +
+        </button>{' '}
+        <RestField form={form} handleChange={handleChangeFormRest} /> */}
         <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
       </form>
     </ExerciseFormWrapper>

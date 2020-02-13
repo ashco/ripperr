@@ -13,7 +13,7 @@ import {
   // IWorkoutFormErrors,
   IFormReducerAction,
 } from '../../../common/types';
-import { FormMode } from '../../../common/enums';
+import { FormMode, FormActionType } from '../../../common/enums';
 
 const FirstFields: React.FC<{
   form: IArchetypeFormValues | IExerciseFormValues | IWorkoutFormValues;
@@ -54,7 +54,9 @@ const FirstFields: React.FC<{
         name="name"
         placeholder="Name"
         value={form.name}
-        onChange={handleChange}
+        onChange={(e) =>
+          formDispatch({ type: FormActionType.Name, value: e.target.value })
+        }
         disabled={formMode === FormMode.View}
       />
       <FormError>{errors.name}</FormError>
@@ -63,7 +65,12 @@ const FirstFields: React.FC<{
         name="description"
         placeholder="Enter a description..."
         value={form.description}
-        onChange={handleChange}
+        onChange={(e) =>
+          formDispatch({
+            type: FormActionType.Description,
+            value: e.target.value,
+          })
+        }
         disabled={formMode === FormMode.View}
       />
       <FormError>{errors.description}</FormError>
