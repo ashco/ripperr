@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext, useEffect, useRef } from 'react';
+﻿import React, { useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { MovementsContext } from '../../context';
@@ -23,36 +23,6 @@ import { MovementType } from '../../common/enums';
 
 export const MovementList: React.FC = () => {
   const listRef = useRef<HTMLUListElement>(null);
-
-  const [width, setWidth] = useState(0);
-  const [columnNum, setColumnNum] = useState(0);
-
-  // function updateColumnNum(): void {
-  //   const remPixels = parseFloat(
-  //     getComputedStyle(document.documentElement).fontSize,
-  //   );
-
-  //   let colWidth = 0;
-  //   if (listRef && listRef.current) {
-  //     colWidth = listRef.current.offsetWidth;
-  //   }
-
-  //   const listItemWidth = 16 * remPixels;
-  //   let colNum = Math.floor(colWidth / listItemWidth);
-
-  //   if (colNum < 1) colNum = 1;
-
-  //   setColumnNum(colNum);
-  // }
-
-  // useEffect(() => {
-  //   updateColumnNum();
-
-  //   window.addEventListener('resize', updateColumnNum);
-  //   return () => {
-  //     window.removeEventListener('resize', updateColumnNum);
-  //   };
-  // }, []);
 
   const movements = useContext(MovementsContext);
 

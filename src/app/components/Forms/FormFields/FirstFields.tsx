@@ -11,6 +11,7 @@ import {
   IArchetypeFormErrors,
   IExerciseFormErrors,
   // IWorkoutFormErrors,
+  IFormReducerAction,
 } from '../../../common/types';
 import { FormMode } from '../../../common/enums';
 
@@ -18,8 +19,9 @@ const FirstFields: React.FC<{
   form: IArchetypeFormValues | IExerciseFormValues | IWorkoutFormValues;
   errors: IArchetypeFormErrors | IExerciseFormErrors;
   formMode: FormMode;
-  handleChange: (e: IHandleChange) => void;
-}> = ({ form, errors, formMode, handleChange }) => {
+  // handleChange: (e: IHandleChange) => void;
+  formDispatch: React.Dispatch<IFormReducerAction>;
+}> = ({ form, errors, formMode, formDispatch }) => {
   // const tags = [
   //   'Push',
   //   'Pull',

@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext, useReducer } from 'react';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 
@@ -38,31 +38,25 @@ import {
   IWorkoutFormValues,
   IWorkoutFormErrors,
   IButtonRowBtn,
+  IFormReducerAction,
 } from '../../common/types';
-import { FormMode, MovementType, WorkoutMode } from '../../common/enums';
+import {
+  FormMode,
+  MovementType,
+  WorkoutMode,
+  FormFieldProp,
+  FormActionType,
+} from '../../common/enums';
 
 const INITIAL_FORM_VALUES_AR: IArchetypeFormValues = {
   name: '',
   description: '',
 };
-
-const INITIAL_ERROR_VALUES_AR: IArchetypeFormErrors = {
-  name: '',
-  description: '',
-};
-
 const INITIAL_FORM_VALUES_EX: IExerciseFormValues = {
   name: '',
   description: '',
   tags: [],
 };
-
-const INITIAL_ERROR_VALUES_EX: IExerciseFormErrors = {
-  name: '',
-  description: '',
-  tags: '',
-};
-
 const INITIAL_FORM_VALUES_WO: IWorkoutFormValues = {
   name: '',
   description: '',
@@ -88,6 +82,15 @@ const INITIAL_FORM_VALUES_WO: IWorkoutFormValues = {
   },
 };
 
+const INITIAL_ERROR_VALUES_AR: IArchetypeFormErrors = {
+  name: '',
+  description: '',
+};
+const INITIAL_ERROR_VALUES_EX: IExerciseFormErrors = {
+  name: '',
+  description: '',
+  tags: '',
+};
 const INITIAL_ERROR_VALUES_WO: IWorkoutFormErrors = {
   name: '',
   description: '',
@@ -112,20 +115,34 @@ const MovementForm: React.FC<{
 
   // ============ SET UP FORM STATE ============
   let initialFormState: IMovements | IMovementFormValues;
-  if (
-    (movement && formMode === FormMode.View) ||
-    (movement && formMode === FormMode.Edit)
-  ) {
+
+  if (movement) {
     initialFormState = movement;
-  } else if (movementType === MovementType.Archetype) {
-    initialFormState = INITIAL_FORM_VALUES_AR;
-  } else if (movementType === MovementType.Exercise) {
-    initialFormState = INITIAL_FORM_VALUES_EX;
-  } else if (movementType === MovementType.Workout) {
-    initialFormState = INITIAL_FORM_VALUES_WO;
   } else {
-    return <div>This will never show</div>;
+    if (movementType === MovementType.Archetype) {
+      initialFormState = INITIAL_FORM_VALUES_AR;
+    } else if (movementType === MovementType.Exercise) {
+      initialFormState = INITIAL_FORM_VALUES_EX;
+    } else if (movementType === MovementType.Workout) {
+      initialFormState = INITIAL_FORM_VALUES_WO;
+    } else {
+      return <div>No movement object or movementType set!</div>;
+    }
   }
+  // if (
+  //   (movement && formMode === FormMode.View) ||
+  //   (movement && formMode === FormMode.Edit)
+  // ) {
+  //   initialFormState = movement;
+  // } else if (movementType === MovementType.Archetype) {
+  //   initialFormState = INITIAL_FORM_VALUES_AR;
+  // } else if (movementType === MovementType.Exercise) {
+  //   initialFormState = INITIAL_FORM_VALUES_EX;
+  // } else if (movementType === MovementType.Workout) {
+  //   initialFormState = INITIAL_FORM_VALUES_WO;
+  // } else {
+  //   return <div>This will never show</div>;
+  // }
 
   let movementText = '';
   let initialErrorValues;
@@ -142,8 +159,57 @@ const MovementForm: React.FC<{
     return <div>Make this error handling cleaner</div>;
   }
 
-  const [form, setForm] = useState(initialFormState);
+  // const [form, setForm] = useState(initialFormState);
   const [errors, setErrors] = useState(initialErrorValues);
+
+  // ============ FORM REDUCER ============
+
+  // const initialState: IExerciseFormValues = {
+  //   name: '',
+  //   description: '',
+  //   tags: [],
+  // };
+
+  // interface IFormReducerAction {
+  //   type: FormActionType;
+  //   value: string;
+  // }
+
+  function formReducer(
+    state: IMovementFormValues,
+    action: IFormReducerAction,
+  ): IMovementFormValues {
+    switch (action.type) {
+      case FormActionType.Name:
+        return { ...state, name: action.value };
+      case FormActionType.Description:
+        return { ...state, description: action.value };
+      case FormActionType.AddTag:
+        if (
+          movementType !== MovementType.Exercise &&
+          movementType !== MovementType.Workout
+        ) {
+          throw Error();
+        }
+        return { ...state, tags: [...state.tags, action.value] };
+      case FormActionType.RemoveTag: {
+        if (
+          movementType !== MovementType.Exercise &&
+          movementType !== MovementType.Workout
+        ) {
+          throw Error();
+        }
+        const tags = (state as
+          | IExerciseFormValues
+          | IWorkoutFormValues).tags.filter((tag) => tag === action.value);
+        return { ...state, tags };
+      }
+      default:
+        throw Error();
+    }
+  }
+
+  const [form, formDispatch] = useReducer(formReducer, initialFormState);
 
   // ============ FORMMODE SPECIFIC VALUES ============
 
@@ -291,10 +357,25 @@ const MovementForm: React.FC<{
 
   // ============ FORM FUNCTIONS ============
 
-  function handleChangeForm(e: IHandleChange): void {
-    handleChange(e, form, setForm);
-    handleValidation(e, errors, setErrors);
-  }
+  // function handleChangeForm(e: IHandleChange): void {
+  //   handleChange(e, form, setForm);
+  //   handleValidation(e, errors, setErrors);
+  // }
+
+  // function handleChangeFormMovement(e: IHandleChange, i: number): void {
+  //   handleChange(e, form, setForm, {
+  //     type: FormFieldProp.Movements,
+  //     index: i,
+  //   });
+  // }
+
+  // function handleChangeFormRest(e: IHandleChange): void {
+  //   handleChange(e, form, setForm, { type: FormFieldProp.Rest });
+  // }
+
+  // function handleChangeFormConfig(e: IHandleChange): void {
+  //   handleChange(e, form, setForm, { type: FormFieldProp.Config });
+  // }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
@@ -310,6 +391,30 @@ const MovementForm: React.FC<{
     }
   }
 
+  // // ============ MOVEMENT FIELD HANDLERS ============
+
+  // function handleAddMovementRef(mode: WorkoutMode): void {
+  //   const newForm = { ...form };
+
+  //   const newMovement: IMovementRefs = {
+  //     id: '',
+  //     name: '',
+  //     reps: 0,
+  //     sets: 0,
+  //     duration: 0,
+  //   };
+
+  //   newForm.movements.push(newMovement);
+  //   setForm(newForm);
+  // }
+
+  // function handleDeleteMovementRef(i: number): void {
+  //   const newForm = { ...form };
+
+  //   newForm.movements.splice(i, 1);
+  //   setForm(newForm);
+  // }
+
   return (
     <ExerciseFormWrapper>
       <h1>{text.title}</h1>
@@ -322,7 +427,7 @@ const MovementForm: React.FC<{
           form={form}
           errors={errors}
           formMode={formMode}
-          handleChange={handleChangeForm}
+          formDispatch={formDispatch}
         />
         {movementType === MovementType.Workout && (
           <>
@@ -332,16 +437,16 @@ const MovementForm: React.FC<{
               errors={errors}
               handleChange={handleChangeForm}
               handleChangeConfig={handleChangeFormConfig}
-            />
-            {renderMovementFields()}
+            /> */}
+            {/* {renderMovementFields()}
             <button
               type="button"
               className="add-btn"
               onClick={() => handleAddMovementRef(form.mode)}
             >
               +
-            </button>
-            <RestField form={form} handleChange={handleChangeFormRest} /> */}
+            </button> */}
+            {/* <RestField form={form} handleChange={handleChangeFormRest} /> */}
           </>
         )}
         <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />

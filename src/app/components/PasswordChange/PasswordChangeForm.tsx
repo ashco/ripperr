@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 
 import { InputField, passwordChangeVal } from '../Forms';
@@ -20,7 +20,6 @@ const INITIAL_VALUES: IPasswordChangeForm = {
 
 const PasswordChangeForm: React.FC = () => {
   const firebase = useContext(FirebaseContext);
-  // const [state, setState] = useState(INITIAL_VALUES);
 
   return (
     <Formik

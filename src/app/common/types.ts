@@ -1,4 +1,4 @@
-﻿import { WorkoutMode, MovementType } from './enums';
+﻿import { WorkoutMode, MovementType, FormActionType } from './enums';
 
 export type IMovements = IArchetype | IExercise | IWorkout;
 export type IMovementFormValues =
@@ -53,8 +53,12 @@ export interface IHandleChange {
   target: HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement;
 }
 
-// =============== FORMS ===============
+export interface IFormReducerAction {
+  type: FormActionType;
+  value: string;
+}
 
+// =============== FORMS ===============
 export interface IArchetypeFormValues {
   [key: string]: any;
   name: string;

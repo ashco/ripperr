@@ -17,3 +17,10 @@ export enum MovementType {
   Exercise = 'EXERCISE',
   Workout = 'WORKOUT',
 }
+
+export enum FormActionType {
+  Name = 'FORM_NAME',
+  Description = 'FORM_DESCRIPTION',
+  AddTag = 'FORM_ADD_TAG',
+  RemoveTag = 'FORM_REMOVE_TAG',
+}
