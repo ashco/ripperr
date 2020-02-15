@@ -10,7 +10,7 @@ const Button = styled.button<{ size?: string }>`
     background: lightgray;
   }
   &:active {
-    background: gray;
+    /* background: gray; */
   }
 `;
 

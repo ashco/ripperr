@@ -23,7 +23,9 @@ const FilterBarWrapper = styled.div`
   margin: 1rem 1rem 0;
   input {
     font-size: 24px;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
+    box-shadow: ${(props) => props.theme.shadow[2]};
+    border: none;
   }
   .btn-container {
     display: inline-block;
@@ -38,6 +40,8 @@ const FilterBarWrapper = styled.div`
       bottom: 0;
       left: 0;
       right: 0;
+      box-shadow: ${(props) => props.theme.shadow[2]};
+      border: none;
     }
   }
 `;

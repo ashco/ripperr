@@ -246,6 +246,10 @@ const MovementForm: React.FC<{
     // actionBtn.onClick = edit; // switch to edit mode
   }
 
+  const showTagField =
+    movementType === MovementType.Workout ||
+    movementType === MovementType.Exercise;
+
   // ============ FIREBASE FUNCTIONS ============
 
   function handleCreateMovement(form: IMovementFormValues): void {
@@ -430,13 +434,13 @@ const MovementForm: React.FC<{
           formMode={formMode}
           formDispatch={formDispatch}
         />
-        {movementType === MovementType.Exercise ||
-          (movementType === MovementType.Workout && (
-            <TagField
-              form={form as IExerciseFormValues | IWorkoutFormValues}
-              formDispatch={formDispatch}
-            />
-          ))}
+        {showTagField && (
+          <TagField
+            form={form as IExerciseFormValues | IWorkoutFormValues}
+            formDispatch={formDispatch}
+            archetypes={archetypes}
+          />
+        )}
         {/* <ModeField
           form={form}
           errors={errors}

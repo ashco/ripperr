@@ -13,6 +13,9 @@ const ListItemMenuButton: React.FC<{
   handleDelete: () => void;
 }> = ({ type, movement, deleteText, handleDelete }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [btnHovered, setBtnHovered] = useState(false);
+
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   function openMenu(): void {
     setMenuOpen(true);
@@ -25,10 +28,18 @@ const ListItemMenuButton: React.FC<{
     // }
   }
 
+  function toggleHover() {
+    // if (btnRef && btnRef.current && btnRef.current.contains(e.target)) {
+    setBtnHovered((hovered) => !hovered);
+    // }
+    console.log(btnHovered);
+  }
+
   useEffect(() => {
     if (menuOpen) {
       console.log('open');
       document.addEventListener('click', closeMenu);
+      // document.addEventListener('onMouseEnter', toggleHover);
     } else {
       console.log('closed');
     }
@@ -36,8 +47,13 @@ const ListItemMenuButton: React.FC<{
 
   return (
     <div>
-      <StyledListItemMenuButton onClick={openMenu}>
-        <Bars color="grey" />
+      <StyledListItemMenuButton
+        onClick={openMenu}
+        onMouseEnter={toggleHover}
+        onMouseLeave={toggleHover}
+        ref={btnRef}
+      >
+        <Bars color={btnHovered ? 'black' : 'gray'} />
       </StyledListItemMenuButton>
       <ListItemMenuWrapper open={menuOpen}>
         {type === MovementType.Workout && (

@@ -44,7 +44,7 @@ export const MovementFormWrapper = styled(FormWrapper)`
   }
   input,
   textarea {
-    border: 1px solid black;
+    border: 2px solid black;
   }
   textarea {
     font-size: 1rem;
@@ -60,9 +60,9 @@ export const MovementFormWrapper = styled(FormWrapper)`
   .view-mode {
     input,
     textarea {
-      border: none;
+      /* border: none;
+      padding-left: 0; */
       background: none;
-      padding-left: 0;
       color: ${(props) => props.theme.color.neutral[900]};
     }
   }

@@ -9,14 +9,16 @@ export const ListItem = styled.li`
   box-shadow: ${(props) => props.theme.shadow[1]};
   border-radius: 3px;
   display: grid;
-  grid-auto-rows: 3px 1fr auto;
+  grid-auto-rows: auto 1fr auto;
   .color-bar {
-    height: 3px;
+    height: 7px;
     width: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
   }
   .name {
     font-size: 16px;
-    padding: 1rem 0.5rem;
+    padding: 0.75rem 0.5rem;
   }
   .row {
     display: flex;

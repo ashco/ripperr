@@ -1,7 +1,7 @@
 ﻿import styled from 'styled-components';
 
 const ModalBackground = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.85);
   position: fixed;
   height: 100%;
   width: 100%;

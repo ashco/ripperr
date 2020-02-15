@@ -11,7 +11,7 @@ import Navigation from './Navigation/Navigation';
 
 const StyledPage = styled.div`
   color: ${({ theme }) => theme.color.neutral[900]};
-  background: ${(props) => props.theme.color.neutral[200]};
+  background: ${(props) => props.theme.color.neutral[400]};
   height: 100vh;
   width: 100vw;
   display: grid;
