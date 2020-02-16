@@ -3,38 +3,38 @@ import styled from 'styled-components';
 
 import { useModalDispatch } from '../../context/ModalContext';
 
-import { FormWrapper } from './styles';
+import { ModalWrapper } from './styles';
 import { Button } from '../Buttons';
 
 const AddForm: React.FC<{}> = () => {
   const modalDispatch = useModalDispatch();
 
-  function addArchetype() {
+  function addArchetype(): void {
     modalDispatch({ type: 'MODAL_EDIT' });
   }
-  function addExercise() {
+  function addExercise(): void {
     modalDispatch({ type: 'MODAL_EDIT' });
   }
-  function addWorkout() {
+  function addWorkout(): void {
     modalDispatch({ type: 'MODAL_EDIT' });
   }
-  function closeModal() {
+  function closeModal(): void {
     modalDispatch({ type: 'MODAL_CLOSE' });
   }
 
   return (
-    <AddFormWrapper>
+    <AddModalWrapper>
       <Button onClick={addArchetype}>Add Archetype</Button>
       <Button onClick={addExercise}>Add Exercise</Button>
       <Button onClick={addWorkout}>Add Workout</Button>
       <Button className="cancel-btn" onClick={closeModal}>
         Cancel
       </Button>
-    </AddFormWrapper>
+    </AddModalWrapper>
   );
 };
 
-const AddFormWrapper = styled(FormWrapper)`
+const AddModalWrapper = styled(ModalWrapper)`
   width: ${(p) => p.theme.space[12]};
   display: grid;
   gap: 0.5rem;

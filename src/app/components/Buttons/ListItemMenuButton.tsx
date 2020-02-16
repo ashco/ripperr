@@ -2,6 +2,9 @@
 import styled from 'styled-components';
 
 import { Button, MovementFormButton, DeleteButton } from '../Buttons';
+
+import { useModalDispatch } from '../../context/ModalContext';
+
 import Bars from '../../icons/Bars';
 import { MovementType, FormMode } from '../../common/enums';
 import { IMovements } from '../../common/types';
@@ -10,12 +13,24 @@ const ListItemMenuButton: React.FC<{
   type: MovementType;
   movement: IMovements;
   deleteText: string;
-  handleDelete: () => void;
-}> = ({ type, movement, deleteText, handleDelete }) => {
+  handleDelete?: () => void;
+}> = ({ type, movement, deleteText }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
 
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  const modalDispatch = useModalDispatch();
+
+  function handleView(): void {
+    modalDispatch({ type: 'MODAL_VIEW' });
+  }
+  function handleEdit(): void {
+    modalDispatch({ type: 'MODAL_EDIT' });
+  }
+  function handleDelete(): void {
+    modalDispatch({ type: 'MODAL_DELETE' });
+  }
 
   function openMenu(): void {
     setMenuOpen(true);
@@ -53,6 +68,10 @@ const ListItemMenuButton: React.FC<{
         {type === MovementType.Workout && (
           <Button onClick={() => console.log('Starting!!')}>Start</Button>
         )}
+        <Button onClick={handleView}>View</Button>
+        <Button onClick={handleEdit}>Edit</Button>
+        <Button onClick={handleDelete}>Delete</Button>
+
         {/* <MovementFormButton formMode={FormMode.View} movement={movement} />
         <MovementFormButton formMode={FormMode.Edit} movement={movement} />
         <DeleteButton text={deleteText} handleDelete={handleDelete} /> */}

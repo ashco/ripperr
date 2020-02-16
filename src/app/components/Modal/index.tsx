@@ -1,8 +1,17 @@
 ﻿import Modal from './Modal';
 import ModalNodeAttacher from './ModalNodeAttacher';
 import ModalBackground from './ModalBackground';
-import DeleteModal from './DeleteModal';
+
+import AddMovementModal from './AddMovementModal';
+import DeleteMovementModal from './DeleteMovementModal';
 
 import { ModalWrapper } from './styles';
 
-export { Modal, ModalNodeAttacher, ModalBackground, DeleteModal, ModalWrapper };
+export {
+  Modal,
+  ModalNodeAttacher,
+  ModalBackground,
+  AddMovementModal,
+  DeleteMovementModal,
+  ModalWrapper,
+};

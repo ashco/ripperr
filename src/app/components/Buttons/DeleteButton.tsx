@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Modal, DeleteModal } from '../Modal';
+// import { Modal, DeleteModal } from '../Modal';
 import { Button } from '../Buttons';
 
 const DeleteButton: React.FC<{
@@ -13,16 +13,16 @@ const DeleteButton: React.FC<{
     setShowModal(true);
   };
 
-  const modal = showModal ? (
-    <Modal>
-      <DeleteModal text={text} handleDelete={handleDelete} hide={hide} />
-    </Modal>
-  ) : null;
+  // const modal = showModal ? (
+  //   <Modal>
+  //     {/* <DeleteModal text={text} handleDelete={handleDelete} hide={hide} /> */}
+  //   </Modal>
+  // ) : null;
 
   return (
     <>
       <Button onClick={(e) => show(e)}>Delete</Button>
-      {modal}
+      {/* {modal} */}
     </>
   );
 };

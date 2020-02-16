@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 import { useModalState, useModalDispatch } from '../../context/ModalContext';
 
-import { ModalBackground, ModalWrapper } from '../Modal';
-import AddForm from '../Forms/NewAddForm';
+import { ModalBackground, ModalWrapper, DeleteMovementModal } from '../Modal';
+import AddMovementModal from './AddMovementModal';
+import { ModalMode } from '../../common/enums';
 
 const Modal: React.FC = (props) => {
   const modalState = useModalState();
@@ -14,7 +15,8 @@ const Modal: React.FC = (props) => {
     <ModalRoot>
       {modalState.open && (
         <ModalBackground>
-          <AddForm />
+          {modalState.mode === ModalMode.Add && <AddMovementModal />}
+          {modalState.mode === ModalMode.Delete && <DeleteMovementModal />}
           {/* <MovementModal
             formMode={FormMode.Add}
             hide={() => modalDispatch({ type: ModalActionType.Close })}

@@ -8,39 +8,36 @@ import ButtonRow from '../Forms/ButtonRow';
 import { Button } from '../Buttons';
 
 const DeleteModal: React.FC<{
-  text: string;
-  hide: () => void;
-  handleDelete: () => void;
-}> = ({ text, hide, handleDelete }) => {
-  function onDelete() {
-    handleDelete();
-    hide();
-  }
+  // hide: () => void;
+  // handleDelete: () => void;
+}> = () => {
+  // function onDelete() {
+  //   handleDelete();
+  //   hide();
+  // }
 
-  const cancelBtn = {
-    onClick: hide,
-    text: 'Cancel',
-  };
-  const actionBtn = {
-    onClick: onDelete,
-    text: 'Delete',
-  };
+  // const cancelBtn = {
+  //   onClick: hide,
+  //   text: 'Cancel',
+  // };
+  // const actionBtn = {
+  //   onClick: onDelete,
+  //   text: 'Delete',
+  // };
 
   return (
     <DeleteModalWrapper>
-      <p>{text}</p>
-      <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} />
+      <p>Do you want to delete this MOVEMENT?</p>
+      {/* <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} /> */}
     </DeleteModalWrapper>
   );
 };
 
 const DeleteModalWrapper = styled(ModalWrapper)`
   display: grid;
-  /* grid-template-rows: auto auto auto; */
   gap: 1rem;
   p {
     font-size: ${(p) => p.theme.font[3]};
-    /* padding-bottom: ${(p) => p.theme.space[2]}; */
   }
 `;
 
