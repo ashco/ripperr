@@ -1,17 +1,21 @@
 ﻿import React from 'react';
 
-// import { INITIAL_MODAL_STATE } from '../components/Modal/NewModal';
+import { FormMode, ModalMode } from '../common/enums';
 
-// import { IModalState } from '../common/types';
-import { ModalActionType } from '../common/enums';
-
+type ModalActionType =
+  | 'MODAL_CLOSE'
+  | 'MODAL_ADD'
+  | 'MODAL_DELETE'
+  | 'MODAL_EDIT'
+  | 'MODAL_VIEW';
 type Action = { type: ModalActionType };
 type Dispatch = (action: Action) => void;
-type State = { open: boolean };
+type State = { open: boolean; mode: ModalMode | null };
 type ModalProviderProps = { children: React.ReactNode };
 
 const INITIAL_MODAL_STATE: State = {
-  open: true,
+  open: false,
+  mode: null,
 };
 
 const ModalStateContext = React.createContext<State | undefined>(undefined);
@@ -20,14 +24,22 @@ const ModalDispatchContext = React.createContext<Dispatch | undefined>(
 );
 
 function modalReducer(state: State, action: Action) {
+  console.log(action.type);
+
   switch (action.type) {
-    case ModalActionType.Open:
-      return { open: true };
-    case ModalActionType.Close:
-      return { open: false };
-    default: {
-      throw Error(`Unhandled action type: ${action.type}`);
-    }
+    case 'MODAL_CLOSE':
+      return { open: false, mode: null };
+    case 'MODAL_ADD':
+      return { open: true, mode: ModalMode.Add };
+    case 'MODAL_DELETE':
+      return { open: true, mode: ModalMode.Delete };
+    case 'MODAL_EDIT':
+      return { open: true, mode: ModalMode.Edit };
+    case 'MODAL_VIEW':
+      return { open: true, mode: ModalMode.View };
+    // default: {
+    //   throw Error(`Unhandled action type: ${action.type}`);
+    // }
   }
 }
 
@@ -58,6 +70,5 @@ function useModalDispatch() {
   }
   return context;
 }
-// const ModalContext = React.createContext<IModalState>(INITIAL_MODAL_STATE);
 
 export { ModalProvider, useModalState, useModalDispatch };

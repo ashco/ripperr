@@ -10,7 +10,7 @@ import { ModalProvider } from '../context/ModalContext';
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
-import NewModal from './Modal/NewModal';
+import Modal from './Modal/NewModal';
 
 const StyledPage = styled.div`
   color: ${({ theme }) => theme.color.neutral[900]};
@@ -37,7 +37,7 @@ const Page: React.FC = (props) => {
         <StyledPage>
           <GlobalStyle />
           <Meta />
-          <NewModal />
+          <Modal />
           <Navigation />
           <ToastContainer />
           <Inner>{props.children}</Inner>
