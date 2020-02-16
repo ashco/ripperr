@@ -22,24 +22,18 @@ const ListItemMenuButton: React.FC<{
   }
 
   function closeMenu(): void {
-    // if (menuRef && menuRef.current && !menuRef.current.contains(e.target)) {
     setMenuOpen(false);
     document.removeEventListener('click', closeMenu);
-    // }
   }
 
   function toggleHover() {
-    // if (btnRef && btnRef.current && btnRef.current.contains(e.target)) {
     setBtnHovered((hovered) => !hovered);
-    // }
-    console.log(btnHovered);
   }
 
   useEffect(() => {
     if (menuOpen) {
       console.log('open');
       document.addEventListener('click', closeMenu);
-      // document.addEventListener('onMouseEnter', toggleHover);
     } else {
       console.log('closed');
     }
@@ -59,9 +53,9 @@ const ListItemMenuButton: React.FC<{
         {type === MovementType.Workout && (
           <Button onClick={() => console.log('Starting!!')}>Start</Button>
         )}
-        <MovementFormButton formMode={FormMode.View} movement={movement} />
+        {/* <MovementFormButton formMode={FormMode.View} movement={movement} />
         <MovementFormButton formMode={FormMode.Edit} movement={movement} />
-        <DeleteButton text={deleteText} handleDelete={handleDelete} />
+        <DeleteButton text={deleteText} handleDelete={handleDelete} /> */}
       </ListItemMenuWrapper>
     </div>
   );

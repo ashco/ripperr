@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 
 import { AuthUserContext, FirebaseContext } from '../../context';
 
@@ -17,6 +17,7 @@ import { FormMode, MovementType } from '../../common/enums';
 const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
+  const themeContext = useContext(ThemeContext);
 
   const deleteText = `Do you want to delete this exercise: ${exercise.name}?`;
 
@@ -31,32 +32,18 @@ const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
   }
 
   return (
-    <ExerciseListItemWrapper>
-        <div className="color-bar" />
-        <p className="name">{exercise.name}</p>
-        <ListItemMenuButton
-          type={MovementType.Exercise}
-          movement={exercise}
-          deleteText={deleteText}
-          handleDelete={handleDelete}
-          />
+    <ExerciseListItemWrapper color={themeContext.color.blue[500]}>
+      <p className="name">{exercise.name}</p>
+      <ListItemMenuButton
+        type={MovementType.Exercise}
+        movement={exercise}
+        deleteText={deleteText}
+        handleDelete={handleDelete}
+      />
     </ExerciseListItemWrapper>
   );
 };
 
-// const ClickHandler = styled.div`
-//   cursor: pointer;
-// `;
-
-const ExerciseListItemWrapper = styled(ListItem)`
-  /* height: ${(props) => props.theme.space[8]}; */
-  .color-bar {
-    background-color: ${(props) => props.theme.color.blue[500]};
-  }
-  /* StyledListItemMenuButton {
-    position: absolute;
-
-  } */
-`;
+const ExerciseListItemWrapper = styled(ListItem)``;
 
 export default ExerciseListItem;

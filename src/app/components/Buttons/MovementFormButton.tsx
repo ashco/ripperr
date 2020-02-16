@@ -1,4 +1,4 @@
-﻿import React, { useState, RefObject } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import sizes from '../../styles/sizes';
@@ -6,12 +6,12 @@ import sizes from '../../styles/sizes';
 import { Modal } from '../Modal';
 
 import { MovementModal } from '../Forms';
-import { Button } from '.';
+import { Button, FormButton } from '.';
 
 import { IMovements } from '../../common/types';
 import { FormMode } from '../../common/enums';
 
-import PlusIcon from '../../static/icons/plus-solid.svg';
+import Plus from '../../icons/Plus';
 
 const MovementFormButton: React.FC<{
   formMode: FormMode;
@@ -21,17 +21,29 @@ const MovementFormButton: React.FC<{
   const hide = (): void => setShowModal(false);
   const show = (): void => setShowModal(true);
 
+  const [btnHovered, setBtnHovered] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  function toggleHover() {
+    setBtnHovered((hovered) => !hovered);
+  }
+
   let ButtonEl;
   if (formMode === FormMode.Add) {
     ButtonEl = (
-      <AddMovementButton onClick={show}>
-        <img src={PlusIcon} alt="Add Movement" />
+      <AddMovementButton
+        onClick={show}
+        onMouseEnter={toggleHover}
+        onMouseLeave={toggleHover}
+        ref={btnRef}
+      >
+        <Plus color={btnHovered ? 'black' : 'gray'} />
       </AddMovementButton>
     );
   } else if (formMode === FormMode.Edit) {
-    ButtonEl = <Button onClick={show}>Edit</Button>;
+    ButtonEl = <FormButton onClick={show}>Edit</FormButton>;
   } else if (formMode === FormMode.View) {
-    ButtonEl = <Button onClick={show}>View</Button>;
+    ButtonEl = <FormButton onClick={show}>View</FormButton>;
   }
 
   const modal = showModal ? (
@@ -49,7 +61,10 @@ const MovementFormButton: React.FC<{
 };
 
 const AddMovementButton = styled(Button)`
-  img {
+  display: grid;
+  place-items: center;
+  background-color: white;
+  svg {
     width: 1.5rem;
   }
 `;

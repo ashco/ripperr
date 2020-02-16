@@ -1,4 +1,5 @@
-﻿import styled from 'styled-components';
+﻿import React from 'react';
+import styled from 'styled-components';
 
 const Button = styled.button<{ size?: string }>`
   border: 2px solid black;
@@ -7,7 +8,7 @@ const Button = styled.button<{ size?: string }>`
   width: 100%;
   cursor: pointer;
   &:hover {
-    background: lightgray;
+    /* background: lightgray; */
   }
   &:active {
     /* background: gray; */

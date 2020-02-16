@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 
 import { AuthUserContext, FirebaseContext } from '../../context';
 
@@ -19,6 +19,7 @@ const ArchetypeListItem: React.FC<{ archetype: IArchetype }> = ({
 }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
+  const themeContext = useContext(ThemeContext);
 
   const deleteText = `Do you want to delete this archetype: ${archetype.name}?`;
 
@@ -33,8 +34,7 @@ const ArchetypeListItem: React.FC<{ archetype: IArchetype }> = ({
   }
 
   return (
-    <ArchetypeListItemWrapper>
-      <div className="color-bar" />
+    <ArchetypeListItemWrapper color={themeContext.color.green[500]}>
       <p className="name">{archetype.name}</p>
       {/* <div className="btn-container">
         <span className="row">
@@ -49,9 +49,6 @@ const ArchetypeListItem: React.FC<{ archetype: IArchetype }> = ({
 
 const ArchetypeListItemWrapper = styled(ListItem)`
   height: 100%;
-  .color-bar {
-    background-color: ${(props) => props.theme.color.green[500]};
-  }
   .name {
     padding: 0.5rem;
   }

@@ -72,6 +72,7 @@ const NavigationNonAuth: React.FC = () => (
 
 const NavigationWrapper = styled.nav`
   background-color: ${({ theme }) => theme.color.neutral[100]};
+  opacity: 0.85;
   box-shadow: ${(props) => props.theme.shadow[2]};
   height: 100%;
   grid-area: navigation;

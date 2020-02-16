@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 
 import { AuthUserContext, FirebaseContext } from '../../context';
 
@@ -12,6 +12,7 @@ import { FormMode, MovementType } from '../../common/enums';
 const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
+  const themeContext = useContext(ThemeContext);
 
   const deleteText = `Do you want to delete this workout: ${workout.name}?`;
 
@@ -26,8 +27,7 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
   }
 
   return (
-    <WorkoutListItemWrapper>
-      <div className="color-bar" />
+    <WorkoutListItemWrapper color={themeContext.color.yellow[500]}>
       <p className="name">{workout.name}</p>
       <ListItemMenuButton
         type={MovementType.Workout}
@@ -40,13 +40,7 @@ const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
 };
 
 const WorkoutListItemWrapper = styled(ListItem)`
-  /* height: ${(props) => props.theme.space[8]}; */
-  /* height: 180px;
-  width: 16rem; */
   grid-area: auto / auto / span 2 / span 2;
-  .color-bar {
-    background-color: ${(props) => props.theme.color.yellow[500]};
-  }
 `;
 
 export default WorkoutListItem;

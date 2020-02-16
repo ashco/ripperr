@@ -5,4 +5,5 @@ export const ModalWrapper = styled.div`
   background: ${(props) => props.theme.color.neutral[100]};
   max-width: 90vw;
   padding: 2rem;
+  border-radius: 5px;
 `;

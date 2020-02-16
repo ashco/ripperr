@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 
 const ModalNodeAttacher = (props: any) => {
   let modalRoot: any;
-  let el: any;
+  let modalEl: any;
   if (window !== undefined) {
     modalRoot = document.getElementById('modal-root');
-    el = document.createElement('div');
+    modalEl = document.createElement('div');
   }
 
   useEffect(() => {
     if (modalRoot) {
-      modalRoot.appendChild(el);
+      modalRoot.appendChild(modalEl);
     }
 
     return (): void => {
       if (modalRoot) {
-        modalRoot.removeChild(el);
+        modalRoot.removeChild(modalEl);
       }
     };
   });
@@ -26,7 +26,7 @@ const ModalNodeAttacher = (props: any) => {
     // Any valid React child: JSX, strings, arrays, etc.
     props.children,
     // A DOM element
-    el,
+    modalEl,
   );
 };
 

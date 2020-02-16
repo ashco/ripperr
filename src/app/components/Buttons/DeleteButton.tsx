@@ -10,8 +10,6 @@ const DeleteButton: React.FC<{
 
   const hide = (): void => setShowModal(false);
   const show = (e: any): void => {
-    console.log('show fnc');
-    // closeMenuHard();
     setShowModal(true);
   };
 

@@ -26,6 +26,7 @@ const FilterBarWrapper = styled.div`
     padding: 0.5rem 1rem;
     box-shadow: ${(props) => props.theme.shadow[2]};
     border: none;
+    border-radius: 5px;
   }
   .btn-container {
     display: inline-block;
@@ -35,6 +36,7 @@ const FilterBarWrapper = styled.div`
       margin-top: 100%;
     }
     button {
+      border-radius: 5px;
       position: absolute;
       top: 0;
       bottom: 0;
