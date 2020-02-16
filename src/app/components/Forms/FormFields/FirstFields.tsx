@@ -5,9 +5,9 @@ import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
-  IArchetypeFormValues,
-  IExerciseFormValues,
-  IWorkoutFormValues,
+  IArchetypeFormState,
+  IExerciseFormState,
+  IWorkoutFormState,
   IArchetypeFormErrors,
   IExerciseFormErrors,
   // IWorkoutFormErrors,
@@ -16,7 +16,7 @@ import {
 import { FormMode, FormActionType } from '../../../common/enums';
 
 const FirstFields: React.FC<{
-  form: IArchetypeFormValues | IExerciseFormValues | IWorkoutFormValues;
+  form: IArchetypeFormState | IExerciseFormState | IWorkoutFormState;
   errors: IArchetypeFormErrors | IExerciseFormErrors;
   formMode: FormMode;
   // handleChange: (e: IHandleChange) => void;

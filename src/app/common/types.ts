@@ -1,10 +1,15 @@
-﻿import { WorkoutMode, MovementType, FormActionType } from './enums';
+﻿import {
+  WorkoutMode,
+  MovementType,
+  FormActionType,
+  ModalActionType,
+} from './enums';
 
 export type IMovements = IArchetype | IExercise | IWorkout;
-export type IMovementFormValues =
-  | IArchetypeFormValues
-  | IExerciseFormValues
-  | IWorkoutFormValues;
+export type IMovementFormState =
+  | IArchetypeFormState
+  | IExerciseFormState
+  | IWorkoutFormState;
 
 // =============== ERRORS ===============
 export interface IFormError {
@@ -53,13 +58,8 @@ export interface IHandleChange {
   target: HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement;
 }
 
-export interface IFormReducerAction {
-  type: FormActionType;
-  value: string;
-}
-
-// =============== FORMS ===============
-export interface IArchetypeFormValues {
+// =============== STATES ===============
+export interface IArchetypeFormState {
   [key: string]: any;
   name: string;
   description: string;
@@ -68,7 +68,7 @@ export interface IArchetypeFormErrors {
   name: string;
   description: string;
 }
-export interface IExerciseFormValues {
+export interface IExerciseFormState {
   [key: string]: any;
   name: string;
   description: string;
@@ -80,7 +80,7 @@ export interface IExerciseFormErrors {
   tags: string;
 }
 
-export interface IWorkoutFormValues {
+export interface IWorkoutFormState {
   [key: string]: any;
   name: string;
   description: string;
@@ -96,6 +96,10 @@ export interface IWorkoutFormErrors {
   name: string;
   description: string;
   tags: string;
+}
+
+export interface IModalState {
+  open: boolean;
 }
 
 // =============== FORM BUTTONS ===============
@@ -189,4 +193,14 @@ export interface IWorkoutRest {
 
 export interface IWorkoutConfig {
   rounds?: number;
+}
+
+// ============ REDUCERS ============
+export interface IFormReducerAction {
+  type: FormActionType;
+  value: string;
+}
+
+export interface IModalReducerAction {
+  type: ModalActionType;
 }

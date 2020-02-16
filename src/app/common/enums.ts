@@ -23,3 +23,8 @@ export enum FormActionType {
   Description = 'FORM_DESCRIPTION',
   Tag = 'FORM_TAG',
 }
+
+export enum ModalActionType {
+  Open = 'MODAL_OPEN',
+  Close = 'MODAL_CLOSE',
+}

@@ -5,6 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
 
+import { ModalProvider } from '../context/ModalContext';
+
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
@@ -31,14 +33,16 @@ const Inner = styled.div`
 const Page: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
-      <StyledPage>
-        <GlobalStyle />
-        <Meta />
-        <NewModal />
-        <Navigation />
-        <ToastContainer />
-        <Inner>{props.children}</Inner>
-      </StyledPage>
+      <ModalProvider>
+        <StyledPage>
+          <GlobalStyle />
+          <Meta />
+          <NewModal />
+          <Navigation />
+          <ToastContainer />
+          <Inner>{props.children}</Inner>
+        </StyledPage>
+      </ModalProvider>
     </ThemeProvider>
   );
 };

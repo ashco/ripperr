@@ -30,12 +30,12 @@ import {
   IArchetype,
   IExercise,
   IWorkout,
-  IMovementFormValues,
-  IArchetypeFormValues,
+  IMovementFormState,
+  IArchetypeFormState,
   IArchetypeFormErrors,
-  IExerciseFormValues,
+  IExerciseFormState,
   IExerciseFormErrors,
-  IWorkoutFormValues,
+  IWorkoutFormState,
   IWorkoutFormErrors,
   IButtonRowBtn,
   IFormReducerAction,
@@ -48,16 +48,16 @@ import {
   FormActionType,
 } from '../../common/enums';
 
-const INITIAL_FORM_VALUES_AR: IArchetypeFormValues = {
+const INITIAL_FORM_STATE_AR: IArchetypeFormState = {
   name: '',
   description: '',
 };
-const INITIAL_FORM_VALUES_EX: IExerciseFormValues = {
+const INITIAL_FORM_STATE_EX: IExerciseFormState = {
   name: '',
   description: '',
   tags: [],
 };
-const INITIAL_FORM_VALUES_WO: IWorkoutFormValues = {
+const INITIAL_FORM_STATE_WO: IWorkoutFormState = {
   name: '',
   description: '',
   tags: [],
@@ -114,17 +114,17 @@ const MovementForm: React.FC<{
   const { archetypes, exercises, workouts } = useContext(MovementsContext);
 
   // ============ SET UP FORM STATE ============
-  let initialFormState: IMovements | IMovementFormValues;
+  let initialFormState: IMovements | IMovementFormState;
 
   if (movement) {
     initialFormState = movement;
   } else {
     if (movementType === MovementType.Archetype) {
-      initialFormState = INITIAL_FORM_VALUES_AR;
+      initialFormState = INITIAL_FORM_STATE_AR;
     } else if (movementType === MovementType.Exercise) {
-      initialFormState = INITIAL_FORM_VALUES_EX;
+      initialFormState = INITIAL_FORM_STATE_EX;
     } else if (movementType === MovementType.Workout) {
-      initialFormState = INITIAL_FORM_VALUES_WO;
+      initialFormState = INITIAL_FORM_STATE_WO;
     } else {
       return <div>No movement object or movementType set!</div>;
     }
@@ -135,11 +135,11 @@ const MovementForm: React.FC<{
   // ) {
   //   initialFormState = movement;
   // } else if (movementType === MovementType.Archetype) {
-  //   initialFormState = INITIAL_FORM_VALUES_AR;
+  //   initialFormState = INITIAL_FORM_STATE_AR;
   // } else if (movementType === MovementType.Exercise) {
-  //   initialFormState = INITIAL_FORM_VALUES_EX;
+  //   initialFormState = INITIAL_FORM_STATE_EX;
   // } else if (movementType === MovementType.Workout) {
-  //   initialFormState = INITIAL_FORM_VALUES_WO;
+  //   initialFormState = INITIAL_FORM_STATE_WO;
   // } else {
   //   return <div>This will never show</div>;
   // }
@@ -164,7 +164,7 @@ const MovementForm: React.FC<{
 
   // ============ FORM REDUCER ============
 
-  // const initialState: IExerciseFormValues = {
+  // const initialState: IExerciseFormState = {
   //   name: '',
   //   description: '',
   //   tags: [],
@@ -176,9 +176,9 @@ const MovementForm: React.FC<{
   // }
 
   function formReducer(
-    state: IMovementFormValues,
+    state: IMovementFormState,
     action: IFormReducerAction,
-  ): IMovementFormValues {
+  ): IMovementFormState {
     switch (action.type) {
       case FormActionType.Name:
         return { ...state, name: action.value };
@@ -201,8 +201,8 @@ const MovementForm: React.FC<{
       //     throw Error();
       //   }
       //   const tags = (state as
-      //     | IExerciseFormValues
-      //     | IWorkoutFormValues).tags.filter((tag) => tag === action.value);
+      //     | IExerciseFormState
+      //     | IWorkoutFormState).tags.filter((tag) => tag === action.value);
       //   return { ...state, tags };
       // }
       default:
@@ -252,7 +252,7 @@ const MovementForm: React.FC<{
 
   // ============ FIREBASE FUNCTIONS ============
 
-  function handleCreateMovement(form: IMovementFormValues): void {
+  function handleCreateMovement(form: IMovementFormState): void {
     let firebaseFnc;
     let movementList;
     if (movementType === MovementType.Archetype) {
@@ -314,7 +314,7 @@ const MovementForm: React.FC<{
     }
   }
 
-  function handleUpdateMovement(form: IMovementFormValues): void {
+  function handleUpdateMovement(form: IMovementFormState): void {
     let firebaseFnc;
     let movementList;
     if (movementType === MovementType.Archetype) {
@@ -339,7 +339,7 @@ const MovementForm: React.FC<{
         return;
       }
 
-      const movementObj: IExerciseFormValues = {
+      const movementObj: IExerciseFormState = {
         lastModified: firebase.getTimestamp(),
         name: form.name,
         description: form.description,
@@ -436,7 +436,7 @@ const MovementForm: React.FC<{
         />
         {showTagField && (
           <TagField
-            form={form as IExerciseFormValues | IWorkoutFormValues}
+            form={form as IExerciseFormState | IWorkoutFormState}
             formDispatch={formDispatch}
             archetypes={archetypes}
           />

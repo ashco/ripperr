@@ -5,13 +5,13 @@ import { Row } from './styles';
 
 import {
   IHandleChange,
-  IWorkoutFormValues,
+  IWorkoutFormState,
   IWorkoutFormErrors,
 } from '../../common/types';
 import { WorkoutMode } from '../../common/enums';
 
 const TimedModeConfigFields: React.FC<{
-  form: IWorkoutFormValues;
+  form: IWorkoutFormState;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   return (
@@ -32,7 +32,7 @@ const TimedModeConfigFields: React.FC<{
 };
 
 const ModeField: React.FC<{
-  form: IWorkoutFormValues;
+  form: IWorkoutFormState;
   errors: IWorkoutFormErrors;
   handleChange: (e: IHandleChange) => void;
   handleChangeConfig: (e: IHandleChange) => void;

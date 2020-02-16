@@ -7,16 +7,16 @@ import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
-  IExerciseFormValues,
-  IWorkoutFormValues,
+  IExerciseFormState,
+  IWorkoutFormState,
   IFormReducerAction,
   IArchetype,
 } from '../../../common/types';
 import { FormActionType } from '../../../common/enums';
 
 const TagField: React.FC<{
-  form: IExerciseFormValues | IWorkoutFormValues;
-  // form: IWorkoutFormValues;
+  form: IExerciseFormState | IWorkoutFormState;
+  // form: IWorkoutFormState;
   // handleChange: (e: IHandleChange) => void;
   formDispatch: React.Dispatch<IFormReducerAction>;
   archetypes: IArchetype[];
