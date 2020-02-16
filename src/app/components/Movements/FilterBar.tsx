@@ -4,13 +4,18 @@ import styled from 'styled-components';
 import { MovementFormButton } from '../Buttons';
 import { FormMode } from '../../common/enums';
 
-export const FilterBar = () => {
+const FilterBar = () => {
+  function toggleModal() {
+    console.log('opening modal');
+  }
+
   return (
     <FilterBarWrapper>
       <input className="filter-bar" type="text" placeholder="Filter..." />
       <div className="btn-container">
         <div id="dummy" />
-        <MovementFormButton formMode={FormMode.Add} />
+        {/* <MovementFormButton formMode={FormMode.Add} /> */}
+        <button onClick={toggleModal}>Open Modal</button>
       </div>
     </FilterBarWrapper>
   );
@@ -20,7 +25,7 @@ const FilterBarWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 3rem;
   gap: 1rem;
-  margin: 1rem 1rem 0;
+  margin: 1rem;
   input {
     font-size: 24px;
     padding: 0.5rem 1rem;
@@ -53,3 +58,5 @@ const FilterBarWrapper = styled.div`
 //   font-size: 24px;
 //   padding: 0.5rem;
 // `;
+
+export default FilterBar;

@@ -1,15 +1,15 @@
 ﻿import MovementModal from '../Modal/MovementModal';
+
 import MovementForm from './MovementForm';
+import ModeField from './ModeField';
+import ButtonRow from './ButtonRow';
+import AddForm from './AddForm';
+import InputField from './InputField';
 
 import FirstFields from './FormFields/FirstFields';
 import RepsField from './FormFields/RepsField';
 import TimedField from './FormFields/TimedField';
 import RestField from './FormFields/RestField';
-import ModeField from './ModeField';
-
-import ButtonRow from './ButtonRow';
-import AddForm from './AddForm';
-import InputField from './InputField';
 import SelectField from './FormFields/SelectField';
 
 import {

@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import { SearchContainer, MovementList } from '../components/Movements';
+import { FilterBar } from '../components/Movements';
 import { MovementFormButton } from '../components/Buttons';
 
 import { withAuthorization, withMovements } from '../context';
@@ -13,12 +14,8 @@ import { FormMode } from '../common/enums';
 const MovementsPage: NextPage = () => {
   return (
     <MovementsPageWrapper>
-      <SearchContainer />
-      {/* <FilterBar />
-      <ArchetypeRow /> */}
+      <FilterBar />
       <MovementList />
-
-      {/* <MovementFormButton formMode={FormMode.Add} /> */}
     </MovementsPageWrapper>
   );
 };

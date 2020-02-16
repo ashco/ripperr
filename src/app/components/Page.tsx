@@ -8,6 +8,7 @@ import theme from '../styles/theme';
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
+import NewModal from './Modal/NewModal';
 
 const StyledPage = styled.div`
   color: ${({ theme }) => theme.color.neutral[900]};
@@ -21,24 +22,19 @@ const StyledPage = styled.div`
   grid-template-areas: 'navigation main';
 `;
 
-const ModalRoot = styled.div`
-  position: relative;
-  z-index: 999;
-`;
-
 const Inner = styled.div`
   height: 100vh;
   grid-area: main;
   overflow-y: auto;
 `;
 
-const Page = (props: any) => {
+const Page: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <StyledPage>
         <GlobalStyle />
         <Meta />
-        <ModalRoot id="modal-root" />
+        <NewModal />
         <Navigation />
         <ToastContainer />
         <Inner>{props.children}</Inner>

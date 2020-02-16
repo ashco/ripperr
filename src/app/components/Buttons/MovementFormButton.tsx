@@ -1,11 +1,9 @@
 ﻿import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
-import sizes from '../../styles/sizes';
-
 import { Modal } from '../Modal';
-
 import { MovementModal } from '../Forms';
+
 import { Button, FormButton } from '.';
 
 import { IMovements } from '../../common/types';
