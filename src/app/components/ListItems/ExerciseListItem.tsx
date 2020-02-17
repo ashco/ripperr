@@ -35,10 +35,10 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
     <ExerciseListItemWrapper color={themeContext.color.blue[500]}>
       <p className="name">{exercise.name}</p>
       <ListItemMenuButton
-        type={MovementType.Exercise}
+        // type={MovementType.Exercise}
         movement={exercise}
         deleteText={deleteText}
-        handleDelete={handleDelete}
+        handleDeleteMovement={handleDelete}
       />
     </ExerciseListItemWrapper>
   );

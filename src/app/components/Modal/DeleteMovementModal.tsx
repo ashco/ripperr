@@ -7,28 +7,33 @@ import { ModalWrapper } from './styles';
 import ButtonRow from '../Forms/ButtonRow';
 // import { Button } from '../Buttons';
 
-const DeleteModal: React.FC<{
-  // hide: () => void;
-  // handleDelete: () => void;
-}> = () => {
-  // function onDelete() {
-  //   handleDelete();
-  //   hide();
-  // }
+import { useModalDispatch } from '../../context/ModalContext';
 
-  // const cancelBtn = {
-  //   onClick: hide,
-  //   text: 'Cancel',
-  // };
-  // const actionBtn = {
-  //   onClick: onDelete,
-  //   text: 'Delete',
-  // };
+const DeleteModal: React.FC<{
+  handleDelete?: () => void;
+}> = ({ handleDelete }) => {
+  const modalDispatch = useModalDispatch();
+
+  function onDelete(): void {
+    // handleDelete();
+    modalDispatch({ type: 'MODAL_CLOSE' });
+  }
+
+  const btnConfig = {
+    cancelBtn: {
+      text: 'Cancel',
+      onClick: (): void => modalDispatch({ type: 'MODAL_CLOSE' }),
+    },
+    actionBtn: {
+      text: 'Delete',
+      onClick: onDelete,
+    },
+  };
 
   return (
     <DeleteModalWrapper>
       <p>Do you want to delete this MOVEMENT?</p>
-      {/* <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} /> */}
+      <ButtonRow config={btnConfig} />
     </DeleteModalWrapper>
   );
 };

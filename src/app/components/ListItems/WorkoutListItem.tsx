@@ -30,10 +30,9 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
     <WorkoutListItemWrapper color={themeContext.color.yellow[500]}>
       <p className="name">{workout.name}</p>
       <ListItemMenuButton
-        type={MovementType.Workout}
         movement={workout}
         deleteText={deleteText}
-        handleDelete={handleDelete}
+        handleDeleteMovement={handleDelete}
       />
     </WorkoutListItemWrapper>
   );

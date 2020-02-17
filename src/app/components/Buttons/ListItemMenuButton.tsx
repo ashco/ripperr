@@ -11,11 +11,10 @@ import { MovementType } from '../../common/enums';
 import { IMovements } from '../../common/types';
 
 const ListItemMenuButton: React.FC<{
-  type: MovementType;
   movement: IMovements;
   deleteText: string;
-  handleDelete?: () => void;
-}> = ({ type, movement, deleteText }) => {
+  handleDeleteMovement?: () => void;
+}> = ({ movement, deleteText }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
 
@@ -72,7 +71,7 @@ const ListItemMenuButton: React.FC<{
         <Bars color={btnHovered ? 'black' : 'gray'} />
       </StyledListItemMenuButton>
       <ListItemMenuWrapper open={menuOpen}>
-        {type === MovementType.Workout && (
+        {movement.type === MovementType.Workout && (
           <Button onClick={() => console.log('Starting!!')}>Start</Button>
         )}
         <Button onClick={handleView}>View</Button>
