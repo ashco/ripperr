@@ -6,10 +6,10 @@ import { AuthUserContext, FirebaseContext } from '../../context';
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
 
-import { IWorkout } from '../../common/types';
+import { Workout } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-const WorkoutListItem: React.FC<{ workout: IWorkout }> = ({ workout }) => {
+const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);

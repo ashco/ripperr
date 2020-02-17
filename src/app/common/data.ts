@@ -1,4 +1,4 @@
-﻿import { IWorkout, IExercise } from './types';
+﻿import { Workout, Exercise } from './types';
 import { WorkoutMode, MovementType } from './enums';
 
 export const workoutModeOptions = [
@@ -149,7 +149,7 @@ export const workoutModeOptions = [
 //   id: string;
 // }
 
-// export const workoutObj: IWorkout = {
+// export const workoutObj: Workout = {
 //   id: '5678',
 //   type: MovementType.Workout,
 //   name: 'Morning Stretch Routine',
@@ -182,7 +182,7 @@ export const workoutModeOptions = [
 //   },
 // };
 
-// export const exerciseObj: IExercise = {
+// export const exerciseObj: Exercise = {
 //   id: '1234',
 //   type: MovementType.Exercise,
 //   name: 'Toe touches',

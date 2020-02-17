@@ -4,13 +4,11 @@ import styled from 'styled-components';
 import { AddMovementButton } from '../Buttons';
 import { useModalDispatch } from '../../context/ModalContext';
 
-import { FormMode } from '../../common/enums';
-
 const FilterBar = () => {
   const modalDispatch = useModalDispatch();
 
   function openModal(): void {
-    modalDispatch({ type: 'MODAL_ADD' });
+    modalDispatch({ type: 'MODAL_ADD_SELECT' });
   }
 
   return (

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ModalWrapper } from './styles';
 
 // import { FormWrapper } from '../Forms/styles';
-// import ButtonRow from '../Forms/ButtonRow';
+import ButtonRow from '../Forms/ButtonRow';
 // import { Button } from '../Buttons';
 
 const DeleteModal: React.FC<{

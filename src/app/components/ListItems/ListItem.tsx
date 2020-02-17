@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { IExercise, IWorkout } from '../../common/types';
+import { Exercise, Workout } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
 export const ListItem = styled.li<{ color: string }>`

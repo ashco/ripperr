@@ -10,7 +10,7 @@ import {
   ExerciseFormState,
   IWorkoutFormState,
   IFormReducerAction,
-  IArchetype,
+  Archetype,
 } from '../../../common/types';
 import { FormActionType } from '../../../common/enums';
 
@@ -19,7 +19,7 @@ const TagField: React.FC<{
   // form: IWorkoutFormState;
   // handleChange: (e: IHandleChange) => void;
   formDispatch: React.Dispatch<IFormReducerAction>;
-  archetypes: IArchetype[];
+  archetypes: Archetype[];
 }> = ({ form, formDispatch, archetypes }) => {
   console.log(archetypes.map((arch) => arch.name));
 

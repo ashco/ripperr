@@ -11,10 +11,10 @@ import {
   ListItemMenuButton,
 } from '../Buttons';
 
-import { IExercise } from '../../common/types';
+import { Exercise } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
+const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);

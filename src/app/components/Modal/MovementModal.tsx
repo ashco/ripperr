@@ -11,24 +11,96 @@ import { useFormState, useFormDispatch } from '../../context/FormContext';
 
 // import { MovementFormWrapper } from '../Forms/styles';
 import { ModalWrapper } from './styles';
+import { ButtonRow } from '../Forms';
 
-// import { IMovements } from '../../common/types';
-// import { FormMode, MovementType } from '../../common/enums';
+import {
+  ArchetypeFormState,
+  ExerciseFormState,
+  WorkoutFormState,
+} from '../../common/types';
+import { ModalMode, MovementType } from '../../common/enums';
 
-const MovementModal: React.FC = () => {
+const MovementModal: React.FC<{
+  mode: ModalMode.Add | ModalMode.Edit | ModalMode.View;
+}> = ({ mode }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const { archetypes, exercises, workouts } = useContext(MovementsContext);
 
   const formState = useFormState();
+  const formDispatch = useFormDispatch();
+
+  // ============ MODE SPECIFIC VALUES ============
+
+  let movementText = 'Archetype';
+  if (formState?.type === MovementType.Exercise) {
+    movementText = 'Exercise';
+  } else if (formState?.type === MovementType.Workout) {
+    movementText = 'Workout';
+  }
+
+  let actionText = 'Add';
+  let submitButton = 'Submit';
+  if (mode === ModalMode.Edit) {
+    actionText = 'Edit';
+    submitButton = 'Update';
+  } else if (mode === ModalMode.View) {
+    actionText = 'View';
+    submitButton = 'Edit';
+  }
+
+  const text = {
+    title: `${actionText} ${movementText}`,
+    submitButton,
+  };
+  // const cancelBtn: IButtonRowBtn = {
+  //   text: '',
+  // };
+  // const actionBtn: IButtonRowBtn = {
+  //   text: '',
+  // };
+
+  // if (formMode === FormMode.Add) {
+  //   text.title = `Create New ${movementText}`;
+  //   text.submitButton = 'Submit';
+  //   cancelBtn.text = 'Cancel';
+  //   cancelBtn.onClick = hide;
+  //   actionBtn.text = 'Create';
+  // } else if (formMode === FormMode.Edit) {
+  //   text.title = `Edit ${movementText}`;
+  //   text.submitButton = 'Update';
+  //   cancelBtn.text = 'Cancel';
+  //   cancelBtn.onClick = hide; // switch to view mode
+  //   actionBtn.text = 'Update';
+  // } else if (formMode === FormMode.View) {
+  //   text.title = `View ${movementText}`;
+  //   text.submitButton = 'Update';
+  //   cancelBtn.text = 'Close';
+  //   cancelBtn.onClick = hide;
+  //   actionBtn.text = 'Edit';
+  //   // actionBtn.onClick = edit; // switch to edit mode
+  // }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+
+    // if (validateForm(errors)) {
+    //   if (formMode === FormMode.Add) {
+    //     handleCreateMovement(form);
+    //   } else if (formMode === FormMode.Edit) {
+    //     handleUpdateMovement(form);
+    //   }
+    // } else {
+    //   toast.error('There is a problem with your configuration..');
+    // }
+  }
 
   return (
     <MovementModalWrapper>
-      <h1 className="title">Title</h1>
-      {/* <h1 className="title">{text.title}</h1> */}
+      <h1 className="title">{text.title}</h1>
       <form
-        // onSubmit={handleSubmit}
-        // className={formMode === FormMode.View ? 'view-mode' : 'edit-mode'}
+        onSubmit={handleSubmit}
+        className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
         noValidate
       >
         <div className="first-fields">
@@ -36,26 +108,37 @@ const MovementModal: React.FC = () => {
             type="text"
             name="name"
             placeholder="Name"
-            value={formState.name}
-            // onChange={(e) =>
-            //   formDispatch({ type: FormActionType.Name, value: e.target.value })
-            // }
-            // disabled={formMode === FormMode.View}
+            value={
+              (formState as
+                | ArchetypeFormState
+                | ExerciseFormState
+                | WorkoutFormState).name
+            }
+            onChange={(e) =>
+              formDispatch({ type: 'FORM_NAME', value: e.target.value })
+            }
+            disabled={mode === ModalMode.View}
           />
           <textarea
             id="description"
             name="description"
             placeholder="Enter a description..."
-            value={formState.description}
-            // onChange={(e) =>
-            //   formDispatch({
-            //     type: FormActionType.Description,
-            //     value: e.target.value,
-            //   })
-            // }
-            // disabled={formMode === FormMode.View}
+            value={
+              (formState as
+                | ArchetypeFormState
+                | ExerciseFormState
+                | WorkoutFormState).description
+            }
+            onChange={(e) =>
+              formDispatch({
+                type: 'FORM_DESCRIPTION',
+                value: e.target.value,
+              })
+            }
+            disabled={mode === ModalMode.View}
           />
         </div>
+        {/* <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} /> */}
       </form>
     </MovementModalWrapper>
   );

@@ -27,9 +27,9 @@
 // import {
 //   IHandleChange,
 //   IMovements,
-//   IArchetype,
-//   IExercise,
-//   IWorkout,
+//   Archetype,
+//   Exercise,
+//   Workout,
 //   IMovementFormState,
 //   ArchetypeFormState,
 //   IArchetypeFormErrors,
@@ -291,13 +291,13 @@
 //       if (movementType === MovementType.Archetype) {
 //         // Add nothing..
 //       } else if (movementType === MovementType.Exercise) {
-//         (movementObj as IExercise).tags = form.tags;
+//         (movementObj as Exercise).tags = form.tags;
 //       } else if (movementType === MovementType.Workout) {
-//         (movementObj as IWorkout).tags = form.tags;
-//         (movementObj as IWorkout).mode = form.mode;
-//         (movementObj as IWorkout).movements = form.movements;
-//         (movementObj as IWorkout).rest = form.rest;
-//         (movementObj as IWorkout).config = {};
+//         (movementObj as Workout).tags = form.tags;
+//         (movementObj as Workout).mode = form.mode;
+//         (movementObj as Workout).movements = form.movements;
+//         (movementObj as Workout).rest = form.rest;
+//         (movementObj as Workout).config = {};
 //       }
 
 //       docRef
@@ -362,25 +362,25 @@
 
 //   // ============ FORM FUNCTIONS ============
 
-//   // function handleChangeForm(e: IHandleChange): void {
-//   //   handleChange(e, form, setForm);
-//   //   handleValidation(e, errors, setErrors);
-//   // }
+// function handleChangeForm(e: IHandleChange): void {
+//   handleChange(e, form, setForm);
+//   handleValidation(e, errors, setErrors);
+// }
 
-//   // function handleChangeFormMovement(e: IHandleChange, i: number): void {
-//   //   handleChange(e, form, setForm, {
-//   //     type: FormFieldProp.Movements,
-//   //     index: i,
-//   //   });
-//   // }
+// function handleChangeFormMovement(e: IHandleChange, i: number): void {
+//   handleChange(e, form, setForm, {
+//     type: FormFieldProp.Movements,
+//     index: i,
+//   });
+// }
 
-//   // function handleChangeFormRest(e: IHandleChange): void {
-//   //   handleChange(e, form, setForm, { type: FormFieldProp.Rest });
-//   // }
+// function handleChangeFormRest(e: IHandleChange): void {
+//   handleChange(e, form, setForm, { type: FormFieldProp.Rest });
+// }
 
-//   // function handleChangeFormConfig(e: IHandleChange): void {
-//   //   handleChange(e, form, setForm, { type: FormFieldProp.Config });
-//   // }
+// function handleChangeFormConfig(e: IHandleChange): void {
+//   handleChange(e, form, setForm, { type: FormFieldProp.Config });
+// }
 
 //   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
 //     e.preventDefault();
@@ -398,27 +398,27 @@
 
 //   // // ============ MOVEMENT FIELD HANDLERS ============
 
-//   // function handleAddMovementRef(mode: WorkoutMode): void {
-//   //   const newForm = { ...form };
+// function handleAddMovementRef(mode: WorkoutMode): void {
+//   const newForm = { ...form };
 
-//   //   const newMovement: IMovementRefs = {
-//   //     id: '',
-//   //     name: '',
-//   //     reps: 0,
-//   //     sets: 0,
-//   //     duration: 0,
-//   //   };
+//   const newMovement: IMovementRefs = {
+//     id: '',
+//     name: '',
+//     reps: 0,
+//     sets: 0,
+//     duration: 0,
+//   };
 
-//   //   newForm.movements.push(newMovement);
-//   //   setForm(newForm);
-//   // }
+//   newForm.movements.push(newMovement);
+//   setForm(newForm);
+// }
 
-//   // function handleDeleteMovementRef(i: number): void {
-//   //   const newForm = { ...form };
+// function handleDeleteMovementRef(i: number): void {
+//   const newForm = { ...form };
 
-//   //   newForm.movements.splice(i, 1);
-//   //   setForm(newForm);
-//   // }
+//   newForm.movements.splice(i, 1);
+//   setForm(newForm);
+// }
 
 //   return (
 //     <ExerciseFormWrapper>

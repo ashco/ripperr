@@ -4,9 +4,9 @@ import { AuthUserContext, FirebaseContext } from '.';
 import { MovementsContext } from './index';
 
 import {
-  IArchetype,
-  IExercise,
-  IWorkout,
+  Archetype,
+  Exercise,
+  Workout,
   IArchetypesFirebaseQuery,
   IExercisesFirebaseQuery,
   IWorkoutsFirebaseQuery,
@@ -54,7 +54,7 @@ const withMovements = (Component: any) => {
         const unsubscribe = firebase
           .archetypes(authUser.uid)
           .onSnapshot((snapshot) => {
-            const archetypeList: IArchetype[] = [];
+            const archetypeList: Archetype[] = [];
 
             snapshot.forEach((doc) => {
               const {
@@ -64,7 +64,7 @@ const withMovements = (Component: any) => {
                 description,
                 history,
               } = doc.data();
-              const obj: IArchetype = {
+              const obj: Archetype = {
                 id: doc.id,
                 lastModified,
                 type,
@@ -94,7 +94,7 @@ const withMovements = (Component: any) => {
         const unsubscribe = firebase
           .exercises(authUser.uid)
           .onSnapshot((snapshot) => {
-            const exerciseList: IExercise[] = [];
+            const exerciseList: Exercise[] = [];
 
             snapshot.forEach((doc) => {
               const {
@@ -105,7 +105,7 @@ const withMovements = (Component: any) => {
                 tags,
                 history,
               } = doc.data();
-              const obj: IExercise = {
+              const obj: Exercise = {
                 id: doc.id,
                 lastModified,
                 type,
@@ -136,7 +136,7 @@ const withMovements = (Component: any) => {
         const unsubscribe = firebase
           .workouts(authUser.uid)
           .onSnapshot((snapshot) => {
-            const workoutList: IWorkout[] = [];
+            const workoutList: Workout[] = [];
 
             snapshot.forEach((doc) => {
               const {
@@ -152,7 +152,7 @@ const withMovements = (Component: any) => {
                 config,
               } = doc.data();
 
-              const obj: IWorkout = {
+              const obj: Workout = {
                 id: doc.id,
                 lastModified,
                 type,

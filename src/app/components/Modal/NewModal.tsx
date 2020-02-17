@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useModalState, useModalDispatch } from '../../context/ModalContext';
 
 import { ModalBackground, ModalWrapper, DeleteMovementModal } from '../Modal';
-import AddMovementModal from './AddMovementModal';
+import AddSelectModal from './AddSelectModal';
 import MovementModal from './MovementModal';
 import { ModalMode } from '../../common/enums';
 
@@ -16,10 +16,17 @@ const Modal: React.FC = (props) => {
     <ModalRoot>
       {modalState.open && (
         <ModalBackground>
-          {modalState.mode === ModalMode.Add && <AddMovementModal />}
+          {modalState.mode === ModalMode.AddSelect && <AddSelectModal />}
+          {modalState.mode === ModalMode.Add && (
+            <MovementModal mode={modalState.mode} />
+          )}
+          {modalState.mode === ModalMode.View && (
+            <MovementModal mode={modalState.mode} />
+          )}
+          {modalState.mode === ModalMode.Edit && (
+            <MovementModal mode={modalState.mode} />
+          )}
           {modalState.mode === ModalMode.Delete && <DeleteMovementModal />}
-          {modalState.mode === ModalMode.View && <div>View</div>}
-          {modalState.mode === ModalMode.Edit && <MovementModal />}
         </ModalBackground>
       )}
     </ModalRoot>

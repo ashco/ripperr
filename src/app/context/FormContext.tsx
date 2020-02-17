@@ -1,16 +1,62 @@
 ﻿import React from 'react';
 
-import { ArchetypeFormState, ExerciseFormState } from '../common/types';
+import {
+  ArchetypeFormState,
+  ExerciseFormState,
+  WorkoutFormState,
+} from '../common/types';
+import { MovementType, WorkoutMode } from '../common/enums';
 
-type FormActionType = 'FORM_NAME' | 'FORM_DESCRIPTION' | 'FORM_TAG';
-type Action = { type: FormActionType; value: string };
+type FormActionType =
+  | 'FORM_CLEAR'
+  | 'FORM_RESET_AR'
+  | 'FORM_RESET_EX'
+  | 'FORM_RESET_WO'
+  | 'FORM_NAME'
+  | 'FORM_DESCRIPTION'
+  | 'FORM_TAG';
+type Action = { type: FormActionType; value?: string };
 type Dispatch = (action: Action) => void;
-type State = ArchetypeFormState | ExerciseFormState;
+type State = ArchetypeFormState | ExerciseFormState | WorkoutFormState | null;
 type FormProviderProps = { children: React.ReactNode };
 
 const INITIAL_FORM_STATE_AR: ArchetypeFormState = {
-  name: 'test',
+  type: MovementType.Archetype,
+  name: 'ARCH',
   description: '',
+};
+
+const INITIAL_FORM_STATE_EX: ExerciseFormState = {
+  type: MovementType.Exercise,
+  name: 'EX',
+  description: '',
+  tags: [],
+};
+
+const INITIAL_FORM_STATE_WO: WorkoutFormState = {
+  type: MovementType.Workout,
+  name: 'WO',
+  description: '',
+  tags: [],
+  mode: WorkoutMode.Reps,
+  movements: [
+    {
+      id: '',
+      name: '',
+      reps: 0,
+      sets: 0,
+      duration: 0,
+    },
+  ],
+  rest: {
+    auto: true,
+    inner: 45,
+    outer: 60,
+  },
+  config: {
+    // TIMED
+    // rounds: 1,
+  },
 };
 
 const FormStateContext = React.createContext<State | undefined>(undefined);
@@ -19,11 +65,29 @@ const FormDispatchContext = React.createContext<Dispatch | undefined>(
 );
 
 function formReducer(state: State, action: Action): State {
-  switch (action.type) {
+  const { type, value = 'NO VALUE SET' } = action;
+
+  console.log(type);
+
+  switch (type) {
+    case 'FORM_CLEAR':
+      return null;
+    case 'FORM_RESET_AR':
+      return { ...INITIAL_FORM_STATE_AR };
+    case 'FORM_RESET_EX':
+      return { ...INITIAL_FORM_STATE_EX };
+    case 'FORM_RESET_WO':
+      return { ...INITIAL_FORM_STATE_WO };
     case 'FORM_NAME':
-      return { ...state, name: action.value };
+      return { ...state, name: value } as
+        | ArchetypeFormState
+        | ExerciseFormState
+        | WorkoutFormState;
     case 'FORM_DESCRIPTION':
-      return { ...state, description: action.value };
+      return { ...state, description: value } as
+        | ArchetypeFormState
+        | ExerciseFormState
+        | WorkoutFormState;
     // case 'FORM_TAG':
     // if (
     //   movementType !== MovementType.Exercise &&
@@ -51,10 +115,7 @@ function formReducer(state: State, action: Action): State {
 }
 
 function FormProvider({ children }: FormProviderProps) {
-  const [state, dispatch] = React.useReducer(
-    formReducer,
-    INITIAL_FORM_STATE_AR,
-  );
+  const [state, dispatch] = React.useReducer(formReducer, null);
 
   return (
     <FormStateContext.Provider value={state}>

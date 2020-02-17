@@ -4,6 +4,7 @@ import { ModalMode } from '../common/enums';
 
 type ModalActionType =
   | 'MODAL_CLOSE'
+  | 'MODAL_ADD_SELECT'
   | 'MODAL_ADD'
   | 'MODAL_DELETE'
   | 'MODAL_EDIT'
@@ -29,6 +30,8 @@ function modalReducer(state: State, action: Action) {
   switch (action.type) {
     case 'MODAL_CLOSE':
       return { open: false, mode: null };
+    case 'MODAL_ADD_SELECT':
+      return { open: true, mode: ModalMode.AddSelect };
     case 'MODAL_ADD':
       return { open: true, mode: ModalMode.Add };
     case 'MODAL_DELETE':

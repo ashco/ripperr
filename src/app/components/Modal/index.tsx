@@ -2,7 +2,7 @@
 import ModalNodeAttacher from './ModalNodeAttacher';
 import ModalBackground from './ModalBackground';
 
-import AddMovementModal from './AddMovementModal';
+import AddSelectModal from './AddSelectModal';
 import DeleteMovementModal from './DeleteMovementModal';
 
 import { ModalWrapper } from './styles';
@@ -11,7 +11,7 @@ export {
   Modal,
   ModalNodeAttacher,
   ModalBackground,
-  AddMovementModal,
+  AddSelectModal,
   DeleteMovementModal,
   ModalWrapper,
 };

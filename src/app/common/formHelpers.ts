@@ -1,6 +1,6 @@
 ﻿import {
-  IExercise,
-  IWorkout,
+  Exercise,
+  Workout,
   IHandleChange,
   ArchetypeFormState,
   ExerciseFormState,

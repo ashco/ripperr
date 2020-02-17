@@ -14,9 +14,9 @@ import { createMovementColList } from '../../common/createMovementColList';
 
 import {
   IMovements,
-  IArchetype,
-  IExercise,
-  IWorkout,
+  Archetype,
+  Exercise,
+  Workout,
   IMovementState,
 } from '../../common/types';
 import { MovementType } from '../../common/enums';
@@ -33,9 +33,9 @@ export const MovementList: React.FC = () => {
 
   function renderListItem(move: IMovements) {
     if (move.type === MovementType.Exercise) {
-      return <ExerciseListItem key={move.id} exercise={move as IExercise} />;
+      return <ExerciseListItem key={move.id} exercise={move as Exercise} />;
     } else if (move.type === MovementType.Workout) {
-      return <WorkoutListItem key={move.id} workout={move as IWorkout} />;
+      return <WorkoutListItem key={move.id} workout={move as Workout} />;
     } else {
       return null;
     }

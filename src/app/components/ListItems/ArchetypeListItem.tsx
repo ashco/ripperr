@@ -11,10 +11,10 @@ import { ListItem } from './index';
 //   ListItemMenuButton,
 // } from '../Buttons';
 
-import { IArchetype } from '../../common/types';
+import { Archetype } from '../../common/types';
 // import { FormMode } from '../../common/enums';
 
-const ArchetypeListItem: React.FC<{ archetype: IArchetype }> = ({
+const ArchetypeListItem: React.FC<{ archetype: Archetype }> = ({
   archetype,
 }) => {
   const firebase = useContext(FirebaseContext);

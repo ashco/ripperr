@@ -5,11 +5,11 @@
   ModalActionType,
 } from './enums';
 
-export type IMovements = IArchetype | IExercise | IWorkout;
+export type IMovements = Archetype | Exercise | Workout;
 export type IMovementFormState =
   | ArchetypeFormState
   | ExerciseFormState
-  | IWorkoutFormState;
+  | WorkoutFormState;
 
 // =============== ERRORS ===============
 export interface IFormError {
@@ -33,24 +33,24 @@ export type IAuthUserContext = firebase.User | null;
 
 export interface IArchetypesFirebaseQuery {
   loading: boolean;
-  archetypes: IArchetype[];
+  archetypes: Archetype[];
 }
 
 export interface IExercisesFirebaseQuery {
   loading: boolean;
-  exercises: IExercise[];
+  exercises: Exercise[];
 }
 
 export interface IWorkoutsFirebaseQuery {
   loading: boolean;
-  workouts: IWorkout[];
+  workouts: Workout[];
 }
 
 export interface IMovementState {
   loading: boolean;
-  archetypes: IArchetype[];
-  exercises: IExercise[];
-  workouts: IWorkout[];
+  archetypes: Archetype[];
+  exercises: Exercise[];
+  workouts: Workout[];
 }
 
 // =============== FORM HELPERS ===============
@@ -59,47 +59,61 @@ export interface IHandleChange {
 }
 
 // =============== STATES ===============
+// export interface ArchetypeFormState {
+//   [key: string]: any;
+//   name: string;
+//   description: string;
+// }
 export interface ArchetypeFormState {
   [key: string]: any;
+  type: MovementType;
   name: string;
   description: string;
 }
+
+export interface ExerciseFormState extends ArchetypeFormState {
+  tags: string[];
+}
+
+export interface WorkoutFormState extends ExerciseFormState {
+  mode: WorkoutMode;
+  movements: IMovementRefs[];
+  rest: IWorkoutRest;
+  config: IWorkoutConfig;
+}
+
 export interface IArchetypeFormErrors {
   name: string;
   description: string;
 }
-export interface ExerciseFormState {
-  [key: string]: any;
-  name: string;
-  description: string;
-  tags: string[];
-}
+// export interface ExerciseFormState {
+//   [key: string]: any;
+//   name: string;
+//   description: string;
+//   tags: string[];
+// }
 export interface IExerciseFormErrors {
   name: string;
   description: string;
   tags: string;
 }
 
-export interface IWorkoutFormState {
-  [key: string]: any;
-  name: string;
-  description: string;
-  tags: string[];
-  mode: WorkoutMode;
-  // movements: IMovementRefReps[] | IMovementRefTimed[];
-  movements: IMovementRefs[];
-  rest: IWorkoutRest;
-  config: IWorkoutConfig;
-}
+// export interface IWorkoutFormState {
+//   [key: string]: any;
+//   name: string;
+//   description: string;
+//   tags: string[];
+//   mode: WorkoutMode;
+//   // movements: IMovementRefReps[] | IMovementRefTimed[];
+//   movements: IMovementRefs[];
+//   rest: IWorkoutRest;
+//   config: IWorkoutConfig;
+// }
 
 export interface IWorkoutFormErrors {
   name: string;
   description: string;
   tags: string;
-}
-
-export interface IModalState {
-  open: boolean;
 }
 
 // =============== FORM BUTTONS ===============
@@ -115,7 +129,7 @@ export interface IButtonRow {
 
 // =============== DATA OBJECT STRUCTURES ===============
 
-export interface IArchetype {
+export interface Archetype {
   readonly id: string;
   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   readonly type: MovementType;
@@ -124,30 +138,50 @@ export interface IArchetype {
   history: any;
 }
 
-export interface IExercise {
-  readonly id: string;
-  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
-  readonly type: MovementType;
-  name: string;
-  description: string;
-  history: any;
+export interface Exercise extends Archetype {
   tags: string[];
 }
 
-export interface IWorkout {
-  readonly id: string;
-  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
-  readonly type: MovementType;
-  name: string;
-  description: string;
-  tags: string[];
+export interface Workout extends Exercise {
   history: any;
   mode: WorkoutMode;
-  // movements: IMovementRefReps[] | IMovementRefTimed[];
   movements: IMovementRefs[];
   rest: IWorkoutRest;
   config: IWorkoutConfig;
 }
+// export interface Archetype {
+//   readonly id: string;
+//   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
+//   readonly type: MovementType;
+//   name: string;
+//   description: string;
+//   history: any;
+// }
+
+// export interface Exercise {
+//   readonly id: string;
+//   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
+//   readonly type: MovementType;
+//   name: string;
+//   description: string;
+//   history: any;
+//   tags: string[];
+// }
+
+// export interface Workout {
+//   readonly id: string;
+//   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
+//   readonly type: MovementType;
+//   name: string;
+//   description: string;
+//   tags: string[];
+//   history: any;
+//   mode: WorkoutMode;
+//   // movements: IMovementRefReps[] | IMovementRefTimed[];
+//   movements: IMovementRefs[];
+//   rest: IWorkoutRest;
+//   config: IWorkoutConfig;
+// }
 
 export interface IMovementRefs {
   [key: string]: string | number;
