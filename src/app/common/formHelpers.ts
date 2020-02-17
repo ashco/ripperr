@@ -4,7 +4,7 @@
   IHandleChange,
   ArchetypeFormState,
   ExerciseFormState,
-  IWorkoutFormState,
+  WorkoutFormState,
   IArchetypeFormErrors,
   IExerciseFormErrors,
   IWorkoutFormErrors,
@@ -54,7 +54,7 @@ function getName(e: IHandleChange): string | null {
 }
 export function handleChange(
   e: IHandleChange,
-  state: ArchetypeFormState | ExerciseFormState | IWorkoutFormState,
+  state: ArchetypeFormState | ExerciseFormState | WorkoutFormState,
   setState: (state: any) => void,
   config?: {
     type: FormFieldProp;

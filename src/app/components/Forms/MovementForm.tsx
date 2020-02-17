@@ -35,7 +35,7 @@
 //   IArchetypeFormErrors,
 //   ExerciseFormState,
 //   IExerciseFormErrors,
-//   IWorkoutFormState,
+//   WorkoutFormState,
 //   IWorkoutFormErrors,
 //   IButtonRowBtn,
 //   IFormReducerAction,
@@ -57,7 +57,7 @@
 //   description: '',
 //   tags: [],
 // };
-// const INITIAL_FORM_STATE_WO: IWorkoutFormState = {
+// const INITIAL_FORM_STATE_WO: WorkoutFormState = {
 //   name: '',
 //   description: '',
 //   tags: [],
@@ -164,7 +164,7 @@
 
 //   // ============ FORM REDUCER ============
 
-//   // const initialState: IExerciseFormState = {
+//   // const initialState: ExerciseFormState = {
 //   //   name: '',
 //   //   description: '',
 //   //   tags: [],
@@ -201,8 +201,8 @@
 //       //     throw Error();
 //       //   }
 //       //   const tags = (state as
-//       //     | IExerciseFormState
-//       //     | IWorkoutFormState).tags.filter((tag) => tag === action.value);
+//       //     | ExerciseFormState
+//       //     | WorkoutFormState).tags.filter((tag) => tag === action.value);
 //       //   return { ...state, tags };
 //       // }
 //       default:
@@ -436,7 +436,7 @@
 //         />
 //         {showTagField && (
 //           <TagField
-//             form={form as ExerciseFormState | IWorkoutFormState}
+//             form={form as ExerciseFormState | WorkoutFormState}
 //             formDispatch={formDispatch}
 //             archetypes={archetypes}
 //           />

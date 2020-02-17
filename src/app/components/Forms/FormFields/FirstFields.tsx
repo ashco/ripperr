@@ -7,21 +7,21 @@ import {
   IHandleChange,
   ArchetypeFormState,
   ExerciseFormState,
-  IWorkoutFormState,
+  WorkoutFormState,
   IArchetypeFormErrors,
   IExerciseFormErrors,
   // IWorkoutFormErrors,
   IFormReducerAction,
 } from '../../../common/types';
-import { FormMode } from '../../../common/enums';
+// import { FormMode } from '../../../common/enums';
 
 const FirstFields: React.FC<{
-  form: ArchetypeFormState | ExerciseFormState | IWorkoutFormState;
+  form: ArchetypeFormState | ExerciseFormState | WorkoutFormState;
   errors: IArchetypeFormErrors | IExerciseFormErrors;
-  formMode: FormMode;
+  // formMode: FormMode;
   // handleChange: (e: IHandleChange) => void;
   formDispatch: React.Dispatch<IFormReducerAction>;
-}> = ({ form, errors, formMode, formDispatch }) => {
+}> = ({ form, errors, formDispatch }) => {
   // const tags = [
   //   'Push',
   //   'Pull',
@@ -57,7 +57,7 @@ const FirstFields: React.FC<{
         // onChange={(e) =>
         //   formDispatch({ type: FormActionType.Name, value: e.target.value })
         // }
-        disabled={formMode === FormMode.View}
+        // disabled={formMode === FormMode.View}
       />
       <FormError>{errors.name}</FormError>
       <textarea
@@ -71,7 +71,7 @@ const FirstFields: React.FC<{
         //     value: e.target.value,
         //   })
         // }
-        disabled={formMode === FormMode.View}
+        // disabled={formMode === FormMode.View}
       />
       <FormError>{errors.description}</FormError>
       {/* <label htmlFor="tags"> */}

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Button } from '../Buttons';
 
+import { useFormDispatch } from '../../context/FormContext';
 import { useModalDispatch } from '../../context/ModalContext';
 
 import Bars from '../../icons/Bars';
@@ -20,9 +21,13 @@ const ListItemMenuButton: React.FC<{
 
   const btnRef = useRef<HTMLButtonElement>(null);
 
+  // const formDispatch = useFormDispatch();
   const modalDispatch = useModalDispatch();
 
   function handleView(): void {
+    console.log(movement);
+
+    // formDispatch({ type: 'FORM_SET' });
     modalDispatch({ type: 'MODAL_VIEW' });
   }
 

@@ -8,15 +8,15 @@ import { Row, FormError } from '../styles';
 import {
   IHandleChange,
   ExerciseFormState,
-  IWorkoutFormState,
+  WorkoutFormState,
   IFormReducerAction,
   Archetype,
 } from '../../../common/types';
 import { FormActionType } from '../../../common/enums';
 
 const TagField: React.FC<{
-  form: ExerciseFormState | IWorkoutFormState;
-  // form: IWorkoutFormState;
+  form: ExerciseFormState | WorkoutFormState;
+  // form: WorkoutFormState;
   // handleChange: (e: IHandleChange) => void;
   formDispatch: React.Dispatch<IFormReducerAction>;
   archetypes: Archetype[];

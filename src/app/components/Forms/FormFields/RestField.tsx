@@ -6,11 +6,11 @@ import { Row } from '../styles';
 import {
   IHandleChange,
   ExerciseFormState,
-  IWorkoutFormState,
+  WorkoutFormState,
 } from '../../../common/types';
 
 const RestField: React.FC<{
-  form: ExerciseFormState | IWorkoutFormState;
+  form: ExerciseFormState | WorkoutFormState;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   return (

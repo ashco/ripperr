@@ -98,7 +98,7 @@ export interface IExerciseFormErrors {
   tags: string;
 }
 
-// export interface IWorkoutFormState {
+// export interface WorkoutFormState {
 //   [key: string]: any;
 //   name: string;
 //   description: string;
@@ -118,13 +118,18 @@ export interface IWorkoutFormErrors {
 
 // =============== FORM BUTTONS ===============
 
-export interface IButtonRowBtn {
+export interface ButtonRowBtn {
   text: string;
   onClick?: () => void;
 }
-export interface IButtonRow {
-  cancelBtn: IButtonRowBtn;
-  actionBtn: IButtonRowBtn;
+// export interface IButtonRow {
+//   cancelBtn: IButtonRowBtn;
+//   actionBtn: IButtonRowBtn;
+// }
+
+export interface ButtonRowProps {
+  cancelBtn: ButtonRowBtn;
+  actionBtn: ButtonRowBtn;
 }
 
 // =============== DATA OBJECT STRUCTURES ===============

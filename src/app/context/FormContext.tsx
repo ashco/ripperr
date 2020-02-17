@@ -12,30 +12,36 @@ type FormActionType =
   | 'FORM_RESET_AR'
   | 'FORM_RESET_EX'
   | 'FORM_RESET_WO'
+  // | 'FORM_SET'
   | 'FORM_NAME'
   | 'FORM_DESCRIPTION'
   | 'FORM_TAG';
-type Action = { type: FormActionType; value?: string };
-type Dispatch = (action: Action) => void;
-type State = ArchetypeFormState | ExerciseFormState | WorkoutFormState | null;
+
+type FormAction = { type: FormActionType; value?: string };
+type FormDispatch = (action: FormAction) => void;
+type FormState =
+  | ArchetypeFormState
+  | ExerciseFormState
+  | WorkoutFormState
+  | null;
 type FormProviderProps = { children: React.ReactNode };
 
 const INITIAL_FORM_STATE_AR: ArchetypeFormState = {
   type: MovementType.Archetype,
-  name: 'ARCH',
+  name: '',
   description: '',
 };
 
 const INITIAL_FORM_STATE_EX: ExerciseFormState = {
   type: MovementType.Exercise,
-  name: 'EX',
+  name: '',
   description: '',
   tags: [],
 };
 
 const INITIAL_FORM_STATE_WO: WorkoutFormState = {
   type: MovementType.Workout,
-  name: 'WO',
+  name: '',
   description: '',
   tags: [],
   mode: WorkoutMode.Reps,
@@ -59,12 +65,12 @@ const INITIAL_FORM_STATE_WO: WorkoutFormState = {
   },
 };
 
-const FormStateContext = React.createContext<State | undefined>(undefined);
-const FormDispatchContext = React.createContext<Dispatch | undefined>(
+const FormStateContext = React.createContext<FormState | undefined>(undefined);
+const FormDispatchContext = React.createContext<FormDispatch | undefined>(
   undefined,
 );
 
-function formReducer(state: State, action: Action): State {
+function formReducer(state: FormState, action: FormAction): FormState {
   const { type, value = 'NO VALUE SET' } = action;
 
   console.log(type);
@@ -106,7 +112,7 @@ function formReducer(state: State, action: Action): State {
     //   }
     //   const tags = (state as
     //     | ExerciseFormState
-    //     | IWorkoutFormState).tags.filter((tag) => tag === action.value);
+    //     | WorkoutFormState).tags.filter((tag) => tag === action.value);
     //   return { ...state, tags };
     // }
     default:
@@ -126,7 +132,7 @@ function FormProvider({ children }: FormProviderProps) {
   );
 }
 
-function useFormState(): State {
+function useFormState(): FormState {
   const context = React.useContext(FormStateContext);
   if (context === undefined) {
     throw Error('useFormState must be used within a FormProvider');
@@ -134,7 +140,7 @@ function useFormState(): State {
   return context;
 }
 
-function useFormDispatch(): Dispatch {
+function useFormDispatch(): FormDispatch {
   const context = React.useContext(FormDispatchContext);
   if (context === undefined) {
     throw Error('useFormDispatch must be used within a FormProvider');

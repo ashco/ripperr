@@ -9,22 +9,24 @@ type ModalActionType =
   | 'MODAL_DELETE'
   | 'MODAL_EDIT'
   | 'MODAL_VIEW';
-type Action = { type: ModalActionType };
-type Dispatch = (action: Action) => void;
-type State = { open: boolean; mode: ModalMode | null };
+type ModalAction = { type: ModalActionType };
+type ModalDispatch = (action: ModalAction) => void;
+type ModalState = { open: boolean; mode: ModalMode | null };
 type ModalProviderProps = { children: React.ReactNode };
 
-const INITIAL_MODAL_STATE: State = {
+const INITIAL_MODAL_STATE: ModalState = {
   open: false,
   mode: null,
 };
 
-const ModalStateContext = React.createContext<State | undefined>(undefined);
-const ModalDispatchContext = React.createContext<Dispatch | undefined>(
+const ModalStateContext = React.createContext<ModalState | undefined>(
+  undefined,
+);
+const ModalDispatchContext = React.createContext<ModalDispatch | undefined>(
   undefined,
 );
 
-function modalReducer(state: State, action: Action) {
+function modalReducer(state: ModalState, action: ModalAction) {
   console.log(action.type);
 
   switch (action.type) {

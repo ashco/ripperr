@@ -1,6 +1,6 @@
 ﻿import React, { useState, useContext, useReducer } from 'react';
 import styled from 'styled-components';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import {
   AuthUserContext,
@@ -8,6 +8,7 @@ import {
   MovementsContext,
 } from '../../context';
 import { useFormState, useFormDispatch } from '../../context/FormContext';
+import { useModalDispatch } from '../../context/ModalContext';
 
 // import { MovementFormWrapper } from '../Forms/styles';
 import { ModalWrapper } from './styles';
@@ -17,6 +18,10 @@ import {
   ArchetypeFormState,
   ExerciseFormState,
   WorkoutFormState,
+  Archetype,
+  Exercise,
+  Workout,
+  ButtonRowProps,
 } from '../../common/types';
 import { ModalMode, MovementType } from '../../common/enums';
 
@@ -29,6 +34,7 @@ const MovementModal: React.FC<{
 
   const formState = useFormState();
   const formDispatch = useFormDispatch();
+  const modalDispatch = useModalDispatch();
 
   // ============ MODE SPECIFIC VALUES ============
 
@@ -41,48 +47,106 @@ const MovementModal: React.FC<{
 
   let actionText = 'Add';
   let submitButton = 'Submit';
+
+  const btnConfig: ButtonRowProps = {
+    cancelBtn: {
+      text: 'Cancel',
+      onClick: () => modalDispatch({ type: 'MODAL_CLOSE' }),
+    },
+    actionBtn: {
+      text: 'Create',
+    },
+  };
+
   if (mode === ModalMode.Edit) {
     actionText = 'Edit';
     submitButton = 'Update';
+    btnConfig.cancelBtn.text = 'Cancel';
+    btnConfig.actionBtn.text = 'Update';
   } else if (mode === ModalMode.View) {
     actionText = 'View';
     submitButton = 'Edit';
+    btnConfig.cancelBtn.text = 'Close';
+    btnConfig.actionBtn.text = 'Edit';
   }
 
   const text = {
     title: `${actionText} ${movementText}`,
     submitButton,
   };
+
   // const cancelBtn: IButtonRowBtn = {
   //   text: '',
   // };
+
   // const actionBtn: IButtonRowBtn = {
   //   text: '',
   // };
 
-  // if (formMode === FormMode.Add) {
-  //   text.title = `Create New ${movementText}`;
-  //   text.submitButton = 'Submit';
-  //   cancelBtn.text = 'Cancel';
-  //   cancelBtn.onClick = hide;
-  //   actionBtn.text = 'Create';
-  // } else if (formMode === FormMode.Edit) {
-  //   text.title = `Edit ${movementText}`;
-  //   text.submitButton = 'Update';
-  //   cancelBtn.text = 'Cancel';
-  //   cancelBtn.onClick = hide; // switch to view mode
-  //   actionBtn.text = 'Update';
-  // } else if (formMode === FormMode.View) {
-  //   text.title = `View ${movementText}`;
-  //   text.submitButton = 'Update';
-  //   cancelBtn.text = 'Close';
-  //   cancelBtn.onClick = hide;
-  //   actionBtn.text = 'Edit';
-  //   // actionBtn.onClick = edit; // switch to edit mode
-  // }
+  function handleCreateMovement(
+    formState: ArchetypeFormState | ExerciseFormState | WorkoutFormState,
+  ): void {
+    let firebaseFnc;
+    let movementList;
+    if (formState.type === MovementType.Archetype) {
+      firebaseFnc = firebase.archetypes;
+      movementList = archetypes;
+    } else if (formState.type === MovementType.Exercise) {
+      firebaseFnc = firebase.exercises;
+      movementList = exercises;
+    } else if (formState.type === MovementType.Workout) {
+      firebaseFnc = firebase.workouts;
+      movementList = workouts;
+    } else {
+      throw Error('No MovementType specified!');
+      return;
+    }
+    if (authUser) {
+      const docRef = firebaseFnc(authUser.uid).doc();
+      // Check that name is unique
+      const moveNames = movementList.map((move) => move.name);
+      if (moveNames.includes(formState.name)) {
+        toast.error(`${movementText} name is already in use.`);
+        return;
+      }
+
+      const movementObj: Archetype | Exercise | Workout = {
+        id: docRef.id,
+        lastModified: firebase.getTimestamp(),
+        type: formState.type,
+        name: formState.name,
+        description: formState.description,
+        history: [],
+      };
+      if (formState.type === MovementType.Exercise) {
+        (movementObj as Exercise).tags = formState.tags;
+      } else if (formState.type === MovementType.Workout) {
+        (movementObj as Workout).tags = formState.tags;
+        (movementObj as Workout).mode = formState.mode;
+        (movementObj as Workout).movements = formState.movements;
+        (movementObj as Workout).rest = formState.rest;
+        (movementObj as Workout).config = {};
+      }
+      docRef
+        .set(movementObj)
+        .then(() => {
+          console.log(`${movementText} Added: ${movementObj.name}`);
+          modalDispatch({ type: 'MODAL_CLOSE' });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      console.log('There is no authUser!');
+    }
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
+
+    if (mode === ModalMode.Add && formState) {
+      handleCreateMovement(formState);
+    }
 
     // if (validateForm(errors)) {
     //   if (formMode === FormMode.Add) {
@@ -138,7 +202,7 @@ const MovementModal: React.FC<{
             disabled={mode === ModalMode.View}
           />
         </div>
-        {/* <ButtonRow cancelBtn={cancelBtn} actionBtn={actionBtn} /> */}
+        <ButtonRow config={btnConfig} />
       </form>
     </MovementModalWrapper>
   );
