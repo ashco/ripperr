@@ -7,7 +7,7 @@ import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
-  IExerciseFormState,
+  ExerciseFormState,
   IWorkoutFormState,
   IFormReducerAction,
   IArchetype,
@@ -15,7 +15,7 @@ import {
 import { FormActionType } from '../../../common/enums';
 
 const TagField: React.FC<{
-  form: IExerciseFormState | IWorkoutFormState;
+  form: ExerciseFormState | IWorkoutFormState;
   // form: IWorkoutFormState;
   // handleChange: (e: IHandleChange) => void;
   formDispatch: React.Dispatch<IFormReducerAction>;

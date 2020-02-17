@@ -2,14 +2,14 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { SearchContainer, MovementList } from '../components/Movements';
+import { MovementList } from '../components/Movements';
 import { FilterBar } from '../components/Movements';
-import { MovementFormButton } from '../components/Buttons';
+// import { MovementFormButton } from '../components/Buttons';
 
 import { withAuthorization, withMovements } from '../context';
 
 import { IAuthUserContext } from '../common/types';
-import { FormMode } from '../common/enums';
+// import { FormMode } from '../common/enums';
 
 const MovementsPage: NextPage = () => {
   return (

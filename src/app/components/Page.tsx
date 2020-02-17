@@ -6,6 +6,7 @@ import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
 
 import { ModalProvider } from '../context/ModalContext';
+import { FormProvider } from '../context/FormContext';
 
 import Meta from './Meta';
 import Header from './Header';
@@ -34,14 +35,16 @@ const Page: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <ModalProvider>
-        <StyledPage>
-          <GlobalStyle />
-          <Meta />
-          <Modal />
-          <Navigation />
-          <ToastContainer />
-          <Inner>{props.children}</Inner>
-        </StyledPage>
+        <FormProvider>
+          <StyledPage>
+            <GlobalStyle />
+            <Meta />
+            <Modal />
+            <Navigation />
+            <ToastContainer />
+            <Inner>{props.children}</Inner>
+          </StyledPage>
+        </FormProvider>
       </ModalProvider>
     </ThemeProvider>
   );

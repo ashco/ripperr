@@ -5,18 +5,18 @@ import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
-  IArchetypeFormState,
-  IExerciseFormState,
+  ArchetypeFormState,
+  ExerciseFormState,
   IWorkoutFormState,
   IArchetypeFormErrors,
   IExerciseFormErrors,
   // IWorkoutFormErrors,
   IFormReducerAction,
 } from '../../../common/types';
-import { FormMode, FormActionType } from '../../../common/enums';
+import { FormMode } from '../../../common/enums';
 
 const FirstFields: React.FC<{
-  form: IArchetypeFormState | IExerciseFormState | IWorkoutFormState;
+  form: ArchetypeFormState | ExerciseFormState | IWorkoutFormState;
   errors: IArchetypeFormErrors | IExerciseFormErrors;
   formMode: FormMode;
   // handleChange: (e: IHandleChange) => void;
@@ -54,9 +54,9 @@ const FirstFields: React.FC<{
         name="name"
         placeholder="Name"
         value={form.name}
-        onChange={(e) =>
-          formDispatch({ type: FormActionType.Name, value: e.target.value })
-        }
+        // onChange={(e) =>
+        //   formDispatch({ type: FormActionType.Name, value: e.target.value })
+        // }
         disabled={formMode === FormMode.View}
       />
       <FormError>{errors.name}</FormError>
@@ -65,12 +65,12 @@ const FirstFields: React.FC<{
         name="description"
         placeholder="Enter a description..."
         value={form.description}
-        onChange={(e) =>
-          formDispatch({
-            type: FormActionType.Description,
-            value: e.target.value,
-          })
-        }
+        // onChange={(e) =>
+        //   formDispatch({
+        //     type: FormActionType.Description,
+        //     value: e.target.value,
+        //   })
+        // }
         disabled={formMode === FormMode.View}
       />
       <FormError>{errors.description}</FormError>

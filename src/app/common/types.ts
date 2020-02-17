@@ -7,8 +7,8 @@
 
 export type IMovements = IArchetype | IExercise | IWorkout;
 export type IMovementFormState =
-  | IArchetypeFormState
-  | IExerciseFormState
+  | ArchetypeFormState
+  | ExerciseFormState
   | IWorkoutFormState;
 
 // =============== ERRORS ===============
@@ -59,7 +59,7 @@ export interface IHandleChange {
 }
 
 // =============== STATES ===============
-export interface IArchetypeFormState {
+export interface ArchetypeFormState {
   [key: string]: any;
   name: string;
   description: string;
@@ -68,7 +68,7 @@ export interface IArchetypeFormErrors {
   name: string;
   description: string;
 }
-export interface IExerciseFormState {
+export interface ExerciseFormState {
   [key: string]: any;
   name: string;
   description: string;
@@ -201,6 +201,6 @@ export interface IFormReducerAction {
   value: string;
 }
 
-export interface IModalReducerAction {
-  type: ModalActionType;
-}
+// export interface IModalReducerAction {
+//   type: ModalActionType;
+// }

@@ -1,12 +1,12 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import { Button, MovementFormButton, DeleteButton } from '../Buttons';
+import { Button } from '../Buttons';
 
 import { useModalDispatch } from '../../context/ModalContext';
 
 import Bars from '../../icons/Bars';
-import { MovementType, FormMode } from '../../common/enums';
+import { MovementType } from '../../common/enums';
 import { IMovements } from '../../common/types';
 
 const ListItemMenuButton: React.FC<{
@@ -25,9 +25,11 @@ const ListItemMenuButton: React.FC<{
   function handleView(): void {
     modalDispatch({ type: 'MODAL_VIEW' });
   }
+
   function handleEdit(): void {
     modalDispatch({ type: 'MODAL_EDIT' });
   }
+
   function handleDelete(): void {
     modalDispatch({ type: 'MODAL_DELETE' });
   }

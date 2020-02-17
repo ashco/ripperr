@@ -6,13 +6,13 @@ import { AuthUserContext, FirebaseContext } from '../../context';
 import { ListItem } from './index';
 // import { ListItemWrapper } from './ListItem';
 import {
-  DeleteButton,
-  MovementFormButton,
+  // DeleteButton,
+  // MovementFormButton,
   ListItemMenuButton,
 } from '../Buttons';
 
 import { IExercise } from '../../common/types';
-import { FormMode, MovementType } from '../../common/enums';
+import { MovementType } from '../../common/enums';
 
 const ExerciseListItem: React.FC<{ exercise: IExercise }> = ({ exercise }) => {
   const firebase = useContext(FirebaseContext);

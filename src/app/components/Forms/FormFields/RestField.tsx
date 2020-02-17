@@ -5,12 +5,12 @@ import { Row } from '../styles';
 
 import {
   IHandleChange,
-  IExerciseFormState,
+  ExerciseFormState,
   IWorkoutFormState,
 } from '../../../common/types';
 
 const RestField: React.FC<{
-  form: IExerciseFormState | IWorkoutFormState;
+  form: ExerciseFormState | IWorkoutFormState;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   return (
