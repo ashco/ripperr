@@ -5,12 +5,6 @@
   ModalActionType,
 } from './enums';
 
-export type Movement = Archetype | Exercise | Workout;
-export type MovementFormState =
-  | ArchetypeFormState
-  | ExerciseFormState
-  | WorkoutFormState;
-
 // =============== ERRORS ===============
 export interface IFormError {
   message: string;
@@ -64,23 +58,52 @@ export interface IHandleChange {
 //   name: string;
 //   description: string;
 // }
-export interface ArchetypeFormState {
-  [key: string]: any;
+// =============== DATA OBJECT STRUCTURES ===============
+export type Movement = Archetype | Exercise | Workout;
+
+export interface Archetype {
+  readonly id: string;
+  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   readonly type: MovementType;
   name: string;
   description: string;
+  history: any;
 }
 
-export interface ExerciseFormState extends ArchetypeFormState {
+export interface Exercise extends Archetype {
   tags: string[];
 }
 
-export interface WorkoutFormState extends ExerciseFormState {
+export interface Workout extends Exercise {
   mode: WorkoutMode;
   movements: IMovementRefs[];
   rest: IWorkoutRest;
   config: IWorkoutConfig;
 }
+
+// ==================== FORM STATES ====================
+// export type MovementFormState =
+//   | ArchetypeFormState
+//   | ExerciseFormState
+//   | WorkoutFormState;
+
+// export interface ArchetypeFormState {
+//   [key: string]: any;
+//   readonly type: MovementType;
+//   name: string;
+//   description: string;
+// }
+
+// export interface ExerciseFormState extends ArchetypeFormState {
+//   tags: string[];
+// }
+
+// export interface WorkoutFormState extends ExerciseFormState {
+//   mode: WorkoutMode;
+//   movements: IMovementRefs[];
+//   rest: IWorkoutRest;
+//   config: IWorkoutConfig;
+// }
 
 export interface IArchetypeFormErrors {
   name: string;
@@ -132,28 +155,6 @@ export interface ButtonRowProps {
   actionBtn: ButtonRowBtn;
 }
 
-// =============== DATA OBJECT STRUCTURES ===============
-
-export interface Archetype {
-  readonly id: string;
-  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
-  readonly type: MovementType;
-  name: string;
-  description: string;
-  history: any;
-}
-
-export interface Exercise extends Archetype {
-  tags: string[];
-}
-
-export interface Workout extends Exercise {
-  history: any;
-  mode: WorkoutMode;
-  movements: IMovementRefs[];
-  rest: IWorkoutRest;
-  config: IWorkoutConfig;
-}
 // export interface Archetype {
 //   readonly id: string;
 //   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
