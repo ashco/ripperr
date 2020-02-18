@@ -1,14 +1,14 @@
 ﻿import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { MovementsContext } from '../../context';
+import { MovementListContext } from '../../context';
 
 import { ArchetypeListItem } from '../ListItems';
 
 import { sortMovements } from '../../common/sortMovements';
 
 export const ArchetypeRow: React.FC = () => {
-  const movements = useContext(MovementsContext);
+  const movements = useContext(MovementListContext);
 
   const archetypeList = [...movements.archetypes].sort((a, b) =>
     sortMovements(a, b),

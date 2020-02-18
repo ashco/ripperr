@@ -2,12 +2,10 @@
   Exercise,
   Workout,
   IHandleChange,
-  ArchetypeFormState,
-  ExerciseFormState,
-  WorkoutFormState,
   IArchetypeFormErrors,
   IExerciseFormErrors,
   IWorkoutFormErrors,
+  Movement,
 } from './types';
 
 import { FormFieldProp, WorkoutMode, MovementType } from './enums';
@@ -54,7 +52,7 @@ function getName(e: IHandleChange): string | null {
 }
 export function handleChange(
   e: IHandleChange,
-  state: ArchetypeFormState | ExerciseFormState | WorkoutFormState,
+  state: Movement,
   setState: (state: any) => void,
   config?: {
     type: FormFieldProp;

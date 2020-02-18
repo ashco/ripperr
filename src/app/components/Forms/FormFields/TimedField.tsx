@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react';
 
-import { MovementsContext } from '../../../context';
+import { MovementListContext } from '../../../context';
 
 import { Button } from '../../Buttons';
 import { Row } from '../styles';
@@ -13,7 +13,7 @@ const TimedField: React.FC<{
   handleChange: (e: IHandleChange, i: number) => void;
   handleDeleteMovementRef: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteMovementRef }) => {
-  const { exercises, loading } = useContext(MovementsContext);
+  const { exercises, loading } = useContext(MovementListContext);
 
   return (
     <Row>

@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect, useContext } from 'react';
 
 import { AuthUserContext, FirebaseContext } from '.';
-import { MovementsContext } from './index';
+import { MovementListContext } from './index';
 
 import {
   Archetype,
@@ -187,9 +187,9 @@ const withMovements = (Component: any) => {
     };
 
     return (
-      <MovementsContext.Provider value={movementState}>
+      <MovementListContext.Provider value={movementState}>
         <Component {...props} />
-      </MovementsContext.Provider>
+      </MovementListContext.Provider>
     );
   };
 

@@ -6,7 +6,7 @@ import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
 
 import { ModalProvider } from '../context/ModalContext';
-import { FormProvider } from '../context/FormContext';
+import { MovementProvider } from '../context/MovementContext';
 
 import Meta from './Meta';
 import Header from './Header';
@@ -35,7 +35,7 @@ const Page: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <ModalProvider>
-        <FormProvider>
+        <MovementProvider>
           <StyledPage>
             <GlobalStyle />
             <Meta />
@@ -44,7 +44,7 @@ const Page: React.FC = (props) => {
             <ToastContainer />
             <Inner>{props.children}</Inner>
           </StyledPage>
-        </FormProvider>
+        </MovementProvider>
       </ModalProvider>
     </ThemeProvider>
   );

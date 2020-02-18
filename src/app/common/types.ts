@@ -62,12 +62,12 @@ export interface IHandleChange {
 export type Movement = Archetype | Exercise | Workout;
 
 export interface Archetype {
-  readonly id: string;
-  lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   readonly type: MovementType;
+  readonly id?: string;
+  lastModified?: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   name: string;
   description: string;
-  history: any;
+  history?: any;
 }
 
 export interface Exercise extends Archetype {

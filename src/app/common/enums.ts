@@ -34,7 +34,7 @@ export enum MovementType {
 }
 
 export enum FormActionType {
-  Name = 'FORM_NAME',
-  Description = 'FORM_DESCRIPTION',
-  Tag = 'FORM_TAG',
+  Name = 'MOVE_CHANGE_NAME',
+  Description = 'MOVE_CHANGE_DESCRIPTION',
+  Tag = 'MOVE_CHANGE_TAG',
 }

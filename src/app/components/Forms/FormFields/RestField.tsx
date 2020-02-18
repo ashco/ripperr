@@ -3,14 +3,10 @@ import styled from 'styled-components';
 
 import { Row } from '../styles';
 
-import {
-  IHandleChange,
-  ExerciseFormState,
-  WorkoutFormState,
-} from '../../../common/types';
+import { IHandleChange, Workout } from '../../../common/types';
 
 const RestField: React.FC<{
-  form: ExerciseFormState | WorkoutFormState;
+  form: Workout;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   return (

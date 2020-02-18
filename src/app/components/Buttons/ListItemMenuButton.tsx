@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Button } from '../Buttons';
 
-import { useFormDispatch } from '../../context/FormContext';
+import { useMovementDispatch } from '../../context/MovementContext';
 import { useModalDispatch } from '../../context/ModalContext';
 
 import Bars from '../../icons/Bars';
@@ -20,17 +20,17 @@ const ListItemMenuButton: React.FC<{
 
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  const formDispatch = useFormDispatch();
+  const movementDispatch = useMovementDispatch();
   const modalDispatch = useModalDispatch();
 
   function handleView(): void {
     console.log(movement);
-    formDispatch({ type: 'FORM_SET', value: movement });
+    movementDispatch({ type: 'MOVE_SET', value: movement });
     modalDispatch({ type: 'MODAL_VIEW' });
   }
 
   function handleEdit(): void {
-    formDispatch({ type: 'FORM_SET', value: movement });
+    movementDispatch({ type: 'MOVE_SET', value: movement });
     modalDispatch({ type: 'MODAL_EDIT' });
   }
 

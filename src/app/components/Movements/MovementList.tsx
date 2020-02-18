@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import { MovementsContext } from '../../context';
+import { MovementListContext } from '../../context';
 
 import {
   ArchetypeListItem,
@@ -24,7 +24,7 @@ import { MovementType } from '../../common/enums';
 export const MovementList: React.FC = () => {
   const listRef = useRef<HTMLUListElement>(null);
 
-  const movements = useContext(MovementsContext);
+  const movements = useContext(MovementListContext);
 
   const movementList = [
     ...movements.exercises,

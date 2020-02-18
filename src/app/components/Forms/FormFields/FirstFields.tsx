@@ -5,23 +5,21 @@ import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
-  ArchetypeFormState,
-  ExerciseFormState,
-  WorkoutFormState,
   IArchetypeFormErrors,
   IExerciseFormErrors,
   // IWorkoutFormErrors,
   IFormReducerAction,
+  Movement,
 } from '../../../common/types';
 // import { FormMode } from '../../../common/enums';
 
 const FirstFields: React.FC<{
-  form: ArchetypeFormState | ExerciseFormState | WorkoutFormState;
+  form: Movement;
   errors: IArchetypeFormErrors | IExerciseFormErrors;
   // formMode: FormMode;
   // handleChange: (e: IHandleChange) => void;
-  formDispatch: React.Dispatch<IFormReducerAction>;
-}> = ({ form, errors, formDispatch }) => {
+  movementDispatch: React.Dispatch<IFormReducerAction>;
+}> = ({ form, errors, movementDispatch }) => {
   // const tags = [
   //   'Push',
   //   'Pull',
@@ -55,7 +53,7 @@ const FirstFields: React.FC<{
         placeholder="Name"
         value={form.name}
         // onChange={(e) =>
-        //   formDispatch({ type: FormActionType.Name, value: e.target.value })
+        //   movementDispatch({ type: FormActionType.Name, value: e.target.value })
         // }
         // disabled={formMode === FormMode.View}
       />
@@ -66,7 +64,7 @@ const FirstFields: React.FC<{
         placeholder="Enter a description..."
         value={form.description}
         // onChange={(e) =>
-        //   formDispatch({
+        //   movementDispatch({
         //     type: FormActionType.Description,
         //     value: e.target.value,
         //   })

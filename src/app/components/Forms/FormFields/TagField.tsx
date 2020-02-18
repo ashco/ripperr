@@ -1,26 +1,26 @@
 ﻿import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { MovementsContext } from '../../../context';
+import { MovementListContext } from '../../../context';
 
 import { Row, FormError } from '../styles';
 
 import {
   IHandleChange,
-  ExerciseFormState,
-  WorkoutFormState,
   IFormReducerAction,
   Archetype,
+  Exercise,
+  Workout,
 } from '../../../common/types';
 import { FormActionType } from '../../../common/enums';
 
 const TagField: React.FC<{
-  form: ExerciseFormState | WorkoutFormState;
+  form: Exercise | Workout;
   // form: WorkoutFormState;
   // handleChange: (e: IHandleChange) => void;
-  formDispatch: React.Dispatch<IFormReducerAction>;
+  movementDispatch: React.Dispatch<IFormReducerAction>;
   archetypes: Archetype[];
-}> = ({ form, formDispatch, archetypes }) => {
+}> = ({ form, movementDispatch, archetypes }) => {
   console.log(archetypes.map((arch) => arch.name));
 
   return (
@@ -33,7 +33,7 @@ const TagField: React.FC<{
         name="tags"
         value={form.tags}
         onChange={(e: any) =>
-          formDispatch({ type: FormActionType.Tag, value: e.target.value })
+          movementDispatch({ type: FormActionType.Tag, value: e.target.value })
         }
       >
         <option label="PUSH" value="Push" />

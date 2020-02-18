@@ -24,12 +24,14 @@ const ArchetypeListItem: React.FC<{ archetype: Archetype }> = ({
   const deleteText = `Do you want to delete this archetype: ${archetype.name}?`;
 
   function handleDelete(): void {
-    if (authUser) {
+    if (authUser && archetype.id) {
       firebase
         .archetype(authUser.uid, archetype.id)
         .delete()
         .then(() => console.log(`Archetype Deleted: ${archetype.name}`))
         .catch((err) => console.error(err));
+    } else {
+      throw Error('No authUser && archetype.id!');
     }
   }
 

@@ -3,15 +3,11 @@ import styled from 'styled-components';
 
 import { Row } from './styles';
 
-import {
-  IHandleChange,
-  WorkoutFormState,
-  IWorkoutFormErrors,
-} from '../../common/types';
+import { IHandleChange, Workout, IWorkoutFormErrors } from '../../common/types';
 import { WorkoutMode } from '../../common/enums';
 
 const TimedModeConfigFields: React.FC<{
-  form: WorkoutFormState;
+  form: Workout;
   handleChange: (e: IHandleChange) => void;
 }> = ({ form, handleChange }) => {
   return (
@@ -32,7 +28,7 @@ const TimedModeConfigFields: React.FC<{
 };
 
 const ModeField: React.FC<{
-  form: WorkoutFormState;
+  form: Workout;
   errors: IWorkoutFormErrors;
   handleChange: (e: IHandleChange) => void;
   handleChangeConfig: (e: IHandleChange) => void;

@@ -5,9 +5,12 @@ import { toast } from 'react-toastify';
 import {
   AuthUserContext,
   FirebaseContext,
-  MovementsContext,
+  MovementListContext,
 } from '../../context';
-import { useFormState, useFormDispatch } from '../../context/FormContext';
+import {
+  useMovementState,
+  useMovementDispatch,
+} from '../../context/MovementContext';
 import { useModalDispatch } from '../../context/ModalContext';
 
 // import { MovementFormWrapper } from '../Forms/styles';
@@ -15,10 +18,6 @@ import { ModalWrapper } from './styles';
 import { ButtonRow } from '../Forms';
 
 import {
-  MovementFormState,
-  ArchetypeFormState,
-  ExerciseFormState,
-  WorkoutFormState,
   Movement,
   Archetype,
   Exercise,
@@ -33,18 +32,18 @@ const MovementModal: React.FC<{
 }> = ({ mode, movement }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
-  const { archetypes, exercises, workouts } = useContext(MovementsContext);
+  const { archetypes, exercises, workouts } = useContext(MovementListContext);
 
-  const formState = useFormState();
-  const formDispatch = useFormDispatch();
+  const movementState = useMovementState();
+  const movementDispatch = useMovementDispatch();
   const modalDispatch = useModalDispatch();
 
   // ============ MODE SPECIFIC VALUES ============
 
   let movementText = 'Archetype';
-  if (formState?.type === MovementType.Exercise) {
+  if (movementState?.type === MovementType.Exercise) {
     movementText = 'Exercise';
-  } else if (formState?.type === MovementType.Workout) {
+  } else if (movementState?.type === MovementType.Workout) {
     movementText = 'Workout';
   }
 
@@ -80,51 +79,54 @@ const MovementModal: React.FC<{
 
   // ========= MOVEMENT FUNCTIONS =========
 
-  function handleUpdateMovement(formState: MovementFormState): void {
+  function handleUpdateMovement(movementState: Movement): void {
     let firebaseFnc;
     let movementList;
 
-    if (formState.type === MovementType.Archetype) {
+    if (movementState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetype;
       movementList = archetypes;
-    } else if (formState.type === MovementType.Exercise) {
+    } else if (movementState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercise;
       movementList = exercises;
-    } else if (formState.type === MovementType.Workout) {
+    } else if (movementState.type === MovementType.Workout) {
       firebaseFnc = firebase.workout;
       movementList = workouts;
     } else {
       throw Error('No MovementType specified!');
     }
 
-    if (authUser && movement) {
+    if (authUser && movement && movement.id) {
       // Check that name is unique or matches with current id
       const moveNames = movementList.map((move) => move.name);
       if (
-        moveNames.includes(formState.name) &&
-        movement.name !== formState.name
+        moveNames.includes(movementState.name) &&
+        movement.name !== movementState.name
       ) {
         toast.error(`${movementText} name is already in use.`);
         return;
       }
 
-      const movementObj: any = {
-        lastModified: firebase.getTimestamp(),
-        name: formState.name,
-        description: formState.description,
-      };
-      if (
-        formState.type === MovementType.Exercise ||
-        formState.type === MovementType.Workout
-      ) {
-        movementObj.tags = formState.tags;
-      }
-      if (formState.type === MovementType.Workout) {
-        movementObj.mode = formState.mode;
-        movementObj.movements = formState.movements;
-        movementObj.rest = formState.rest;
-        movementObj.config = formState.config;
-      }
+      const movementObj: Movement = movementState;
+      movementObj.lastModified = firebase.getTimestamp();
+
+      // const movementObj: any = {
+      //   lastModified: firebase.getTimestamp(),
+      //   name: movementState.name,
+      //   description: movementState.description,
+      // };
+      // if (
+      //   movementState.type === MovementType.Exercise ||
+      //   movementState.type === MovementType.Workout
+      // ) {
+      //   movementObj.tags = movementState.tags;
+      // }
+      // if (movementState.type === MovementType.Workout) {
+      //   movementObj.mode = movementState.mode;
+      //   movementObj.movements = movementState.movements;
+      //   movementObj.rest = movementState.rest;
+      //   movementObj.config = movementState.config;
+      // }
 
       firebaseFnc(authUser.uid, movement.id)
         .update(movementObj)
@@ -136,20 +138,20 @@ const MovementModal: React.FC<{
           console.error(err);
         });
     } else {
-      throw Error('There is no authUser || movement!');
+      throw Error('There is no authUser && movement && movement.id!');
     }
   }
 
-  function handleCreateMovement(formState: MovementFormState): void {
+  function handleCreateMovement(movementState: Movement): void {
     let firebaseFnc;
     let movementList;
-    if (formState.type === MovementType.Archetype) {
+    if (movementState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetypes;
       movementList = archetypes;
-    } else if (formState.type === MovementType.Exercise) {
+    } else if (movementState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercises;
       movementList = exercises;
-    } else if (formState.type === MovementType.Workout) {
+    } else if (movementState.type === MovementType.Workout) {
       firebaseFnc = firebase.workouts;
       movementList = workouts;
     } else {
@@ -159,28 +161,36 @@ const MovementModal: React.FC<{
       const docRef = firebaseFnc(authUser.uid).doc();
       // Check that name is unique
       const moveNames = movementList.map((move) => move.name);
-      if (moveNames.includes(formState.name)) {
+      if (moveNames.includes(movementState.name)) {
         toast.error(`${movementText} name is already in use.`);
         return;
       }
 
-      const movementObj: Movement = {
-        id: docRef.id,
-        lastModified: firebase.getTimestamp(),
-        type: formState.type,
-        name: formState.name,
-        description: formState.description,
-        history: [],
-      };
-      if (formState.type === MovementType.Exercise) {
-        (movementObj as Exercise).tags = formState.tags;
-      } else if (formState.type === MovementType.Workout) {
-        (movementObj as Workout).tags = formState.tags;
-        (movementObj as Workout).mode = formState.mode;
-        (movementObj as Workout).movements = formState.movements;
-        (movementObj as Workout).rest = formState.rest;
-        (movementObj as Workout).config = {};
-      }
+      const movementObj: Movement = { ...movementState };
+      movementObj.lastModified = firebase.getTimestamp();
+      // const movementObj: Archetype = {
+      //   id: docRef.id,
+      //   lastModified: firebase.getTimestamp(),
+      //   type: movementState.type,
+      //   name: movementState.name,
+      //   description: movementState.description,
+      //   history: [],
+      // };
+      // if (
+      //   movementState.type === MovementType.Exercise ||
+      //   movementState.type === MovementType.Workout
+      // ) {
+      //   (movementObj as Exercise | Workout).tags = (movementState as
+      //     | Exercise
+      //     | Workout).tags;
+      // }
+      // if (movementState.type === MovementType.Workout) {
+      //   (movementObj as Workout).tags = (movementState as Workout).tags;
+      //   (movementObj as Workout).mode = (movementState as Workout).mode;
+      //   (movementObj as Workout).movements = (movementState as Workout).movements;
+      //   (movementObj as Workout).rest = (movementState as Workout).rest;
+      //   (movementObj as Workout).config = {};
+      // }
       docRef
         .set(movementObj)
         .then(() => {
@@ -198,11 +208,11 @@ const MovementModal: React.FC<{
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (formState) {
+    if (movementState) {
       if (mode === ModalMode.Add) {
-        handleCreateMovement(formState);
+        handleCreateMovement(movementState);
       } else if (mode === ModalMode.Edit) {
-        handleUpdateMovement(formState);
+        handleUpdateMovement(movementState);
       }
     }
 
@@ -230,14 +240,12 @@ const MovementModal: React.FC<{
             type="text"
             name="name"
             placeholder="Name"
-            value={
-              (formState as
-                | ArchetypeFormState
-                | ExerciseFormState
-                | WorkoutFormState).name
-            }
+            value={(movementState as Movement).name}
             onChange={(e) =>
-              formDispatch({ type: 'FORM_NAME', value: e.target.value })
+              movementDispatch({
+                type: 'MOVE_CHANGE_NAME',
+                value: e.target.value,
+              })
             }
             disabled={mode === ModalMode.View}
           />
@@ -245,15 +253,10 @@ const MovementModal: React.FC<{
             id="description"
             name="description"
             placeholder="Enter a description..."
-            value={
-              (formState as
-                | ArchetypeFormState
-                | ExerciseFormState
-                | WorkoutFormState).description
-            }
+            value={(movementState as Movement).description}
             onChange={(e) =>
-              formDispatch({
-                type: 'FORM_DESCRIPTION',
+              movementDispatch({
+                type: 'MOVE_CHANGE_DESCRIPTION',
                 value: e.target.value,
               })
             }

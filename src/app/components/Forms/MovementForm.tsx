@@ -5,7 +5,7 @@
 // import {
 //   AuthUserContext,
 //   FirebaseContext,
-//   MovementsContext,
+//   MovementListContext,
 // } from '../../context';
 // import {
 //   handleChange,
@@ -48,16 +48,16 @@
 //   FormActionType,
 // } from '../../common/enums';
 
-// const INITIAL_FORM_STATE_AR: ArchetypeFormState = {
+// const INITIAL_MOVE_STATE_AR: ArchetypeFormState = {
 //   name: '',
 //   description: '',
 // };
-// const INITIAL_FORM_STATE_EX: ExerciseFormState = {
+// const INITIAL_MOVE_STATE_EX: ExerciseFormState = {
 //   name: '',
 //   description: '',
 //   tags: [],
 // };
-// const INITIAL_FORM_STATE_WO: WorkoutFormState = {
+// const INITIAL_MOVE_STATE_WO: WorkoutFormState = {
 //   name: '',
 //   description: '',
 //   tags: [],
@@ -111,7 +111,7 @@
 // }> = ({ formMode, movementType, movement, hide }) => {
 //   const firebase = useContext(FirebaseContext);
 //   const authUser = useContext(AuthUserContext);
-//   const { archetypes, exercises, workouts } = useContext(MovementsContext);
+//   const { archetypes, exercises, workouts } = useContext(MovementListContext);
 
 //   // ============ SET UP FORM STATE ============
 //   let initialFormState: Movement | IMovementFormState;
@@ -120,11 +120,11 @@
 //     initialFormState = movement;
 //   } else {
 //     if (movementType === MovementType.Archetype) {
-//       initialFormState = INITIAL_FORM_STATE_AR;
+//       initialFormState = INITIAL_MOVE_STATE_AR;
 //     } else if (movementType === MovementType.Exercise) {
-//       initialFormState = INITIAL_FORM_STATE_EX;
+//       initialFormState = INITIAL_MOVE_STATE_EX;
 //     } else if (movementType === MovementType.Workout) {
-//       initialFormState = INITIAL_FORM_STATE_WO;
+//       initialFormState = INITIAL_MOVE_STATE_WO;
 //     } else {
 //       return <div>No movement object or movementType set!</div>;
 //     }
@@ -135,11 +135,11 @@
 //   // ) {
 //   //   initialFormState = movement;
 //   // } else if (movementType === MovementType.Archetype) {
-//   //   initialFormState = INITIAL_FORM_STATE_AR;
+//   //   initialFormState = INITIAL_MOVE_STATE_AR;
 //   // } else if (movementType === MovementType.Exercise) {
-//   //   initialFormState = INITIAL_FORM_STATE_EX;
+//   //   initialFormState = INITIAL_MOVE_STATE_EX;
 //   // } else if (movementType === MovementType.Workout) {
-//   //   initialFormState = INITIAL_FORM_STATE_WO;
+//   //   initialFormState = INITIAL_MOVE_STATE_WO;
 //   // } else {
 //   //   return <div>This will never show</div>;
 //   // }
@@ -210,7 +210,7 @@
 //     }
 //   }
 
-//   const [form, formDispatch] = useReducer(formReducer, initialFormState);
+//   const [form, movementDispatch] = useReducer(formReducer, initialFormState);
 
 //   // ============ FORMMODE SPECIFIC VALUES ============
 
@@ -432,12 +432,12 @@
 //           form={form}
 //           errors={errors}
 //           formMode={formMode}
-//           formDispatch={formDispatch}
+//           movementDispatch={movementDispatch}
 //         />
 //         {showTagField && (
 //           <TagField
 //             form={form as ExerciseFormState | WorkoutFormState}
-//             formDispatch={formDispatch}
+//             movementDispatch={movementDispatch}
 //             archetypes={archetypes}
 //           />
 //         )}

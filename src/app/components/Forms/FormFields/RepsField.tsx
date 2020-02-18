@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react';
 
-import { MovementsContext } from '../../../context';
+import { MovementListContext } from '../../../context';
 
 import { Row } from '../styles';
 
@@ -12,7 +12,7 @@ const RepsField: React.FC<{
   handleChange: (e: IHandleChange, i: number) => void;
   handleDeleteMovementRef: (i: number) => void;
 }> = ({ move, i, handleChange, handleDeleteMovementRef }) => {
-  const { exercises } = useContext(MovementsContext);
+  const { exercises } = useContext(MovementListContext);
 
   // // check if move is still in database
   // const moveIsAvailable = exercises.map((ex) => ex.name).includes(move.name);

@@ -17,12 +17,14 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
   const deleteText = `Do you want to delete this workout: ${workout.name}?`;
 
   function handleDelete(): void {
-    if (authUser) {
+    if (authUser && workout.id) {
       firebase
         .workout(authUser.uid, workout.id)
         .delete()
         .then(() => console.log(`Workout Deleted: ${workout.name}`))
         .catch((err) => console.error(err));
+    } else {
+      throw Error('No authUser && workout.id!');
     }
   }
 

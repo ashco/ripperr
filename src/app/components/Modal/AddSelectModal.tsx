@@ -2,26 +2,26 @@
 import styled from 'styled-components';
 
 import { useModalDispatch } from '../../context/ModalContext';
-import { useFormDispatch } from '../../context/FormContext';
+import { useMovementDispatch } from '../../context/MovementContext';
 
 import { ModalWrapper } from './styles';
 import { Button } from '../Buttons';
 
 const AddSelectModal: React.FC<{}> = () => {
   const modalDispatch = useModalDispatch();
-  const formDispatch = useFormDispatch();
+  const movementDispatch = useMovementDispatch();
 
   function addArchetype(): void {
     modalDispatch({ type: 'MODAL_ADD' });
-    formDispatch({ type: 'FORM_RESET_AR' });
+    movementDispatch({ type: 'MOVE_RESET_AR' });
   }
   function addExercise(): void {
     modalDispatch({ type: 'MODAL_ADD' });
-    formDispatch({ type: 'FORM_RESET_EX' });
+    movementDispatch({ type: 'MOVE_RESET_EX' });
   }
   function addWorkout(): void {
     modalDispatch({ type: 'MODAL_ADD' });
-    formDispatch({ type: 'FORM_RESET_WO' });
+    movementDispatch({ type: 'MOVE_RESET_WO' });
   }
   function closeModal(): void {
     modalDispatch({ type: 'MODAL_CLOSE' });

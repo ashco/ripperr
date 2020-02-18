@@ -42,9 +42,9 @@ function modalReducer(state: ModalState, action: ModalAction) {
       return { open: true, mode: ModalMode.Edit };
     case 'MODAL_VIEW':
       return { open: true, mode: ModalMode.View };
-    // default: {
-    //   throw Error(`Unhandled action type: ${action.type}`);
-    // }
+    default: {
+      throw Error(`Unhandled action type: ${action.type}`);
+    }
   }
 }
 
