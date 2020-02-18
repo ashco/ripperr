@@ -279,7 +279,7 @@
 //         return;
 //       }
 
-//       const movementObj: Movement = {
+//       const moveObj: Movement = {
 //         id: docRef.id,
 //         lastModified: firebase.getTimestamp(),
 //         type: movementType,
@@ -291,19 +291,19 @@
 //       if (movementType === MovementType.Archetype) {
 //         // Add nothing..
 //       } else if (movementType === MovementType.Exercise) {
-//         (movementObj as Exercise).tags = form.tags;
+//         (moveObj as Exercise).tags = form.tags;
 //       } else if (movementType === MovementType.Workout) {
-//         (movementObj as Workout).tags = form.tags;
-//         (movementObj as Workout).mode = form.mode;
-//         (movementObj as Workout).movements = form.movements;
-//         (movementObj as Workout).rest = form.rest;
-//         (movementObj as Workout).config = {};
+//         (moveObj as Workout).tags = form.tags;
+//         (moveObj as Workout).mode = form.mode;
+//         (moveObj as Workout).movements = form.movements;
+//         (moveObj as Workout).rest = form.rest;
+//         (moveObj as Workout).config = {};
 //       }
 
 //       docRef
-//         .set(movementObj)
+//         .set(moveObj)
 //         .then(() => {
-//           console.log(`${movementText} Added: ${movementObj.name}`);
+//           console.log(`${movementText} Added: ${moveObj.name}`);
 //           hide();
 //         })
 //         .catch((err) => {
@@ -339,7 +339,7 @@
 //         return;
 //       }
 
-//       const movementObj: ExerciseFormState = {
+//       const moveObj: ExerciseFormState = {
 //         lastModified: firebase.getTimestamp(),
 //         name: form.name,
 //         description: form.description,
@@ -347,9 +347,9 @@
 //       };
 
 //       firebaseFnc(authUser.uid, movement.id)
-//         .update(movementObj)
+//         .update(moveObj)
 //         .then(() => {
-//           console.log(`${movementText} Updated: ${movementObj.name}`);
+//           console.log(`${movementText} Updated: ${moveObj.name}`);
 //           hide();
 //         })
 //         .catch((err) => {

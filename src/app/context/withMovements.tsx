@@ -179,7 +179,7 @@ const withMovements = (Component: any) => {
       }
     }, []);
 
-    const movementState: IMovementState = {
+    const moveState: IMovementState = {
       archetypes: archetypeState.archetypes,
       exercises: exerciseState.exercises,
       workouts: workoutState.workouts,
@@ -187,7 +187,7 @@ const withMovements = (Component: any) => {
     };
 
     return (
-      <MovementListContext.Provider value={movementState}>
+      <MovementListContext.Provider value={moveState}>
         <Component {...props} />
       </MovementListContext.Provider>
     );

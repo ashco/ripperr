@@ -122,10 +122,10 @@ function MovementProvider({ children }: MoveProviderProps) {
   );
 }
 
-function useMovementState(): MoveState {
+function useMoveState(): MoveState {
   const context = React.useContext(MovementStateContext);
   if (context === undefined) {
-    throw Error('useMovementState must be used within a MovementProvider');
+    throw Error('useMoveState must be used within a MovementProvider');
   }
   return context;
 }
@@ -138,4 +138,4 @@ function useMovementDispatch(): MoveDispatch {
   return context;
 }
 
-export { MovementProvider, useMovementState, useMovementDispatch };
+export { MovementProvider, useMoveState, useMovementDispatch };

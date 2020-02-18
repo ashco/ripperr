@@ -24,7 +24,6 @@ const ListItemMenuButton: React.FC<{
   const modalDispatch = useModalDispatch();
 
   function handleView(): void {
-    console.log(movement);
     movementDispatch({ type: 'MOVE_SET', value: movement });
     modalDispatch({ type: 'MODAL_VIEW' });
   }
@@ -35,6 +34,7 @@ const ListItemMenuButton: React.FC<{
   }
 
   function handleDelete(): void {
+    movementDispatch({ type: 'MOVE_SET', value: movement });
     modalDispatch({ type: 'MODAL_DELETE' });
   }
 

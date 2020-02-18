@@ -8,7 +8,7 @@ import {
   MovementListContext,
 } from '../../context';
 import {
-  useMovementState,
+  useMoveState,
   useMovementDispatch,
 } from '../../context/MovementContext';
 import { useModalDispatch } from '../../context/ModalContext';
@@ -28,22 +28,21 @@ import { ModalMode, MovementType } from '../../common/enums';
 
 const MovementModal: React.FC<{
   mode: ModalMode.Add | ModalMode.Edit | ModalMode.View;
-  movement?: Movement;
-}> = ({ mode, movement }) => {
+}> = ({ mode }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const { archetypes, exercises, workouts } = useContext(MovementListContext);
 
-  const movementState = useMovementState();
+  const moveState = useMoveState();
   const movementDispatch = useMovementDispatch();
   const modalDispatch = useModalDispatch();
 
   // ============ MODE SPECIFIC VALUES ============
 
   let movementText = 'Archetype';
-  if (movementState?.type === MovementType.Exercise) {
+  if (moveState?.type === MovementType.Exercise) {
     movementText = 'Exercise';
-  } else if (movementState?.type === MovementType.Workout) {
+  } else if (moveState?.type === MovementType.Workout) {
     movementText = 'Workout';
   }
 
@@ -79,59 +78,59 @@ const MovementModal: React.FC<{
 
   // ========= MOVEMENT FUNCTIONS =========
 
-  function handleUpdateMovement(movementState: Movement): void {
+  function handleUpdateMovement(moveState: Movement): void {
     let firebaseFnc;
     let movementList;
 
-    if (movementState.type === MovementType.Archetype) {
+    if (moveState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetype;
       movementList = archetypes;
-    } else if (movementState.type === MovementType.Exercise) {
+    } else if (moveState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercise;
       movementList = exercises;
-    } else if (movementState.type === MovementType.Workout) {
+    } else if (moveState.type === MovementType.Workout) {
       firebaseFnc = firebase.workout;
       movementList = workouts;
     } else {
-      throw Error('No MovementType specified!');
+      throw Error('moveState type is not recognized!');
     }
 
-    if (authUser && movement && movement.id) {
+    if (authUser && moveState.id) {
       // Check that name is unique or matches with current id
       const moveNames = movementList.map((move) => move.name);
-      if (
-        moveNames.includes(movementState.name) &&
-        movement.name !== movementState.name
-      ) {
-        toast.error(`${movementText} name is already in use.`);
-        return;
-      }
+      // if (
+      //   moveNames.includes(moveState.name) &&
+      //   movement.name !== moveState.name
+      // ) {
+      //   toast.error(`${movementText} name is already in use.`);
+      //   return;
+      // }
 
-      const movementObj: Movement = movementState;
-      movementObj.lastModified = firebase.getTimestamp();
+      const moveObj: Movement = { ...moveState };
+      moveObj.lastModified = firebase.getTimestamp();
 
-      // const movementObj: any = {
+      // const moveObj: any = {
       //   lastModified: firebase.getTimestamp(),
-      //   name: movementState.name,
-      //   description: movementState.description,
+      //   name: moveState.name,
+      //   description: moveState.description,
       // };
       // if (
-      //   movementState.type === MovementType.Exercise ||
-      //   movementState.type === MovementType.Workout
+      //   moveState.type === MovementType.Exercise ||
+      //   moveState.type === MovementType.Workout
       // ) {
-      //   movementObj.tags = movementState.tags;
+      //   moveObj.tags = moveState.tags;
       // }
-      // if (movementState.type === MovementType.Workout) {
-      //   movementObj.mode = movementState.mode;
-      //   movementObj.movements = movementState.movements;
-      //   movementObj.rest = movementState.rest;
-      //   movementObj.config = movementState.config;
+      // if (moveState.type === MovementType.Workout) {
+      //   moveObj.mode = moveState.mode;
+      //   moveObj.movements = moveState.movements;
+      //   moveObj.rest = moveState.rest;
+      //   moveObj.config = moveState.config;
       // }
 
-      firebaseFnc(authUser.uid, movement.id)
-        .update(movementObj)
+      firebaseFnc(authUser.uid, moveState.id)
+        .update(moveObj)
         .then(() => {
-          console.log(`${movementText} Updated: ${movementObj.name}`);
+          console.log(`${movementText} Updated: ${moveObj.name}`);
           modalDispatch({ type: 'MODAL_CLOSE' });
         })
         .catch((err) => {
@@ -142,59 +141,60 @@ const MovementModal: React.FC<{
     }
   }
 
-  function handleCreateMovement(movementState: Movement): void {
+  function handleCreateMovement(moveState: Movement): void {
     let firebaseFnc;
     let movementList;
-    if (movementState.type === MovementType.Archetype) {
+    if (moveState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetypes;
       movementList = archetypes;
-    } else if (movementState.type === MovementType.Exercise) {
+    } else if (moveState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercises;
       movementList = exercises;
-    } else if (movementState.type === MovementType.Workout) {
+    } else if (moveState.type === MovementType.Workout) {
       firebaseFnc = firebase.workouts;
       movementList = workouts;
     } else {
       throw Error('No MovementType specified!');
     }
+
     if (authUser) {
       const docRef = firebaseFnc(authUser.uid).doc();
       // Check that name is unique
       const moveNames = movementList.map((move) => move.name);
-      if (moveNames.includes(movementState.name)) {
-        toast.error(`${movementText} name is already in use.`);
-        return;
-      }
+      // if (moveNames.includes(moveState.name)) {
+      //   toast.error(`${movementText} name is already in use.`);
+      //   return;
+      // }
 
-      const movementObj: Movement = { ...movementState };
-      movementObj.lastModified = firebase.getTimestamp();
-      // const movementObj: Archetype = {
+      const moveObj: Movement = { ...moveState };
+      moveObj.lastModified = firebase.getTimestamp();
+      // const moveObj: Archetype = {
       //   id: docRef.id,
       //   lastModified: firebase.getTimestamp(),
-      //   type: movementState.type,
-      //   name: movementState.name,
-      //   description: movementState.description,
+      //   type: moveState.type,
+      //   name: moveState.name,
+      //   description: moveState.description,
       //   history: [],
       // };
       // if (
-      //   movementState.type === MovementType.Exercise ||
-      //   movementState.type === MovementType.Workout
+      //   moveState.type === MovementType.Exercise ||
+      //   moveState.type === MovementType.Workout
       // ) {
-      //   (movementObj as Exercise | Workout).tags = (movementState as
+      //   (moveObj as Exercise | Workout).tags = (moveState as
       //     | Exercise
       //     | Workout).tags;
       // }
-      // if (movementState.type === MovementType.Workout) {
-      //   (movementObj as Workout).tags = (movementState as Workout).tags;
-      //   (movementObj as Workout).mode = (movementState as Workout).mode;
-      //   (movementObj as Workout).movements = (movementState as Workout).movements;
-      //   (movementObj as Workout).rest = (movementState as Workout).rest;
-      //   (movementObj as Workout).config = {};
+      // if (moveState.type === MovementType.Workout) {
+      //   (moveObj as Workout).tags = (moveState as Workout).tags;
+      //   (moveObj as Workout).mode = (moveState as Workout).mode;
+      //   (moveObj as Workout).movements = (moveState as Workout).movements;
+      //   (moveObj as Workout).rest = (moveState as Workout).rest;
+      //   (moveObj as Workout).config = {};
       // }
       docRef
-        .set(movementObj)
+        .set(moveObj)
         .then(() => {
-          console.log(`${movementText} Added: ${movementObj.name}`);
+          console.log(`${movementText} Added: ${moveObj.name}`);
           modalDispatch({ type: 'MODAL_CLOSE' });
         })
         .catch((err) => {
@@ -208,11 +208,16 @@ const MovementModal: React.FC<{
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (movementState) {
-      if (mode === ModalMode.Add) {
-        handleCreateMovement(movementState);
-      } else if (mode === ModalMode.Edit) {
-        handleUpdateMovement(movementState);
+    if (moveState) {
+      // if (mode === ModalMode.Add) {
+      //   handleCreateMovement(moveState);
+      // } else if (mode === ModalMode.Edit) {
+      //   handleUpdateMovement(moveState);
+      // }
+      if (moveState.id) {
+        handleUpdateMovement(moveState);
+      } else {
+        handleCreateMovement(moveState);
       }
     }
 
@@ -240,7 +245,7 @@ const MovementModal: React.FC<{
             type="text"
             name="name"
             placeholder="Name"
-            value={(movementState as Movement).name}
+            value={(moveState as Movement).name}
             onChange={(e) =>
               movementDispatch({
                 type: 'MOVE_CHANGE_NAME',
@@ -253,7 +258,7 @@ const MovementModal: React.FC<{
             id="description"
             name="description"
             placeholder="Enter a description..."
-            value={(movementState as Movement).description}
+            value={(moveState as Movement).description}
             onChange={(e) =>
               movementDispatch({
                 type: 'MOVE_CHANGE_DESCRIPTION',
