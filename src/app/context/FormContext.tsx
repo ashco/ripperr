@@ -4,6 +4,7 @@ import {
   ArchetypeFormState,
   ExerciseFormState,
   WorkoutFormState,
+  Movement,
 } from '../common/types';
 import { MovementType, WorkoutMode } from '../common/enums';
 
@@ -12,12 +13,12 @@ type FormActionType =
   | 'FORM_RESET_AR'
   | 'FORM_RESET_EX'
   | 'FORM_RESET_WO'
-  // | 'FORM_SET'
+  | 'FORM_SET'
   | 'FORM_NAME'
   | 'FORM_DESCRIPTION'
   | 'FORM_TAG';
 
-type FormAction = { type: FormActionType; value?: string };
+type FormAction = { type: FormActionType; value?: string | Movement };
 type FormDispatch = (action: FormAction) => void;
 type FormState =
   | ArchetypeFormState
@@ -84,6 +85,8 @@ function formReducer(state: FormState, action: FormAction): FormState {
       return { ...INITIAL_FORM_STATE_EX };
     case 'FORM_RESET_WO':
       return { ...INITIAL_FORM_STATE_WO };
+    case 'FORM_SET':
+      return { ...(value as Movement) };
     case 'FORM_NAME':
       return { ...state, name: value } as
         | ArchetypeFormState

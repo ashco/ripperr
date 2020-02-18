@@ -1,4 +1,4 @@
-﻿import { useContext, useEffect } from 'react';
+﻿import React, { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { AuthUserContext, FirebaseContext } from './index';

@@ -1,8 +1,8 @@
-﻿import { IMovements } from './types';
+﻿import { Movement } from './types';
 
-export function createMovementColList(colNum: number, moveList: IMovements[]) {
+export function createMovementColList(colNum: number, moveList: Movement[]) {
   // create sorted movement lists
-  const movementColList: IMovements[][] = [];
+  const movementColList: Movement[][] = [];
 
   for (let i = 0; i < colNum; i += 1) {
     movementColList.push([]);

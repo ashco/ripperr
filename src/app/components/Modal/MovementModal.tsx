@@ -15,9 +15,11 @@ import { ModalWrapper } from './styles';
 import { ButtonRow } from '../Forms';
 
 import {
+  MovementFormState,
   ArchetypeFormState,
   ExerciseFormState,
   WorkoutFormState,
+  Movement,
   Archetype,
   Exercise,
   Workout,
@@ -27,7 +29,8 @@ import { ModalMode, MovementType } from '../../common/enums';
 
 const MovementModal: React.FC<{
   mode: ModalMode.Add | ModalMode.Edit | ModalMode.View;
-}> = ({ mode }) => {
+  movement?: Movement;
+}> = ({ mode, movement }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
   const { archetypes, exercises, workouts } = useContext(MovementsContext);
@@ -75,17 +78,69 @@ const MovementModal: React.FC<{
     submitButton,
   };
 
-  // const cancelBtn: IButtonRowBtn = {
-  //   text: '',
-  // };
+  // ========= MOVEMENT FUNCTIONS =========
 
-  // const actionBtn: IButtonRowBtn = {
-  //   text: '',
-  // };
+  function handleUpdateMovement(formState: MovementFormState): void {
+    let firebaseFnc;
+    let movementList;
 
-  function handleCreateMovement(
-    formState: ArchetypeFormState | ExerciseFormState | WorkoutFormState,
-  ): void {
+    if (formState.type === MovementType.Archetype) {
+      firebaseFnc = firebase.archetype;
+      movementList = archetypes;
+    } else if (formState.type === MovementType.Exercise) {
+      firebaseFnc = firebase.exercise;
+      movementList = exercises;
+    } else if (formState.type === MovementType.Workout) {
+      firebaseFnc = firebase.workout;
+      movementList = workouts;
+    } else {
+      throw Error('No MovementType specified!');
+    }
+
+    if (authUser && movement) {
+      // Check that name is unique or matches with current id
+      const moveNames = movementList.map((move) => move.name);
+      if (
+        moveNames.includes(formState.name) &&
+        movement.name !== formState.name
+      ) {
+        toast.error(`${movementText} name is already in use.`);
+        return;
+      }
+
+      const movementObj: any = {
+        lastModified: firebase.getTimestamp(),
+        name: formState.name,
+        description: formState.description,
+      };
+      if (
+        formState.type === MovementType.Exercise ||
+        formState.type === MovementType.Workout
+      ) {
+        movementObj.tags = formState.tags;
+      }
+      if (formState.type === MovementType.Workout) {
+        movementObj.mode = formState.mode;
+        movementObj.movements = formState.movements;
+        movementObj.rest = formState.rest;
+        movementObj.config = formState.config;
+      }
+
+      firebaseFnc(authUser.uid, movement.id)
+        .update(movementObj)
+        .then(() => {
+          console.log(`${movementText} Updated: ${movementObj.name}`);
+          modalDispatch({ type: 'MODAL_CLOSE' });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      throw Error('There is no authUser || movement!');
+    }
+  }
+
+  function handleCreateMovement(formState: MovementFormState): void {
     let firebaseFnc;
     let movementList;
     if (formState.type === MovementType.Archetype) {
@@ -99,7 +154,6 @@ const MovementModal: React.FC<{
       movementList = workouts;
     } else {
       throw Error('No MovementType specified!');
-      return;
     }
     if (authUser) {
       const docRef = firebaseFnc(authUser.uid).doc();
@@ -110,7 +164,7 @@ const MovementModal: React.FC<{
         return;
       }
 
-      const movementObj: Archetype | Exercise | Workout = {
+      const movementObj: Movement = {
         id: docRef.id,
         lastModified: firebase.getTimestamp(),
         type: formState.type,
@@ -137,15 +191,19 @@ const MovementModal: React.FC<{
           console.error(err);
         });
     } else {
-      console.log('There is no authUser!');
+      throw Error('There is no authUser!');
     }
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (mode === ModalMode.Add && formState) {
-      handleCreateMovement(formState);
+    if (formState) {
+      if (mode === ModalMode.Add) {
+        handleCreateMovement(formState);
+      } else if (mode === ModalMode.Edit) {
+        handleUpdateMovement(formState);
+      }
     }
 
     // if (validateForm(errors)) {

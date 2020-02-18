@@ -13,7 +13,7 @@ import { sortMovements } from '../../common/sortMovements';
 import { createMovementColList } from '../../common/createMovementColList';
 
 import {
-  IMovements,
+  Movement,
   Archetype,
   Exercise,
   Workout,
@@ -31,7 +31,7 @@ export const MovementList: React.FC = () => {
     ...movements.workouts,
   ].sort((a, b) => sortMovements(a, b));
 
-  function renderListItem(move: IMovements) {
+  function renderListItem(move: Movement) {
     if (move.type === MovementType.Exercise) {
       return <ExerciseListItem key={move.id} exercise={move as Exercise} />;
     } else if (move.type === MovementType.Workout) {

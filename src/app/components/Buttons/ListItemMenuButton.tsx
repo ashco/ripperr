@@ -8,10 +8,10 @@ import { useModalDispatch } from '../../context/ModalContext';
 
 import Bars from '../../icons/Bars';
 import { MovementType } from '../../common/enums';
-import { IMovements } from '../../common/types';
+import { Movement } from '../../common/types';
 
 const ListItemMenuButton: React.FC<{
-  movement: IMovements;
+  movement: Movement;
   deleteText: string;
   handleDeleteMovement?: () => void;
 }> = ({ movement, deleteText }) => {
@@ -20,17 +20,17 @@ const ListItemMenuButton: React.FC<{
 
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  // const formDispatch = useFormDispatch();
+  const formDispatch = useFormDispatch();
   const modalDispatch = useModalDispatch();
 
   function handleView(): void {
     console.log(movement);
-
-    // formDispatch({ type: 'FORM_SET' });
+    formDispatch({ type: 'FORM_SET', value: movement });
     modalDispatch({ type: 'MODAL_VIEW' });
   }
 
   function handleEdit(): void {
+    formDispatch({ type: 'FORM_SET', value: movement });
     modalDispatch({ type: 'MODAL_EDIT' });
   }
 

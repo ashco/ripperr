@@ -6,14 +6,14 @@
 
 // import { Button, FormButton } from '.';
 
-// import { IMovements } from '../../common/types';
+// import { Movement } from '../../common/types';
 // import { FormMode } from '../../common/enums';
 
 // import Plus from '../../icons/Plus';
 
 // const MovementFormButton: React.FC<{
 //   formMode: FormMode;
-//   movement?: IMovements;
+//   movement?: Movement;
 // }> = ({ formMode, movement }) => {
 //   const [showModal, setShowModal] = useState(false);
 //   const hide = (): void => setShowModal(false);

@@ -26,7 +26,7 @@
 
 // import {
 //   IHandleChange,
-//   IMovements,
+//   Movement,
 //   Archetype,
 //   Exercise,
 //   Workout,
@@ -106,7 +106,7 @@
 // const MovementForm: React.FC<{
 //   movementType: MovementType;
 //   formMode: FormMode;
-//   movement?: IMovements;
+//   movement?: Movement;
 //   hide: () => void;
 // }> = ({ formMode, movementType, movement, hide }) => {
 //   const firebase = useContext(FirebaseContext);
@@ -114,7 +114,7 @@
 //   const { archetypes, exercises, workouts } = useContext(MovementsContext);
 
 //   // ============ SET UP FORM STATE ============
-//   let initialFormState: IMovements | IMovementFormState;
+//   let initialFormState: Movement | IMovementFormState;
 
 //   if (movement) {
 //     initialFormState = movement;
@@ -279,7 +279,7 @@
 //         return;
 //       }
 
-//       const movementObj: IMovements = {
+//       const movementObj: Movement = {
 //         id: docRef.id,
 //         lastModified: firebase.getTimestamp(),
 //         type: movementType,

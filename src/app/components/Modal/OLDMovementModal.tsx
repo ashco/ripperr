@@ -5,11 +5,11 @@
 // import { MovementForm, AddForm } from '../Forms';
 
 // import { FormMode, MovementType } from '../../common/enums';
-// import { IMovements } from '../../common/types';
+// import { Movement } from '../../common/types';
 
 // const MovementModal: React.FC<{
 //   formMode: FormMode;
-//   movement?: IMovements;
+//   movement?: Movement;
 //   hide: () => void;
 // }> = ({ formMode, hide, movement }) => {
 //   // Determine type to add

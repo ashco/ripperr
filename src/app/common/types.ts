@@ -5,8 +5,8 @@
   ModalActionType,
 } from './enums';
 
-export type IMovements = Archetype | Exercise | Workout;
-export type IMovementFormState =
+export type Movement = Archetype | Exercise | Workout;
+export type MovementFormState =
   | ArchetypeFormState
   | ExerciseFormState
   | WorkoutFormState;
@@ -66,7 +66,7 @@ export interface IHandleChange {
 // }
 export interface ArchetypeFormState {
   [key: string]: any;
-  type: MovementType;
+  readonly type: MovementType;
   name: string;
   description: string;
 }

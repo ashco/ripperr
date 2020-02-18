@@ -1,6 +1,6 @@
-﻿import { IMovements } from '../common/types';
+﻿import { Movement } from '../common/types';
 
-export function sortMovements(a: IMovements, b: IMovements): number {
+export function sortMovements(a: Movement, b: Movement): number {
   if (a.lastModified !== null && b.lastModified !== null) {
     const aTime = (a.lastModified as firebase.firestore.Timestamp)
       .toDate()
