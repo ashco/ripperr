@@ -21,19 +21,19 @@ const ArchetypeListItem: React.FC<{ archetype: Archetype }> = ({
   const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);
 
-  const deleteText = `Do you want to delete this archetype: ${archetype.name}?`;
+  // const deleteText = `Do you want to delete this archetype: ${archetype.name}?`;
 
-  function handleDelete(): void {
-    if (authUser && archetype.id) {
-      firebase
-        .archetype(authUser.uid, archetype.id)
-        .delete()
-        .then(() => console.log(`Archetype Deleted: ${archetype.name}`))
-        .catch((err) => console.error(err));
-    } else {
-      throw Error('No authUser && archetype.id!');
-    }
-  }
+  // function handleDelete(): void {
+  //   if (authUser && archetype.id) {
+  //     firebase
+  //       .archetype(authUser.uid, archetype.id)
+  //       .delete()
+  //       .then(() => console.log(`Archetype Deleted: ${archetype.name}`))
+  //       .catch((err) => console.error(err));
+  //   } else {
+  //     throw Error('No authUser && archetype.id!');
+  //   }
+  // }
 
   return (
     <ArchetypeListItemWrapper color={themeContext.color.green[500]}>

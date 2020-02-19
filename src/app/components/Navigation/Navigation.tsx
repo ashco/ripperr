@@ -19,7 +19,7 @@ const Navigation: React.FC = () => {
 
 const NavigationAuth: React.FC = () => (
   <ul>
-    <div className="top-group">
+    <div className="list-group left">
       <li>
         <Link href="/movements">
           <a className="logo">
@@ -34,7 +34,7 @@ const NavigationAuth: React.FC = () => (
         </Link>
       </li>
     </div>
-    <div className="bottom-group">
+    <div className="list-group right">
       <li>
         <Link href="/account">
           <a>Account</a>
@@ -54,19 +54,23 @@ const NavigationAuth: React.FC = () => (
 
 const NavigationNonAuth: React.FC = () => (
   <ul>
-    <li>
-      <Link href="/movements">
-        <a className="logo">
-          <img src={Logo} alt="Ripperr Icon" />
-          Ripperr
-        </a>
-      </Link>
-    </li>
-    <li>
-      <Link href="/signin">
-        <a>Sign In</a>
-      </Link>
-    </li>
+    <div className="list-group left">
+      <li>
+        <Link href="/movements">
+          <a className="logo">
+            <img src={Logo} alt="Ripperr Icon" />
+            Ripperr
+          </a>
+        </Link>
+      </li>
+    </div>
+    <div className="list-group right">
+      <li>
+        <Link href="/signin">
+          <a>Sign In</a>
+        </Link>
+      </li>
+    </div>
   </ul>
 );
 
@@ -74,51 +78,38 @@ const NavigationWrapper = styled.nav`
   background-color: ${({ theme }) => theme.color.neutral[100]};
   opacity: 0.85;
   box-shadow: ${(props) => props.theme.shadow[2]};
-  height: 100%;
   grid-area: navigation;
   z-index: 99;
   ul {
     display: grid;
-    grid-template-rows: 1fr auto;
+    grid-auto-flow: column;
+    place-items: center;
     height: 100%;
+    padding: 0 2rem;
+    div.list-group {
+      display: grid;
+      grid-auto-flow: column;
+      place-items: center;
+      gap: 2rem;
+      /* justify-content: space-between; */
+    }
+    div.left {
+      place-self: center start;
+    }
+    div.right {
+      place-self: center end;
+    }
     li {
-      padding: 16px;
+      /* padding: 16px; */
     }
     .logo {
       font-size: 22px;
       display: grid;
       gap: 0.5rem;
-      grid-template-columns: 40px auto;
+      grid-template-columns: 32px auto;
       align-items: center;
     }
   }
-  /* ul {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    li:first-child {
-      margin-right: auto;
-      height: 100%;
-    }
-    li {
-      padding: 16px;
-    }
-    .logo {
-      font-size: ${(props) => props.theme.font[4]};
-      display: flex;
-      align-items: center;
-      height: 100%;
-      img {
-        height: 100%;
-        margin-right: 0.5rem;
-      }
-    }
-  } */
-`;
-
-const LinksWrapper = styled.div``;
-const ProfileWrapper = styled.div`
-  grid-area: profile;
 `;
 
 export default Navigation;

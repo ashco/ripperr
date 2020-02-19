@@ -14,15 +14,15 @@ import { IAuthUserContext } from '../common/types';
 const MovementsPage: NextPage = () => {
   return (
     <MovementsPageWrapper>
-      <FilterBar />
       <MovementList />
+      <FilterBar />
     </MovementsPageWrapper>
   );
 };
 
 const MovementsPageWrapper = styled.div`
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr auto;
   gap: 1rem;
   height: 100%;
 `;
