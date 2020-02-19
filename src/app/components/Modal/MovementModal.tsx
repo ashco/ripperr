@@ -7,10 +7,7 @@ import {
   FirebaseContext,
   MovementListContext,
 } from '../../context';
-import {
-  useMoveState,
-  useMovementDispatch,
-} from '../../context/MovementContext';
+import { useMoveState, useMoveDispatch } from '../../context/MoveContext';
 import { useModalDispatch } from '../../context/ModalContext';
 
 // import { MovementFormWrapper } from '../Forms/styles';
@@ -34,7 +31,7 @@ const MovementModal: React.FC<{
   const { archetypes, exercises, workouts } = useContext(MovementListContext);
 
   const moveState = useMoveState();
-  const movementDispatch = useMovementDispatch();
+  const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
 
   // ============ MODE SPECIFIC VALUES ============
@@ -49,26 +46,16 @@ const MovementModal: React.FC<{
   let actionText = 'Add';
   let submitButton = 'Submit';
 
-  const btnConfig: ButtonRowProps = {
-    cancelBtn: {
-      text: 'Cancel',
-      onClick: () => modalDispatch({ type: 'MODAL_CLOSE' }),
-    },
-    actionBtn: {
-      text: 'Create',
-    },
-  };
-
   if (mode === ModalMode.Edit) {
     actionText = 'Edit';
     submitButton = 'Update';
-    btnConfig.cancelBtn.text = 'Cancel';
-    btnConfig.actionBtn.text = 'Update';
+    // btnConfig.cancelBtn.text = 'Cancel';
+    // btnConfig.actionBtn.text = 'Update';
   } else if (mode === ModalMode.View) {
     actionText = 'View';
     submitButton = 'Edit';
-    btnConfig.cancelBtn.text = 'Close';
-    btnConfig.actionBtn.text = 'Edit';
+    // btnConfig.cancelBtn.text = 'Close';
+    // btnConfig.actionBtn.text = 'Edit';
   }
 
   const text = {
@@ -232,6 +219,30 @@ const MovementModal: React.FC<{
     // }
   }
 
+  function handleClose() {
+    modalDispatch({ type: 'MODAL_CLOSE' });
+    moveDispatch({ type: 'MOVE_CLEAR' });
+  }
+
+  // BUTTON ROW CONFIG
+  const btnConfig: ButtonRowProps = {
+    cancelBtn: {
+      text: 'Cancel',
+      onClick: handleClose,
+    },
+    actionBtn: {
+      text: 'Create',
+    },
+  };
+
+  if (mode === ModalMode.Edit) {
+    btnConfig.cancelBtn.text = 'Cancel';
+    btnConfig.actionBtn.text = 'Update';
+  } else if (mode === ModalMode.View) {
+    btnConfig.cancelBtn.text = 'Close';
+    btnConfig.actionBtn.text = 'Edit';
+  }
+
   return (
     <MovementModalWrapper>
       <h1 className="title">{text.title}</h1>
@@ -247,7 +258,7 @@ const MovementModal: React.FC<{
             placeholder="Name"
             value={(moveState as Movement).name}
             onChange={(e) =>
-              movementDispatch({
+              moveDispatch({
                 type: 'MOVE_CHANGE_NAME',
                 value: e.target.value,
               })
@@ -260,7 +271,7 @@ const MovementModal: React.FC<{
             placeholder="Enter a description..."
             value={(moveState as Movement).description}
             onChange={(e) =>
-              movementDispatch({
+              moveDispatch({
                 type: 'MOVE_CHANGE_DESCRIPTION',
                 value: e.target.value,
               })

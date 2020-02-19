@@ -1,7 +1,9 @@
-﻿import React, { useContext } from 'react';
+﻿import React, { useEffect, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
 import { AuthUserContext, FirebaseContext } from '../../context';
+import { useModalDispatch } from '../../context/ModalContext';
+import { useMoveDispatch } from '../../context/MoveContext';
 
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
@@ -10,33 +12,35 @@ import { Exercise } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
 const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
-  const firebase = useContext(FirebaseContext);
-  const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);
+  const modalDispatch = useModalDispatch();
+  const moveDispatch = useMoveDispatch();
 
-  const deleteText = `Do you want to delete this exercise: ${exercise.name}?`;
+  const btnRef = useRef<HTMLDivElement>(null);
 
-  function handleDelete(): void {
-    if (authUser && exercise.id) {
-      firebase
-        .exercise(authUser.uid, exercise.id)
-        .delete()
-        .then(() => console.log(`Exercise Deleted: ${exercise.name}`))
-        .catch((err) => console.error(err));
-    } else {
-      throw Error('No authUser && exercise.id!');
+  function handleView(e: any): void {
+    if (!btnRef?.current?.contains(e.target)) {
+      modalDispatch({ type: 'MODAL_VIEW' });
+      moveDispatch({ type: 'MOVE_SET', value: exercise });
     }
   }
 
+  // useEffect(() => {
+  //   document.addEventListener('click', handleView);
+  //   return () => {
+  //     document.removeEventListener('click', handleView);
+  //   };
+  // });
+
   return (
-    <ExerciseListItemWrapper color={themeContext.color.blue[500]}>
+    <ExerciseListItemWrapper
+      onClick={handleView}
+      color={themeContext.color.blue[500]}
+    >
       <p className="name">{exercise.name}</p>
-      <ListItemMenuButton
-        // type={MovementType.Exercise}
-        movement={exercise}
-        deleteText={deleteText}
-        handleDeleteMovement={handleDelete}
-      />
+      <div ref={btnRef}>
+        <ListItemMenuButton movement={exercise} />
+      </div>
     </ExerciseListItemWrapper>
   );
 };

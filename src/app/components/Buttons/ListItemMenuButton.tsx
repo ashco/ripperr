@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Button } from '../Buttons';
 
-import { useMovementDispatch } from '../../context/MovementContext';
+import { useMoveDispatch } from '../../context/MoveContext';
 import { useModalDispatch } from '../../context/ModalContext';
 
 import Bars from '../../icons/Bars';
@@ -12,29 +12,26 @@ import { Movement } from '../../common/types';
 
 const ListItemMenuButton: React.FC<{
   movement: Movement;
-  deleteText: string;
-  handleDeleteMovement?: () => void;
-}> = ({ movement, deleteText }) => {
+  // ref: React.RefObject<HTMLButtonElement>;
+}> = ({ movement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
 
-  const btnRef = useRef<HTMLButtonElement>(null);
-
-  const movementDispatch = useMovementDispatch();
+  const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
 
   function handleView(): void {
-    movementDispatch({ type: 'MOVE_SET', value: movement });
+    moveDispatch({ type: 'MOVE_SET', value: movement });
     modalDispatch({ type: 'MODAL_VIEW' });
   }
 
   function handleEdit(): void {
-    movementDispatch({ type: 'MOVE_SET', value: movement });
+    moveDispatch({ type: 'MOVE_SET', value: movement });
     modalDispatch({ type: 'MODAL_EDIT' });
   }
 
   function handleDelete(): void {
-    movementDispatch({ type: 'MOVE_SET', value: movement });
+    moveDispatch({ type: 'MOVE_SET', value: movement });
     modalDispatch({ type: 'MODAL_DELETE' });
   }
 
@@ -66,7 +63,6 @@ const ListItemMenuButton: React.FC<{
         onClick={openMenu}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
-        ref={btnRef}
       >
         <Bars color={btnHovered ? 'black' : 'gray'} />
       </StyledListItemMenuButton>

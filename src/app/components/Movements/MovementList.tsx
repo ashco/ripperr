@@ -55,7 +55,7 @@ export const MovementList: React.FC = () => {
 };
 
 const MovementListWrapper = styled.ul`
-  margin: 2rem;
+  margin: 1rem;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, 6rem);

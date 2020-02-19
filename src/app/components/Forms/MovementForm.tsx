@@ -210,7 +210,7 @@
 //     }
 //   }
 
-//   const [form, movementDispatch] = useReducer(formReducer, initialFormState);
+//   const [form, moveDispatch] = useReducer(formReducer, initialFormState);
 
 //   // ============ FORMMODE SPECIFIC VALUES ============
 
@@ -432,12 +432,12 @@
 //           form={form}
 //           errors={errors}
 //           formMode={formMode}
-//           movementDispatch={movementDispatch}
+//           moveDispatch={moveDispatch}
 //         />
 //         {showTagField && (
 //           <TagField
 //             form={form as ExerciseFormState | WorkoutFormState}
-//             movementDispatch={movementDispatch}
+//             moveDispatch={moveDispatch}
 //             archetypes={archetypes}
 //           />
 //         )}

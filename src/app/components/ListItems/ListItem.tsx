@@ -11,6 +11,7 @@ export const ListItem = styled.li<{ color: string }>`
   display: grid;
   grid-auto-rows: 1fr auto;
   border-top: 7px solid ${(props) => props.color};
+  cursor: pointer;
   /* .color-bar {
     height: 7px;
     width: 100%;

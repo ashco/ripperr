@@ -8,7 +8,7 @@ import ButtonRow from '../Forms/ButtonRow';
 // import { Button } from '../Buttons';
 
 import { useModalDispatch } from '../../context/ModalContext';
-import { useMoveState } from '../../context/MovementContext';
+import { useMoveState } from '../../context/MoveContext';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { MovementType } from '../../common/enums';
@@ -21,6 +21,10 @@ const DeleteModal: React.FC = () => {
   const firebase = useContext(FirebaseContext);
 
   // const deleteText = `Do you want to delete this archetype: ${archetype.name}?`;
+
+  if (moveState === null) {
+    throw Error('moveState === null!');
+  }
 
   function handleDelete(): void {
     console.log(moveState);
@@ -64,7 +68,9 @@ const DeleteModal: React.FC = () => {
 
   return (
     <DeleteModalWrapper>
-      <p>Do you want to delete this MOVEMENT?</p>
+      <p>
+        Do you want to delete this {moveState.type}? {moveState.name}
+      </p>
       <ButtonRow config={btnConfig} />
     </DeleteModalWrapper>
   );

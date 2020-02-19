@@ -6,7 +6,7 @@ import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
 
 import { ModalProvider } from '../context/ModalContext';
-import { MovementProvider } from '../context/MovementContext';
+import { MovementProvider } from '../context/MoveContext';
 
 import Meta from './Meta';
 import Header from './Header';
@@ -29,8 +29,6 @@ const StyledPage = styled.div`
   grid-template-areas:
     'navigation'
     'main';
-  /*
-     */
 `;
 
 const Inner = styled.div`

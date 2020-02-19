@@ -18,9 +18,9 @@ const TagField: React.FC<{
   form: Exercise | Workout;
   // form: WorkoutFormState;
   // handleChange: (e: IHandleChange) => void;
-  movementDispatch: React.Dispatch<IFormReducerAction>;
+  moveDispatch: React.Dispatch<IFormReducerAction>;
   archetypes: Archetype[];
-}> = ({ form, movementDispatch, archetypes }) => {
+}> = ({ form, moveDispatch, archetypes }) => {
   console.log(archetypes.map((arch) => arch.name));
 
   return (
@@ -33,7 +33,7 @@ const TagField: React.FC<{
         name="tags"
         value={form.tags}
         onChange={(e: any) =>
-          movementDispatch({ type: FormActionType.Tag, value: e.target.value })
+          moveDispatch({ type: FormActionType.Tag, value: e.target.value })
         }
       >
         <option label="PUSH" value="Push" />

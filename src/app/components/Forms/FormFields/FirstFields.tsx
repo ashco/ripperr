@@ -18,8 +18,8 @@ const FirstFields: React.FC<{
   errors: IArchetypeFormErrors | IExerciseFormErrors;
   // formMode: FormMode;
   // handleChange: (e: IHandleChange) => void;
-  movementDispatch: React.Dispatch<IFormReducerAction>;
-}> = ({ form, errors, movementDispatch }) => {
+  moveDispatch: React.Dispatch<IFormReducerAction>;
+}> = ({ form, errors, moveDispatch }) => {
   // const tags = [
   //   'Push',
   //   'Pull',
@@ -53,7 +53,7 @@ const FirstFields: React.FC<{
         placeholder="Name"
         value={form.name}
         // onChange={(e) =>
-        //   movementDispatch({ type: FormActionType.Name, value: e.target.value })
+        //   moveDispatch({ type: FormActionType.Name, value: e.target.value })
         // }
         // disabled={formMode === FormMode.View}
       />
@@ -64,7 +64,7 @@ const FirstFields: React.FC<{
         placeholder="Enter a description..."
         value={form.description}
         // onChange={(e) =>
-        //   movementDispatch({
+        //   moveDispatch({
         //     type: FormActionType.Description,
         //     value: e.target.value,
         //   })
