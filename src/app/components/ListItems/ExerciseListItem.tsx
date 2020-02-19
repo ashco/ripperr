@@ -4,12 +4,7 @@ import styled, { ThemeContext } from 'styled-components';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { ListItem } from './index';
-// import { ListItemWrapper } from './ListItem';
-import {
-  // DeleteButton,
-  // MovementFormButton,
-  ListItemMenuButton,
-} from '../Buttons';
+import { ListItemMenuButton } from '../Buttons';
 
 import { Exercise } from '../../common/types';
 import { MovementType } from '../../common/enums';

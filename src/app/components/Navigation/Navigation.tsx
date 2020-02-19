@@ -21,16 +21,11 @@ const NavigationAuth: React.FC = () => (
   <ul>
     <div className="list-group left">
       <li>
-        <Link href="/movements">
+        <Link href="/moves">
           <a className="logo">
             <img src={Logo} alt="Ripperr Icon" />
             Ripperr
           </a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/movements">
-          <a>Movements</a>
         </Link>
       </li>
     </div>
@@ -40,11 +35,11 @@ const NavigationAuth: React.FC = () => (
           <a>Account</a>
         </Link>
       </li>
-      <li>
+      {/* <li>
         <Link href="/admin">
           <a>Admin</a>
         </Link>
-      </li>
+      </li> */}
       <li>
         <SignOutButton />
       </li>
@@ -98,9 +93,6 @@ const NavigationWrapper = styled.nav`
     }
     div.right {
       place-self: center end;
-    }
-    li {
-      /* padding: 16px; */
     }
     .logo {
       font-size: 22px;
