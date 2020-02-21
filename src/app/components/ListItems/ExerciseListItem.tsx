@@ -40,11 +40,6 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
   );
 };
 
-const ExerciseListItemWrapper = styled(ListItem)`
-  .list-item-menu-container {
-    display: grid;
-    grid-template-columns: auto 1fr;
-  }
-`;
+const ExerciseListItemWrapper = styled(ListItem)``;
 
 export default ExerciseListItem;

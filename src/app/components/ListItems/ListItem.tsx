@@ -25,6 +25,10 @@ export const ListItem = styled.li<{ color: string }>`
   .row {
     display: flex;
   }
+  .list-item-menu-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
   .btn-container {
     /* display: flex; */
     button {
