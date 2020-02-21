@@ -21,18 +21,28 @@ import {
 } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-export const ArchetypeList: React.FC<{ archetypeList: Archetype[] | null }> = ({
-  archetypeList,
-}) => {
+export const ArchetypeList: React.FC<{
+  archetypeList: Archetype[] | null;
+  activeArchs: string[];
+  setActiveArchs: React.Dispatch<React.SetStateAction<string[]>>;
+}> = ({ archetypeList, activeArchs, setActiveArchs }) => {
   return (
     <ArchetypeListWrapper>
       {archetypeList ? (
         archetypeList.length === 0 ? (
           <div>No archetypes yet!</div>
         ) : (
-          archetypeList.map((arch) => (
-            <ArchetypeListItem key={arch.id} archetype={arch} />
-          ))
+          archetypeList.map((arch) => {
+            const isActive = activeArchs.includes(arch.name);
+            return (
+              <ArchetypeListItem
+                key={arch.id}
+                archetype={arch}
+                setActiveArchs={setActiveArchs}
+                className={isActive ? 'active' : ''}
+              />
+            );
+          })
         )
       ) : (
         <div>Loading ...</div>

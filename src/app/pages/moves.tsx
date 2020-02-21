@@ -16,6 +16,7 @@ import { IAuthUserContext } from '../common/types';
 
 const MovementsPage: NextPage = () => {
   const [filter, setFilter] = useState('');
+  const [activeArchs, setActiveArchs] = useState<string[]>([]);
 
   const movements = useContext(MovementListContext);
   const movementList = movements.loading
@@ -33,7 +34,11 @@ const MovementsPage: NextPage = () => {
   return (
     <MovementsPageWrapper>
       <MovementList movementList={movementList} />
-      <ArchetypeList archetypeList={archetypeList} />
+      <ArchetypeList
+        archetypeList={archetypeList}
+        activeArchs={activeArchs}
+        setActiveArchs={setActiveArchs}
+      />
       <FilterBar filter={filter} setFilter={setFilter} />
     </MovementsPageWrapper>
   );

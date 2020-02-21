@@ -1,55 +1,56 @@
-﻿import React, { useContext } from 'react';
+﻿import React, { useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import { AuthUserContext, FirebaseContext } from '../../context';
+import { ListItemMenuButton } from '../Buttons';
 
 import { ListItem } from './index';
-// import { ListItemWrapper } from './ListItem';
-// import {
-//   DeleteButton,
-//   MovementFormButton,
-//   ListItemMenuButton,
-// } from '../Buttons';
 
 import { Archetype } from '../../common/types';
-// import { FormMode } from '../../common/enums';
 
-const ArchetypeListItem: React.FC<{ archetype: Archetype }> = ({
-  archetype,
-}) => {
-  const firebase = useContext(FirebaseContext);
-  const authUser = useContext(AuthUserContext);
+const ArchetypeListItem: React.FC<{
+  archetype: Archetype;
+  setActiveArchs: React.Dispatch<React.SetStateAction<string[]>>;
+  className?: string;
+}> = ({ archetype, setActiveArchs, className }) => {
   const themeContext = useContext(ThemeContext);
 
-  // const deleteText = `Do you want to delete this archetype: ${archetype.name}?`;
+  const btnRef = useRef<HTMLDivElement>(null);
 
-  // function handleDelete(): void {
-  //   if (authUser && archetype.id) {
-  //     firebase
-  //       .archetype(authUser.uid, archetype.id)
-  //       .delete()
-  //       .then(() => console.log(`Archetype Deleted: ${archetype.name}`))
-  //       .catch((err) => console.error(err));
-  //   } else {
-  //     throw Error('No authUser && archetype.id!');
-  //   }
-  // }
+  function toggleActive(e: any) {
+    if (!btnRef?.current?.contains(e.target)) {
+      setActiveArchs((prevState) => {
+        const { name } = archetype;
+
+        const index = prevState.indexOf(name);
+        if (index > -1) {
+          prevState.splice(index, 1);
+        } else {
+          prevState.push(name);
+        }
+        return [...prevState];
+      });
+    }
+  }
 
   return (
-    <ArchetypeListItemWrapper color={themeContext.color.green[500]}>
+    <ArchetypeListItemWrapper
+      className={className}
+      color={themeContext.color.green[500]}
+      onClick={toggleActive}
+    >
       <p className="name">{archetype.name}</p>
-      {/* <div className="btn-container">
-        <span className="row">
-          <DeleteButton text={deleteText} handleDelete={handleDelete} />
-          <MovementFormButton formMode={FormMode.Edit} movement={archetype} />
-        </span>
-      </div> */}
-      {/* <ListItemMenuButton /> */}
+      <div className="list-item-menu-container">
+        <div ref={btnRef}>
+          <ListItemMenuButton movement={archetype} />
+        </div>
+      </div>
     </ArchetypeListItemWrapper>
   );
 };
 
 const ArchetypeListItemWrapper = styled(ListItem)`
+  background: ${(props) =>
+    props.className === 'active' && props.theme.color.green[500]};
   height: 100%;
   .name {
     padding: 0.5rem;
