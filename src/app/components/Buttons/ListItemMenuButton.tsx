@@ -58,7 +58,7 @@ const ListItemMenuButton: React.FC<{
   }, [menuOpen]);
 
   return (
-    <div>
+    <>
       <StyledListItemMenuButton
         onClick={openMenu}
         onMouseEnter={toggleHover}
@@ -78,7 +78,7 @@ const ListItemMenuButton: React.FC<{
         <MovementFormButton formMode={FormMode.Edit} movement={movement} />
         <DeleteButton text={deleteText} handleDelete={handleDelete} /> */}
       </ListItemMenuWrapper>
-    </div>
+    </>
   );
 };
 

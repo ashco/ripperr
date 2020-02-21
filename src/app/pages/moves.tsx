@@ -25,6 +25,8 @@ const MovementsPageWrapper = styled.div`
   grid-template-rows: 1fr auto;
   gap: 1rem;
   height: 100%;
+  /* max-width: 48rem;
+  margin: 0 auto; */
 `;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;

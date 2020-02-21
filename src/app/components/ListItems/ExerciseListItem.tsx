@@ -25,26 +25,26 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
     }
   }
 
-  // useEffect(() => {
-  //   document.addEventListener('click', handleView);
-  //   return () => {
-  //     document.removeEventListener('click', handleView);
-  //   };
-  // });
-
   return (
     <ExerciseListItemWrapper
       onClick={handleView}
       color={themeContext.color.blue[500]}
     >
       <p className="name">{exercise.name}</p>
-      <div ref={btnRef}>
-        <ListItemMenuButton movement={exercise} />
+      <div className="list-item-menu-container">
+        <div ref={btnRef}>
+          <ListItemMenuButton movement={exercise} />
+        </div>
       </div>
     </ExerciseListItemWrapper>
   );
 };
 
-const ExerciseListItemWrapper = styled(ListItem)``;
+const ExerciseListItemWrapper = styled(ListItem)`
+  .list-item-menu-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+`;
 
 export default ExerciseListItem;
