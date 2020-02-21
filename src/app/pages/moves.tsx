@@ -7,12 +7,10 @@ import { withAuthorization, withMovements } from '../context';
 
 import { MovementList, ArchetypeList } from '../components/Movements';
 import { FilterBar } from '../components/Movements';
-// import { MovementFormButton } from '../components/Buttons';
 
 import { sortMovements } from '../common/sortMovements';
 
 import { IAuthUserContext } from '../common/types';
-// import { FormMode } from '../common/enums';
 
 const MovementsPage: NextPage = () => {
   const [filter, setFilter] = useState('');
