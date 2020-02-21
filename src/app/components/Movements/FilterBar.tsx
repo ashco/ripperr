@@ -21,7 +21,9 @@ const FilterBar: React.FC<{
         type="text"
         placeholder="Filter..."
         value={filter}
-        onChange={(e) => setFilter(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+          setFilter(e.target.value)
+        }
       />
       <AddMovementButton openModal={openModal} />
     </FilterBarWrapper>
@@ -32,7 +34,7 @@ const FilterBarWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 3rem;
   gap: 1rem;
-  margin: 1rem;
+  margin: 0 1rem 1rem;
   input {
     font-size: 24px;
     padding: 0.5rem 1rem;

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { MovementListContext } from '../context';
 import { withAuthorization, withMovements } from '../context';
 
-import { MovementList } from '../components/Movements';
+import { MovementList, ArchetypeList } from '../components/Movements';
 import { FilterBar } from '../components/Movements';
 // import { MovementFormButton } from '../components/Buttons';
 
@@ -22,11 +22,18 @@ const MovementsPage: NextPage = () => {
     ? null
     : [...movements.exercises, ...movements.workouts]
         .sort((a, b) => sortMovements(a, b))
-        .filter((move) => move.name.includes(filter));
+        .filter((move) =>
+          move.name.toLowerCase().includes(filter.toLowerCase()),
+        );
+
+  const archetypeList = movements.loading
+    ? null
+    : [...movements.archetypes].sort((a, b) => sortMovements(a, b));
 
   return (
     <MovementsPageWrapper>
       <MovementList movementList={movementList} />
+      <ArchetypeList archetypeList={archetypeList} />
       <FilterBar filter={filter} setFilter={setFilter} />
     </MovementsPageWrapper>
   );
@@ -37,8 +44,6 @@ const MovementsPageWrapper = styled.div`
   grid-template-rows: 1fr auto;
   gap: 1rem;
   height: 100%;
-  /* max-width: 48rem;
-  margin: 0 auto; */
 `;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;

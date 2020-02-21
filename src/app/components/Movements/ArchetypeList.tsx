@@ -21,45 +21,36 @@ import {
 } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-export const MovementList: React.FC<{ movementList: Movement[] | null }> = ({
-  movementList,
+export const ArchetypeList: React.FC<{ archetypeList: Archetype[] | null }> = ({
+  archetypeList,
 }) => {
-  function renderListItem(move: Movement) {
-    if (move.type === MovementType.Exercise) {
-      return <ExerciseListItem key={move.id} exercise={move as Exercise} />;
-    } else if (move.type === MovementType.Workout) {
-      return <WorkoutListItem key={move.id} workout={move as Workout} />;
-    } else {
-      return null;
-    }
-  }
-
   return (
-    <MovementListWrapper>
-      {movementList ? (
-        movementList.length === 0 ? (
-          <div>Get out there and make something of yourself.</div>
+    <ArchetypeListWrapper>
+      {archetypeList ? (
+        archetypeList.length === 0 ? (
+          <div>No archetypes yet!</div>
         ) : (
-          movementList.map((move) => renderListItem(move))
+          archetypeList.map((arch) => (
+            <ArchetypeListItem key={arch.id} archetype={arch} />
+          ))
         )
       ) : (
         <div>Loading ...</div>
       )}
-    </MovementListWrapper>
+    </ArchetypeListWrapper>
   );
 };
 
-const MovementListWrapper = styled.ul`
-  margin: 1rem;
+const ArchetypeListWrapper = styled.ul`
+  margin: 0 1rem;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, 6rem);
-  grid-auto-rows: 6rem;
+  grid-template-columns: repeat(auto-fit, 4rem);
+  grid-auto-rows: 4rem;
   grid-auto-flow: row dense;
   /* grid-template-columns: repeat(auto-fit, 8rem); */
   /* grid-template-rows: repeat(auto-fill, 8rem); */
   justify-content: center;
-  overflow-y: auto;
   /* grid-template-columns: repeat(auto-fill, 8rem);
   grid-template-rows: repeat(auto-fill, 8rem); */
 `;

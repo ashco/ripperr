@@ -1,5 +1,5 @@
 ﻿import FilterBar from './FilterBar';
 
-// export * from './SearchContainer';
+export * from './ArchetypeList';
 export * from './MovementList';
 export { FilterBar };
