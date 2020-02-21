@@ -1,21 +1,33 @@
-﻿import React from 'react';
+﻿import React, { useState, useContext } from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
+
+import { MovementListContext } from '../context';
+import { withAuthorization, withMovements } from '../context';
 
 import { MovementList } from '../components/Movements';
 import { FilterBar } from '../components/Movements';
 // import { MovementFormButton } from '../components/Buttons';
 
-import { withAuthorization, withMovements } from '../context';
+import { sortMovements } from '../common/sortMovements';
 
 import { IAuthUserContext } from '../common/types';
 // import { FormMode } from '../common/enums';
 
 const MovementsPage: NextPage = () => {
+  const [filter, setFilter] = useState('');
+
+  const movements = useContext(MovementListContext);
+  const movementList = movements.loading
+    ? null
+    : [...movements.exercises, ...movements.workouts]
+        .sort((a, b) => sortMovements(a, b))
+        .filter((move) => move.name.includes(filter));
+
   return (
     <MovementsPageWrapper>
-      <MovementList />
-      <FilterBar />
+      <MovementList movementList={movementList} />
+      <FilterBar filter={filter} setFilter={setFilter} />
     </MovementsPageWrapper>
   );
 };

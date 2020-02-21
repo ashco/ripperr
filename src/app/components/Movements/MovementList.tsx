@@ -21,15 +21,17 @@ import {
 } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-export const MovementList: React.FC = () => {
+export const MovementList: React.FC<{ movementList: Movement[] | null }> = ({
+  movementList,
+}) => {
   const listRef = useRef<HTMLUListElement>(null);
 
-  const movements = useContext(MovementListContext);
+  // const movements = useContext(MovementListContext);
 
-  const movementList = [
-    ...movements.exercises,
-    ...movements.workouts,
-  ].sort((a, b) => sortMovements(a, b));
+  // const movementList = [
+  //   ...movements.exercises,
+  //   ...movements.workouts,
+  // ].sort((a, b) => sortMovements(a, b));
 
   function renderListItem(move: Movement) {
     if (move.type === MovementType.Exercise) {
@@ -43,12 +45,14 @@ export const MovementList: React.FC = () => {
 
   return (
     <MovementListWrapper ref={listRef}>
-      {movements.loading ? (
-        <div>Loading ...</div>
-      ) : movementList.length === 0 ? (
-        <div>Get out there and make something of yourself.</div>
+      {movementList ? (
+        movementList.length === 0 ? (
+          <div>Get out there and make something of yourself.</div>
+        ) : (
+          movementList.map((move) => renderListItem(move))
+        )
       ) : (
-        movementList.map((move) => renderListItem(move))
+        <div>Loading ...</div>
       )}
     </MovementListWrapper>
   );

@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import { AddMovementButton } from '../Buttons';
 import { useModalDispatch } from '../../context/ModalContext';
 
-const FilterBar = () => {
+const FilterBar: React.FC<{
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ filter, setFilter }) => {
   const modalDispatch = useModalDispatch();
 
   function openModal(): void {
@@ -13,7 +16,13 @@ const FilterBar = () => {
 
   return (
     <FilterBarWrapper>
-      <input className="filter-bar" type="text" placeholder="Filter..." />
+      <input
+        className="filter-bar"
+        type="text"
+        placeholder="Filter..."
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
       <AddMovementButton openModal={openModal} />
     </FilterBarWrapper>
   );
