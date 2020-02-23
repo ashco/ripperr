@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { MovementListContext } from '../context';
 import { withAuthorization, withMovements } from '../context';
 
-import { MovementList, ArchetypeList } from '../components/Movements';
-import { FilterBar } from '../components/Movements';
+import { MovementList } from '../components/Movements';
+import { Filter } from '../components/Filter';
 
 import { sortMovements } from '../common/sortMovements';
 
@@ -32,12 +32,19 @@ const MovementsPage: NextPage = () => {
   return (
     <MovementsPageWrapper>
       <MovementList movementList={movementList} />
-      <ArchetypeList
+      <Filter
+        filter={filter}
+        setFilter={setFilter}
         archetypeList={archetypeList}
         activeArchs={activeArchs}
         setActiveArchs={setActiveArchs}
       />
-      <FilterBar filter={filter} setFilter={setFilter} />
+      {/* <ArchetypeList
+        archetypeList={archetypeList}
+        activeArchs={activeArchs}
+        setActiveArchs={setActiveArchs}
+      />
+      <FilterBar filter={filter} setFilter={setFilter} /> */}
     </MovementsPageWrapper>
   );
 };

@@ -7,7 +7,8 @@ import { useModalDispatch } from '../../context/ModalContext';
 const FilterBar: React.FC<{
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
-}> = ({ filter, setFilter }) => {
+  setFilterMode: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ filter, setFilter, setFilterMode }) => {
   const modalDispatch = useModalDispatch();
 
   function openModal(): void {
@@ -24,6 +25,7 @@ const FilterBar: React.FC<{
         onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
           setFilter(e.target.value)
         }
+        onFocus={() => setFilterMode(true)}
       />
       <AddMovementButton openModal={openModal} />
     </FilterBarWrapper>
@@ -34,7 +36,7 @@ const FilterBarWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 3rem;
   gap: 1rem;
-  margin: 0 1rem 1rem;
+  /* margin: 0 1rem 1rem; */
   input {
     font-size: 24px;
     padding: 0.5rem 1rem;
