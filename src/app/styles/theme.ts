@@ -95,6 +95,7 @@
     15: '48rem', // 768
   },
   maxWidth: '1000px',
+  modalBackground: 'rgba(0,0,0,0.85)',
 };
 
 export default theme;

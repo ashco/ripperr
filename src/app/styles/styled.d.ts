@@ -17,5 +17,6 @@ declare module 'styled-components' {
     shadow: any;
     space: any;
     maxWidth: string;
+    modalBackground: string;
   }
 }

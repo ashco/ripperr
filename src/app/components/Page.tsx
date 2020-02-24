@@ -6,7 +6,8 @@ import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
 
 import { ModalProvider } from '../context/ModalContext';
-import { MovementProvider } from '../context/MoveContext';
+import { MoveProvider } from '../context/MoveContext';
+import { FilterProvider } from '../context/FilterContext';
 
 import Meta from './Meta';
 import Header from './Header';
@@ -39,18 +40,20 @@ const Inner = styled.div`
 const Page: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
-      <ModalProvider>
-        <MovementProvider>
-          <StyledPage>
-            <GlobalStyle />
-            <Meta />
-            <Modal />
-            <Navigation />
-            <ToastContainer />
-            <Inner>{props.children}</Inner>
-          </StyledPage>
-        </MovementProvider>
-      </ModalProvider>
+      <MoveProvider>
+        <ModalProvider>
+          <FilterProvider>
+            <StyledPage>
+              <GlobalStyle />
+              <Meta />
+              <Modal />
+              <Navigation />
+              <ToastContainer />
+              <Inner>{props.children}</Inner>
+            </StyledPage>
+          </FilterProvider>
+        </ModalProvider>
+      </MoveProvider>
     </ThemeProvider>
   );
 };

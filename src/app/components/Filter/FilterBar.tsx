@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { AddMovementButton } from '../Buttons';
 import { useModalDispatch } from '../../context/ModalContext';
+import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
 
-const FilterBar: React.FC<{
-  filter: string;
-  setFilter: React.Dispatch<React.SetStateAction<string>>;
-  setFilterMode: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ filter, setFilter, setFilterMode }) => {
+import { AddMovementButton } from '../Buttons';
+
+const FilterBar: React.FC<{}> = () => {
+  const filterState = useFilterState();
+  const filterDispatch = useFilterDispatch();
   const modalDispatch = useModalDispatch();
 
   function openModal(): void {
@@ -21,11 +21,14 @@ const FilterBar: React.FC<{
         className="filter-bar"
         type="text"
         placeholder="Filter..."
-        value={filter}
+        value={filterState.value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-          setFilter(e.target.value)
+          filterDispatch({
+            type: 'FILTER_CHANGE_VALUE',
+            value: e.target.value,
+          })
         }
-        onFocus={() => setFilterMode(true)}
+        onFocus={() => filterDispatch({ type: 'FILTER_MODE_ON' })}
       />
       <AddMovementButton openModal={openModal} />
     </FilterBarWrapper>

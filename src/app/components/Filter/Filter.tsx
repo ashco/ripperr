@@ -1,61 +1,51 @@
 ﻿import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
+
 import { ArchetypeList } from '../../components/Movements';
 import FilterBar from './FilterBar';
 
 import { Archetype } from '../../common/types';
 
 const Filter: React.FC<{
-  filter: string;
-  setFilter: React.Dispatch<React.SetStateAction<string>>;
   archetypeList: Archetype[] | null;
-  activeArchs: string[];
-  setActiveArchs: React.Dispatch<React.SetStateAction<string[]>>;
-}> = ({ filter, setFilter, archetypeList, activeArchs, setActiveArchs }) => {
-  const [filterMode, setFilterMode] = useState(false);
+}> = ({ archetypeList }) => {
+  const filterState = useFilterState();
+  const filterDispatch = useFilterDispatch();
 
   const filterRef = useRef<HTMLDivElement>(null);
 
-  function handleStopFilterMode(e: any) {
-    if (filterMode) {
+  function handleFilterModeOff(e: any) {
+    if (filterState.active) {
       if (!filterRef?.current?.contains(e.target)) {
-        setFilterMode(false);
+        filterDispatch({ type: 'FILTER_MODE_OFF' });
       }
     }
   }
 
   useEffect(() => {
-    document.addEventListener('click', handleStopFilterMode);
+    document.addEventListener('click', handleFilterModeOff);
 
     return (): void => {
-      document.removeEventListener('click', handleStopFilterMode);
+      document.removeEventListener('click', handleFilterModeOff);
     };
   });
 
   return (
-    <FilterContainer filterMode={filterMode} ref={filterRef}>
-      {filterMode && (
-        <ArchetypeList
-          archetypeList={archetypeList}
-          activeArchs={activeArchs}
-          setActiveArchs={setActiveArchs}
-        />
-      )}
-      <FilterBar
-        filter={filter}
-        setFilter={setFilter}
-        setFilterMode={setFilterMode}
-      />
+    <FilterContainer active={filterState.active} ref={filterRef}>
+      {filterState.active && <ArchetypeList archetypeList={archetypeList} />}
+      <FilterBar />
     </FilterContainer>
   );
 };
 
-const FilterContainer = styled.div<{ filterMode: boolean }>`
+const FilterContainer = styled.div<{ active: boolean }>`
   padding: 1rem;
   display: grid;
   gap: 1rem;
-  background: ${(props) => (props.filterMode ? 'black' : 'default')};
+  background: ${(props) =>
+    props.active ? props.theme.modalBackground : 'default'};
 `;
 
 export default Filter;

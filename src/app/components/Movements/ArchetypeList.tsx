@@ -1,31 +1,18 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { MovementListContext } from '../../context';
+import { useFilterState } from '../../context/FilterContext';
 
-import {
-  ArchetypeListItem,
-  ExerciseListItem,
-  WorkoutListItem,
-} from '../ListItems';
+import { ArchetypeListItem } from '../ListItems';
 
-import { sortMovements } from '../../common/sortMovements';
-import { createMovementColList } from '../../common/createMovementColList';
-
-import {
-  Movement,
-  Archetype,
-  Exercise,
-  Workout,
-  IMovementState,
-} from '../../common/types';
+import { Archetype } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
 export const ArchetypeList: React.FC<{
   archetypeList: Archetype[] | null;
-  activeArchs: string[];
-  setActiveArchs: React.Dispatch<React.SetStateAction<string[]>>;
-}> = ({ archetypeList, activeArchs, setActiveArchs }) => {
+}> = ({ archetypeList }) => {
+  const filterState = useFilterState();
+
   return (
     <ArchetypeListWrapper>
       {archetypeList ? (
@@ -33,13 +20,12 @@ export const ArchetypeList: React.FC<{
           <div>No archetypes yet!</div>
         ) : (
           archetypeList.map((arch) => {
-            const isActive = activeArchs.includes(arch.name);
+            // const isActive = filterState.archs.includes(arch.name);
             return (
               <ArchetypeListItem
                 key={arch.id}
                 archetype={arch}
-                setActiveArchs={setActiveArchs}
-                className={isActive ? 'active' : ''}
+                // className={isActive ? 'active' : ''}
               />
             );
           })

@@ -110,7 +110,7 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
   }
 }
 
-function MovementProvider({ children }: MoveProviderProps) {
+function MoveProvider({ children }: MoveProviderProps) {
   const [state, dispatch] = React.useReducer(formReducer, null);
 
   return (
@@ -125,7 +125,7 @@ function MovementProvider({ children }: MoveProviderProps) {
 function useMoveState(): MoveState {
   const context = React.useContext(MovementStateContext);
   if (context === undefined) {
-    throw Error('useMoveState must be used within a MovementProvider');
+    throw Error('useMoveState must be used within a MoveProvider');
   }
   return context;
 }
@@ -133,9 +133,9 @@ function useMoveState(): MoveState {
 function useMoveDispatch(): MoveDispatch {
   const context = React.useContext(MovementDispatchContext);
   if (context === undefined) {
-    throw Error('useMoveDispatch must be used within a MovementProvider');
+    throw Error('useMoveDispatch must be used within a MoveProvider');
   }
   return context;
 }
 
-export { MovementProvider, useMoveState, useMoveDispatch };
+export { MoveProvider, useMoveState, useMoveDispatch };

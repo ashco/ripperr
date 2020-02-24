@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { MovementListContext } from '../context';
 import { withAuthorization, withMovements } from '../context';
+import { FilterProvider, useFilterState } from '../context/FilterContext';
 
 import { MovementList } from '../components/Movements';
 import { Filter } from '../components/Filter';
@@ -13,8 +14,8 @@ import { sortMovements } from '../common/sortMovements';
 import { IAuthUserContext } from '../common/types';
 
 const MovementsPage: NextPage = () => {
-  const [filter, setFilter] = useState('');
-  const [activeArchs, setActiveArchs] = useState<string[]>([]);
+  const filterState = useFilterState();
+  // const [activeArchs, setActiveArchs] = useState<string[]>([]);
 
   const movements = useContext(MovementListContext);
   const movementList = movements.loading
@@ -22,7 +23,7 @@ const MovementsPage: NextPage = () => {
     : [...movements.exercises, ...movements.workouts]
         .sort((a, b) => sortMovements(a, b))
         .filter((move) =>
-          move.name.toLowerCase().includes(filter.toLowerCase()),
+          move.name.toLowerCase().includes(filterState.value.toLowerCase()),
         );
 
   const archetypeList = movements.loading
@@ -33,17 +34,17 @@ const MovementsPage: NextPage = () => {
     <MovementsPageWrapper>
       <MovementList movementList={movementList} />
       <Filter
-        filter={filter}
-        setFilter={setFilter}
+        // filter={filter}
+        // setFilter={setFilter}
         archetypeList={archetypeList}
-        activeArchs={activeArchs}
-        setActiveArchs={setActiveArchs}
+        // activeArchs={activeArchs}
+        // setActiveArchs={setActiveArchs}
       />
       {/* <ArchetypeList
         archetypeList={archetypeList}
         activeArchs={activeArchs}
         setActiveArchs={setActiveArchs}
-      />
+        />
       <FilterBar filter={filter} setFilter={setFilter} /> */}
     </MovementsPageWrapper>
   );

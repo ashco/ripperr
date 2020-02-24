@@ -5,36 +5,30 @@ import { ListItemMenuButton } from '../Buttons';
 
 import { ListItem } from './index';
 
+import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
+
 import { Archetype } from '../../common/types';
 
 const ArchetypeListItem: React.FC<{
   archetype: Archetype;
-  setActiveArchs: React.Dispatch<React.SetStateAction<string[]>>;
-  className?: string;
-}> = ({ archetype, setActiveArchs, className }) => {
+}> = ({ archetype }) => {
   const themeContext = useContext(ThemeContext);
+  const filterState = useFilterState();
+  const filterDispatch = useFilterDispatch();
 
   const btnRef = useRef<HTMLDivElement>(null);
 
   function toggleActive(e: any) {
     if (!btnRef?.current?.contains(e.target)) {
-      setActiveArchs((prevState) => {
-        const { name } = archetype;
-
-        const index = prevState.indexOf(name);
-        if (index > -1) {
-          prevState.splice(index, 1);
-        } else {
-          prevState.push(name);
-        }
-        return [...prevState];
-      });
+      filterDispatch({ type: 'FILTER_TOGGLE_ARCH', value: archetype.name });
     }
   }
 
+  const active = filterState.archs.includes(archetype.name);
+
   return (
     <ArchetypeListItemWrapper
-      className={className}
+      active={active}
       color={themeContext.color.green[500]}
       onClick={toggleActive}
     >
@@ -48,9 +42,8 @@ const ArchetypeListItem: React.FC<{
   );
 };
 
-const ArchetypeListItemWrapper = styled(ListItem)`
-  background: ${(props) =>
-    props.className === 'active' && props.theme.color.green[500]};
+const ArchetypeListItemWrapper = styled(ListItem)<{ active: boolean }>`
+  background: ${(props) => props.active && props.theme.color.green[500]};
   height: 100%;
   .name {
     padding: 0.5rem;
