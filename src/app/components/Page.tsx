@@ -11,7 +11,7 @@ import { MovementProvider } from '../context/MoveContext';
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
-import Modal from './Modal/NewModal';
+import Modal from './Modal/Modal';
 
 const StyledPage = styled.div`
   color: ${({ theme }) => theme.color.neutral[900]};
