@@ -71,7 +71,7 @@ const NavigationNonAuth: React.FC = () => (
 
 const NavigationWrapper = styled.nav`
   /* background-color: ${({ theme }) => theme.color.neutral[100]}; */
-  background-color: ${({ theme }) => theme.color.black[700]};
+  background-color: ${({ theme }) => theme.mode.background[300]};
   opacity: 0.85;
   box-shadow: ${(props) => props.theme.shadow[2]};
   grid-area: navigation;
@@ -103,7 +103,7 @@ const NavigationWrapper = styled.nav`
       align-items: center;
     }
     a {
-      color: white;
+      color: ${(props) => props.theme.mode.color[100]};
     }
   }
 `;

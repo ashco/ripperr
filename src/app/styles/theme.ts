@@ -1,10 +1,10 @@
-﻿const theme = {
+﻿export const theme = {
   color: {
-    black: {
-      700: 'hsl(0, 0%, 13%, 1)',
-      800: 'hsl(0, 0%, 9%, 1)',
-      900: 'hsl(0, 0%, 7%, 1)',
-    },
+    // black: {
+    //   700: 'hsl(0, 0%, 13%, 1)',
+    //   800: 'hsl(0, 0%, 9%, 1)',
+    //   900: 'hsl(0, 0%, 7%, 1)',
+    // },
     neutral: {
       100: 'hsl(210, 17%, 98%)',
       200: 'hsl(207, 22%, 90%)',
@@ -102,5 +102,26 @@
   maxWidth: '1000px',
   modalBackground: 'rgba(0,0,0,0.85)',
 };
+export const darkMode = {
+  background: {
+    100: 'hsl(0, 0%, 7%)',
+    200: 'hsl(0, 0%, 9%)',
+    300: 'hsl(0, 0%, 13%)',
+  },
+  color: {
+    100: 'hsl(0, 0%, 100%)',
+    200: 'hsl(240, 1%, 47%)',
+  },
+};
 
-export default theme;
+export const lightMode = {
+  background: {
+    100: 'hsl(0, 0%, 100%)',
+    200: 'hsl(210, 100%, 99%)',
+    300: 'hsl(0, 0%, 100%)',
+  },
+  color: {
+    100: 'hsl(0, 0%, 13%)',
+    200: 'hsl(240, 1%, 47%)',
+  },
+};

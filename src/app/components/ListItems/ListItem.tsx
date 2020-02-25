@@ -6,7 +6,7 @@ import { MovementType } from '../../common/enums';
 
 export const ListItem = styled.li<{ color: string }>`
   /* background: ${({ theme }) => theme.color.neutral[100]}; */
-  background: ${({ theme }) => theme.color.black[700]};
+  background: ${({ theme }) => theme.mode.background[300]};
   box-shadow: ${(props) => props.theme.shadow[1]};
   border-radius: 3px;
   display: grid;
@@ -22,7 +22,7 @@ export const ListItem = styled.li<{ color: string }>`
   p.name {
     font-size: 16px;
     padding: 0.75rem 0.5rem;
-    color: white;
+    color: ${(props) => props.theme.mode.color[100]};
     font-weight: 600;
   }
   .row {

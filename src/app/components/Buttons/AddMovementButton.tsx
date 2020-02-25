@@ -1,5 +1,5 @@
-﻿import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
+﻿import React, { useState, useContext, useRef } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
 import { Button } from '.';
 
@@ -8,6 +8,7 @@ import Plus from '../../icons/Plus';
 const AddMovementButton: React.FC<{ openModal: () => void }> = ({
   openModal,
 }) => {
+  const themeContext = useContext(ThemeContext);
   const [btnHovered, setBtnHovered] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -22,7 +23,13 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
       onMouseLeave={toggleHover}
       ref={btnRef}
     >
-      <Plus color={btnHovered ? 'white' : 'gray'} />
+      <Plus
+        color={
+          btnHovered
+            ? themeContext.mode.color[100]
+            : themeContext.mode.color[200]
+        }
+      />
     </StyledAddMovementButton>
   );
 };
@@ -30,7 +37,7 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
 const StyledAddMovementButton = styled(Button)`
   display: grid;
   place-items: center;
-  background-color: ${(props) => props.theme.color.black[700]};
+  background-color: ${(props) => props.theme.mode.background[300]};
   border-radius: 5px;
   box-shadow: ${(props) => props.theme.shadow[2]};
   border: none;

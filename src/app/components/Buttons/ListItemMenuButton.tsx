@@ -1,5 +1,5 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+﻿import React, { useState, useEffect, useContext, useRef } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
 import { Button } from '../Buttons';
 
@@ -16,6 +16,8 @@ const ListItemMenuButton: React.FC<{
 }> = ({ movement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
+
+  const themeContext = useContext(ThemeContext);
 
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
@@ -64,7 +66,13 @@ const ListItemMenuButton: React.FC<{
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
       >
-        <Bars color={btnHovered ? 'black' : 'gray'} />
+        <Bars
+          color={
+            btnHovered
+              ? themeContext.mode.color[100]
+              : themeContext.mode.color[200]
+          }
+        />
       </StyledListItemMenuButton>
       <ListItemMenuWrapper open={menuOpen}>
         {movement.type === MovementType.Workout && (

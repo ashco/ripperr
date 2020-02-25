@@ -2,6 +2,10 @@
 const withImages = require('next-images');
 
 module.exports = withImages({
+  devIndicators: {
+    // removes indicator
+    autoPrerender: false,
+  },
   distDir: '../../dist/next',
   env: {
     API_KEY: process.env.API_KEY,

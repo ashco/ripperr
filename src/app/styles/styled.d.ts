@@ -6,8 +6,11 @@ import 'styled-components';
 // This modifies the Styled Component theme object declaration
 declare module 'styled-components' {
   export interface DefaultTheme {
+    mode: {
+      background: any;
+      color: any;
+    };
     color: {
-      black: any;
       neutral: any;
       blue: any;
       green: any;
