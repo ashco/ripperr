@@ -5,7 +5,8 @@ import { Exercise, Workout } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
 export const ListItem = styled.li<{ color: string }>`
-  background: ${({ theme }) => theme.color.neutral[100]};
+  /* background: ${({ theme }) => theme.color.neutral[100]}; */
+  background: ${({ theme }) => theme.color.black[700]};
   box-shadow: ${(props) => props.theme.shadow[1]};
   border-radius: 3px;
   display: grid;
@@ -18,9 +19,11 @@ export const ListItem = styled.li<{ color: string }>`
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
   } */
-  .name {
+  p.name {
     font-size: 16px;
     padding: 0.75rem 0.5rem;
+    color: white;
+    font-weight: 600;
   }
   .row {
     display: flex;

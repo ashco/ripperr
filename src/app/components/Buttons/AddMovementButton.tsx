@@ -22,7 +22,7 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
       onMouseLeave={toggleHover}
       ref={btnRef}
     >
-      <Plus color={btnHovered ? 'black' : 'gray'} />
+      <Plus color={btnHovered ? 'white' : 'gray'} />
     </StyledAddMovementButton>
   );
 };
@@ -30,7 +30,7 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
 const StyledAddMovementButton = styled(Button)`
   display: grid;
   place-items: center;
-  background-color: white;
+  background-color: ${(props) => props.theme.color.black[700]};
   border-radius: 5px;
   box-shadow: ${(props) => props.theme.shadow[2]};
   border: none;

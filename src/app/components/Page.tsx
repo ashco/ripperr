@@ -16,13 +16,14 @@ import Modal from './Modal/Modal';
 
 const StyledPage = styled.div`
   color: ${({ theme }) => theme.color.neutral[900]};
-  background: rgb(84, 255, 180);
+  /* background: rgb(84, 255, 180);
   background: linear-gradient(
     32deg,
     rgba(84, 255, 180, 1) 0%,
     rgba(74, 255, 209, 1) 40%,
     rgba(101, 230, 255, 1) 100%
-  );
+  ); */
+  background: ${(props) => props.theme.color.black[900]};
   height: 100vh;
   width: 100vw;
   display: grid;
@@ -30,6 +31,7 @@ const StyledPage = styled.div`
   grid-template-areas:
     'navigation'
     'main';
+  border-top: 7px solid hsl(43, 86%, 67%);
 `;
 
 const Inner = styled.div`

@@ -44,8 +44,9 @@ const FilterContainer = styled.div<{ active: boolean }>`
   padding: 1rem;
   display: grid;
   gap: 1rem;
-  background: ${(props) =>
-    props.active ? props.theme.modalBackground : 'default'};
+  /* background: ${(props) =>
+    props.active ? props.theme.modalBackground : 'default'}; */
+  /* background: ${(props) => props.theme.modalBackground}; */
 `;
 
 export default Filter;

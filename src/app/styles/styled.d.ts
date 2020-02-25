@@ -7,6 +7,7 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     color: {
+      black: any;
       neutral: any;
       blue: any;
       green: any;

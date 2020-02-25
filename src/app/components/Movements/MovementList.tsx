@@ -53,7 +53,7 @@ const MovementListWrapper = styled.ul`
   margin: 1rem;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, 6rem);
+  grid-template-columns: repeat(auto-fill, 9rem);
   grid-auto-rows: 6rem;
   grid-auto-flow: row dense;
   /* grid-template-columns: repeat(auto-fit, 8rem); */

@@ -45,7 +45,9 @@ const FilterBarWrapper = styled.div`
     padding: 0.5rem 1rem;
     box-shadow: ${(props) => props.theme.shadow[2]};
     border: none;
+    background: ${(props) => props.theme.color.black[700]};
     border-radius: 5px;
+    color: white;
   }
 `;
 
