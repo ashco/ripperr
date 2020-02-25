@@ -32,7 +32,7 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
     >
       <p className="name">{exercise.name}</p>
       <div className="list-item-menu-container">
-        <div ref={btnRef}>
+        <div ref={btnRef} className="btn-wrapper">
           <ListItemMenuButton movement={exercise} />
         </div>
       </div>

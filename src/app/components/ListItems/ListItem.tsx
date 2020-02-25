@@ -30,7 +30,10 @@ export const ListItem = styled.li<{ color: string }>`
   }
   .list-item-menu-container {
     display: grid;
-    grid-template-columns: auto 1fr;
+    /* grid-template-columns: auto 1fr; */
+  }
+  .btn-wrapper {
+    justify-self: end;
   }
   .btn-container {
     /* display: flex; */

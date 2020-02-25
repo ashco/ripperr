@@ -31,7 +31,7 @@ const StyledPage = styled.div`
   grid-template-areas:
     'navigation'
     'main';
-  border-top: 7px solid hsl(43, 86%, 67%);
+  border-top: 7px solid rgba(84, 255, 180, 1);
 `;
 
 const Inner = styled.div`

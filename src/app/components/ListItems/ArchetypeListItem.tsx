@@ -33,7 +33,7 @@ const ArchetypeListItem: React.FC<{
       onClick={toggleActive}
     >
       <p className="name">{archetype.name}</p>
-      <div className="list-item-menu-container">
+      <div className="btn-wrapper">
         <div ref={btnRef}>
           <ListItemMenuButton movement={archetype} />
         </div>
