@@ -39,7 +39,9 @@ const FilterBarWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 3rem;
   gap: 1rem;
-  /* margin: 0 1rem 1rem; */
+  max-width: 1024px;
+  justify-self: center;
+  width: 100%;
   input {
     font-size: 24px;
     padding: 0.5rem 1rem;

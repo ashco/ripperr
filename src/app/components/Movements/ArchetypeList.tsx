@@ -41,8 +41,8 @@ const ArchetypeListWrapper = styled.ul`
   margin: 0 1rem;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, 4rem);
-  grid-auto-rows: 4rem;
+  grid-template-columns: repeat(auto-fit, 6rem);
+  grid-auto-rows: 3rem;
   grid-auto-flow: row dense;
   /* grid-template-columns: repeat(auto-fit, 8rem); */
   /* grid-template-rows: repeat(auto-fill, 8rem); */

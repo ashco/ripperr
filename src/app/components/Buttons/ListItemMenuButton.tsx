@@ -12,7 +12,6 @@ import { Movement } from '../../common/types';
 
 const ListItemMenuButton: React.FC<{
   movement: Movement;
-  // ref: React.RefObject<HTMLButtonElement>;
 }> = ({ movement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
@@ -81,10 +80,6 @@ const ListItemMenuButton: React.FC<{
         <Button onClick={handleView}>View</Button>
         <Button onClick={handleEdit}>Edit</Button>
         <Button onClick={handleDelete}>Delete</Button>
-
-        {/* <MovementFormButton formMode={FormMode.View} movement={movement} />
-        <MovementFormButton formMode={FormMode.Edit} movement={movement} />
-        <DeleteButton text={deleteText} handleDelete={handleDelete} /> */}
       </ListItemMenuWrapper>
     </>
   );

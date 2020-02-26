@@ -8,6 +8,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     mode: {
       background: any;
+      backgroundOpacity: any;
       color: any;
     };
     color: {
@@ -15,12 +16,13 @@ declare module 'styled-components' {
       blue: any;
       green: any;
       yellow: any;
+      orange: any;
       red: any;
     };
     font: any;
     shadow: any;
     space: any;
     maxWidth: string;
-    modalBackground: string;
+    // modalBackground: string;
   }
 }

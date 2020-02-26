@@ -1,29 +1,35 @@
 ﻿import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
 import { AuthUserContext } from '../../context';
 
 import SignOutButton from './SignOutButton';
 
-import Logo from '../../static/icons/fire-alt-solid.svg';
+// import Logo from '../../static/icons/fire-alt-solid.svg';
+import Logo from '../../icons/Logo';
 
 const Navigation: React.FC = () => {
   const authUser = useContext(AuthUserContext);
+  const themeContext = useContext(ThemeContext);
   return (
     <NavigationWrapper>
-      {authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+      {authUser ? (
+        <NavigationAuth color={themeContext.mode.color[100]} />
+      ) : (
+        <NavigationNonAuth color={themeContext.mode.color[100]} />
+      )}
     </NavigationWrapper>
   );
 };
 
-const NavigationAuth: React.FC = () => (
+const NavigationAuth: React.FC<{ color: string }> = ({ color }) => (
   <ul>
     <div className="list-group left">
       <li>
         <Link href="/moves">
           <a className="logo">
-            <img src={Logo} alt="Ripperr Icon" />
+            <Logo color={color} />
             Ripperr
           </a>
         </Link>
@@ -47,13 +53,13 @@ const NavigationAuth: React.FC = () => (
   </ul>
 );
 
-const NavigationNonAuth: React.FC = () => (
+const NavigationNonAuth: React.FC<{ color: string }> = ({ color }) => (
   <ul>
     <div className="list-group left">
       <li>
         <Link href="/movements">
           <a className="logo">
-            <img src={Logo} alt="Ripperr Icon" />
+            <Logo color={color} />
             Ripperr
           </a>
         </Link>

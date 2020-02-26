@@ -29,7 +29,7 @@ const ArchetypeListItem: React.FC<{
   return (
     <ArchetypeListItemWrapper
       active={active}
-      color={themeContext.color.green[500]}
+      color={themeContext.color.orange[500]}
       onClick={toggleActive}
     >
       <p className="name">{archetype.name}</p>
@@ -43,7 +43,7 @@ const ArchetypeListItem: React.FC<{
 };
 
 const ArchetypeListItemWrapper = styled(ListItem)<{ active: boolean }>`
-  background: ${(props) => props.active && props.theme.color.green[500]};
+  background: ${(props) => props.active && props.theme.color.orange[500]};
   height: 100%;
   .name {
     padding: 0.5rem;

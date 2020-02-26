@@ -1,7 +1,7 @@
 ﻿import styled from 'styled-components';
 
 const ModalBackground = styled.div`
-  background-color: ${(props) => props.theme.modalBackground};
+  background-color: ${(props) => props.theme.mode.backgroundOpacity[100]};
   position: fixed;
   height: 100%;
   width: 100%;
