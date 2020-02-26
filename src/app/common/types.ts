@@ -67,7 +67,7 @@ export interface Archetype {
   lastModified?: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   name: string;
   description: string;
-  history?: any;
+  // history?: any;
 }
 
 export interface Exercise extends Archetype {

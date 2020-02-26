@@ -62,7 +62,7 @@ const withMovements = (Component: any) => {
                 type,
                 name,
                 description,
-                history,
+                // history,
               } = doc.data();
               const obj: Archetype = {
                 id: doc.id,
@@ -70,7 +70,7 @@ const withMovements = (Component: any) => {
                 type,
                 name,
                 description,
-                history,
+                // history,
               };
 
               archetypeList.push(obj);
@@ -103,7 +103,7 @@ const withMovements = (Component: any) => {
                 name,
                 description,
                 tags,
-                history,
+                // history,
               } = doc.data();
               const obj: Exercise = {
                 id: doc.id,
@@ -112,7 +112,7 @@ const withMovements = (Component: any) => {
                 name,
                 description,
                 tags,
-                history,
+                // history,
               };
 
               exerciseList.push(obj);
@@ -145,7 +145,7 @@ const withMovements = (Component: any) => {
                 name,
                 description,
                 tags,
-                history,
+                // history,
                 mode,
                 movements,
                 rest,
@@ -159,7 +159,7 @@ const withMovements = (Component: any) => {
                 name,
                 description,
                 tags,
-                history,
+                // history,
                 mode,
                 movements,
                 rest,
