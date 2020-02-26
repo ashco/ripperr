@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { ToastContainer } from 'react-toastify';
 
 import GlobalStyle from '../styles/GlobalStyle';
-import { theme, lightMode } from '../styles/theme';
+import { theme, lightMode, darkMode } from '../styles/theme';
 
 import { ModalProvider } from '../context/ModalContext';
 import { MoveProvider } from '../context/MoveContext';

@@ -116,7 +116,7 @@ video {
   vertical-align: baseline;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu,
     Cantarell, Helvetica Neue, sans-serif;
-  color: #333;
+  /* color: #333; */
 }
 /* HTML5 display-role reset for older browsers */
 article,

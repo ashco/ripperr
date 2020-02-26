@@ -141,9 +141,14 @@ export interface IWorkoutFormErrors {
 
 // =============== FORM BUTTONS ===============
 
-export interface ButtonRowBtn {
+export interface ButtonRowCancelBtn {
+  text: string;
+  onClick: () => void;
+}
+export interface ButtonRowActionBtn {
   text: string;
   onClick?: () => void;
+  // submit: boolean;
 }
 // export interface IButtonRow {
 //   cancelBtn: IButtonRowBtn;
@@ -151,8 +156,8 @@ export interface ButtonRowBtn {
 // }
 
 export interface ButtonRowProps {
-  cancelBtn: ButtonRowBtn;
-  actionBtn: ButtonRowBtn;
+  cancelBtn: ButtonRowCancelBtn;
+  actionBtn: ButtonRowActionBtn;
 }
 
 // export interface Archetype {
@@ -198,32 +203,6 @@ export interface IMovementRefs {
   duration: number;
 }
 
-// export interface IMovementRefReps extends IMovementRefs {
-//   sets: number;
-//   reps: number;
-//   duration: null;
-// }
-
-// export interface IMovementRefTimed extends IMovementRefs {
-//   sets: null;
-//   reps: null;
-//   duration: number;
-// }
-
-// export interface IMovementRefs {
-//   [key: string]: string | number;
-//   id: string;
-// }
-
-// export interface IMovementRefReps extends IMovementRefs {
-//   sets: number;
-//   reps: number;
-// }
-
-// export interface IMovementRefTimed extends IMovementRefs {
-//   duration: number;
-// }
-
 export interface IWorkoutRest {
   [key: string]: boolean | number;
   auto: boolean;
@@ -240,7 +219,3 @@ export interface IFormReducerAction {
   type: FormActionType;
   value: string;
 }
-
-// export interface IModalReducerAction {
-//   type: ModalActionType;
-// }

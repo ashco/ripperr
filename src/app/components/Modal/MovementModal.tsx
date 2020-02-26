@@ -195,18 +195,35 @@ const MovementModal: React.FC<{
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (moveState) {
-      // if (mode === ModalMode.Add) {
-      //   handleCreateMovement(moveState);
-      // } else if (mode === ModalMode.Edit) {
-      //   handleUpdateMovement(moveState);
-      // }
+    if (!moveState) {
+      throw Error('No moveState detected!');
+    }
+
+    if (mode === ModalMode.Add) {
+      handleCreateMovement(moveState);
+    } else if (mode === ModalMode.Edit) {
       if (moveState.id) {
         handleUpdateMovement(moveState);
       } else {
-        handleCreateMovement(moveState);
+        throw Error('No moveState.id detected!');
       }
+    } else if (mode === ModalMode.View) {
+      modalDispatch({ type: 'MODAL_EDIT' });
+    } else {
+      throw Error('Unsupported ModalMode provided.');
     }
+    // if (moveState) {
+    //   // if (mode === ModalMode.Add) {
+    //   //   handleCreateMovement(moveState);
+    //   // } else if (mode === ModalMode.Edit) {
+    //   //   handleUpdateMovement(moveState);
+    //   // }
+    //   if (moveState.id) {
+    //     handleUpdateMovement(moveState);
+    //   } else {
+    //     handleCreateMovement(moveState);
+    //   }
+    // }
 
     // if (validateForm(errors)) {
     //   if (formMode === FormMode.Add) {
@@ -301,19 +318,9 @@ const MovementModalWrapper = styled(ModalWrapper)`
     align-items: center;
     text-align: center;
   }
-  input {
-    font-size: 20px;
-  }
   input[type='number'] {
     width: 4.5rem;
     text-align: center;
-  }
-  input,
-  textarea {
-    border: 2px solid black;
-  }
-  textarea {
-    font-size: 1rem;
   }
   input,
   textarea,
@@ -326,18 +333,11 @@ const MovementModalWrapper = styled(ModalWrapper)`
   .view-mode {
     input,
     textarea {
-      /* border: none;
-      padding-left: 0; */
       background: none;
-      color: ${(props) => props.theme.color.neutral[900]};
     }
   }
   .edit-mode {
   }
-  /* .error {
-    margin: auto 0.25rem;
-    font-size: 0.75rem;
-  } */
   .add-btn {
     width: 100%;
   }
@@ -354,7 +354,6 @@ const MovementModalWrapper = styled(ModalWrapper)`
   /* ------ Section specific styling ------ */
   .first-fields {
     display: grid;
-    /* grid-template-rows: auto 1rem auto 1rem auto 1rem; */
     grid-template-rows: auto auto;
     #description {
       height: 4rem;

@@ -63,6 +63,7 @@ const DeleteModal: React.FC = () => {
     actionBtn: {
       text: 'Delete',
       onClick: onDelete,
+      // submit: false,
     },
   };
 
