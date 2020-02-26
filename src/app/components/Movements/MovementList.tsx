@@ -21,8 +21,8 @@ import {
 } from '../../common/types';
 import { MovementType } from '../../common/enums';
 
-export const MovementList: React.FC<{ movementList: Movement[] | null }> = ({
-  movementList,
+export const MovementList: React.FC<{ moveList: Movement[] | null }> = ({
+  moveList,
 }) => {
   function renderListItem(move: Movement) {
     if (move.type === MovementType.Exercise) {
@@ -36,11 +36,11 @@ export const MovementList: React.FC<{ movementList: Movement[] | null }> = ({
 
   return (
     <MovementListWrapper>
-      {movementList ? (
-        movementList.length === 0 ? (
+      {moveList ? (
+        moveList.length === 0 ? (
           <div>Get out there and make something of yourself.</div>
         ) : (
-          movementList.map((move) => renderListItem(move))
+          moveList.map((move) => renderListItem(move))
         )
       ) : (
         <div>Loading ...</div>
@@ -50,7 +50,7 @@ export const MovementList: React.FC<{ movementList: Movement[] | null }> = ({
 };
 
 const MovementListWrapper = styled.ul`
-  margin: 1rem;
+  /* margin: 0 1rem; */
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, 9rem);
@@ -60,6 +60,7 @@ const MovementListWrapper = styled.ul`
   /* grid-template-rows: repeat(auto-fill, 8rem); */
   justify-content: center;
   overflow-y: auto;
+  padding: 1rem 1rem 0;
   /* grid-template-columns: repeat(auto-fill, 8rem);
   grid-template-rows: repeat(auto-fill, 8rem); */
 `;

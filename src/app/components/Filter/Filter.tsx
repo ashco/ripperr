@@ -41,9 +41,11 @@ const Filter: React.FC<{
 };
 
 const FilterContainer = styled.div<{ active: boolean }>`
-  padding: 1rem;
+  padding: 0.75rem;
   display: grid;
   gap: 1rem;
+  border-top: 2px solid ${(props) => props.theme.mode.colorOpacity[200]};
+  background-color: ${(props) => props.theme.mode.background[200]};
 `;
 
 export default Filter;

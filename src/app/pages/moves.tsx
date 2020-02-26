@@ -13,12 +13,11 @@ import { sortMovements } from '../common/sortMovements';
 
 import { IAuthUserContext } from '../common/types';
 
-const MovementsPage: NextPage = () => {
+const MovesPage: NextPage = () => {
   const filterState = useFilterState();
-  // const [activeArchs, setActiveArchs] = useState<string[]>([]);
 
   const movements = useContext(MovementListContext);
-  const movementList = movements.loading
+  const moveList = movements.loading
     ? null
     : [...movements.exercises, ...movements.workouts]
         .sort((a, b) => sortMovements(a, b))
@@ -32,20 +31,8 @@ const MovementsPage: NextPage = () => {
 
   return (
     <MovementsPageWrapper>
-      <MovementList movementList={movementList} />
-      <Filter
-        // filter={filter}
-        // setFilter={setFilter}
-        archetypeList={archetypeList}
-        // activeArchs={activeArchs}
-        // setActiveArchs={setActiveArchs}
-      />
-      {/* <ArchetypeList
-        archetypeList={archetypeList}
-        activeArchs={activeArchs}
-        setActiveArchs={setActiveArchs}
-        />
-      <FilterBar filter={filter} setFilter={setFilter} /> */}
+      <MovementList moveList={moveList} />
+      <Filter archetypeList={archetypeList} />
     </MovementsPageWrapper>
   );
 };
@@ -53,10 +40,10 @@ const MovementsPage: NextPage = () => {
 const MovementsPageWrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
-  gap: 1rem;
+  /* gap: 1rem; */
   height: 100%;
 `;
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 
-export default withAuthorization(condition)(withMovements(MovementsPage));
+export default withAuthorization(condition)(withMovements(MovesPage));

@@ -1,8 +1,6 @@
-﻿const sizes = {
-  tablet: 768,
-  laptop: 1200,
-  desktop: 1450,
-  hd: 2400,
+﻿export const sizes = {
+  tablet: '768px',
+  laptop: '1200px',
+  desktop: '1450px',
+  hd: '2400px',
 };
-
-export default sizes;

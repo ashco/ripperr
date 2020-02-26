@@ -50,6 +50,7 @@ const FilterBarWrapper = styled.div`
     background: ${(props) => props.theme.mode.background[300]};
     border-radius: 5px;
     color: ${(props) => props.theme.mode.color[100]};
+    width: inherit;
   }
 `;
 

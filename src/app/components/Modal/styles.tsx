@@ -1,13 +1,16 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
+import { sizes } from '../../styles/sizes';
+
 export const ModalWrapper = styled.div`
   background: ${(props) => props.theme.mode.background[300]};
   max-width: 90vw;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 5px;
   color: ${(props) => props.theme.mode.color[100]};
   box-shadow: ${(props) => props.theme.shadow[2]};
+  margin: 0.5rem;
   input,
   textarea {
     border: 2px solid ${(props) => props.theme.mode.color[100]};
@@ -19,5 +22,8 @@ export const ModalWrapper = styled.div`
   }
   textarea {
     font-size: 16px;
+  }
+  @media (min-width: ${sizes.tablet}) {
+    padding: 2rem;
   }
 `;

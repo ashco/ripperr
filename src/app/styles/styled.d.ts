@@ -10,6 +10,7 @@ declare module 'styled-components' {
       background: any;
       backgroundOpacity: any;
       color: any;
+      colorOpacity: any;
     };
     color: {
       neutral: any;

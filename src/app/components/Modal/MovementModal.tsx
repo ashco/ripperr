@@ -67,24 +67,24 @@ const MovementModal: React.FC<{
 
   function handleUpdateMovement(moveState: Movement): void {
     let firebaseFnc;
-    let movementList;
+    let moveList;
 
     if (moveState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetype;
-      movementList = archetypes;
+      moveList = archetypes;
     } else if (moveState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercise;
-      movementList = exercises;
+      moveList = exercises;
     } else if (moveState.type === MovementType.Workout) {
       firebaseFnc = firebase.workout;
-      movementList = workouts;
+      moveList = workouts;
     } else {
       throw Error('moveState type is not recognized!');
     }
 
     if (authUser && moveState.id) {
       // Check that name is unique or matches with current id
-      const moveNames = movementList.map((move) => move.name);
+      const moveNames = moveList.map((move) => move.name);
       // if (
       //   moveNames.includes(moveState.name) &&
       //   movement.name !== moveState.name
@@ -130,16 +130,16 @@ const MovementModal: React.FC<{
 
   function handleCreateMovement(moveState: Movement): void {
     let firebaseFnc;
-    let movementList;
+    let moveList;
     if (moveState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetypes;
-      movementList = archetypes;
+      moveList = archetypes;
     } else if (moveState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercises;
-      movementList = exercises;
+      moveList = exercises;
     } else if (moveState.type === MovementType.Workout) {
       firebaseFnc = firebase.workouts;
-      movementList = workouts;
+      moveList = workouts;
     } else {
       throw Error('No MovementType specified!');
     }
@@ -147,7 +147,7 @@ const MovementModal: React.FC<{
     if (authUser) {
       const docRef = firebaseFnc(authUser.uid).doc();
       // Check that name is unique
-      const moveNames = movementList.map((move) => move.name);
+      const moveNames = moveList.map((move) => move.name);
       // if (moveNames.includes(moveState.name)) {
       //   toast.error(`${movementText} name is already in use.`);
       //   return;

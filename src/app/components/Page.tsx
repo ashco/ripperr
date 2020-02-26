@@ -61,7 +61,7 @@ const Page: React.FC = (props) => {
 
   return (
     <DarkModeProvider>
-      <ThemeProvider theme={{ ...theme, mode: lightMode }}>
+      <ThemeProvider theme={{ ...theme, mode: darkMode }}>
         <MoveProvider>
           <ModalProvider>
             <FilterProvider>

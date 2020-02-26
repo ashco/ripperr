@@ -112,6 +112,10 @@ export const darkMode = {
     100: 'hsl(0, 0%, 100%)',
     200: 'hsl(240, 1%, 47%)',
   },
+  colorOpacity: {
+    100: 'hsla(0, 0%, 100%, 0.15)',
+    200: 'hsla(240, 1%, 47%, 0.5)',
+  },
 };
 
 export const lightMode = {
@@ -126,5 +130,9 @@ export const lightMode = {
   color: {
     100: 'hsl(0, 0%, 13%)',
     200: 'hsl(240, 1%, 47%)',
+  },
+  colorOpacity: {
+    100: 'hsla(0, 0%, 13%, 0.15)',
+    200: 'hsla(240, 1%, 47%, 0.5)',
   },
 };

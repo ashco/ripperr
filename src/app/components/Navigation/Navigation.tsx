@@ -9,6 +9,8 @@ import SignOutButton from './SignOutButton';
 // import Logo from '../../static/icons/fire-alt-solid.svg';
 import Logo from '../../icons/Logo';
 
+import { sizes } from '../../styles/sizes';
+
 const Navigation: React.FC = () => {
   const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);
@@ -87,7 +89,7 @@ const NavigationWrapper = styled.nav`
     grid-auto-flow: column;
     place-items: center;
     height: 100%;
-    padding: 0 2rem;
+    padding: 0 0.8rem;
     div.list-group {
       display: grid;
       grid-auto-flow: column;
@@ -110,6 +112,12 @@ const NavigationWrapper = styled.nav`
     }
     a {
       color: ${(props) => props.theme.mode.color[100]};
+    }
+  }
+
+  @media (min-width: ${sizes.tablet}) {
+    ul {
+      padding: 0 2rem;
     }
   }
 `;
