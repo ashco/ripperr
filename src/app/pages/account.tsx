@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import { AuthUserContext, withAuthorization } from '../context';
+import { useDarkModeDispatch } from '../context/DarkModeContext';
 
 import { AuthFormContainer } from './signin';
 import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';
@@ -12,6 +13,9 @@ import { IAuthUserContext } from '../common/types';
 
 const AccountPage: NextPage = () => {
   const authUser = useContext(AuthUserContext);
+
+  const darkModeDispatch = useDarkModeDispatch();
+
   return (
     <AccountPageWrapper>
       <h1>{authUser ? `Account: ${authUser.email}` : `Account Page`}</h1>
@@ -21,6 +25,14 @@ const AccountPage: NextPage = () => {
       <AuthFormContainer>
         <PasswordChangeForm />
       </AuthFormContainer>
+      <div>
+        <button onClick={() => darkModeDispatch({ type: 'DARK_MODE_OFF' })}>
+          Light Mode
+        </button>
+        <button onClick={() => darkModeDispatch({ type: 'DARK_MODE_ON' })}>
+          Dark Mode
+        </button>
+      </div>
     </AccountPageWrapper>
   );
 };

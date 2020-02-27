@@ -14,7 +14,7 @@ import { sortMovements } from '../common/sortMovements';
 
 import { IAuthUserContext } from '../common/types';
 
-const MovesPage: NextPage = () => {
+const MovesPage: NextPage = (props) => {
   const filterState = useFilterState();
 
   const movements = useContext(MovementListContext);
@@ -30,6 +30,7 @@ const MovesPage: NextPage = () => {
     ? null
     : [...movements.archetypes].sort((a, b) => sortMovements(a, b));
 
+  console.log(props);
   return (
     <MovementsPageWrapper>
       <MovementList moveList={moveList} />

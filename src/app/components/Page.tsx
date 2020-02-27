@@ -3,15 +3,17 @@ import styled, { ThemeProvider } from 'styled-components';
 import { ToastContainer } from 'react-toastify';
 
 import GlobalStyle from '../styles/GlobalStyle';
-import { theme, lightMode, darkMode } from '../styles/theme';
+// import { theme, lightMode, darkMode } from '../styles/theme';
 
 import { ModalProvider } from '../context/ModalContext';
 import { MoveProvider } from '../context/MoveContext';
 import { FilterProvider } from '../context/FilterContext';
-import { DarkModeProvider } from '../context/DarkModeContext';
+import {
+  useDarkModeState,
+  useDarkModeDispatch,
+} from '../context/DarkModeContext';
 
 import Meta from './Meta';
-import Header from './Header';
 import Navigation from './Navigation/Navigation';
 
 const StyledPage = styled.div`
@@ -40,41 +42,34 @@ const Inner = styled.div`
 `;
 
 const Page: React.FC = (props) => {
-  // const [themeObj, setThemeObj] = useState({ ...theme, mode: themeLight });
+  const darkModeState = useDarkModeState();
+  const darkModeDispatch = useDarkModeDispatch();
 
-  // useEffect(() => {
-  //   if (typeof window !== `undefined`) {
-  //     // Check for system Dark Mode
-  //     if (
-  //       window.matchMedia &&
-  //       window.matchMedia('(prefers-color-scheme: dark)').matches
-  //     ) {
-  //       setThemeObj({ ...themeObj, mode: themeDark });
-  //     } else {
-  //       setThemeObj({ ...themeObj, mode: themeLight });
-  //     }
-  //   } else {
-  //     setThemeObj({ ...themeObj, mode: themeLight });
-  //   }
-  // });
+  useEffect(() => {
+    if (
+      typeof window !== `undefined` &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      darkModeDispatch({ type: 'DARK_MODE_ON' });
+    }
+  }, []);
 
   return (
-    <DarkModeProvider>
-      <ThemeProvider theme={{ ...theme, mode: darkMode }}>
-        <MoveProvider>
-          <ModalProvider>
-            <FilterProvider>
-              <StyledPage>
-                <GlobalStyle />
-                <Meta />
-                <Navigation />
-                <Inner>{props.children}</Inner>
-              </StyledPage>
-            </FilterProvider>
-          </ModalProvider>
-        </MoveProvider>
-      </ThemeProvider>
-    </DarkModeProvider>
+    <ThemeProvider theme={darkModeState}>
+      <MoveProvider>
+        <ModalProvider>
+          <FilterProvider>
+            <StyledPage>
+              <GlobalStyle />
+              <Meta />
+              <Navigation />
+              <Inner>{props.children}</Inner>
+            </StyledPage>
+          </FilterProvider>
+        </ModalProvider>
+      </MoveProvider>
+    </ThemeProvider>
   );
 };
 
