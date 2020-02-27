@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button<{ size?: string }>`
+const Button = styled.button<{ size?: string; onClick?: any }>`
   border: 2px solid ${(props) => props.theme.mode.color[100]};
   color: ${(props) => props.theme.mode.color[100]};
   background: none;

@@ -3,7 +3,7 @@ import App from 'next/app';
 import Page from '../components/Page';
 
 import { withAuthentication } from '../context';
-import { DarkModeProvider } from '../context/DarkModeContext';
+import { ThemeModeProvider } from '../context/ThemeModeContext';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,11 +11,11 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <DarkModeProvider>
+      <ThemeModeProvider>
         <Page>
           <Component {...pageProps} />
         </Page>
-      </DarkModeProvider>
+      </ThemeModeProvider>
     );
   }
 }

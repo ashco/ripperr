@@ -100,6 +100,7 @@
   maxWidth: '1000px',
 };
 export const darkMode = {
+  type: 'Dark',
   background: {
     100: 'hsl(0, 0%, 7%)',
     200: 'hsl(0, 0%, 9%)',
@@ -119,6 +120,7 @@ export const darkMode = {
 };
 
 export const lightMode = {
+  type: 'Light',
   background: {
     100: 'hsl(180, 6.2%, 93%)',
     200: 'hsl(300, 14.3%, 98.6%)',

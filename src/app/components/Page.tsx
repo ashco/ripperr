@@ -9,9 +9,9 @@ import { ModalProvider } from '../context/ModalContext';
 import { MoveProvider } from '../context/MoveContext';
 import { FilterProvider } from '../context/FilterContext';
 import {
-  useDarkModeState,
-  useDarkModeDispatch,
-} from '../context/DarkModeContext';
+  useThemeModeObj,
+  useThemeModeToggle,
+} from '../context/ThemeModeContext';
 
 import Meta from './Meta';
 import Navigation from './Navigation/Navigation';
@@ -42,8 +42,8 @@ const Inner = styled.div`
 `;
 
 const Page: React.FC = (props) => {
-  const darkModeState = useDarkModeState();
-  const darkModeDispatch = useDarkModeDispatch();
+  const themeObj = useThemeModeObj();
+  const darkModeDispatch = useThemeModeToggle();
 
   useEffect(() => {
     if (
@@ -56,7 +56,7 @@ const Page: React.FC = (props) => {
   }, []);
 
   return (
-    <ThemeProvider theme={darkModeState}>
+    <ThemeProvider theme={themeObj}>
       <MoveProvider>
         <ModalProvider>
           <FilterProvider>

@@ -7,6 +7,7 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     mode: {
+      type: string;
       background: any;
       backgroundOpacity: any;
       color: any;
