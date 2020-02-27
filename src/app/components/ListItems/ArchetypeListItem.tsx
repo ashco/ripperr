@@ -47,6 +47,7 @@ const ArchetypeListItem: React.FC<{
 
 const ArchetypeListItemWrapper = styled(ListItem)`
   height: 100%;
+  align-items: center;
   .name {
     padding: 0.5rem;
   }

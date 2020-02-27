@@ -10,7 +10,8 @@ export const ListItem = styled.li<{ color: string }>`
   box-shadow: ${(props) => props.theme.shadow[1]};
   border-radius: 3px;
   display: grid;
-  grid-auto-rows: 1fr auto;
+  grid-template-columns: 1fr auto;
+  /* grid-auto-rows: 1fr auto; */
   border-top: 7px solid ${(props) => props.color};
   cursor: pointer;
   /* .color-bar {
@@ -33,7 +34,7 @@ export const ListItem = styled.li<{ color: string }>`
     /* grid-template-columns: auto 1fr; */
   }
   .btn-wrapper {
-    justify-self: end;
+    align-self: end;
   }
   .btn-container {
     /* display: flex; */
