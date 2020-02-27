@@ -8,6 +8,7 @@ import { FilterProvider, useFilterState } from '../context/FilterContext';
 
 import { MovementList } from '../components/Movements';
 import { Filter } from '../components/Filter';
+import { Modal } from '../components/Modal';
 
 import { sortMovements } from '../common/sortMovements';
 
@@ -33,6 +34,7 @@ const MovesPage: NextPage = () => {
     <MovementsPageWrapper>
       <MovementList moveList={moveList} />
       <Filter archetypeList={archetypeList} />
+      <Modal />
     </MovementsPageWrapper>
   );
 };
@@ -40,7 +42,6 @@ const MovesPage: NextPage = () => {
 const MovementsPageWrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
-  /* gap: 1rem; */
   height: 100%;
 `;
 

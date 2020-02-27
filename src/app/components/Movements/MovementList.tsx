@@ -63,4 +63,10 @@ const MovementListWrapper = styled.ul`
   padding: 1rem 1rem 0;
   /* grid-template-columns: repeat(auto-fill, 8rem);
   grid-template-rows: repeat(auto-fill, 8rem); */
+  &:after {
+    content: ' ';
+    height: 1px;
+    position: relative;
+    bottom: 0;
+  }
 `;

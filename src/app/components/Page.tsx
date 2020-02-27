@@ -13,7 +13,6 @@ import { DarkModeProvider } from '../context/DarkModeContext';
 import Meta from './Meta';
 import Header from './Header';
 import Navigation from './Navigation/Navigation';
-import Modal from './Modal/Modal';
 
 const StyledPage = styled.div`
   color: ${({ theme }) => theme.color.neutral[900]};
@@ -68,9 +67,7 @@ const Page: React.FC = (props) => {
               <StyledPage>
                 <GlobalStyle />
                 <Meta />
-                <Modal />
                 <Navigation />
-                <ToastContainer />
                 <Inner>{props.children}</Inner>
               </StyledPage>
             </FilterProvider>

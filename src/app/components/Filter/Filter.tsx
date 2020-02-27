@@ -32,19 +32,30 @@ const Filter: React.FC<{
     };
   });
 
+  const filtering =
+    filterState.value.length > 0 || filterState.archs.length > 0;
+
   return (
-    <FilterContainer active={filterState.active} ref={filterRef}>
+    <FilterContainer
+      active={filterState.active}
+      filtering={filtering}
+      ref={filterRef}
+    >
       {filterState.active && <ArchetypeList archetypeList={archetypeList} />}
       <FilterBar />
     </FilterContainer>
   );
 };
 
-const FilterContainer = styled.div<{ active: boolean }>`
+const FilterContainer = styled.div<{ active: boolean; filtering: boolean }>`
   padding: 0.75rem;
   display: grid;
   gap: 1rem;
-  border-top: 2px solid ${(props) => props.theme.mode.colorOpacity[200]};
+  border-top: 2px solid
+    ${(props) =>
+      props.filtering
+        ? props.theme.color.orange[500]
+        : props.theme.mode.colorOpacity[200]};
   background-color: ${(props) => props.theme.mode.background[200]};
 `;
 
