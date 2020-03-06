@@ -42,8 +42,8 @@ const Inner = styled.div`
 `;
 
 const Page: React.FC = (props) => {
-  const themeObj = useThemeModeState();
-  const darkModeDispatch = useThemeModeDispatch();
+  const themeModeState = useThemeModeState();
+  const themeModeDispatch = useThemeModeDispatch();
 
   useEffect(() => {
     if (
@@ -51,12 +51,12 @@ const Page: React.FC = (props) => {
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
     ) {
-      darkModeDispatch({ type: 'DARK_MODE_ON' });
+      themeModeDispatch({ type: 'DARK_MODE' });
     }
   }, []);
 
   return (
-    <ThemeProvider theme={themeObj}>
+    <ThemeProvider theme={themeModeState}>
       <MoveProvider>
         <ModalProvider>
           <FilterProvider>

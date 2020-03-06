@@ -2,7 +2,7 @@
 
 import { theme, darkMode, lightMode } from '../styles/theme';
 
-type ThemeModeActionType = 'DARK_MODE_OFF' | 'DARK_MODE_ON';
+export type ThemeModeActionType = 'LIGHT_MODE' | 'DARK_MODE';
 type ThemeModeAction = {
   type: ThemeModeActionType;
 };
@@ -22,13 +22,13 @@ const ThemeModeDispatchContext = React.createContext<
   ThemeModeDispatch | undefined
 >(undefined);
 
-function darkModeReducer(state: ThemeModeState, action: ThemeModeAction) {
+function themeModeReducer(state: ThemeModeState, action: ThemeModeAction) {
   console.log(action.type);
 
   switch (action.type) {
-    case 'DARK_MODE_OFF':
+    case 'LIGHT_MODE':
       return { ...theme, mode: lightMode };
-    case 'DARK_MODE_ON':
+    case 'DARK_MODE':
       return { ...theme, mode: darkMode };
     default: {
       throw Error(`Unhandled action type: ${action.type}`);
@@ -47,7 +47,7 @@ function darkModeReducer(state: ThemeModeState, action: ThemeModeAction) {
 
 //   return (
 //     <ThemeModeStateContext.Provider value={themeObj}>
-//       <ThemeModeDispatchContext.Provider value={darkModeReducer}>
+//       <ThemeModeDispatchContext.Provider value={themeModeReducer}>
 //         {children}
 //       </ThemeModeDispatchContext.Provider>
 //     </ThemeModeStateContext.Provider>
@@ -55,7 +55,7 @@ function darkModeReducer(state: ThemeModeState, action: ThemeModeAction) {
 // }
 function ThemeModeProvider({ children }: ThemeModeProviderProps) {
   const [state, dispatch] = React.useReducer(
-    darkModeReducer,
+    themeModeReducer,
     INITIAL_THEME_STATE,
   );
 

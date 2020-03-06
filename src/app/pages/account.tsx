@@ -22,6 +22,7 @@ const AccountPage: NextPage = () => {
       <AuthFormContainer>
         <PasswordChangeForm />
       </AuthFormContainer>
+      <DarkModeButton />
     </AccountPageWrapper>
   );
 };
