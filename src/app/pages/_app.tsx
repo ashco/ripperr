@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import App from 'next/app';
 import Page from '../components/Page';
-
 import { withAuthentication } from '../context';
 import { ThemeModeProvider } from '../context/ThemeModeContext';
 

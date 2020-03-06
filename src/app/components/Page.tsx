@@ -9,8 +9,8 @@ import { ModalProvider } from '../context/ModalContext';
 import { MoveProvider } from '../context/MoveContext';
 import { FilterProvider } from '../context/FilterContext';
 import {
-  useThemeModeObj,
-  useThemeModeToggle,
+  useThemeModeState,
+  useThemeModeDispatch,
 } from '../context/ThemeModeContext';
 
 import Meta from './Meta';
@@ -42,8 +42,8 @@ const Inner = styled.div`
 `;
 
 const Page: React.FC = (props) => {
-  const themeObj = useThemeModeObj();
-  const darkModeDispatch = useThemeModeToggle();
+  const themeObj = useThemeModeState();
+  const darkModeDispatch = useThemeModeDispatch();
 
   useEffect(() => {
     if (

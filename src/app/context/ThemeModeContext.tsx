@@ -6,8 +6,8 @@ type ThemeModeActionType = 'DARK_MODE_OFF' | 'DARK_MODE_ON';
 type ThemeModeAction = {
   type: ThemeModeActionType;
 };
-type ThemeModeDispatch = (action: ThemeModeAction) => void;
 type ThemeModeState = any;
+type ThemeModeDispatch = (action: ThemeModeAction) => void;
 type ThemeModeProviderProps = { children: React.ReactNode };
 
 const INITIAL_THEME_STATE = {
@@ -36,43 +36,39 @@ function darkModeReducer(state: ThemeModeState, action: ThemeModeAction) {
   }
 }
 
-function ThemeModeProvider({ children }: ThemeModeProviderProps) {
-  const [isThemeMode, setThemeMode] = React.useState(false);
-
-  function createThemeModeObj() {
-    return { ...theme, mode: isThemeMode ? darkMode : lightMode };
-  }
-
-  function toggleThemeMode() {
-    setThemeMode((mode) => !mode);
-  }
-
-  const themeObj = createThemeModeObj();
-
-  return (
-    <ThemeModeStateContext.Provider value={themeObj}>
-      <ThemeModeDispatchContext.Provider value={toggleThemeMode}>
-        {children}
-      </ThemeModeDispatchContext.Provider>
-    </ThemeModeStateContext.Provider>
-  );
-}
 // function ThemeModeProvider({ children }: ThemeModeProviderProps) {
-//   const [state, dispatch] = React.useReducer(
-//     darkModeReducer,
-//     INITIAL_THEME_STATE,
-//   );
+//   const [isThemeMode, setThemeMode] = React.useState(false);
+
+//   function createThemeModeObj() {
+//     return { ...theme, mode: isThemeMode ? darkMode : lightMode };
+//   }
+
+//   const themeObj = createThemeModeObj();
 
 //   return (
-//     <ThemeModeStateContext.Provider value={state}>
-//       <ThemeModeDispatchContext.Provider value={dispatch}>
+//     <ThemeModeStateContext.Provider value={themeObj}>
+//       <ThemeModeDispatchContext.Provider value={darkModeReducer}>
 //         {children}
 //       </ThemeModeDispatchContext.Provider>
 //     </ThemeModeStateContext.Provider>
 //   );
 // }
+function ThemeModeProvider({ children }: ThemeModeProviderProps) {
+  const [state, dispatch] = React.useReducer(
+    darkModeReducer,
+    INITIAL_THEME_STATE,
+  );
 
-function useThemeModeObj() {
+  return (
+    <ThemeModeStateContext.Provider value={state}>
+      <ThemeModeDispatchContext.Provider value={dispatch}>
+        {children}
+      </ThemeModeDispatchContext.Provider>
+    </ThemeModeStateContext.Provider>
+  );
+}
+
+function useThemeModeState() {
   const context = React.useContext(ThemeModeStateContext);
   if (context === undefined) {
     throw Error('useThemeModeState must be used within a ThemeModeProvider');
@@ -80,7 +76,7 @@ function useThemeModeObj() {
   return context;
 }
 
-function useThemeModeToggle() {
+function useThemeModeDispatch() {
   const context = React.useContext(ThemeModeDispatchContext);
   if (context === undefined) {
     throw Error('useThemeModeDispatch must be used within a ThemeModeProvider');
@@ -88,4 +84,4 @@ function useThemeModeToggle() {
   return context;
 }
 
-export { ThemeModeProvider, useThemeModeObj, useThemeModeToggle };
+export { ThemeModeProvider, useThemeModeState, useThemeModeDispatch };

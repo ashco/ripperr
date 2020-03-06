@@ -13,7 +13,6 @@ import { IAuthUserContext } from '../common/types';
 
 const AccountPage: NextPage = () => {
   const authUser = useContext(AuthUserContext);
-
   return (
     <AccountPageWrapper>
       <h1>{authUser ? `Account: ${authUser.email}` : `Account Page`}</h1>
@@ -23,7 +22,6 @@ const AccountPage: NextPage = () => {
       <AuthFormContainer>
         <PasswordChangeForm />
       </AuthFormContainer>
-      <DarkModeButton />
     </AccountPageWrapper>
   );
 };
