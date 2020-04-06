@@ -6,6 +6,7 @@ import ButtonRow from './ButtonRow';
 // import AddForm from './AddForm';
 import InputField from './InputField';
 
+import ArchField from './FormFields/ArchField';
 import FirstFields from './FormFields/FirstFields';
 import RepsField from './FormFields/RepsField';
 import TimedField from './FormFields/TimedField';
@@ -36,6 +37,7 @@ export {
   RepsField,
   RestField,
   ModeField,
+  ArchField,
   FirstFields,
   TimedField,
   ButtonRow,

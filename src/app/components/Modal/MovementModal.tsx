@@ -12,7 +12,7 @@ import { useModalDispatch } from '../../context/ModalContext';
 
 // import { MovementFormWrapper } from '../Forms/styles';
 import { ModalWrapper } from './styles';
-import { ButtonRow } from '../Forms';
+import { ButtonRow, ArchField } from '../Forms';
 
 import {
   Movement,
@@ -295,6 +295,7 @@ const MovementModal: React.FC<{
             }
             disabled={mode === ModalMode.View}
           />
+          <ArchField moveState={moveState as Exercise | Workout} />
         </div>
         <ButtonRow config={btnConfig} />
       </form>

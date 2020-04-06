@@ -62,6 +62,7 @@ export interface IHandleChange {
 export type Movement = Archetype | Exercise | Workout;
 
 export interface Archetype {
+  // id and lastModified are ? because id is not assigned during initial form creation process
   readonly type: MovementType;
   readonly id?: string;
   lastModified?: firebase.firestore.FieldValue | firebase.firestore.Timestamp;

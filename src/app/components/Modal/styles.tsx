@@ -13,7 +13,7 @@ export const ModalWrapper = styled.div`
   margin: 0.5rem;
   input,
   textarea {
-    border: 2px solid ${(props) => props.theme.mode.color[100]};
+    border: 2px solid ${(props) => props.theme.mode.color[200]};
     background: none;
     color: ${(props) => props.theme.mode.color[100]};
   }

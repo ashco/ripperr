@@ -11,7 +11,7 @@ type FormActionType =
   | 'MOVE_SET'
   | 'MOVE_CHANGE_NAME'
   | 'MOVE_CHANGE_DESCRIPTION'
-  | 'MOVE_CHANGE_TAG';
+  | 'MOVE_CHANGE_ARCH';
 
 type FormAction = { type: FormActionType; value?: string | Movement };
 type MoveDispatch = (action: FormAction) => void;
@@ -68,6 +68,8 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
   const { type, value = 'NO VALUE SET' } = action;
 
   console.log(type);
+  console.log(value);
+  console.log(state);
 
   switch (type) {
     case 'MOVE_CLEAR':
@@ -84,6 +86,43 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
       return { ...state, name: value } as Movement;
     case 'MOVE_CHANGE_DESCRIPTION':
       return { ...state, description: value } as Movement;
+    case 'MOVE_CHANGE_ARCH': {
+      if (state?.type === MovementType.Archetype) {
+        throw Error();
+      } else if (
+        state?.type === MovementType.Exercise ||
+        state?.type === MovementType.Workout
+      ) {
+        const { tags } = state as Exercise | Workout;
+        // add or remove value
+        const index = tags.indexOf(value as string);
+        console.log(index);
+        if (index >= 0) {
+          console.log('1');
+          tags.splice(index, 1);
+        } else {
+          console.log('2');
+          tags.push(value as string);
+        }
+
+        console.log(tags);
+
+        return { ...state, tags };
+      }
+    }
+    // if (
+    //   state?.type !== MovementType.Exercise &&
+    //   state?.type !== MovementType.Workout
+    // ) {
+    //   throw Error();
+    // }
+
+    // const tags = (state as ).tags;
+
+    // console.log(state, action);
+
+    // return { ...(value as Movement) };
+
     // case 'MOVE_CHANGE_TAG':
     // if (
     //   movementType !== MovementType.Exercise &&
