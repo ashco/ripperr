@@ -260,6 +260,8 @@ const MovementModal: React.FC<{
     btnConfig.actionBtn.text = 'Edit';
   }
 
+  const disabled = mode === ModalMode.View;
+
   return (
     <MovementModalWrapper>
       <h1 className="title">{text.title}</h1>
@@ -280,7 +282,7 @@ const MovementModal: React.FC<{
                 value: e.target.value,
               })
             }
-            disabled={mode === ModalMode.View}
+            disabled={disabled}
           />
           <textarea
             id="description"
@@ -293,9 +295,15 @@ const MovementModal: React.FC<{
                 value: e.target.value,
               })
             }
-            disabled={mode === ModalMode.View}
+            disabled={disabled}
           />
-          <ArchField moveState={moveState as Exercise | Workout} />
+          {(moveState?.type === MovementType.Exercise ||
+            moveState?.type === MovementType.Workout) && (
+            <ArchField
+              moveState={moveState as Exercise | Workout}
+              disabled={disabled}
+            />
+          )}
         </div>
         <ButtonRow config={btnConfig} />
       </form>

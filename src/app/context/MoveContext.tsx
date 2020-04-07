@@ -67,10 +67,6 @@ const MovementDispatchContext = React.createContext<MoveDispatch | undefined>(
 function formReducer(state: MoveState, action: FormAction): MoveState {
   const { type, value = 'NO VALUE SET' } = action;
 
-  console.log(type);
-  console.log(value);
-  console.log(state);
-
   switch (type) {
     case 'MOVE_CLEAR':
       return null;
@@ -87,9 +83,7 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
     case 'MOVE_CHANGE_DESCRIPTION':
       return { ...state, description: value } as Movement;
     case 'MOVE_CHANGE_ARCH': {
-      if (state?.type === MovementType.Archetype) {
-        throw Error();
-      } else if (
+      if (
         state?.type === MovementType.Exercise ||
         state?.type === MovementType.Workout
       ) {
@@ -108,42 +102,10 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
         console.log(tags);
 
         return { ...state, tags };
+      } else {
+        throw Error();
       }
     }
-    // if (
-    //   state?.type !== MovementType.Exercise &&
-    //   state?.type !== MovementType.Workout
-    // ) {
-    //   throw Error();
-    // }
-
-    // const tags = (state as ).tags;
-
-    // console.log(state, action);
-
-    // return { ...(value as Movement) };
-
-    // case 'MOVE_CHANGE_TAG':
-    // if (
-    //   movementType !== MovementType.Exercise &&
-    //   movementType !== MovementType.Workout
-    // ) {
-    //   throw Error();
-    // }
-
-    // return { ...state, tags: [...state.tags, action.value] };
-    // case FormActionType.RemoveTag: {
-    //   if (
-    //     movementType !== MovementType.Exercise &&
-    //     movementType !== MovementType.Workout
-    //   ) {
-    //     throw Error();
-    //   }
-    //   const tags = (state as
-    //     | ExerciseFormState
-    //     | WorkoutFormState).tags.filter((tag) => tag === action.value);
-    //   return { ...state, tags };
-    // }
     default:
       throw Error();
   }

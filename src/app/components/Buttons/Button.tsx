@@ -9,6 +9,11 @@ const Button = styled.button<{ size?: string; onClick?: any }>`
   padding: 0.5rem;
   width: 100%;
   cursor: pointer;
+  &:disabled {
+    /* color: grey;
+    border-color: grey; */
+    cursor: default;
+  }
   &:hover {
     /* background: lightgray; */
   }
