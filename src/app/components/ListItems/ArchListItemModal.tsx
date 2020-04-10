@@ -12,7 +12,8 @@ import { Archetype } from '../../common/types';
 const ArchListItemModal: React.FC<{
   archetype: Archetype;
   active: boolean;
-}> = ({ archetype, active }) => {
+  disabled: boolean;
+}> = ({ archetype, active, disabled }) => {
   const themeContext = useContext(ThemeContext);
   const moveDispatch = useMoveDispatch();
 
@@ -35,18 +36,26 @@ const ArchListItemModal: React.FC<{
           : themeContext.mode.colorOpacity[200]
       }
       onClick={toggleArch}
+      active={active}
+      disabled={disabled}
     >
       <p className="name">{archetype.name}</p>
     </ArchListItemModalWrapper>
   );
 };
 
-const ArchListItemModalWrapper = styled(ListItem)`
+const ArchListItemModalWrapper = styled(ListItem)<{
+  disabled?: boolean;
+  active?: boolean;
+}>`
   height: 100%;
   align-items: center;
-  .name {
+  p.name {
     padding: 0.5rem;
+    color: ${(props) =>
+      props.active ? 'default' : props.theme.mode.color[200]};
   }
+  pointer-events: ${(props) => (props.disabled ? 'none' : 'default')};
 `;
 
 export default ArchListItemModal;

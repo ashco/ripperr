@@ -90,20 +90,15 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
         const { tags } = state as Exercise | Workout;
         // add or remove value
         const index = tags.indexOf(value as string);
-        console.log(index);
+        const newTags = [...tags];
         if (index >= 0) {
-          console.log('1');
-          tags.splice(index, 1);
+          newTags.splice(index, 1);
         } else {
-          console.log('2');
-          tags.push(value as string);
+          newTags.push(value as string);
         }
-
-        console.log(tags);
-
-        return { ...state, tags };
+        return { ...state, tags: newTags };
       } else {
-        throw Error();
+        throw Error('MOVE_CHANGE_ARCH state type is note Exercise or Workout.');
       }
     }
     default:

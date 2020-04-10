@@ -14,20 +14,21 @@ const ArchField: React.FC<{
   //   form: Workout;
   //   handleClick: (e: IHandleChange) => void;
   // }> = ({ form, handleClick }) => {
-  moveState: Exercise | Workout;
+  // moveState: Exercise | Workout;
+  tags: string[];
   disabled: boolean;
-}> = ({ moveState, disabled }) => {
+}> = ({ tags, disabled }) => {
   const { archetypes } = React.useContext(MovementListContext);
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
 
-  function handleClick(e: any) {
-    e.preventDefault();
+  // function handleClick(e: any) {
+  //   e.preventDefault();
 
-    moveDispatch({
-      type: 'MOVE_CHANGE_ARCH',
-      value: e.target.value,
-    });
-  }
+  //   moveDispatch({
+  //     type: 'MOVE_CHANGE_ARCH',
+  //     value: e.target.value,
+  //   });
+  // }
 
   return (
     <>
@@ -36,7 +37,8 @@ const ArchField: React.FC<{
           <ArchListItemModal
             key={arch.id}
             archetype={arch}
-            active={moveState.tags.includes(arch.id as string)}
+            active={tags.includes(arch.id as string)}
+            disabled={disabled}
           />
           // <ArchButton
           //   active={moveState.tags.includes(arch.id as string)}
