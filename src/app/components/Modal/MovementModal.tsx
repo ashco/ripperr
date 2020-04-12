@@ -12,7 +12,7 @@ import { useModalDispatch } from '../../context/ModalContext';
 
 // import { MovementFormWrapper } from '../Forms/styles';
 import { ModalWrapper } from './styles';
-import { ButtonRow, ArchField } from '../Forms';
+import { ButtonRow, ArchField, MovementsField } from '../Forms';
 
 import {
   Movement,
@@ -186,6 +186,8 @@ const MovementModal: React.FC<{
 
   const disabled = mode === ModalMode.View;
 
+  console.log(moveState);
+
   return (
     <MovementModalWrapper>
       <h1 className="title">{text.title}</h1>
@@ -221,6 +223,47 @@ const MovementModal: React.FC<{
             }
             disabled={disabled}
           />
+          {moveState?.type === MovementType.Workout && (
+            <>
+              <WorkoutModeField>
+                <label htmlFor="reps">
+                  <input
+                    type="radio"
+                    id="reps"
+                    name="mode"
+                    checked={(moveState as Workout).mode === 'REPS'}
+                    value="REPS"
+                    onChange={(e) =>
+                      moveDispatch({
+                        type: 'MOVE_CHANGE_MODE',
+                        value: e.currentTarget.value,
+                      })
+                    }
+                    disabled={disabled}
+                  />
+                  Reps
+                </label>
+                <label htmlFor="timed">
+                  <input
+                    type="radio"
+                    id="timed"
+                    name="mode"
+                    checked={(moveState as Workout).mode === 'TIMED'}
+                    value="TIMED"
+                    onChange={(e) =>
+                      moveDispatch({
+                        type: 'MOVE_CHANGE_MODE',
+                        value: e.currentTarget.value,
+                      })
+                    }
+                    disabled={disabled}
+                  />
+                  Timed
+                </label>
+              </WorkoutModeField>
+              <MovementsField movements={(moveState as Workout).movements} />
+            </>
+          )}
           {(moveState?.type === MovementType.Exercise ||
             moveState?.type === MovementType.Workout) && (
             <ArchField
@@ -297,6 +340,13 @@ const MovementModalWrapper = styled(ModalWrapper)`
       resize: none;
     }
   }
+`;
+
+const WorkoutModeField = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  margin: 0 auto;
 `;
 
 export default MovementModal;

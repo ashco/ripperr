@@ -11,6 +11,7 @@ type FormActionType =
   | 'MOVE_SET'
   | 'MOVE_CHANGE_NAME'
   | 'MOVE_CHANGE_DESCRIPTION'
+  | 'MOVE_CHANGE_MODE'
   | 'MOVE_CHANGE_ARCH';
 
 type FormAction = { type: FormActionType; value?: string | Movement };
@@ -82,6 +83,8 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
       return { ...state, name: value } as Movement;
     case 'MOVE_CHANGE_DESCRIPTION':
       return { ...state, description: value } as Movement;
+    case 'MOVE_CHANGE_MODE':
+      return { ...state, mode: value } as Workout;
     case 'MOVE_CHANGE_ARCH': {
       if (
         state?.type === MovementType.Exercise ||
