@@ -5,55 +5,35 @@ import { MovementListContext } from '../../../context';
 import { useMoveDispatch } from '../../../context/MoveContext';
 import { Row } from '../styles';
 
-import { ArchListItemModal } from '../../ListItems';
+import { ArchListItemForm } from '../../ListItems';
 import { Button } from '../../Buttons';
 
 import { IHandleChange, Exercise, Workout } from '../../../common/types';
 
 const ArchField: React.FC<{
-  //   form: Workout;
-  //   handleClick: (e: IHandleChange) => void;
-  // }> = ({ form, handleClick }) => {
-  // moveState: Exercise | Workout;
   tags: string[];
   disabled: boolean;
 }> = ({ tags, disabled }) => {
   const { archetypes } = React.useContext(MovementListContext);
-  // const moveDispatch = useMoveDispatch();
-
-  // function handleClick(e: any) {
-  //   e.preventDefault();
-
-  //   moveDispatch({
-  //     type: 'MOVE_CHANGE_ARCH',
-  //     value: e.target.value,
-  //   });
-  // }
 
   return (
-    <>
-      <Row>
-        {archetypes.map((arch) => (
-          <ArchListItemModal
-            key={arch.id}
-            archetype={arch}
-            active={tags.includes(arch.id as string)}
-            disabled={disabled}
-          />
-          // <ArchButton
-          //   active={moveState.tags.includes(arch.id as string)}
-          //   key={arch.id}
-          //   value={arch.id}
-          //   onClick={handleClick}
-          //   disabled={disabled}
-          // >
-          //   {arch.name}
-          // </ArchButton>
-        ))}
-      </Row>
-    </>
+    <ArchFieldWrapper>
+      {archetypes.map((arch) => (
+        <ArchListItemForm
+          key={arch.id}
+          archetype={arch}
+          active={tags.includes(arch.id as string)}
+          disabled={disabled}
+        />
+      ))}
+    </ArchFieldWrapper>
   );
 };
+
+const ArchFieldWrapper = styled.ul`
+  display: flex;
+  justify-content: flex-start;
+`;
 
 const ArchButton = styled(Button)<{ active: boolean }>`
   /* border-color: ${(props) => (props.active ? 'red' : 'white')}; */

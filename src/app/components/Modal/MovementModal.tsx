@@ -54,8 +54,6 @@ const MovementModal: React.FC<{
   } else if (mode === ModalMode.View) {
     actionText = 'View';
     submitButton = 'Edit';
-    // btnConfig.cancelBtn.text = 'Close';
-    // btnConfig.actionBtn.text = 'Edit';
   }
 
   const text = {
@@ -84,35 +82,9 @@ const MovementModal: React.FC<{
 
     if (authUser && moveState.id) {
       // Check that name is unique or matches with current id
-      const moveNames = moveList.map((move) => move.name);
-      // if (
-      //   moveNames.includes(moveState.name) &&
-      //   movement.name !== moveState.name
-      // ) {
-      //   toast.error(`${movementText} name is already in use.`);
-      //   return;
-      // }
 
       const moveObj: Movement = { ...moveState };
       moveObj.lastModified = firebase.getTimestamp();
-
-      // const moveObj: any = {
-      //   lastModified: firebase.getTimestamp(),
-      //   name: moveState.name,
-      //   description: moveState.description,
-      // };
-      // if (
-      //   moveState.type === MovementType.Exercise ||
-      //   moveState.type === MovementType.Workout
-      // ) {
-      //   moveObj.tags = moveState.tags;
-      // }
-      // if (moveState.type === MovementType.Workout) {
-      //   moveObj.mode = moveState.mode;
-      //   moveObj.movements = moveState.movements;
-      //   moveObj.rest = moveState.rest;
-      //   moveObj.config = moveState.config;
-      // }
 
       firebaseFnc(authUser.uid, moveState.id)
         .update(moveObj)
@@ -148,36 +120,10 @@ const MovementModal: React.FC<{
       const docRef = firebaseFnc(authUser.uid).doc();
       // Check that name is unique
       const moveNames = moveList.map((move) => move.name);
-      // if (moveNames.includes(moveState.name)) {
-      //   toast.error(`${movementText} name is already in use.`);
-      //   return;
-      // }
 
       const moveObj: Movement = { ...moveState };
       moveObj.lastModified = firebase.getTimestamp();
-      // const moveObj: Archetype = {
-      //   id: docRef.id,
-      //   lastModified: firebase.getTimestamp(),
-      //   type: moveState.type,
-      //   name: moveState.name,
-      //   description: moveState.description,
-      //   history: [],
-      // };
-      // if (
-      //   moveState.type === MovementType.Exercise ||
-      //   moveState.type === MovementType.Workout
-      // ) {
-      //   (moveObj as Exercise | Workout).tags = (moveState as
-      //     | Exercise
-      //     | Workout).tags;
-      // }
-      // if (moveState.type === MovementType.Workout) {
-      //   (moveObj as Workout).tags = (moveState as Workout).tags;
-      //   (moveObj as Workout).mode = (moveState as Workout).mode;
-      //   (moveObj as Workout).movements = (moveState as Workout).movements;
-      //   (moveObj as Workout).rest = (moveState as Workout).rest;
-      //   (moveObj as Workout).config = {};
-      // }
+      // const move
       docRef
         .set(moveObj)
         .then(() => {
@@ -212,28 +158,7 @@ const MovementModal: React.FC<{
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
-    // if (moveState) {
-    //   // if (mode === ModalMode.Add) {
-    //   //   handleCreateMovement(moveState);
-    //   // } else if (mode === ModalMode.Edit) {
-    //   //   handleUpdateMovement(moveState);
-    //   // }
-    //   if (moveState.id) {
-    //     handleUpdateMovement(moveState);
-    //   } else {
-    //     handleCreateMovement(moveState);
-    //   }
-    // }
-
-    // if (validateForm(errors)) {
-    //   if (formMode === FormMode.Add) {
-    //     handleCreateMovement(form);
-    //   } else if (formMode === FormMode.Edit) {
-    //     handleUpdateMovement(form);
-    //   }
-    // } else {
-    //   toast.error('There is a problem with your configuration..');
-    // }
+    // if (moveS
   }
 
   function handleClose() {
@@ -270,7 +195,7 @@ const MovementModal: React.FC<{
         className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
         noValidate
       >
-        <div className="first-fields">
+        <div className="form-fields">
           <input
             type="text"
             name="name"
@@ -313,9 +238,12 @@ const MovementModal: React.FC<{
 
 const MovementModalWrapper = styled(ModalWrapper)`
   display: grid;
-  /* width: ${(p) => p.theme.space[12]}; */
   max-width: 100%;
-  /* max-width: 70%; */
+  form {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 0.5rem;
+  }
   h1.title {
     font-size: 24px;
     font-weight: 600;
@@ -361,9 +289,10 @@ const MovementModalWrapper = styled(ModalWrapper)`
   width: ${(p) => p.theme.space[13]};
 
   /* ------ Section specific styling ------ */
-  .first-fields {
+  .form-fields {
     display: grid;
     grid-template-rows: auto auto;
+    gap: 0.5rem;
     #description {
       height: 4rem;
       resize: none;

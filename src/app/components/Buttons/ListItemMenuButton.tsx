@@ -102,7 +102,7 @@ const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   display: ${(props) => (props.open ? 'grid' : 'none')};
   /* display: grid; */
   grid-auto-rows: auto;
-  background-color: ${(props) => props.theme.color.neutral[200]};
+  background-color: ${(props) => props.theme.mode.background[200]};
   box-shadow: ${(props) => props.theme.shadow[2]};
   width: 6rem;
   /* padding: 1rem; */
