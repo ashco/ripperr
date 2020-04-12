@@ -2,13 +2,9 @@
 import styled from 'styled-components';
 
 import { MovementListContext } from '../../../context';
-import { useMoveDispatch } from '../../../context/MoveContext';
-import { Row } from '../styles';
 
 import { ArchListItemForm } from '../../ListItems';
 import { Button } from '../../Buttons';
-
-import { IHandleChange, Exercise, Workout } from '../../../common/types';
 
 const ArchField: React.FC<{
   tags: string[];
@@ -36,7 +32,6 @@ const ArchFieldWrapper = styled.ul`
 `;
 
 const ArchButton = styled(Button)<{ active: boolean }>`
-  /* border-color: ${(props) => (props.active ? 'red' : 'white')}; */
   border-color: ${(props) =>
     props.active ? props.theme.color.orange[500] : 'white'};
   background-color: ${(props) =>

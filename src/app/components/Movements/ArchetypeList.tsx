@@ -11,8 +11,6 @@ import { MovementType } from '../../common/enums';
 export const ArchetypeList: React.FC<{
   archetypeList: Archetype[] | null;
 }> = ({ archetypeList }) => {
-  const filterState = useFilterState();
-
   return (
     <ArchetypeListWrapper>
       {archetypeList ? (
@@ -20,14 +18,7 @@ export const ArchetypeList: React.FC<{
           <div>No archetypes yet!</div>
         ) : (
           archetypeList.map((arch) => {
-            // const isActive = filterState.archs.includes(arch.name);
-            return (
-              <ArchetypeListItem
-                key={arch.id}
-                archetype={arch}
-                // className={isActive ? 'active' : ''}
-              />
-            );
+            return <ArchetypeListItem key={arch.id} archetype={arch} />;
           })
         )
       ) : (

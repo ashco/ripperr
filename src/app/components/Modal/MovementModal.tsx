@@ -158,7 +158,6 @@ const MovementModal: React.FC<{
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
-    // if (moveS
   }
 
   function handleClose() {
