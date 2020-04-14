@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import { ExerciseListItemForm } from '../../ListItems';
 
 import { IMovementRefs } from '../../../common/types';
+import { WorkoutMode } from '../../../common/enums';
 
 const MovementsField: React.FC<{
   movements: IMovementRefs[];
+  mode: WorkoutMode;
   disabled: boolean;
-}> = ({ movements, disabled }) => {
+}> = ({ movements, disabled, mode }) => {
   return (
     <MovementsFieldWrapper>
       {movements.map((move, i) => {
@@ -16,13 +18,14 @@ const MovementsField: React.FC<{
           <MovementField key={move.id}>
             <ExerciseListItemForm
               exercise={move}
+              mode={mode}
               index={i}
               disabled={disabled}
             />
           </MovementField>
         );
       })}
-      <AddMovementFieldButton />
+      {/* <AddMovementFieldButton /> */}
     </MovementsFieldWrapper>
   );
 };

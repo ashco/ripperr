@@ -9,18 +9,16 @@ import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
 
 import { IMovementRefs } from '../../common/types';
-import { MovementType } from '../../common/enums';
+import { MovementType, WorkoutMode } from '../../common/enums';
 
 const ExerciseListItemForm: React.FC<{
   exercise: IMovementRefs;
   index: number;
   disabled: boolean;
-}> = ({ exercise, index, disabled }) => {
+  mode: WorkoutMode;
+}> = ({ exercise, index, disabled, mode }) => {
   const themeContext = useContext(ThemeContext);
-  const modalDispatch = useModalDispatch();
   const moveDispatch = useMoveDispatch();
-
-  const btnRef = useRef<HTMLDivElement>(null);
 
   // function handleView(e: any): void {
   //   if (!btnRef?.current?.contains(e.target)) {
@@ -35,36 +33,59 @@ const ExerciseListItemForm: React.FC<{
       color={themeContext.color.blue[500]}
     >
       <p className="name">{exercise.name}</p>
-      <input
-        type="number"
-        placeholder="Reps"
-        min="0"
-        max="999"
-        value={exercise.reps}
-        onChange={(e) =>
-          moveDispatch({
-            type: 'MOVE_CHANGE_MOVE_EX_REPS',
-            value: e.currentTarget.value,
-            index,
-          })
-        }
-        disabled={disabled}
-      />
-      <input
-        type="number"
-        placeholder="Sets"
-        min="0"
-        max="999"
-        value={exercise.sets}
-        onChange={(e) =>
-          moveDispatch({
-            type: 'MOVE_CHANGE_MOVE_EX_SETS',
-            value: e.currentTarget.value,
-            index,
-          })
-        }
-        disabled={disabled}
-      />
+      {mode === WorkoutMode.Reps && (
+        <div className="number-values">
+          <input
+            type="number"
+            placeholder="Reps"
+            min="0"
+            max="999"
+            value={exercise.reps}
+            onChange={(e) =>
+              moveDispatch({
+                type: 'MOVE_CHANGE_MOVE_EX_REPS',
+                value: e.currentTarget.value,
+                index,
+              })
+            }
+            disabled={disabled}
+          />
+          <input
+            type="number"
+            placeholder="Sets"
+            min="0"
+            max="999"
+            value={exercise.sets}
+            onChange={(e) =>
+              moveDispatch({
+                type: 'MOVE_CHANGE_MOVE_EX_SETS',
+                value: e.currentTarget.value,
+                index,
+              })
+            }
+            disabled={disabled}
+          />
+        </div>
+      )}
+      {mode === WorkoutMode.Timed && (
+        <div className="number-values">
+          <input
+            type="number"
+            placeholder="Duration"
+            min="0"
+            max="999"
+            value={exercise.duration}
+            onChange={(e) =>
+              moveDispatch({
+                type: 'MOVE_CHANGE_MOVE_EX_DURATION',
+                value: e.currentTarget.value,
+                index,
+              })
+            }
+            disabled={disabled}
+          />
+        </div>
+      )}
     </ExerciseListItemFormWrapper>
   );
 };
@@ -72,10 +93,14 @@ const ExerciseListItemForm: React.FC<{
 const ExerciseListItemFormWrapper = styled(ListItem)`
   box-shadow: ${(props) => props.theme.shadow[0]};
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
-  input[type='number'] {
-    border: none;
-    width: 5.5rem;
+  grid-template-columns: 4fr 1fr;
+  .number-values {
+    display: flex;
+    input[type='number'],
+    input[type='number']:disabled {
+      border: none;
+      width: 5.5rem;
+    }
   }
 `;
 

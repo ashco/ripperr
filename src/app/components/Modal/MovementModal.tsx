@@ -263,6 +263,7 @@ const MovementModal: React.FC<{
               </WorkoutModeField>
               <MovementsField
                 movements={(moveState as Workout).movements}
+                mode={(moveState as Workout).mode}
                 disabled={disabled}
               />
             </>
@@ -286,6 +287,15 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
   max-width: 100%;
   width: ${(props) =>
     props.type === MovementType.Workout ? '40rem' : '32rem'};
+  border-top: 7px solid
+    ${(props) =>
+      props.type === MovementType.Archetype
+        ? props.theme.color.orange[500]
+        : props.type === MovementType.Exercise
+        ? props.theme.color.blue[500]
+        : props.type === MovementType.Workout
+        ? props.theme.color.yellow[500]
+        : 'none'};
   form {
     display: grid;
     grid-template-rows: 1fr auto;

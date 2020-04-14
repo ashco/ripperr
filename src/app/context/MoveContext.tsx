@@ -14,6 +14,7 @@ type FormActionType =
   | 'MOVE_CHANGE_MODE'
   | 'MOVE_CHANGE_MOVE_EX_REPS'
   | 'MOVE_CHANGE_MOVE_EX_SETS'
+  | 'MOVE_CHANGE_MOVE_EX_DURATION'
   | 'MOVE_CHANGE_ARCH';
 
 type FormAction = {
@@ -107,6 +108,14 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
         throw Error('index was not provided');
       }
       newMovements[index].sets = value as number;
+      return { ...state, movements: newMovements } as Workout;
+    }
+    case 'MOVE_CHANGE_MOVE_EX_DURATION': {
+      const newMovements = [...(state as Workout).movements];
+      if (index === null) {
+        throw Error('index was not provided');
+      }
+      newMovements[index].duration = value as number;
       return { ...state, movements: newMovements } as Workout;
     }
     case 'MOVE_CHANGE_ARCH': {
