@@ -261,7 +261,10 @@ const MovementModal: React.FC<{
                   Timed
                 </label>
               </WorkoutModeField>
-              <MovementsField movements={(moveState as Workout).movements} />
+              <MovementsField
+                movements={(moveState as Workout).movements}
+                disabled={disabled}
+              />
             </>
           )}
           {(moveState?.type === MovementType.Exercise ||

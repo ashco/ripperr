@@ -14,7 +14,8 @@ import { MovementType } from '../../common/enums';
 const ExerciseListItemForm: React.FC<{
   exercise: IMovementRefs;
   index: number;
-}> = ({ exercise, index }) => {
+  disabled: boolean;
+}> = ({ exercise, index, disabled }) => {
   const themeContext = useContext(ThemeContext);
   const modalDispatch = useModalDispatch();
   const moveDispatch = useMoveDispatch();
@@ -47,6 +48,7 @@ const ExerciseListItemForm: React.FC<{
             index,
           })
         }
+        disabled={disabled}
       />
       <input
         type="number"
@@ -61,6 +63,7 @@ const ExerciseListItemForm: React.FC<{
             index,
           })
         }
+        disabled={disabled}
       />
     </ExerciseListItemFormWrapper>
   );

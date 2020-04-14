@@ -7,13 +7,18 @@ import { IMovementRefs } from '../../../common/types';
 
 const MovementsField: React.FC<{
   movements: IMovementRefs[];
-}> = ({ movements }) => {
+  disabled: boolean;
+}> = ({ movements, disabled }) => {
   return (
     <MovementsFieldWrapper>
       {movements.map((move, i) => {
         return (
           <MovementField key={move.id}>
-            <ExerciseListItemForm exercise={move} index={i} />
+            <ExerciseListItemForm
+              exercise={move}
+              index={i}
+              disabled={disabled}
+            />
           </MovementField>
         );
       })}

@@ -97,7 +97,7 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
         throw Error('index is null');
       }
       newMovements[index].reps = value as number;
-      return { ...state } as Workout;
+      return { ...state, movements: newMovements } as Workout;
     }
     case 'MOVE_CHANGE_MOVE_EX_SETS': {
       const newMovements = [...(state as Workout).movements];
@@ -105,7 +105,7 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
         throw Error('index is null');
       }
       newMovements[index].sets = value as number;
-      return { ...state } as Workout;
+      return { ...state, movements: newMovements } as Workout;
     }
     case 'MOVE_CHANGE_ARCH': {
       if (
