@@ -20,11 +20,11 @@ const ArchetypeListItem: React.FC<{
 
   function toggleActive(e: any) {
     if (!btnRef?.current?.contains(e.target)) {
-      filterDispatch({ type: 'FILTER_TOGGLE_ARCH', value: archetype.name });
+      filterDispatch({ type: 'FILTER_TOGGLE_ARCH', value: archetype.id });
     }
   }
 
-  const active = filterState.archs.includes(archetype.name);
+  const active = filterState.archs.includes(archetype.id as string);
 
   return (
     <ArchetypeListItemWrapper
