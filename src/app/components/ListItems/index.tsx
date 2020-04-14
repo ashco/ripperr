@@ -2,6 +2,7 @@
 import ArchetypeListItem from './ArchetypeListItem';
 import ArchListItemForm from './ArchListItemForm';
 import ExerciseListItem from './ExerciseListItem';
+import ExerciseListItemForm from './ExerciseListItemForm';
 import WorkoutListItem from './WorkoutListItem';
 
 export {
@@ -9,5 +10,6 @@ export {
   ArchetypeListItem,
   ArchListItemForm,
   ExerciseListItem,
+  ExerciseListItemForm,
   WorkoutListItem,
 };
