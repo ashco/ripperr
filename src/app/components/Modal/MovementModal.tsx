@@ -189,7 +189,7 @@ const MovementModal: React.FC<{
   console.log(moveState);
 
   return (
-    <MovementModalWrapper>
+    <MovementModalWrapper type={(moveState as Movement).type}>
       <h1 className="title">{text.title}</h1>
       <form
         onSubmit={handleSubmit}
@@ -281,10 +281,11 @@ const MovementModal: React.FC<{
   );
 };
 
-const MovementModalWrapper = styled(ModalWrapper)`
+const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
   display: grid;
   max-width: 100%;
-  width: 32rem;
+  width: ${(props) =>
+    props.type === MovementType.Workout ? '40rem' : '32rem'};
   form {
     display: grid;
     grid-template-rows: 1fr auto;

@@ -92,9 +92,11 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
     case 'MOVE_CHANGE_MODE':
       return { ...state, mode: value } as Workout;
     case 'MOVE_CHANGE_MOVE_EX_REPS': {
-      const newMovements = [...(state as Workout).movements];
+      // const newMovements = [...(state as Workout).movements];
+      const { movements } = state as Workout;
+      const newMovements = [...movements];
       if (index === null) {
-        throw Error('index is null');
+        throw Error('index was not provided');
       }
       newMovements[index].reps = value as number;
       return { ...state, movements: newMovements } as Workout;
@@ -102,7 +104,7 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
     case 'MOVE_CHANGE_MOVE_EX_SETS': {
       const newMovements = [...(state as Workout).movements];
       if (index === null) {
-        throw Error('index is null');
+        throw Error('index was not provided');
       }
       newMovements[index].sets = value as number;
       return { ...state, movements: newMovements } as Workout;
