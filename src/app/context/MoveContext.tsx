@@ -12,9 +12,15 @@ type FormActionType =
   | 'MOVE_CHANGE_NAME'
   | 'MOVE_CHANGE_DESCRIPTION'
   | 'MOVE_CHANGE_MODE'
+  | 'MOVE_CHANGE_MOVE_EX_REPS'
+  | 'MOVE_CHANGE_MOVE_EX_SETS'
   | 'MOVE_CHANGE_ARCH';
 
-type FormAction = { type: FormActionType; value?: string | Movement };
+type FormAction = {
+  type: FormActionType;
+  value?: string | number | Movement;
+  index?: number | null;
+};
 type MoveDispatch = (action: FormAction) => void;
 type MoveState = Movement | null;
 type MoveProviderProps = { children: React.ReactNode };
@@ -66,7 +72,7 @@ const MovementDispatchContext = React.createContext<MoveDispatch | undefined>(
 );
 
 function formReducer(state: MoveState, action: FormAction): MoveState {
-  const { type, value = 'NO VALUE SET' } = action;
+  const { type, value = 'NO VALUE SET', index = null } = action;
 
   switch (type) {
     case 'MOVE_CLEAR':
@@ -85,6 +91,22 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
       return { ...state, description: value } as Movement;
     case 'MOVE_CHANGE_MODE':
       return { ...state, mode: value } as Workout;
+    case 'MOVE_CHANGE_MOVE_EX_REPS': {
+      const newMovements = [...(state as Workout).movements];
+      if (index === null) {
+        throw Error('index is null');
+      }
+      newMovements[index].reps = value as number;
+      return { ...state } as Workout;
+    }
+    case 'MOVE_CHANGE_MOVE_EX_SETS': {
+      const newMovements = [...(state as Workout).movements];
+      if (index === null) {
+        throw Error('index is null');
+      }
+      newMovements[index].sets = value as number;
+      return { ...state } as Workout;
+    }
     case 'MOVE_CHANGE_ARCH': {
       if (
         state?.type === MovementType.Exercise ||

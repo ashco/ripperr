@@ -281,6 +281,7 @@ const MovementModal: React.FC<{
 const MovementModalWrapper = styled(ModalWrapper)`
   display: grid;
   max-width: 100%;
+  width: 32rem;
   form {
     display: grid;
     grid-template-rows: 1fr auto;
@@ -298,7 +299,7 @@ const MovementModalWrapper = styled(ModalWrapper)`
     text-align: center;
   }
   input[type='number'] {
-    width: 4.5rem;
+    width: 5.5rem;
     text-align: center;
   }
   input,
@@ -328,7 +329,6 @@ const MovementModalWrapper = styled(ModalWrapper)`
   .missing-option {
     background: yellow;
   }
-  width: ${(p) => p.theme.space[13]};
 
   /* ------ Section specific styling ------ */
   .form-fields {

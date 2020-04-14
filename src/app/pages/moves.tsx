@@ -27,7 +27,6 @@ const MovesPage: NextPage = () => {
         )
         .filter((move) => {
           if (filterState.archs.length > 0) {
-            // return move.tags.some((tag) => filterState.archs.includes(tag));
             return filterState.archs.every((arch) => move.tags.includes(arch));
           }
           return true;

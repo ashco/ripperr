@@ -42,7 +42,6 @@ function filterReducer(state: FilterState, action: FilterAction) {
     case 'FILTER_CLEAR_VALUE':
       return { ...state, value: '' };
     case 'FILTER_TOGGLE_ARCH': {
-      console.log(state);
       const { archs } = state;
       const index = archs.indexOf(value);
 
