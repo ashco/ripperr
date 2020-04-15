@@ -5,13 +5,14 @@ import { ExerciseListItemForm } from '../../ListItems';
 import { Button } from '../../Buttons';
 
 import { IMovementRefs } from '../../../common/types';
-import { WorkoutMode } from '../../../common/enums';
+import { WorkoutMode, ModalMode } from '../../../common/enums';
 
 const MovementsField: React.FC<{
   movements: IMovementRefs[];
   mode: WorkoutMode;
+  modalMode: ModalMode;
   disabled: boolean;
-}> = ({ movements, disabled, mode }) => {
+}> = ({ movements, disabled, mode, modalMode }) => {
   return (
     <MovementsFieldWrapper>
       {movements.map((move, i) => {
@@ -20,6 +21,7 @@ const MovementsField: React.FC<{
             <ExerciseListItemForm
               exercise={move}
               mode={mode}
+              modalMode={modalMode}
               index={i}
               disabled={disabled}
             />

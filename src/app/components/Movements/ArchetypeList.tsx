@@ -35,9 +35,5 @@ const ArchetypeListWrapper = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(6rem, auto));
   grid-auto-rows: 3rem;
   grid-auto-flow: row dense;
-  /* grid-template-columns: repeat(auto-fit, 8rem); */
-  /* grid-template-rows: repeat(auto-fill, 8rem); */
   justify-content: center;
-  /* grid-template-columns: repeat(auto-fill, 8rem);
-  grid-template-rows: repeat(auto-fill, 8rem); */
 `;

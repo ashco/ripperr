@@ -19,6 +19,7 @@ const AddMovementButton: React.FC = () => {
 
 const StyledAddMovementButton = styled(Button)`
   width: 12rem;
+  justify-self: center;
 `;
 
 export default AddMovementButton;

@@ -269,6 +269,7 @@ const MovementModal: React.FC<{
               <MovementsField
                 movements={(moveState as Workout).movements}
                 mode={(moveState as Workout).mode}
+                modalMode={mode}
                 disabled={disabled}
               />
               {(mode === ModalMode.Add || mode === ModalMode.Edit) && (

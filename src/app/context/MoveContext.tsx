@@ -15,6 +15,7 @@ type FormActionType =
   | 'MOVE_CHANGE_MOVE_EX_REPS'
   | 'MOVE_CHANGE_MOVE_EX_SETS'
   | 'MOVE_CHANGE_MOVE_EX_DURATION'
+  | 'MOVE_DELETE_MOVE'
   | 'MOVE_CHANGE_ARCH';
 
 type FormAction = {
@@ -93,29 +94,44 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
     case 'MOVE_CHANGE_MODE':
       return { ...state, mode: value } as Workout;
     case 'MOVE_CHANGE_MOVE_EX_REPS': {
-      // const newMovements = [...(state as Workout).movements];
-      const { movements } = state as Workout;
-      const newMovements = [...movements];
       if (index === null) {
         throw Error('index was not provided');
       }
+
+      const { movements } = state as Workout;
+      const newMovements = [...movements];
       newMovements[index].reps = value as number;
+
       return { ...state, movements: newMovements } as Workout;
     }
     case 'MOVE_CHANGE_MOVE_EX_SETS': {
-      const newMovements = [...(state as Workout).movements];
       if (index === null) {
         throw Error('index was not provided');
       }
+
+      const newMovements = [...(state as Workout).movements];
       newMovements[index].sets = value as number;
+
       return { ...state, movements: newMovements } as Workout;
     }
     case 'MOVE_CHANGE_MOVE_EX_DURATION': {
-      const newMovements = [...(state as Workout).movements];
       if (index === null) {
         throw Error('index was not provided');
       }
+
+      const newMovements = [...(state as Workout).movements];
       newMovements[index].duration = value as number;
+
+      return { ...state, movements: newMovements } as Workout;
+    }
+    case 'MOVE_DELETE_MOVE': {
+      if (index === null) {
+        throw Error('index was not provided');
+      }
+
+      const newMovements = [...(state as Workout).movements];
+      newMovements.splice(index, 1);
+
       return { ...state, movements: newMovements } as Workout;
     }
     case 'MOVE_CHANGE_ARCH': {
