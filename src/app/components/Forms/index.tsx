@@ -13,6 +13,7 @@ import TimedField from './FormFields/TimedField';
 import RestField from './FormFields/RestField';
 import SelectField from './FormFields/SelectField';
 import MovementsField from './FormFields/MovementsField';
+import AddMovementButton from './FormFields/AddMovementButton';
 
 import {
   signInVal,
@@ -43,6 +44,7 @@ export {
   TimedField,
   ButtonRow,
   MovementsField,
+  AddMovementButton,
   // AddForm,
   // MovementForm,
 };

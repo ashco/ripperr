@@ -94,6 +94,7 @@ const ExerciseListItemFormWrapper = styled(ListItem)`
   box-shadow: ${(props) => props.theme.shadow[0]};
   display: grid;
   grid-template-columns: 4fr 1fr;
+  cursor: default;
   .number-values {
     display: flex;
     input[type='number'],

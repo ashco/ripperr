@@ -12,7 +12,12 @@ import { useModalDispatch } from '../../context/ModalContext';
 
 // import { MovementFormWrapper } from '../Forms/styles';
 import { ModalWrapper } from './styles';
-import { ButtonRow, ArchField, MovementsField } from '../Forms';
+import {
+  ButtonRow,
+  ArchField,
+  MovementsField,
+  AddMovementButton,
+} from '../Forms';
 
 import {
   Movement,
@@ -49,8 +54,6 @@ const MovementModal: React.FC<{
   if (mode === ModalMode.Edit) {
     actionText = 'Edit';
     submitButton = 'Update';
-    // btnConfig.cancelBtn.text = 'Cancel';
-    // btnConfig.actionBtn.text = 'Update';
   } else if (mode === ModalMode.View) {
     actionText = 'View';
     submitButton = 'Edit';
@@ -177,6 +180,8 @@ const MovementModal: React.FC<{
   };
 
   if (mode === ModalMode.Edit) {
+    btnConfig.cancelBtn.onClick = (): void =>
+      modalDispatch({ type: 'MODAL_VIEW' });
     btnConfig.cancelBtn.text = 'Cancel';
     btnConfig.actionBtn.text = 'Update';
   } else if (mode === ModalMode.View) {
@@ -266,6 +271,9 @@ const MovementModal: React.FC<{
                 mode={(moveState as Workout).mode}
                 disabled={disabled}
               />
+              {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
+                <AddMovementButton />
+              )}
             </>
           )}
           {(moveState?.type === MovementType.Exercise ||

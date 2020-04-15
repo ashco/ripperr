@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 
 import { ExerciseListItemForm } from '../../ListItems';
+import { Button } from '../../Buttons';
 
 import { IMovementRefs } from '../../../common/types';
 import { WorkoutMode } from '../../../common/enums';
@@ -25,13 +26,8 @@ const MovementsField: React.FC<{
           </MovementField>
         );
       })}
-      {/* <AddMovementFieldButton /> */}
     </MovementsFieldWrapper>
   );
-};
-
-const AddMovementFieldButton: React.FC = () => {
-  return <button>Add Movement</button>;
 };
 
 const MovementsFieldWrapper = styled.div`
