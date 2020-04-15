@@ -1,9 +1,5 @@
-﻿// import MovementModal from '../Modal/OLDMovementModal';
-
-// import MovementForm from './MovementForm';
-import ModeField from './ModeField';
+﻿import ModeField from './ModeField';
 import ButtonRow from './ButtonRow';
-// import AddForm from './AddForm';
 import InputField from './InputField';
 
 import ArchField from './FormFields/ArchField';
@@ -27,7 +23,6 @@ import {
 export * from './FormFields/TagField';
 
 export {
-  // MovementModal,
   InputField,
   SelectField,
   signInVal,
@@ -45,6 +40,4 @@ export {
   ButtonRow,
   MovementsField,
   AddMovementButton,
-  // AddForm,
-  // MovementForm,
 };

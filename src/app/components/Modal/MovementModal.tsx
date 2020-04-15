@@ -33,11 +33,22 @@ const MovementModal: React.FC<{
 }> = ({ mode }) => {
   const firebase = useContext(FirebaseContext);
   const authUser = useContext(AuthUserContext);
-  const { archetypes, exercises, workouts } = useContext(MovementListContext);
+  const movementList = useContext(MovementListContext);
 
-  const moveState = useMoveState();
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
+  const moveState = useMoveState();
+
+  let moveList: Archetype[] | Exercise[] | Workout[];
+  if (moveState?.type === MovementType.Archetype) {
+    moveList = movementList.archetypes;
+  } else if (moveState?.type === MovementType.Exercise) {
+    moveList = movementList.exercises;
+  } else if (moveState?.type === MovementType.Workout) {
+    moveList = movementList.workouts;
+  } else {
+    throw Error('No MovementType specified!');
+  }
 
   // ============ MODE SPECIFIC VALUES ============
 
@@ -68,17 +79,13 @@ const MovementModal: React.FC<{
 
   function handleUpdateMovement(moveState: Movement): void {
     let firebaseFnc;
-    let moveList;
 
     if (moveState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetype;
-      moveList = archetypes;
     } else if (moveState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercise;
-      moveList = exercises;
     } else if (moveState.type === MovementType.Workout) {
       firebaseFnc = firebase.workout;
-      moveList = workouts;
     } else {
       throw Error('moveState type is not recognized!');
     }
@@ -105,16 +112,16 @@ const MovementModal: React.FC<{
 
   function handleCreateMovement(moveState: Movement): void {
     let firebaseFnc;
-    let moveList;
+    // let moveList;
     if (moveState.type === MovementType.Archetype) {
       firebaseFnc = firebase.archetypes;
-      moveList = archetypes;
+      // moveList = movementList.archetypes;
     } else if (moveState.type === MovementType.Exercise) {
       firebaseFnc = firebase.exercises;
-      moveList = exercises;
+      // moveList = movementList.exercises;
     } else if (moveState.type === MovementType.Workout) {
       firebaseFnc = firebase.workouts;
-      moveList = workouts;
+      // moveList = movementList.workouts;
     } else {
       throw Error('No MovementType specified!');
     }
@@ -122,7 +129,7 @@ const MovementModal: React.FC<{
     if (authUser) {
       const docRef = firebaseFnc(authUser.uid).doc();
       // Check that name is unique
-      const moveNames = moveList.map((move) => move.name);
+      // const moveNames = moveList.map((move) => move.name);
 
       const moveObj: Movement = { ...moveState };
       moveObj.lastModified = firebase.getTimestamp();
@@ -180,8 +187,13 @@ const MovementModal: React.FC<{
   };
 
   if (mode === ModalMode.Edit) {
-    btnConfig.cancelBtn.onClick = (): void =>
+    btnConfig.cancelBtn.onClick = (): void => {
       modalDispatch({ type: 'MODAL_VIEW' });
+
+      // Have moveState reset back to original non-edited state
+      const initMoveState = moveList.find((move) => move.id === moveState?.id);
+      moveDispatch({ type: 'MOVE_SET', value: initMoveState });
+    };
     btnConfig.cancelBtn.text = 'Cancel';
     btnConfig.actionBtn.text = 'Update';
   } else if (mode === ModalMode.View) {
