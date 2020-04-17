@@ -1,6 +1,12 @@
 ﻿import React from 'react';
 
-import { Movement, Archetype, Exercise, Workout } from '../common/types';
+import {
+  Movement,
+  Archetype,
+  Exercise,
+  Workout,
+  IWorkoutRest,
+} from '../common/types';
 import { MovementType, WorkoutMode } from '../common/enums';
 
 type FormActionType =
@@ -16,11 +22,14 @@ type FormActionType =
   | 'MOVE_CHANGE_MOVE_EX_SETS'
   | 'MOVE_CHANGE_MOVE_EX_DURATION'
   | 'MOVE_DELETE_MOVE'
+  | 'MOVE_CHANGE_REST_AUTO'
+  | 'MOVE_CHANGE_REST_INNER'
+  | 'MOVE_CHANGE_REST_OUTER'
   | 'MOVE_CHANGE_ARCH';
 
 type FormAction = {
   type: FormActionType;
-  value?: string | number | Movement;
+  value?: string | number | boolean | Movement;
   index?: number | null;
 };
 type MoveDispatch = (action: FormAction) => void;
@@ -133,6 +142,33 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
       newMovements.splice(index, 1);
 
       return { ...state, movements: newMovements } as Workout;
+    }
+    case 'MOVE_CHANGE_REST_AUTO': {
+      const newState = {
+        ...(state as Workout),
+        rest: { ...((state as Workout).rest as IWorkoutRest) },
+      };
+
+      newState.rest.auto = value as boolean;
+      return newState;
+    }
+    case 'MOVE_CHANGE_REST_INNER': {
+      const newState = {
+        ...(state as Workout),
+        rest: { ...((state as Workout).rest as IWorkoutRest) },
+      };
+
+      newState.rest.inner = value as number;
+      return newState;
+    }
+    case 'MOVE_CHANGE_REST_OUTER': {
+      const newState = {
+        ...(state as Workout),
+        rest: { ...((state as Workout).rest as IWorkoutRest) },
+      };
+
+      newState.rest.outer = value as number;
+      return newState;
     }
     case 'MOVE_CHANGE_ARCH': {
       if (

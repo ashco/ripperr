@@ -1,49 +1,69 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
+import { useMoveDispatch } from '../../../context/MoveContext';
+
 import { Row } from '../styles';
 
-import { IHandleChange, Workout } from '../../../common/types';
+import { IWorkoutRest } from '../../../common/types';
+import { ModalMode } from '../../../common/enums';
 
 const RestField: React.FC<{
-  form: Workout;
-  handleChange: (e: IHandleChange) => void;
-}> = ({ form, handleChange }) => {
+  rest: IWorkoutRest;
+  disabled: boolean;
+}> = ({ rest, disabled }) => {
+  const moveDispatch = useMoveDispatch();
+
   return (
-    <>
-      <Row>Rest Options</Row>
-      <Row>
-        <label>
-          <input
-            type="checkbox"
-            name="auto"
-            onChange={handleChange}
-            checked={form.rest.auto}
-          />
-          Automatic
-        </label>
-        <label>
-          <input
-            type="number"
-            name="inner"
-            min="0"
-            onChange={handleChange}
-            value={form.rest.inner}
-          />
-          Inner Time
-        </label>
-        <label>
-          <input
-            type="number"
-            name="outer"
-            min="0"
-            onChange={handleChange}
-            value={form.rest.outer}
-          />
-          Outer Time
-        </label>
-      </Row>
-    </>
+    <Row>
+      <label>
+        <input
+          type="checkbox"
+          name="auto"
+          onChange={(e) =>
+            moveDispatch({
+              type: 'MOVE_CHANGE_REST_AUTO',
+              value: e.currentTarget.checked,
+            })
+          }
+          checked={rest.auto}
+          disabled={disabled}
+        />
+        Automatic
+      </label>
+      <label>
+        <input
+          type="number"
+          name="inner"
+          min="0"
+          onChange={(e) =>
+            moveDispatch({
+              type: 'MOVE_CHANGE_REST_INNER',
+              value: e.currentTarget.value,
+            })
+          }
+          value={rest.inner}
+          disabled={disabled}
+        />
+        Inner
+      </label>
+      <label>
+        <input
+          type="number"
+          name="outer"
+          min="0"
+          onChange={(e) =>
+            moveDispatch({
+              type: 'MOVE_CHANGE_REST_OUTER',
+              value: e.currentTarget.value,
+            })
+          }
+          value={rest.outer}
+          disabled={disabled}
+        />
+        Outer
+      </label>
+    </Row>
   );
 };
 

@@ -17,6 +17,7 @@ import {
   ArchField,
   MovementsField,
   AddMovementButton,
+  RestField,
 } from '../Forms';
 
 import {
@@ -192,6 +193,8 @@ const MovementModal: React.FC<{
 
       // Have moveState reset back to original non-edited state
       const initMoveState = moveList.find((move) => move.id === moveState?.id);
+      console.log(initMoveState);
+
       moveDispatch({ type: 'MOVE_SET', value: initMoveState });
     };
     btnConfig.cancelBtn.text = 'Cancel';
@@ -287,6 +290,11 @@ const MovementModal: React.FC<{
               {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
                 <AddMovementButton />
               )}
+              <RestField
+                rest={(moveState as Workout).rest}
+                disabled={disabled}
+                // modalMode={mode}
+              />
             </>
           )}
           {(moveState?.type === MovementType.Exercise ||

@@ -6,10 +6,10 @@ import ArchField from './FormFields/ArchField';
 import FirstFields from './FormFields/FirstFields';
 import RepsField from './FormFields/RepsField';
 import TimedField from './FormFields/TimedField';
-import RestField from './FormFields/RestField';
 import SelectField from './FormFields/SelectField';
 import MovementsField from './FormFields/MovementsField';
 import AddMovementButton from './FormFields/AddMovementButton';
+import RestField from './FormFields/RestField';
 
 import {
   signInVal,
