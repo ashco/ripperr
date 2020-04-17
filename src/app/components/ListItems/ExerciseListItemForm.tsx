@@ -87,7 +87,7 @@ const ExerciseListItemForm: React.FC<{
         )}
       </div>
       {modalMode === ModalMode.Edit && (
-        <button onClick={handleDelete}>X</button>
+        <DeleteButton onClick={handleDelete}>✕</DeleteButton>
       )}
     </ExerciseListItemFormWrapper>
   );
@@ -96,7 +96,7 @@ const ExerciseListItemForm: React.FC<{
 const ExerciseListItemFormWrapper = styled(ListItem)`
   box-shadow: ${(props) => props.theme.shadow[0]};
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr 3rem;
   cursor: default;
   .number-values {
     display: flex;
@@ -105,6 +105,17 @@ const ExerciseListItemFormWrapper = styled(ListItem)`
       border: none;
       width: 5.5rem;
     }
+  }
+`;
+
+const DeleteButton = styled.button`
+  background: none;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.color.red[400]};
   }
 `;
 

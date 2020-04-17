@@ -48,7 +48,7 @@ const ArchListItemModalWrapper = styled(ListItem)<{
   p.name {
     padding: 0.5rem;
     color: ${(props) =>
-      props.active ? 'default' : props.theme.mode.color[200]};
+      props.disabled ? props.theme.mode.color[200] : 'default'};
   }
   pointer-events: ${(props) => (props.disabled ? 'none' : 'default')};
   margin-right: 1rem;
