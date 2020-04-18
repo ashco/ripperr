@@ -26,7 +26,9 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
       <Plus
         color={
           btnHovered
-            ? themeContext.mode.color[100]
+            ? // ? themeContext.mode.color[100]
+              // : themeContext.mode.color[200]
+              themeContext.mode.background[200]
             : themeContext.mode.color[200]
         }
       />
