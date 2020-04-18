@@ -6,7 +6,7 @@ import { MovementListContext } from '../context';
 import { withAuthorization, withMovements } from '../context';
 import { FilterProvider, useFilterState } from '../context/FilterContext';
 
-import { MovementList } from '../components/Movements';
+import { MovementsContainer } from '../components/Movements';
 import { Filter } from '../components/Filter';
 import { Modal } from '../components/Modal';
 
@@ -38,7 +38,10 @@ const MovesPage: NextPage = () => {
 
   return (
     <MovementsPageWrapper>
-      <MovementList moveList={moveList} />
+      <MovementsContainer
+        moveList={moveList}
+        filterActive={filterState.active}
+      />
       <Filter archetypeList={archetypeList} />
       <Modal />
     </MovementsPageWrapper>
