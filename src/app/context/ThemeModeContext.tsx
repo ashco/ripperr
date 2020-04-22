@@ -27,8 +27,10 @@ function themeModeReducer(state: ThemeModeState, action: ThemeModeAction) {
 
   switch (action.type) {
     case 'LIGHT_MODE':
+      localStorage.setItem('themeMode', 'LIGHT_MODE');
       return { ...theme, mode: lightMode };
     case 'DARK_MODE':
+      localStorage.setItem('themeMode', 'DARK_MODE');
       return { ...theme, mode: darkMode };
     default: {
       throw Error(`Unhandled action type: ${action.type}`);

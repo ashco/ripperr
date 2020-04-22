@@ -46,7 +46,11 @@ const Page: React.FC = (props) => {
   const themeModeDispatch = useThemeModeDispatch();
 
   useEffect(() => {
-    if (
+    if (localStorage.getItem('themeMode') === 'LIGHT_MODE') {
+      themeModeDispatch({ type: 'LIGHT_MODE' });
+    } else if (localStorage.getItem('themeMode') === 'DARK_MODE') {
+      themeModeDispatch({ type: 'DARK_MODE' });
+    } else if (
       typeof window !== `undefined` &&
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
