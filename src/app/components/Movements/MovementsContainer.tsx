@@ -24,7 +24,8 @@ import { MovementType } from '../../common/enums';
 export const MovementsContainer: React.FC<{
   moveList: Movement[] | null;
   filterActive: boolean;
-}> = ({ moveList, filterActive }) => {
+  // loading: boolean;
+}> = ({ moveList }) => {
   function renderListItem(move: Movement) {
     if (move.type === MovementType.Exercise) {
       return <ExerciseListItem key={move.id} exercise={move as Exercise} />;
@@ -37,26 +38,15 @@ export const MovementsContainer: React.FC<{
 
   return (
     <MovementsContainerWrapper>
-      {moveList && moveList.length > 0 ? (
+      {moveList === null ? (
+        <Loading />
+      ) : moveList.length === 0 ? (
+        <NoMovementsMessage />
+      ) : (
         <MovementListWrapper>
           {moveList.map((move) => renderListItem(move))}
         </MovementListWrapper>
-      ) : filterActive ? (
-        <NoMovementsMessage />
-      ) : (
-        <Loading />
       )}
-      {/* {moveList ? (
-        moveList.length === 0 ? (
-          <NoMovementsMessage />
-        ) : (
-          <MovementListWrapper>
-            {moveList.map((move) => renderListItem(move))}
-          </MovementListWrapper>
-        )
-      ) : (
-        <Loading />
-      )} */}
     </MovementsContainerWrapper>
   );
 };
@@ -70,7 +60,7 @@ const MovementsContainerWrapper = styled.div`
 
 const NoMovementsMessage = () => (
   <NoMovementsMessageWrapper>
-    No movements are available..
+    No moves are available..
   </NoMovementsMessageWrapper>
 );
 
@@ -101,7 +91,7 @@ const LoadingWrapper = styled.div`
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: ${(props) => props.theme.mode.color[100]};
+    background: #fff;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   div:nth-child(1) {
