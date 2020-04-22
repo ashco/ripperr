@@ -13,7 +13,11 @@ const ButtonRow: React.FC<{ config: ButtonRowProps }> = ({ config }) => {
       <Button type="button" onClick={cancelBtn.onClick}>
         {cancelBtn.text}
       </Button>
-      <Button type="submit" onClick={actionBtn.onClick}>
+      <Button
+        type="submit"
+        onClick={actionBtn.onClick}
+        className={actionBtn.className}
+      >
         {actionBtn.text}
       </Button>
     </ButtonRowWrapper>

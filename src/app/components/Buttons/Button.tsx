@@ -22,6 +22,14 @@ const Button = styled.button<{ size?: string; onClick?: any }>`
   &:active {
     /* background: gray; */
   }
+  &.btn-delete {
+    color: ${(props) => props.theme.color.red[400]};
+    border-color: ${(props) => props.theme.color.red[400]};
+    &:hover {
+      background: ${(props) => props.theme.color.red[400]};
+      color: ${(props) => props.theme.mode.background[200]};
+    }
+  }
 `;
 
 export default Button;

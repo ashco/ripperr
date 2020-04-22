@@ -2,7 +2,6 @@
 import styled from 'styled-components';
 
 import { MovementListContext } from '../../../context';
-import { sortArchetypes } from '../../../common/sortMovements';
 
 import { ArchListItemForm } from '../../ListItems';
 import { Button } from '../../Buttons';
@@ -12,11 +11,10 @@ const ArchField: React.FC<{
   disabled: boolean;
 }> = ({ tags, disabled }) => {
   const { archetypes } = React.useContext(MovementListContext);
-  const archetypeList = archetypes.sort((a, b) => sortArchetypes(a, b));
 
   return (
     <ArchFieldWrapper>
-      {archetypeList.map((arch) => (
+      {archetypes.map((arch) => (
         <ArchListItemForm
           key={arch.id}
           archetype={arch}

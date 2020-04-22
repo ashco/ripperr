@@ -137,21 +137,13 @@ const LoadingWrapper = styled.div`
 `;
 
 const MovementListWrapper = styled.ul`
-  /* margin: 0 1rem; */
-  /* display: grid; */
+  padding-bottom: 1rem;
   display: grid;
   justify-content: center;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, 9rem);
   grid-auto-rows: 6rem;
   grid-auto-flow: row dense;
-  /* grid-template-columns: repeat(auto-fit, 8rem); */
-  /* grid-template-rows: repeat(auto-fill, 8rem); */
-  /* justify-content: center; */
-  /* overflow-y: auto; */
-  /* padding: 1rem 1rem 0; */
-  /* grid-template-columns: repeat(auto-fill, 8rem);
-  grid-template-rows: repeat(auto-fill, 8rem); */
   &:after {
     content: ' ';
     height: 1px;

@@ -11,8 +11,6 @@ import { MovementType } from '../../common/enums';
 export const ArchetypeList: React.FC<{
   archetypeList: Archetype[] | null;
 }> = ({ archetypeList }) => {
-  console.log(archetypeList);
-
   return (
     <ArchetypeListWrapper>
       {archetypeList ? (

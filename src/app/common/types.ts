@@ -149,6 +149,7 @@ export interface ButtonRowCancelBtn {
 export interface ButtonRowActionBtn {
   text: string;
   onClick?: () => void;
+  className?: string;
   // submit: boolean;
 }
 // export interface IButtonRow {

@@ -63,15 +63,14 @@ const DeleteModal: React.FC = () => {
     actionBtn: {
       text: 'Delete',
       onClick: onDelete,
-      // submit: false,
+      className: 'btn-delete',
     },
   };
 
   return (
     <DeleteModalWrapper>
-      <p>
-        Do you want to delete this {moveState.type}? {moveState.name}
-      </p>
+      <p>Do you want to delete this {moveState.type}?:</p>
+      <p>{moveState.name}</p>
       <ButtonRow config={btnConfig} />
     </DeleteModalWrapper>
   );

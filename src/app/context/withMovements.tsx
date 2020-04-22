@@ -12,6 +12,7 @@ import {
   IWorkoutsFirebaseQuery,
   IMovementState,
 } from '../common/types';
+import { sortArchetypes } from '../common/sortMovements';
 
 export const INITIAL_ARCHETYPE_STATE: IArchetypesFirebaseQuery = {
   loading: true,
@@ -78,7 +79,7 @@ const withMovements = (Component: any) => {
 
             setArchetypeState({
               loading: false,
-              archetypes: archetypeList,
+              archetypes: archetypeList.sort((a, b) => sortArchetypes(a, b)),
             });
 
             return (): void => unsubscribe();

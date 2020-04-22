@@ -18,8 +18,6 @@ export function sortMovements(a: Movement, b: Movement): number {
 
 // sort alphabetically
 export function sortArchetypes(a: Archetype, b: Archetype): number {
-  // if (a.name !== null && b.name !== null) {
-  // return b.name - a.name;
   if (a.name > b.name) {
     return 1;
   } else if (a.name < b.name) {
