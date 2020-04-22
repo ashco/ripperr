@@ -5,7 +5,8 @@ type FilterActionType =
   | 'FILTER_MODE_OFF'
   | 'FILTER_CHANGE_VALUE'
   | 'FILTER_CLEAR_VALUE'
-  | 'FILTER_TOGGLE_ARCH';
+  | 'FILTER_TOGGLE_ARCH'
+  | 'FILTER_RESET';
 type FilterAction = {
   type: FilterActionType;
   value?: string;
@@ -51,6 +52,9 @@ function filterReducer(state: FilterState, action: FilterAction) {
         archs.push(value);
       }
       return { ...state, archs };
+    }
+    case 'FILTER_RESET': {
+      return { active: false, value: '', archs: [] };
     }
     default: {
       throw Error(`Unhandled action type: ${action.type}`);

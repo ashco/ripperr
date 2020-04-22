@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Bars: React.FC<{ color: string }> = ({ color }) => (
+const Plus: React.FC<{ color: string }> = ({ color }) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -16,4 +16,4 @@ const Bars: React.FC<{ color: string }> = ({ color }) => (
   </svg>
 );
 
-export default Bars;
+export default Plus;

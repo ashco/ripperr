@@ -14,22 +14,22 @@ import {
 } from '../common/types';
 
 export const INITIAL_ARCHETYPE_STATE: IArchetypesFirebaseQuery = {
-  loading: false,
+  loading: true,
   archetypes: [],
 };
 
 export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
-  loading: false,
+  loading: true,
   exercises: [],
 };
 
 export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
-  loading: false,
+  loading: true,
   workouts: [],
 };
 
 export const INITIAL_MOVEMENT_STATE: IMovementState = {
-  loading: false,
+  loading: true,
   archetypes: [],
   exercises: [],
   workouts: [],

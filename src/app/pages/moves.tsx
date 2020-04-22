@@ -10,7 +10,7 @@ import { MovementsContainer } from '../components/Movements';
 import { Filter } from '../components/Filter';
 import { Modal } from '../components/Modal';
 
-import { sortMovements } from '../common/sortMovements';
+import { sortMovements, sortArchetypes } from '../common/sortMovements';
 
 import { IAuthUserContext } from '../common/types';
 
@@ -34,7 +34,7 @@ const MovesPage: NextPage = () => {
 
   const archetypeList = movements.loading
     ? null
-    : [...movements.archetypes].sort((a, b) => sortMovements(a, b));
+    : [...movements.archetypes].sort((a, b) => sortArchetypes(a, b));
 
   return (
     <MovementsPageWrapper>

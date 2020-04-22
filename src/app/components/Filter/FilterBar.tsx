@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import { useModalDispatch } from '../../context/ModalContext';
 import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
 
-import { AddMovementButton } from '../Buttons';
+import { AddMovementButton, ClearFilterButton } from '../Buttons';
 
 const FilterBar: React.FC<{}> = () => {
   const filterState = useFilterState();
   const filterDispatch = useFilterDispatch();
   const modalDispatch = useModalDispatch();
+
+  const filtering =
+    filterState.value.length > 0 || filterState.archs.length > 0;
 
   function openModal(): void {
     modalDispatch({ type: 'MODAL_ADD_SELECT' });
@@ -30,7 +33,11 @@ const FilterBar: React.FC<{}> = () => {
         }
         onFocus={() => filterDispatch({ type: 'FILTER_MODE_ON' })}
       />
-      <AddMovementButton openModal={openModal} />
+      {filtering ? (
+        <ClearFilterButton />
+      ) : (
+        <AddMovementButton openModal={openModal} />
+      )}
     </FilterBarWrapper>
   );
 };
