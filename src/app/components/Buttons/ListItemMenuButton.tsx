@@ -16,6 +16,8 @@ const ListItemMenuButton: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const themeContext = useContext(ThemeContext);
 
   const moveDispatch = useMoveDispatch();
@@ -51,10 +53,52 @@ const ListItemMenuButton: React.FC<{
 
   useEffect(() => {
     if (menuOpen) {
-      console.log('open');
+      console.log('menu open');
       document.addEventListener('click', closeMenu);
+
+      // const { offsetWidth, offsetLeft } = menuRef?.current;
+      const offsetHeight = menuRef?.current?.offsetHeight;
+      const offsetWidth = menuRef?.current?.offsetWidth;
+      const offsetTop = menuRef?.current?.offsetTop;
+      const offsetLeft = menuRef?.current?.offsetLeft;
+      if (
+        offsetHeight &&
+        offsetWidth &&
+        offsetTop &&
+        offsetLeft &&
+        menuRef &&
+        menuRef.current
+      ) {
+        console.log(offsetWidth);
+        console.log(offsetLeft);
+        console.log(offsetTop);
+
+        const isOverBottom =
+          offsetHeight + offsetTop - document.body.clientHeight >= 0;
+        const isOverRight =
+          offsetWidth + offsetLeft - document.body.clientWidth >= 0;
+
+        let topPosition = offsetTop;
+        let leftPosition = offsetLeft;
+        if (isOverBottom) {
+          topPosition = offsetTop - menuRef.current.clientHeight - 28;
+        }
+        if (isOverRight) {
+          leftPosition = offsetLeft - menuRef.current.clientWidth + 28;
+        }
+        menuRef.current.style.top = topPosition + 'px';
+        menuRef.current.style.left = leftPosition + 'px';
+
+        // if (isOverLeft) {
+        //   menuRef.current.style.top = offsetTop + 'px';
+        //   menuRef.current.style.left = offsetLeft + 'px';
+        // } else {
+        //   menuRef.current.style.top = offsetTop + 'px';
+        //   menuRef.current.style.left = offsetLeft + 'px';
+        // }
+      }
     } else {
-      console.log('closed');
+      console.log('menu closed');
     }
   }, [menuOpen]);
 
@@ -73,7 +117,7 @@ const ListItemMenuButton: React.FC<{
           }
         />
       </StyledListItemMenuButton>
-      <ListItemMenuWrapper open={menuOpen}>
+      <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
         {movement.type === MovementType.Workout && (
           <Button onClick={() => console.log('Starting!!')}>Start</Button>
         )}
@@ -98,7 +142,7 @@ const StyledListItemMenuButton = styled.button`
 `;
 
 const ListItemMenuWrapper = styled.div<{ open: boolean }>`
-  position: absolute;
+  position: fixed;
   display: ${(props) => (props.open ? 'grid' : 'none')};
   /* display: grid; */
   grid-auto-rows: auto;
