@@ -20,8 +20,6 @@ const DeleteModal: React.FC = () => {
   const authUser = useContext(AuthUserContext);
   const firebase = useContext(FirebaseContext);
 
-  // const deleteText = `Do you want to delete this archetype: ${archetype.name}?`;
-
   if (moveState === null) {
     throw Error('moveState === null!');
   }
@@ -67,10 +65,25 @@ const DeleteModal: React.FC = () => {
     },
   };
 
+  let moveText;
+  switch (moveState.type) {
+    case 'ARCHETYPE':
+      moveText = 'Archetype';
+      break;
+    case 'EXERCISE':
+      moveText = 'Exercise';
+      break;
+    case 'WORKOUT':
+      moveText = 'Workout';
+      break;
+    default:
+      break;
+  }
+
   return (
     <DeleteModalWrapper>
-      <p>Do you want to delete this {moveState.type}?:</p>
-      <p>{moveState.name}</p>
+      <p>Do you want to delete this {moveText}?</p>
+      <p className="moveName">{moveState.name}</p>
       <ButtonRow config={btnConfig} />
     </DeleteModalWrapper>
   );
@@ -81,6 +94,9 @@ const DeleteModalWrapper = styled(ModalWrapper)`
   gap: 1rem;
   p {
     font-size: ${(p) => p.theme.font[3]};
+  }
+  .moveName {
+    font-weight: 600;
   }
 `;
 
