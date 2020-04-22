@@ -70,7 +70,7 @@ const MovementsContainerWrapper = styled.div`
 
 const NoMovementsMessage = () => (
   <NoMovementsMessageWrapper>
-    No moves are available..
+    No movements are available..
   </NoMovementsMessageWrapper>
 );
 

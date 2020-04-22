@@ -56,7 +56,6 @@ const ListItemMenuButton: React.FC<{
       console.log('menu open');
       document.addEventListener('click', closeMenu);
 
-      // const { offsetWidth, offsetLeft } = menuRef?.current;
       const offsetHeight = menuRef?.current?.offsetHeight;
       const offsetWidth = menuRef?.current?.offsetWidth;
       const offsetTop = menuRef?.current?.offsetTop;
@@ -69,10 +68,6 @@ const ListItemMenuButton: React.FC<{
         menuRef &&
         menuRef.current
       ) {
-        console.log(offsetWidth);
-        console.log(offsetLeft);
-        console.log(offsetTop);
-
         const isOverBottom =
           offsetHeight + offsetTop - document.body.clientHeight >= 0;
         const isOverRight =
@@ -88,14 +83,7 @@ const ListItemMenuButton: React.FC<{
         }
         menuRef.current.style.top = topPosition + 'px';
         menuRef.current.style.left = leftPosition + 'px';
-
-        // if (isOverLeft) {
-        //   menuRef.current.style.top = offsetTop + 'px';
-        //   menuRef.current.style.left = offsetLeft + 'px';
-        // } else {
-        //   menuRef.current.style.top = offsetTop + 'px';
-        //   menuRef.current.style.left = offsetLeft + 'px';
-        // }
+        menuRef.current.style.opacity = '1';
       }
     } else {
       console.log('menu closed');
@@ -143,8 +131,8 @@ const StyledListItemMenuButton = styled.button`
 
 const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   position: fixed;
+  opacity: 0;
   display: ${(props) => (props.open ? 'grid' : 'none')};
-  /* display: grid; */
   grid-auto-rows: auto;
   background-color: ${(props) => props.theme.mode.background[200]};
   box-shadow: ${(props) => props.theme.shadow[2]};
