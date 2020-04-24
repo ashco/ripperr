@@ -5,7 +5,7 @@ import { Button } from '../Buttons';
 
 import { useMoveDispatch } from '../../context/MoveContext';
 import { useModalDispatch } from '../../context/ModalContext';
-import { useSetPointerEvents } from '../../context/PointerEventsContext';
+import { usePointerEvents } from '../../context/PointerEventsContext';
 
 import Bars from '../../icons/Bars';
 import { MovementType } from '../../common/enums';
@@ -23,7 +23,7 @@ const ListItemMenuButton: React.FC<{
 
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
-  const setPointerEvents = useSetPointerEvents();
+  const setPointerEvents = usePointerEvents()[1];
 
   function handleView(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
@@ -134,6 +134,7 @@ const StyledListItemMenuButton = styled.button`
 `;
 
 const ListItemMenuWrapper = styled.div<{ open: boolean }>`
+  pointer-events: all;
   position: fixed;
   opacity: 0;
   display: ${(props) => (props.open ? 'grid' : 'none')};

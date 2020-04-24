@@ -21,7 +21,7 @@ const Page: React.FC = (props) => {
   const themeModeState = useThemeModeState();
   const themeModeDispatch = useThemeModeDispatch();
 
-  const pointerEvents = usePointerEvents();
+  const pointerEvents = usePointerEvents()[0];
 
   useEffect(() => {
     if (localStorage.getItem('themeMode') === 'LIGHT_MODE') {
@@ -42,14 +42,12 @@ const Page: React.FC = (props) => {
       <MoveProvider>
         <ModalProvider>
           <FilterProvider>
-            {/* <PointerEventsProvider> */}
             <StyledPage pointerEvents={pointerEvents}>
               <GlobalStyle />
               <Meta />
               <Navigation />
               <Inner>{props.children}</Inner>
             </StyledPage>
-            {/* </PointerEventsProvider> */}
           </FilterProvider>
         </ModalProvider>
       </MoveProvider>
@@ -59,13 +57,6 @@ const Page: React.FC = (props) => {
 
 const StyledPage = styled.div<{ pointerEvents: boolean }>`
   color: ${({ theme }) => theme.color.neutral[900]};
-  /* background: rgb(84, 255, 180);
-  background: linear-gradient(
-    32deg,
-    rgba(84, 255, 180, 1) 0%,
-    rgba(74, 255, 209, 1) 40%,
-    rgba(101, 230, 255, 1) 100%
-  ); */
   background: ${(props) => props.theme.mode.background[100]};
   height: 100vh;
   width: 100vw;
