@@ -3,6 +3,7 @@ import App from 'next/app';
 import Page from '../components/Page';
 import { withAuthentication } from '../context';
 import { ThemeModeProvider } from '../context/ThemeModeContext';
+import { PointerEventsProvider } from '../context/PointerEventsContext';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,9 +12,11 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <ThemeModeProvider>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
+        <PointerEventsProvider>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </PointerEventsProvider>
       </ThemeModeProvider>
     );
   }

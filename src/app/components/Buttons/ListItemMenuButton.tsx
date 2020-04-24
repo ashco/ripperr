@@ -5,6 +5,7 @@ import { Button } from '../Buttons';
 
 import { useMoveDispatch } from '../../context/MoveContext';
 import { useModalDispatch } from '../../context/ModalContext';
+import { useSetPointerEvents } from '../../context/PointerEventsContext';
 
 import Bars from '../../icons/Bars';
 import { MovementType } from '../../common/enums';
@@ -22,6 +23,7 @@ const ListItemMenuButton: React.FC<{
 
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
+  const setPointerEvents = useSetPointerEvents();
 
   function handleView(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
@@ -40,10 +42,12 @@ const ListItemMenuButton: React.FC<{
 
   function openMenu(): void {
     setMenuOpen(true);
+    setPointerEvents(false);
   }
 
   function closeMenu(): void {
     setMenuOpen(false);
+    setPointerEvents(true);
     document.removeEventListener('click', closeMenu);
   }
 
@@ -137,7 +141,12 @@ const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   background-color: ${(props) => props.theme.mode.background[200]};
   box-shadow: ${(props) => props.theme.shadow[2]};
   width: 6rem;
-  /* padding: 1rem; */
+  button {
+    border-bottom: none;
+  }
+  &:last-child {
+    border-bottom: 2px solid ${(prop) => prop.theme.mode.color[100]};
+  }
 `;
 
 export default ListItemMenuButton;
