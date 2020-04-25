@@ -5,8 +5,8 @@ import { useFilterState } from '../../context/FilterContext';
 
 import { ArchetypeListItem } from '../ListItems';
 
-import { Archetype } from '../../common/types';
-import { MovementType } from '../../common/enums';
+import { Archetype } from '../../types/types';
+import { MovementType } from '../../types/enums';
 
 export const ArchetypeList: React.FC<{
   archetypeList: Archetype[] | null;

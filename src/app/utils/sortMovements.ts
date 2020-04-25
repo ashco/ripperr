@@ -1,4 +1,4 @@
-﻿import { Movement, Archetype } from '../common/types';
+﻿import { Movement, Archetype } from '../types/types';
 
 // sort by newest modified first
 export function sortMovements(a: Movement, b: Movement): number {

@@ -1,5 +1,5 @@
-﻿import { Workout, Exercise } from './types';
-import { WorkoutMode, MovementType } from './enums';
+﻿import { Workout, Exercise } from '../types/types';
+import { WorkoutMode, MovementType } from '../types/enums';
 
 export const workoutModeOptions = [
   {

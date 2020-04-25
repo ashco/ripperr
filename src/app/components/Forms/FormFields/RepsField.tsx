@@ -4,7 +4,7 @@ import { MovementListContext } from '../../../context';
 
 import { Row } from '../styles';
 
-import { IHandleChange, IMovementRefs } from '../../../common/types';
+import { IHandleChange, IMovementRefs } from '../../../types/types';
 
 const RepsField: React.FC<{
   move: IMovementRefs;

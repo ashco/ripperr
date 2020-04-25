@@ -42,7 +42,7 @@ const Page: React.FC = (props) => {
       <MoveProvider>
         <ModalProvider>
           <FilterProvider>
-            <StyledPage pointerEvents={pointerEvents}>
+            <StyledPage pointerEvents={pointerEvents ? 'auto' : 'none'}>
               <GlobalStyle />
               <Meta />
               <Navigation />
@@ -55,7 +55,7 @@ const Page: React.FC = (props) => {
   );
 };
 
-const StyledPage = styled.div<{ pointerEvents: boolean }>`
+const StyledPage = styled.div<{ pointerEvents: string }>`
   color: ${({ theme }) => theme.color.neutral[900]};
   background: ${(props) => props.theme.mode.background[100]};
   height: 100vh;

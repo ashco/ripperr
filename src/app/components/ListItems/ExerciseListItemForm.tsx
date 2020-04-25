@@ -8,8 +8,8 @@ import { useMoveDispatch } from '../../context/MoveContext';
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
 
-import { IMovementRefs } from '../../common/types';
-import { MovementType, WorkoutMode, ModalMode } from '../../common/enums';
+import { IMovementRefs } from '../../types/types';
+import { MovementType, WorkoutMode, ModalMode } from '../../types/enums';
 
 const ExerciseListItemForm: React.FC<{
   exercise: IMovementRefs;
@@ -31,7 +31,7 @@ const ExerciseListItemForm: React.FC<{
   }
 
   return (
-    <ExerciseListItemFormWrapper color={themeContext.color.blue[500]}>
+    <ExerciseListItemFormWrapper color={themeContext.color.purple[500]}>
       <p className="name">{exercise.name}</p>
       <div className="number-values">
         {mode === WorkoutMode.Reps && (

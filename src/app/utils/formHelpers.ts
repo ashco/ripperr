@@ -6,9 +6,9 @@
   IExerciseFormErrors,
   IWorkoutFormErrors,
   Movement,
-} from './types';
+} from '../types/types';
 
-import { FormFieldProp, WorkoutMode, MovementType } from './enums';
+import { FormFieldProp, WorkoutMode, MovementType } from '../types/enums';
 
 function getValue(e: IHandleChange): string | number | boolean | string[] {
   const { options, multiple } = e.target as HTMLSelectElement;

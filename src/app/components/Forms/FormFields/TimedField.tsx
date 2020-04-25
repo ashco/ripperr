@@ -5,7 +5,7 @@ import { MovementListContext } from '../../../context';
 import { Button } from '../../Buttons';
 import { Row } from '../styles';
 
-import { IHandleChange, IMovementRefs } from '../../../common/types';
+import { IHandleChange, IMovementRefs } from '../../../types/types';
 
 const TimedField: React.FC<{
   move: IMovementRefs;

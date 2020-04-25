@@ -10,7 +10,7 @@ import {
   // IWorkoutFormErrors,
   IFormReducerAction,
   Movement,
-} from '../../../common/types';
+} from '../../../types/types';
 // import { FormMode } from '../../../common/enums';
 
 const FirstFields: React.FC<{

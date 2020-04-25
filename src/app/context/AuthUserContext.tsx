@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { IAuthUserContext } from '../common/types';
+import { IAuthUserContext } from '../types/types';
 
 const AuthUserContext = React.createContext<IAuthUserContext>(null);
 

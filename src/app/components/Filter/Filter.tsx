@@ -6,7 +6,7 @@ import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
 import { ArchetypeList } from '../../components/Movements';
 import FilterBar from './FilterBar';
 
-import { Archetype } from '../../common/types';
+import { Archetype } from '../../types/types';
 
 const Filter: React.FC<{
   archetypeList: Archetype[] | null;

@@ -2,7 +2,7 @@
 
 import { AuthUserContext, FirebaseContext } from './index';
 
-import { IAuthUserContext } from '../common/types';
+import { IAuthUserContext } from '../types/types';
 
 const withAuthentication = (Component: any) => {
   const WithAuthentication = (props: any) => {

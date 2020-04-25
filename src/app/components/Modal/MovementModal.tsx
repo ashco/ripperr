@@ -26,8 +26,8 @@ import {
   Exercise,
   Workout,
   ButtonRowProps,
-} from '../../common/types';
-import { ModalMode, MovementType } from '../../common/enums';
+} from '../../types/types';
+import { ModalMode, MovementType } from '../../types/enums';
 
 const MovementModal: React.FC<{
   mode: ModalMode.Add | ModalMode.Edit | ModalMode.View;
@@ -321,9 +321,9 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
       props.type === MovementType.Archetype
         ? props.theme.color.orange[500]
         : props.type === MovementType.Exercise
-        ? props.theme.color.blue[500]
+        ? props.theme.color.purple[500]
         : props.type === MovementType.Workout
-        ? props.theme.color.yellow[500]
+        ? props.theme.color.blue[500]
         : 'none'};
   form {
     display: grid;

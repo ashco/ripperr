@@ -9,11 +9,12 @@ export const ListItem = styled.li<{ color: string }>`
   grid-template-columns: 1fr auto;
   border-top: 7px solid ${(props) => props.color};
   cursor: pointer;
-  p.name {
+  p {
     font-size: 16px;
     padding: 0.75rem 0.5rem;
     color: ${(props) => props.theme.mode.color[100]};
     font-weight: 600;
+    line-height: 1.15;
   }
   .row {
     display: flex;

@@ -5,7 +5,7 @@ import { FirebaseContext, withAuthorization } from '../context';
 
 import UserList from '../components/Admin/UserList';
 
-import { IAuthUserContext, IUser } from '../common/types';
+import { IAuthUserContext, IUser } from '../types/types';
 
 interface IState {
   uLoading: boolean;

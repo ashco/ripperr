@@ -11,8 +11,8 @@ import {
   IExercisesFirebaseQuery,
   IWorkoutsFirebaseQuery,
   IMovementState,
-} from '../common/types';
-import { sortArchetypes } from '../common/sortMovements';
+} from '../types/types';
+import { sortArchetypes } from '../utils/sortMovements';
 
 export const INITIAL_ARCHETYPE_STATE: IArchetypesFirebaseQuery = {
   loading: true,

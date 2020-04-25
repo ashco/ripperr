@@ -1,4 +1,4 @@
-﻿import { Movement } from './types';
+﻿import { Movement } from '../types/types';
 
 export function createMovementColList(colNum: number, moveList: Movement[]) {
   // create sorted movement lists

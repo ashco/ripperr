@@ -5,7 +5,7 @@ import { Formik, Form } from 'formik';
 import { Button } from '../Buttons';
 import { InputField, passwordForgotVal } from '../Forms';
 import { FirebaseContext } from '../../context';
-import { IAuthError } from '../../common/types';
+import { IAuthError } from '../../types/types';
 
 interface IPasswordForgotForm {
   email: string;

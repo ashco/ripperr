@@ -9,7 +9,7 @@ import { AuthFormContainer } from './signin';
 import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChangeForm';
 
-import { IAuthUserContext } from '../common/types';
+import { IAuthUserContext } from '../types/types';
 
 const AccountPage: NextPage = () => {
   const authUser = useContext(AuthUserContext);

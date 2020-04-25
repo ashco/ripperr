@@ -11,8 +11,8 @@ import {
   Archetype,
   Exercise,
   Workout,
-} from '../../../common/types';
-import { FormActionType } from '../../../common/enums';
+} from '../../../types/types';
+import { FormActionType } from '../../../types/enums';
 
 const TagField: React.FC<{
   form: Exercise | Workout;

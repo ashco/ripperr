@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { ExerciseListItemForm } from '../../ListItems';
 import { Button } from '../../Buttons';
 
-import { IMovementRefs } from '../../../common/types';
-import { WorkoutMode, ModalMode } from '../../../common/enums';
+import { IMovementRefs } from '../../../types/types';
+import { WorkoutMode, ModalMode } from '../../../types/enums';
 
 const MovementsField: React.FC<{
   movements: IMovementRefs[];

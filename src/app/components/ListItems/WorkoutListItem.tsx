@@ -8,8 +8,8 @@ import { useMoveDispatch } from '../../context/MoveContext';
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
 
-import { Workout } from '../../common/types';
-import { MovementType } from '../../common/enums';
+import { Workout } from '../../types/types';
+import { MovementType } from '../../types/enums';
 
 const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
   const themeContext = useContext(ThemeContext);
@@ -28,7 +28,7 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
   return (
     <WorkoutListItemWrapper
       onClick={handleView}
-      color={themeContext.color.yellow[500]}
+      color={themeContext.color.blue[500]}
     >
       <p className="name">{workout.name}</p>
       <div className="list-item-menu-container">

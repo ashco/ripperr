@@ -5,8 +5,8 @@ import { useMoveDispatch } from '../../../context/MoveContext';
 
 import { Row } from '../styles';
 
-import { IWorkoutRest } from '../../../common/types';
-import { ModalMode } from '../../../common/enums';
+import { IWorkoutRest } from '../../../types/types';
+import { ModalMode } from '../../../types/enums';
 
 const RestField: React.FC<{
   rest: IWorkoutRest;

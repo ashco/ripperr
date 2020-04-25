@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { ModalMode } from '../common/enums';
+import { ModalMode } from '../types/enums';
 
 type ModalActionType =
   | 'MODAL_CLOSE'

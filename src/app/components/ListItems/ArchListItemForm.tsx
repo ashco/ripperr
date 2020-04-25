@@ -5,7 +5,7 @@ import { ListItem } from './index';
 
 import { useMoveDispatch } from '../../context/MoveContext';
 
-import { Archetype } from '../../common/types';
+import { Archetype } from '../../types/types';
 
 const ArchListItemForm: React.FC<{
   archetype: Archetype;

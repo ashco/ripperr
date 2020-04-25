@@ -10,9 +10,9 @@ import { MovementsContainer } from '../components/Movements';
 import { Filter } from '../components/Filter';
 import { Modal } from '../components/Modal';
 
-import { sortMovements } from '../common/sortMovements';
+import { sortMovements } from '../utils/sortMovements';
 
-import { IAuthUserContext } from '../common/types';
+import { IAuthUserContext } from '../types/types';
 
 const MovesPage: NextPage = () => {
   const filterState = useFilterState();

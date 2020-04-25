@@ -15,6 +15,7 @@ declare module 'styled-components' {
     };
     color: {
       neutral: any;
+      purple: any;
       blue: any;
       green: any;
       yellow: any;

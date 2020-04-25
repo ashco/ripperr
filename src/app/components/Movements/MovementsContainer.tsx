@@ -9,8 +9,8 @@ import {
   WorkoutListItem,
 } from '../ListItems';
 
-import { sortMovements } from '../../common/sortMovements';
-import { createMovementColList } from '../../common/createMovementColList';
+import { sortMovements } from '../../utils/sortMovements';
+import { createMovementColList } from '../../utils/createMovementColList';
 
 import {
   Movement,
@@ -18,8 +18,8 @@ import {
   Exercise,
   Workout,
   IMovementState,
-} from '../../common/types';
-import { MovementType } from '../../common/enums';
+} from '../../types/types';
+import { MovementType } from '../../types/enums';
 
 export const MovementsContainer: React.FC<{
   moveList: Movement[] | null;

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { Row } from './styles';
 
-import { IHandleChange, Workout, IWorkoutFormErrors } from '../../common/types';
-import { WorkoutMode } from '../../common/enums';
+import { IHandleChange, Workout, IWorkoutFormErrors } from '../../types/types';
+import { WorkoutMode } from '../../types/enums';
 
 const TimedModeConfigFields: React.FC<{
   form: Workout;

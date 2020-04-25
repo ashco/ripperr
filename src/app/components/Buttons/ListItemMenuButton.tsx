@@ -8,8 +8,8 @@ import { useModalDispatch } from '../../context/ModalContext';
 import { usePointerEvents } from '../../context/PointerEventsContext';
 
 import Bars from '../../icons/Bars';
-import { MovementType } from '../../common/enums';
-import { Movement } from '../../common/types';
+import { MovementType } from '../../types/enums';
+import { Movement } from '../../types/types';
 
 const ListItemMenuButton: React.FC<{
   movement: Movement;

@@ -11,7 +11,7 @@ import { useModalDispatch } from '../../context/ModalContext';
 import { useMoveState } from '../../context/MoveContext';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
-import { MovementType } from '../../common/enums';
+import { MovementType } from '../../types/enums';
 
 const DeleteModal: React.FC = () => {
   const modalDispatch = useModalDispatch();

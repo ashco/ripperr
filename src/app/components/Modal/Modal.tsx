@@ -7,7 +7,7 @@ import { useModalState, useModalDispatch } from '../../context/ModalContext';
 import { ModalBackground, ModalWrapper, DeleteMovementModal } from '.';
 import AddSelectModal from './AddSelectModal';
 import MovementModal from './MovementModal';
-import { ModalMode } from '../../common/enums';
+import { ModalMode } from '../../types/enums';
 
 const Modal: React.FC = (props) => {
   const modalState = useModalState();

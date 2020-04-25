@@ -7,7 +7,7 @@ import { FormError } from '../Forms/styles';
 import { Button } from '../Buttons';
 
 import { FirebaseContext } from '../../context';
-import { IAuthError } from '../../common/types';
+import { IAuthError } from '../../types/types';
 
 interface ISignUpFormValues {
   username: string;

@@ -6,8 +6,8 @@ import {
   Exercise,
   Workout,
   IWorkoutRest,
-} from '../common/types';
-import { MovementType, WorkoutMode } from '../common/enums';
+} from '../types/types';
+import { MovementType, WorkoutMode } from '../types/enums';
 
 type FormActionType =
   | 'MOVE_CLEAR'
