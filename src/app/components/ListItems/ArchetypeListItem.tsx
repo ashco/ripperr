@@ -37,17 +37,17 @@ const ArchetypeListItem: React.FC<{
   const active = filterState.archs.includes(archetype.id as string);
 
   const textLength = 10;
+  const color = active
+    ? themeContext.color.orange[500]
+    : themeContext.mode.background[400];
 
   return (
-    <ToolTip text={archetype.name} hidden={archetype.name.length < textLength}>
-      <ArchetypeListItemWrapper
-        color={
-          active
-            ? themeContext.color.orange[500]
-            : themeContext.mode.colorOpacity[200]
-        }
-        onClick={toggleActive}
-      >
+    <ToolTip
+      text={archetype.name}
+      hidden={archetype.name.length < textLength}
+      color={color}
+    >
+      <ArchetypeListItemWrapper color={color} onClick={toggleActive}>
         <p className="name">{stringShortener(archetype.name, textLength)}</p>
         {/* <TextExpander text={archetype.name} length={10} /> */}
         <div className="btn-wrapper">

@@ -301,6 +301,7 @@ const MovementModal: React.FC<{
             moveState?.type === MovementType.Workout) && (
             <ArchField
               tags={(moveState as Exercise | Workout).tags}
+              modalMode={mode}
               disabled={disabled}
             />
           )}

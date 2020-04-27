@@ -6,22 +6,33 @@ import { MovementListContext } from '../../../context';
 import { ArchListItemForm } from '../../ListItems';
 import { Button } from '../../Buttons';
 
+import { ModalMode } from '../../../types/enums';
+
 const ArchField: React.FC<{
   tags: string[];
   disabled: boolean;
-}> = ({ tags, disabled }) => {
+  modalMode: ModalMode;
+}> = ({ tags, disabled, modalMode }) => {
   const { archetypes } = React.useContext(MovementListContext);
 
   return (
     <ArchFieldWrapper>
-      {archetypes.map((arch) => (
-        <ArchListItemForm
-          key={arch.id}
-          archetype={arch}
-          active={tags.includes(arch.id as string)}
-          disabled={disabled}
-        />
-      ))}
+      {archetypes
+        .filter((arch) => {
+          if (modalMode === ModalMode.View) {
+            return tags.includes(arch.id as string);
+          } else {
+            return true;
+          }
+        })
+        .map((arch) => (
+          <ArchListItemForm
+            key={arch.id}
+            archetype={arch}
+            active={tags.includes(arch.id as string)}
+            disabled={disabled}
+          />
+        ))}
     </ArchFieldWrapper>
   );
 };
@@ -29,6 +40,7 @@ const ArchField: React.FC<{
 const ArchFieldWrapper = styled.ul`
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 const ArchButton = styled(Button)<{ active: boolean }>`

@@ -142,6 +142,7 @@ const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   background-color: ${(props) => props.theme.mode.background[200]};
   box-shadow: ${(props) => props.theme.shadow[2]};
   width: 6rem;
+  z-index: 20;
   button {
     border-bottom: none;
   }
