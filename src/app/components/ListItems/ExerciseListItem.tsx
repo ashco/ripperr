@@ -19,8 +19,6 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
   const btnRef = useRef<HTMLDivElement>(null);
 
   function handleView(e: any): void {
-    console.log(exercise);
-
     if (!btnRef?.current?.contains(e.target)) {
       modalDispatch({ type: 'MODAL_VIEW' });
       moveDispatch({ type: 'MOVE_SET', value: exercise });

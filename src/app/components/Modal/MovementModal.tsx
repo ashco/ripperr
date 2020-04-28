@@ -208,6 +208,10 @@ const MovementModal: React.FC<{
 
   console.log(moveState);
 
+  const showDesc =
+    mode !== ModalMode.View ||
+    (mode === ModalMode.View && (moveState as Movement).description !== '');
+
   return (
     <MovementModalWrapper type={(moveState as Movement).type}>
       <h1 className="title">{text.title}</h1>
@@ -230,19 +234,21 @@ const MovementModal: React.FC<{
             }
             disabled={disabled}
           />
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Enter a description..."
-            value={(moveState as Movement).description}
-            onChange={(e) =>
-              moveDispatch({
-                type: 'MOVE_CHANGE_DESCRIPTION',
-                value: e.target.value,
-              })
-            }
-            disabled={disabled}
-          />
+          {showDesc && (
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Enter a description..."
+              value={(moveState as Movement).description}
+              onChange={(e) =>
+                moveDispatch({
+                  type: 'MOVE_CHANGE_DESCRIPTION',
+                  value: e.target.value,
+                })
+              }
+              disabled={disabled}
+            />
+          )}
           {moveState?.type === MovementType.Workout && (
             <>
               <WorkoutModeField>

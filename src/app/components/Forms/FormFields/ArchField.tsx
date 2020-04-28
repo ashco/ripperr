@@ -18,6 +18,7 @@ const ArchField: React.FC<{
   return (
     <ArchFieldWrapper>
       {archetypes
+        // TODO - make more performent
         .filter((arch) => {
           if (modalMode === ModalMode.View) {
             return tags.includes(arch.id as string);

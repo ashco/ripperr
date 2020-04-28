@@ -70,7 +70,7 @@ const ArchListItemModalWrapper = styled.li<{
   p.name {
     padding: 0.25rem 0.5rem;
     color: default;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.15;
   }
 `;
