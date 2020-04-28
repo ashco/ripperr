@@ -11,11 +11,26 @@ import { ModalMode } from '../../types/enums';
 
 const Modal: React.FC = (props) => {
   const modalState = useModalState();
+  const modalDispatch = useModalDispatch();
+
+  const bgRef = React.useRef<HTMLDivElement>(null);
+
+  function handleClose(e: any): void {
+    if (e.target === bgRef.current) {
+      modalDispatch({ type: 'MODAL_CLOSE' });
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('click', handleClose);
+
+    return (): void => document.removeEventListener('click', handleClose);
+  });
 
   return (
     <ModalRoot>
       {modalState.open && (
-        <ModalBackground>
+        <ModalBackground ref={bgRef}>
           {modalState.mode === ModalMode.AddSelect && <AddSelectModal />}
           {modalState.mode === ModalMode.Add && (
             <MovementModal mode={modalState.mode} />
