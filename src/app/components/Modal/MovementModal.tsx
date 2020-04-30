@@ -13,6 +13,7 @@ import { useModalDispatch } from '../../context/ModalContext';
 // import { MovementFormWrapper } from '../Forms/styles';
 import { ModalWrapper } from './styles';
 import {
+  InlineField,
   ButtonRow,
   ArchField,
   MovementsField,
@@ -220,22 +221,24 @@ const MovementModal: React.FC<{
         className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
         noValidate
       >
-        <div className="form-fields">
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={(moveState as Movement).name}
-            onChange={(e) =>
-              moveDispatch({
-                type: 'MOVE_CHANGE_NAME',
-                value: e.target.value,
-              })
-            }
-            disabled={disabled}
-          />
-          {showDesc && (
-            <textarea
+        <div className="top-fields">
+          <InlineField name="Name:">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={(moveState as Movement).name}
+              onChange={(e) =>
+                moveDispatch({
+                  type: 'MOVE_CHANGE_NAME',
+                  value: e.target.value,
+                })
+              }
+              disabled={disabled}
+            />
+          </InlineField>
+          <InlineField name="Description:">
+            <input
               id="description"
               name="description"
               placeholder="Enter a description..."
@@ -248,45 +251,81 @@ const MovementModal: React.FC<{
               }
               disabled={disabled}
             />
-          )}
+          </InlineField>
+          <InlineField name="Mode:">
+            <WorkoutModeField>
+              <label>
+                <input
+                  type="radio"
+                  name="mode"
+                  id="mode-reps"
+                  checked={(moveState as Workout).mode === 'REPS'}
+                  value="REPS"
+                  onChange={(e) =>
+                    moveDispatch({
+                      type: 'MOVE_CHANGE_MODE',
+                      value: e.currentTarget.value,
+                    })
+                  }
+                  disabled={disabled}
+                />
+                <span>Reps</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="mode"
+                  id="mode-timed"
+                  checked={(moveState as Workout).mode === 'TIMED'}
+                  value="TIMED"
+                  onChange={(e) =>
+                    moveDispatch({
+                      type: 'MOVE_CHANGE_MODE',
+                      value: e.currentTarget.value,
+                    })
+                  }
+                  disabled={disabled}
+                />
+                <span>Timed</span>
+              </label>
+              {/* <input
+                type="radio"
+                name="mode"
+                id="mode-reps"
+                checked={(moveState as Workout).mode === 'REPS'}
+                value="REPS"
+                onChange={(e) =>
+                  moveDispatch({
+                    type: 'MOVE_CHANGE_MODE',
+                    value: e.currentTarget.value,
+                  })
+                }
+                disabled={disabled}
+              />
+              <input
+                type="radio"
+                name="mode"
+                id="mode-timed"
+                checked={(moveState as Workout).mode === 'TIMED'}
+                value="TIMED"
+                onChange={(e) =>
+                  moveDispatch({
+                    type: 'MOVE_CHANGE_MODE',
+                    value: e.currentTarget.value,
+                  })
+                }
+                disabled={disabled}
+              />
+              <label htmlFor="mode-reps">Reps</label>
+              <label htmlFor="mode-timed">Timed</label> */}
+            </WorkoutModeField>
+          </InlineField>
+        </div>
+        {/*
+        <div className="form-fields">
           {moveState?.type === MovementType.Workout && (
             <>
-              <WorkoutModeField>
-                <label htmlFor="reps">
-                  <input
-                    type="radio"
-                    id="reps"
-                    name="mode"
-                    checked={(moveState as Workout).mode === 'REPS'}
-                    value="REPS"
-                    onChange={(e) =>
-                      moveDispatch({
-                        type: 'MOVE_CHANGE_MODE',
-                        value: e.currentTarget.value,
-                      })
-                    }
-                    disabled={disabled}
-                  />
-                  Reps
-                </label>
-                <label htmlFor="timed">
-                  <input
-                    type="radio"
-                    id="timed"
-                    name="mode"
-                    checked={(moveState as Workout).mode === 'TIMED'}
-                    value="TIMED"
-                    onChange={(e) =>
-                      moveDispatch({
-                        type: 'MOVE_CHANGE_MODE',
-                        value: e.currentTarget.value,
-                      })
-                    }
-                    disabled={disabled}
-                  />
-                  Timed
-                </label>
-              </WorkoutModeField>
+
               <MovementsField
                 movements={(moveState as Workout).movements}
                 mode={(moveState as Workout).mode}
@@ -311,10 +350,112 @@ const MovementModal: React.FC<{
               disabled={disabled}
             />
           )}
-        </div>
+        </div> */}
         <ButtonRow config={btnConfig} />
       </form>
     </MovementModalWrapper>
+    // <MovementModalWrapper type={(moveState as Movement).type}>
+    //   <h1 className="title">{text.title}</h1>
+    //   <form
+    //     onSubmit={handleSubmit}
+    //     className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
+    //     noValidate
+    //   >
+    //     <div className="form-fields">
+    //       <input
+    //         type="text"
+    //         name="name"
+    //         placeholder="Name"
+    //         value={(moveState as Movement).name}
+    //         onChange={(e) =>
+    //           moveDispatch({
+    //             type: 'MOVE_CHANGE_NAME',
+    //             value: e.target.value,
+    //           })
+    //         }
+    //         disabled={disabled}
+    //       />
+    //       {showDesc && (
+    //         <textarea
+    //           id="description"
+    //           name="description"
+    //           placeholder="Enter a description..."
+    //           value={(moveState as Movement).description}
+    //           onChange={(e) =>
+    //             moveDispatch({
+    //               type: 'MOVE_CHANGE_DESCRIPTION',
+    //               value: e.target.value,
+    //             })
+    //           }
+    //           disabled={disabled}
+    //         />
+    //       )}
+    //       {moveState?.type === MovementType.Workout && (
+    //         <>
+    //           <WorkoutModeField>
+    //             <label htmlFor="reps">
+    //               <input
+    //                 type="radio"
+    //                 id="reps"
+    //                 name="mode"
+    //                 checked={(moveState as Workout).mode === 'REPS'}
+    //                 value="REPS"
+    //                 onChange={(e) =>
+    //                   moveDispatch({
+    //                     type: 'MOVE_CHANGE_MODE',
+    //                     value: e.currentTarget.value,
+    //                   })
+    //                 }
+    //                 disabled={disabled}
+    //               />
+    //               Reps
+    //             </label>
+    //             <label htmlFor="timed">
+    //               <input
+    //                 type="radio"
+    //                 id="timed"
+    //                 name="mode"
+    //                 checked={(moveState as Workout).mode === 'TIMED'}
+    //                 value="TIMED"
+    //                 onChange={(e) =>
+    //                   moveDispatch({
+    //                     type: 'MOVE_CHANGE_MODE',
+    //                     value: e.currentTarget.value,
+    //                   })
+    //                 }
+    //                 disabled={disabled}
+    //               />
+    //               Timed
+    //             </label>
+    //           </WorkoutModeField>
+    //           <MovementsField
+    //             movements={(moveState as Workout).movements}
+    //             mode={(moveState as Workout).mode}
+    //             modalMode={mode}
+    //             disabled={disabled}
+    //           />
+    //           {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
+    //             <AddMovementButton />
+    //           )}
+    //           <RestField
+    //             rest={(moveState as Workout).rest}
+    //             disabled={disabled}
+    //             // modalMode={mode}
+    //           />
+    //         </>
+    //       )}
+    //       {(moveState?.type === MovementType.Exercise ||
+    //         moveState?.type === MovementType.Workout) && (
+    //         <ArchField
+    //           tags={(moveState as Exercise | Workout).tags}
+    //           modalMode={mode}
+    //           disabled={disabled}
+    //         />
+    //       )}
+    //     </div>
+    //     <ButtonRow config={btnConfig} />
+    //   </form>
+    // </MovementModalWrapper>
   );
 };
 
@@ -381,22 +522,42 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
   }
 
   /* ------ Section specific styling ------ */
-  .form-fields {
+  /* .form-fields {
     display: grid;
     grid-template-rows: auto auto;
-    gap: 0.5rem;
-    #description {
+    gap: 0.5rem; */
+  /* #description {
       height: 4rem;
       resize: none;
-    }
+    } */
+  .top-fields {
+    display: grid;
+    gap: 0.5rem;
   }
 `;
 
 const WorkoutModeField = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
+  gap: 0.5rem;
+  label {
+    border: 2px solid ${(props) => props.theme.mode.color[100]};
+    cursor: pointer;
+  }
+  label input {
+    display: none;
+  }
+  label span {
+    padding: 0.5rem;
+    font-size: 16px;
+    width: 100%;
+  }
+  input:checked + span {
+    background-color: ${(props) => props.theme.mode.color[100]};
+    color: ${(props) => props.theme.mode.background[300]};
+  }
 `;
 
 export default MovementModal;

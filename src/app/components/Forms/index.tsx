@@ -10,6 +10,7 @@ import SelectField from './FormFields/SelectField';
 import MovementsField from './FormFields/MovementsField';
 import AddMovementButton from './FormFields/AddMovementButton';
 import RestField from './FormFields/RestField';
+import InlineField from './FormFields/InlineField';
 
 import {
   signInVal,
@@ -40,4 +41,5 @@ export {
   ButtonRow,
   MovementsField,
   AddMovementButton,
+  InlineField,
 };
