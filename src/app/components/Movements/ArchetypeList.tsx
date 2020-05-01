@@ -1,12 +1,9 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { useFilterState } from '../../context/FilterContext';
-
-import { ArchetypeListItem } from '../ListItems';
+import { MenuListItem } from '../ListItems';
 
 import { Archetype } from '../../types/types';
-import { MovementType } from '../../types/enums';
 
 export const ArchetypeList: React.FC<{
   archetypeList: Archetype[] | null;
@@ -18,7 +15,7 @@ export const ArchetypeList: React.FC<{
           <div>No archetypes yet!</div>
         ) : (
           archetypeList.map((arch) => {
-            return <ArchetypeListItem key={arch.id} archetype={arch} />;
+            return <MenuListItem key={arch.id} movement={arch} />;
           })
         )
       ) : (

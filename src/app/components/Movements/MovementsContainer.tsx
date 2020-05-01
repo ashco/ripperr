@@ -1,17 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { MovementListContext } from '../../context';
-
-import {
-  MenuListItem,
-  ArchetypeListItem,
-  ExerciseListItem,
-  WorkoutListItem,
-} from '../ListItems';
-
-import { sortMovements } from '../../utils/sortMovements';
-import { createMovementColList } from '../../utils/createMovementColList';
+import { MenuListItem } from '../ListItems';
 
 import {
   Movement,
@@ -25,17 +15,13 @@ import { MovementType } from '../../types/enums';
 export const MovementsContainer: React.FC<{
   moveList: Movement[] | null;
   filterActive: boolean;
-  // loading: boolean;
 }> = ({ moveList }) => {
   function renderListItem(move: Movement) {
     if (
       move.type === MovementType.Exercise ||
       move.type === MovementType.Workout
     ) {
-      // return <ExerciseListItem key={move.id} exercise={move as Exercise} />;
       return <MenuListItem key={move.id} movement={move} />;
-      // } else if (move.type === MovementType.Workout) {
-      // return <WorkoutListItem key={move.id} workout={move as Workout} />;
     } else {
       return null;
     }

@@ -1,8 +1,6 @@
 ﻿import React from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import { ListItem } from './index';
-
 import { useMoveDispatch } from '../../context/MoveContext';
 
 import { Archetype } from '../../types/types';

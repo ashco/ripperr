@@ -1,6 +1,5 @@
-﻿import React, { useState, useContext, useReducer } from 'react';
+﻿import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
-import { toast } from 'react-toastify';
 
 import {
   AuthUserContext,
@@ -223,108 +222,106 @@ const MovementModal: React.FC<{
         className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
         noValidate
       >
-        <div className="top-fields">
-          <InlineField name="Name">
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={(moveState as Movement).name}
-              onChange={(e) =>
-                moveDispatch({
-                  type: 'MOVE_CHANGE_NAME',
-                  value: e.target.value,
-                })
-              }
-              disabled={disabled}
-            />
-          </InlineField>
-          <InlineField name="Description">
-            <input
-              id="description"
-              name="description"
-              placeholder="Enter a description..."
-              value={(moveState as Movement).description}
-              onChange={(e) =>
-                moveDispatch({
-                  type: 'MOVE_CHANGE_DESCRIPTION',
-                  value: e.target.value,
-                })
-              }
-              disabled={disabled}
-            />
-          </InlineField>
-          {moveState?.type === MovementType.Workout && (
-            <>
-              <InlineField name="Mode">
-                <WorkoutModeField disabled={disabled}>
-                  <label>
-                    <input
-                      type="radio"
-                      name="mode"
-                      id="mode-reps"
-                      checked={(moveState as Workout).mode === 'REPS'}
-                      value="REPS"
-                      onChange={(e) =>
-                        moveDispatch({
-                          type: 'MOVE_CHANGE_MODE',
-                          value: e.currentTarget.value,
-                        })
-                      }
-                      disabled={disabled}
-                    />
-                    <span>Reps</span>
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="mode"
-                      id="mode-timed"
-                      checked={(moveState as Workout).mode === 'TIMED'}
-                      value="TIMED"
-                      onChange={(e) =>
-                        moveDispatch({
-                          type: 'MOVE_CHANGE_MODE',
-                          value: e.currentTarget.value,
-                        })
-                      }
-                      disabled={disabled}
-                    />
-                    <span>Timed</span>
-                  </label>
-                </WorkoutModeField>
-              </InlineField>
+        <InlineField name="Name">
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={(moveState as Movement).name}
+            onChange={(e) =>
+              moveDispatch({
+                type: 'MOVE_CHANGE_NAME',
+                value: e.target.value,
+              })
+            }
+            disabled={disabled}
+          />
+        </InlineField>
+        <InlineField name="Description">
+          <input
+            id="description"
+            name="description"
+            placeholder="Enter a description..."
+            value={(moveState as Movement).description}
+            onChange={(e) =>
+              moveDispatch({
+                type: 'MOVE_CHANGE_DESCRIPTION',
+                value: e.target.value,
+              })
+            }
+            disabled={disabled}
+          />
+        </InlineField>
+        {moveState?.type === MovementType.Workout && (
+          <>
+            <InlineField name="Mode">
+              <WorkoutModeField disabled={disabled}>
+                <label>
+                  <input
+                    type="radio"
+                    name="mode"
+                    id="mode-reps"
+                    checked={(moveState as Workout).mode === 'REPS'}
+                    value="REPS"
+                    onChange={(e) =>
+                      moveDispatch({
+                        type: 'MOVE_CHANGE_MODE',
+                        value: e.currentTarget.value,
+                      })
+                    }
+                    disabled={disabled}
+                  />
+                  <span>Reps</span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="mode"
+                    id="mode-timed"
+                    checked={(moveState as Workout).mode === 'TIMED'}
+                    value="TIMED"
+                    onChange={(e) =>
+                      moveDispatch({
+                        type: 'MOVE_CHANGE_MODE',
+                        value: e.currentTarget.value,
+                      })
+                    }
+                    disabled={disabled}
+                  />
+                  <span>Timed</span>
+                </label>
+              </WorkoutModeField>
+            </InlineField>
 
-              <InlineField name="Rest">
-                <RestField
-                  rest={(moveState as Workout).rest}
-                  disabled={disabled}
-                />
-              </InlineField>
-              <BlockField name="Movements">
-                <MovementsField
-                  movements={(moveState as Workout).movements}
-                  mode={(moveState as Workout).mode}
-                  modalMode={mode}
-                  disabled={disabled}
-                />
-                {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
-                  <AddMovementButton />
-                )}
-              </BlockField>
-            </>
-          )}
-          {(moveState?.type === MovementType.Exercise ||
-            moveState?.type === MovementType.Workout) && (
-            <BlockField name="Tags">
-              <ArchField
-                tags={(moveState as Exercise | Workout).tags}
+            <InlineField name="Rest">
+              <RestField
+                rest={(moveState as Workout).rest}
+                disabled={disabled}
+              />
+            </InlineField>
+            <BlockField name="Movements">
+              <MovementsField
+                movements={(moveState as Workout).movements}
+                mode={(moveState as Workout).mode}
                 modalMode={mode}
                 disabled={disabled}
               />
+              {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
+                <AddMovementButton />
+              )}
             </BlockField>
-          )}
-        </div>
+          </>
+        )}
+        {(moveState?.type === MovementType.Exercise ||
+          moveState?.type === MovementType.Workout) && (
+          <BlockField name="Tags">
+            <ArchField
+              tags={(moveState as Exercise | Workout).tags}
+              modalMode={mode}
+              disabled={disabled}
+            />
+          </BlockField>
+        )}
         <ButtonRow config={btnConfig} />
       </form>
     </MovementModalWrapper>
@@ -338,8 +335,7 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
     props.type === MovementType.Workout ? '40rem' : '32rem'};
   form {
     display: grid;
-    grid-template-rows: 1fr auto;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   h1.title {
     font-size: 24px;
@@ -382,20 +378,6 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
   }
   .missing-option {
     background: yellow;
-  }
-
-  /* ------ Section specific styling ------ */
-  /* .form-fields {
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 0.5rem; */
-  /* #description {
-      height: 4rem;
-      resize: none;
-    } */
-  .top-fields {
-    display: grid;
-    gap: 1rem;
   }
 `;
 

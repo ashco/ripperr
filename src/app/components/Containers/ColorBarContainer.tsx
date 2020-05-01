@@ -19,8 +19,10 @@ const ColorBarContainer: React.FC<{ color?: string; type?: string }> = ({
     barColor = theme.color.blue[500];
   } else if (color === 'purple') {
     barColor = theme.color.purple[500];
+  } else if (color === 'neutral') {
+    barColor = theme.mode.background[400];
   } else {
-    barColor = theme.color.neutral[500];
+    barColor = theme.mode.background[400];
   }
 
   return (

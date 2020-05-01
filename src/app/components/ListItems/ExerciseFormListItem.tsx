@@ -1,12 +1,8 @@
-﻿import React, { useEffect, useContext, useRef } from 'react';
+﻿import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import { AuthUserContext, FirebaseContext } from '../../context';
-import { useModalDispatch } from '../../context/ModalContext';
 import { useMoveDispatch } from '../../context/MoveContext';
 
-import { ListItem } from './index';
-import { ListItemMenuButton } from '../Buttons';
 import ColorBarContainer from '../Containers/ColorBarContainer';
 
 import { IMovementRefs } from '../../types/types';
@@ -19,7 +15,6 @@ const ExerciseFormListItem: React.FC<{
   mode: WorkoutMode;
   modalMode: ModalMode;
 }> = ({ exercise, index, disabled, mode, modalMode }) => {
-  const themeContext = useContext(ThemeContext);
   const moveDispatch = useMoveDispatch();
 
   function handleDelete(e: any) {
