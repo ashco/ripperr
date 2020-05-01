@@ -40,12 +40,16 @@ const Modal: React.FC = (props) => {
       modalComponent = <AddSelectModal />;
       barColor = 'green';
       break;
+    case ModalMode.Delete:
+      modalComponent = <DeleteMovementModal />;
+      barColor = 'red';
+      break;
     case ModalMode.Add:
     case ModalMode.Edit:
     case ModalMode.View:
       modalComponent = <MovementModal mode={modalState.mode} />;
 
-      if (!moveState) throw Error('No movestate');
+      if (!moveState) throw Error('No moveState');
       switch (moveState.type) {
         case MovementType.Archetype:
           barColor = 'orange';
@@ -58,12 +62,7 @@ const Modal: React.FC = (props) => {
           break;
         default:
           throw Error('moveState.type value not expected: ' + moveState.type);
-          break;
       }
-      break;
-    case ModalMode.Delete:
-      modalComponent = <DeleteMovementModal />;
-      barColor = 'red';
       break;
     default:
       break;
@@ -74,17 +73,7 @@ const Modal: React.FC = (props) => {
       {modalState.open && (
         <ModalBackground ref={bgRef}>
           <ColorBarContainer color={barColor}>
-            {modalState.mode === ModalMode.AddSelect && <AddSelectModal />}
-            {modalState.mode === ModalMode.Add && (
-              <MovementModal mode={modalState.mode} />
-            )}
-            {modalState.mode === ModalMode.View && (
-              <MovementModal mode={modalState.mode} />
-            )}
-            {modalState.mode === ModalMode.Edit && (
-              <MovementModal mode={modalState.mode} />
-            )}
-            {modalState.mode === ModalMode.Delete && <DeleteMovementModal />}
+            {modalComponent}
           </ColorBarContainer>
         </ModalBackground>
       )}

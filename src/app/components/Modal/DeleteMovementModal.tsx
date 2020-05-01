@@ -3,16 +3,13 @@ import styled, { ThemeContext } from 'styled-components';
 
 import { ModalWrapper } from './styles';
 
-// import { FormWrapper } from '../Forms/styles';
 import ButtonRow from '../Forms/ButtonRow';
-// import { Button } from '../Buttons';
 
 import { useModalDispatch } from '../../context/ModalContext';
 import { useMoveState } from '../../context/MoveContext';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { MovementType } from '../../types/enums';
-import ColorBarContainer from '../Containers/ColorBarContainer';
 
 const DeleteModal: React.FC = () => {
   const modalDispatch = useModalDispatch();
@@ -20,7 +17,6 @@ const DeleteModal: React.FC = () => {
 
   const authUser = useContext(AuthUserContext);
   const firebase = useContext(FirebaseContext);
-  const theme = useContext(ThemeContext);
 
   if (moveState === null) {
     throw Error('moveState === null!');
@@ -83,13 +79,11 @@ const DeleteModal: React.FC = () => {
   }
 
   return (
-    // <ColorBarContainer color="red">
     <DeleteModalWrapper>
       <p className="moveName">{moveState.name}</p>
       <p>Do you want to delete this {moveText}?</p>
       <ButtonRow config={btnConfig} />
     </DeleteModalWrapper>
-    // </ColorBarContainer>
   );
 };
 

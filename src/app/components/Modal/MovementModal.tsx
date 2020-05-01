@@ -21,7 +21,6 @@ import {
   AddMovementButton,
   RestField,
 } from '../Forms';
-import ColorBarContainer from '../Containers/ColorBarContainer';
 
 import {
   Movement,
@@ -208,21 +207,6 @@ const MovementModal: React.FC<{
     btnConfig.actionBtn.text = 'Edit';
   }
 
-  let color = 'green';
-  switch (moveState.type) {
-    case MovementType.Archetype:
-      color = 'orange';
-      break;
-    case MovementType.Exercise:
-      color = 'purple';
-      break;
-    case MovementType.Workout:
-      color = 'blue';
-      break;
-    default:
-      break;
-  }
-
   const disabled = mode === ModalMode.View;
 
   console.log(moveState);
@@ -232,7 +216,6 @@ const MovementModal: React.FC<{
     (mode === ModalMode.View && (moveState as Movement).description !== '');
 
   return (
-    // <ColorBarContainer color={color}>
     <MovementModalWrapper type={(moveState as Movement).type}>
       <h1 className="title">{text.title}</h1>
       <form
@@ -345,7 +328,6 @@ const MovementModal: React.FC<{
         <ButtonRow config={btnConfig} />
       </form>
     </MovementModalWrapper>
-    // </ColorBarContainer>
   );
 };
 
