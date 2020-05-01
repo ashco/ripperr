@@ -253,7 +253,7 @@ const MovementModal: React.FC<{
             />
           </InlineField>
           <InlineField name="Mode:">
-            <WorkoutModeField>
+            <WorkoutModeField disabled={disabled}>
               <label>
                 <input
                   type="radio"
@@ -288,37 +288,16 @@ const MovementModal: React.FC<{
                 />
                 <span>Timed</span>
               </label>
-              {/* <input
-                type="radio"
-                name="mode"
-                id="mode-reps"
-                checked={(moveState as Workout).mode === 'REPS'}
-                value="REPS"
-                onChange={(e) =>
-                  moveDispatch({
-                    type: 'MOVE_CHANGE_MODE',
-                    value: e.currentTarget.value,
-                  })
-                }
-                disabled={disabled}
-              />
-              <input
-                type="radio"
-                name="mode"
-                id="mode-timed"
-                checked={(moveState as Workout).mode === 'TIMED'}
-                value="TIMED"
-                onChange={(e) =>
-                  moveDispatch({
-                    type: 'MOVE_CHANGE_MODE',
-                    value: e.currentTarget.value,
-                  })
-                }
-                disabled={disabled}
-              />
-              <label htmlFor="mode-reps">Reps</label>
-              <label htmlFor="mode-timed">Timed</label> */}
             </WorkoutModeField>
+          </InlineField>
+          <InlineField name="Rest:">
+            {/* <RestField>
+            </RestField> */}
+            <RestField
+              rest={(moveState as Workout).rest}
+              disabled={disabled}
+              // modalMode={mode}
+            />
           </InlineField>
         </div>
         {/*
@@ -536,15 +515,19 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
   }
 `;
 
-const WorkoutModeField = styled.div`
+const WorkoutModeField = styled.div<{ disabled: boolean }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
   margin: 0 auto;
   gap: 0.5rem;
   label {
-    border: 2px solid ${(props) => props.theme.mode.color[100]};
-    cursor: pointer;
+    border: 2px solid
+      ${(props) =>
+        // props.disabled
+        // ? props.theme.mode.color[200]
+        props.theme.mode.color[100]};
+    cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
   }
   label input {
     display: none;
@@ -557,7 +540,10 @@ const WorkoutModeField = styled.div`
   input:checked + span {
     background-color: ${(props) => props.theme.mode.color[100]};
     color: ${(props) => props.theme.mode.background[300]};
+    /* border-color: ${(props) => props.theme.mode.color[100]}; */
   }
 `;
+
+// const RestField = styled.div``;
 
 export default MovementModal;
