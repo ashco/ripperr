@@ -14,6 +14,7 @@ import { useModalDispatch } from '../../context/ModalContext';
 import { ModalWrapper } from './styles';
 import {
   InlineField,
+  BlockField,
   ButtonRow,
   ArchField,
   MovementsField,
@@ -222,7 +223,7 @@ const MovementModal: React.FC<{
         noValidate
       >
         <div className="top-fields">
-          <InlineField name="Name:">
+          <InlineField name="Name">
             <input
               type="text"
               name="name"
@@ -237,7 +238,7 @@ const MovementModal: React.FC<{
               disabled={disabled}
             />
           </InlineField>
-          <InlineField name="Description:">
+          <InlineField name="Description">
             <input
               id="description"
               name="description"
@@ -252,53 +253,76 @@ const MovementModal: React.FC<{
               disabled={disabled}
             />
           </InlineField>
-          <InlineField name="Mode:">
-            <WorkoutModeField disabled={disabled}>
-              <label>
-                <input
-                  type="radio"
-                  name="mode"
-                  id="mode-reps"
-                  checked={(moveState as Workout).mode === 'REPS'}
-                  value="REPS"
-                  onChange={(e) =>
-                    moveDispatch({
-                      type: 'MOVE_CHANGE_MODE',
-                      value: e.currentTarget.value,
-                    })
-                  }
+          {moveState?.type === MovementType.Workout && (
+            <>
+              <InlineField name="Mode">
+                <WorkoutModeField disabled={disabled}>
+                  <label>
+                    <input
+                      type="radio"
+                      name="mode"
+                      id="mode-reps"
+                      checked={(moveState as Workout).mode === 'REPS'}
+                      value="REPS"
+                      onChange={(e) =>
+                        moveDispatch({
+                          type: 'MOVE_CHANGE_MODE',
+                          value: e.currentTarget.value,
+                        })
+                      }
+                      disabled={disabled}
+                    />
+                    <span>Reps</span>
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="mode"
+                      id="mode-timed"
+                      checked={(moveState as Workout).mode === 'TIMED'}
+                      value="TIMED"
+                      onChange={(e) =>
+                        moveDispatch({
+                          type: 'MOVE_CHANGE_MODE',
+                          value: e.currentTarget.value,
+                        })
+                      }
+                      disabled={disabled}
+                    />
+                    <span>Timed</span>
+                  </label>
+                </WorkoutModeField>
+              </InlineField>
+
+              <InlineField name="Rest">
+                <RestField
+                  rest={(moveState as Workout).rest}
                   disabled={disabled}
                 />
-                <span>Reps</span>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="mode"
-                  id="mode-timed"
-                  checked={(moveState as Workout).mode === 'TIMED'}
-                  value="TIMED"
-                  onChange={(e) =>
-                    moveDispatch({
-                      type: 'MOVE_CHANGE_MODE',
-                      value: e.currentTarget.value,
-                    })
-                  }
+              </InlineField>
+              <BlockField name="Movements">
+                <MovementsField
+                  movements={(moveState as Workout).movements}
+                  mode={(moveState as Workout).mode}
+                  modalMode={mode}
                   disabled={disabled}
                 />
-                <span>Timed</span>
-              </label>
-            </WorkoutModeField>
-          </InlineField>
-          <InlineField name="Rest:">
-            {/* <RestField>
-            </RestField> */}
-            <RestField
-              rest={(moveState as Workout).rest}
-              disabled={disabled}
-              // modalMode={mode}
-            />
-          </InlineField>
+                {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
+                  <AddMovementButton />
+                )}
+              </BlockField>
+            </>
+          )}
+          {(moveState?.type === MovementType.Exercise ||
+            moveState?.type === MovementType.Workout) && (
+            <BlockField name="Tags">
+              <ArchField
+                tags={(moveState as Exercise | Workout).tags}
+                modalMode={mode}
+                disabled={disabled}
+              />
+            </BlockField>
+          )}
         </div>
         {/*
         <div className="form-fields">
@@ -320,14 +344,6 @@ const MovementModal: React.FC<{
                 // modalMode={mode}
               />
             </>
-          )}
-          {(moveState?.type === MovementType.Exercise ||
-            moveState?.type === MovementType.Workout) && (
-            <ArchField
-              tags={(moveState as Exercise | Workout).tags}
-              modalMode={mode}
-              disabled={disabled}
-            />
           )}
         </div> */}
         <ButtonRow config={btnConfig} />
@@ -511,7 +527,7 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
     } */
   .top-fields {
     display: grid;
-    gap: 0.5rem;
+    gap: 1rem;
   }
 `;
 
