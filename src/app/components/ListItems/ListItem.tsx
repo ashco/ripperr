@@ -1,13 +1,13 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-export const ListItem = styled.li<{ color: string }>`
+export const ListItem = styled.li<{ color?: string }>`
   background: ${({ theme }) => theme.mode.background[300]};
   box-shadow: ${(props) => props.theme.shadow[1]};
-  border-radius: 3px;
+  /* border-radius: 3px; */
   display: grid;
   grid-template-columns: 1fr auto;
-  border-top: 7px solid ${(props) => props.color};
+  /* border-top: 7px solid ${(props) => props.color}; */
   cursor: pointer;
   p {
     font-size: 16px;

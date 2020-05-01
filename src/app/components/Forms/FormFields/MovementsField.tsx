@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { ExerciseListItemForm } from '../../ListItems';
+import { ExerciseFormListItem } from '../../ListItems';
 import { Button } from '../../Buttons';
 
 import { IMovementRefs } from '../../../types/types';
@@ -18,7 +18,7 @@ const MovementsField: React.FC<{
       {movements.map((move, i) => {
         return (
           <MovementField key={move.id}>
-            <ExerciseListItemForm
+            <ExerciseFormListItem
               exercise={move}
               mode={mode}
               modalMode={modalMode}

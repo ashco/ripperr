@@ -7,6 +7,7 @@ import { useMoveDispatch } from '../../context/MoveContext';
 
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
+import ColorBarWrapper from '../Containers/ColorBarWrapper';
 
 import { Exercise } from '../../types/types';
 import { MovementType } from '../../types/enums';
@@ -26,17 +27,16 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
   }
 
   return (
-    <ExerciseListItemWrapper
-      onClick={handleView}
-      color={themeContext.color.purple[500]}
-    >
-      <p className="name">{exercise.name}</p>
-      <div className="list-item-menu-container">
-        <div ref={btnRef} className="btn-wrapper">
-          <ListItemMenuButton movement={exercise} />
+    <ColorBarWrapper color={themeContext.color.purple[500]}>
+      <ExerciseListItemWrapper onClick={handleView}>
+        <p className="name">{exercise.name}</p>
+        <div className="list-item-menu-container">
+          <div ref={btnRef} className="btn-wrapper">
+            <ListItemMenuButton movement={exercise} />
+          </div>
         </div>
-      </div>
-    </ExerciseListItemWrapper>
+      </ExerciseListItemWrapper>
+    </ColorBarWrapper>
   );
 };
 

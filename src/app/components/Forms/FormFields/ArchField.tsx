@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { MovementListContext } from '../../../context';
 
-import { ArchListItemForm } from '../../ListItems';
+import { ArchFormListItem } from '../../ListItems';
 import { Button } from '../../Buttons';
 
 import { ModalMode } from '../../../types/enums';
@@ -27,7 +27,7 @@ const ArchField: React.FC<{
           }
         })
         .map((arch) => (
-          <ArchListItemForm
+          <ArchFormListItem
             key={arch.id}
             archetype={arch}
             active={tags.includes(arch.id as string)}

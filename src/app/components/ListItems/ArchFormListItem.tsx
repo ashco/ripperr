@@ -7,7 +7,7 @@ import { useMoveDispatch } from '../../context/MoveContext';
 
 import { Archetype } from '../../types/types';
 
-const ArchListItemForm: React.FC<{
+const ArchFormListItem: React.FC<{
   archetype: Archetype;
   active: boolean;
   disabled: boolean;
@@ -75,4 +75,4 @@ const ArchListItemModalWrapper = styled.li<{
   }
 `;
 
-export default ArchListItemForm;
+export default ArchFormListItem;

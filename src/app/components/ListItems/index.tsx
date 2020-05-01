@@ -1,15 +1,15 @@
 ﻿import ListItem from './ListItem';
 import ArchetypeListItem from './ArchetypeListItem';
-import ArchListItemForm from './ArchListItemForm';
+import ArchFormListItem from './ArchFormListItem';
 import ExerciseListItem from './ExerciseListItem';
-import ExerciseListItemForm from './ExerciseListItemForm';
+import ExerciseFormListItem from './ExerciseFormListItem';
 import WorkoutListItem from './WorkoutListItem';
 
 export {
   ListItem,
   ArchetypeListItem,
-  ArchListItemForm,
+  ArchFormListItem,
   ExerciseListItem,
-  ExerciseListItemForm,
+  ExerciseFormListItem,
   WorkoutListItem,
 };

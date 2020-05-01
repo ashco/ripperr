@@ -7,10 +7,10 @@ export const ModalWrapper = styled.div`
   background: ${(props) => props.theme.mode.background[300]};
   max-width: 90vw;
   padding: 1rem;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   color: ${(props) => props.theme.mode.color[100]};
   box-shadow: ${(props) => props.theme.shadow[2]};
-  margin: 0.5rem;
+  /* margin: 0.5rem; */
   input,
   textarea {
     border: none;
