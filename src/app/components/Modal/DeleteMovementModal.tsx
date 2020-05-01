@@ -3,7 +3,7 @@ import styled, { ThemeContext } from 'styled-components';
 
 import { ModalWrapper } from './styles';
 
-import ButtonRow from '../Forms/ButtonRow';
+import ButtonRow from '../Forms/FormFields/ButtonRow';
 
 import { useModalDispatch } from '../../context/ModalContext';
 import { useMoveState } from '../../context/MoveContext';

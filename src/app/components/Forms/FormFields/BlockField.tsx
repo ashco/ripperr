@@ -16,8 +16,6 @@ const BlockFieldWrapper = styled.div`
   gap: 1rem;
   p {
     font-size: 20px;
-    /* align-self: center; */
-    /* padding-top: 0.5rem; */
   }
 `;
 

@@ -15,7 +15,6 @@ const InlineFieldWrapper = styled.div`
   grid-template-columns: 8rem auto;
   p {
     font-size: 20px;
-    /* align-self: center; */
     padding-top: 0.5rem;
   }
 `;

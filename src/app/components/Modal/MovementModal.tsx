@@ -19,6 +19,7 @@ import {
   MovementsField,
   AddMovementButton,
   RestField,
+  WorkoutModeField,
 } from '../Forms';
 
 import {
@@ -255,42 +256,10 @@ const MovementModal: React.FC<{
         {moveState?.type === MovementType.Workout && (
           <>
             <InlineField name="Mode">
-              <WorkoutModeField disabled={disabled}>
-                <label>
-                  <input
-                    type="radio"
-                    name="mode"
-                    id="mode-reps"
-                    checked={(moveState as Workout).mode === 'REPS'}
-                    value="REPS"
-                    onChange={(e) =>
-                      moveDispatch({
-                        type: 'MOVE_CHANGE_MODE',
-                        value: e.currentTarget.value,
-                      })
-                    }
-                    disabled={disabled}
-                  />
-                  <span>Reps</span>
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="mode"
-                    id="mode-timed"
-                    checked={(moveState as Workout).mode === 'TIMED'}
-                    value="TIMED"
-                    onChange={(e) =>
-                      moveDispatch({
-                        type: 'MOVE_CHANGE_MODE',
-                        value: e.currentTarget.value,
-                      })
-                    }
-                    disabled={disabled}
-                  />
-                  <span>Timed</span>
-                </label>
-              </WorkoutModeField>
+              <WorkoutModeField
+                value={(moveState as Workout).mode}
+                disabled={disabled}
+              />
             </InlineField>
 
             <InlineField name="Rest">
@@ -380,36 +349,5 @@ const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
     background: yellow;
   }
 `;
-
-const WorkoutModeField = styled.div<{ disabled: boolean }>`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  margin: 0 auto;
-  gap: 0.5rem;
-  label {
-    border: 2px solid
-      ${(props) =>
-        // props.disabled
-        // ? props.theme.mode.color[200]
-        props.theme.mode.color[100]};
-    cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
-  }
-  label input {
-    display: none;
-  }
-  label span {
-    padding: 0.5rem;
-    font-size: 16px;
-    width: 100%;
-  }
-  input:checked + span {
-    background-color: ${(props) => props.theme.mode.color[100]};
-    color: ${(props) => props.theme.mode.background[300]};
-    /* border-color: ${(props) => props.theme.mode.color[100]}; */
-  }
-`;
-
-// const RestField = styled.div``;
 
 export default MovementModal;

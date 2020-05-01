@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../Buttons';
+import { Button } from '../../Buttons';
 
-import { ButtonRowProps } from '../../types/types';
+import { ButtonRowProps } from '../../../types/types';
 
 const ButtonRow: React.FC<{ config: ButtonRowProps }> = ({ config }) => {
   const { cancelBtn, actionBtn } = config;
