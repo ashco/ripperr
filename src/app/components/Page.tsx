@@ -65,7 +65,7 @@ const StyledPage = styled.div<{ pointerEvents: string }>`
   grid-template-areas:
     'navigation'
     'main';
-  border-top: 7px solid rgba(84, 255, 180, 1);
+  border-top: 7px solid ${(props) => props.theme.color.logo};
   pointer-events: ${(props) => (props.pointerEvents ? 'auto' : 'none')};
 `;
 

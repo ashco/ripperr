@@ -1,5 +1,6 @@
 ﻿export const theme = {
   color: {
+    logo: 'rgba(84, 255, 180, 1)',
     neutral: {
       100: 'hsl(210, 17%, 98%)',
       200: 'hsl(207, 22%, 90%)',

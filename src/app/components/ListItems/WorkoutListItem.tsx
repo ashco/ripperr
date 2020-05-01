@@ -25,10 +25,14 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
       moveDispatch({ type: 'MOVE_SET', value: workout });
     }
   }
+  // <WorkoutListItemWrapper onClick={handleView}>
+  {
+    /* <ColorBarWrapper color={themeContext.color.blue[500]}> */
+  }
 
   return (
     <WorkoutListItemWrapper>
-      <ColorBarWrapper color={themeContext.color.blue[500]}>
+      <ColorBarWrapper type="thin" color="blue">
         <ListItem onClick={handleView}>
           <p className="name">{workout.name}</p>
           <div className="list-item-menu-container">
@@ -42,8 +46,19 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
   );
 };
 
-const WorkoutListItemWrapper = styled.li`
+{
+  /*
+</ColorBarWrapper> */
+}
+// </WorkoutListItemWrapper>
+// const WorkoutListItemWrapper = styled(ListItem)`
+//   grid-area: auto / auto / span 2 / span 2;
+// `;
+const WorkoutListItemWrapper = styled.div`
   grid-area: auto / auto / span 2 / span 2;
+  > div {
+    height: 100%;
+  }
 `;
 
 export default WorkoutListItem;

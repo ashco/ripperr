@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 
 import { ModalWrapper } from './styles';
 
@@ -12,6 +12,7 @@ import { useMoveState } from '../../context/MoveContext';
 import { AuthUserContext, FirebaseContext } from '../../context';
 
 import { MovementType } from '../../types/enums';
+import ColorBarWrapper from '../Containers/ColorBarWrapper';
 
 const DeleteModal: React.FC = () => {
   const modalDispatch = useModalDispatch();
@@ -19,6 +20,7 @@ const DeleteModal: React.FC = () => {
 
   const authUser = useContext(AuthUserContext);
   const firebase = useContext(FirebaseContext);
+  const theme = useContext(ThemeContext);
 
   if (moveState === null) {
     throw Error('moveState === null!');
@@ -81,11 +83,13 @@ const DeleteModal: React.FC = () => {
   }
 
   return (
-    <DeleteModalWrapper>
-      <p>Do you want to delete this {moveText}?</p>
-      <p className="moveName">{moveState.name}</p>
-      <ButtonRow config={btnConfig} />
-    </DeleteModalWrapper>
+    <ColorBarWrapper color="red">
+      <DeleteModalWrapper>
+        <p className="moveName">{moveState.name}</p>
+        <p>Do you want to delete this {moveText}?</p>
+        <ButtonRow config={btnConfig} />
+      </DeleteModalWrapper>
+    </ColorBarWrapper>
   );
 };
 

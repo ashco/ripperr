@@ -21,20 +21,21 @@ const ToolTipWrapper = styled.div<{ hidden: boolean; color: string }>`
   .tool-tip-text {
     visibility: hidden;
     position: absolute;
-    width: 100%;
+    width: 90%;
     /* max-width: 12rem; */
     /* background-color: ${(props) => props.theme.mode.background[300]}; */
     color: white;
     text-align: center;
     /* padding: 0.25rem 0.5rem;
     margin: 0.25rem 0.5rem; */
-    border-radius: 0.25rem;
+    /* border-radius: 0.25rem; */
     border: 0.25rem;
     z-index: 15;
     /* bottom: 100%; */
 
-    bottom: 90%;
+    bottom: 100%;
     padding: 0.5rem;
+    margin: 0 5%;
     /* margin: 0.25rem 0.5rem; */
     /* background-color: ${(props) => props.theme.mode.background[400]}; */
     background-color: ${(props) => props.color}

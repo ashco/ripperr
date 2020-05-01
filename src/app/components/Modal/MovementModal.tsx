@@ -208,16 +208,16 @@ const MovementModal: React.FC<{
     btnConfig.actionBtn.text = 'Edit';
   }
 
-  let colorBar;
+  let color = 'green';
   switch (moveState.type) {
     case MovementType.Archetype:
-      colorBar = themeContext.color.orange[500];
+      color = 'orange';
       break;
     case MovementType.Exercise:
-      colorBar = themeContext.color.purple[500];
+      color = 'purple';
       break;
     case MovementType.Workout:
-      colorBar = themeContext.color.blue[500];
+      color = 'blue';
       break;
     default:
       break;
@@ -232,7 +232,7 @@ const MovementModal: React.FC<{
     (mode === ModalMode.View && (moveState as Movement).description !== '');
 
   return (
-    <ColorBarWrapper color={colorBar}>
+    <ColorBarWrapper color={color}>
       <MovementModalWrapper type={(moveState as Movement).type}>
         <h1 className="title">{text.title}</h1>
         <form

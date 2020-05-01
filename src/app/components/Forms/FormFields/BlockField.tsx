@@ -12,7 +12,8 @@ const BlockField: React.FC<{ name: string }> = ({ name, children }) => {
 
 const BlockFieldWrapper = styled.div`
   display: grid;
-  grid-template-rows: 2rem auto;
+  grid-template-rows: auto auto;
+  gap: 1rem;
   p {
     font-size: 20px;
     /* align-self: center; */

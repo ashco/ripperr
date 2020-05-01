@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { AuthUserContext, withAuthorization } from '../context';
 
 import { DarkModeButton } from '../components/Buttons';
-import { AuthFormContainer } from './signin';
+import AuthFormContainer from '../components/Containers/AuthFormContainer';
 import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChangeForm';
 
@@ -30,6 +30,7 @@ const AccountPage: NextPage = () => {
 const AccountPageWrapper = styled.div`
   display: grid;
   justify-content: center;
+  gap: 2rem;
   h1 {
     font-size: 20px;
     margin-top: 2rem;

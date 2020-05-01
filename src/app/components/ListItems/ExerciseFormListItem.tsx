@@ -32,8 +32,8 @@ const ExerciseFormListItem: React.FC<{
   }
 
   return (
-    <ColorBarWrapper color={themeContext.color.purple[500]}>
-      <ExerciseFormListItemWrapper>
+    <ColorBarWrapper color="purple">
+      <ExerciseFormListItemWrapper disabled={disabled}>
         <p className="name">{exercise.name}</p>
         <div className="number-values">
           {mode === WorkoutMode.Reps && (
@@ -96,8 +96,12 @@ const ExerciseFormListItem: React.FC<{
   );
 };
 
-const ExerciseFormListItemWrapper = styled.div`
-  border: 2px solid white;
+const ExerciseFormListItemWrapper = styled.div<{ disabled: boolean }>`
+  border: 2px solid
+    ${(props) =>
+      props.disabled
+        ? props.theme.mode.color[200]
+        : props.theme.mode.color[100]};
   display: grid;
   grid-template-columns: 4fr 1fr 3rem;
   cursor: default;

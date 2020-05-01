@@ -14,6 +14,7 @@ declare module 'styled-components' {
       colorOpacity: any;
     };
     color: {
+      logo: any;
       neutral: any;
       purple: any;
       blue: any;

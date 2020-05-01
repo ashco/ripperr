@@ -66,7 +66,7 @@ const SignInForm = () => {
 const StyledForm = styled(Form)`
   /* border: black 4px solid; */
   display: grid;
-  grid-template-rows: auto auto auto 2rem;
+  grid-template-rows: auto auto auto;
   /* * {
     margin-bottom: 4px;
   } */

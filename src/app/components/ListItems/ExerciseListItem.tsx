@@ -27,7 +27,7 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
   }
 
   return (
-    <ColorBarWrapper color={themeContext.color.purple[500]}>
+    <ColorBarWrapper type="thin" color="purple">
       <ExerciseListItemWrapper onClick={handleView}>
         <p className="name">{exercise.name}</p>
         <div className="list-item-menu-container">

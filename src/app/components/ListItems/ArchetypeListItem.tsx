@@ -2,6 +2,7 @@
 import styled, { ThemeContext } from 'styled-components';
 
 import { ListItemMenuButton } from '../Buttons';
+import ColorBarWrapper from '../Containers/ColorBarWrapper';
 import ToolTip from '../../utils/Tooltip';
 
 import { ListItem } from './index';
@@ -47,15 +48,16 @@ const ArchetypeListItem: React.FC<{
       hidden={archetype.name.length < textLength}
       color={color}
     >
-      <ArchetypeListItemWrapper color={color} onClick={toggleActive}>
-        <p className="name">{stringShortener(archetype.name, textLength)}</p>
-        {/* <TextExpander text={archetype.name} length={10} /> */}
-        <div className="btn-wrapper">
-          <div ref={btnRef}>
-            <ListItemMenuButton movement={archetype} />
+      <ColorBarWrapper color={color} type="thin">
+        <ArchetypeListItemWrapper color={color} onClick={toggleActive}>
+          <p className="name">{stringShortener(archetype.name, textLength)}</p>
+          <div className="btn-wrapper">
+            <div ref={btnRef}>
+              <ListItemMenuButton movement={archetype} />
+            </div>
           </div>
-        </div>
-      </ArchetypeListItemWrapper>
+        </ArchetypeListItemWrapper>
+      </ColorBarWrapper>
     </ToolTip>
   );
 };

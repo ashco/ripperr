@@ -1,15 +1,24 @@
 ﻿import React from 'react';
+import styled from 'styled-components';
 import { NextPage } from 'next';
 
-import { AuthFormContainer } from './signin';
+import AuthFormContainer from '../components/Containers/AuthFormContainer';
 import SignUpForm from '../components/Signup/SignUpForm';
 
 const SignUpPage: NextPage = () => {
   return (
-    <AuthFormContainer>
-      <SignUpForm />
-    </AuthFormContainer>
+    <SignUpPageWrapper>
+      <AuthFormContainer>
+        <SignUpForm />
+      </AuthFormContainer>
+    </SignUpPageWrapper>
   );
 };
+
+const SignUpPageWrapper = styled.div`
+  display: grid;
+  justify-content: center;
+  margin-top: 2rem;
+`;
 
 export default SignUpPage;

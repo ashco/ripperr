@@ -104,7 +104,11 @@ const RestFieldWrapper = styled.div<{ disabled: boolean }>`
       font-size: 14px;
       padding-bottom: 0.25rem;
       input {
-        border-bottom: 2px solid ${(props) => props.theme.mode.color[100]};
+        border-bottom: 2px solid
+          ${(props) =>
+            props.disabled
+              ? props.theme.mode.color[200]
+              : props.theme.mode.color[100]};
         padding: 0.3rem;
         margin-bottom: 0.25rem;
         /* appearance: none; */
