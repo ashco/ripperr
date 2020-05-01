@@ -46,14 +46,6 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
   );
 };
 
-{
-  /*
-</ColorBarContainer> */
-}
-// </WorkoutListItemWrapper>
-// const WorkoutListItemWrapper = styled(ListItem)`
-//   grid-area: auto / auto / span 2 / span 2;
-// `;
 const WorkoutListItemWrapper = styled.div`
   grid-area: auto / auto / span 2 / span 2;
   > div {

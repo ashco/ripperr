@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { MovementListContext } from '../../context';
 
 import {
+  MenuListItem,
   ArchetypeListItem,
   ExerciseListItem,
   WorkoutListItem,
@@ -27,10 +28,14 @@ export const MovementsContainer: React.FC<{
   // loading: boolean;
 }> = ({ moveList }) => {
   function renderListItem(move: Movement) {
-    if (move.type === MovementType.Exercise) {
-      return <ExerciseListItem key={move.id} exercise={move as Exercise} />;
-    } else if (move.type === MovementType.Workout) {
-      return <WorkoutListItem key={move.id} workout={move as Workout} />;
+    if (
+      move.type === MovementType.Exercise ||
+      move.type === MovementType.Workout
+    ) {
+      // return <ExerciseListItem key={move.id} exercise={move as Exercise} />;
+      return <MenuListItem key={move.id} movement={move} />;
+      // } else if (move.type === MovementType.Workout) {
+      // return <WorkoutListItem key={move.id} workout={move as Workout} />;
     } else {
       return null;
     }
