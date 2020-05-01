@@ -1,34 +1,37 @@
 ﻿import React from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-const ColorBarWrapper: React.FC<{ color: string; type?: string }> = ({
+const ColorBarContainer: React.FC<{ color?: string; type?: string }> = ({
   color,
   type,
   children,
 }) => {
   const theme = React.useContext(ThemeContext);
 
+  let barColor;
   if (color === 'green') {
-    color = theme.color.logo;
+    barColor = theme.color.logo;
   } else if (color === 'red') {
-    color = theme.color.red[400];
+    barColor = theme.color.red[400];
   } else if (color === 'orange') {
-    color = theme.color.orange[500];
+    barColor = theme.color.orange[500];
   } else if (color === 'blue') {
-    color = theme.color.blue[500];
+    barColor = theme.color.blue[500];
   } else if (color === 'purple') {
-    color = theme.color.purple[500];
+    barColor = theme.color.purple[500];
+  } else {
+    barColor = theme.color.neutral[500];
   }
 
   return (
-    <StyledColorBarWrapper color={color} type={type}>
+    <StyledColorBarContainer color={barColor} type={type}>
       <div className="color-bar" />
       {children}
-    </StyledColorBarWrapper>
+    </StyledColorBarContainer>
   );
 };
 
-const StyledColorBarWrapper = styled.div<{ color: string; type?: string }>`
+const StyledColorBarContainer = styled.div<{ color: string; type?: string }>`
   display: grid;
   grid-template-rows: ${(props) => (props.type === 'thin' ? '5px' : '8px')} auto;
   .color-bar {
@@ -38,4 +41,4 @@ const StyledColorBarWrapper = styled.div<{ color: string; type?: string }>`
   }
 `;
 
-export default ColorBarWrapper;
+export default ColorBarContainer;

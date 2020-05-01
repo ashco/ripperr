@@ -7,7 +7,7 @@ import { useMoveDispatch } from '../../context/MoveContext';
 
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
-import ColorBarWrapper from '../Containers/ColorBarWrapper';
+import ColorBarContainer from '../Containers/ColorBarContainer';
 
 import { Workout } from '../../types/types';
 import { MovementType } from '../../types/enums';
@@ -27,12 +27,12 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
   }
   // <WorkoutListItemWrapper onClick={handleView}>
   {
-    /* <ColorBarWrapper color={themeContext.color.blue[500]}> */
+    /* <ColorBarContainer color={themeContext.color.blue[500]}> */
   }
 
   return (
     <WorkoutListItemWrapper>
-      <ColorBarWrapper type="thin" color="blue">
+      <ColorBarContainer type="thin" color="blue">
         <ListItem onClick={handleView}>
           <p className="name">{workout.name}</p>
           <div className="list-item-menu-container">
@@ -41,14 +41,14 @@ const WorkoutListItem: React.FC<{ workout: Workout }> = ({ workout }) => {
             </div>
           </div>
         </ListItem>
-      </ColorBarWrapper>
+      </ColorBarContainer>
     </WorkoutListItemWrapper>
   );
 };
 
 {
   /*
-</ColorBarWrapper> */
+</ColorBarContainer> */
 }
 // </WorkoutListItemWrapper>
 // const WorkoutListItemWrapper = styled(ListItem)`

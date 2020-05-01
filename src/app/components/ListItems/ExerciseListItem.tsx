@@ -7,7 +7,7 @@ import { useMoveDispatch } from '../../context/MoveContext';
 
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Buttons';
-import ColorBarWrapper from '../Containers/ColorBarWrapper';
+import ColorBarContainer from '../Containers/ColorBarContainer';
 
 import { Exercise } from '../../types/types';
 import { MovementType } from '../../types/enums';
@@ -27,7 +27,7 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
   }
 
   return (
-    <ColorBarWrapper type="thin" color="purple">
+    <ColorBarContainer type="thin" color="purple">
       <ExerciseListItemWrapper onClick={handleView}>
         <p className="name">{exercise.name}</p>
         <div className="list-item-menu-container">
@@ -36,7 +36,7 @@ const ExerciseListItem: React.FC<{ exercise: Exercise }> = ({ exercise }) => {
           </div>
         </div>
       </ExerciseListItemWrapper>
-    </ColorBarWrapper>
+    </ColorBarContainer>
   );
 };
 

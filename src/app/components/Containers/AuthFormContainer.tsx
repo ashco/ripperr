@@ -1,15 +1,15 @@
 ﻿import React from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import ColorBarWrapper from './ColorBarWrapper';
+import ColorBarContainer from './ColorBarContainer';
 
 const AuthFormContainer: React.FC = ({ children }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <ColorBarWrapper color="green">
+    <ColorBarContainer color="green">
       <AuthFormContainerWrapper>{children}</AuthFormContainerWrapper>
-    </ColorBarWrapper>
+    </ColorBarContainer>
   );
 };
 

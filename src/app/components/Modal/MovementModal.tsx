@@ -21,7 +21,7 @@ import {
   AddMovementButton,
   RestField,
 } from '../Forms';
-import ColorBarWrapper from '../Containers/ColorBarWrapper';
+import ColorBarContainer from '../Containers/ColorBarContainer';
 
 import {
   Movement,
@@ -232,251 +232,127 @@ const MovementModal: React.FC<{
     (mode === ModalMode.View && (moveState as Movement).description !== '');
 
   return (
-    <ColorBarWrapper color={color}>
-      <MovementModalWrapper type={(moveState as Movement).type}>
-        <h1 className="title">{text.title}</h1>
-        <form
-          onSubmit={handleSubmit}
-          className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
-          noValidate
-        >
-          <div className="top-fields">
-            <InlineField name="Name">
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                value={(moveState as Movement).name}
-                onChange={(e) =>
-                  moveDispatch({
-                    type: 'MOVE_CHANGE_NAME',
-                    value: e.target.value,
-                  })
-                }
-                disabled={disabled}
-              />
-            </InlineField>
-            <InlineField name="Description">
-              <input
-                id="description"
-                name="description"
-                placeholder="Enter a description..."
-                value={(moveState as Movement).description}
-                onChange={(e) =>
-                  moveDispatch({
-                    type: 'MOVE_CHANGE_DESCRIPTION',
-                    value: e.target.value,
-                  })
-                }
-                disabled={disabled}
-              />
-            </InlineField>
-            {moveState?.type === MovementType.Workout && (
-              <>
-                <InlineField name="Mode">
-                  <WorkoutModeField disabled={disabled}>
-                    <label>
-                      <input
-                        type="radio"
-                        name="mode"
-                        id="mode-reps"
-                        checked={(moveState as Workout).mode === 'REPS'}
-                        value="REPS"
-                        onChange={(e) =>
-                          moveDispatch({
-                            type: 'MOVE_CHANGE_MODE',
-                            value: e.currentTarget.value,
-                          })
-                        }
-                        disabled={disabled}
-                      />
-                      <span>Reps</span>
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="mode"
-                        id="mode-timed"
-                        checked={(moveState as Workout).mode === 'TIMED'}
-                        value="TIMED"
-                        onChange={(e) =>
-                          moveDispatch({
-                            type: 'MOVE_CHANGE_MODE',
-                            value: e.currentTarget.value,
-                          })
-                        }
-                        disabled={disabled}
-                      />
-                      <span>Timed</span>
-                    </label>
-                  </WorkoutModeField>
-                </InlineField>
+    // <ColorBarContainer color={color}>
+    <MovementModalWrapper type={(moveState as Movement).type}>
+      <h1 className="title">{text.title}</h1>
+      <form
+        onSubmit={handleSubmit}
+        className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
+        noValidate
+      >
+        <div className="top-fields">
+          <InlineField name="Name">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={(moveState as Movement).name}
+              onChange={(e) =>
+                moveDispatch({
+                  type: 'MOVE_CHANGE_NAME',
+                  value: e.target.value,
+                })
+              }
+              disabled={disabled}
+            />
+          </InlineField>
+          <InlineField name="Description">
+            <input
+              id="description"
+              name="description"
+              placeholder="Enter a description..."
+              value={(moveState as Movement).description}
+              onChange={(e) =>
+                moveDispatch({
+                  type: 'MOVE_CHANGE_DESCRIPTION',
+                  value: e.target.value,
+                })
+              }
+              disabled={disabled}
+            />
+          </InlineField>
+          {moveState?.type === MovementType.Workout && (
+            <>
+              <InlineField name="Mode">
+                <WorkoutModeField disabled={disabled}>
+                  <label>
+                    <input
+                      type="radio"
+                      name="mode"
+                      id="mode-reps"
+                      checked={(moveState as Workout).mode === 'REPS'}
+                      value="REPS"
+                      onChange={(e) =>
+                        moveDispatch({
+                          type: 'MOVE_CHANGE_MODE',
+                          value: e.currentTarget.value,
+                        })
+                      }
+                      disabled={disabled}
+                    />
+                    <span>Reps</span>
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="mode"
+                      id="mode-timed"
+                      checked={(moveState as Workout).mode === 'TIMED'}
+                      value="TIMED"
+                      onChange={(e) =>
+                        moveDispatch({
+                          type: 'MOVE_CHANGE_MODE',
+                          value: e.currentTarget.value,
+                        })
+                      }
+                      disabled={disabled}
+                    />
+                    <span>Timed</span>
+                  </label>
+                </WorkoutModeField>
+              </InlineField>
 
-                <InlineField name="Rest">
-                  <RestField
-                    rest={(moveState as Workout).rest}
-                    disabled={disabled}
-                  />
-                </InlineField>
-                <BlockField name="Movements">
-                  <MovementsField
-                    movements={(moveState as Workout).movements}
-                    mode={(moveState as Workout).mode}
-                    modalMode={mode}
-                    disabled={disabled}
-                  />
-                  {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
-                    <AddMovementButton />
-                  )}
-                </BlockField>
-              </>
-            )}
-            {(moveState?.type === MovementType.Exercise ||
-              moveState?.type === MovementType.Workout) && (
-              <BlockField name="Tags">
-                <ArchField
-                  tags={(moveState as Exercise | Workout).tags}
+              <InlineField name="Rest">
+                <RestField
+                  rest={(moveState as Workout).rest}
+                  disabled={disabled}
+                />
+              </InlineField>
+              <BlockField name="Movements">
+                <MovementsField
+                  movements={(moveState as Workout).movements}
+                  mode={(moveState as Workout).mode}
                   modalMode={mode}
                   disabled={disabled}
                 />
+                {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
+                  <AddMovementButton />
+                )}
               </BlockField>
-            )}
-          </div>
-          {/*
-        <div className="form-fields">
-          {moveState?.type === MovementType.Workout && (
-            <>
-
-              <MovementsField
-                movements={(moveState as Workout).movements}
-                mode={(moveState as Workout).mode}
+            </>
+          )}
+          {(moveState?.type === MovementType.Exercise ||
+            moveState?.type === MovementType.Workout) && (
+            <BlockField name="Tags">
+              <ArchField
+                tags={(moveState as Exercise | Workout).tags}
                 modalMode={mode}
                 disabled={disabled}
               />
-              {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
-                <AddMovementButton />
-              )}
-              <RestField
-                rest={(moveState as Workout).rest}
-                disabled={disabled}
-                // modalMode={mode}
-              />
-            </>
+            </BlockField>
           )}
-        </div> */}
-          <ButtonRow config={btnConfig} />
-        </form>
-      </MovementModalWrapper>
-    </ColorBarWrapper>
-    // <MovementModalWrapper type={(moveState as Movement).type}>
-    //   <h1 className="title">{text.title}</h1>
-    //   <form
-    //     onSubmit={handleSubmit}
-    //     className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
-    //     noValidate
-    //   >
-    //     <div className="form-fields">
-    //       <input
-    //         type="text"
-    //         name="name"
-    //         placeholder="Name"
-    //         value={(moveState as Movement).name}
-    //         onChange={(e) =>
-    //           moveDispatch({
-    //             type: 'MOVE_CHANGE_NAME',
-    //             value: e.target.value,
-    //           })
-    //         }
-    //         disabled={disabled}
-    //       />
-    //       {showDesc && (
-    //         <textarea
-    //           id="description"
-    //           name="description"
-    //           placeholder="Enter a description..."
-    //           value={(moveState as Movement).description}
-    //           onChange={(e) =>
-    //             moveDispatch({
-    //               type: 'MOVE_CHANGE_DESCRIPTION',
-    //               value: e.target.value,
-    //             })
-    //           }
-    //           disabled={disabled}
-    //         />
-    //       )}
-    //       {moveState?.type === MovementType.Workout && (
-    //         <>
-    //           <WorkoutModeField>
-    //             <label htmlFor="reps">
-    //               <input
-    //                 type="radio"
-    //                 id="reps"
-    //                 name="mode"
-    //                 checked={(moveState as Workout).mode === 'REPS'}
-    //                 value="REPS"
-    //                 onChange={(e) =>
-    //                   moveDispatch({
-    //                     type: 'MOVE_CHANGE_MODE',
-    //                     value: e.currentTarget.value,
-    //                   })
-    //                 }
-    //                 disabled={disabled}
-    //               />
-    //               Reps
-    //             </label>
-    //             <label htmlFor="timed">
-    //               <input
-    //                 type="radio"
-    //                 id="timed"
-    //                 name="mode"
-    //                 checked={(moveState as Workout).mode === 'TIMED'}
-    //                 value="TIMED"
-    //                 onChange={(e) =>
-    //                   moveDispatch({
-    //                     type: 'MOVE_CHANGE_MODE',
-    //                     value: e.currentTarget.value,
-    //                   })
-    //                 }
-    //                 disabled={disabled}
-    //               />
-    //               Timed
-    //             </label>
-    //           </WorkoutModeField>
-    //           <MovementsField
-    //             movements={(moveState as Workout).movements}
-    //             mode={(moveState as Workout).mode}
-    //             modalMode={mode}
-    //             disabled={disabled}
-    //           />
-    //           {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
-    //             <AddMovementButton />
-    //           )}
-    //           <RestField
-    //             rest={(moveState as Workout).rest}
-    //             disabled={disabled}
-    //             // modalMode={mode}
-    //           />
-    //         </>
-    //       )}
-    //       {(moveState?.type === MovementType.Exercise ||
-    //         moveState?.type === MovementType.Workout) && (
-    //         <ArchField
-    //           tags={(moveState as Exercise | Workout).tags}
-    //           modalMode={mode}
-    //           disabled={disabled}
-    //         />
-    //       )}
-    //     </div>
-    //     <ButtonRow config={btnConfig} />
-    //   </form>
-    // </MovementModalWrapper>
+        </div>
+        <ButtonRow config={btnConfig} />
+      </form>
+    </MovementModalWrapper>
+    // </ColorBarContainer>
   );
 };
 
 const MovementModalWrapper = styled(ModalWrapper)<{ type: MovementType }>`
   display: grid;
-  max-width: 100%;
-  width: ${(props) =>
+  /* max-width: 100%; */
+  max-width: ${(props) =>
     props.type === MovementType.Workout ? '40rem' : '32rem'};
   form {
     display: grid;
