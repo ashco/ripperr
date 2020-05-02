@@ -2,8 +2,8 @@
 import styled from 'styled-components';
 import { NextPage } from 'next';
 
-import AuthFormContainer from '../components/AuthFormContainer';
-import SignUpForm from '../domain/SignUp/SignUpForm';
+import AuthFormContainer from '@/domain/Auth/AuthFormContainer';
+import SignUpForm from '@/domain/Auth/SignUpForm';
 
 const SignUpPage: NextPage = () => {
   return (

@@ -5,7 +5,7 @@ import { useMoveDispatch } from '@/context/MoveContext';
 import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
 
 import ColorBarWrapper from '@/components/ColorBarWrapper';
-import OptionButton from '../ListItems/Buttons/OptionButton';
+import OptionMenuButton from '@/components/MenuListItem/OptionMenuButton';
 
 import { WorkoutWrapper, ExerciseWrapper, ArchetypeWrapper } from './style';
 
@@ -69,43 +69,6 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
     return shortStr;
   }
 
-  // const TextExpander: React.FC<{
-  //   text: string;
-  //   length: number;
-  // }> = ({ text, length }) => {
-  //   // const ref = React.useRef<HTMLParagraphElement>(null);
-
-  //   const [displayText, setDisplayText] = React.useState(text);
-
-  //   function stringShortener(str: string, length: number): string {
-  //     let shortStr = str.substring(0, length).trimEnd();
-
-  //     if (str !== shortStr) {
-  //       shortStr += '..';
-  //     }
-  //     return shortStr;
-  //   }
-
-  //   function handleMouseEnter() {
-  //     setDisplayText(text);
-  //   }
-
-  //   function handleMouseLeave() {
-  //     setDisplayText(stringShortener(text, 10));
-  //   }
-  //   // React.useEffect(() => {
-  //   //   ref?.current?.addEventListener('hover', () => {
-  //   //     console.log('hi mom!');
-  //   //   });
-  //   // });
-
-  //   return (
-  //     <p onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-  //       {displayText}
-  //     </p>
-  //   );
-  // };
-
   const nameLength = movement.type === MovementType.Archetype ? 10 : Infinity;
 
   const listItem = (
@@ -116,7 +79,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
         </div>
         <div className="right">
           <div ref={btnRef} className="option-menu-btn-wrapper">
-            <OptionButton movement={movement} />
+            <OptionMenuButton movement={movement} />
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ import {
 } from '@/context/ThemeModeContext';
 
 import Meta from '../Meta';
-import Navigation from '../Navigation';
+import Navigation from '../../domain/Navigation';
 
 const Page: React.FC = (props) => {
   const themeModeState = useThemeModeState();

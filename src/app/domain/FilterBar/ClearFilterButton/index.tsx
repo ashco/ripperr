@@ -6,7 +6,7 @@ import {
   useFilterDispatch,
 } from '../../../context/FilterContext';
 
-import Button from '../../Button';
+import Button from '../../../components/Button';
 
 import Times from '../../../icons/Times';
 

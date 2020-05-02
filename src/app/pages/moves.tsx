@@ -6,11 +6,11 @@ import { MovementListContext } from '@/context';
 import { withAuthorization, withMovements } from '@/context';
 import { useFilterState } from '@/context/FilterContext';
 
+import FilterBar from '@/domain/FilterBar';
+import Modal from '@/domain/Modal';
 import MovementMenu from '@/components/MovementMenu';
-import FilterBar from '@/components/FilterBar';
-import Modal from '@/components/Modal';
 
-import { sortMovements } from '../utils/sortMovements';
+import { sortMovements } from '@/utils/sortMovements';
 
 import { IAuthUserContext } from '@/types/types';
 

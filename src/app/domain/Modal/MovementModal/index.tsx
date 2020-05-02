@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import MovementForm from '@/components/MovementForm';
+import MovementForm from '@/domain/MovementForm';
 
 import MovementModalWrapper from './style';
 

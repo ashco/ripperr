@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { ExerciseFormListItem } from '../../ListItems';
+import { ExerciseFormListItem } from '../../../components/ListItems';
 
 import { IMovementRefs } from '../../../types/types';
 import { WorkoutMode, ModalMode } from '../../../types/enums';

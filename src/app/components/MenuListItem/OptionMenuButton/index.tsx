@@ -11,7 +11,7 @@ import Bars from '../../../icons/Bars';
 import { MovementType } from '../../../types/enums';
 import { Movement } from '../../../types/types';
 
-const OptionButton: React.FC<{
+const OptionMenuButton: React.FC<{
   movement: Movement;
 }> = ({ movement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -151,4 +151,4 @@ const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   }
 `;
 
-export default OptionButton;
+export default OptionMenuButton;
