@@ -1,11 +1,13 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
+import { ThemeContext } from 'styled-components';
 
-import { MovementListContext } from '@/context';
+import { MovementListContext, useMoveDispatch } from '@/context';
 
-import { ArchFormListItem } from '@/components/ListItems';
+// import { ArchFormListItem } from '@/components/ListItems';
+import { ArchetypesFieldWrapper, ArchetypeListItemWrapper } from './style';
 
 import { ModalMode } from '@/types/enums';
+import { Archetype } from '@/types/types';
 
 const ArchetypesField: React.FC<{
   tags: string[];
@@ -26,7 +28,7 @@ const ArchetypesField: React.FC<{
           }
         })
         .map((arch) => (
-          <ArchFormListItem
+          <ArchetypeListItem
             key={arch.id}
             archetype={arch}
             active={tags.includes(arch.id as string)}
@@ -37,10 +39,35 @@ const ArchetypesField: React.FC<{
   );
 };
 
-const ArchetypesFieldWrapper = styled.ul`
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-`;
+const ArchetypeListItem: React.FC<{
+  archetype: Archetype;
+  active: boolean;
+  disabled: boolean;
+}> = ({ archetype, active, disabled }) => {
+  const themeContext = React.useContext(ThemeContext);
+  const moveDispatch = useMoveDispatch();
+
+  function toggleArch() {
+    moveDispatch({
+      type: 'MOVE_CHANGE_ARCH',
+      value: archetype.id,
+    });
+  }
+
+  return (
+    <ArchetypeListItemWrapper
+      color={
+        active
+          ? themeContext.color.orange[500]
+          : themeContext.mode.colorOpacity[200]
+      }
+      onClick={toggleArch}
+      active={active}
+      disabled={disabled}
+    >
+      <p className="name">{archetype.name}</p>
+    </ArchetypeListItemWrapper>
+  );
+};
 
 export default ArchetypesField;

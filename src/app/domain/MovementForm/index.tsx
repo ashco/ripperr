@@ -41,7 +41,6 @@ const MovementForm: React.FC<{
   const firebase = React.useContext(FirebaseContext);
   const authUser = React.useContext(AuthUserContext);
   const movementList = React.useContext(MovementListContext);
-  const themeContext = React.useContext(ThemeContext);
 
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
