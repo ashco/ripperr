@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Formik, Form } from 'formik';
 
 import { Button } from '@components/Button';
-import { InputField, passwordForgotVal } from '@/components/Forms';
+import { InputField, passwordForgotVal } from '@/components/MovementForm';
 import { FirebaseContext } from '@/context';
 import { IAuthError } from '@/types/types';
 

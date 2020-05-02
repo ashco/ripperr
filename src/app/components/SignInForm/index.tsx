@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import { InputField, signInVal } from '@/components/Forms';
-import { FormError } from '@/components/Forms/styles';
+import { InputField, signInVal } from '@/components/MovementForm';
+import { FormError } from '@/components/MovementForm/styles';
 import Button from '@/components/Button';
 
 import { FirebaseContext } from '@/context';

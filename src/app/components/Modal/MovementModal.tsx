@@ -20,7 +20,7 @@ import {
   AddMovementButton,
   RestField,
   WorkoutModeField,
-} from '../Forms';
+} from '../MovementForm';
 
 import {
   Movement,
