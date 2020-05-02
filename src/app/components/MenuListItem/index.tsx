@@ -1,16 +1,16 @@
 ﻿import React from 'react';
 
-import { useModalDispatch } from '@context/ModalContext';
-import { useMoveDispatch } from '@context/MoveContext';
-import { useFilterState, useFilterDispatch } from '@context/FilterContext';
+import { useModalDispatch } from '@/context/ModalContext';
+import { useMoveDispatch } from '@/context/MoveContext';
+import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
 
 import ColorBarContainer from '../Containers/ColorBarContainer';
 import OptionButton from '../ListItems/Buttons/OptionButton';
 
 import { WorkoutWrapper, ExerciseWrapper, ArchetypeWrapper } from './style';
 
-import { Movement } from '@types/types';
-import { MovementType } from '@types/enums';
+import { Movement } from '@/types/types';
+import { MovementType } from '@/types/enums';
 
 const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
   const modalDispatch = useModalDispatch();

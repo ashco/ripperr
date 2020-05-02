@@ -3,7 +3,7 @@ import styled, { ThemeContext } from 'styled-components';
 
 import ButtonWrapper from '../ButtonWrapper';
 
-import Plus from '@icons/Plus';
+import Plus from '@/icons/Plus';
 
 const AddMovementButton: React.FC<{ openModal: () => void }> = ({
   openModal,

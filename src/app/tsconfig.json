@@ -17,8 +17,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".",
     "paths": {
-      // "@types": ["./src/app/types/"],
+      "@/*": ["./*"],
+      // "@/*": ["./src/app/*"],
+      // "@context/*": ["./src/app/context/*"],
+      // "@icons/*": ["./src/app/icons/*"],
+      // "@styles/*": ["./src/app/styles/*"],
       // "*": ["src/*"],
       // "test/*": ["test/*"],
       // "underscore": ["lodash"]

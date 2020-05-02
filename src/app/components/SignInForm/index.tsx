@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import { InputField, signInVal } from '../../components/Forms';
-import { FormError } from '../../components/Forms/styles';
-import { Button } from '../../components/Button';
+import { InputField, signInVal } from '@/components/Forms';
+import { FormError } from '@/components/Forms/styles';
+import Button from '@/components/Button';
 
-import { FirebaseContext } from '../../context';
-import { IAuthError } from '../../types/types';
+import { FirebaseContext } from '@/context';
+import { IAuthError } from '@/types/types';
 
 export interface ISignInFormValues {
   email: string;

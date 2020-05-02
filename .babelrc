@@ -4,16 +4,8 @@
     [
       "module-resolver",
       {
-        "root": ["./src/app/"],
         "alias": {
-          "@components": "./components",
-          "@context": "./context",
-          "@domain": "./domain",
-          "@icons": "./icons",
-          "@pages": "./pages",
-          "@styles": "./styles",
-          "@types": "./types",
-          "@utils": "./utils"
+          "@": "./"
         }
       }
     ]
