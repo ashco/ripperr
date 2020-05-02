@@ -2,7 +2,7 @@
 
 import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
 
-import { ArchetypeList } from '../Movements';
+import ArchetypeList from './ArchetypeList';
 import FilterInput from './FilterInput';
 
 import FilterBarContainer from './style';

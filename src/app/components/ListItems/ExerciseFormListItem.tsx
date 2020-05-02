@@ -3,7 +3,7 @@ import styled, { ThemeContext } from 'styled-components';
 
 import { useMoveDispatch } from '../../context/MoveContext';
 
-import ColorBarContainer from '../Containers/ColorBarContainer';
+import ColorBarContainer from '@/components/ColorBarContainer';
 
 import { IMovementRefs } from '../../types/types';
 import { MovementType, WorkoutMode, ModalMode } from '../../types/enums';

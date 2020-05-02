@@ -1,13 +1,12 @@
 ﻿import React from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 import { useModalState, useModalDispatch } from '../../context/ModalContext';
 import { useMoveState } from '../../context/MoveContext';
 
-import ColorBarContainer from '../Containers/ColorBarContainer';
+import ColorBarContainer from '@/components/ColorBarContainer';
 
-import { ModalBackground, ModalWrapper, DeleteMovementModal } from '.';
+import { ModalBackground, DeleteMovementModal } from '.';
 import AddSelectModal from './AddSelectModal';
 import MovementModal from './MovementModal';
 import { ModalMode, MovementType } from '../../types/enums';

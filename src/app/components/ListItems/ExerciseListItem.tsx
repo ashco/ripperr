@@ -7,7 +7,7 @@ import { useMoveDispatch } from '../../context/MoveContext';
 
 import { ListItem } from './index';
 import { ListItemMenuButton } from '../Button';
-import ColorBarContainer from '../Containers/ColorBarContainer';
+import ColorBarContainer from '@/components/ColorBarContainer';
 
 import { Exercise } from '../../types/types';
 import { MovementType } from '../../types/enums';

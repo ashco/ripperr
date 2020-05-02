@@ -1,11 +1,12 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
 
-import { MenuListItem } from '../ListItems';
+import ArchetypeListWrapper from './style';
 
-import { Archetype } from '../../types/types';
+import { MenuListItem } from '@/components/ListItems';
 
-export const ArchetypeList: React.FC<{
+import { Archetype } from '@/types/types';
+
+const ArchetypeList: React.FC<{
   archetypeList: Archetype[] | null;
 }> = ({ archetypeList }) => {
   return (
@@ -25,12 +26,4 @@ export const ArchetypeList: React.FC<{
   );
 };
 
-const ArchetypeListWrapper = styled.ul`
-  margin: 0 1rem;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, 9rem);
-  grid-auto-rows: 3rem;
-  grid-auto-flow: row dense;
-  justify-content: center;
-`;
+export default ArchetypeList;

@@ -1,13 +1,13 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import { MovementListContext } from '../context';
 import { withAuthorization, withMovements } from '../context';
-import { FilterProvider, useFilterState } from '../context/FilterContext';
+import { useFilterState } from '../context/FilterContext';
 
-import { MovementsContainer } from '../components/Movements';
-import Filter from '../components/FilterBar';
+import MovementMenu from '@/components/MovementMenu';
+import FilterBar from '../components/FilterBar';
 import { Modal } from '../components/Modal';
 
 import { sortMovements } from '../utils/sortMovements';
@@ -36,11 +36,8 @@ const MovesPage: NextPage = () => {
 
   return (
     <MovementsPageWrapper>
-      <MovementsContainer
-        moveList={moveList}
-        filterActive={filterState.active}
-      />
-      <Filter archetypeList={archetypeList} />
+      <MovementMenu moveList={moveList} filterActive={filterState.active} />
+      <FilterBar archetypeList={archetypeList} />
       <Modal />
     </MovementsPageWrapper>
   );

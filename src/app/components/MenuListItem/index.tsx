@@ -4,7 +4,7 @@ import { useModalDispatch } from '@/context/ModalContext';
 import { useMoveDispatch } from '@/context/MoveContext';
 import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
 
-import ColorBarContainer from '../Containers/ColorBarContainer';
+import ColorBarContainer from '@/components/ColorBarContainer';
 import OptionButton from '../ListItems/Buttons/OptionButton';
 
 import { WorkoutWrapper, ExerciseWrapper, ArchetypeWrapper } from './style';

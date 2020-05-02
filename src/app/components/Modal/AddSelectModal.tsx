@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useModalDispatch } from '../../context/ModalContext';
 import { useMoveDispatch } from '../../context/MoveContext';
 
-import ColorBarContainer from '../Containers/ColorBarContainer';
 import { ModalWrapper } from './styles';
 import Button from '../Button';
 
@@ -29,7 +28,6 @@ const AddSelectModal: React.FC<{}> = () => {
   }
 
   return (
-    // <ColorBarContainer color="green">
     <AddSelectModalWrapper>
       <Button onClick={addArchetype}>Add Archetype</Button>
       <Button onClick={addExercise}>Add Exercise</Button>
@@ -38,7 +36,6 @@ const AddSelectModal: React.FC<{}> = () => {
         Cancel
       </Button>
     </AddSelectModalWrapper>
-    // </ColorBarContainer>
   );
 };
 

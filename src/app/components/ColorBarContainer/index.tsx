@@ -1,5 +1,7 @@
 ﻿import React from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components';
+
+import StyledColorBarContainer from './style';
 
 const ColorBarContainer: React.FC<{
   color?: string;
@@ -26,25 +28,11 @@ const ColorBarContainer: React.FC<{
   }
 
   return (
-    <StyledColorBarContainer color={barColor} height={height}>
+    <StyledColorBarContainer color={barColor} height={height} width={width}>
       <div className="color-bar" />
       {children}
     </StyledColorBarContainer>
   );
 };
-
-const StyledColorBarContainer = styled.div<{
-  color: string;
-  height?: string;
-  width?: string;
-}>`
-  display: grid;
-  grid-template-rows: ${(props) => (props.height ? props.height : '8px')} auto;
-  .color-bar {
-    width: ${(props) => (props.width ? props.width : '90%')};
-    margin: 0 auto;
-    background: ${(props) => props.color};
-  }
-`;
 
 export default ColorBarContainer;
