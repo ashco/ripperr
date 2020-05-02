@@ -5,6 +5,8 @@ const MovementMenuWrapper = styled.div`
   overflow-y: auto;
   color: ${(props) => props.theme.mode.color[100]};
   display: grid;
+  scrollbar-width: none;
+
   p.message {
     justify-self: center;
   }
