@@ -1,10 +1,11 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
 
 import { useFilterState, useFilterDispatch } from '@context/FilterContext';
 
 import { ArchetypeList } from '../Movements';
 import FilterInput from './FilterInput';
+
+import FilterBarContainer from './style';
 
 import { Archetype } from '@types/types';
 
@@ -36,27 +37,15 @@ const FilterBar: React.FC<{
     filterState.value.length > 0 || filterState.archs.length > 0;
 
   return (
-    <FilterContainer
+    <FilterBarContainer
       active={filterState.active}
       filtering={filtering}
       ref={filterRef}
     >
       {filterState.active && <ArchetypeList archetypeList={archetypeList} />}
       <FilterInput />
-    </FilterContainer>
+    </FilterBarContainer>
   );
 };
-
-const FilterContainer = styled.div<{ active: boolean; filtering: boolean }>`
-  padding: 0.75rem;
-  display: grid;
-  gap: 1rem;
-  border-top: solid
-    ${(props) =>
-      props.filtering
-        ? props.theme.color.orange[500] + '5px'
-        : props.theme.mode.colorOpacity[200] + '2px'};
-  background-color: ${(props) => props.theme.mode.background[200]};
-`;
 
 export default FilterBar;

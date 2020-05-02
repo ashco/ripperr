@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { useModalDispatch } from '@context/ModalContext';
 import { useFilterState, useFilterDispatch } from '@context/FilterContext';
 
-import AddMovementButton from '../AddMovementButton/AddMovementButton';
-import ClearFilterButton from '../ClearFilterButton/ClearFilterButton';
+import AddMovementButton from '../AddMovementButton';
+import ClearFilterButton from '../ClearFilterButton';
 
 const FilterInput: React.FC<{}> = () => {
   const filterState = useFilterState();

@@ -1,7 +1,9 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-const SmallButton = styled.button`
+import Button from '@components/Button';
+
+const ButtonWrapper = styled(Button)`
   display: grid;
   place-items: center;
   background-color: ${(props) => props.theme.mode.background[300]};
@@ -9,4 +11,4 @@ const SmallButton = styled.button`
   border: none;
 `;
 
-export default SmallButton;
+export default ButtonWrapper;

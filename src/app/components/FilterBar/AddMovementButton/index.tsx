@@ -1,9 +1,9 @@
 ﻿import React, { useState, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import Button from '../../Button';
+import ButtonWrapper from '../ButtonWrapper';
 
-import Plus from '../../../icons/Plus';
+import Plus from '@icons/Plus';
 
 const AddMovementButton: React.FC<{ openModal: () => void }> = ({
   openModal,
@@ -17,7 +17,7 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
   }
 
   return (
-    <StyledAddMovementButton
+    <ButtonWrapper
       onClick={openModal}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
@@ -30,20 +30,8 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
             : themeContext.mode.color[200]
         }
       />
-    </StyledAddMovementButton>
+    </ButtonWrapper>
   );
 };
-
-const StyledAddMovementButton = styled(Button)`
-  /* display: grid;
-  place-items: center; */
-  /* background-color: ${(props) => props.theme.mode.background[300]}; */
-  /* border-radius: 5px; */
-  /* box-shadow: ${(props) => props.theme.shadow[2]};
-  border: none; */
-  svg {
-    width: 1.5rem;
-  }
-`;
 
 export default AddMovementButton;

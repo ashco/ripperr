@@ -2,14 +2,13 @@
 import styled, { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
-import { AuthUserContext } from '../../context';
+import { AuthUserContext } from '@context';
 
 import SignOutButton from './SignOutButton';
 
-// import Logo from '../../static/icons/fire-alt-solid.svg';
-import Logo from '../../icons/Logo';
+import Logo from '@icons/Logo';
 
-import { sizes } from '../../styles/sizes';
+import { sizes } from '@styles/sizes';
 
 const Navigation: React.FC = () => {
   const authUser = useContext(AuthUserContext);

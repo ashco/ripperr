@@ -1,15 +1,16 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
 
-import { useModalDispatch } from '../../context/ModalContext';
-import { useMoveDispatch } from '../../context/MoveContext';
-import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
+import { useModalDispatch } from '@context/ModalContext';
+import { useMoveDispatch } from '@context/MoveContext';
+import { useFilterState, useFilterDispatch } from '@context/FilterContext';
 
 import ColorBarContainer from '../Containers/ColorBarContainer';
-import OptionButton from './Buttons/OptionButton';
+import OptionButton from '../ListItems/Buttons/OptionButton';
 
-import { Movement } from '../../types/types';
-import { MovementType } from '../../types/enums';
+import { WorkoutWrapper, ExerciseWrapper, ArchetypeWrapper } from './style';
+
+import { Movement } from '@types/types';
+import { MovementType } from '@types/enums';
 
 const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
   const modalDispatch = useModalDispatch();
@@ -132,39 +133,5 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
     return null;
   }
 };
-
-const MenuListItemWrapper = styled.div`
-  > div {
-    height: 100%;
-    .container {
-      background: ${({ theme }) => theme.mode.background[300]};
-      box-shadow: ${(props) => props.theme.shadow[1]};
-      display: grid;
-      grid-template-columns: 1fr auto;
-      cursor: pointer;
-      .left {
-        p.name {
-          font-size: 16px;
-          padding: 0.75rem 0.5rem;
-          color: ${(props) => props.theme.mode.color[100]};
-          font-weight: 600;
-          line-height: 1.15;
-        }
-      }
-      .right {
-        display: grid;
-        .option-menu-btn-wrapper {
-          align-self: end;
-        }
-      }
-    }
-  }
-`;
-
-const WorkoutWrapper = styled(MenuListItemWrapper)`
-  grid-area: auto / auto / span 2 / span 2;
-`;
-const ExerciseWrapper = styled(MenuListItemWrapper)``;
-const ArchetypeWrapper = styled(MenuListItemWrapper)``;
 
 export default MenuListItem;

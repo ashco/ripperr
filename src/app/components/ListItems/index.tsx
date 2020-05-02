@@ -1,4 +1,4 @@
-﻿import MenuListItem from './MenuListItem';
+﻿import MenuListItem from '../MenuListItem';
 import ArchFormListItem from './ArchFormListItem';
 import ExerciseFormListItem from './ExerciseFormListItem';
 
