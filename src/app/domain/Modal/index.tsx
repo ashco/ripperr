@@ -79,7 +79,9 @@ const Modal: React.FC = (props) => {
     <ModalRoot>
       {modalState.open && (
         <div className="background" ref={bgRef}>
-          <ColorBarWrapper color={barColor}>{modalComponent}</ColorBarWrapper>
+          <div className="modal-wrapper">
+            <ColorBarWrapper color={barColor}>{modalComponent}</ColorBarWrapper>
+          </div>
         </div>
       )}
     </ModalRoot>

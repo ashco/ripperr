@@ -18,7 +18,9 @@ const MovementFormWrapper = styled.form`
     font-size: 20px;
   }
   textarea {
-    font-size: 16px;
+    font-size: 20px;
+    resize: none;
+    scrollbar-width: none;
   }
   label {
     display: flex;

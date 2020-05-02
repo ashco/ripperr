@@ -1,6 +1,8 @@
 ﻿import React from 'react';
 import { ThemeContext } from 'styled-components';
 
+import TextareaAutosize from 'react-textarea-autosize';
+
 import {
   AuthUserContext,
   FirebaseContext,
@@ -18,6 +20,7 @@ import ModeField from './ModeField';
 import MovementsField from './MovementsField';
 import RestField from './RestField';
 import ButtonRow from '@/components/ButtonRow';
+// import Textarea from '@/components/Textarea';
 
 import useCurrentWidth from '@/hooks/useCurrentWidth';
 
@@ -192,7 +195,8 @@ const MovementForm: React.FC<{
 
   const disabled = mode === ModalMode.View;
 
-  const isMobile = useCurrentWidth() < parseInt(sizes.tablet);
+  // const isMobile = useCurrentWidth() < parseInt(sizes.tablet);
+  const isMobile = useCurrentWidth() < 600;
 
   return (
     <MovementFormWrapper onSubmit={handleSubmit} noValidate>
@@ -212,7 +216,7 @@ const MovementForm: React.FC<{
         />
       </Label>
       <Label text="Description" display={isMobile ? 'block' : 'inline'}>
-        <input
+        <TextareaAutosize
           id="description"
           name="description"
           placeholder="Enter a description..."
@@ -224,7 +228,21 @@ const MovementForm: React.FC<{
             })
           }
           disabled={disabled}
+          maxRows={4}
         />
+        {/* <input
+          id="description"
+          name="description"
+          placeholder="Enter a description..."
+          value={(moveState as Movement).description}
+          onChange={(e) =>
+            moveDispatch({
+              type: 'MOVE_CHANGE_DESCRIPTION',
+              value: e.target.value,
+            })
+          }
+          disabled={disabled}
+        /> */}
       </Label>
       {moveState?.type === MovementType.Workout && (
         <>

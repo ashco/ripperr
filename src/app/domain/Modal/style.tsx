@@ -10,9 +10,15 @@ const ModalRoot = styled.div`
     width: 100%;
     top: 0;
     left: 0;
-    display: flex;
-    align-items: center;
+    display: grid;
+    align-content: center;
     justify-content: center;
+  }
+  .modal-wrapper {
+    overflow-y: auto;
+    > div {
+      margin: 2rem 1rem;
+    }
   }
 `;
 
