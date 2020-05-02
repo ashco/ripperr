@@ -26,7 +26,7 @@ const ButtonRow: React.FC<{ config: ButtonRowProps }> = ({ config }) => {
 const ButtonRowWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 export default ButtonRow;

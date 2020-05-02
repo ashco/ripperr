@@ -33,7 +33,7 @@ const InlineLabelWrapper = styled.div`
   display: grid;
   grid-template-columns: 6rem auto;
   p {
-    padding-top: 0.5rem;
+    padding-top: 0.75rem;
   }
 
   @media (min-width: ${sizes.tablet}) {
@@ -44,6 +44,7 @@ const InlineLabelWrapper = styled.div`
 const BlockLabelWrapper = styled.div`
   display: grid;
   grid-template-rows: auto auto;
+  gap: 0.5rem;
   @media (min-width: ${sizes.tablet}) {
     gap: 1rem;
   }
@@ -53,7 +54,7 @@ const LabelText = styled.p`
   font-size: 16px;
 
   @media (min-width: ${sizes.tablet}) {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
