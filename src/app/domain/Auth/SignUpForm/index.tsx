@@ -1,13 +1,16 @@
-﻿import React, { useState, useContext } from 'react';
-import { useRouter } from 'next/router';
-import { Formik, Form } from 'formik';
+﻿import React, {
+  useState,
+  useContext,
+} from '@/domain/SignUp/SignUpForm/node_modules/react';
+import { useRouter } from '@/domain/SignUp/SignUpForm/node_modules/next/router';
+import { Formik, Form } from '@/domain/SignUp/SignUpForm/node_modules/formik';
 
-import { InputField, signUpVal } from '../../components/MovementForm';
-import { FormError } from '../../components/MovementForm/style';
-import { Button } from '../../components/Button';
+import { InputField, signUpVal } from '@/components/MovementForm';
+import { FormError } from '@/components/MovementForm/style';
+import Button from '@/components/Button';
 
-import { FirebaseContext } from '../../context';
-import { IAuthError } from '../../types/types';
+import { FirebaseContext } from '@/context';
+import { IAuthError } from '@/types/types';
 
 interface ISignUpFormValues {
   username: string;

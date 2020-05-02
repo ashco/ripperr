@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import { AuthUserContext, withAuthorization } from '@/context';
 
-import { DarkModeButton } from '@/components/Button';
 import AuthFormContainer from '@/components/AuthFormContainer';
+import DarkModeButton from '@/domain/Account/DarkModeButton';
 import PasswordForgotForm from '@/domain/PasswordForgot/PasswordForgotForm';
 import PasswordChangeForm from '@/components/PasswordChangeForm';
 

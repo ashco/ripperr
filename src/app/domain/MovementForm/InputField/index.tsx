@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { useField, FieldAttributes } from 'formik';
 
-import { FormError } from '../style';
+import FormError from '@/components/FormError';
 
 type IInputFieldProps = FieldAttributes<{}>;
 

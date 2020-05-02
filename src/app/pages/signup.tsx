@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { NextPage } from 'next';
 
 import AuthFormContainer from '../components/AuthFormContainer';
-import SignUpForm from '../domain/Signup/SignUpForm';
+import SignUpForm from '../domain/SignUp/SignUpForm';
 
 const SignUpPage: NextPage = () => {
   return (
