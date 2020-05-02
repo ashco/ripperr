@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
 import { InputField, signInVal } from '@/components/MovementForm';
-import { FormError } from '@/components/MovementForm/styles';
+import { FormError } from '@/components/MovementForm/style';
 import Button from '@/components/Button';
 
 import { FirebaseContext } from '@/context';

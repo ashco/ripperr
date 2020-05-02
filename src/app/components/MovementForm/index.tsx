@@ -9,6 +9,8 @@ import {
 import { useMoveState, useMoveDispatch } from '@/context/MoveContext';
 import { useModalDispatch } from '@/context/ModalContext';
 
+import MovementFormWrapper from './style';
+
 import ArchetypesField from './ArchetypesField';
 import AddMovementButton from './AddMovementButton';
 import BlockLabel from './BlockLabel';
@@ -188,9 +190,9 @@ const MovementForm: React.FC<{
   const disabled = mode === ModalMode.View;
 
   return (
-    <form
+    <MovementFormWrapper
       onSubmit={handleSubmit}
-      className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
+      // className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
       noValidate
     >
       <InlineLabel name="Name">
@@ -259,7 +261,7 @@ const MovementForm: React.FC<{
         </BlockLabel>
       )}
       <ButtonRow config={btnConfig} />
-    </form>
+    </MovementFormWrapper>
   );
 };
 
