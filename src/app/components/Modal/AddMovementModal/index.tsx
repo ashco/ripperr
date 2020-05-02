@@ -1,13 +1,12 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
 
-import { useModalDispatch } from '../../context/ModalContext';
-import { useMoveDispatch } from '../../context/MoveContext';
+import { useModalDispatch } from '@/context/ModalContext';
+import { useMoveDispatch } from '@/context/MoveContext';
 
-import { ModalWrapper } from './styles';
-import Button from '../Button';
+import AddSelectModalWrapper from './style';
+import Button from '@/components/Button';
 
-const AddSelectModal: React.FC<{}> = () => {
+const AddMovementModal: React.FC<{}> = () => {
   const modalDispatch = useModalDispatch();
   const moveDispatch = useMoveDispatch();
 
@@ -29,9 +28,11 @@ const AddSelectModal: React.FC<{}> = () => {
 
   return (
     <AddSelectModalWrapper>
-      <Button onClick={addArchetype}>Add Archetype</Button>
-      <Button onClick={addExercise}>Add Exercise</Button>
-      <Button onClick={addWorkout}>Add Workout</Button>
+      <div className="btn-container">
+        <Button onClick={addArchetype}>Add Archetype</Button>
+        <Button onClick={addExercise}>Add Exercise</Button>
+        <Button onClick={addWorkout}>Add Workout</Button>
+      </div>
       <Button className="cancel-btn" onClick={closeModal}>
         Cancel
       </Button>
@@ -39,13 +40,4 @@ const AddSelectModal: React.FC<{}> = () => {
   );
 };
 
-const AddSelectModalWrapper = styled(ModalWrapper)`
-  width: ${(p) => p.theme.space[12]};
-  display: grid;
-  gap: 0.5rem;
-  .cancel-btn {
-    margin-top: 2rem;
-  }
-`;
-
-export default AddSelectModal;
+export default AddMovementModal;

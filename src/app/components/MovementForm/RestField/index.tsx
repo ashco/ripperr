@@ -1,12 +1,9 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { useMoveDispatch } from '../../../context/MoveContext';
+import { useMoveDispatch } from '@/context/MoveContext';
 
-import { Row } from '../styles';
-
-import { IWorkoutRest } from '../../../types/types';
-import { ModalMode } from '../../../types/enums';
+import { IWorkoutRest } from '@/types/types';
 
 const RestField: React.FC<{
   rest: IWorkoutRest;

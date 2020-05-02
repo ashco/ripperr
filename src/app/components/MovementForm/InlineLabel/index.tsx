@@ -1,16 +1,16 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-const InlineField: React.FC<{ name: string }> = ({ name, children }) => {
+const InlineLabel: React.FC<{ name: string }> = ({ name, children }) => {
   return (
-    <InlineFieldWrapper>
+    <InlineLabelWrapper>
       <p>{name}</p>
       {children}
-    </InlineFieldWrapper>
+    </InlineLabelWrapper>
   );
 };
 
-const InlineFieldWrapper = styled.div`
+const InlineLabelWrapper = styled.div`
   display: grid;
   grid-template-columns: 8rem auto;
   p {
@@ -19,4 +19,4 @@ const InlineFieldWrapper = styled.div`
   }
 `;
 
-export default InlineField;
+export default InlineLabel;

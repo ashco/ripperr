@@ -3,7 +3,7 @@ import styled, { ThemeContext } from 'styled-components';
 
 import { useMoveDispatch } from '../../context/MoveContext';
 
-import ColorBarContainer from '@/components/ColorBarContainer';
+import ColorBarWrapper from '@/components/ColorBarWrapper';
 
 import { IMovementRefs } from '../../types/types';
 import { MovementType, WorkoutMode, ModalMode } from '../../types/enums';
@@ -27,7 +27,7 @@ const ExerciseFormListItem: React.FC<{
   }
 
   return (
-    <ColorBarContainer color="purple">
+    <ColorBarWrapper color="purple">
       <ExerciseFormListItemWrapper disabled={disabled}>
         <p className="name">{exercise.name}</p>
         <div className="number-values">
@@ -87,7 +87,7 @@ const ExerciseFormListItem: React.FC<{
           <DeleteButton onClick={handleDelete}>✕</DeleteButton>
         )}
       </ExerciseFormListItemWrapper>
-    </ColorBarContainer>
+    </ColorBarWrapper>
   );
 };
 

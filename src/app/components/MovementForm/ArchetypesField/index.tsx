@@ -1,14 +1,13 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { MovementListContext } from '../../../context';
+import { MovementListContext } from '@/context';
 
-import { ArchFormListItem } from '../../ListItems';
-import Button from '../../Button';
+import { ArchFormListItem } from '@/components/ListItems';
 
-import { ModalMode } from '../../../types/enums';
+import { ModalMode } from '@/types/enums';
 
-const ArchField: React.FC<{
+const ArchetypesField: React.FC<{
   tags: string[];
   disabled: boolean;
   modalMode: ModalMode;
@@ -16,7 +15,7 @@ const ArchField: React.FC<{
   const { archetypes } = React.useContext(MovementListContext);
 
   return (
-    <ArchFieldWrapper>
+    <ArchetypesFieldWrapper>
       {archetypes
         // TODO - make more performent
         .filter((arch) => {
@@ -34,23 +33,14 @@ const ArchField: React.FC<{
             disabled={disabled}
           />
         ))}
-    </ArchFieldWrapper>
+    </ArchetypesFieldWrapper>
   );
 };
 
-const ArchFieldWrapper = styled.ul`
+const ArchetypesFieldWrapper = styled.ul`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
 `;
 
-const ArchButton = styled(Button)<{ active: boolean }>`
-  border-color: ${(props) =>
-    props.active ? props.theme.color.orange[500] : 'white'};
-  background-color: ${(props) =>
-    props.active ? props.theme.color.orange[500] : 'default'};
-  color: ${(props) => (props.active ? 'black' : 'default')};
-  font-weight: ${(props) => (props.active ? '600' : 'default')};
-`;
-
-export default ArchField;
+export default ArchetypesField;

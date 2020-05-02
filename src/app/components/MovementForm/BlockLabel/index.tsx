@@ -1,16 +1,16 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-const BlockField: React.FC<{ name: string }> = ({ name, children }) => {
+const BlockLabel: React.FC<{ name: string }> = ({ name, children }) => {
   return (
-    <BlockFieldWrapper>
+    <BlockLabelWrapper>
       <p>{name}</p>
       {children}
-    </BlockFieldWrapper>
+    </BlockLabelWrapper>
   );
 };
 
-const BlockFieldWrapper = styled.div`
+const BlockLabelWrapper = styled.div`
   display: grid;
   grid-template-rows: auto auto;
   gap: 1rem;
@@ -19,4 +19,4 @@ const BlockFieldWrapper = styled.div`
   }
 `;
 
-export default BlockField;
+export default BlockLabel;

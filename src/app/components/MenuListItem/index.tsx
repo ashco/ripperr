@@ -4,7 +4,7 @@ import { useModalDispatch } from '@/context/ModalContext';
 import { useMoveDispatch } from '@/context/MoveContext';
 import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
 
-import ColorBarContainer from '@/components/ColorBarContainer';
+import ColorBarWrapper from '@/components/ColorBarWrapper';
 import OptionButton from '../ListItems/Buttons/OptionButton';
 
 import { WorkoutWrapper, ExerciseWrapper, ArchetypeWrapper } from './style';
@@ -109,7 +109,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
   const nameLength = movement.type === MovementType.Archetype ? 10 : Infinity;
 
   const listItem = (
-    <ColorBarContainer color={color} height="5px">
+    <ColorBarWrapper color={color} height="5px">
       <div className="container" onClick={handleClick}>
         <div className="left">
           <p className="name">{stringShortener(movement.name, nameLength)}</p>
@@ -120,7 +120,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
           </div>
         </div>
       </div>
-    </ColorBarContainer>
+    </ColorBarWrapper>
   );
 
   if (movement.type === MovementType.Workout) {

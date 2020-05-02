@@ -2,13 +2,13 @@
 
 import AuthFormContainerWrapper from './style';
 
-import ColorBarContainer from '@/components/ColorBarContainer';
+import ColorBarWrapper from '@/components/ColorBarWrapper';
 
 const AuthFormContainer: React.FC = ({ children }) => {
   return (
-    <ColorBarContainer color="green">
+    <ColorBarWrapper color="green">
       <AuthFormContainerWrapper>{children}</AuthFormContainerWrapper>
-    </ColorBarContainer>
+    </ColorBarWrapper>
   );
 };
 

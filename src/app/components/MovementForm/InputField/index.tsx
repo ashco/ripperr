@@ -7,7 +7,6 @@ import { FormError } from '../styles';
 type IInputFieldProps = FieldAttributes<{}>;
 
 const InputField: React.FC<IInputFieldProps> = ({
-  // label,
   name,
   type,
   placeholder,
@@ -15,7 +14,6 @@ const InputField: React.FC<IInputFieldProps> = ({
   const [field, meta] = useField(name);
   return (
     <InputFieldWrapper htmlFor={name}>
-      {/* <div>{label}</div> */}
       <input {...field} name={name} type={type} placeholder={placeholder} />
       {meta.touched && meta.error && <FormError>{meta.error}</FormError>}
     </InputFieldWrapper>

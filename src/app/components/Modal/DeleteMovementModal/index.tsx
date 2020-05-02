@@ -1,17 +1,16 @@
 ﻿import React, { useContext } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import { ModalWrapper } from './styles';
+import DeleteMovementModalWrapper from './style';
 
-import ButtonRow from '../MovementForm/FormFields/ButtonRow';
+import { useModalDispatch } from '@/context/ModalContext';
+import { useMoveState } from '@/context/MoveContext';
+import { AuthUserContext, FirebaseContext } from '@/context';
+import ButtonRow from '@/components/ButtonRow';
 
-import { useModalDispatch } from '../../context/ModalContext';
-import { useMoveState } from '../../context/MoveContext';
-import { AuthUserContext, FirebaseContext } from '../../context';
+import { MovementType } from '@/types/enums';
 
-import { MovementType } from '../../types/enums';
-
-const DeleteModal: React.FC = () => {
+const DeleteMovementModal: React.FC = () => {
   const modalDispatch = useModalDispatch();
   const moveState = useMoveState();
 
@@ -79,23 +78,14 @@ const DeleteModal: React.FC = () => {
   }
 
   return (
-    <DeleteModalWrapper>
-      <p className="moveName">{moveState.name}</p>
-      <p>Do you want to delete this {moveText}?</p>
+    <DeleteMovementModalWrapper>
+      <div className="text-container">
+        <p className="moveName">{moveState.name}</p>
+        <p>Do you want to delete this {moveText}?</p>
+      </div>
       <ButtonRow config={btnConfig} />
-    </DeleteModalWrapper>
+    </DeleteMovementModalWrapper>
   );
 };
 
-const DeleteModalWrapper = styled(ModalWrapper)`
-  display: grid;
-  gap: 1rem;
-  p {
-    font-size: ${(p) => p.theme.font[3]};
-  }
-  .moveName {
-    font-weight: 600;
-  }
-`;
-
-export default DeleteModal;
+export default DeleteMovementModal;

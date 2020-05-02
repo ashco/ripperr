@@ -3,7 +3,7 @@ import { ThemeContext } from 'styled-components';
 
 import StyledColorBarContainer from './style';
 
-const ColorBarContainer: React.FC<{
+const ColorBarWrapper: React.FC<{
   color?: string;
   height?: string;
   width?: string;
@@ -35,4 +35,4 @@ const ColorBarContainer: React.FC<{
   );
 };
 
-export default ColorBarContainer;
+export default ColorBarWrapper;

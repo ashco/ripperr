@@ -2,7 +2,6 @@
 import styled from 'styled-components';
 
 import { ExerciseFormListItem } from '../../ListItems';
-import Button from '../../Button';
 
 import { IMovementRefs } from '../../../types/types';
 import { WorkoutMode, ModalMode } from '../../../types/enums';
@@ -32,13 +31,9 @@ const MovementsField: React.FC<{
   );
 };
 
-const MovementsFieldWrapper = styled.div`
-  /* border: red 1px solid; */
-`;
+const MovementsFieldWrapper = styled.div``;
 
 const MovementField = styled.div`
-  /* display: grid; */
-  /* grid-template-columns: 3fr 1fr 1fr; */
   input {
     justify-self: end;
   }
