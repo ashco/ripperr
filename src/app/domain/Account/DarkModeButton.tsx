@@ -7,7 +7,7 @@ import {
   ThemeModeActionType,
 } from '../../context/ThemeModeContext';
 
-import { Button } from '../Buttons';
+import Button from '../../components/Button';
 
 const DarkModeButton = () => {
   const themeModeState = useThemeModeState();

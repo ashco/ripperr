@@ -1,4 +1,4 @@
-﻿import FilterBar from '../Filter/FilterBar';
+﻿import FilterBar from '../FilterBar/FilterInput';
 
 export * from './ArchetypeList';
 export * from './MovementsContainer';

@@ -3,9 +3,9 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import AuthFormContainer from '../components/Containers/AuthFormContainer';
-import SignInForm from '../components/Signin/SignInForm';
-import { PasswordForgotLink } from '../components/PasswordForgot/PasswordForgotForm';
-import SignUpLink from '../components/Signup/SignUpLink';
+import SignInForm from '../domain/Signin/SignInForm';
+import { PasswordForgotLink } from '../domain/PasswordForgot/PasswordForgotForm';
+import SignUpLink from '../domain/Signup/SignUpLink';
 
 const SignInPage: NextPage<{ userAgent: string }> = () => (
   <SignInPageWrapper>

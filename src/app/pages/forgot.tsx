@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { NextPage } from 'next';
 
 import AuthFormContainer from '../components/Containers/AuthFormContainer';
-import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';
+import PasswordForgotForm from '../domain/PasswordForgot/PasswordForgotForm';
 
 const PasswordForgotPage: NextPage = () => (
   <ForgotPageWrapper>

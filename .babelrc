@@ -1,12 +1,19 @@
 ﻿{
   "presets": ["next/babel"],
   "plugins": [
-    ["module-resolver", {
-      "root": ["./src"],
-      "alias": {
-        "test": "./test",
-        "underscore": "lodash"
+    [
+      "module-resolver",
+      {
+        "root": ["./src/app/"],
+        "alias": {
+          "@components": "./components",
+          "@context": "./context",
+          "@domain": "./domain",
+          "@pages": "./pages",
+          "@types": "./types",
+          "@utils": "./utils"
+        }
       }
-    }]
-  ]
+    ]
+  ],
 }

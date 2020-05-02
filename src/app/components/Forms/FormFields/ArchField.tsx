@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { MovementListContext } from '../../../context';
 
 import { ArchFormListItem } from '../../ListItems';
-import { Button } from '../../Buttons';
+import Button from '../../Button';
 
 import { ModalMode } from '../../../types/enums';
 

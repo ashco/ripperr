@@ -1,13 +1,13 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { useModalDispatch } from '../../context/ModalContext';
-import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
+import { useModalDispatch } from '@context/ModalContext';
+import { useFilterState, useFilterDispatch } from '@context/FilterContext';
 
-import AddMovementButton from './Buttons/AddMovementButton';
-import ClearFilterButton from './Buttons/ClearFilterButton';
+import AddMovementButton from '../AddMovementButton/AddMovementButton';
+import ClearFilterButton from '../ClearFilterButton/ClearFilterButton';
 
-const FilterBar: React.FC<{}> = () => {
+const FilterInput: React.FC<{}> = () => {
   const filterState = useFilterState();
   const filterDispatch = useFilterDispatch();
   const modalDispatch = useModalDispatch();
@@ -62,4 +62,4 @@ const FilterBarWrapper = styled.div`
   }
 `;
 
-export default FilterBar;
+export default FilterInput;

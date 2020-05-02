@@ -7,7 +7,7 @@ import { withAuthorization, withMovements } from '../context';
 import { FilterProvider, useFilterState } from '../context/FilterContext';
 
 import { MovementsContainer } from '../components/Movements';
-import { Filter } from '../components/Filter';
+import Filter from '../components/FilterBar';
 import { Modal } from '../components/Modal';
 
 import { sortMovements } from '../utils/sortMovements';

@@ -6,7 +6,7 @@ import { useMoveDispatch } from '../../context/MoveContext';
 
 import ColorBarContainer from '../Containers/ColorBarContainer';
 import { ModalWrapper } from './styles';
-import { Button } from '../Buttons';
+import Button from '../Button';
 
 const AddSelectModal: React.FC<{}> = () => {
   const modalDispatch = useModalDispatch();

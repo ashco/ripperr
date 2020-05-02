@@ -1,18 +1,13 @@
 ﻿import React, { useState, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import {
-  useFilterState,
-  useFilterDispatch,
-} from '../../../context/FilterContext';
+import Button from '../../Button';
 
-import { Button } from '../../Buttons';
+import Plus from '../../../icons/Plus';
 
-import Times from '../../../icons/Times';
-
-const ClearFilterButton: React.FC = () => {
-  const filterDispatch = useFilterDispatch();
-
+const AddMovementButton: React.FC<{ openModal: () => void }> = ({
+  openModal,
+}) => {
   const themeContext = useContext(ThemeContext);
   const [btnHovered, setBtnHovered] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -21,29 +16,25 @@ const ClearFilterButton: React.FC = () => {
     setBtnHovered((hovered) => !hovered);
   }
 
-  function clearFilter() {
-    filterDispatch({ type: 'FILTER_RESET' });
-  }
-
   return (
-    <StyledClearFilterButton
-      onClick={clearFilter}
+    <StyledAddMovementButton
+      onClick={openModal}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
       ref={btnRef}
     >
-      <Times
+      <Plus
         color={
           btnHovered
             ? themeContext.mode.background[200]
             : themeContext.mode.color[200]
         }
       />
-    </StyledClearFilterButton>
+    </StyledAddMovementButton>
   );
 };
 
-const StyledClearFilterButton = styled(Button)`
+const StyledAddMovementButton = styled(Button)`
   /* display: grid;
   place-items: center; */
   /* background-color: ${(props) => props.theme.mode.background[300]}; */
@@ -51,8 +42,8 @@ const StyledClearFilterButton = styled(Button)`
   /* box-shadow: ${(props) => props.theme.shadow[2]};
   border: none; */
   svg {
-    width: 1.25rem;
+    width: 1.5rem;
   }
 `;
 
-export default ClearFilterButton;
+export default AddMovementButton;

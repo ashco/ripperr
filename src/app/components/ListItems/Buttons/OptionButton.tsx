@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import { Button } from '../../Buttons';
+import Button from '../../Button';
 
 import { useMoveDispatch } from '../../../context/MoveContext';
 import { useModalDispatch } from '../../../context/ModalContext';

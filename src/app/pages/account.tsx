@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import { AuthUserContext, withAuthorization } from '../context';
 
-import { DarkModeButton } from '../components/Buttons';
+import { DarkModeButton } from '../components/Button';
 import AuthFormContainer from '../components/Containers/AuthFormContainer';
-import PasswordForgotForm from '../components/PasswordForgot/PasswordForgotForm';
+import PasswordForgotForm from '../domain/PasswordForgot/PasswordForgotForm';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChangeForm';
 
 import { IAuthUserContext } from '../types/types';

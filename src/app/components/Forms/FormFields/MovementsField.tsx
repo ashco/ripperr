@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 import { ExerciseFormListItem } from '../../ListItems';
-import { Button } from '../../Buttons';
+import Button from '../../Button';
 
 import { IMovementRefs } from '../../../types/types';
 import { WorkoutMode, ModalMode } from '../../../types/enums';

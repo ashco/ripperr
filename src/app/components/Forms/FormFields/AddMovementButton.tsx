@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../../Buttons';
+import Button from '../../Button';
 
 const AddMovementButton: React.FC = () => {
   function handleClick(e: any) {

@@ -1,20 +1,20 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+﻿import React from 'react';
 import styled from 'styled-components';
 
-import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
+import { useFilterState, useFilterDispatch } from '@context/FilterContext';
 
-import { ArchetypeList } from '../../components/Movements';
-import FilterBar from './FilterBar';
+import { ArchetypeList } from '../Movements';
+import FilterInput from './FilterInput';
 
-import { Archetype } from '../../types/types';
+import { Archetype } from '@types/types';
 
-const Filter: React.FC<{
+const FilterBar: React.FC<{
   archetypeList: Archetype[] | null;
 }> = ({ archetypeList }) => {
   const filterState = useFilterState();
   const filterDispatch = useFilterDispatch();
 
-  const filterRef = useRef<HTMLDivElement>(null);
+  const filterRef = React.useRef<HTMLDivElement>(null);
 
   function handleFilterModeOff(e: any) {
     if (filterState.active) {
@@ -24,7 +24,7 @@ const Filter: React.FC<{
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener('click', handleFilterModeOff);
 
     return (): void => {
@@ -42,7 +42,7 @@ const Filter: React.FC<{
       ref={filterRef}
     >
       {filterState.active && <ArchetypeList archetypeList={archetypeList} />}
-      <FilterBar />
+      <FilterInput />
     </FilterContainer>
   );
 };
@@ -59,4 +59,4 @@ const FilterContainer = styled.div<{ active: boolean; filtering: boolean }>`
   background-color: ${(props) => props.theme.mode.background[200]};
 `;
 
-export default Filter;
+export default FilterBar;

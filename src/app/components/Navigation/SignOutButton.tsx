@@ -1,7 +1,7 @@
 ﻿import React, { useContext } from 'react';
 import { FirebaseContext } from '../../context';
 
-import { Button } from '../Buttons';
+import Button from '../Button';
 
 const SignOutButton: React.FC = () => {
   const firebase = useContext(FirebaseContext);
