@@ -1,17 +1,17 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import { Button } from '../Buttons';
+import { Button } from '../../Buttons';
 
-import { useMoveDispatch } from '../../context/MoveContext';
-import { useModalDispatch } from '../../context/ModalContext';
-import { usePointerEvents } from '../../context/PointerEventsContext';
+import { useMoveDispatch } from '../../../context/MoveContext';
+import { useModalDispatch } from '../../../context/ModalContext';
+import { usePointerEvents } from '../../../context/PointerEventsContext';
 
-import Bars from '../../icons/Bars';
-import { MovementType } from '../../types/enums';
-import { Movement } from '../../types/types';
+import Bars from '../../../icons/Bars';
+import { MovementType } from '../../../types/enums';
+import { Movement } from '../../../types/types';
 
-const ListItemMenuButton: React.FC<{
+const OptionButton: React.FC<{
   movement: Movement;
 }> = ({ movement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -96,7 +96,7 @@ const ListItemMenuButton: React.FC<{
 
   return (
     <>
-      <StyledListItemMenuButton
+      <StyledOptionButton
         onClick={openMenu}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
@@ -108,7 +108,7 @@ const ListItemMenuButton: React.FC<{
               : themeContext.mode.color[200]
           }
         />
-      </StyledListItemMenuButton>
+      </StyledOptionButton>
       <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
         {movement.type === MovementType.Workout && (
           <Button onClick={() => console.log('Starting!!')}>Start</Button>
@@ -121,7 +121,7 @@ const ListItemMenuButton: React.FC<{
   );
 };
 
-const StyledListItemMenuButton = styled.button`
+const StyledOptionButton = styled.button`
   border: none;
   background: none;
   height: 1.75rem;
@@ -151,4 +151,4 @@ const ListItemMenuWrapper = styled.div<{ open: boolean }>`
   }
 `;
 
-export default ListItemMenuButton;
+export default OptionButton;

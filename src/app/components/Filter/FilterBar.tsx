@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { useModalDispatch } from '../../context/ModalContext';
 import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
 
-import { AddMovementButton, ClearFilterButton } from '../Buttons';
+import AddMovementButton from './Buttons/AddMovementButton';
+import ClearFilterButton from './Buttons/ClearFilterButton';
 
 const FilterBar: React.FC<{}> = () => {
   const filterState = useFilterState();

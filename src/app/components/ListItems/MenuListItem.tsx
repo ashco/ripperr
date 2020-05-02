@@ -6,7 +6,7 @@ import { useMoveDispatch } from '../../context/MoveContext';
 import { useFilterState, useFilterDispatch } from '../../context/FilterContext';
 
 import ColorBarContainer from '../Containers/ColorBarContainer';
-import { ListItemMenuButton as OptionMenuButton } from '../Buttons';
+import OptionButton from './Buttons/OptionButton';
 
 import { Movement } from '../../types/types';
 import { MovementType } from '../../types/enums';
@@ -108,14 +108,14 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
   const nameLength = movement.type === MovementType.Archetype ? 10 : Infinity;
 
   const listItem = (
-    <ColorBarContainer color={color}>
+    <ColorBarContainer color={color} height="5px">
       <div className="container" onClick={handleClick}>
         <div className="left">
           <p className="name">{stringShortener(movement.name, nameLength)}</p>
         </div>
         <div className="right">
           <div ref={btnRef} className="option-menu-btn-wrapper">
-            <OptionMenuButton movement={movement} />
+            <OptionButton movement={movement} />
           </div>
         </div>
       </div>

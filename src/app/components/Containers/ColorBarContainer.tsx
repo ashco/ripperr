@@ -1,11 +1,11 @@
 ﻿import React from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-const ColorBarContainer: React.FC<{ color?: string; type?: string }> = ({
-  color,
-  type,
-  children,
-}) => {
+const ColorBarContainer: React.FC<{
+  color?: string;
+  height?: string;
+  width?: string;
+}> = ({ color, height, width, children }) => {
   const theme = React.useContext(ThemeContext);
 
   let barColor;
@@ -26,18 +26,22 @@ const ColorBarContainer: React.FC<{ color?: string; type?: string }> = ({
   }
 
   return (
-    <StyledColorBarContainer color={barColor} type={type}>
+    <StyledColorBarContainer color={barColor} height={height}>
       <div className="color-bar" />
       {children}
     </StyledColorBarContainer>
   );
 };
 
-const StyledColorBarContainer = styled.div<{ color: string; type?: string }>`
+const StyledColorBarContainer = styled.div<{
+  color: string;
+  height?: string;
+  width?: string;
+}>`
   display: grid;
-  grid-template-rows: ${(props) => (props.type === 'thin' ? '5px' : '8px')} auto;
+  grid-template-rows: ${(props) => (props.height ? props.height : '8px')} auto;
   .color-bar {
-    width: 90%;
+    width: ${(props) => (props.width ? props.width : '90%')};
     margin: 0 auto;
     background: ${(props) => props.color};
   }

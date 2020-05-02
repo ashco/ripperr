@@ -21,7 +21,12 @@ const Modal: React.FC = (props) => {
 
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
-      modalDispatch({ type: 'MODAL_CLOSE' });
+      if (
+        modalState.mode !== ModalMode.Add &&
+        modalState.mode !== ModalMode.Edit
+      ) {
+        modalDispatch({ type: 'MODAL_CLOSE' });
+      }
     }
   }
 
