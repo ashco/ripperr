@@ -14,9 +14,6 @@ const ModalRoot = styled.div`
     align-items: center;
     justify-content: center;
   }
-  .modal-container {
-    /* width: 95%; */
-  }
 `;
 
 export default ModalRoot;

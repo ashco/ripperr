@@ -79,9 +79,7 @@ const Modal: React.FC = (props) => {
     <ModalRoot>
       {modalState.open && (
         <div className="background" ref={bgRef}>
-          {/* <div className="modal-container"> */}
           <ColorBarWrapper color={barColor}>{modalComponent}</ColorBarWrapper>
-          {/* </div> */}
         </div>
       )}
     </ModalRoot>
