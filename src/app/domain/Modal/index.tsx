@@ -10,6 +10,8 @@ import AddMovementModal from './AddMovementModal';
 import DeleteMovementModal from './DeleteMovementModal';
 import MovementModal from './MovementModal';
 
+import ModalRoot from './style';
+
 import { ModalMode, MovementType } from '@/types/enums';
 
 const Modal: React.FC = (props) => {
@@ -77,27 +79,13 @@ const Modal: React.FC = (props) => {
     <ModalRoot>
       {modalState.open && (
         <div className="background" ref={bgRef}>
+          {/* <div className="modal-container"> */}
           <ColorBarWrapper color={barColor}>{modalComponent}</ColorBarWrapper>
+          {/* </div> */}
         </div>
       )}
     </ModalRoot>
   );
 };
-
-const ModalRoot = styled.div`
-  position: relative;
-  z-index: 999;
-  .background {
-    background-color: ${(props) => props.theme.mode.backgroundOpacity[100]};
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
 
 export default Modal;

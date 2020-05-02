@@ -13,12 +13,15 @@ import MovementFormWrapper from './style';
 
 import ArchetypesField from './ArchetypesField';
 import AddMovementButton from './AddMovementButton';
-import BlockLabel from './BlockLabel';
-import InlineLabel from './InlineLabel';
+import Label from './Label';
 import ModeField from './ModeField';
 import MovementsField from './MovementsField';
 import RestField from './RestField';
 import ButtonRow from '@/components/ButtonRow';
+
+import useCurrentWidth from '@/hooks/useCurrentWidth';
+
+import { sizes } from '@/styles/sizes';
 
 import {
   Movement,
@@ -189,13 +192,11 @@ const MovementForm: React.FC<{
 
   const disabled = mode === ModalMode.View;
 
+  const isMobile = useCurrentWidth() < parseInt(sizes.tablet);
+
   return (
-    <MovementFormWrapper
-      onSubmit={handleSubmit}
-      // className={mode === ModalMode.View ? 'view-mode' : 'edit-mode'}
-      noValidate
-    >
-      <InlineLabel name="Name">
+    <MovementFormWrapper onSubmit={handleSubmit} noValidate>
+      <Label text="Name" display={isMobile ? 'block' : 'inline'}>
         <input
           type="text"
           name="name"
@@ -209,8 +210,8 @@ const MovementForm: React.FC<{
           }
           disabled={disabled}
         />
-      </InlineLabel>
-      <InlineLabel name="Description">
+      </Label>
+      <Label text="Description" display={isMobile ? 'block' : 'inline'}>
         <input
           id="description"
           name="description"
@@ -224,20 +225,20 @@ const MovementForm: React.FC<{
           }
           disabled={disabled}
         />
-      </InlineLabel>
+      </Label>
       {moveState?.type === MovementType.Workout && (
         <>
-          <InlineLabel name="Mode">
+          <Label text="Mode" display={isMobile ? 'block' : 'inline'}>
             <ModeField
               value={(moveState as Workout).mode}
               disabled={disabled}
             />
-          </InlineLabel>
+          </Label>
 
-          <InlineLabel name="Rest">
+          <Label text="Rest" display={isMobile ? 'block' : 'inline'}>
             <RestField rest={(moveState as Workout).rest} disabled={disabled} />
-          </InlineLabel>
-          <BlockLabel name="Movements">
+          </Label>
+          <Label text="Movements" display="block">
             <MovementsField
               movements={(moveState as Workout).movements}
               mode={(moveState as Workout).mode}
@@ -247,18 +248,18 @@ const MovementForm: React.FC<{
             {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
               <AddMovementButton />
             )}
-          </BlockLabel>
+          </Label>
         </>
       )}
       {(moveState?.type === MovementType.Exercise ||
         moveState?.type === MovementType.Workout) && (
-        <BlockLabel name="Tags">
+        <Label text="Tags" display="block">
           <ArchetypesField
             tags={(moveState as Exercise | Workout).tags}
             modalMode={mode}
             disabled={disabled}
           />
-        </BlockLabel>
+        </Label>
       )}
       <ButtonRow config={btnConfig} />
     </MovementFormWrapper>
