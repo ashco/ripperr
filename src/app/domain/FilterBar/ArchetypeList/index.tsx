@@ -2,7 +2,7 @@
 
 import ArchetypeListWrapper from './style';
 
-import { MenuListItem } from '@/components/ListItems';
+import MenuListItem from '@/components/MenuListItem';
 
 import { Archetype } from '@/types/types';
 

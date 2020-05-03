@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 import { ThemeContext } from 'styled-components';
 
-import { MovementListContext, useMoveDispatch } from '@/context';
+import { MovementListContext } from '@/context';
+import { useMoveDispatch } from '@/context/MoveContext';
 
 // import { ArchFormListItem } from '@/components/ListItems';
 import { ArchetypesFieldWrapper, ArchetypeListItemWrapper } from './style';

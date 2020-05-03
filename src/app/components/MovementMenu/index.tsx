@@ -1,10 +1,9 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
 
 import MovementMenuWrapper from './style';
 
 import Loading from '@/components/Loading';
-import { MenuListItem } from '../ListItems';
+import MenuListItem from '../MenuListItem';
 
 import { Movement } from '../../types/types';
 import { MovementType } from '../../types/enums';
