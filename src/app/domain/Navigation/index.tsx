@@ -3,28 +3,35 @@ import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
 import { AuthUserContext } from '@/context';
+import { useAddMoveMode } from '@/context/AddMoveModeContext';
 
 import SignOutButton from './SignOutButton';
+import AddBar from './AddBar';
 
-import NavigationWrapper from './style';
+import NavBarWrapper from './style';
 
 import Logo from '@/icons/Logo';
 
-const Navigation: React.FC = () => {
+const NavBar: React.FC = () => {
   const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);
+
+  const addMoveMode = useAddMoveMode()[0];
+
   return (
-    <NavigationWrapper>
-      {authUser ? (
-        <NavigationAuth color={themeContext.mode.color[100]} />
+    <NavBarWrapper>
+      {addMoveMode ? (
+        <AddBar />
+      ) : authUser ? (
+        <NavBarAuth color={themeContext.mode.color[100]} />
       ) : (
-        <NavigationNonAuth color={themeContext.mode.color[100]} />
+        <NavBarNonAuth color={themeContext.mode.color[100]} />
       )}
-    </NavigationWrapper>
+    </NavBarWrapper>
   );
 };
 
-const NavigationAuth: React.FC<{ color: string }> = ({ color }) => (
+const NavBarAuth: React.FC<{ color: string }> = ({ color }) => (
   <ul>
     <div className="list-group left">
       <li>
@@ -54,7 +61,7 @@ const NavigationAuth: React.FC<{ color: string }> = ({ color }) => (
   </ul>
 );
 
-const NavigationNonAuth: React.FC<{ color: string }> = ({ color }) => (
+const NavBarNonAuth: React.FC<{ color: string }> = ({ color }) => (
   <ul>
     <div className="list-group left">
       <li>
@@ -76,4 +83,4 @@ const NavigationNonAuth: React.FC<{ color: string }> = ({ color }) => (
   </ul>
 );
 
-export default Navigation;
+export default NavBar;

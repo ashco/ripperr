@@ -3,6 +3,7 @@
 import { useModalDispatch } from '@/context/ModalContext';
 import { useMoveDispatch } from '@/context/MoveContext';
 import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
+import { useAddMoveMode } from '@/context/AddMoveModeContext';
 
 import ColorBarWrapper from '@/components/ColorBarWrapper';
 import OptionMenuButton from '@/components/MenuListItem/OptionMenuButton';
@@ -17,6 +18,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
   const moveDispatch = useMoveDispatch();
   const filterState = useFilterState();
   const filterDispatch = useFilterDispatch();
+  const [addMoveMode, setAddMoveMode] = useAddMoveMode();
 
   const btnRef = React.useRef<HTMLDivElement>(null);
 
@@ -39,16 +41,25 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
       break;
   }
 
-  function handleModalView(e: any): void {
+  function toggleActiveArch(e: any) {
+    if (!btnRef?.current?.contains(e.target)) {
+      filterDispatch({ type: 'FILTER_TOGGLE_ARCH', value: movement.id });
+    }
+  }
+
+  function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
       modalDispatch({ type: 'MODAL_VIEW' });
       moveDispatch({ type: 'MOVE_SET', value: movement });
     }
   }
 
-  function toggleActiveArch(e: any) {
+  function addMoveToWorkout(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
-      filterDispatch({ type: 'FILTER_TOGGLE_ARCH', value: movement.id });
+      console.log('Adding movement to workout');
+      moveDispatch({ type: 'MOVE_ADD_MOVE', value: movement });
+      modalDispatch({ type: 'MODAL_EDIT' });
+      setAddMoveMode(false);
     }
   }
 
@@ -56,7 +67,11 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
     if (movement.type === MovementType.Archetype) {
       toggleActiveArch(e);
     } else {
-      handleModalView(e);
+      if (addMoveMode) {
+        addMoveToWorkout(e);
+      } else {
+        showModalView(e);
+      }
     }
   }
 
@@ -78,9 +93,11 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
           <p className="name">{stringShortener(movement.name, nameLength)}</p>
         </div>
         <div className="right">
-          <div ref={btnRef} className="option-menu-btn-wrapper">
-            <OptionMenuButton movement={movement} />
-          </div>
+          {!addMoveMode && (
+            <div ref={btnRef} className="option-menu-btn-wrapper">
+              <OptionMenuButton movement={movement} />
+            </div>
+          )}
         </div>
       </div>
     </ColorBarWrapper>

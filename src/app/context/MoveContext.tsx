@@ -18,6 +18,7 @@ type FormActionType =
   | 'MOVE_CHANGE_NAME'
   | 'MOVE_CHANGE_DESCRIPTION'
   | 'MOVE_CHANGE_MODE'
+  | 'MOVE_ADD_MOVE'
   | 'MOVE_CHANGE_MOVE_EX_REPS'
   | 'MOVE_CHANGE_MOVE_EX_SETS'
   | 'MOVE_CHANGE_MOVE_EX_DURATION'
@@ -102,6 +103,21 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
       return { ...state, description: value } as Movement;
     case 'MOVE_CHANGE_MODE':
       return { ...state, mode: value } as Workout;
+    case 'MOVE_ADD_MOVE': {
+      const newMovements = [...(state as Workout).movements];
+      // newMovements.splice(index, 1);
+      const newMove = {
+        id: (value as Movement).id as string,
+        name: (value as Movement).name,
+        duration: 0,
+        reps: 0,
+        sets: 0,
+      };
+
+      newMovements.push(newMove);
+
+      return { ...state, movements: newMovements } as Workout;
+    }
     case 'MOVE_CHANGE_MOVE_EX_REPS': {
       if (index === null) {
         throw Error('index was not provided');

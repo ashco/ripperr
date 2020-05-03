@@ -40,6 +40,8 @@ function modalReducer(state: ModalState, action: ModalAction) {
       return { open: true, mode: ModalMode.Delete };
     case 'MODAL_EDIT':
       return { open: true, mode: ModalMode.Edit };
+    // case 'MODAL_EDIT_ADD_MOVEMENT':
+    //   return { open: false, mode: ModalMode.Edit };
     case 'MODAL_VIEW':
       return { open: true, mode: ModalMode.View };
     default: {
