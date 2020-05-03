@@ -10,10 +10,6 @@ const ModalWrapper = styled.div`
   padding: 1rem;
   color: ${(props) => props.theme.mode.color[100]};
   box-shadow: ${(props) => props.theme.shadow[2]};
-  /* .container {
-    display: grid;
-    gap: 1rem;
-  } */
   @media (min-width: ${sizes.tablet}) {
     padding: 2rem;
   }

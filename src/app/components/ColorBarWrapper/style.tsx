@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-const StyledColorBarContainer = styled.div<{
+const StyledColorBarWrapper = styled.div<{
   color: string;
   height?: string;
   width?: string;
@@ -14,4 +14,4 @@ const StyledColorBarContainer = styled.div<{
   }
 `;
 
-export default StyledColorBarContainer;
+export default StyledColorBarWrapper;

@@ -12,7 +12,8 @@ const MovementFormWrapper = styled.form`
   }
   input:disabled,
   textarea:disabled {
-    border-color: ${(props) => props.theme.mode.color[200]};
+    /* border-color: ${(props) => props.theme.mode.color[200]}; */
+    border-bottom: none;
   }
   input {
     font-size: 20px;

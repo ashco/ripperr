@@ -199,7 +199,7 @@ const MovementForm: React.FC<{
 
   return (
     <MovementFormWrapper onSubmit={handleSubmit} noValidate>
-      <Label text="Name" display={isMobile ? 'block' : 'inline'}>
+      <Label text="Name:" display={isMobile ? 'block' : 'inline'}>
         <input
           type="text"
           name="name"
@@ -214,48 +214,37 @@ const MovementForm: React.FC<{
           disabled={disabled}
         />
       </Label>
-      <Label text="Description" display={isMobile ? 'block' : 'inline'}>
-        <TextareaAutosize
-          id="description"
-          name="description"
-          placeholder="Enter a description..."
-          value={(moveState as Movement).description}
-          onChange={(e) =>
-            moveDispatch({
-              type: 'MOVE_CHANGE_DESCRIPTION',
-              value: e.target.value,
-            })
-          }
-          disabled={disabled}
-          maxRows={4}
-        />
-        {/* <input
-          id="description"
-          name="description"
-          placeholder="Enter a description..."
-          value={(moveState as Movement).description}
-          onChange={(e) =>
-            moveDispatch({
-              type: 'MOVE_CHANGE_DESCRIPTION',
-              value: e.target.value,
-            })
-          }
-          disabled={disabled}
-        /> */}
-      </Label>
+      {(!disabled || moveState.description.length > 0) && (
+        <Label text="Description:" display={isMobile ? 'block' : 'inline'}>
+          <TextareaAutosize
+            id="description"
+            name="description"
+            placeholder="Enter a description..."
+            value={(moveState as Movement).description}
+            onChange={(e) =>
+              moveDispatch({
+                type: 'MOVE_CHANGE_DESCRIPTION',
+                value: e.target.value,
+              })
+            }
+            disabled={disabled}
+            maxRows={4}
+          />
+        </Label>
+      )}
       {moveState?.type === MovementType.Workout && (
         <>
-          <Label text="Mode" display={isMobile ? 'block' : 'inline'}>
+          <Label text="Mode:" display={isMobile ? 'block' : 'inline'}>
             <ModeField
               value={(moveState as Workout).mode}
               disabled={disabled}
             />
           </Label>
 
-          <Label text="Rest" display={isMobile ? 'block' : 'inline'}>
+          <Label text="Rest:" display={isMobile ? 'block' : 'inline'}>
             <RestField rest={(moveState as Workout).rest} disabled={disabled} />
           </Label>
-          <Label text="Movements" display="block">
+          <Label text="Movements:" display="block">
             <MovementsField
               movements={(moveState as Workout).movements}
               mode={(moveState as Workout).mode}
@@ -269,15 +258,16 @@ const MovementForm: React.FC<{
         </>
       )}
       {(moveState?.type === MovementType.Exercise ||
-        moveState?.type === MovementType.Workout) && (
-        <Label text="Tags" display="block">
-          <ArchetypesField
-            tags={(moveState as Exercise | Workout).tags}
-            modalMode={mode}
-            disabled={disabled}
-          />
-        </Label>
-      )}
+        moveState?.type === MovementType.Workout) &&
+        (!disabled || (moveState as Exercise | Workout).tags.length > 0) && (
+          <Label text="Tags:" display="block">
+            <ArchetypesField
+              tags={(moveState as Exercise | Workout).tags}
+              modalMode={mode}
+              disabled={disabled}
+            />
+          </Label>
+        )}
       <ButtonRow config={btnConfig} />
     </MovementFormWrapper>
   );

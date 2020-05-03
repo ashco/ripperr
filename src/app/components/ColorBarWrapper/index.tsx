@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { ThemeContext } from 'styled-components';
 
-import StyledColorBarContainer from './style';
+import StyledColorBarWrapper from './style';
 
 const ColorBarWrapper: React.FC<{
   color?: string;
@@ -27,11 +27,13 @@ const ColorBarWrapper: React.FC<{
     barColor = theme.mode.background[400];
   }
 
+  console.log(barColor);
+
   return (
-    <StyledColorBarContainer color={barColor} height={height} width={width}>
+    <StyledColorBarWrapper color={barColor} height={height} width={width}>
       <div className="color-bar" />
       {children}
-    </StyledColorBarContainer>
+    </StyledColorBarWrapper>
   );
 };
 

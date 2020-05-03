@@ -13,13 +13,8 @@ const AddMovementButton: React.FC = () => {
   function handleClick(e: any) {
     e.preventDefault();
 
-    // Hide modal
     modalDispatch({ type: 'MODAL_CLOSE' });
     setAddMoveMode(true);
-
-    // initiate new movement select mode
-    // 1. Cancel button appears that shows modal again
-    // 2. menulistitems onclick function changes to adding new movement
   }
 
   return (

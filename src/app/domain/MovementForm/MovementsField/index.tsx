@@ -1,10 +1,10 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { ExerciseFormListItem } from '../../../components/ListItems';
+import MovementListItem from './MovementListItem';
 
-import { IMovementRefs } from '../../../types/types';
-import { WorkoutMode, ModalMode } from '../../../types/enums';
+import { IMovementRefs } from '@/types/types';
+import { WorkoutMode, ModalMode } from '@/types/enums';
 
 const MovementsField: React.FC<{
   movements: IMovementRefs[];
@@ -16,27 +16,29 @@ const MovementsField: React.FC<{
     <MovementsFieldWrapper>
       {movements.map((move, i) => {
         return (
-          <MovementField key={move.id}>
-            <ExerciseFormListItem
-              exercise={move}
-              mode={mode}
-              modalMode={modalMode}
-              index={i}
-              disabled={disabled}
-            />
-          </MovementField>
+          <MovementListItem
+            key={move.id}
+            movement={move}
+            mode={mode}
+            modalMode={modalMode}
+            index={i}
+            disabled={disabled}
+          />
         );
       })}
     </MovementsFieldWrapper>
   );
 };
 
-const MovementsFieldWrapper = styled.div``;
-
-const MovementField = styled.div`
-  input {
-    justify-self: end;
-  }
+const MovementsFieldWrapper = styled.div`
+  display: grid;
+  gap: 0.5rem;
 `;
+
+// const MovementField = styled.div`
+//   input {
+//     justify-self: end;
+//   }
+// `;
 
 export default MovementsField;
