@@ -3,6 +3,7 @@
 import ModalWrapper from '../ModalWrapper';
 
 const DeleteMovementModalWrapper = styled(ModalWrapper)`
+  width: 24rem;
   .text-container {
     display: grid;
     gap: 1rem;

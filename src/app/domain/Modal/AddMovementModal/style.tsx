@@ -3,7 +3,7 @@
 import ModalWrapper from '../ModalWrapper';
 
 const AddSelectModalWrapper = styled(ModalWrapper)`
-  width: ${(p) => p.theme.space[12]};
+  width: 24rem;
   gap: 0.5rem;
   .btn-container {
     display: grid;

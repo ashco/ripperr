@@ -23,7 +23,7 @@ const Button = styled.button<{ size?: string; onClick?: any }>`
     border-color: ${(props) => props.theme.color.red[400]};
     &:hover {
       background: ${(props) => props.theme.color.red[400]};
-      color: ${(props) => props.theme.mode.color[100]};
+      /* color: ${(props) => props.theme.mode.background[100]}; */
     }
   }
 `;
