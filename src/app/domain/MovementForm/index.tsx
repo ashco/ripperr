@@ -20,11 +20,8 @@ import ModeField from './ModeField';
 import MovementsField from './MovementsField';
 import RestField from './RestField';
 import ButtonRow from '@/components/ButtonRow';
-// import Textarea from '@/components/Textarea';
 
 import useCurrentWidth from '@/hooks/useCurrentWidth';
-
-import { sizes } from '@/styles/sizes';
 
 import {
   Movement,
@@ -194,7 +191,6 @@ const MovementForm: React.FC<{
 
   const disabled = mode === ModalMode.View;
 
-  // const isMobile = useCurrentWidth() < parseInt(sizes.tablet);
   const isMobile = useCurrentWidth() < 600;
 
   return (
