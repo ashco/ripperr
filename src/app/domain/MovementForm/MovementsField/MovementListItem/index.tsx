@@ -12,8 +12,6 @@ import GripIcon from '@/icons/GripLines';
 import { IMovementRefs } from '@/types/types';
 import { MovementType, WorkoutMode, ModalMode } from '@/types/enums';
 
-const DragHandle = SortableHandle(() => <GripIcon />);
-
 const MovementListItem = SortableElement(
   ({
     movement,
@@ -39,13 +37,17 @@ const MovementListItem = SortableElement(
       });
     }
 
+    const DragHandle = SortableHandle(() => (
+      <div className="drag-icon">
+        {modalMode === ModalMode.Edit && <GripIcon />}
+      </div>
+    ));
+
     return (
       <MovementListItemWrapper disabled={disabled}>
         <ColorBarWrapper color="purple">
           <div className="list-item-container">
-            <div className="drag-icon">
-              {modalMode === ModalMode.Edit && <DragHandle />}
-            </div>
+            <DragHandle />
             <p className="name">{movement.name}</p>
             <div className="number-values">
               {mode === WorkoutMode.Reps && (
