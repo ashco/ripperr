@@ -19,12 +19,6 @@ const ModalRoot = styled.div<{ type?: MovementType; modalWidth?: string }>`
   }
   .wrapper {
     overflow-y: auto;
-    /* padding: 1rem; */
-    /* max-width: 100vw; */
-    /* width: 100%;
-    max-width: 100vw; */
-    /* max-width: ${(props) =>
-      props.type === MovementType.Workout ? '48rem' : '32rem'}; */
     > div {
       padding: 1rem;
       width: 100vw;
@@ -48,9 +42,6 @@ const ModalRoot = styled.div<{ type?: MovementType; modalWidth?: string }>`
 
   @media (min-width: ${sizes.tablet}) {
     .wrapper {
-      /* padding: 2rem; */
-      /* width: ${(props) =>
-        props.type === MovementType.Workout ? '48rem' : '32rem'}; */
       > div {
         padding: 2rem;
         width: ${(props) => props.modalWidth || 'auto'};

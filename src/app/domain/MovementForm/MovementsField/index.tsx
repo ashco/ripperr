@@ -7,12 +7,6 @@ import MovementListItem from './MovementListItem';
 import { IMovementRefs } from '@/types/types';
 import { WorkoutMode, ModalMode } from '@/types/enums';
 
-// const MovementsField: React.FC<{
-//   movements: IMovementRefs[];
-//   mode: WorkoutMode;
-//   modalMode: ModalMode;
-//   disabled: boolean;
-// }> = ({ movements, disabled, mode, modalMode }) => {
 const MovementsList = SortableContainer(
   ({
     movements,
@@ -71,7 +65,6 @@ const MovementsSortableComponent: React.FC<{
       onSortEnd={onSortEnd}
       lockAxis="y"
       helperClass="sortableHelper"
-      // style={{ zIndex: 999999 }}
     />
   );
 };
@@ -80,11 +73,5 @@ const MovementsFieldWrapper = styled.ul`
   display: grid;
   gap: 0.5rem;
 `;
-
-// const MovementField = styled.div`
-//   input {
-//     justify-self: end;
-//   }
-// `;
 
 export default MovementsSortableComponent;

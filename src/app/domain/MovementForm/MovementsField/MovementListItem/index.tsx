@@ -7,11 +7,12 @@ import { useMoveDispatch } from '@/context/MoveContext';
 import ColorBarWrapper from '@/components/ColorBarWrapper';
 
 import MovementListItemWrapper from './style';
+import GripIcon from '@/icons/GripLines';
 
 import { IMovementRefs } from '@/types/types';
 import { MovementType, WorkoutMode, ModalMode } from '@/types/enums';
 
-const DragHandle = SortableHandle(() => <StyledDragHandle></StyledDragHandle>);
+const DragHandle = SortableHandle(() => <GripIcon />);
 
 const MovementListItem = SortableElement(
   ({
@@ -42,7 +43,7 @@ const MovementListItem = SortableElement(
       <MovementListItemWrapper disabled={disabled}>
         <ColorBarWrapper color="purple">
           <div className="list-item-container">
-            <div className="dragger">
+            <div className="drag-icon">
               {modalMode === ModalMode.Edit && <DragHandle />}
             </div>
             <p className="name">{movement.name}</p>
@@ -119,29 +120,5 @@ const MovementListItem = SortableElement(
     );
   },
 );
-
-const StyledDragHandle = styled.div`
-  position: relative;
-  top: 1px;
-  display: block;
-  width: 18px;
-  height: 11px;
-  opacity: 0.25;
-  margin-right: 20px;
-  cursor: row-resize;
-  background: linear-gradient(
-    180deg,
-    hsl(0, 0%, 0%),
-    hsl(0, 0%, 0%) 20%,
-    hsl(0, 0%, 100%) 0,
-    hsl(0, 0%, 100%) 40%,
-    hsl(0, 0%, 0%) 0,
-    hsl(0, 0%, 0%) 60%,
-    hsl(0, 0%, 100%) 0,
-    hsl(0, 0%, 100%) 80%,
-    hsl(0, 0%, 0%) 0,
-    hsl(0, 0%, 0%)
-  );
-`;
 
 export default MovementListItem;

@@ -3,6 +3,14 @@ import ColorBarWrapper from '@/components/ColorBarWrapper';
 
 const MovementListItemWrapper = styled.li<{ disabled: boolean }>`
   z-index: 999999;
+  .drag-icon {
+    display: grid;
+    place-content: center;
+    > svg {
+      width: 0.75rem;
+      cursor: pointer;
+    }
+  }
   .list-item-container {
     background-color: ${(props) => props.theme.mode.background[300]};
     border: 2px solid

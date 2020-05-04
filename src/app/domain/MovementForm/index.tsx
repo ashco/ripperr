@@ -213,7 +213,10 @@ const MovementForm: React.FC<{
         </Label>
       )}
       {(!disabled || moveState.description.length > 0) && (
-        <Label text="Description:" display={isMobile ? 'block' : 'inline'}>
+        <Label
+          text="Description:"
+          display={isMobile ? 'block' : disabled ? 'block' : 'inline'}
+        >
           <TextareaAutosize
             id="description"
             name="description"

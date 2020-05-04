@@ -72,7 +72,7 @@ const Modal: React.FC = () => {
   switch (modalState.mode) {
     case ModalMode.AddSelect:
       barColor = 'green';
-      modalWidth = '24rem';
+      modalWidth = '28rem';
       break;
     case ModalMode.Delete:
       barColor = 'red';

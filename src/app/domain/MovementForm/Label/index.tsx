@@ -12,7 +12,8 @@ const Label: React.FC<{ text: string; display: 'inline' | 'block' }> = ({
   children,
 }) => {
   const modalState = useModalState();
-  const showLabel = modalState.mode === ModalMode.Edit;
+  const showLabel =
+    modalState.mode === ModalMode.Add || modalState.mode === ModalMode.Edit;
 
   return (
     <LabelWrapper className={display} showLabel={showLabel}>
@@ -20,21 +21,6 @@ const Label: React.FC<{ text: string; display: 'inline' | 'block' }> = ({
       {children}
     </LabelWrapper>
   );
-  // if (display === 'inline') {
-  //   return (
-  //     <InlineLabelWrapper showLabel={showLabel}>
-  //       {showLabel && <p>{text}</p>}
-  //       {children}
-  //     </InlineLabelWrapper>
-  //   );
-  // } else {
-  //   return (
-  //     <BlockLabelWrapper showLabel={showLabel}>
-  //       {showLabel && <p>{text}</p>}
-  //       {children}
-  //     </BlockLabelWrapper>
-  //   );
-  // }
 };
 
 const LabelWrapper = styled.div<{ showLabel: boolean }>`
@@ -51,11 +37,11 @@ const LabelWrapper = styled.div<{ showLabel: boolean }>`
   }
   &.block {
     grid-template-rows: ${(props) => (props.showLabel ? 'auto auto' : 'auto')};
-    gap: 0.5rem;
-    /* input,
+    gap: 0.25rem;
+    input,
     textarea {
-      padding-left: ${(props) => (props.showLabel ? 'auto' : '0px')};
-    } */
+      padding-left: 0px;
+    }
   }
 
   @media (min-width: ${sizes.tablet}) {
@@ -71,42 +57,5 @@ const LabelWrapper = styled.div<{ showLabel: boolean }>`
     }
   }
 `;
-
-// const LabelWrapper = styled.div<{ showLabel: boolean }>`
-//   display: grid;
-//   p {
-//     font-size: 16px;
-//   }
-//   p,
-//   textarea {
-//     padding-left: ${(props) => (props.showLabel ? 'auto' : '0px')};
-//   }
-
-//   @media (min-width: ${sizes.tablet}) {
-//     p {
-//       font-size: 18px;
-//     }
-//   }
-// `;
-
-// const InlineLabelWrapper = styled(LabelWrapper)`
-//   grid-template-columns: ${(props) => (props.showLabel ? '6rem auto' : 'auto')};
-//   p {
-//     padding-top: 0.75rem;
-//   }
-
-//   @media (min-width: ${sizes.tablet}) {
-//     grid-template-columns: ${(props) =>
-//       props.showLabel ? '8rem auto' : 'auto'};
-//   }
-// `;
-
-// const BlockLabelWrapper = styled(LabelWrapper)`
-//   grid-template-rows: ${(props) => (props.showLabel ? 'auto auto' : 'auto')};
-//   gap: 0.5rem;
-//   @media (min-width: ${sizes.tablet}) {
-//     gap: 1rem;
-//   }
-// `;
 
 export default Label;

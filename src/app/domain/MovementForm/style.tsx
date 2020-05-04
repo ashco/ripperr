@@ -2,18 +2,16 @@
 
 const MovementFormWrapper = styled.form`
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   input,
   textarea {
     border: none;
     border-bottom: 2px solid ${(props) => props.theme.mode.color[200]};
-    /* border-bottom: 2px solid ${(props) => props.theme.mode.color[100]}; */
     background: none;
     color: ${(props) => props.theme.mode.color[100]};
   }
   input:disabled,
   textarea:disabled {
-    /* border-color: ${(props) => props.theme.mode.color[200]}; */
     border-bottom: none;
   }
   input {
