@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { ThemeContext } from 'styled-components';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -22,6 +21,7 @@ import RestField from './RestField';
 import ButtonRow from '@/components/ButtonRow';
 
 import useCurrentWidth from '@/hooks/useCurrentWidth';
+import singleCapString from '@/utils/singleCapString';
 
 import {
   Movement,
@@ -43,26 +43,26 @@ const MovementForm: React.FC<{
   const modalDispatch = useModalDispatch();
   const moveState = useMoveState();
 
-  let moveList: Archetype[] | Exercise[] | Workout[];
-  if (moveState?.type === MovementType.Archetype) {
-    moveList = movementList.archetypes;
-  } else if (moveState?.type === MovementType.Exercise) {
-    moveList = movementList.exercises;
-  } else if (moveState?.type === MovementType.Workout) {
-    moveList = movementList.workouts;
-  } else {
-    throw Error('No MovementType specified!');
-  }
+  const disabled = mode === ModalMode.View;
+  const isMobile = useCurrentWidth() < 600;
 
-  let movementText = 'Archetype';
-  if (moveState?.type === MovementType.Exercise) {
-    movementText = 'Exercise';
-  } else if (moveState?.type === MovementType.Workout) {
-    movementText = 'Workout';
+  let moveList: Archetype[] | Exercise[] | Workout[];
+  switch (moveState?.type) {
+    case MovementType.Archetype:
+      moveList = movementList.archetypes;
+      break;
+    case MovementType.Exercise:
+      moveList = movementList.exercises;
+      break;
+    case MovementType.Workout:
+      moveList = movementList.workouts;
+      break;
+    default:
+      throw Error('No MovementType specified!');
+      break;
   }
 
   // ========= MOVEMENT FUNCTIONS =========
-
   function handleUpdateMovement(moveState: Movement): void {
     let firebaseFnc;
 
@@ -85,7 +85,9 @@ const MovementForm: React.FC<{
       firebaseFnc(authUser.uid, moveState.id)
         .update(moveObj)
         .then(() => {
-          console.log(`${movementText} Updated: ${moveObj.name}`);
+          console.log(
+            `${singleCapString(moveState?.type)} Updated: ${moveObj.name}`,
+          );
           modalDispatch({ type: 'MODAL_CLOSE' });
         })
         .catch((err) => {
@@ -123,7 +125,9 @@ const MovementForm: React.FC<{
       docRef
         .set(moveObj)
         .then(() => {
-          console.log(`${movementText} Added: ${moveObj.name}`);
+          console.log(
+            `${singleCapString(moveState?.type)} Added: ${moveObj.name}`,
+          );
           modalDispatch({ type: 'MODAL_CLOSE' });
         })
         .catch((err) => {
@@ -156,7 +160,7 @@ const MovementForm: React.FC<{
     }
   }
 
-  function handleClose() {
+  function handleClose(): void {
     modalDispatch({ type: 'MODAL_CLOSE' });
     moveDispatch({ type: 'MOVE_CLEAR' });
   }
@@ -189,27 +193,25 @@ const MovementForm: React.FC<{
     btnConfig.actionBtn.text = 'Edit';
   }
 
-  const disabled = mode === ModalMode.View;
-
-  const isMobile = useCurrentWidth() < 600;
-
   return (
     <MovementFormWrapper onSubmit={handleSubmit} noValidate>
-      <Label text="Name:" display={isMobile ? 'block' : 'inline'}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={(moveState as Movement).name}
-          onChange={(e) =>
-            moveDispatch({
-              type: 'MOVE_CHANGE_NAME',
-              value: e.target.value,
-            })
-          }
-          disabled={disabled}
-        />
-      </Label>
+      {mode === ModalMode.Edit && (
+        <Label text="Name:" display={isMobile ? 'block' : 'inline'}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={(moveState as Movement).name}
+            onChange={(e) =>
+              moveDispatch({
+                type: 'MOVE_CHANGE_NAME',
+                value: e.target.value,
+              })
+            }
+            disabled={disabled}
+          />
+        </Label>
+      )}
       {(!disabled || moveState.description.length > 0) && (
         <Label text="Description:" display={isMobile ? 'block' : 'inline'}>
           <TextareaAutosize

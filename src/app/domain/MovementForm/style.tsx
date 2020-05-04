@@ -6,7 +6,8 @@ const MovementFormWrapper = styled.form`
   input,
   textarea {
     border: none;
-    border-bottom: 2px solid ${(props) => props.theme.mode.color[100]};
+    border-bottom: 2px solid ${(props) => props.theme.mode.color[200]};
+    /* border-bottom: 2px solid ${(props) => props.theme.mode.color[100]}; */
     background: none;
     color: ${(props) => props.theme.mode.color[100]};
   }

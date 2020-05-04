@@ -5,7 +5,7 @@
 import { MovementType } from '@/types/enums';
 import { sizes } from '@/styles/sizes';
 
-const StyledViewMovementContainer = styled.div<{
+const StyledMovementContainer = styled.div<{
   type: MovementType;
 }>`
   /* h1.title {
@@ -26,4 +26,4 @@ const StyledViewMovementContainer = styled.div<{
   } */
 `;
 
-export default StyledViewMovementContainer;
+export default StyledMovementContainer;

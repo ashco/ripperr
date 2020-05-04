@@ -7,12 +7,12 @@ import ColorBarWrapper from '@/components/ColorBarWrapper';
 
 import AddMovementContainer from './AddMovementContainer';
 import DeleteMovementContainer from './DeleteMovementContainer';
-import EditMovementContainer from './EditMovementContainer';
-import ViewMovementContainer from './ViewMovementContainer';
+import MovementContainer from './MovementContainer';
 
 import ModalRoot from './style';
 
 import { ModalMode, MovementType } from '@/types/enums';
+import { Movement } from '@/types/types';
 import singleCapString from '@/utils/singleCapString';
 
 const Modal: React.FC = (props) => {
@@ -21,6 +21,79 @@ const Modal: React.FC = (props) => {
   const modalDispatch = useModalDispatch();
 
   const bgRef = React.useRef<HTMLDivElement>(null);
+
+  let modalContent;
+  let headerText;
+  let barColor;
+
+  // Determine modalContent
+  switch (modalState.mode) {
+    case ModalMode.AddSelect:
+      modalContent = <AddMovementContainer />;
+      break;
+
+    case ModalMode.Delete:
+      modalContent = <DeleteMovementContainer />;
+      break;
+
+    case ModalMode.Add:
+    case ModalMode.Edit:
+    case ModalMode.View:
+      modalContent = <MovementContainer mode={modalState.mode} />;
+      break;
+
+    default:
+      break;
+  }
+
+  // Determine headerText
+  switch (modalState.mode) {
+    case ModalMode.AddSelect:
+      headerText = 'Create Movement';
+      break;
+
+    case ModalMode.Delete:
+    case ModalMode.View:
+      headerText = moveState?.name;
+      break;
+
+    case ModalMode.Add:
+    case ModalMode.Edit:
+      headerText = `${singleCapString(modalState.mode)} ${singleCapString(
+        (moveState as Movement).type,
+      )}`;
+      break;
+
+    default:
+      break;
+  }
+
+  switch (modalState.mode) {
+    case ModalMode.AddSelect:
+      barColor = 'green';
+      break;
+    case ModalMode.Delete:
+      barColor = 'red';
+      break;
+    case ModalMode.Add:
+    case ModalMode.Edit:
+    case ModalMode.View:
+      switch ((moveState as Movement).type) {
+        case MovementType.Archetype:
+          barColor = 'orange';
+          break;
+        case MovementType.Exercise:
+          barColor = 'purple';
+          break;
+        case MovementType.Workout:
+          barColor = 'blue';
+          break;
+        default:
+      }
+      break;
+    default:
+      break;
+  }
 
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
@@ -39,54 +112,6 @@ const Modal: React.FC = (props) => {
     return (): void => document.removeEventListener('click', handleClose);
   });
 
-  // Determine modal view
-  let modalContent;
-  let barColor;
-  let headerText;
-
-  switch (modalState.mode) {
-    case ModalMode.AddSelect:
-      modalContent = <AddMovementContainer />;
-      barColor = 'green';
-      headerText = 'Create Movement';
-      break;
-    case ModalMode.Delete:
-      modalContent = <DeleteMovementContainer />;
-      barColor = 'red';
-      headerText = moveState?.name;
-      break;
-    case ModalMode.Add:
-    case ModalMode.Edit:
-      modalContent = <EditMovementContainer mode={modalState.mode} />;
-
-      if (!moveState) throw Error('No moveState');
-      switch (moveState.type) {
-        case MovementType.Archetype:
-          barColor = 'orange';
-          break;
-        case MovementType.Exercise:
-          barColor = 'purple';
-          break;
-        case MovementType.Workout:
-          barColor = 'blue';
-          break;
-        default:
-          throw Error('moveState.type value not expected: ' + moveState.type);
-      }
-
-      headerText = `${singleCapString(modalState.mode)} ${singleCapString(
-        moveState.type,
-      )}`;
-      break;
-    case ModalMode.View:
-      modalContent = <ViewMovementContainer />;
-      barColor = 'green';
-      headerText = 'TEMPORARY';
-      break;
-    default:
-      break;
-  }
-
   return (
     <ModalRoot>
       {modalState.open && (
@@ -102,21 +127,6 @@ const Modal: React.FC = (props) => {
         </div>
       )}
     </ModalRoot>
-    // <ModalRoot>
-    //   {modalState.open && (
-    //     <div className="background" ref={bgRef}>
-    //       <div className="modal-wrapper">
-    //         {/* <ColorBarWrapper color={barColor}>{modalContent}</ColorBarWrapper> */}
-    //         <ColorBarWrapper color={barColor}>
-    //           <ModalWrapper>
-    //             <h1 className="header">{headerText}</h1>
-    //             {modalContent}
-    //           </ModalWrapper>
-    //         </ColorBarWrapper>
-    //       </div>
-    //     </div>
-    //   )}
-    // </ModalRoot>
   );
 };
 
