@@ -15,7 +15,7 @@ import { ModalMode, MovementType } from '@/types/enums';
 import { Movement } from '@/types/types';
 import singleCapString from '@/utils/singleCapString';
 
-const Modal: React.FC = (props) => {
+const Modal: React.FC = () => {
   const modalState = useModalState();
   const moveState = useMoveState();
   const modalDispatch = useModalDispatch();
@@ -113,7 +113,7 @@ const Modal: React.FC = (props) => {
   });
 
   return (
-    <ModalRoot>
+    <ModalRoot type={moveState?.type}>
       {modalState.open && (
         <div className="background" ref={bgRef}>
           <div className="wrapper">

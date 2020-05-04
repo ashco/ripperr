@@ -1,8 +1,9 @@
 ﻿import styled from 'styled-components';
 
 import { sizes } from '@/styles/sizes';
+import { MovementType } from '@/types/enums';
 
-const ModalRoot = styled.div`
+const ModalRoot = styled.div<{ type?: MovementType }>`
   position: relative;
   z-index: 999;
   .background {
@@ -18,11 +19,19 @@ const ModalRoot = styled.div`
   }
   .wrapper {
     overflow-y: auto;
+    /* padding: 1rem; */
+    width: 100vw;
+    max-width: ${(props) =>
+      props.type === MovementType.Workout ? '48rem' : '32rem'};
+    > div {
+      padding: 1rem;
+    }
+
     .container {
       display: grid;
       gap: 1rem;
       background: ${(props) => props.theme.mode.background[300]};
-      max-width: 90vw;
+
       padding: 1rem;
       color: ${(props) => props.theme.mode.color[100]};
       box-shadow: ${(props) => props.theme.shadow[2]};
@@ -32,8 +41,15 @@ const ModalRoot = styled.div`
       }
     }
   }
+
   @media (min-width: ${sizes.tablet}) {
     .wrapper {
+      /* padding: 2rem; */
+      width: ${(props) =>
+        props.type === MovementType.Workout ? '48rem' : '32rem'};
+      > div {
+        padding: 2rem;
+      }
       .container {
         padding: 2rem;
         h1.header {
@@ -42,12 +58,6 @@ const ModalRoot = styled.div`
       }
     }
   }
-  /* .modal-wrapper {
-    overflow-y: auto;
-    > div {
-      margin: 2rem 1rem;
-    }
-  } */
 `;
 
 export default ModalRoot;
