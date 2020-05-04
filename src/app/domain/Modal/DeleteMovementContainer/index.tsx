@@ -78,9 +78,7 @@ const DeleteMovementContainer: React.FC = () => {
 
   return (
     <StyledDeleteMovementContainer>
-      <div className="text-container">
-        <p>Do you want to delete this {moveText}?</p>
-      </div>
+      <p>Do you want to delete this {moveText}?</p>
       <ButtonRow config={btnConfig} />
     </StyledDeleteMovementContainer>
   );

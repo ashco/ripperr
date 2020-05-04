@@ -4,10 +4,8 @@
 
 const StyledDeleteMovementContainer = styled.div`
   width: 24rem;
-  .text-container {
-    display: grid;
-    gap: 1rem;
-  }
+  display: grid;
+  gap: 1rem;
 `;
 
 export default StyledDeleteMovementContainer;

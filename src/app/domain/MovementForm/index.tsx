@@ -88,7 +88,7 @@ const MovementForm: React.FC<{
           console.log(
             `${singleCapString(moveState?.type)} Updated: ${moveObj.name}`,
           );
-          modalDispatch({ type: 'MODAL_CLOSE' });
+          modalDispatch({ type: 'MODAL_VIEW' });
         })
         .catch((err) => {
           console.error(err);
