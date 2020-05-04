@@ -3,10 +3,10 @@
 import { useModalDispatch } from '@/context/ModalContext';
 import { useMoveDispatch } from '@/context/MoveContext';
 
-import AddSelectModalWrapper from './style';
+import StyledAddMovementContainer from './style';
 import Button from '@/components/Button';
 
-const AddMovementModal: React.FC<{}> = () => {
+const AddMovementContainer: React.FC<{}> = () => {
   const modalDispatch = useModalDispatch();
   const moveDispatch = useMoveDispatch();
 
@@ -27,7 +27,7 @@ const AddMovementModal: React.FC<{}> = () => {
   }
 
   return (
-    <AddSelectModalWrapper>
+    <StyledAddMovementContainer>
       <div className="btn-container">
         <Button onClick={addArchetype}>Add Archetype</Button>
         <Button onClick={addExercise}>Add Exercise</Button>
@@ -36,8 +36,8 @@ const AddMovementModal: React.FC<{}> = () => {
       <Button className="cancel-btn" onClick={closeModal}>
         Cancel
       </Button>
-    </AddSelectModalWrapper>
+    </StyledAddMovementContainer>
   );
 };
 
-export default AddMovementModal;
+export default AddMovementContainer;

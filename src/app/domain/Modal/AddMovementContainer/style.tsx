@@ -1,8 +1,8 @@
 ﻿import styled from 'styled-components';
 
-import ModalWrapper from '../ModalWrapper';
+// import ModalWrapper from '../ModalWrapper';
 
-const AddSelectModalWrapper = styled(ModalWrapper)`
+const StyledAddMovementContainer = styled.div`
   width: 24rem;
   gap: 0.5rem;
   .btn-container {
@@ -14,4 +14,4 @@ const AddSelectModalWrapper = styled(ModalWrapper)`
   }
 `;
 
-export default AddSelectModalWrapper;
+export default StyledAddMovementContainer;

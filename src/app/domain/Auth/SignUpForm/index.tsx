@@ -2,8 +2,8 @@
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 
-import InputField from '@/domain/MovementForm/InputField';
-import { signUpVal } from '@/domain/MovementForm/validationSchema';
+import InputField from '@/domain/EditMovementForm/InputField';
+import { signUpVal } from '@/domain/EditMovementForm/validationSchema';
 import FormError from '@/components/FormError';
 import Button from '@/components/Button';
 

@@ -1,7 +1,6 @@
 ﻿import React, { useContext } from 'react';
-import styled, { ThemeContext } from 'styled-components';
 
-import DeleteMovementModalWrapper from './style';
+import StyledDeleteMovementContainer from './style';
 
 import { useModalDispatch } from '@/context/ModalContext';
 import { useMoveState } from '@/context/MoveContext';
@@ -10,7 +9,7 @@ import ButtonRow from '@/components/ButtonRow';
 
 import { MovementType } from '@/types/enums';
 
-const DeleteMovementModal: React.FC = () => {
+const DeleteMovementContainer: React.FC = () => {
   const modalDispatch = useModalDispatch();
   const moveState = useMoveState();
 
@@ -78,14 +77,13 @@ const DeleteMovementModal: React.FC = () => {
   }
 
   return (
-    <DeleteMovementModalWrapper>
+    <StyledDeleteMovementContainer>
       <div className="text-container">
-        <p className="moveName">{moveState.name}</p>
         <p>Do you want to delete this {moveText}?</p>
       </div>
       <ButtonRow config={btnConfig} />
-    </DeleteMovementModalWrapper>
+    </StyledDeleteMovementContainer>
   );
 };
 
-export default DeleteMovementModal;
+export default DeleteMovementContainer;

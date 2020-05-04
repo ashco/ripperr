@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import InputField from '@/domain/MovementForm/InputField';
-import { signInVal } from '@/domain/MovementForm/validationSchema';
+import InputField from '@/domain/EditMovementForm/InputField';
+import { signInVal } from '@/domain/EditMovementForm/validationSchema';
 import FormError from '@/components/FormError';
 import Button from '@/components/Button';
 

@@ -1,0 +1,13 @@
+﻿import styled from 'styled-components';
+
+// import ModalWrapper from '../ModalWrapper';
+
+const StyledDeleteMovementContainer = styled.div`
+  width: 24rem;
+  .text-container {
+    display: grid;
+    gap: 1rem;
+  }
+`;
+
+export default StyledDeleteMovementContainer;
