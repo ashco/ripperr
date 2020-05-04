@@ -64,7 +64,7 @@ const MovementsSortableComponent: React.FC<{
       useDragHandle
       onSortEnd={onSortEnd}
       lockAxis="y"
-      helperClass="sortableHelper"
+      // helperClass="sortableHelper"
     />
   );
 };

@@ -27,8 +27,6 @@ const ColorBarWrapper: React.FC<{
     barColor = theme.mode.background[400];
   }
 
-  console.log(barColor);
-
   return (
     <StyledColorBarWrapper color={barColor} height={height} width={width}>
       <div className="color-bar" />

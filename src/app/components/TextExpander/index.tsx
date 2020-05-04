@@ -24,11 +24,6 @@ const TextExpander: React.FC<{
   function handleMouseLeave() {
     setDisplayText(stringShortener(text, 10));
   }
-  // React.useEffect(() => {
-  //   ref?.current?.addEventListener('hover', () => {
-  //     console.log('hi mom!');
-  //   });
-  // });
 
   return (
     <p onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

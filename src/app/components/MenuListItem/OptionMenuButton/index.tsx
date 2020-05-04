@@ -89,8 +89,6 @@ const OptionMenuButton: React.FC<{
         menuRef.current.style.left = leftPosition + 'px';
         menuRef.current.style.opacity = '1';
       }
-    } else {
-      console.log('menu closed');
     }
   }, [menuOpen]);
 

@@ -46,9 +46,9 @@ const MovementFormWrapper = styled.form`
   input[type='number'] {
     -moz-appearance: textfield;
   }
-  .sortableHelper {
+  /* .sortableHelper {
     z-index: 10000;
-  }
+  } */
 `;
 
 export default MovementFormWrapper;

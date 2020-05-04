@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { SortableHandle, SortableElement } from 'react-sortable-hoc';
 
 import { useMoveDispatch } from '@/context/MoveContext';
@@ -27,6 +27,7 @@ const MovementListItem = SortableElement(
     modalMode: ModalMode;
   }) => {
     const moveDispatch = useMoveDispatch();
+    const theme = React.useContext(ThemeContext);
 
     function handleDelete(e: any) {
       e.preventDefault();
@@ -39,7 +40,9 @@ const MovementListItem = SortableElement(
 
     const DragHandle = SortableHandle(() => (
       <div className="drag-icon">
-        {modalMode === ModalMode.Edit && <GripIcon />}
+        {modalMode === ModalMode.Edit && (
+          <GripIcon color={theme.mode.color[100]} />
+        )}
       </div>
     ));
 
