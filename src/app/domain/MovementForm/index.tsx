@@ -195,7 +195,7 @@ const MovementForm: React.FC<{
 
   return (
     <MovementFormWrapper onSubmit={handleSubmit} noValidate>
-      {mode === ModalMode.Edit && (
+      {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
         <Label text="Name:" display={isMobile ? 'block' : 'inline'}>
           <input
             type="text"

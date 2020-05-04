@@ -25,6 +25,7 @@ const Modal: React.FC = () => {
   let modalContent;
   let headerText;
   let barColor;
+  let modalWidth;
 
   // Determine modalContent
   switch (modalState.mode) {
@@ -71,9 +72,11 @@ const Modal: React.FC = () => {
   switch (modalState.mode) {
     case ModalMode.AddSelect:
       barColor = 'green';
+      modalWidth = '24rem';
       break;
     case ModalMode.Delete:
       barColor = 'red';
+      modalWidth = '32rem';
       break;
     case ModalMode.Add:
     case ModalMode.Edit:
@@ -81,12 +84,15 @@ const Modal: React.FC = () => {
       switch ((moveState as Movement).type) {
         case MovementType.Archetype:
           barColor = 'orange';
+          modalWidth = '32rem';
           break;
         case MovementType.Exercise:
           barColor = 'purple';
+          modalWidth = '36rem';
           break;
         case MovementType.Workout:
           barColor = 'blue';
+          modalWidth = '48rem';
           break;
         default:
       }
@@ -113,12 +119,12 @@ const Modal: React.FC = () => {
   });
 
   return (
-    <ModalRoot type={moveState?.type}>
+    <ModalRoot type={moveState?.type} modalWidth={modalWidth}>
       {modalState.open && (
         <div className="background" ref={bgRef}>
           <div className="wrapper">
             <ColorBarWrapper color={barColor}>
-              <div className="container">
+              <div className="modal-container">
                 <h1 className="header">{headerText}</h1>
                 {modalContent}
               </div>

@@ -88,7 +88,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
 
   const listItem = (
     <ColorBarWrapper color={color} height="5px">
-      <div className="container" onClick={handleClick}>
+      <div className="menu-list-item-container" onClick={handleClick}>
         <div className="left">
           <p className="name">{stringShortener(movement.name, nameLength)}</p>
         </div>
