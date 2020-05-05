@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
+import { useAddMoveMode } from '@/context/AddMoveModeContext';
 import { useModalDispatch } from '@/context/ModalContext';
 import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
 
@@ -11,6 +12,8 @@ const FilterInput: React.FC<{}> = () => {
   const filterState = useFilterState();
   const filterDispatch = useFilterDispatch();
   const modalDispatch = useModalDispatch();
+
+  const addMoveMode = useAddMoveMode()[0];
 
   const filtering =
     filterState.value.length > 0 || filterState.archs.length > 0;
@@ -37,7 +40,7 @@ const FilterInput: React.FC<{}> = () => {
       {filtering ? (
         <ClearFilterButton />
       ) : (
-        <AddMovementButton openModal={openModal} />
+        !addMoveMode && <AddMovementButton openModal={openModal} />
       )}
     </FilterBarWrapper>
   );

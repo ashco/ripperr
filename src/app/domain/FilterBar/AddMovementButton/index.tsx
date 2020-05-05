@@ -1,5 +1,7 @@
 ﻿import React, { useState, useContext, useRef } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components';
+
+// import { useAddMoveMode } from '@/context/AddMoveModeContext';
 
 import ButtonWrapper from '../ButtonWrapper';
 

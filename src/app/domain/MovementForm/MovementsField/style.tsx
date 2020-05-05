@@ -15,6 +15,7 @@ export const MovementListItemWrapper = styled.li<{ disabled: boolean }>`
     display: grid;
     grid-template-columns: 3rem 1fr 1fr 3rem;
     cursor: default;
+
     .drag-icon {
       display: grid;
       place-content: center;
@@ -75,6 +76,13 @@ export const MovementListItemWrapper = styled.li<{ disabled: boolean }>`
         color: ${(props) => props.theme.color.red[400]};
       }
     }
+  }
+
+  /* Redeclaring here so drag will have usually inherited styles. Drag will create new element at root of body, and some styles do not copy over like they should */
+  color: ${(props) => props.theme.mode.color[100]};
+  input {
+    color: ${(props) => props.theme.mode.color[100]};
+    background: none;
   }
 `;
 

@@ -164,8 +164,6 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
     case 'MOVE_SORT_MOVE': {
       const newMovements: IMovementRefs[] = value;
 
-      console.log(value);
-
       return { ...state, movements: newMovements } as Workout;
     }
     case 'MOVE_CHANGE_REST_AUTO': {
