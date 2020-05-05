@@ -15,9 +15,9 @@
     '@typescript-eslint/interface-name-prefix': 0,
     'prettier/prettier': ['error'],
   },
-  settings: {
-    'import/resolver': {
-      'babel-module': {},
-    },
-  },
+  // settings: {
+  //   'import/resolver': {
+  //     'babel-module': {},
+  //   },
+  // },
 };
