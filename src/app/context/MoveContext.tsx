@@ -6,6 +6,7 @@ import {
   Exercise,
   Workout,
   IWorkoutRest,
+  IMovementRefs,
 } from '../types/types';
 import { MovementType, WorkoutMode } from '../types/enums';
 
@@ -23,6 +24,7 @@ type FormActionType =
   | 'MOVE_CHANGE_MOVE_EX_SETS'
   | 'MOVE_CHANGE_MOVE_EX_DURATION'
   | 'MOVE_DELETE_MOVE'
+  | 'MOVE_SORT_MOVE'
   | 'MOVE_CHANGE_REST_AUTO'
   | 'MOVE_CHANGE_REST_INNER'
   | 'MOVE_CHANGE_REST_OUTER'
@@ -30,7 +32,7 @@ type FormActionType =
 
 type FormAction = {
   type: FormActionType;
-  value?: string | number | boolean | Movement;
+  value?: any;
   index?: number | null;
 };
 type MoveDispatch = (action: FormAction) => void;
@@ -156,6 +158,13 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
 
       const newMovements = [...(state as Workout).movements];
       newMovements.splice(index, 1);
+
+      return { ...state, movements: newMovements } as Workout;
+    }
+    case 'MOVE_SORT_MOVE': {
+      const newMovements: IMovementRefs[] = value;
+
+      console.log(value);
 
       return { ...state, movements: newMovements } as Workout;
     }
