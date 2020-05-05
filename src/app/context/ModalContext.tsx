@@ -5,7 +5,6 @@ import { ModalMode } from '../types/enums';
 type ModalActionType =
   | 'MODAL_CLOSE'
   | 'MODAL_ADD_SELECT'
-  | 'MODAL_ADD'
   | 'MODAL_DELETE'
   | 'MODAL_EDIT'
   | 'MODAL_VIEW';
@@ -34,14 +33,10 @@ function modalReducer(state: ModalState, action: ModalAction) {
       return { open: false, mode: null };
     case 'MODAL_ADD_SELECT':
       return { open: true, mode: ModalMode.AddSelect };
-    case 'MODAL_ADD':
-      return { open: true, mode: ModalMode.Add };
     case 'MODAL_DELETE':
       return { open: true, mode: ModalMode.Delete };
     case 'MODAL_EDIT':
       return { open: true, mode: ModalMode.Edit };
-    // case 'MODAL_EDIT_ADD_MOVEMENT':
-    //   return { open: false, mode: ModalMode.Edit };
     case 'MODAL_VIEW':
       return { open: true, mode: ModalMode.View };
     default: {

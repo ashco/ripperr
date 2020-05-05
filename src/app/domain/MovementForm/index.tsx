@@ -29,7 +29,7 @@ import {
 import { ModalMode, MovementType } from 'types/enums';
 
 const MovementForm: React.FC<{
-  mode: ModalMode.Add | ModalMode.Edit | ModalMode.View;
+  mode: ModalMode.Edit | ModalMode.View;
 }> = ({ mode }) => {
   const firebase = React.useContext(FirebaseContext);
   const authUser = React.useContext(AuthUserContext);
@@ -62,14 +62,18 @@ const MovementForm: React.FC<{
   function handleUpdateMovement(moveState: Movement): void {
     let firebaseFnc;
 
-    if (moveState.type === MovementType.Archetype) {
-      firebaseFnc = firebase.archetype;
-    } else if (moveState.type === MovementType.Exercise) {
-      firebaseFnc = firebase.exercise;
-    } else if (moveState.type === MovementType.Workout) {
-      firebaseFnc = firebase.workout;
-    } else {
-      throw Error('moveState type is not recognized!');
+    switch (moveState.type) {
+      case MovementType.Archetype:
+        firebaseFnc = firebase.archetype;
+        break;
+      case MovementType.Exercise:
+        firebaseFnc = firebase.exercise;
+        break;
+      case MovementType.Workout:
+        firebaseFnc = firebase.workout;
+        break;
+      default:
+        throw Error('moveState type is not recognized');
     }
 
     if (authUser && moveState.id) {
@@ -96,24 +100,24 @@ const MovementForm: React.FC<{
 
   function handleCreateMovement(moveState: Movement): void {
     let firebaseFnc;
-    // let moveList;
-    if (moveState.type === MovementType.Archetype) {
-      firebaseFnc = firebase.archetypes;
-      // moveList = movementList.archetypes;
-    } else if (moveState.type === MovementType.Exercise) {
-      firebaseFnc = firebase.exercises;
-      // moveList = movementList.exercises;
-    } else if (moveState.type === MovementType.Workout) {
-      firebaseFnc = firebase.workouts;
-      // moveList = movementList.workouts;
-    } else {
-      throw Error('No MovementType specified!');
+
+    switch (moveState.type) {
+      case MovementType.Archetype:
+        firebaseFnc = firebase.archetypes;
+        break;
+      case MovementType.Exercise:
+        firebaseFnc = firebase.exercises;
+        break;
+      case MovementType.Workout:
+        firebaseFnc = firebase.workouts;
+        break;
+      default:
+        throw Error('moveState.type is not recognized');
     }
 
     if (authUser) {
       const docRef = firebaseFnc(authUser.uid).doc();
-      // Check that name is unique
-      // const moveNames = moveList.map((move) => move.name);
+      // TODO Check that name is unique
 
       const moveObj: Movement = { ...moveState };
       moveObj.lastModified = firebase.getTimestamp();
@@ -141,14 +145,10 @@ const MovementForm: React.FC<{
       throw Error('No moveState detected!');
     }
 
-    if (mode === ModalMode.Add) {
-      handleCreateMovement(moveState);
-    } else if (mode === ModalMode.Edit) {
-      if (moveState.id) {
-        handleUpdateMovement(moveState);
-      } else {
-        throw Error('No moveState.id detected!');
-      }
+    if (mode === ModalMode.Edit) {
+      moveState.id
+        ? handleUpdateMovement(moveState)
+        : handleCreateMovement(moveState);
     } else if (mode === ModalMode.View) {
       modalDispatch({ type: 'MODAL_EDIT' });
     } else {
@@ -191,7 +191,7 @@ const MovementForm: React.FC<{
 
   return (
     <MovementFormWrapper onSubmit={handleSubmit} noValidate>
-      {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
+      {mode === ModalMode.Edit && (
         <Label text="Name:" display={isMobile ? 'block' : 'inline'}>
           <input
             type="text"
@@ -248,9 +248,7 @@ const MovementForm: React.FC<{
               modalMode={mode}
               disabled={disabled}
             />
-            {(mode === ModalMode.Add || mode === ModalMode.Edit) && (
-              <AddMovementButton />
-            )}
+            {mode === ModalMode.Edit && <AddMovementButton />}
           </Label>
         </>
       )}

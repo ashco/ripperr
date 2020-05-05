@@ -37,7 +37,6 @@ const Modal: React.FC = () => {
       modalContent = <DeleteMovementContainer />;
       break;
 
-    case ModalMode.Add:
     case ModalMode.Edit:
     case ModalMode.View:
       modalContent = <MovementContainer mode={modalState.mode} />;
@@ -58,7 +57,6 @@ const Modal: React.FC = () => {
       headerText = moveState?.name;
       break;
 
-    case ModalMode.Add:
     case ModalMode.Edit:
       headerText = `${singleCapString(modalState.mode)} ${singleCapString(
         (moveState as Movement).type,
@@ -78,7 +76,6 @@ const Modal: React.FC = () => {
       barColor = 'red';
       modalWidth = '32rem';
       break;
-    case ModalMode.Add:
     case ModalMode.Edit:
     case ModalMode.View:
       switch ((moveState as Movement).type) {
@@ -103,10 +100,7 @@ const Modal: React.FC = () => {
 
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
-      if (
-        modalState.mode !== ModalMode.Add &&
-        modalState.mode !== ModalMode.Edit
-      ) {
+      if (modalState.mode !== ModalMode.Edit) {
         modalDispatch({ type: 'MODAL_CLOSE' });
       }
     }

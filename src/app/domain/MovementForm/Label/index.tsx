@@ -12,8 +12,7 @@ const Label: React.FC<{ text: string; display: 'inline' | 'block' }> = ({
   children,
 }) => {
   const modalState = useModalState();
-  const showLabel =
-    modalState.mode === ModalMode.Add || modalState.mode === ModalMode.Edit;
+  const showLabel = modalState.mode === ModalMode.Edit;
 
   return (
     <LabelWrapper className={display} showLabel={showLabel}>

@@ -11,15 +11,15 @@ const AddMovementContainer: React.FC<{}> = () => {
   const moveDispatch = useMoveDispatch();
 
   function addArchetype(): void {
-    modalDispatch({ type: 'MODAL_ADD' });
+    modalDispatch({ type: 'MODAL_EDIT' });
     moveDispatch({ type: 'MOVE_RESET_AR' });
   }
   function addExercise(): void {
-    modalDispatch({ type: 'MODAL_ADD' });
+    modalDispatch({ type: 'MODAL_EDIT' });
     moveDispatch({ type: 'MOVE_RESET_EX' });
   }
   function addWorkout(): void {
-    modalDispatch({ type: 'MODAL_ADD' });
+    modalDispatch({ type: 'MODAL_EDIT' });
     moveDispatch({ type: 'MOVE_RESET_WO' });
   }
   function closeModal(): void {
