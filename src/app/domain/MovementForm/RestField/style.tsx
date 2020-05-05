@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-const RestFieldWrapper = styled.div<{ disabled: boolean }>`
+const RestFieldWrapper = styled.div<{ isDisabled: boolean }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
@@ -8,7 +8,7 @@ const RestFieldWrapper = styled.div<{ disabled: boolean }>`
     label {
       border: 2px solid ${(props) => props.theme.mode.color[100]};
       /* height: 100%; */
-      cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
+      cursor: ${(props) => (props.isDisabled ? 'auto' : 'pointer')};
       input {
         display: none;
       }
@@ -35,7 +35,7 @@ const RestFieldWrapper = styled.div<{ disabled: boolean }>`
       input {
         border-bottom: 2px solid
           ${(props) =>
-            props.disabled
+            props.isDisabled
               ? props.theme.mode.color[200]
               : props.theme.mode.color[100]};
         padding: 0.3rem;

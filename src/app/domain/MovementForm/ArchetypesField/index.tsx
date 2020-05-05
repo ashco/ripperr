@@ -12,9 +12,9 @@ import { Archetype } from 'types/types';
 
 const ArchetypesField: React.FC<{
   tags: string[];
-  disabled: boolean;
+  isDisabled: boolean;
   modalMode: ModalMode;
-}> = ({ tags, disabled, modalMode }) => {
+}> = ({ tags, isDisabled, modalMode }) => {
   const { archetypes } = React.useContext(MovementListContext);
 
   return (
@@ -33,7 +33,7 @@ const ArchetypesField: React.FC<{
             key={arch.id}
             archetype={arch}
             active={tags.includes(arch.id as string)}
-            disabled={disabled}
+            isDisabled={isDisabled}
           />
         ))}
     </ArchetypesFieldWrapper>
@@ -43,8 +43,8 @@ const ArchetypesField: React.FC<{
 const ArchetypeListItem: React.FC<{
   archetype: Archetype;
   active: boolean;
-  disabled: boolean;
-}> = ({ archetype, active, disabled }) => {
+  isDisabled: boolean;
+}> = ({ archetype, active, isDisabled }) => {
   const themeContext = React.useContext(ThemeContext);
   const moveDispatch = useMoveDispatch();
 
@@ -64,7 +64,7 @@ const ArchetypeListItem: React.FC<{
       }
       onClick={toggleArch}
       active={active}
-      disabled={disabled}
+      isDisabled={isDisabled}
     >
       <p className="name">{archetype.name}</p>
     </ArchetypeListItemWrapper>

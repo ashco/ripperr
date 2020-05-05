@@ -5,14 +5,14 @@ import { useMoveDispatch } from '../../../context/MoveContext';
 
 import { WorkoutMode } from '../../../types/enums';
 
-const ModeField: React.FC<{ value: WorkoutMode; disabled: boolean }> = ({
+const ModeField: React.FC<{ value: WorkoutMode; isDisabled: boolean }> = ({
   value,
-  disabled,
+  isDisabled,
 }) => {
   const moveDispatch = useMoveDispatch();
 
   return (
-    <ModeFieldWrapper disabled={disabled}>
+    <ModeFieldWrapper isDisabled={isDisabled}>
       <label>
         <input
           type="radio"
@@ -26,7 +26,7 @@ const ModeField: React.FC<{ value: WorkoutMode; disabled: boolean }> = ({
               value: e.currentTarget.value,
             })
           }
-          disabled={disabled}
+          disabled={isDisabled}
         />
         <span>Reps</span>
       </label>
@@ -43,7 +43,7 @@ const ModeField: React.FC<{ value: WorkoutMode; disabled: boolean }> = ({
               value: e.currentTarget.value,
             })
           }
-          disabled={disabled}
+          disabled={isDisabled}
         />
         <span>Timed</span>
       </label>
@@ -51,7 +51,7 @@ const ModeField: React.FC<{ value: WorkoutMode; disabled: boolean }> = ({
   );
 };
 
-const ModeFieldWrapper = styled.div<{ disabled: boolean }>`
+const ModeFieldWrapper = styled.div<{ isDisabled: boolean }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
@@ -60,10 +60,10 @@ const ModeFieldWrapper = styled.div<{ disabled: boolean }>`
   label {
     border: 2px solid
       ${(props) =>
-        // props.disabled
+        // props.isDisabled
         // ? props.theme.mode.color[200]
         props.theme.mode.color[100]};
-    cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
+    cursor: ${(props) => (props.isDisabled ? 'auto' : 'pointer')};
   }
   label input {
     display: none;

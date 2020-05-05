@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-export const MovementListItemWrapper = styled.li<{ disabled: boolean }>`
+export const MovementListItemWrapper = styled.li<{ isDisabled: boolean }>`
   z-index: 999999;
   list-style: none;
 
@@ -9,7 +9,7 @@ export const MovementListItemWrapper = styled.li<{ disabled: boolean }>`
     background-color: ${(props) => props.theme.mode.background[300]};
     border: 2px solid
       ${(props) =>
-        props.disabled
+        props.isDisabled
           ? props.theme.mode.color[200]
           : props.theme.mode.color[100]};
     display: grid;

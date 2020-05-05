@@ -7,12 +7,12 @@ import { IWorkoutRest } from 'types/types';
 
 const RestField: React.FC<{
   rest: IWorkoutRest;
-  disabled: boolean;
-}> = ({ rest, disabled }) => {
+  isDisabled: boolean;
+}> = ({ rest, isDisabled }) => {
   const moveDispatch = useMoveDispatch();
 
   return (
-    <RestFieldWrapper disabled={disabled}>
+    <RestFieldWrapper isDisabled={isDisabled}>
       <div className="checkbox-container">
         <label>
           <input
@@ -25,7 +25,7 @@ const RestField: React.FC<{
               })
             }
             checked={rest.auto}
-            disabled={disabled}
+            disabled={isDisabled}
           />
           <span>Automatic</span>
         </label>
@@ -43,7 +43,7 @@ const RestField: React.FC<{
               })
             }
             value={rest.inner}
-            disabled={disabled}
+            disabled={isDisabled}
           />
           Inner
         </label>
@@ -59,7 +59,7 @@ const RestField: React.FC<{
               })
             }
             value={rest.outer}
-            disabled={disabled}
+            disabled={isDisabled}
           />
           Outer
         </label>

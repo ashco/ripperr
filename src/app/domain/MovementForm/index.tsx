@@ -39,7 +39,8 @@ const MovementForm: React.FC<{
   const modalDispatch = useModalDispatch();
   const moveState = useMoveState();
 
-  const disabled = mode === ModalMode.View;
+  const isDisabled = mode === ModalMode.View;
+  const isNewEntry = !moveState?.id;
   const isMobile = useCurrentWidth() < 600;
 
   let moveList: Archetype[] | Exercise[] | Workout[];
@@ -54,8 +55,8 @@ const MovementForm: React.FC<{
       moveList = movementList.workouts;
       break;
     default:
+      // break;
       throw Error('No MovementType specified!');
-      break;
   }
 
   // ========= MOVEMENT FUNCTIONS =========
@@ -141,9 +142,7 @@ const MovementForm: React.FC<{
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (!moveState) {
-      throw Error('No moveState detected!');
-    }
+    if (!moveState) throw Error('No moveState detected!');
 
     if (mode === ModalMode.Edit) {
       moveState.id
@@ -157,36 +156,40 @@ const MovementForm: React.FC<{
   }
 
   function handleClose(): void {
-    modalDispatch({ type: 'MODAL_CLOSE' });
-    moveDispatch({ type: 'MOVE_CLEAR' });
-  }
-
-  // BUTTON ROW CONFIG
-  const btnConfig: ButtonRowProps = {
-    cancelBtn: {
-      text: 'Cancel',
-      onClick: handleClose,
-    },
-    actionBtn: {
-      text: 'Create',
-    },
-  };
-
-  if (mode === ModalMode.Edit) {
-    btnConfig.cancelBtn.onClick = (): void => {
-      modalDispatch({ type: 'MODAL_VIEW' });
-
+    if (mode === ModalMode.View || isNewEntry) {
+      modalDispatch({ type: 'MODAL_CLOSE' });
+      moveDispatch({ type: 'MOVE_CLEAR' });
+    } else if (mode === ModalMode.Edit) {
       // Have moveState reset back to original non-edited state
       const initMoveState = moveList.find((move) => move.id === moveState?.id);
-      console.log(initMoveState);
-
+      modalDispatch({ type: 'MODAL_VIEW' });
       moveDispatch({ type: 'MOVE_SET', value: initMoveState });
-    };
-    btnConfig.cancelBtn.text = 'Cancel';
-    btnConfig.actionBtn.text = 'Update';
-  } else if (mode === ModalMode.View) {
-    btnConfig.cancelBtn.text = 'Close';
-    btnConfig.actionBtn.text = 'Edit';
+    } else {
+      throw Error('Unsupported ModalMode provided.');
+    }
+  }
+
+  // BUTTON CONFIGURATION LOGIC
+  const btnConfig: ButtonRowProps = {
+    cancelBtn: {
+      onClick: handleClose,
+      text: '',
+    },
+    actionBtn: {
+      text: '',
+    },
+  };
+  switch (mode) {
+    case ModalMode.View:
+      btnConfig.cancelBtn.text = 'Close';
+      btnConfig.actionBtn.text = 'Edit';
+      break;
+    case ModalMode.Edit:
+      btnConfig.cancelBtn.text = 'Cancel';
+      btnConfig.actionBtn.text = isNewEntry ? 'Update' : 'Create';
+      break;
+    default:
+      break;
   }
 
   return (
@@ -204,14 +207,15 @@ const MovementForm: React.FC<{
                 value: e.target.value,
               })
             }
-            disabled={disabled}
+            disabled={isDisabled}
+            autoFocus
           />
         </Label>
       )}
-      {(!disabled || moveState.description.length > 0) && (
+      {(!isDisabled || moveState.description.length > 0) && (
         <Label
           text="Description:"
-          display={isMobile ? 'block' : disabled ? 'block' : 'inline'}
+          display={isMobile ? 'block' : isDisabled ? 'block' : 'inline'}
         >
           <TextareaAutosize
             id="description"
@@ -224,7 +228,7 @@ const MovementForm: React.FC<{
                 value: e.target.value,
               })
             }
-            disabled={disabled}
+            disabled={isDisabled}
             maxRows={4}
           />
         </Label>
@@ -234,19 +238,22 @@ const MovementForm: React.FC<{
           <Label text="Mode:" display={isMobile ? 'block' : 'inline'}>
             <ModeField
               value={(moveState as Workout).mode}
-              disabled={disabled}
+              isDisabled={isDisabled}
             />
           </Label>
 
           <Label text="Rest:" display={isMobile ? 'block' : 'inline'}>
-            <RestField rest={(moveState as Workout).rest} disabled={disabled} />
+            <RestField
+              rest={(moveState as Workout).rest}
+              isDisabled={isDisabled}
+            />
           </Label>
           <Label text="Movements:" display="block">
             <MovementsField
               movements={(moveState as Workout).movements}
               mode={(moveState as Workout).mode}
               modalMode={mode}
-              disabled={disabled}
+              isDisabled={isDisabled}
             />
             {mode === ModalMode.Edit && <AddMovementButton />}
           </Label>
@@ -254,12 +261,12 @@ const MovementForm: React.FC<{
       )}
       {(moveState?.type === MovementType.Exercise ||
         moveState?.type === MovementType.Workout) &&
-        (!disabled || (moveState as Exercise | Workout).tags.length > 0) && (
+        (!isDisabled || (moveState as Exercise | Workout).tags.length > 0) && (
           <Label text="Tags:" display="block">
             <ArchetypesField
               tags={(moveState as Exercise | Workout).tags}
               modalMode={mode}
-              disabled={disabled}
+              isDisabled={isDisabled}
             />
           </Label>
         )}
