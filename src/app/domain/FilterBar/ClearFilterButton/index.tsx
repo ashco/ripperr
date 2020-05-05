@@ -1,14 +1,11 @@
 ﻿import React, { useState, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import {
-  useFilterState,
-  useFilterDispatch,
-} from '../../../context/FilterContext';
+import { useFilterState, useFilterDispatch } from 'context/FilterContext';
 
-import Button from '../../../components/Button';
+import Button from 'components/Button';
 
-import Times from '../../../icons/Times';
+import Times from 'icons/Times';
 
 const ClearFilterButton: React.FC = () => {
   const filterDispatch = useFilterDispatch();

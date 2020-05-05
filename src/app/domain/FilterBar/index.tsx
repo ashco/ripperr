@@ -1,13 +1,13 @@
 ﻿import React from 'react';
 
-import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
+import { useFilterState, useFilterDispatch } from 'context/FilterContext';
 
 import ArchetypeList from './ArchetypeList';
 import FilterInput from './FilterInput';
 
 import FilterBarContainer from './style';
 
-import { Archetype } from '@/types/types';
+import { Archetype } from 'types/types';
 
 const FilterBar: React.FC<{
   archetypeList: Archetype[] | null;

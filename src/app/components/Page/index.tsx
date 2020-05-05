@@ -1,22 +1,22 @@
 ﻿import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import GlobalStyle from '@/styles/GlobalStyle';
+import GlobalStyle from 'styles/GlobalStyle';
 
 import StyledPage from './style';
 
-import { ModalProvider } from '@/context/ModalContext';
-import { MoveProvider } from '@/context/MoveContext';
-import { FilterProvider } from '@/context/FilterContext';
-import { AddMoveModeProvider } from '@/context/AddMoveModeContext';
-import { usePointerEvents } from '@/context/PointerEventsContext';
+import { ModalProvider } from 'context/ModalContext';
+import { MoveProvider } from 'context/MoveContext';
+import { FilterProvider } from 'context/FilterContext';
+import { AddMoveModeProvider } from 'context/AddMoveModeContext';
+import { usePointerEvents } from 'context/PointerEventsContext';
 import {
   useThemeModeState,
   useThemeModeDispatch,
-} from '@/context/ThemeModeContext';
+} from 'context/ThemeModeContext';
 
 import Meta from '../Meta';
-import NavBar from '@/domain/Navigation';
+import NavBar from 'domain/Navigation';
 
 const Page: React.FC = (props) => {
   const themeModeState = useThemeModeState();

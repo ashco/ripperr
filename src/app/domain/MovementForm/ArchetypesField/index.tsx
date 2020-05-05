@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 import { ThemeContext } from 'styled-components';
 
-import { MovementListContext } from '@/context';
-import { useMoveDispatch } from '@/context/MoveContext';
+import { MovementListContext } from 'context';
+import { useMoveDispatch } from 'context/MoveContext';
 
-// import { ArchFormListItem } from '@/components/ListItems';
+// import { ArchFormListItem } from 'components/ListItems';
 import { ArchetypesFieldWrapper, ArchetypeListItemWrapper } from './style';
 
-import { ModalMode } from '@/types/enums';
-import { Archetype } from '@/types/types';
+import { ModalMode } from 'types/enums';
+import { Archetype } from 'types/types';
 
 const ArchetypesField: React.FC<{
   tags: string[];

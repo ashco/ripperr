@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 import { ThemeContext } from 'styled-components';
 
-import { useModalDispatch } from '@/context/ModalContext';
-import { useAddMoveMode } from '@/context/AddMoveModeContext';
+import { useModalDispatch } from 'context/ModalContext';
+import { useAddMoveMode } from 'context/AddMoveModeContext';
 
-import ButtonWrapper from '@/domain/FilterBar/ButtonWrapper';
+import ButtonWrapper from 'domain/FilterBar/ButtonWrapper';
 
-import Times from '@/icons/Times';
+import Times from 'icons/Times';
 
 const AddBar: React.FC = () => {
   const modalDispatch = useModalDispatch();

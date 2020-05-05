@@ -2,19 +2,19 @@
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
-import { AuthUserContext } from '@/context';
-import { useAddMoveMode } from '@/context/AddMoveModeContext';
-import { useModalDispatch } from '@/context/ModalContext';
+import { AuthUserContext } from 'context';
+import { useAddMoveMode } from 'context/AddMoveModeContext';
+import { useModalDispatch } from 'context/ModalContext';
 
-import ButtonWrapper from '@/domain/FilterBar/ButtonWrapper';
+import ButtonWrapper from 'domain/FilterBar/ButtonWrapper';
 
 import SignOutButton from './SignOutButton';
 // import AddBar from './AddBar';
 
 import NavBarWrapper from './style';
 
-import Logo from '@/icons/Logo';
-import Times from '@/icons/Times';
+import Logo from 'icons/Logo';
+import Times from 'icons/Times';
 
 const NavBar: React.FC = () => {
   const authUser = useContext(AuthUserContext);

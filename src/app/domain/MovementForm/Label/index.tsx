@@ -1,10 +1,10 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { useModalState } from '@/context/ModalContext';
+import { useModalState } from 'context/ModalContext';
 
-import { sizes } from '@/styles/sizes';
-import { ModalMode } from '@/types/enums';
+import { sizes } from 'styles/sizes';
+import { ModalMode } from 'types/enums';
 
 const Label: React.FC<{ text: string; display: 'inline' | 'block' }> = ({
   text,

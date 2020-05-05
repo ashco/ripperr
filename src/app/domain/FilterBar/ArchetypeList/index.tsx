@@ -2,9 +2,9 @@
 
 import ArchetypeListWrapper from './style';
 
-import MenuListItem from '@/components/MenuListItem';
+import MenuListItem from 'components/MenuListItem';
 
-import { Archetype } from '@/types/types';
+import { Archetype } from 'types/types';
 
 const ArchetypeList: React.FC<{
   archetypeList: Archetype[] | null;

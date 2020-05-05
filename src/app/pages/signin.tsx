@@ -2,10 +2,10 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import AuthFormContainer from '@/domain/Auth/AuthFormContainer';
-import SignInForm from '@/domain/Auth/SignInForm';
-import { PasswordForgotLink } from '@/domain/Auth/PasswordForgotForm';
-import SignUpLink from '@/components/SignUpLink';
+import AuthFormContainer from 'domain/Auth/AuthFormContainer';
+import SignInForm from 'domain/Auth/SignInForm';
+import { PasswordForgotLink } from 'domain/Auth/PasswordForgotForm';
+import SignUpLink from 'components/SignUpLink';
 
 const SignInPage: NextPage<{ userAgent: string }> = () => (
   <SignInPageWrapper>

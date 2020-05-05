@@ -1,10 +1,10 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import Button from '@/components/Button';
+import Button from 'components/Button';
 
-import { useModalDispatch } from '@/context/ModalContext';
-import { useAddMoveMode } from '@/context/AddMoveModeContext';
+import { useModalDispatch } from 'context/ModalContext';
+import { useAddMoveMode } from 'context/AddMoveModeContext';
 
 const AddMovementButton: React.FC = () => {
   const modalDispatch = useModalDispatch();

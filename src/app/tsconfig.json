@@ -20,13 +20,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      // "@/*": ["./src/app/*"],
-      // "@context/*": ["./src/app/context/*"],
-      // "@icons/*": ["./src/app/icons/*"],
-      // "@styles/*": ["./src/app/styles/*"],
-      // "*": ["src/*"],
-      // "test/*": ["test/*"],
-      // "underscore": ["lodash"]
     }
   },
   "exclude": [

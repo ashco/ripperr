@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { useAddMoveMode } from '@/context/AddMoveModeContext';
-import { useModalDispatch } from '@/context/ModalContext';
-import { useFilterState, useFilterDispatch } from '@/context/FilterContext';
+import { useAddMoveMode } from 'context/AddMoveModeContext';
+import { useModalDispatch } from 'context/ModalContext';
+import { useFilterState, useFilterDispatch } from 'context/FilterContext';
 
 import AddMovementButton from '../AddMovementButton';
 import ClearFilterButton from '../ClearFilterButton';

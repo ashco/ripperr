@@ -2,11 +2,11 @@
 import App from 'next/app';
 
 import Page from '../components/Page';
-import { withAuthentication } from '../context';
-import { ThemeModeProvider } from '../context/ThemeModeContext';
-import { PointerEventsProvider } from '../context/PointerEventsContext';
+import { withAuthentication } from 'context';
+import { ThemeModeProvider } from 'context/ThemeModeContext';
+import { PointerEventsProvider } from 'context/PointerEventsContext';
 
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 
 class MyApp extends App {
   render() {

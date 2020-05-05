@@ -3,13 +3,13 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
-import InputField from './node_modules/@/components/MovementForm/InputField';
-import { signInVal } from './node_modules/@/components/MovementForm/validationSchema';
-import FormError from './node_modules/@/components/FormError';
-import Button from './node_modules/@/components/Button';
+import InputField from './node_modules/components/MovementForm/InputField';
+import { signInVal } from './node_modules/components/MovementForm/validationSchema';
+import FormError from './node_modules/components/FormError';
+import Button from './node_modules/components/Button';
 
-import { FirebaseContext } from './node_modules/@/context';
-import { IAuthError } from './node_modules/@/types/types';
+import { FirebaseContext } from './node_modules/context';
+import { IAuthError } from './node_modules/types/types';
 
 export interface ISignInFormValues {
   email: string;

@@ -2,11 +2,11 @@
 import Link from 'next/link';
 import { Formik, Form } from 'formik';
 
-import Button from '@/components/Button';
-import InputField from '@/domain/MovementForm/InputField';
-import { passwordForgotVal } from '@/domain/MovementForm/validationSchema';
-import { FirebaseContext } from '@/context';
-import { IAuthError } from '@/types/types';
+import Button from 'components/Button';
+import InputField from 'domain/MovementForm/InputField';
+import { passwordForgotVal } from 'domain/MovementForm/validationSchema';
+import { FirebaseContext } from 'context';
+import { IAuthError } from 'types/types';
 
 interface IPasswordForgotForm {
   email: string;

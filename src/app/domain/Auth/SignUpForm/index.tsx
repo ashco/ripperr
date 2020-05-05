@@ -2,13 +2,13 @@
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 
-import InputField from '@/domain/MovementForm/InputField';
-import { signUpVal } from '@/domain/MovementForm/validationSchema';
-import FormError from '@/components/FormError';
-import Button from '@/components/Button';
+import InputField from 'domain/MovementForm/InputField';
+import { signUpVal } from 'domain/MovementForm/validationSchema';
+import FormError from 'components/FormError';
+import Button from 'components/Button';
 
-import { FirebaseContext } from '@/context';
-import { IAuthError } from '@/types/types';
+import { FirebaseContext } from 'context';
+import { IAuthError } from 'types/types';
 
 interface ISignUpFormValues {
   username: string;

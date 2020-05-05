@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import RestFieldWrapper from './style';
 
-import { useMoveDispatch } from '@/context/MoveContext';
+import { useMoveDispatch } from 'context/MoveContext';
 
-import { IWorkoutRest } from '@/types/types';
+import { IWorkoutRest } from 'types/types';
 
 const RestField: React.FC<{
   rest: IWorkoutRest;

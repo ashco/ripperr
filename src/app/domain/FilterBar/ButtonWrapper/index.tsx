@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-import Button from '@/components/Button';
+import Button from 'components/Button';
 
 const ButtonWrapper = styled(Button)`
   display: grid;

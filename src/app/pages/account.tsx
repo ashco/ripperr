@@ -2,15 +2,15 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { AuthUserContext, withAuthorization } from '@/context';
+import { AuthUserContext, withAuthorization } from 'context';
 
-import AuthFormContainer from '@/domain/Auth/AuthFormContainer';
-import PasswordForgotForm from '@/domain/Auth/PasswordForgotForm';
+import AuthFormContainer from 'domain/Auth/AuthFormContainer';
+import PasswordForgotForm from 'domain/Auth/PasswordForgotForm';
 
-import DarkModeButton from '@/components/DarkModeButton';
-import PasswordChangeForm from '@/components/PasswordChangeForm';
+import DarkModeButton from 'components/DarkModeButton';
+import PasswordChangeForm from 'components/PasswordChangeForm';
 
-import { IAuthUserContext } from '@/types/types';
+import { IAuthUserContext } from 'types/types';
 
 const AccountPage: NextPage = () => {
   const authUser = useContext(AuthUserContext);

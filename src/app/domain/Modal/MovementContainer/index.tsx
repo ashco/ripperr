@@ -1,13 +1,13 @@
 ﻿import React from 'react';
 
-import MovementForm from '@/domain/MovementForm';
+import MovementForm from 'domain/MovementForm';
 
 import StyledMovementContainer from './style';
 
-import { useMoveState } from '@/context/MoveContext';
+import { useMoveState } from 'context/MoveContext';
 
-import { Movement } from '@/types/types';
-import { ModalMode, MovementType } from '@/types/enums';
+import { Movement } from 'types/types';
+import { ModalMode, MovementType } from 'types/enums';
 
 const MovementContainer: React.FC<{
   mode: ModalMode.Add | ModalMode.Edit | ModalMode.View;

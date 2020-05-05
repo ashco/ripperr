@@ -6,15 +6,15 @@ import {
   SortableElement,
 } from 'react-sortable-hoc';
 
-import ColorBarWrapper from '@/components/ColorBarWrapper';
-import { useMoveDispatch } from '@/context/MoveContext';
-import GripIcon from '@/icons/GripLines';
+import ColorBarWrapper from 'components/ColorBarWrapper';
+import { useMoveDispatch } from 'context/MoveContext';
+import GripIcon from 'icons/GripLines';
 
 import { MovementListItemWrapper, MovementListWrapper } from './style';
 
-import arrayMove from '@/utils/arrayMove';
-import { IMovementRefs } from '@/types/types';
-import { WorkoutMode, ModalMode } from '@/types/enums';
+import arrayMove from 'utils/arrayMove';
+import { IMovementRefs } from 'types/types';
+import { WorkoutMode, ModalMode } from 'types/enums';
 
 const MovementItem = SortableElement(
   ({

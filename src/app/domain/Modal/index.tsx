@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 
-import { useModalState, useModalDispatch } from '@/context/ModalContext';
-import { useMoveState } from '@/context/MoveContext';
+import { useModalState, useModalDispatch } from 'context/ModalContext';
+import { useMoveState } from 'context/MoveContext';
 
-import ColorBarWrapper from '@/components/ColorBarWrapper';
+import ColorBarWrapper from 'components/ColorBarWrapper';
 
 import AddMovementContainer from './AddMovementContainer';
 import DeleteMovementContainer from './DeleteMovementContainer';
@@ -11,9 +11,9 @@ import MovementContainer from './MovementContainer';
 
 import ModalRoot from './style';
 
-import { ModalMode, MovementType } from '@/types/enums';
-import { Movement } from '@/types/types';
-import singleCapString from '@/utils/singleCapString';
+import { ModalMode, MovementType } from 'types/enums';
+import { Movement } from 'types/types';
+import singleCapString from 'utils/singleCapString';
 
 const Modal: React.FC = () => {
   const modalState = useModalState();

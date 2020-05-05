@@ -2,12 +2,12 @@
 
 import StyledDeleteMovementContainer from './style';
 
-import { useModalDispatch } from '@/context/ModalContext';
-import { useMoveState } from '@/context/MoveContext';
-import { AuthUserContext, FirebaseContext } from '@/context';
-import ButtonRow from '@/components/ButtonRow';
+import { useModalDispatch } from 'context/ModalContext';
+import { useMoveState } from 'context/MoveContext';
+import { AuthUserContext, FirebaseContext } from 'context';
+import ButtonRow from 'components/ButtonRow';
 
-import { MovementType } from '@/types/enums';
+import { MovementType } from 'types/enums';
 
 const DeleteMovementContainer: React.FC = () => {
   const modalDispatch = useModalDispatch();

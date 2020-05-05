@@ -1,5 +1,5 @@
 ﻿import styled from 'styled-components';
-import { sizes } from '@/styles/sizes';
+import { sizes } from 'styles/sizes';
 
 const NavigationWrapper = styled.nav`
   background-color: ${({ theme }) => theme.mode.background[300]};

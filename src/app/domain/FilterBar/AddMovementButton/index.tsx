@@ -1,11 +1,11 @@
 ﻿import React, { useState, useContext, useRef } from 'react';
 import { ThemeContext } from 'styled-components';
 
-// import { useAddMoveMode } from '@/context/AddMoveModeContext';
+// import { useAddMoveMode } from 'context/AddMoveModeContext';
 
 import ButtonWrapper from '../ButtonWrapper';
 
-import Plus from '@/icons/Plus';
+import Plus from 'icons/Plus';
 
 const AddMovementButton: React.FC<{ openModal: () => void }> = ({
   openModal,

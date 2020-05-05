@@ -1,7 +1,7 @@
 ﻿import styled from 'styled-components';
 
-import { sizes } from '@/styles/sizes';
-import { MovementType } from '@/types/enums';
+import { sizes } from 'styles/sizes';
+import { MovementType } from 'types/enums';
 
 const ModalRoot = styled.div<{ type?: MovementType; modalWidth?: string }>`
   position: relative;

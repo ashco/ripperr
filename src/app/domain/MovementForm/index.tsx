@@ -2,13 +2,9 @@
 
 import TextareaAutosize from 'react-textarea-autosize';
 
-import {
-  AuthUserContext,
-  FirebaseContext,
-  MovementListContext,
-} from '@/context';
-import { useMoveState, useMoveDispatch } from '@/context/MoveContext';
-import { useModalDispatch } from '@/context/ModalContext';
+import { AuthUserContext, FirebaseContext, MovementListContext } from 'context';
+import { useMoveState, useMoveDispatch } from 'context/MoveContext';
+import { useModalDispatch } from 'context/ModalContext';
 
 import MovementFormWrapper from './style';
 
@@ -18,10 +14,10 @@ import Label from './Label';
 import ModeField from './ModeField';
 import MovementsField from './MovementsField';
 import RestField from './RestField';
-import ButtonRow from '@/components/ButtonRow';
+import ButtonRow from 'components/ButtonRow';
 
-import useCurrentWidth from '@/hooks/useCurrentWidth';
-import singleCapString from '@/utils/singleCapString';
+import useCurrentWidth from 'hooks/useCurrentWidth';
+import singleCapString from 'utils/singleCapString';
 
 import {
   Movement,
@@ -29,8 +25,8 @@ import {
   Exercise,
   Workout,
   ButtonRowProps,
-} from '@/types/types';
-import { ModalMode, MovementType } from '@/types/enums';
+} from 'types/types';
+import { ModalMode, MovementType } from 'types/enums';
 
 const MovementForm: React.FC<{
   mode: ModalMode.Add | ModalMode.Edit | ModalMode.View;
