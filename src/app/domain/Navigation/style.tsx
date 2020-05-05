@@ -32,6 +32,7 @@ const NavigationWrapper = styled.nav`
       background: none;
       border: none;
       cursor: pointer;
+      box-shadow: none;
     }
     .logo {
       font-size: 22px;
