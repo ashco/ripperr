@@ -23,7 +23,7 @@ const FilterInput: React.FC<{}> = () => {
   }
 
   return (
-    <FilterBarWrapper>
+    <FilterInputWrapper>
       <input
         className="filter-bar"
         type="text"
@@ -42,11 +42,11 @@ const FilterInput: React.FC<{}> = () => {
       ) : (
         !addMoveMode && <AddMovementButton openModal={openModal} />
       )}
-    </FilterBarWrapper>
+    </FilterInputWrapper>
   );
 };
 
-const FilterBarWrapper = styled.div`
+const FilterInputWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 3rem;
   gap: 1rem;

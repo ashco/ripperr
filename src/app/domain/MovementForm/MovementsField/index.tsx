@@ -8,7 +8,7 @@ import {
 
 import ColorBarWrapper from 'components/ColorBarWrapper';
 import { useMoveDispatch } from 'context/MoveContext';
-import GripIcon from 'icons/GripLines';
+import Icon from 'icons';
 
 import { MovementListItemWrapper, MovementListWrapper } from './style';
 
@@ -33,12 +33,10 @@ const MovementItem = SortableElement(
     modalMode: ModalMode;
   }) => {
     const moveDispatch = useMoveDispatch();
-    const theme = React.useContext(ThemeContext);
 
     function handleDelete(e: any) {
       e.preventDefault();
 
-      console.log(otherIndex);
       moveDispatch({
         type: 'MOVE_DELETE_MOVE',
         index: otherIndex,
@@ -47,9 +45,7 @@ const MovementItem = SortableElement(
 
     const DragHandle = SortableHandle(() => (
       <div className="drag-icon">
-        {modalMode === ModalMode.Edit && (
-          <GripIcon color={theme.mode.color[100]} />
-        )}
+        {modalMode === ModalMode.Edit && <Icon name="grip-lines" />}
       </div>
     ));
 

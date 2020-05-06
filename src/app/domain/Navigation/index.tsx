@@ -6,15 +6,13 @@ import { AuthUserContext } from 'context';
 import { useAddMoveMode } from 'context/AddMoveModeContext';
 import { useModalDispatch } from 'context/ModalContext';
 
-import ButtonWrapper from 'domain/FilterBar/ButtonWrapper';
+import Button from 'components/Button';
 
 import SignOutButton from './SignOutButton';
-// import AddBar from './AddBar';
 
 import NavBarWrapper from './style';
 
-import Logo from 'icons/Logo';
-import Times from 'icons/Times';
+import Icon from 'icons';
 
 const NavBar: React.FC = () => {
   const authUser = useContext(AuthUserContext);
@@ -35,14 +33,6 @@ const NavLogo: React.FC<{ color: string }> = ({ color }) => {
   const [addMoveMode, setAddMoveMode] = useAddMoveMode();
   const modalDispatch = useModalDispatch();
 
-  const themeContext = React.useContext(ThemeContext);
-  const [btnHovered, setBtnHovered] = React.useState(false);
-  const btnRef = React.useRef<HTMLButtonElement>(null);
-
-  function toggleHover() {
-    setBtnHovered((hovered) => !hovered);
-  }
-
   function handleCancel(e: any) {
     // Find way to determine if edit or add.
 
@@ -51,26 +41,14 @@ const NavLogo: React.FC<{ color: string }> = ({ color }) => {
   }
 
   return addMoveMode ? (
-    <ButtonWrapper
-      onMouseEnter={toggleHover}
-      onMouseLeave={toggleHover}
-      ref={btnRef}
-      className="logo"
-      onClick={handleCancel}
-    >
-      <Times
-        color={
-          btnHovered
-            ? themeContext.mode.color[200]
-            : themeContext.mode.color[100]
-        }
-      />
+    <Button className="logo" onClick={handleCancel}>
+      <Icon name="times" />
       Cancel
-    </ButtonWrapper>
+    </Button>
   ) : (
     <Link href="/moves">
       <a className="logo">
-        <Logo color={color} />
+        <Icon name="logo" />
         Ripperr
       </a>
     </Link>

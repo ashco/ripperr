@@ -7,9 +7,10 @@ import { useMoveDispatch } from 'context/MoveContext';
 import { useModalDispatch } from 'context/ModalContext';
 import { usePointerEvents } from 'context/PointerEventsContext';
 
-import TimesSolid from 'icons/times-solid.svg';
+// import TimesSolid from 'icons/times-solid.svg';
 
-import Bars from 'icons/Bars';
+// import Bars from 'icons/Bars';
+import Icon from 'icons';
 import { MovementType } from 'types/enums';
 import { Movement } from 'types/types';
 
@@ -17,11 +18,8 @@ const OptionMenuButton: React.FC<{
   movement: Movement;
 }> = ({ movement }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [btnHovered, setBtnHovered] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
-
-  const themeContext = useContext(ThemeContext);
 
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
@@ -51,10 +49,6 @@ const OptionMenuButton: React.FC<{
     setMenuOpen(false);
     setPointerEvents(true);
     document.removeEventListener('click', closeMenu);
-  }
-
-  function toggleHover() {
-    setBtnHovered((hovered) => !hovered);
   }
 
   useEffect(() => {
@@ -95,22 +89,10 @@ const OptionMenuButton: React.FC<{
     }
   }, [menuOpen]);
 
-  console.log(TimesSolid);
-
   return (
     <>
-      <StyledOptionButton
-        onClick={openMenu}
-        onMouseEnter={toggleHover}
-        onMouseLeave={toggleHover}
-      >
-        <Bars
-          color={
-            btnHovered
-              ? themeContext.mode.color[100]
-              : themeContext.mode.color[200]
-          }
-        />
+      <StyledOptionButton onClick={openMenu}>
+        <Icon name="bars" />
       </StyledOptionButton>
       <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
         {movement.type === MovementType.Workout && (
@@ -130,9 +112,14 @@ const StyledOptionButton = styled.button`
   height: 1.75rem;
   width: 1.75rem;
   cursor: pointer;
-  svg {
-    height: 100%;
-    width: 100%;
+
+  svg path {
+    fill: ${(props) => props.theme.mode.color[200]};
+  }
+  &:hover {
+    svg path {
+      fill: ${(props) => props.theme.mode.color[100]};
+    }
   }
 `;
 
