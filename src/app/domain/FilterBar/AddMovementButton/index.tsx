@@ -7,6 +7,8 @@ import ButtonWrapper from '../ButtonWrapper';
 
 import Plus from 'icons/Plus';
 
+import Icon from 'icons';
+
 const AddMovementButton: React.FC<{ openModal: () => void }> = ({
   openModal,
 }) => {
@@ -25,13 +27,14 @@ const AddMovementButton: React.FC<{ openModal: () => void }> = ({
       onMouseLeave={toggleHover}
       ref={btnRef}
     >
-      <Plus
+      {/* <Plus
         color={
           btnHovered
             ? themeContext.mode.background[200]
             : themeContext.mode.color[200]
         }
-      />
+      /> */}
+      <Icon name="plus" className="hoverable" />
     </ButtonWrapper>
   );
 };

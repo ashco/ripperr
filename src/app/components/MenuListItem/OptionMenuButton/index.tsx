@@ -1,15 +1,17 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 
-import Button from '../../Button';
+import Button from 'components/Button';
 
-import { useMoveDispatch } from '../../../context/MoveContext';
-import { useModalDispatch } from '../../../context/ModalContext';
-import { usePointerEvents } from '../../../context/PointerEventsContext';
+import { useMoveDispatch } from 'context/MoveContext';
+import { useModalDispatch } from 'context/ModalContext';
+import { usePointerEvents } from 'context/PointerEventsContext';
 
-import Bars from '../../../icons/Bars';
-import { MovementType } from '../../../types/enums';
-import { Movement } from '../../../types/types';
+import TimesSolid from 'icons/times-solid.svg';
+
+import Bars from 'icons/Bars';
+import { MovementType } from 'types/enums';
+import { Movement } from 'types/types';
 
 const OptionMenuButton: React.FC<{
   movement: Movement;
@@ -89,8 +91,11 @@ const OptionMenuButton: React.FC<{
         menuRef.current.style.left = leftPosition + 'px';
         menuRef.current.style.opacity = '1';
       }
+      return () => document.removeEventListener('click', closeMenu);
     }
   }, [menuOpen]);
+
+  console.log(TimesSolid);
 
   return (
     <>

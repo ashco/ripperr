@@ -41,7 +41,9 @@ const MovementForm: React.FC<{
 
   const isDisabled = mode === ModalMode.View;
   const isNewEntry = !moveState?.id;
-  const isMobile = useCurrentWidth() < 600;
+  // TODO - update useCurrentWidth to listen on window resize, no setTimeout usage
+  // const isMobile = useCurrentWidth() < 600;
+  const isMobile = false;
 
   let moveList: Archetype[] | Exercise[] | Workout[];
   switch (moveState?.type) {
@@ -186,7 +188,7 @@ const MovementForm: React.FC<{
       break;
     case ModalMode.Edit:
       btnConfig.cancelBtn.text = 'Cancel';
-      btnConfig.actionBtn.text = isNewEntry ? 'Update' : 'Create';
+      btnConfig.actionBtn.text = isNewEntry ? 'Create' : 'Update';
       break;
     default:
       break;

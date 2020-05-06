@@ -156,6 +156,7 @@ table {
   border-spacing: 0;
 }
 
+
 `;
 
 export default GlobalStyle;

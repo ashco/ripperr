@@ -1,9 +1,4 @@
-﻿import {
-  WorkoutMode,
-  MovementType,
-  FormActionType,
-  ModalActionType,
-} from './enums';
+﻿import { WorkoutMode, MovementType, FormActionType } from './enums';
 
 // =============== ERRORS ===============
 export interface IFormError {
@@ -220,4 +215,16 @@ export interface IWorkoutConfig {
 export interface IFormReducerAction {
   type: FormActionType;
   value: string;
+}
+
+export interface ISVG {
+  style?: any;
+  fill?: string;
+  width?: string;
+  className?: string;
+  viewBox?: string;
+}
+
+export interface IIcon extends ISVG {
+  name: string;
 }
