@@ -57,15 +57,16 @@ const INITIAL_MOVE_STATE_WO: Workout = {
   name: '',
   description: '',
   tags: [],
-  mode: WorkoutMode.Reps,
+  mode: undefined,
+  // mode: WorkoutMode.Reps,
   movements: [
-    {
-      id: '',
-      name: '',
-      reps: 0,
-      sets: 0,
-      duration: 0,
-    },
+    // {
+    //   id: '',
+    //   name: '',
+    //   reps: 0,
+    //   sets: 0,
+    //   duration: 0,
+    // },
   ],
   rest: {
     auto: true,

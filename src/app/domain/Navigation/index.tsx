@@ -35,7 +35,6 @@ const NavLogo: React.FC<{ color: string }> = ({ color }) => {
 
   function handleCancel(e: any) {
     // Find way to determine if edit or add.
-
     modalDispatch({ type: 'MODAL_EDIT' });
     setAddMoveMode(false);
   }

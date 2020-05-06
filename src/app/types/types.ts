@@ -71,7 +71,7 @@ export interface Exercise extends Archetype {
 }
 
 export interface Workout extends Exercise {
-  mode: WorkoutMode;
+  mode?: WorkoutMode;
   movements: IMovementRefs[];
   rest: IWorkoutRest;
   config: IWorkoutConfig;

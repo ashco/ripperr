@@ -23,6 +23,9 @@ const AuthFormContainerWrapper = styled.div`
       color: ${(props) => props.theme.mode.color[100]};
       font-weight: 600;
     }
+    a:hover {
+      text-decoration-line: underline;
+    }
   }
 `;
 

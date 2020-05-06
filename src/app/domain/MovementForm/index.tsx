@@ -57,7 +57,6 @@ const MovementForm: React.FC<{
       moveList = movementList.workouts;
       break;
     default:
-      // break;
       throw Error('No MovementType specified!');
   }
 
@@ -124,7 +123,7 @@ const MovementForm: React.FC<{
 
       const moveObj: Movement = { ...moveState };
       moveObj.lastModified = firebase.getTimestamp();
-      // const move
+
       docRef
         .set(moveObj)
         .then(() => {
@@ -244,21 +243,28 @@ const MovementForm: React.FC<{
             />
           </Label>
 
-          <Label text="Rest:" display={isMobile ? 'block' : 'inline'}>
-            <RestField
-              rest={(moveState as Workout).rest}
-              isDisabled={isDisabled}
-            />
-          </Label>
-          <Label text="Movements:" display="block">
-            <MovementsField
-              movements={(moveState as Workout).movements}
-              mode={(moveState as Workout).mode}
-              modalMode={mode}
-              isDisabled={isDisabled}
-            />
-            {mode === ModalMode.Edit && <AddMovementButton />}
-          </Label>
+          {(moveState as Workout).mode && (
+            <>
+              <Label text="Rest:" display={isMobile ? 'block' : 'inline'}>
+                <RestField
+                  rest={(moveState as Workout).rest}
+                  isDisabled={isDisabled}
+                />
+              </Label>
+
+              <Label text="Movements:" display="block">
+                {(moveState as Workout).movements.length > 0 && (
+                  <MovementsField
+                    movements={(moveState as Workout).movements}
+                    mode={(moveState as Workout).mode}
+                    modalMode={mode}
+                    isDisabled={isDisabled}
+                  />
+                )}
+                {mode === ModalMode.Edit && <AddMovementButton />}
+              </Label>
+            </>
+          )}
         </>
       )}
       {(moveState?.type === MovementType.Exercise ||

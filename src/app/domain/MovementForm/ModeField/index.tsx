@@ -5,7 +5,7 @@ import { useMoveDispatch } from '../../../context/MoveContext';
 
 import { WorkoutMode } from '../../../types/enums';
 
-const ModeField: React.FC<{ value: WorkoutMode; isDisabled: boolean }> = ({
+const ModeField: React.FC<{ value?: WorkoutMode; isDisabled: boolean }> = ({
   value,
   isDisabled,
 }) => {

@@ -27,12 +27,15 @@ const NavigationWrapper = styled.nav`
     }
     div.right {
       place-self: center end;
+      a:hover {
+        text-decoration-line: underline;
+      }
     }
     button.logo {
-      background: none;
+      /* background: none; */
       border: none;
-      cursor: pointer;
-      box-shadow: none;
+      /* cursor: pointer; */
+      /* box-shadow: none; */
     }
     .logo {
       font-size: 22px;

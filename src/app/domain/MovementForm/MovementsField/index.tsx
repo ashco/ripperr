@@ -29,7 +29,7 @@ const MovementItem = SortableElement(
     index: number;
     otherIndex: number; // Added second index because regular index variable is coming in undefined. Might be because SortableElement needs index as prop, and then doesn't pass it down.
     isDisabled: boolean;
-    mode: WorkoutMode;
+    mode?: WorkoutMode;
     modalMode: ModalMode;
   }) => {
     const moveDispatch = useMoveDispatch();
@@ -137,7 +137,7 @@ const MovementList = SortableContainer(
     modalMode,
   }: {
     movements: IMovementRefs[];
-    mode: WorkoutMode;
+    mode?: WorkoutMode;
     modalMode: ModalMode;
     isDisabled: boolean;
   }) => {
@@ -163,7 +163,7 @@ const MovementList = SortableContainer(
 
 const MovementSortableComponent: React.FC<{
   movements: IMovementRefs[];
-  mode: WorkoutMode;
+  mode?: WorkoutMode;
   modalMode: ModalMode;
   isDisabled: boolean;
 }> = ({ movements, isDisabled, mode, modalMode }) => {
@@ -191,7 +191,6 @@ const MovementSortableComponent: React.FC<{
       onSortEnd={onSortEnd}
       lockAxis="y"
       lockToContainerEdges={true}
-      // helperClass="sortableHelper"
     />
   );
 };
