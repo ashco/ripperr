@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 
+import { useForm, useFieldArray } from 'react-hook-form';
+
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { AuthUserContext, FirebaseContext, MovementListContext } from 'context';
@@ -28,6 +30,12 @@ import {
 } from 'types/types';
 import { ModalMode, MovementType } from 'types/enums';
 
+type FormData = {
+  name: string;
+  description: string;
+  tags: string[];
+};
+
 const MovementForm: React.FC<{
   mode: ModalMode.Edit | ModalMode.View;
 }> = ({ mode }) => {
@@ -44,6 +52,17 @@ const MovementForm: React.FC<{
   // TODO - update useCurrentWidth to listen on window resize, no setTimeout usage
   // const isMobile = useCurrentWidth() < 600;
   const isMobile = false;
+
+  const { control, register, watch, handleSubmit, setValue } = useForm<
+    FormData
+  >();
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
+    {
+      control, // control props comes from useForm (optional: if you are using FormContext)
+      name: 'tags', // unique name for your Field Array
+      // keyName: "id", default to "id", you can change the key name
+    },
+  );
 
   let moveList: Archetype[] | Exercise[] | Workout[];
   switch (moveState?.type) {
@@ -140,21 +159,38 @@ const MovementForm: React.FC<{
     }
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-
-    if (!moveState) throw Error('No moveState detected!');
-
+  function onSubmit(formData: FormData) {
     if (mode === ModalMode.Edit) {
+      // const newMoveState = {
+      //   ...(moveState as Movement),
+      //   name,
+      //   description,
+      //   tags,
+      // };
       moveState.id
-        ? handleUpdateMovement(moveState)
-        : handleCreateMovement(moveState);
+        ? handleUpdateMovement(formData)
+        : handleCreateMovement(formData);
     } else if (mode === ModalMode.View) {
       modalDispatch({ type: 'MODAL_EDIT' });
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
   }
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  //   e.preventDefault();
+
+  //   if (!moveState) throw Error('No moveState detected!');
+
+  //   if (mode === ModalMode.Edit) {
+  //     moveState.id
+  //       ? handleUpdateMovement(moveState)
+  //       : handleCreateMovement(moveState);
+  //   } else if (mode === ModalMode.View) {
+  //     modalDispatch({ type: 'MODAL_EDIT' });
+  //   } else {
+  //     throw Error('Unsupported ModalMode provided.');
+  //   }
+  // }
 
   function handleClose(): void {
     if (mode === ModalMode.View || isNewEntry) {
@@ -194,20 +230,23 @@ const MovementForm: React.FC<{
   }
 
   return (
-    <MovementFormWrapper onSubmit={handleSubmit} noValidate>
+    // <MovementFormWrapper onSubmit={handleSubmit} noValidate>
+    <MovementFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
       {mode === ModalMode.Edit && (
         <Label text="Name:" display={isMobile ? 'block' : 'inline'}>
           <input
-            type="text"
+            // type="text"
             name="name"
             placeholder="Name"
-            value={(moveState as Movement).name}
-            onChange={(e) =>
-              moveDispatch({
-                type: 'MOVE_CHANGE_NAME',
-                value: e.target.value,
-              })
-            }
+            // value={(moveState as Movement).name}
+            defaultValue={(moveState as Movement).name}
+            ref={register}
+            // onChange={(e) =>
+            //   moveDispatch({
+            //     type: 'MOVE_CHANGE_NAME',
+            //     value: e.target.value,
+            //   })
+            // }
             disabled={isDisabled}
             autoFocus
           />
@@ -219,22 +258,24 @@ const MovementForm: React.FC<{
           display={isMobile ? 'block' : isDisabled ? 'block' : 'inline'}
         >
           <TextareaAutosize
-            id="description"
+            // id="description"
             name="description"
             placeholder="Enter a description..."
-            value={(moveState as Movement).description}
-            onChange={(e) =>
-              moveDispatch({
-                type: 'MOVE_CHANGE_DESCRIPTION',
-                value: e.target.value,
-              })
-            }
+            // value={(moveState as Movement).description}
+            defaultValue={(moveState as Movement).description}
+            inputRef={register}
+            // onChange={(e) =>
+            //   moveDispatch({
+            //     type: 'MOVE_CHANGE_DESCRIPTION',
+            //     value: e.target.value,
+            //   })
+            // }
             disabled={isDisabled}
             maxRows={4}
           />
         </Label>
       )}
-      {moveState?.type === MovementType.Workout && (
+      {/* {moveState?.type === MovementType.Workout && (
         <>
           <Label text="Mode:" display={isMobile ? 'block' : 'inline'}>
             <ModeField
@@ -266,15 +307,18 @@ const MovementForm: React.FC<{
             </>
           )}
         </>
-      )}
+      )} */}
       {(moveState?.type === MovementType.Exercise ||
         moveState?.type === MovementType.Workout) &&
         (!isDisabled || (moveState as Exercise | Workout).tags.length > 0) && (
           <Label text="Tags:" display="block">
             <ArchetypesField
               tags={(moveState as Exercise | Workout).tags}
+              setValue={setValue}
               modalMode={mode}
               isDisabled={isDisabled}
+              register={register}
+              // fields={fields}
             />
           </Label>
         )}

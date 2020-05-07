@@ -101,6 +101,8 @@ function formReducer(state: MoveState, action: FormAction): MoveState {
     case 'MOVE_SET':
       return { ...(value as Movement) };
     case 'MOVE_CHANGE_NAME':
+      console.log('in it');
+
       return { ...state, name: value } as Movement;
     case 'MOVE_CHANGE_DESCRIPTION':
       return { ...state, description: value } as Movement;

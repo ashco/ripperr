@@ -27,3 +27,23 @@ export const ArchetypeListItemWrapper = styled.li<{
     line-height: 1.15;
   }
 `;
+
+// export const ArchetypeListItemWrapper = styled.label<{ active?: boolean }>`
+//   input {
+//     /* display: none; */
+//   }
+//   span {
+//     height: 2rem;
+//     margin: 0 0.25rem 0.25rem 0;
+//     border: 3px solid
+//       ${(props) =>
+//         props.active
+//           ? props.theme.color.orange[500]
+//           : props.theme.mode.colorOpacity[200]};
+//     border-radius: 3px;
+//     cursor: pointer;
+//     padding: 0.25rem 0.5rem;
+//     font-size: 16px;
+//     line-height: 1.15;
+//   }
+// `;
