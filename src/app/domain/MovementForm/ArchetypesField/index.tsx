@@ -46,9 +46,9 @@ const ArchetypesField: React.FC<{
     setValue('tags', valueArr);
   }
 
-  React.useEffect(() => {
-    register({ name: 'tags' });
-  }, []);
+  // React.useEffect(() => {
+  //   register({ name: 'tags' });
+  // }, []);
 
   return (
     <Select

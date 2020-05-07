@@ -43,9 +43,9 @@ const MovementForm: React.FC<{
   const authUser = React.useContext(AuthUserContext);
   const movementList = React.useContext(MovementListContext);
 
+  const moveState = useMoveState();
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
-  const moveState = useMoveState();
 
   const isDisabled = mode === ModalMode.View;
   const isNewEntry = !moveState?.id;
@@ -53,16 +53,25 @@ const MovementForm: React.FC<{
   // const isMobile = useCurrentWidth() < 600;
   const isMobile = false;
 
-  const { control, register, watch, handleSubmit, setValue } = useForm<
-    FormData
-  >();
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control, // control props comes from useForm (optional: if you are using FormContext)
-      name: 'tags', // unique name for your Field Array
-      // keyName: "id", default to "id", you can change the key name
+  const {
+    control,
+    register,
+    unregister,
+    reset,
+    watch,
+    errors,
+    handleSubmit,
+    setValue,
+  } = useForm<FormData>({
+    defaultValues: {
+      name: (moveState as Movement).name,
+      description: (moveState as Movement).description,
+      tags: (moveState as Exercise | Workout).tags,
     },
-  );
+  });
+
+  console.log(watch());
+  // console.log(errors);
 
   let moveList: Archetype[] | Exercise[] | Workout[];
   switch (moveState?.type) {
@@ -80,7 +89,7 @@ const MovementForm: React.FC<{
   }
 
   // ========= MOVEMENT FUNCTIONS =========
-  function handleUpdateMovement(moveState: Movement): void {
+  function updateMovement(moveState: Movement): void {
     let firebaseFnc;
 
     switch (moveState.type) {
@@ -98,8 +107,6 @@ const MovementForm: React.FC<{
     }
 
     if (authUser && moveState.id) {
-      // Check that name is unique or matches with current id
-
       const moveObj: Movement = { ...moveState };
       moveObj.lastModified = firebase.getTimestamp();
 
@@ -110,16 +117,17 @@ const MovementForm: React.FC<{
             `${singleCapString(moveState?.type)} Updated: ${moveObj.name}`,
           );
           modalDispatch({ type: 'MODAL_VIEW' });
+          moveDispatch({ type: 'MOVE_SET', value: moveState });
         })
         .catch((err) => {
           console.error(err);
         });
     } else {
-      throw Error('There is no authUser && movement && movement.id!');
+      throw Error('There is no authUser && movement.id!');
     }
   }
 
-  function handleCreateMovement(moveState: Movement): void {
+  function createMovement(moveState: Movement): void {
     let firebaseFnc;
 
     switch (moveState.type) {
@@ -149,7 +157,8 @@ const MovementForm: React.FC<{
           console.log(
             `${singleCapString(moveState?.type)} Added: ${moveObj.name}`,
           );
-          modalDispatch({ type: 'MODAL_CLOSE' });
+          modalDispatch({ type: 'MODAL_VIEW' });
+          moveDispatch({ type: 'MOVE_SET', value: moveState });
         })
         .catch((err) => {
           console.error(err);
@@ -160,37 +169,19 @@ const MovementForm: React.FC<{
   }
 
   function onSubmit(formData: FormData) {
-    if (mode === ModalMode.Edit) {
-      // const newMoveState = {
-      //   ...(moveState as Movement),
-      //   name,
-      //   description,
-      //   tags,
-      // };
-      moveState.id
-        ? handleUpdateMovement(formData)
-        : handleCreateMovement(formData);
-    } else if (mode === ModalMode.View) {
+    if (mode === ModalMode.View) {
       modalDispatch({ type: 'MODAL_EDIT' });
+    } else if (mode === ModalMode.Edit) {
+      const newMoveState = {
+        ...(moveState as Movement),
+        ...formData,
+      };
+
+      isNewEntry ? createMovement(newMoveState) : updateMovement(newMoveState);
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
   }
-  // function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-  //   e.preventDefault();
-
-  //   if (!moveState) throw Error('No moveState detected!');
-
-  //   if (mode === ModalMode.Edit) {
-  //     moveState.id
-  //       ? handleUpdateMovement(moveState)
-  //       : handleCreateMovement(moveState);
-  //   } else if (mode === ModalMode.View) {
-  //     modalDispatch({ type: 'MODAL_EDIT' });
-  //   } else {
-  //     throw Error('Unsupported ModalMode provided.');
-  //   }
-  // }
 
   function handleClose(): void {
     if (mode === ModalMode.View || isNewEntry) {
@@ -201,6 +192,7 @@ const MovementForm: React.FC<{
       const initMoveState = moveList.find((move) => move.id === moveState?.id);
       modalDispatch({ type: 'MODAL_VIEW' });
       moveDispatch({ type: 'MOVE_SET', value: initMoveState });
+      reset();
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
@@ -229,29 +221,38 @@ const MovementForm: React.FC<{
       break;
   }
 
+  React.useEffect(() => {
+    register({ name: 'tags' });
+
+    return () => unregister('tags');
+  }, [register]);
+
   return (
     // <MovementFormWrapper onSubmit={handleSubmit} noValidate>
     <MovementFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
-      {mode === ModalMode.Edit && (
-        <Label text="Name:" display={isMobile ? 'block' : 'inline'}>
-          <input
-            // type="text"
-            name="name"
-            placeholder="Name"
-            // value={(moveState as Movement).name}
-            defaultValue={(moveState as Movement).name}
-            ref={register}
-            // onChange={(e) =>
-            //   moveDispatch({
-            //     type: 'MOVE_CHANGE_NAME',
-            //     value: e.target.value,
-            //   })
-            // }
-            disabled={isDisabled}
-            autoFocus
-          />
-        </Label>
-      )}
+      <Label
+        text="Name:"
+        display={
+          mode === ModalMode.View ? 'none' : isMobile ? 'block' : 'inline'
+        }
+      >
+        <input
+          name="name"
+          placeholder="Name"
+          // value={(moveState as Movement).name}
+          ref={register({
+            required: true,
+          })}
+          // onChange={(e) =>
+          //   moveDispatch({
+          //     type: 'MOVE_CHANGE_NAME',
+          //     value: e.target.value,
+          //   })
+          // }
+          disabled={isDisabled}
+          autoFocus
+        />
+      </Label>
       {(!isDisabled || moveState.description.length > 0) && (
         <Label
           text="Description:"
@@ -262,7 +263,6 @@ const MovementForm: React.FC<{
             name="description"
             placeholder="Enter a description..."
             // value={(moveState as Movement).description}
-            defaultValue={(moveState as Movement).description}
             inputRef={register}
             // onChange={(e) =>
             //   moveDispatch({

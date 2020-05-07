@@ -45,18 +45,8 @@ const SignInForm = () => {
       }}
     >
       <StyledForm>
-        <InputField
-          // label="Email"
-          name="email"
-          type="email"
-          placeholder="Email"
-        />
-        <InputField
-          // label="Password"
-          name="password"
-          type="password"
-          placeholder="Password"
-        />
+        <InputField name="email" type="email" placeholder="Email" />
+        <InputField name="password" type="password" placeholder="Password" />
         <Button type="submit">Sign In</Button>
         {error && <FormError>{error.message}</FormError>}
       </StyledForm>

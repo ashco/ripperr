@@ -63,6 +63,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+cypress.env.json
 
 # production
 build
@@ -74,3 +75,4 @@ out/
 lib/
 next/
 
+serviceAccount.json

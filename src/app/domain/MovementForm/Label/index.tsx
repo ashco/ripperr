@@ -6,11 +6,10 @@ import { useModalState } from 'context/ModalContext';
 import { sizes } from 'styles/sizes';
 import { ModalMode } from 'types/enums';
 
-const Label: React.FC<{ text: string; display: 'inline' | 'block' }> = ({
-  text,
-  display,
-  children,
-}) => {
+const Label: React.FC<{
+  text: string;
+  display: 'inline' | 'block' | 'none';
+}> = ({ text, display, children }) => {
   const modalState = useModalState();
   const showLabel = modalState.mode === ModalMode.Edit;
 
@@ -41,6 +40,9 @@ const LabelWrapper = styled.div<{ showLabel: boolean }>`
     textarea {
       padding-left: 0px;
     }
+  }
+  &.none {
+    display: none;
   }
 
   @media (min-width: ${sizes.tablet}) {
