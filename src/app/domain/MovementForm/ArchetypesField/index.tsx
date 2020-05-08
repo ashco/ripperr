@@ -56,7 +56,6 @@ const ArchetypesField: React.FC<{
       const currentSelectedOptions = options.filter((opt) =>
         tags.includes(opt.value),
       );
-      console.log('trigger');
       setSelectedOptions(currentSelectedOptions);
     }
   }, [modalMode]);

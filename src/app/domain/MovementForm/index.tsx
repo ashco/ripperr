@@ -116,6 +116,7 @@ const MovementForm: React.FC<{
             `${singleCapString(moveData.type)} Updated: ${moveData.name}`,
           );
           console.log(moveData);
+          console.log(watch());
 
           modalDispatch({ type: 'MODAL_VIEW' });
           moveDispatch({ type: 'MOVE_SET', value: moveData });
@@ -202,7 +203,6 @@ const MovementForm: React.FC<{
     });
 
     setValue(resetValues);
-    // console.log(resetValues);
   }
 
   // BUTTON CONFIGURATION LOGIC
@@ -234,6 +234,8 @@ const MovementForm: React.FC<{
     return () => unregister('tags');
   }, [register]);
 
+  console.log(watch());
+
   return (
     // <MovementFormWrapper onSubmit={handleSubmit} noValidate>
     <MovementFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -260,19 +262,27 @@ const MovementForm: React.FC<{
           autoFocus
         />
       </Label>
-      {(!isDisabled || moveState.description.length > 0) && (
-        <Label
-          text="Description:"
-          display={isMobile ? 'block' : isDisabled ? 'block' : 'inline'}
-        >
-          <Controller
-            as={<TextareaAutosize maxRows={4} />}
-            name="description"
-            control={control}
-            placeholder="Enter a description..."
-            disabled={isDisabled}
-          />
-          {/* <TextareaAutosize
+      {/* {(!isDisabled || moveState.description.length > 0) && ( */}
+      <Label
+        text="Description:"
+        display={
+          isDisabled && !moveState.description.length
+            ? 'none'
+            : isMobile
+            ? 'block'
+            : isDisabled
+            ? 'block'
+            : 'inline'
+        }
+      >
+        <Controller
+          as={<TextareaAutosize maxRows={4} />}
+          name="description"
+          control={control}
+          placeholder="Enter a description..."
+          disabled={isDisabled}
+        />
+        {/* <TextareaAutosize
             // id="description"
             name="description"
             placeholder="Enter a description..."
@@ -287,14 +297,14 @@ const MovementForm: React.FC<{
             disabled={isDisabled}
             maxRows={4}
           /> */}
-          {/* <textarea // id="description"
+        {/* <textarea // id="description"
             name="description"
             placeholder="Enter a description..."
             ref={register}
             disabled={isDisabled}
           /> */}
-        </Label>
-      )}
+      </Label>
+      {/* )} */}
       {/* {moveState?.type === MovementType.Workout && (
         <>
           <Label text="Mode:" display={isMobile ? 'block' : 'inline'}>
@@ -329,21 +339,28 @@ const MovementForm: React.FC<{
         </>
       )} */}
       {(moveState?.type === MovementType.Exercise ||
-        moveState?.type === MovementType.Workout) &&
-        (!isDisabled || (moveState as Exercise | Workout).tags.length > 0) && (
-          <Label text="Tags:" display="block">
-            <ArchetypesField
-              tags={watch().tags}
-              // tags={(moveState as Exercise | Workout).tags}
-              setValue={setValue}
-              modalMode={mode}
-              isDisabled={isDisabled}
-              control={control}
-              watch={watch}
-              // fields={fields}
-            />
-          </Label>
-        )}
+        moveState?.type === MovementType.Workout) && (
+        // (!isDisabled || (moveState as Exercise | Workout).tags.length > 0) && (
+        <Label
+          text="Tags:"
+          display={
+            isDisabled && !(moveState as Exercise | Workout).tags.length
+              ? 'none'
+              : 'block'
+          }
+        >
+          <ArchetypesField
+            tags={watch().tags}
+            // tags={(moveState as Exercise | Workout).tags}
+            setValue={setValue}
+            modalMode={mode}
+            isDisabled={isDisabled}
+            control={control}
+            watch={watch}
+            // fields={fields}
+          />
+        </Label>
+      )}
       <ButtonRow config={btnConfig} />
     </MovementFormWrapper>
   );
