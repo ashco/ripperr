@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -47,6 +47,12 @@ const MovementForm: React.FC<{
   const moveDispatch = useMoveDispatch();
   const modalDispatch = useModalDispatch();
 
+  const defaultValues: any = {
+    name: (moveState as Movement).name,
+    description: (moveState as Movement).description,
+    tags: [...(moveState as Exercise | Workout).tags],
+  };
+
   const isDisabled = mode === ModalMode.View;
   const isNewEntry = !moveState?.id;
   // TODO - update useCurrentWidth to listen on window resize, no setTimeout usage
@@ -63,15 +69,8 @@ const MovementForm: React.FC<{
     handleSubmit,
     setValue,
   } = useForm<FormData>({
-    defaultValues: {
-      name: (moveState as Movement).name,
-      description: (moveState as Movement).description,
-      tags: (moveState as Exercise | Workout).tags,
-    },
+    defaultValues,
   });
-
-  console.log(watch());
-  // console.log(errors);
 
   let moveList: Archetype[] | Exercise[] | Workout[];
   switch (moveState?.type) {
@@ -89,10 +88,10 @@ const MovementForm: React.FC<{
   }
 
   // ========= MOVEMENT FUNCTIONS =========
-  function updateMovement(moveState: Movement): void {
+  function updateMovement(moveData: Movement): void {
     let firebaseFnc;
 
-    switch (moveState.type) {
+    switch (moveData.type) {
       case MovementType.Archetype:
         firebaseFnc = firebase.archetype;
         break;
@@ -103,34 +102,36 @@ const MovementForm: React.FC<{
         firebaseFnc = firebase.workout;
         break;
       default:
-        throw Error('moveState type is not recognized');
+        throw Error('moveData type is not recognized');
     }
 
-    if (authUser && moveState.id) {
-      const moveObj: Movement = { ...moveState };
-      moveObj.lastModified = firebase.getTimestamp();
+    if (authUser && moveData.id) {
+      // const moveObj: Movement = { ...moveData };
+      moveData.lastModified = firebase.getTimestamp();
 
-      firebaseFnc(authUser.uid, moveState.id)
-        .update(moveObj)
+      firebaseFnc(authUser.uid, moveData.id)
+        .update(moveData)
         .then(() => {
           console.log(
-            `${singleCapString(moveState?.type)} Updated: ${moveObj.name}`,
+            `${singleCapString(moveData.type)} Updated: ${moveData.name}`,
           );
+          console.log(moveData);
+
           modalDispatch({ type: 'MODAL_VIEW' });
-          moveDispatch({ type: 'MOVE_SET', value: moveState });
+          moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
           console.error(err);
         });
     } else {
-      throw Error('There is no authUser && movement.id!');
+      throw Error('There is no authUser && moveData.id!');
     }
   }
 
-  function createMovement(moveState: Movement): void {
+  function createMovement(moveData: Movement): void {
     let firebaseFnc;
 
-    switch (moveState.type) {
+    switch (moveData.type) {
       case MovementType.Archetype:
         firebaseFnc = firebase.archetypes;
         break;
@@ -141,24 +142,23 @@ const MovementForm: React.FC<{
         firebaseFnc = firebase.workouts;
         break;
       default:
-        throw Error('moveState.type is not recognized');
+        throw Error('moveData.type is not recognized');
     }
 
     if (authUser) {
       const docRef = firebaseFnc(authUser.uid).doc();
       // TODO Check that name is unique
 
-      const moveObj: Movement = { ...moveState };
-      moveObj.lastModified = firebase.getTimestamp();
+      moveData.lastModified = firebase.getTimestamp();
 
       docRef
-        .set(moveObj)
+        .set(moveData)
         .then(() => {
           console.log(
-            `${singleCapString(moveState?.type)} Added: ${moveObj.name}`,
+            `${singleCapString(moveData.type)} Added: ${moveData.name}`,
           );
           modalDispatch({ type: 'MODAL_VIEW' });
-          moveDispatch({ type: 'MOVE_SET', value: moveState });
+          moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
           console.error(err);
@@ -172,12 +172,12 @@ const MovementForm: React.FC<{
     if (mode === ModalMode.View) {
       modalDispatch({ type: 'MODAL_EDIT' });
     } else if (mode === ModalMode.Edit) {
-      const newMoveState = {
+      const moveData = {
         ...(moveState as Movement),
         ...formData,
       };
 
-      isNewEntry ? createMovement(newMoveState) : updateMovement(newMoveState);
+      isNewEntry ? createMovement(moveData) : updateMovement(moveData);
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
@@ -188,14 +188,21 @@ const MovementForm: React.FC<{
       modalDispatch({ type: 'MODAL_CLOSE' });
       moveDispatch({ type: 'MOVE_CLEAR' });
     } else if (mode === ModalMode.Edit) {
-      // Have moveState reset back to original non-edited state
-      const initMoveState = moveList.find((move) => move.id === moveState?.id);
       modalDispatch({ type: 'MODAL_VIEW' });
-      moveDispatch({ type: 'MOVE_SET', value: initMoveState });
-      reset();
+      resetForm();
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
+  }
+
+  function resetForm(): void {
+    // Need to reset values manually in order to ensure all fields reset. Some are fine, but Controlled components (TextareaAutosize, React-Select) are weird and need to be done manually
+    const resetValues = Object.keys(defaultValues).map((key) => {
+      return { [key]: defaultValues[key] };
+    });
+
+    setValue(resetValues);
+    // console.log(resetValues);
   }
 
   // BUTTON CONFIGURATION LOGIC
@@ -258,7 +265,14 @@ const MovementForm: React.FC<{
           text="Description:"
           display={isMobile ? 'block' : isDisabled ? 'block' : 'inline'}
         >
-          <TextareaAutosize
+          <Controller
+            as={<TextareaAutosize maxRows={4} />}
+            name="description"
+            control={control}
+            placeholder="Enter a description..."
+            disabled={isDisabled}
+          />
+          {/* <TextareaAutosize
             // id="description"
             name="description"
             placeholder="Enter a description..."
@@ -272,7 +286,13 @@ const MovementForm: React.FC<{
             // }
             disabled={isDisabled}
             maxRows={4}
-          />
+          /> */}
+          {/* <textarea // id="description"
+            name="description"
+            placeholder="Enter a description..."
+            ref={register}
+            disabled={isDisabled}
+          /> */}
         </Label>
       )}
       {/* {moveState?.type === MovementType.Workout && (
@@ -313,11 +333,13 @@ const MovementForm: React.FC<{
         (!isDisabled || (moveState as Exercise | Workout).tags.length > 0) && (
           <Label text="Tags:" display="block">
             <ArchetypesField
-              tags={(moveState as Exercise | Workout).tags}
+              tags={watch().tags}
+              // tags={(moveState as Exercise | Workout).tags}
               setValue={setValue}
               modalMode={mode}
               isDisabled={isDisabled}
-              register={register}
+              control={control}
+              watch={watch}
               // fields={fields}
             />
           </Label>

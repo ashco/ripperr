@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import Select from 'react-select';
-
+import { Controller } from 'react-hook-form';
 import { ThemeContext } from 'styled-components';
 
 import { MovementListContext } from 'context';
@@ -22,9 +22,10 @@ const ArchetypesField: React.FC<{
   tags: any;
   isDisabled: boolean;
   modalMode: ModalMode;
-  register: any;
+  control: any;
   setValue: any;
-}> = ({ tags, isDisabled, modalMode, register, setValue }) => {
+  watch: any;
+}> = ({ tags, isDisabled, modalMode, control, setValue, watch }) => {
   // Generate select option list
   const { archetypes } = React.useContext(MovementListContext);
   const options = archetypes.map((arch) => {
@@ -32,30 +33,50 @@ const ArchetypesField: React.FC<{
   });
 
   // Determine initial select values
-  const defaultValue = options.filter((opt) => tags.includes(opt.value));
-  const [selectValues, setSelectValues] = React.useState<SelectOption[]>(
-    defaultValue,
+  const initialSelectedOptions = options.filter((opt) =>
+    tags.includes(opt.value),
+  );
+  const [selectedOptions, setSelectedOptions] = React.useState<SelectOption[]>(
+    initialSelectedOptions,
   );
 
-  function handleMultiChange(selectedOptions: any) {
-    setSelectValues(selectedOptions);
-
-    const valueArr = (selectedOptions || []).map(
+  function handleMultiChange(selectedOpts: any) {
+    // Update state which sets select field display
+    setSelectedOptions(selectedOpts);
+    // create new array for form field + moveState
+    const tagsValue = (selectedOpts || []).map(
       (opt: SelectOption) => opt.value,
     );
-    setValue('tags', valueArr);
+    setValue('tags', tagsValue);
   }
 
-  // React.useEffect(() => {
-  //   register({ name: 'tags' });
-  // }, []);
+  React.useEffect(() => {
+    // reset field state to current tags when going from EDIT to VIEW
+    if (modalMode === ModalMode.View) {
+      const currentSelectedOptions = options.filter((opt) =>
+        tags.includes(opt.value),
+      );
+      console.log('trigger');
+      setSelectedOptions(currentSelectedOptions);
+    }
+  }, [modalMode]);
 
   return (
+    // <Controller
+    //   as={<Select options={options} value={selectedOptions} />}
+    //   control={control}
+    //   name="tags"
+    //   placeholder="Tags"
+    //   onChange={handleMultiChange}
+    //   isDisabled={isDisabled}
+    //   isMulti
+    // />
+
     <Select
       name="tags"
       placeholder="Tags"
       options={options}
-      value={selectValues}
+      value={selectedOptions}
       onChange={handleMultiChange}
       isDisabled={isDisabled}
       isMulti
