@@ -237,7 +237,6 @@ const MovementForm: React.FC<{
   console.log(watch());
 
   return (
-    // <MovementFormWrapper onSubmit={handleSubmit} noValidate>
     <MovementFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
       <Label
         text="Name:"
@@ -248,21 +247,13 @@ const MovementForm: React.FC<{
         <input
           name="name"
           placeholder="Name"
-          // value={(moveState as Movement).name}
           ref={register({
             required: true,
           })}
-          // onChange={(e) =>
-          //   moveDispatch({
-          //     type: 'MOVE_CHANGE_NAME',
-          //     value: e.target.value,
-          //   })
-          // }
           disabled={isDisabled}
           autoFocus
         />
       </Label>
-      {/* {(!isDisabled || moveState.description.length > 0) && ( */}
       <Label
         text="Description:"
         display={
@@ -282,29 +273,7 @@ const MovementForm: React.FC<{
           placeholder="Enter a description..."
           disabled={isDisabled}
         />
-        {/* <TextareaAutosize
-            // id="description"
-            name="description"
-            placeholder="Enter a description..."
-            // value={(moveState as Movement).description}
-            inputRef={register}
-            // onChange={(e) =>
-            //   moveDispatch({
-            //     type: 'MOVE_CHANGE_DESCRIPTION',
-            //     value: e.target.value,
-            //   })
-            // }
-            disabled={isDisabled}
-            maxRows={4}
-          /> */}
-        {/* <textarea // id="description"
-            name="description"
-            placeholder="Enter a description..."
-            ref={register}
-            disabled={isDisabled}
-          /> */}
       </Label>
-      {/* )} */}
       {/* {moveState?.type === MovementType.Workout && (
         <>
           <Label text="Mode:" display={isMobile ? 'block' : 'inline'}>
@@ -340,7 +309,6 @@ const MovementForm: React.FC<{
       )} */}
       {(moveState?.type === MovementType.Exercise ||
         moveState?.type === MovementType.Workout) && (
-        // (!isDisabled || (moveState as Exercise | Workout).tags.length > 0) && (
         <Label
           text="Tags:"
           display={
@@ -351,13 +319,11 @@ const MovementForm: React.FC<{
         >
           <ArchetypesField
             tags={watch().tags}
-            // tags={(moveState as Exercise | Workout).tags}
             setValue={setValue}
             modalMode={mode}
             isDisabled={isDisabled}
             control={control}
             watch={watch}
-            // fields={fields}
           />
         </Label>
       )}

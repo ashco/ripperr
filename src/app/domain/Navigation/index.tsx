@@ -6,6 +6,7 @@ import { AuthUserContext } from 'context';
 import { useAddMoveMode } from 'context/AddMoveModeContext';
 import { useModalDispatch } from 'context/ModalContext';
 
+import NotificationBanner from 'components/NotificationBanner';
 import Button from 'components/Button';
 
 import SignOutButton from './SignOutButton';
@@ -13,19 +14,23 @@ import SignOutButton from './SignOutButton';
 import NavBarWrapper from './style';
 
 import Icon from 'icons';
+import useNotification from 'hooks/useNotification';
 
 const NavBar: React.FC = () => {
   const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);
 
   return (
-    <NavBarWrapper>
-      {authUser ? (
-        <NavBarAuth color={themeContext.mode.color[100]} />
-      ) : (
-        <NavBarNonAuth color={themeContext.mode.color[100]} />
-      )}
-    </NavBarWrapper>
+    <>
+      <NotificationBanner />
+      <NavBarWrapper>
+        {authUser ? (
+          <NavBarAuth color={themeContext.mode.color[100]} />
+        ) : (
+          <NavBarNonAuth color={themeContext.mode.color[100]} />
+        )}
+      </NavBarWrapper>
+    </>
   );
 };
 
@@ -62,33 +67,43 @@ const NavMessage: React.FC = () => {
   return <h2>{messageText}</h2>;
 };
 
-const NavBarAuth: React.FC<{ color: string }> = ({ color }) => (
-  <ul>
-    <div className="list-group left">
-      <li>
-        <NavLogo color={color} />
-      </li>
-    </div>
-    <div className="list-group center">
-      <NavMessage />
-    </div>
-    <div className="list-group right">
-      <li>
-        <Link href="/account">
-          <a>Account</a>
-        </Link>
-      </li>
-      {/* <li>
+const NavBarAuth: React.FC<{ color: string }> = ({ color }) => {
+  // const setMessage = useNotification()[1];
+  const [notification, setNotification] = useNotification();
+
+  return (
+    <ul>
+      <div className="list-group left">
+        <li>
+          <NavLogo color={color} />
+        </li>
+      </div>
+      <div className="list-group center">
+        <NavMessage />
+      </div>
+      <div className="list-group right">
+        <li>
+          <Link href="/account">
+            <a>Account</a>
+          </Link>
+        </li>
+        {/* <li>
         <Link href="/admin">
           <a>Admin</a>
         </Link>
       </li> */}
-      <li>
-        <SignOutButton />
-      </li>
-    </div>
-  </ul>
-);
+        <li>
+          <button onClick={() => setNotification('this is just a test')}>
+            NotificationBanner
+          </button>
+        </li>
+        <li>
+          <SignOutButton />
+        </li>
+      </div>
+    </ul>
+  );
+};
 
 const NavBarNonAuth: React.FC<{ color: string }> = ({ color }) => (
   <ul>

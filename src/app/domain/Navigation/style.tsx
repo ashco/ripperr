@@ -7,6 +7,7 @@ const NavigationWrapper = styled.nav`
   box-shadow: ${(props) => props.theme.shadow[2]};
   grid-area: navigation;
   z-index: 99;
+  border-top: 7px solid ${(props) => props.theme.color.logo};
   * {
     color: ${(props) => props.theme.mode.color[100]};
   }
