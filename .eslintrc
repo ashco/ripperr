@@ -11,7 +11,8 @@
     "strict": ["error", "never"]
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "overrides": [
     // ONLY if working with ts files, this config should be applied
@@ -19,7 +20,8 @@
       "files": "**/*.+(ts|tsx)",
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "project": "./src/app/tsconfig.json"
+        "app": "./src/app/tsconfig.json",
+        "functions": "./src/functions/tsconfig.json"
       },
       "plugins": ["@typescript-eslint/eslint-plugin"],
       "extends": [

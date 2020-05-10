@@ -19,7 +19,7 @@ module.exports = withImages({
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
   },
   // allows import aliases
-  webpack(config, options) {
+  webpack(config) {
     // config.resolve.alias['@'] = path.join(__dirname);
     config.resolve.alias['components'] = path.join(__dirname, 'components');
     config.resolve.alias['context'] = path.join(__dirname, 'context');
