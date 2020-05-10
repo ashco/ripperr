@@ -21,4 +21,5 @@ export const server = functions.https.onRequest(async (req, res) => {
 });
 
 admin.initializeApp();
-const db = admin.firestore();
+// const db = admin.firestore();
+admin.firestore();

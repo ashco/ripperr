@@ -184,6 +184,15 @@ const MovementForm: React.FC<{
     }
   }
 
+  function resetForm(): void {
+    // Need to reset values manually in order to ensure all fields reset. Some are fine, but Controlled components (TextareaAutosize, React-Select) are weird and need to be done manually
+    const resetValues = Object.keys(defaultValues).map((key) => {
+      return { [key]: defaultValues[key] };
+    });
+
+    setValue(resetValues);
+  }
+
   function handleClose(): void {
     if (mode === ModalMode.View || isNewEntry) {
       modalDispatch({ type: 'MODAL_CLOSE' });
@@ -194,15 +203,6 @@ const MovementForm: React.FC<{
     } else {
       throw Error('Unsupported ModalMode provided.');
     }
-  }
-
-  function resetForm(): void {
-    // Need to reset values manually in order to ensure all fields reset. Some are fine, but Controlled components (TextareaAutosize, React-Select) are weird and need to be done manually
-    const resetValues = Object.keys(defaultValues).map((key) => {
-      return { [key]: defaultValues[key] };
-    });
-
-    setValue(resetValues);
   }
 
   // BUTTON CONFIGURATION LOGIC

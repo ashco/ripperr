@@ -1,4 +1,5 @@
-﻿import { NextPage } from 'next';
+﻿import React from 'react';
+import { NextPage } from 'next';
 
 const AboutPage: NextPage<{ userAgent: string }> = ({ userAgent }) => (
   <h1>About world</h1>

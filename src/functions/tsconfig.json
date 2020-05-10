@@ -7,13 +7,9 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2017",
-    "types": [
-      "react",
-    ],
-    "allowSyntheticDefaultImports": true,
+    "types": ["react"],
+    "allowSyntheticDefaultImports": true
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
