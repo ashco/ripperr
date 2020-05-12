@@ -19,7 +19,7 @@
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
     "format": "yarn prettier -- --write",
     "check-format": "yarn prettier -- --list-different",
-    "validate": "npm-run-all --parallel check-types check-format lint build",
+    "validate": "npm-run-all --parallel check-types check-format lint test:coverage build",
     "install:all": "yarn install && cd src/functions && yarn install",
     "setup": "yarn install:all && yarn validate",
     "test": "is-ci \"test:coverage\" \"test:watch\"",

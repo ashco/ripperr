@@ -28,6 +28,7 @@ module.exports = withImages({
     config.resolve.alias['styles'] = path.join(__dirname, 'styles');
     config.resolve.alias['types'] = path.join(__dirname, 'types');
     config.resolve.alias['utils'] = path.join(__dirname, 'utils');
+
     return config;
   },
 });
