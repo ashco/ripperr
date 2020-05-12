@@ -15,17 +15,33 @@
     "deploy-fns": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "check-types": "tsc --build ./src/app/tsconfig.json",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
+    "lint": "jest --config test/jest.lint.js",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
     "format": "yarn prettier -- --write",
     "check-format": "yarn prettier -- --list-different",
-    "validate": "npm-run-all --parallel check-types check-format lint test:coverage build",
+    "validate": "npm-run-all --parallel check-types check-format test:coverage build",
     "install:all": "yarn install && cd src/functions && yarn install",
     "setup": "yarn install:all && yarn validate",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch"
+  },
+  "jest-runner-eslint": {
+    "cliOptions": {
+      "ignorePath": "./.gitignore"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run check-types && lint-staged && npm run build"
+    }
+  },
+  "lint-staged": {
+    "**/*.+(js|jsx|ts|tsx|json|css|html|md)": [
+      "prettier --write",
+      "jest --findRelatedTests"
+    ]
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -65,7 +81,10 @@
     "husky": "^4.2.5",
     "is-ci-cli": "^2.0.0",
     "jest": "^26.0.1",
+    "jest-runner-eslint": "^0.8.0",
     "jest-styled-components": "^7.0.2",
+    "jest-watch-select-projects": "^2.0.0",
+    "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.2.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
