@@ -95,28 +95,7 @@
   mode: {},
 };
 
-export const darkMode = {
-  type: 'Dark',
-  background: {
-    100: 'hsl(0, 0%, 7%)',
-    200: 'hsl(0, 0%, 9%)',
-    300: 'hsl(0, 0%, 13%)',
-    400: 'hsl(240, 0.7%, 29.6%)',
-  },
-  backgroundOpacity: {
-    100: 'hsla(0, 0%, 7%, .9)',
-  },
-  color: {
-    100: 'hsl(0, 0%, 100%)',
-    200: 'hsl(240, 1%, 47%)',
-  },
-  colorOpacity: {
-    100: 'hsla(0, 0%, 100%, 0.15)',
-    200: 'hsla(240, 1%, 47%, 0.5)',
-  },
-};
-
-export const lightMode = {
+const lightMode = {
   type: 'Light',
   background: {
     100: 'hsl(180, 6.2%, 93%)',
@@ -137,6 +116,28 @@ export const lightMode = {
   },
 };
 
-export const theme = { ...baseTheme, mode: lightMode };
+const darkMode = {
+  type: 'Dark',
+  background: {
+    100: 'hsl(0, 0%, 7%)',
+    200: 'hsl(0, 0%, 9%)',
+    300: 'hsl(0, 0%, 13%)',
+    400: 'hsl(240, 0.7%, 29.6%)',
+  },
+  backgroundOpacity: {
+    100: 'hsla(0, 0%, 7%, .9)',
+  },
+  color: {
+    100: 'hsl(0, 0%, 100%)',
+    200: 'hsl(240, 1%, 47%)',
+  },
+  colorOpacity: {
+    100: 'hsla(0, 0%, 100%, 0.15)',
+    200: 'hsla(240, 1%, 47%, 0.5)',
+  },
+};
+
+export const lightTheme = { ...baseTheme, mode: lightMode };
+export const darkTheme = { ...baseTheme, mode: darkMode };
 
 // export default theme;

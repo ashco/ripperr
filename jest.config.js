@@ -10,6 +10,7 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
   moduleDirectories: ['node_modules', path.join(__dirname, 'src/app')],
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  // snapshotSerializers: ['jest-styled-components'],
   globals: {
     'ts-jest': {
       tsConfig: 'tsconfig.jest.json',

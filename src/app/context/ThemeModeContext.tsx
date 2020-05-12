@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { theme as initTheme, darkMode, lightMode } from '../styles/theme';
+import { lightTheme, darkTheme } from '../styles/theme';
 import { DefaultTheme } from 'styled-components';
 
 type Mode = 'LIGHT' | 'DARK';
@@ -9,13 +9,13 @@ const ThemeModeContext = React.createContext<
 >(undefined);
 
 function ThemeModeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = React.useState(initTheme);
+  const [theme, setTheme] = React.useState(darkTheme);
 
   const setThemeMode: UseThemeMode = (mode) => {
     if (mode === 'LIGHT') {
-      setTheme({ ...initTheme, mode: lightMode });
+      setTheme(lightTheme);
     } else if (mode === 'DARK') {
-      setTheme({ ...initTheme, mode: darkMode });
+      setTheme(darkTheme);
     }
   };
 

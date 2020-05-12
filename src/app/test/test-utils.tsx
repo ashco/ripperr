@@ -2,9 +2,9 @@
 import { render as rtlRender } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 // import { useThemeModeState } from 'context/ThemeModeContext';
-import { theme } from 'styles/theme';
+import { darkTheme } from 'styles/theme';
 
-function render(ui: any, options?: any) {
+function render(ui: any, { theme = darkTheme, ...options } = {}) {
   function Wrapper({ children }: any) {
     return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
   }
