@@ -20,7 +20,11 @@
     "format": "npm run prettier -- --write",
     "check-format": "npm run prettier -- --list-different",
     "validate": "npm-run-all --parallel check-types check-format lint build",
-    "test": "jest"
+    "setup": "npm install && npm run validate",
+    "test": "is-ci \"test:coverage\" \"test:watch\"",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -58,6 +62,7 @@
     "eslint-plugin-react": "^7.18.0",
     "firebase-admin": "^8.12.0",
     "husky": "^4.2.5",
+    "is-ci-cli": "^2.0.0",
     "jest": "^26.0.1",
     "jest-styled-components": "^7.0.2",
     "lint-staged": "^10.2.2",

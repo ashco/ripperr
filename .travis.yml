@@ -1,0 +1,14 @@
+﻿sudo: false
+language: node_js
+# cache:
+#   directories:
+#     - ~/.npm
+notifications:
+  email: false
+node_js: '10'
+# node_js: '12'
+install: echo "install happens as part of setup"
+script: npm run setup
+# after_script: npx codecov@3
+branches:
+  only: master
