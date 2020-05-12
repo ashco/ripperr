@@ -12,7 +12,7 @@ import {
   IWorkoutsFirebaseQuery,
   IMovementState,
 } from '../types/types';
-import { sortArchetypes } from '../utils/sortMovements';
+import { sortArchetypes } from '../utils/sort-movements';
 
 export const INITIAL_ARCHETYPE_STATE: IArchetypesFirebaseQuery = {
   loading: true,

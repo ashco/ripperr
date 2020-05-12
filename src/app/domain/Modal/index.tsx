@@ -13,7 +13,7 @@ import ModalRoot from './style';
 
 import { ModalMode, MovementType } from 'types/enums';
 import { Movement } from 'types/types';
-import singleCapString from 'utils/singleCapString';
+import singleCapString from '@/utils/single-cap-string';
 
 const Modal: React.FC = () => {
   const modalState = useModalState();

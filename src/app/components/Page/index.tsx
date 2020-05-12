@@ -10,36 +10,32 @@ import { MoveProvider } from 'context/MoveContext';
 import { FilterProvider } from 'context/FilterContext';
 import { AddMoveModeProvider } from 'context/AddMoveModeContext';
 import { usePointerEvents } from 'context/PointerEventsContext';
-import {
-  useThemeModeState,
-  useThemeModeDispatch,
-} from 'context/ThemeModeContext';
+import { useThemeMode } from 'context/ThemeModeContext';
 
 import Meta from '../Meta';
 import NavBar from 'domain/Navigation';
 
 const Page: React.FC = (props) => {
-  const themeModeState = useThemeModeState();
-  const themeModeDispatch = useThemeModeDispatch();
+  const [theme, setTheme] = useThemeMode();
 
   const pointerEvents = usePointerEvents()[0];
 
   useEffect(() => {
     if (localStorage.getItem('themeMode') === 'LIGHT_MODE') {
-      themeModeDispatch({ type: 'LIGHT_MODE' });
+      setTheme('LIGHT');
     } else if (localStorage.getItem('themeMode') === 'DARK_MODE') {
-      themeModeDispatch({ type: 'DARK_MODE' });
+      setTheme('DARK');
     } else if (
       typeof window !== `undefined` &&
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
     ) {
-      themeModeDispatch({ type: 'DARK_MODE' });
+      setTheme('DARK');
     }
   }, []);
 
   return (
-    <ThemeProvider theme={themeModeState}>
+    <ThemeProvider theme={theme}>
       <MoveProvider>
         <ModalProvider>
           <FilterProvider>

@@ -1,29 +1,21 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import {
-  useThemeModeState,
-  useThemeModeDispatch,
-  ThemeModeActionType,
-} from 'context/ThemeModeContext';
+import { useThemeMode } from 'context/ThemeModeContext';
 
 import Button from 'components/Button';
 
 const DarkModeButton = () => {
-  const themeModeState = useThemeModeState();
-  const themeModeDispatch = useThemeModeDispatch();
+  const [theme, setTheme] = useThemeMode();
 
-  const modeType = themeModeState.mode.type;
-
-  const buttonText = modeType === 'Light' ? 'Dark' : 'Light';
+  const buttonText = theme.mode.type === 'Light' ? 'Dark' : 'Light';
 
   function toggleThemeMode() {
-    let actionType: ThemeModeActionType = 'LIGHT_MODE';
-    if (modeType === 'Light') {
-      actionType = 'DARK_MODE';
+    if (theme.mode.type === 'Light') {
+      setTheme('DARK');
+    } else if (theme.mode.type === 'Dark') {
+      setTheme('LIGHT');
     }
-
-    themeModeDispatch({ type: actionType });
   }
 
   return (

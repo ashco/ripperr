@@ -19,7 +19,7 @@ import RestField from './RestField';
 import ButtonRow from 'components/ButtonRow';
 
 import useCurrentWidth from 'hooks/useCurrentWidth';
-import singleCapString from 'utils/singleCapString';
+import singleCapString from '@/utils/single-cap-string';
 
 import {
   Movement,

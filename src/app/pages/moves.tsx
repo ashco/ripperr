@@ -10,7 +10,7 @@ import FilterBar from 'domain/FilterBar';
 import Modal from 'domain/Modal';
 import MovementMenu from 'components/MovementMenu';
 
-import { sortMovements } from 'utils/sortMovements';
+import { sortMovements } from 'utils/sort-movements';
 
 import { IAuthUserContext } from 'types/types';
 

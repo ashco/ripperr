@@ -1,4 +1,4 @@
-﻿export const theme = {
+﻿const baseTheme = {
   color: {
     logo: 'rgba(84, 255, 180, 1)',
     neutral: {
@@ -91,26 +91,10 @@
     3: '0 10px 24px hsla(0, 0%, 0%, .2)',
     4: '0 15px 35px hsla(0, 0%, 0%, .2)',
   },
-  space: {
-    0: '0.25rem', // 4
-    1: '0.5rem', // 8
-    2: '0.75rem', // 12
-    3: '1rem', // 16
-    4: '1.5rem', // 24
-    5: '2rem', // 32
-    6: '3rem', // 48
-    7: '4rem', // 64
-    8: '6rem', // 96
-    9: '8rem', // 128
-    10: '12rem', // 192
-    11: '16rem', // 256
-    12: '24rem', // 387
-    13: '32rem', // 512
-    14: '40rem', // 640
-    15: '48rem', // 768
-  },
   maxWidth: '1000px',
+  mode: {},
 };
+
 export const darkMode = {
   type: 'Dark',
   background: {
@@ -152,3 +136,7 @@ export const lightMode = {
     200: 'hsla(240, 1%, 47%, 0.5)',
   },
 };
+
+export const theme = { ...baseTheme, mode: lightMode };
+
+// export default theme;
