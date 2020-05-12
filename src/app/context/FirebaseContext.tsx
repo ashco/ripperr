@@ -6,10 +6,10 @@ import 'firebase/firestore';
 
 const config = {
   apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  databaseURL: process.env.DATABASE_URL,
+  authDomain: `${process.env.PROJECT_ID}.firebaseapp.com`,
+  databaseURL: `https://${process.env.PROJECT_ID}.firebaseio.com`,
   projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
+  storageBucket: `${process.env.PROJECT_ID}.appspot.com`,
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID,
   measurementId: process.env.MEASUREMENT_ID,
