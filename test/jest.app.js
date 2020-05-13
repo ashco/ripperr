@@ -8,8 +8,11 @@ module.exports = {
   displayName: 'app',
   preset: 'ts-jest',
   testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  // snapshotSerializers: ['jest-styled-components'] // does not currently work with styled-components 7.0
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    'jest-styled-components',
+  ],
+  // snapshotSerializers: ['jest-styled-components'], // does not currently work with styled-components 7.0
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
   globals: {
     'ts-jest': {
