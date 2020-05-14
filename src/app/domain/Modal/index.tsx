@@ -15,6 +15,7 @@ import { ModalMode, MovementType } from 'types/enums';
 import { Movement } from 'types/types';
 import singleCapString from '@/utils/single-cap-string';
 
+// potentially use ReactDOM.portal instead - https://reactjs.org/docs/portals.html
 const Modal: React.FC = () => {
   const modalState = useModalState();
   const moveState = useMoveState();

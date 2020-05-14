@@ -18,8 +18,8 @@ const MovementMenu: React.FC<{
       move.type === MovementType.Workout
     ) {
       return <MenuListItem key={move.id} movement={move} />;
-    } else {
-      return null;
+      // } else {
+      //   return null;
     }
   }
 
