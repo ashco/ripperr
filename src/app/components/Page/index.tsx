@@ -7,15 +7,12 @@ import GlobalStyle from 'styles/GlobalStyle';
 import StyledPage from './style';
 
 import { MoveProvider } from 'context/MoveContext';
-import { usePointerEvents } from 'context/PointerEventsContext';
 
 import Meta from '../Meta';
 import NavBar from 'domain/Navigation';
 
 const Page: React.FC = (props) => {
-  const disablePointer = !usePointerEvents()[0];
-
-  const { theme } = useSelector((state) => state.ui);
+  const { theme, isPointerDisabled } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,12 +28,11 @@ const Page: React.FC = (props) => {
       dispatch(setTheme({ themeMode: 'DARK' }));
     }
   }, []);
-  console.log(disablePointer);
 
   return (
     <ThemeProvider theme={theme}>
       <MoveProvider>
-        <StyledPage disablePointer={disablePointer}>
+        <StyledPage isPointerDisabled={isPointerDisabled}>
           <GlobalStyle />
           <Meta />
           <NavBar />

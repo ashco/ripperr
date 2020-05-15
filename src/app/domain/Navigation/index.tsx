@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode, setIsAddMoveMode, isAddMoveMode } from 'store/ui';
+import { setModalMode, setIsAddMoveMode, IsAddMoveMode } from 'store/ui';
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
@@ -74,7 +74,7 @@ const CancelButton: React.FC<{
 
 const NavBarAuth: React.FC<{
   color: string;
-  isAddMoveMode?: isAddMoveMode;
+  isAddMoveMode?: IsAddMoveMode;
 }> = ({ color, isAddMoveMode }) => {
   const messageText = isAddMoveMode ? 'Add New Movement' : '';
 

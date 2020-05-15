@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 
 import Page from '../components/Page';
 import { withAuthentication } from 'context';
-import { PointerEventsProvider } from 'context/PointerEventsContext';
 
 import configureStore from 'store';
 
@@ -17,11 +16,9 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Provider store={store}>
-        <PointerEventsProvider>
-          <Page>
-            <Component {...pageProps} />
-          </Page>
-        </PointerEventsProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
       </Provider>
     );
   }

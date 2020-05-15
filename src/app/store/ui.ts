@@ -8,18 +8,21 @@ interface ThemeMode {
 }
 
 type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | null;
-export type isAddMoveMode = boolean;
+export type IsAddMoveMode = boolean;
+export type IsPointerDisabled = boolean;
 
 interface UIState {
   theme: DefaultTheme;
   modalMode: ModalMode;
-  isAddMoveMode: isAddMoveMode;
+  isAddMoveMode: IsAddMoveMode;
+  isPointerDisabled: IsPointerDisabled;
 }
 
 const initialState: UIState = {
   theme: darkTheme,
   modalMode: null,
   isAddMoveMode: false,
+  isPointerDisabled: false,
 };
 
 const uiSlice = createSlice({
@@ -34,15 +37,26 @@ const uiSlice = createSlice({
         state.theme = darkTheme;
       }
     },
+
     setModalMode(state, action: PayloadAction<ModalMode>) {
       state.modalMode = action.payload;
     },
-    setIsAddMoveMode(state, action: PayloadAction<isAddMoveMode>) {
+
+    setIsAddMoveMode(state, action: PayloadAction<IsAddMoveMode>) {
       state.isAddMoveMode = action.payload;
+    },
+
+    setIsPointerDisabled(state, action: PayloadAction<IsPointerDisabled>) {
+      state.isPointerDisabled = action.payload;
     },
   },
 });
 
-export const { setTheme, setModalMode, setIsAddMoveMode } = uiSlice.actions;
+export const {
+  setTheme,
+  setModalMode,
+  setIsAddMoveMode,
+  setIsPointerDisabled,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

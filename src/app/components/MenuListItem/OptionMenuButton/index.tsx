@@ -1,17 +1,11 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/ui';
+import { setModalMode, setIsPointerDisabled } from 'store/ui';
 import styled, { ThemeContext } from 'styled-components';
 
 import Button from 'components/Button';
 
 import { useMoveDispatch } from 'context/MoveContext';
-// import { usedispatch } from 'context/ModalContext';
-import { usePointerEvents } from 'context/PointerEventsContext';
-
-// import TimesSolid from 'icons/times-solid.svg';
-
-// import Bars from 'icons/Bars';
 import Icon from 'icons';
 import { MovementType } from 'types/enums';
 import { Movement } from 'types/types';
@@ -28,7 +22,6 @@ const OptionMenuButton: React.FC<{
   const menuRef = useRef<HTMLDivElement>(null);
 
   const moveDispatch = useMoveDispatch();
-  const setPointerEvents = usePointerEvents()[1];
 
   function handleView(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
@@ -47,12 +40,12 @@ const OptionMenuButton: React.FC<{
 
   function openMenu(): void {
     setMenuOpen(true);
-    setPointerEvents(false);
+    dispatch(setIsPointerDisabled(true));
   }
 
   function closeMenu(): void {
     setMenuOpen(false);
-    setPointerEvents(true);
+    dispatch(setIsPointerDisabled(false));
     document.removeEventListener('click', closeMenu);
   }
 
