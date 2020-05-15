@@ -8,8 +8,8 @@ const Label: React.FC<{
   text: string;
   display: 'inline' | 'block' | 'none';
 }> = ({ text, display, children }) => {
-  const { modalMode } = useSelector((state) => state.modal);
-  const showLabel = modalMode === 'MODAL_EDIT';
+  const { modalMode } = useSelector((state) => state.ui);
+  const showLabel = modalMode === 'EDIT';
 
   return (
     <LabelWrapper className={display} showLabel={showLabel}>

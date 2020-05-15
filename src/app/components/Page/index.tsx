@@ -1,12 +1,11 @@
 ﻿import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'store';
 import { ThemeProvider } from 'styled-components';
-import { updateTheme } from 'store/theme';
+import { setTheme } from 'store/ui';
 import GlobalStyle from 'styles/GlobalStyle';
 
 import StyledPage from './style';
 
-// import { ModalProvider } from 'context/ModalContext';
 import { MoveProvider } from 'context/MoveContext';
 import { AddMoveModeProvider } from 'context/AddMoveModeContext';
 import { usePointerEvents } from 'context/PointerEventsContext';
@@ -17,7 +16,7 @@ import NavBar from 'domain/Navigation';
 const Page: React.FC = (props) => {
   const disablePointer = !usePointerEvents()[0];
 
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +29,7 @@ const Page: React.FC = (props) => {
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
     ) {
-      dispatch(updateTheme({ themeMode: 'DARK' }));
+      dispatch(setTheme({ themeMode: 'DARK' }));
     }
   }, []);
   console.log(disablePointer);

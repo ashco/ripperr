@@ -3,21 +3,21 @@
 import styled from 'styled-components';
 // import { useThemeMode } from 'context/ThemeModeContext';
 import { useSelector, useDispatch } from 'store';
-import { updateTheme } from 'store/theme';
+import { setTheme } from 'store/ui';
 
 import Button from 'components/Button';
 
 const DarkModeButton = () => {
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   const buttonText = theme.mode.type === 'Light' ? 'Dark' : 'Light';
 
   function toggleThemeMode() {
     if (theme.mode.type === 'Light') {
-      dispatch(updateTheme({ themeMode: 'DARK' }));
+      dispatch(setTheme({ themeMode: 'DARK' }));
     } else if (theme.mode.type === 'Dark') {
-      dispatch(updateTheme({ themeMode: 'LIGHT' }));
+      dispatch(setTheme({ themeMode: 'LIGHT' }));
     }
   }
 

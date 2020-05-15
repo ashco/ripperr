@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
@@ -43,7 +43,7 @@ const NavLogo: React.FC<{ color: string }> = ({ color }) => {
 
   function handleCancel(e: any) {
     // Find way to determine if edit or add.
-    dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
     setAddMoveMode(false);
   }
 

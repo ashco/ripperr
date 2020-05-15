@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 
 import { useMoveDispatch } from 'context/MoveContext';
 
@@ -17,19 +17,19 @@ const AddMovementModal = () => {
   const moveDispatch = useMoveDispatch();
 
   function addArchetype(): void {
-    dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
     moveDispatch({ type: 'MOVE_RESET_AR' });
   }
   function addExercise(): void {
-    dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
     moveDispatch({ type: 'MOVE_RESET_EX' });
   }
   function addWorkout(): void {
-    dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
     moveDispatch({ type: 'MOVE_RESET_WO' });
   }
   function closeModal(): void {
-    dispatch(setModalMode({ modalMode: 'MODAL_CLOSED' }));
+    dispatch(setModalMode({ modalMode: null }));
   }
 
   return (

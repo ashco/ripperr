@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 // import { useModalDispatch } from 'context/ModalContext';
 import { useMoveDispatch } from 'context/MoveContext';
 import { useAddMoveMode } from 'context/AddMoveModeContext';
@@ -51,7 +51,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
 
   function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
-      dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
+      dispatch(setModalMode({ modalMode: 'VIEW' }));
       moveDispatch({ type: 'MOVE_SET', value: movement });
     }
   }
@@ -60,7 +60,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
     if (!btnRef?.current?.contains(e.target)) {
       console.log('Adding movement to workout');
       moveDispatch({ type: 'MOVE_ADD_MOVE', value: movement });
-      dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
+      dispatch(setModalMode({ modalMode: 'EDIT' }));
       setAddMoveMode(false);
     }
   }

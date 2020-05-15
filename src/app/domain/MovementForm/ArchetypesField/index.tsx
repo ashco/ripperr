@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import Select from 'react-select';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 import { Controller } from 'react-hook-form';
 import { ThemeContext } from 'styled-components';
 
@@ -26,7 +26,7 @@ const ArchetypesField: React.FC<{
   setValue: any;
   watch: any;
 }> = ({ tags, isDisabled, control, setValue, watch }) => {
-  const { modalMode } = useSelector((state) => state.modal);
+  const { modalMode } = useSelector((state) => state.ui);
 
   // Generate select option list
   const { archetypes } = React.useContext(MovementListContext);
@@ -54,7 +54,7 @@ const ArchetypesField: React.FC<{
 
   React.useEffect(() => {
     // reset field state to current tags when going from EDIT to VIEW
-    if (modalMode === 'MODAL_VIEW') {
+    if (modalMode === 'VIEW') {
       const currentSelectedOptions = options.filter((opt) =>
         tags.includes(opt.value),
       );
@@ -136,7 +136,7 @@ const ArchetypesField: React.FC<{
 //       {archetypes
 //         // TODO - make more performent
 //         .filter((arch) => {
-//           if (modalMode === 'MODAL_VIEW') {
+//           if (modalMode === 'VIEW') {
 //             return tags.includes(arch.id as string);
 //           } else {
 //             return true;

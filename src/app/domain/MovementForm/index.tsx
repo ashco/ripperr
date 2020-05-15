@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 import { useForm, Controller } from 'react-hook-form';
 
 import TextareaAutosize from 'react-textarea-autosize';
@@ -45,10 +45,9 @@ const MovementForm: React.FC<{}> = () => {
   const moveState = useMoveState();
   const moveDispatch = useMoveDispatch();
   const dispatch = useDispatch();
-  const { modal } = useSelector((state) => state);
+  const { modalMode } = useSelector((state) => state.ui);
   // const dispatch = usedispatch();
   // const modal = usemodal();
-  const { modalMode } = modal;
 
   const defaultValues: any = {
     name: (moveState as Movement).name,
@@ -56,7 +55,7 @@ const MovementForm: React.FC<{}> = () => {
     tags: [...(moveState as Exercise | Workout).tags],
   };
 
-  const isDisabled = modalMode === 'MODAL_VIEW';
+  const isDisabled = modalMode === 'VIEW';
   const isNewEntry = !moveState?.id;
   // TODO - update useCurrentWidth to listen on window resize, no setTimeout usage
   // const isMobile = useCurrentWidth() < 600;
@@ -121,7 +120,7 @@ const MovementForm: React.FC<{}> = () => {
           console.log(moveData);
           console.log(watch());
 
-          dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
+          dispatch(setModalMode({ modalMode: 'VIEW' }));
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -161,7 +160,7 @@ const MovementForm: React.FC<{}> = () => {
           console.log(
             `${singleCapString(moveData.type)} Added: ${moveData.name}`,
           );
-          dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
+          dispatch(setModalMode({ modalMode: 'VIEW' }));
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -173,9 +172,9 @@ const MovementForm: React.FC<{}> = () => {
   }
 
   function onSubmit(formData: FormData) {
-    if (modalMode === 'MODAL_VIEW') {
-      dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
-    } else if (modalMode === 'MODAL_EDIT') {
+    if (modalMode === 'VIEW') {
+      dispatch(setModalMode({ modalMode: 'EDIT' }));
+    } else if (modalMode === 'EDIT') {
       const moveData = {
         ...(moveState as Movement),
         ...formData,
@@ -197,11 +196,11 @@ const MovementForm: React.FC<{}> = () => {
   }
 
   function handleClose(): void {
-    if (modalMode === 'MODAL_VIEW' || isNewEntry) {
-      dispatch(setModalMode({ modalMode: 'MODAL_CLOSED' }));
+    if (modalMode === 'VIEW' || isNewEntry) {
+      dispatch(setModalMode({ modalMode: null }));
       moveDispatch({ type: 'MOVE_CLEAR' });
-    } else if (modalMode === 'MODAL_EDIT') {
-      dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
+    } else if (modalMode === 'EDIT') {
+      dispatch(setModalMode({ modalMode: 'VIEW' }));
       resetForm();
     } else {
       throw Error('Unsupported ModalMode provided.');
@@ -219,11 +218,11 @@ const MovementForm: React.FC<{}> = () => {
     },
   };
   switch (modalMode) {
-    case 'MODAL_VIEW':
+    case 'VIEW':
       btnConfig.cancelBtn.text = 'Close';
       btnConfig.actionBtn.text = 'Edit';
       break;
-    case 'MODAL_EDIT':
+    case 'EDIT':
       btnConfig.cancelBtn.text = 'Cancel';
       btnConfig.actionBtn.text = isNewEntry ? 'Create' : 'Update';
       break;
@@ -243,9 +242,7 @@ const MovementForm: React.FC<{}> = () => {
     <MovementFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
       <Label
         text="Name:"
-        display={
-          modalMode === 'MODAL_VIEW' ? 'none' : isMobile ? 'block' : 'inline'
-        }
+        display={modalMode === 'VIEW' ? 'none' : isMobile ? 'block' : 'inline'}
       >
         <input
           name="name"
@@ -304,7 +301,7 @@ const MovementForm: React.FC<{}> = () => {
                     isDisabled={isDisabled}
                   />
                 )}
-                {modalMode === 'MODAL_EDIT' && <AddMovementButton />}
+                {modalMode === 'EDIT' && <AddMovementButton />}
               </Label>
             </>
           )}

@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 
 import { useAddMoveMode } from 'context/AddMoveModeContext';
 // import { useModalDispatch } from 'context/ModalContext';
@@ -21,7 +21,7 @@ const FilterInput: React.FC<{}> = () => {
   const filtering = filter.value.length > 0 || filter.tags.length > 0;
 
   function openModal(): void {
-    dispatch(setModalMode({ modalMode: 'MODAL_ADD' }));
+    dispatch(setModalMode({ modalMode: 'ADD' }));
   }
 
   return (

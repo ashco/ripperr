@@ -5,20 +5,17 @@ import {
   useDispatch,
   TypedUseSelectorHook,
 } from 'react-redux';
-// import thunkMiddleware from "redux-thunk";
 
 import { filterReducer } from './filter/reducers';
-import modalReducer from './modal';
-import themeReducer from './theme';
-// import { themeReducer } from './theme/reducers';
-// import { themeReducer } from './theme';
-// import { modalSlice } from './modal';
-// import { themeSlice } from './theme';
+// import modalReducer from './modal';
+// import themeReducer from './theme';
+import uiReducer from './ui';
 
 const rootReducer = combineReducers({
   filter: filterReducer,
-  modal: modalReducer,
-  theme: themeReducer,
+  // modal: modalReducer,
+  ui: uiReducer,
+  // theme: themeReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

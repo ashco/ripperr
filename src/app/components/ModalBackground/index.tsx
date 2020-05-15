@@ -1,18 +1,18 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 import styled from 'styled-components';
 
 const ModalBackground: React.FC = ({ children }) => {
   const dispatch = useDispatch();
-  const modal = useSelector((state) => state.modal);
+  const modal = useSelector((state) => state.ui);
 
   const bgRef = React.useRef<HTMLDivElement>(null);
 
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
-      if (modal.modalMode !== 'MODAL_EDIT') {
-        dispatch(setModalMode({ modalMode: 'MODAL_CLOSED' }));
+      if (modal.modalMode !== 'EDIT') {
+        dispatch(setModalMode({ modalMode: null }));
       }
     }
   }

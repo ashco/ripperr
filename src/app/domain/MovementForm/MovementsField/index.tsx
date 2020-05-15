@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 
 import styled, { ThemeContext } from 'styled-components';
 import {
@@ -35,7 +35,7 @@ const MovementItem = SortableElement(
   }) => {
     const moveDispatch = useMoveDispatch();
 
-    const { modalMode } = useSelector((state) => state.modal);
+    const { modalMode } = useSelector((state) => state.ui);
 
     function handleDelete(e: any) {
       e.preventDefault();
@@ -48,7 +48,7 @@ const MovementItem = SortableElement(
 
     const DragHandle = SortableHandle(() => (
       <div className="drag-icon">
-        {modalMode === 'MODAL_EDIT' && <Icon name="grip-lines" />}
+        {modalMode === 'EDIT' && <Icon name="grip-lines" />}
       </div>
     ));
 
@@ -120,7 +120,7 @@ const MovementItem = SortableElement(
                 </label>
               )}
             </div>
-            {modalMode === 'MODAL_EDIT' && (
+            {modalMode === 'EDIT' && (
               <button className="delete-btn" onClick={handleDelete}>
                 ✕
               </button>

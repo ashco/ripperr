@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/modal';
+import { setModalMode } from 'store/ui';
 import styled, { ThemeContext } from 'styled-components';
 
 import Button from 'components/Button';
@@ -32,17 +32,17 @@ const OptionMenuButton: React.FC<{
 
   function handleView(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
+    dispatch(setModalMode({ modalMode: 'VIEW' }));
   }
 
   function handleEdit(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
   }
 
   function handleDelete(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode({ modalMode: 'MODAL_DELETE' }));
+    dispatch(setModalMode({ modalMode: 'DELETE' }));
   }
 
   function openMenu(): void {

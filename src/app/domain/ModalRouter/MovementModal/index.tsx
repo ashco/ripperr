@@ -14,14 +14,14 @@ import ColorBarWrapper from 'components/ColorBarWrapper';
 
 const MovementContainer: React.FC<{}> = () => {
   const moveState = useMoveState();
-  const { modalMode } = useSelector((state) => state.modal);
+  const { modalMode } = useSelector((state) => state.ui);
 
   let headerText;
   switch (modalMode) {
-    case 'MODAL_VIEW':
+    case 'VIEW':
       headerText = moveState?.name;
       break;
-    case 'MODAL_EDIT':
+    case 'EDIT':
       headerText = `${singleCapString(modalMode)} ${singleCapString(
         (moveState as Movement).type,
       )}`;
