@@ -1,22 +1,23 @@
-﻿import React, { useContext } from 'react';
-
-import StyledDeleteMovementContainer from './style';
+﻿import React from 'react';
 
 import { useModalDispatch } from 'context/ModalContext';
 import { useMoveState } from 'context/MoveContext';
+
+import ModalBackground from 'domain/Modal/ModalBackground';
+
+import DeleteMovementContainer from './style';
+
 import { AuthUserContext, FirebaseContext } from 'context';
 import ButtonRow from 'components/ButtonRow';
 
 import { MovementType } from 'types/enums';
 
-// DELETE ME
-
-const DeleteMovementContainer: React.FC = () => {
+const DeleteMovementMenu = () => {
   const modalDispatch = useModalDispatch();
   const moveState = useMoveState();
 
-  const authUser = useContext(AuthUserContext);
-  const firebase = useContext(FirebaseContext);
+  const authUser = React.useContext(AuthUserContext);
+  const firebase = React.useContext(FirebaseContext);
 
   if (moveState === null) {
     throw Error('moveState === null!');
@@ -79,11 +80,16 @@ const DeleteMovementContainer: React.FC = () => {
   }
 
   return (
-    <StyledDeleteMovementContainer>
-      <p>Do you want to delete this {moveText}?</p>
-      <ButtonRow config={btnConfig} />
-    </StyledDeleteMovementContainer>
+    <ModalBackground>
+      <DeleteMovementContainer>
+        <h1 className="header">{moveState?.name}</h1>
+        <div className="content">
+          <p>Do you want to delete this {moveText}?</p>
+          <ButtonRow config={btnConfig} />
+        </div>
+      </DeleteMovementContainer>
+    </ModalBackground>
   );
 };
 
-export default DeleteMovementContainer;
+export default DeleteMovementMenu;

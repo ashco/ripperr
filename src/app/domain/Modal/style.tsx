@@ -3,6 +3,7 @@
 import { sizes } from 'styles/sizes';
 import { MovementType } from 'types/enums';
 
+// DELETE ME
 const ModalRoot = styled.div<{ type?: MovementType; modalWidth?: string }>`
   position: relative;
   z-index: 999;

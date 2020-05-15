@@ -3,12 +3,12 @@
 import { useModalDispatch } from 'context/ModalContext';
 import { useMoveDispatch } from 'context/MoveContext';
 
-import StyledAddMovementContainer from '../../../components/NewMovementMenu/style';
+import NewMovementMenuContainer from './style';
 import Button from 'components/Button';
 
-// DELETE ME
+import ModalBackground from 'domain/Modal/ModalBackground';
 
-const AddMovementContainer: React.FC<{}> = () => {
+const NewMovementMenu = () => {
   const modalDispatch = useModalDispatch();
   const moveDispatch = useMoveDispatch();
 
@@ -29,17 +29,22 @@ const AddMovementContainer: React.FC<{}> = () => {
   }
 
   return (
-    <StyledAddMovementContainer>
-      <div className="btn-container">
-        <Button onClick={addArchetype}>Add Archetype</Button>
-        <Button onClick={addExercise}>Add Exercise</Button>
-        <Button onClick={addWorkout}>Add Workout</Button>
-      </div>
-      <Button className="cancel-btn" onClick={closeModal}>
-        Cancel
-      </Button>
-    </StyledAddMovementContainer>
+    <ModalBackground>
+      <NewMovementMenuContainer>
+        <h1 className="header">Create Movement</h1>
+        <div className="content">
+          <div className="btn-container">
+            <Button onClick={addArchetype}>Add Archetype</Button>
+            <Button onClick={addExercise}>Add Exercise</Button>
+            <Button onClick={addWorkout}>Add Workout</Button>
+          </div>
+          <Button className="cancel-btn" onClick={closeModal}>
+            Cancel
+          </Button>
+        </div>
+      </NewMovementMenuContainer>
+    </ModalBackground>
   );
 };
 
-export default AddMovementContainer;
+export default NewMovementMenu;

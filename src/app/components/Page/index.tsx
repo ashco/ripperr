@@ -15,7 +15,7 @@ import Meta from '../Meta';
 import NavBar from 'domain/Navigation';
 
 const Page: React.FC = (props) => {
-  const pointerEvents = usePointerEvents()[0];
+  const disablePointer = !usePointerEvents()[0];
 
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -33,13 +33,14 @@ const Page: React.FC = (props) => {
       dispatch({ type: 'DARK_MODE' });
     }
   }, []);
+  console.log(disablePointer);
 
   return (
     <ThemeProvider theme={theme}>
       <MoveProvider>
         <ModalProvider>
           <AddMoveModeProvider>
-            <StyledPage pointerEvents={pointerEvents ? 'auto' : 'none'}>
+            <StyledPage disablePointer={disablePointer}>
               <GlobalStyle />
               <Meta />
               <NavBar />
