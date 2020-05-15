@@ -7,7 +7,6 @@ import GlobalStyle from 'styles/GlobalStyle';
 import StyledPage from './style';
 
 import { MoveProvider } from 'context/MoveContext';
-import { AddMoveModeProvider } from 'context/AddMoveModeContext';
 import { usePointerEvents } from 'context/PointerEventsContext';
 
 import Meta from '../Meta';
@@ -37,16 +36,12 @@ const Page: React.FC = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <MoveProvider>
-        {/* <ModalProvider> */}
-        <AddMoveModeProvider>
-          <StyledPage disablePointer={disablePointer}>
-            <GlobalStyle />
-            <Meta />
-            <NavBar />
-            <div className="main">{props.children}</div>
-          </StyledPage>
-        </AddMoveModeProvider>
-        {/* </ModalProvider> */}
+        <StyledPage disablePointer={disablePointer}>
+          <GlobalStyle />
+          <Meta />
+          <NavBar />
+          <div className="main">{props.children}</div>
+        </StyledPage>
       </MoveProvider>
     </ThemeProvider>
   );

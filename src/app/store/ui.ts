@@ -3,21 +3,23 @@
 import { DefaultTheme } from 'styled-components';
 import { lightTheme, darkTheme } from 'styles/theme';
 
-type ThemeMode = {
+interface ThemeMode {
   themeMode: 'LIGHT' | 'DARK';
-};
-
-interface ModalMode {
-  modalMode: 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | null;
 }
 
-interface UIState extends ModalMode {
+type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | null;
+export type isAddMoveMode = boolean;
+
+interface UIState {
   theme: DefaultTheme;
+  modalMode: ModalMode;
+  isAddMoveMode: isAddMoveMode;
 }
 
 const initialState: UIState = {
   theme: darkTheme,
   modalMode: null,
+  isAddMoveMode: false,
 };
 
 const uiSlice = createSlice({
@@ -33,12 +35,14 @@ const uiSlice = createSlice({
       }
     },
     setModalMode(state, action: PayloadAction<ModalMode>) {
-      const { modalMode } = action.payload;
-      state.modalMode = modalMode;
+      state.modalMode = action.payload;
+    },
+    setIsAddMoveMode(state, action: PayloadAction<isAddMoveMode>) {
+      state.isAddMoveMode = action.payload;
     },
   },
 });
 
-export const { setTheme, setModalMode } = uiSlice.actions;
+export const { setTheme, setModalMode, setIsAddMoveMode } = uiSlice.actions;
 
 export default uiSlice.reducer;

@@ -11,8 +11,9 @@ import { Archetype } from 'types/types';
 const Filter: React.FC<{
   archetypeList: Archetype[] | null;
 }> = ({ archetypeList }) => {
-  const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
+
+  const filter = useSelector((state) => state.filter);
 
   const filterRef = React.useRef<HTMLDivElement>(null);
 

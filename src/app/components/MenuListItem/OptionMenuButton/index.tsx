@@ -32,17 +32,17 @@ const OptionMenuButton: React.FC<{
 
   function handleView(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode({ modalMode: 'VIEW' }));
+    dispatch(setModalMode('VIEW'));
   }
 
   function handleEdit(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode({ modalMode: 'EDIT' }));
+    dispatch(setModalMode('EDIT'));
   }
 
   function handleDelete(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode({ modalMode: 'DELETE' }));
+    dispatch(setModalMode('DELETE'));
   }
 
   function openMenu(): void {

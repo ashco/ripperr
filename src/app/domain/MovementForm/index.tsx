@@ -120,7 +120,7 @@ const MovementForm: React.FC<{}> = () => {
           console.log(moveData);
           console.log(watch());
 
-          dispatch(setModalMode({ modalMode: 'VIEW' }));
+          dispatch(setModalMode('VIEW'));
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -160,7 +160,7 @@ const MovementForm: React.FC<{}> = () => {
           console.log(
             `${singleCapString(moveData.type)} Added: ${moveData.name}`,
           );
-          dispatch(setModalMode({ modalMode: 'VIEW' }));
+          dispatch(setModalMode('VIEW'));
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -173,7 +173,7 @@ const MovementForm: React.FC<{}> = () => {
 
   function onSubmit(formData: FormData) {
     if (modalMode === 'VIEW') {
-      dispatch(setModalMode({ modalMode: 'EDIT' }));
+      dispatch(setModalMode('EDIT'));
     } else if (modalMode === 'EDIT') {
       const moveData = {
         ...(moveState as Movement),
@@ -197,10 +197,10 @@ const MovementForm: React.FC<{}> = () => {
 
   function handleClose(): void {
     if (modalMode === 'VIEW' || isNewEntry) {
-      dispatch(setModalMode({ modalMode: null }));
+      dispatch(setModalMode(null));
       moveDispatch({ type: 'MOVE_CLEAR' });
     } else if (modalMode === 'EDIT') {
-      dispatch(setModalMode({ modalMode: 'VIEW' }));
+      dispatch(setModalMode('VIEW'));
       resetForm();
     } else {
       throw Error('Unsupported ModalMode provided.');

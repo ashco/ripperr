@@ -1,11 +1,11 @@
 ﻿import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/ui';
+import { setModalMode, setIsAddMoveMode, isAddMoveMode } from 'store/ui';
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
 import { AuthUserContext } from 'context';
-import { useAddMoveMode } from 'context/AddMoveModeContext';
+// import { useAddMoveMode } from 'context/AddMoveModeContext';
 // import { useModalDispatch } from 'context/ModalContext';
 
 import NotificationBanner from 'components/NotificationBanner';
@@ -22,67 +22,75 @@ const NavBar: React.FC = () => {
   const authUser = useContext(AuthUserContext);
   const themeContext = useContext(ThemeContext);
 
+  const { isAddMoveMode } = useSelector((state) => state.ui);
+
+  const color = themeContext.mode.color[100];
+
   return (
     <>
-      <NotificationBanner />
+      {/* <NotificationBanner /> */}
       <NavBarWrapper>
         {authUser ? (
-          <NavBarAuth color={themeContext.mode.color[100]} />
+          <NavBarAuth color={color} isAddMoveMode={isAddMoveMode} />
         ) : (
-          <NavBarNonAuth color={themeContext.mode.color[100]} />
+          <NavBarNonAuth color={color} />
         )}
       </NavBarWrapper>
     </>
   );
 };
 
-const NavLogo: React.FC<{ color: string }> = ({ color }) => {
-  const [addMoveMode, setAddMoveMode] = useAddMoveMode();
-  // const modalDispatch = useModalDispatch();
-  const dispatch = useDispatch();
-
-  function handleCancel(e: any) {
-    // Find way to determine if edit or add.
-    dispatch(setModalMode({ modalMode: 'EDIT' }));
-    setAddMoveMode(false);
-  }
-
-  return addMoveMode ? (
-    <Button className="logo" onClick={handleCancel}>
-      <Icon name="times" />
-      Cancel
-    </Button>
-  ) : (
+const NavLogo: React.FC<{
+  color: string;
+}> = ({ color }) => {
+  return (
     <Link href="/moves">
       <a className="logo">
-        <Icon name="logo" />
+        <Icon name="logo" fill={color} />
         Ripperr
       </a>
     </Link>
   );
 };
 
-const NavMessage: React.FC = () => {
-  const addMoveMode = useAddMoveMode()[0];
+const CancelButton: React.FC<{
+  color: string;
+}> = ({ color }) => {
+  const dispatch = useDispatch();
 
-  const messageText = addMoveMode ? 'Add New Movement' : '';
+  function handleCancel(e: any) {
+    // Find way to determine if edit or add.
+    dispatch(setModalMode('EDIT'));
+    dispatch(setIsAddMoveMode(false));
+  }
 
-  return <h2>{messageText}</h2>;
+  return (
+    <Button className="logo" onClick={handleCancel}>
+      <Icon name="times" fill={color} />
+      Cancel
+    </Button>
+  );
 };
 
-const NavBarAuth: React.FC<{ color: string }> = ({ color }) => {
-  // const setMessage = useNotification()[1];
-  const [notification, setNotification] = useNotification();
+const NavBarAuth: React.FC<{
+  color: string;
+  isAddMoveMode?: isAddMoveMode;
+}> = ({ color, isAddMoveMode }) => {
+  const messageText = isAddMoveMode ? 'Add New Movement' : '';
 
   return (
     <ul>
       <div className="list-group left">
         <li>
-          <NavLogo color={color} />
+          {isAddMoveMode ? (
+            <CancelButton color={color} />
+          ) : (
+            <NavLogo color={color} />
+          )}
         </li>
       </div>
       <div className="list-group center">
-        <NavMessage />
+        <h2>{messageText}</h2>
       </div>
       <div className="list-group right">
         <li>
@@ -95,11 +103,6 @@ const NavBarAuth: React.FC<{ color: string }> = ({ color }) => {
           <a>Admin</a>
         </Link>
       </li> */}
-        {/* <li>
-          <button onClick={() => setNotification('this is just a test')}>
-            NotificationBanner
-          </button>
-        </li> */}
         <li>
           <SignOutButton />
         </li>
@@ -115,9 +118,9 @@ const NavBarNonAuth: React.FC<{ color: string }> = ({ color }) => (
         <NavLogo color={color} />
       </li>
     </div>
-    <div className="list-group center">
-      <NavMessage />
-    </div>
+    {/* <div className="list-group center">
+
+    </div> */}
     <div className="list-group right">
       <li>
         <Link href="/signin">

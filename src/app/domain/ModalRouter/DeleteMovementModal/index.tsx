@@ -52,13 +52,13 @@ const DeleteMovementModal = () => {
 
   function onDelete(): void {
     handleDelete();
-    dispatch(setModalMode({ modalMode: null }));
+    dispatch(setModalMode(null));
   }
 
   const btnConfig = {
     cancelBtn: {
       text: 'Cancel',
-      onClick: () => dispatch(setModalMode({ modalMode: null })),
+      onClick: () => dispatch(setModalMode(null)),
     },
     actionBtn: {
       text: 'Delete',

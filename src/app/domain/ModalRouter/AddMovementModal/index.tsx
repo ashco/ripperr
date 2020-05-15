@@ -17,19 +17,19 @@ const AddMovementModal = () => {
   const moveDispatch = useMoveDispatch();
 
   function addArchetype(): void {
-    dispatch(setModalMode({ modalMode: 'EDIT' }));
+    dispatch(setModalMode('EDIT'));
     moveDispatch({ type: 'MOVE_RESET_AR' });
   }
   function addExercise(): void {
-    dispatch(setModalMode({ modalMode: 'EDIT' }));
+    dispatch(setModalMode('EDIT'));
     moveDispatch({ type: 'MOVE_RESET_EX' });
   }
   function addWorkout(): void {
-    dispatch(setModalMode({ modalMode: 'EDIT' }));
+    dispatch(setModalMode('EDIT'));
     moveDispatch({ type: 'MOVE_RESET_WO' });
   }
   function closeModal(): void {
-    dispatch(setModalMode({ modalMode: null }));
+    dispatch(setModalMode(null));
   }
 
   return (

@@ -2,10 +2,7 @@
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/ui';
-
-import { useAddMoveMode } from 'context/AddMoveModeContext';
-// import { useModalDispatch } from 'context/ModalContext';
+import { setModalMode, setIsAddMoveMode } from 'store/ui';
 
 import AddMovementButton from '../AddMovementButton';
 import ClearFilterButton from '../ClearFilterButton';
@@ -13,15 +10,12 @@ import ClearFilterButton from '../ClearFilterButton';
 const FilterInput: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.filter);
-
-  // const modalDispatch = useModalDispatch();
-
-  const addMoveMode = useAddMoveMode()[0];
+  const { isAddMoveMode } = useSelector((state) => state.ui);
 
   const filtering = filter.value.length > 0 || filter.tags.length > 0;
 
   function openModal(): void {
-    dispatch(setModalMode({ modalMode: 'ADD' }));
+    dispatch(setModalMode('ADD'));
   }
 
   return (
@@ -42,7 +36,7 @@ const FilterInput: React.FC<{}> = () => {
       {filtering ? (
         <ClearFilterButton />
       ) : (
-        !addMoveMode && <AddMovementButton openModal={openModal} />
+        !isAddMoveMode && <AddMovementButton openModal={openModal} />
       )}
     </FilterInputWrapper>
   );
@@ -58,11 +52,11 @@ const FilterInputWrapper = styled.div`
   input {
     font-size: 24px;
     padding: 0.5rem 1rem;
-    box-shadow: ${(props) => props.theme.shadow[2]};
+    box-shadow: ${(p) => p.theme.shadow[2]};
     border: none;
-    background: ${(props) => props.theme.mode.background[300]};
+    background: ${(p) => p.theme.mode.background[300]};
     border-radius: 5px;
-    color: ${(props) => props.theme.mode.color[100]};
+    color: ${(p) => p.theme.mode.color[100]};
     width: inherit;
   }
 `;
