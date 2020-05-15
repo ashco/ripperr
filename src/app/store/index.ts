@@ -7,11 +7,11 @@ import {
 // import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { themeModeReducer } from './themeMode/reducers';
+import { themeReducer } from './theme/reducers';
 // import { chatReducer } from './chat/reducers';
 
 const rootReducer = combineReducers({
-  themeMode: themeModeReducer,
+  theme: themeReducer,
   // chat: chatReducer,
 });
 

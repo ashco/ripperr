@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 
 import Page from '../components/Page';
 import { withAuthentication } from 'context';
-// import { ThemeModeProvider } from 'context/ThemeModeContext';
 import { PointerEventsProvider } from 'context/PointerEventsContext';
 
 import configureStore from 'store';
@@ -18,13 +17,11 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <Provider store={store}>
-        {/* <ThemeModeProvider> */}
         <PointerEventsProvider>
           <Page>
             <Component {...pageProps} />
           </Page>
         </PointerEventsProvider>
-        {/* </ThemeModeProvider> */}
       </Provider>
     );
   }

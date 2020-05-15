@@ -7,8 +7,7 @@ import { useSelector, useDispatch } from 'store';
 import Button from 'components/Button';
 
 const DarkModeButton = () => {
-  // const [theme, setTheme] = useThemeMode();
-  const theme = useSelector((state) => state.themeMode);
+  const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
   const buttonText = theme.mode.type === 'Light' ? 'Dark' : 'Light';

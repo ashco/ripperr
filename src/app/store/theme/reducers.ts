@@ -1,13 +1,13 @@
 ﻿import { lightTheme, darkTheme } from 'styles/theme';
 
-import { ThemeModeState, ThemeModeAction } from './types';
+import { ThemeState, ThemeAction } from './types';
 
-const initialState: ThemeModeState = darkTheme;
+const initialState: ThemeState = darkTheme;
 
-export function themeModeReducer(
+export function themeReducer(
   state = initialState,
-  action: ThemeModeAction,
-): ThemeModeState {
+  action: ThemeAction,
+): ThemeState {
   switch (action.type) {
     case 'LIGHT_MODE': {
       return lightTheme;

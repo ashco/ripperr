@@ -4,19 +4,19 @@
 // export interface ThemeModeState {
 //   themeMode: DefaultTheme;
 // }
-export type ThemeModeState = DefaultTheme;
+export type ThemeState = DefaultTheme;
 
 // Describing the different ACTION NAMES available
 // export const UPDATE_THEME_MODE = 'LIGHT_MODE' | 'DARK_MODE';
 
-export type THEME_MODE = 'LIGHT_MODE' | 'DARK_MODE';
+export type THEME = 'LIGHT_MODE' | 'DARK_MODE';
 
-export interface ThemeModeAction {
-  type: THEME_MODE;
+export interface ThemeAction {
+  type: THEME;
   // payload: ThemeModeState;
 }
 
-// export type ThemeModeActionTypes = UpdateThemeModeAction;
+// export type ThemeActionTypes = UpdateThemeAction;
 
 // // Describing the shape of the system's slice of state
 // export interface SystemState {

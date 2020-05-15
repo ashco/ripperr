@@ -21,17 +21,11 @@ const Page: React.FC = (props) => {
 
   const pointerEvents = usePointerEvents()[0];
 
-  const theme = useSelector((state) => state.themeMode);
+  const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
-  // console.log(themeMode);
 
   useEffect(() => {
-    // if (localStorage.getItem('themeMode') === 'LIGHT_MODE') {
-    // setTheme('LIGHT');
-
-    // } else if (localStorage.getItem('themeMode') === 'DARK_MODE') {
-    // setTheme('DARK');
-    const prevThemeMode = localStorage.getItem('themeMode');
+    const prevThemeMode = localStorage.getItem('theme');
 
     if (prevThemeMode) {
       dispatch({ type: prevThemeMode });
