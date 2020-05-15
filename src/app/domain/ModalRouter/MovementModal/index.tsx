@@ -2,9 +2,6 @@
 import { useSelector, useDispatch } from 'store';
 import MovementForm from 'domain/MovementForm';
 
-// import StyledMovementContainer from './style';
-
-// import { usemodal } from 'context/ModalContext';
 import { useMoveState } from 'context/MoveContext';
 import ModalBackground from 'components/ModalBackground';
 import ModalContainer from 'components/ModalContainer';
@@ -12,21 +9,20 @@ import ModalContainer from 'components/ModalContainer';
 import singleCapString from 'utils/single-cap-string';
 
 import { Movement } from 'types/types';
-import { ModalMode, MovementType } from 'types/enums';
+import { MovementType } from 'types/enums';
 import ColorBarWrapper from 'components/ColorBarWrapper';
 
 const MovementContainer: React.FC<{}> = () => {
   const moveState = useMoveState();
-  // const modal = usemodal();
-  const { modal } = useSelector((state) => state);
+  const { modalMode } = useSelector((state) => state.modal);
 
   let headerText;
-  switch (modal.mode) {
-    case ModalMode.View:
+  switch (modalMode) {
+    case 'MODAL_VIEW':
       headerText = moveState?.name;
       break;
-    case ModalMode.Edit:
-      headerText = `${singleCapString(modal.mode)} ${singleCapString(
+    case 'MODAL_EDIT':
+      headerText = `${singleCapString(modalMode)} ${singleCapString(
         (moveState as Movement).type,
       )}`;
       break;

@@ -5,10 +5,8 @@ import styled from 'styled-components';
 
 import { MovementListContext } from 'context';
 import { withAuthorization, withMovements } from 'context';
-// import { useModalState } from 'context/ModalContext';
 
-import FilterBar from 'domain/FilterBar';
-// import Modal from 'domain/Modal';
+import Filter from 'domain/Filter';
 
 import MovementMenu from 'components/MovementMenu';
 
@@ -20,8 +18,6 @@ import ModalRouter from 'domain/ModalRouter';
 
 const MovesPage: NextPage = () => {
   const filter = useSelector((state) => state.filter);
-
-  // const modal = useModalState();
 
   const movements = useContext(MovementListContext);
   const moveList = movements.loading
@@ -43,14 +39,8 @@ const MovesPage: NextPage = () => {
   return (
     <MovementsPageWrapper>
       <MovementMenu moveList={moveList} filterActive={filter.active} />
-      <FilterBar archetypeList={archetypeList} />
-      {/* <Modal /> */}
-
+      <Filter archetypeList={archetypeList} />
       <ModalRouter />
-      {/* <Modal isOpen={modal.open}>
-        <AddMovementModal />
-        <DeleteMovementModal />
-      </Modal> */}
     </MovementsPageWrapper>
   );
 };

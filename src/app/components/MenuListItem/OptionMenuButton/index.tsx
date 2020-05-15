@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useSelector, useDispatch } from 'store';
+import { setModalMode } from 'store/modal';
 import styled, { ThemeContext } from 'styled-components';
 
 import Button from 'components/Button';
@@ -14,6 +15,8 @@ import { usePointerEvents } from 'context/PointerEventsContext';
 import Icon from 'icons';
 import { MovementType } from 'types/enums';
 import { Movement } from 'types/types';
+import Modal from 'components/Modal';
+import ModalBackground from 'components/ModalBackground';
 
 const OptionMenuButton: React.FC<{
   movement: Movement;
@@ -29,17 +32,17 @@ const OptionMenuButton: React.FC<{
 
   function handleView(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch({ type: 'MODAL_VIEW' });
+    dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
   }
 
   function handleEdit(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch({ type: 'MODAL_EDIT' });
+    dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
   }
 
   function handleDelete(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch({ type: 'MODAL_DELETE' });
+    dispatch(setModalMode({ modalMode: 'MODAL_DELETE' }));
   }
 
   function openMenu(): void {
@@ -58,10 +61,13 @@ const OptionMenuButton: React.FC<{
       console.log('menu open');
       document.addEventListener('click', closeMenu);
 
+      // const isNumber = (arg) => typeof arg === 'number';
+
       const offsetHeight = menuRef?.current?.offsetHeight;
       const offsetWidth = menuRef?.current?.offsetWidth;
       const offsetTop = menuRef?.current?.offsetTop;
       const offsetLeft = menuRef?.current?.offsetLeft;
+      // console.log({ offsetHeight, offsetWidth, offsetTop, offsetLeft });
       if (
         offsetHeight &&
         offsetWidth &&
@@ -96,7 +102,9 @@ const OptionMenuButton: React.FC<{
       <StyledOptionButton onClick={openMenu}>
         <Icon name="bars" />
       </StyledOptionButton>
-      <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
+      {/* <Modal > */}
+      {/* <ModalBackground> */}
+      <ListItemMenuWrapper ref={menuRef} isOpen={menuOpen}>
         {movement.type === MovementType.Workout && (
           <Button onClick={() => console.log('Starting!!')}>Start</Button>
         )}
@@ -104,9 +112,24 @@ const OptionMenuButton: React.FC<{
         <Button onClick={handleEdit}>Edit</Button>
         <Button onClick={handleDelete}>Delete</Button>
       </ListItemMenuWrapper>
+      {/* </ModalBackground> */}
+      {/* </Modal> */}
     </>
   );
 };
+// <>
+//   <StyledOptionButton onClick={openMenu}>
+//     <Icon name="bars" />
+//   </StyledOptionButton>
+//   <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
+//     {movement.type === MovementType.Workout && (
+//       <Button onClick={() => console.log('Starting!!')}>Start</Button>
+//     )}
+//     <Button onClick={handleView}>View</Button>
+//     <Button onClick={handleEdit}>Edit</Button>
+//     <Button onClick={handleDelete}>Delete</Button>
+//   </ListItemMenuWrapper>
+// </>
 
 const StyledOptionButton = styled.button`
   border: none;
@@ -116,30 +139,30 @@ const StyledOptionButton = styled.button`
   cursor: pointer;
 
   svg path {
-    fill: ${(props) => props.theme.mode.color[200]};
+    fill: ${(p) => p.theme.mode.color[200]};
   }
   &:hover {
     svg path {
-      fill: ${(props) => props.theme.mode.color[100]};
+      fill: ${(p) => p.theme.mode.color[100]};
     }
   }
 `;
 
-const ListItemMenuWrapper = styled.div<{ open: boolean }>`
+const ListItemMenuWrapper = styled.div<{ isOpen: boolean }>`
   pointer-events: all;
   position: fixed;
   opacity: 0;
-  display: ${(props) => (props.open ? 'grid' : 'none')};
+  display: ${(p) => (p.isOpen ? 'grid' : 'none')};
   grid-auto-rows: auto;
-  background-color: ${(props) => props.theme.mode.background[200]};
-  box-shadow: ${(props) => props.theme.shadow[2]};
+  background-color: ${(p) => p.theme.mode.background[200]};
+  box-shadow: ${(p) => p.theme.shadow[2]};
   width: 6rem;
   z-index: 20;
   button {
     border-bottom: none;
   }
   &:last-child {
-    border-bottom: 2px solid ${(prop) => prop.theme.mode.color[100]};
+    border-bottom: 2px solid ${(p) => p.theme.mode.color[100]};
   }
 `;
 

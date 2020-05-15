@@ -1,7 +1,7 @@
 ﻿import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'store';
 import { ThemeProvider } from 'styled-components';
-
+import { updateTheme } from 'store/theme';
 import GlobalStyle from 'styles/GlobalStyle';
 
 import StyledPage from './style';
@@ -30,7 +30,7 @@ const Page: React.FC = (props) => {
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches
     ) {
-      dispatch({ type: 'DARK_MODE' });
+      dispatch(updateTheme({ themeMode: 'DARK' }));
     }
   }, []);
   console.log(disablePointer);

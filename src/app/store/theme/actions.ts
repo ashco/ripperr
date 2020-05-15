@@ -1,7 +1,11 @@
-﻿import { THEME } from './types';
+﻿import { createAction } from '@reduxjs/toolkit';
 
-export function updateTheme(theme: THEME) {
-  return {
-    type: theme,
-  };
-}
+import { ThemeActionType, ThemeActionPayload } from './types';
+
+export const updateTheme = createAction('theme/update');
+
+// export function updateTheme(theme: ThemeActionType) {
+//   return {
+//     type: theme,
+//   };
+// }

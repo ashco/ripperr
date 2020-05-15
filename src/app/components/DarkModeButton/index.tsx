@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 // import { useThemeMode } from 'context/ThemeModeContext';
 import { useSelector, useDispatch } from 'store';
+import { updateTheme } from 'store/theme';
 
 import Button from 'components/Button';
 
@@ -14,9 +15,9 @@ const DarkModeButton = () => {
 
   function toggleThemeMode() {
     if (theme.mode.type === 'Light') {
-      dispatch({ type: 'DARK_MODE' });
+      dispatch(updateTheme({ themeMode: 'DARK' }));
     } else if (theme.mode.type === 'Dark') {
-      dispatch({ type: 'LIGHT_MODE' });
+      dispatch(updateTheme({ themeMode: 'LIGHT' }));
     }
   }
 

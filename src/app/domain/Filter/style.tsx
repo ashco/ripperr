@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-const FilterBarContainer = styled.div<{ active: boolean; filtering: boolean }>`
+const FilterContainer = styled.div<{ active: boolean; filtering: boolean }>`
   padding: 0.75rem;
   display: grid;
   gap: 1rem;
@@ -12,4 +12,4 @@ const FilterBarContainer = styled.div<{ active: boolean; filtering: boolean }>`
   background-color: ${(props) => props.theme.mode.background[200]};
 `;
 
-export default FilterBarContainer;
+export default FilterContainer;

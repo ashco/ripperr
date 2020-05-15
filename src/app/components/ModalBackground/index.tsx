@@ -1,23 +1,18 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
+import { setModalMode } from 'store/modal';
 import styled from 'styled-components';
-
-// import { useModalState, useModalDispatch } from 'context/ModalContext';
-
-import { ModalMode } from 'types/enums';
 
 const ModalBackground: React.FC = ({ children }) => {
   const dispatch = useDispatch();
-  const { modal } = useSelector((state) => state);
-  // const modal = useModalState();
-  // const modalDispatch = useModalDispatch();
+  const modal = useSelector((state) => state.modal);
 
   const bgRef = React.useRef<HTMLDivElement>(null);
 
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
-      if (modal.mode !== ModalMode.Edit) {
-        dispatch({ type: 'MODAL_CLOSE' });
+      if (modal.modalMode !== 'MODAL_EDIT') {
+        dispatch(setModalMode({ modalMode: 'MODAL_CLOSED' }));
       }
     }
   }
@@ -32,7 +27,7 @@ const ModalBackground: React.FC = ({ children }) => {
 };
 
 const StyledModalBackground = styled.div`
-  z-index: 900;
+  z-index: 100;
   background-color: ${(props) => props.theme.mode.backgroundOpacity[100]};
   position: fixed;
   height: 100%;

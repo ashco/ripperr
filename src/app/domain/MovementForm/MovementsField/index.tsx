@@ -1,4 +1,7 @@
 ﻿import React from 'react';
+import { useSelector, useDispatch } from 'store';
+import { setModalMode } from 'store/modal';
+
 import styled, { ThemeContext } from 'styled-components';
 import {
   SortableHandle,
@@ -14,7 +17,7 @@ import { MovementListItemWrapper, MovementListWrapper } from './style';
 
 import arrayMove from 'utils/array-move';
 import { IMovementRefs } from 'types/types';
-import { WorkoutMode, ModalMode } from 'types/enums';
+import { WorkoutMode } from 'types/enums';
 
 const MovementItem = SortableElement(
   ({
@@ -23,16 +26,16 @@ const MovementItem = SortableElement(
     otherIndex,
     isDisabled,
     mode,
-    modalMode,
   }: {
     movement: IMovementRefs;
     index: number;
     otherIndex: number; // Added second index because regular index variable is coming in undefined. Might be because SortableElement needs index as prop, and then doesn't pass it down.
     isDisabled: boolean;
     mode?: WorkoutMode;
-    modalMode: ModalMode;
   }) => {
     const moveDispatch = useMoveDispatch();
+
+    const { modalMode } = useSelector((state) => state.modal);
 
     function handleDelete(e: any) {
       e.preventDefault();
@@ -45,7 +48,7 @@ const MovementItem = SortableElement(
 
     const DragHandle = SortableHandle(() => (
       <div className="drag-icon">
-        {modalMode === ModalMode.Edit && <Icon name="grip-lines" />}
+        {modalMode === 'MODAL_EDIT' && <Icon name="grip-lines" />}
       </div>
     ));
 
@@ -117,7 +120,7 @@ const MovementItem = SortableElement(
                 </label>
               )}
             </div>
-            {modalMode === ModalMode.Edit && (
+            {modalMode === 'MODAL_EDIT' && (
               <button className="delete-btn" onClick={handleDelete}>
                 ✕
               </button>
@@ -134,11 +137,9 @@ const MovementList = SortableContainer(
     movements,
     isDisabled,
     mode,
-    modalMode,
   }: {
     movements: IMovementRefs[];
     mode?: WorkoutMode;
-    modalMode: ModalMode;
     isDisabled: boolean;
   }) => {
     return (
@@ -149,7 +150,6 @@ const MovementList = SortableContainer(
               key={`item-${i}`}
               movement={move}
               mode={mode}
-              modalMode={modalMode}
               index={i}
               otherIndex={i}
               isDisabled={isDisabled}
@@ -164,9 +164,8 @@ const MovementList = SortableContainer(
 const MovementSortableComponent: React.FC<{
   movements: IMovementRefs[];
   mode?: WorkoutMode;
-  modalMode: ModalMode;
   isDisabled: boolean;
-}> = ({ movements, isDisabled, mode, modalMode }) => {
+}> = ({ movements, isDisabled, mode }) => {
   const moveDispatch = useMoveDispatch();
 
   function onSortEnd({
@@ -186,7 +185,6 @@ const MovementSortableComponent: React.FC<{
       movements={movements}
       isDisabled={isDisabled}
       mode={mode}
-      modalMode={modalMode}
       useDragHandle
       onSortEnd={onSortEnd}
       lockAxis="y"

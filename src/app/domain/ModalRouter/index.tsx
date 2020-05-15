@@ -6,29 +6,26 @@ import Modal from 'components/Modal';
 import AddMovementModal from 'domain/ModalRouter/AddMovementModal';
 import DeleteMovementModal from 'domain/ModalRouter/DeleteMovementModal';
 import MovementModal from 'domain/ModalRouter/MovementModal';
-import { ModalMode } from 'types/enums';
 
 const ModalRouter = () => {
-  // const modal = useModalState();
-
-  const { modal } = useSelector((state) => state);
+  const { modalMode } = useSelector((state) => state.modal);
 
   let content = null;
 
-  switch (modal.mode) {
-    case ModalMode.Add:
+  switch (modalMode) {
+    case 'MODAL_ADD':
       content = <AddMovementModal />;
       break;
-    case ModalMode.Delete:
+    case 'MODAL_DELETE':
       content = <DeleteMovementModal />;
       break;
-    case ModalMode.Edit:
-    case ModalMode.View:
+    case 'MODAL_EDIT':
+    case 'MODAL_VIEW':
       content = <MovementModal />;
       break;
   }
 
-  return <Modal isOpen={modal.open}>{content}</Modal>;
+  return <Modal isOpen={modalMode !== 'MODAL_CLOSED'}>{content}</Modal>;
 };
 
 export default ModalRouter;

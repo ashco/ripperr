@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'store';
 import ArchetypeList from './ArchetypeList';
 import FilterInput from './FilterInput';
 
-import FilterBarContainer from './style';
+import FilterContainer from './style';
 
 import { Archetype } from 'types/types';
 
-const FilterBar: React.FC<{
+const Filter: React.FC<{
   archetypeList: Archetype[] | null;
 }> = ({ archetypeList }) => {
   const filter = useSelector((state) => state.filter);
@@ -35,15 +35,15 @@ const FilterBar: React.FC<{
   const filtering = filter.value.length > 0 || filter.tags.length > 0;
 
   return (
-    <FilterBarContainer
+    <FilterContainer
       active={filter.active}
       filtering={filtering}
       ref={filterRef}
     >
       {filter.active && <ArchetypeList archetypeList={archetypeList} />}
       <FilterInput />
-    </FilterBarContainer>
+    </FilterContainer>
   );
 };
 
-export default FilterBar;
+export default Filter;

@@ -1,15 +1,19 @@
-﻿import { createStore, combineReducers, applyMiddleware } from 'redux';
+﻿import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   useSelector as useRRSelector,
   useDispatch,
   TypedUseSelectorHook,
 } from 'react-redux';
 // import thunkMiddleware from "redux-thunk";
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { filterReducer } from './filter/reducers';
-import { modalReducer } from './modal/reducers';
-import { themeReducer } from './theme/reducers';
+import modalReducer from './modal';
+import themeReducer from './theme';
+// import { themeReducer } from './theme/reducers';
+// import { themeReducer } from './theme';
+// import { modalSlice } from './modal';
+// import { themeSlice } from './theme';
 
 const rootReducer = combineReducers({
   filter: filterReducer,
@@ -17,21 +21,16 @@ const rootReducer = combineReducers({
   theme: themeReducer,
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>;
 
 // set up so don't have to declare type every time
-export const useSelector: TypedUseSelectorHook<AppState> = useRRSelector;
+export const useSelector: TypedUseSelectorHook<RootState> = useRRSelector;
 export { useDispatch };
 
-export default function configureStore() {
-  // const middlewares = [thunkMiddleware];
-  // const middleWareEnhancer = applyMiddleware(...middlewares);
-
-  const store = createStore(
-    rootReducer,
-    // composeWithDevTools(middleWareEnhancer)
-    composeWithDevTools(),
-  );
+export default () => {
+  const store = configureStore({
+    reducer: rootReducer,
+  });
 
   return store;
-}
+};

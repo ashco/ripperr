@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
+import { setModalMode } from 'store/modal';
 import { useForm, Controller } from 'react-hook-form';
 
 import TextareaAutosize from 'react-textarea-autosize';
@@ -28,7 +29,7 @@ import {
   Workout,
   ButtonRowProps,
 } from 'types/types';
-import { ModalMode, MovementType } from 'types/enums';
+import { MovementType } from 'types/enums';
 
 type FormData = {
   name: string;
@@ -36,9 +37,7 @@ type FormData = {
   tags: string[];
 };
 
-const MovementForm: React.FC<{
-  // mode: ModalMode.Edit | ModalMode.View;
-}> = () => {
+const MovementForm: React.FC<{}> = () => {
   const firebase = React.useContext(FirebaseContext);
   const authUser = React.useContext(AuthUserContext);
   const movementList = React.useContext(MovementListContext);
@@ -49,7 +48,7 @@ const MovementForm: React.FC<{
   const { modal } = useSelector((state) => state);
   // const dispatch = usedispatch();
   // const modal = usemodal();
-  const mode = modal.mode as ModalMode;
+  const { modalMode } = modal;
 
   const defaultValues: any = {
     name: (moveState as Movement).name,
@@ -57,7 +56,7 @@ const MovementForm: React.FC<{
     tags: [...(moveState as Exercise | Workout).tags],
   };
 
-  const isDisabled = mode === ModalMode.View;
+  const isDisabled = modalMode === 'MODAL_VIEW';
   const isNewEntry = !moveState?.id;
   // TODO - update useCurrentWidth to listen on window resize, no setTimeout usage
   // const isMobile = useCurrentWidth() < 600;
@@ -122,7 +121,7 @@ const MovementForm: React.FC<{
           console.log(moveData);
           console.log(watch());
 
-          dispatch({ type: 'MODAL_VIEW' });
+          dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -162,7 +161,7 @@ const MovementForm: React.FC<{
           console.log(
             `${singleCapString(moveData.type)} Added: ${moveData.name}`,
           );
-          dispatch({ type: 'MODAL_VIEW' });
+          dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -174,9 +173,9 @@ const MovementForm: React.FC<{
   }
 
   function onSubmit(formData: FormData) {
-    if (mode === ModalMode.View) {
-      dispatch({ type: 'MODAL_EDIT' });
-    } else if (mode === ModalMode.Edit) {
+    if (modalMode === 'MODAL_VIEW') {
+      dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
+    } else if (modalMode === 'MODAL_EDIT') {
       const moveData = {
         ...(moveState as Movement),
         ...formData,
@@ -198,11 +197,11 @@ const MovementForm: React.FC<{
   }
 
   function handleClose(): void {
-    if (mode === ModalMode.View || isNewEntry) {
-      dispatch({ type: 'MODAL_CLOSE' });
+    if (modalMode === 'MODAL_VIEW' || isNewEntry) {
+      dispatch(setModalMode({ modalMode: 'MODAL_CLOSED' }));
       moveDispatch({ type: 'MOVE_CLEAR' });
-    } else if (mode === ModalMode.Edit) {
-      dispatch({ type: 'MODAL_VIEW' });
+    } else if (modalMode === 'MODAL_EDIT') {
+      dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
       resetForm();
     } else {
       throw Error('Unsupported ModalMode provided.');
@@ -219,12 +218,12 @@ const MovementForm: React.FC<{
       text: '',
     },
   };
-  switch (mode) {
-    case ModalMode.View:
+  switch (modalMode) {
+    case 'MODAL_VIEW':
       btnConfig.cancelBtn.text = 'Close';
       btnConfig.actionBtn.text = 'Edit';
       break;
-    case ModalMode.Edit:
+    case 'MODAL_EDIT':
       btnConfig.cancelBtn.text = 'Cancel';
       btnConfig.actionBtn.text = isNewEntry ? 'Create' : 'Update';
       break;
@@ -245,7 +244,7 @@ const MovementForm: React.FC<{
       <Label
         text="Name:"
         display={
-          mode === ModalMode.View ? 'none' : isMobile ? 'block' : 'inline'
+          modalMode === 'MODAL_VIEW' ? 'none' : isMobile ? 'block' : 'inline'
         }
       >
         <input
@@ -301,11 +300,11 @@ const MovementForm: React.FC<{
                   <MovementsField
                     movements={(moveState as Workout).movements}
                     mode={(moveState as Workout).mode}
-                    modalMode={mode}
+                    modalMode={modalMode}
                     isDisabled={isDisabled}
                   />
                 )}
-                {mode === ModalMode.Edit && <AddMovementButton />}
+                {modalMode === 'MODAL_EDIT' && <AddMovementButton />}
               </Label>
             </>
           )}
@@ -324,7 +323,6 @@ const MovementForm: React.FC<{
           <ArchetypesField
             tags={watch().tags}
             setValue={setValue}
-            modalMode={mode}
             isDisabled={isDisabled}
             control={control}
             watch={watch}

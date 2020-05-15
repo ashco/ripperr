@@ -5,7 +5,7 @@ import useNotification from 'hooks/useNotification';
 
 const NotificationBanner: React.FC = () => {
   const notification = useNotification()[0];
-  console.log(notification);
+  // console.log(notification);
 
   return (
     <StyledNotificationBanner active={notification.active}>

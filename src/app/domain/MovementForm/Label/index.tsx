@@ -2,18 +2,14 @@
 import { useSelector, useDispatch } from 'store';
 import styled from 'styled-components';
 
-// import { useModalState } from 'context/ModalContext';
-
 import { sizes } from 'styles/sizes';
-import { ModalMode } from 'types/enums';
 
 const Label: React.FC<{
   text: string;
   display: 'inline' | 'block' | 'none';
 }> = ({ text, display, children }) => {
-  // const modal = useModalState();
-  const { modal } = useSelector((state) => state);
-  const showLabel = modal.mode === ModalMode.Edit;
+  const { modalMode } = useSelector((state) => state.modal);
+  const showLabel = modalMode === 'MODAL_EDIT';
 
   return (
     <LabelWrapper className={display} showLabel={showLabel}>
@@ -29,14 +25,13 @@ const LabelWrapper = styled.div<{ showLabel: boolean }>`
     font-size: 16px;
   }
   &.inline {
-    grid-template-columns: ${(props) =>
-      props.showLabel ? '6rem auto' : 'auto'};
+    grid-template-columns: ${(p) => (p.showLabel ? '6rem auto' : 'auto')};
     p {
       padding-top: 0.75rem;
     }
   }
   &.block {
-    grid-template-rows: ${(props) => (props.showLabel ? 'auto auto' : 'auto')};
+    grid-template-rows: ${(p) => (p.showLabel ? 'auto auto' : 'auto')};
     gap: 0.25rem;
     input,
     textarea {
@@ -52,8 +47,7 @@ const LabelWrapper = styled.div<{ showLabel: boolean }>`
       font-size: 18px;
     }
     &.inline {
-      grid-template-columns: ${(props) =>
-        props.showLabel ? '8rem auto' : 'auto'};
+      grid-template-columns: ${(p) => (p.showLabel ? '8rem auto' : 'auto')};
     }
     &.block {
       gap: 1rem;

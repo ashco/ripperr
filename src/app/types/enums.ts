@@ -1,11 +1,12 @@
 ﻿// ========== MODAL ==========
 
-export enum ModalMode {
-  Add = 'ADD',
-  Delete = 'DELETE',
-  Edit = 'EDIT',
-  View = 'VIEW',
-}
+// export enum ModalMode {
+//   Add = 'ADD',
+//   Edit = 'EDIT',
+//   View = 'VIEW',
+//   Closed = 'CLOSED',
+//   Delete = 'DELETE',
+// }
 
 // ========== MOVEMENTS ==========
 export enum FormFieldProp {

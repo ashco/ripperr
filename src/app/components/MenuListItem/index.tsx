@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
+import { setModalMode } from 'store/modal';
 // import { useModalDispatch } from 'context/ModalContext';
 import { useMoveDispatch } from 'context/MoveContext';
 import { useAddMoveMode } from 'context/AddMoveModeContext';
@@ -26,7 +27,8 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
   let color;
   switch (movement.type) {
     case MovementType.Archetype: {
-      // TODO Make more efficient by lifting up. Do not loop through array for each component.
+      // TODO
+      // Make more efficient by lifting up. Do not loop through array for each component.
       const active = filter.tags.includes(movement.id as string);
       color = active ? 'orange' : 'neutral';
       break;
@@ -49,7 +51,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
 
   function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
-      dispatch({ type: 'MODAL_VIEW' });
+      dispatch(setModalMode({ modalMode: 'MODAL_VIEW' }));
       moveDispatch({ type: 'MOVE_SET', value: movement });
     }
   }
@@ -58,7 +60,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
     if (!btnRef?.current?.contains(e.target)) {
       console.log('Adding movement to workout');
       moveDispatch({ type: 'MOVE_ADD_MOVE', value: movement });
-      dispatch({ type: 'MODAL_EDIT' });
+      dispatch(setModalMode({ modalMode: 'MODAL_EDIT' }));
       setAddMoveMode(false);
     }
   }

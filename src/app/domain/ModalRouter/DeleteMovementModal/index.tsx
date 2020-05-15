@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
+import { setModalMode } from 'store/modal';
 // import { useModalDispatch } from 'context/ModalContext';
 import { useMoveState } from 'context/MoveContext';
 
@@ -51,13 +52,13 @@ const DeleteMovementModal = () => {
 
   function onDelete(): void {
     handleDelete();
-    dispatch({ type: 'MODAL_CLOSE' });
+    dispatch(setModalMode({ modalMode: 'MODAL_CLOSED' }));
   }
 
   const btnConfig = {
     cancelBtn: {
       text: 'Cancel',
-      onClick: () => dispatch({ type: 'MODAL_CLOSE' }),
+      onClick: () => dispatch(setModalMode({ modalMode: 'MODAL_CLOSED' })),
     },
     actionBtn: {
       text: 'Delete',

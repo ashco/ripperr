@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 import Select from 'react-select';
+import { useSelector, useDispatch } from 'store';
+import { setModalMode } from 'store/modal';
 import { Controller } from 'react-hook-form';
 import { ThemeContext } from 'styled-components';
 
@@ -9,7 +11,6 @@ import { useMoveDispatch } from 'context/MoveContext';
 // import { ArchFormListItem } from 'components/ListItems';
 import { ArchetypesFieldWrapper, ArchetypeListItemWrapper } from './style';
 
-import { ModalMode } from 'types/enums';
 import { Archetype } from 'types/types';
 import { string } from 'yup';
 
@@ -21,11 +22,12 @@ interface SelectOption {
 const ArchetypesField: React.FC<{
   tags: any;
   isDisabled: boolean;
-  modalMode: ModalMode;
   control: any;
   setValue: any;
   watch: any;
-}> = ({ tags, isDisabled, modalMode, control, setValue, watch }) => {
+}> = ({ tags, isDisabled, control, setValue, watch }) => {
+  const { modalMode } = useSelector((state) => state.modal);
+
   // Generate select option list
   const { archetypes } = React.useContext(MovementListContext);
   const options = archetypes.map((arch) => {
@@ -52,7 +54,7 @@ const ArchetypesField: React.FC<{
 
   React.useEffect(() => {
     // reset field state to current tags when going from EDIT to VIEW
-    if (modalMode === ModalMode.View) {
+    if (modalMode === 'MODAL_VIEW') {
       const currentSelectedOptions = options.filter((opt) =>
         tags.includes(opt.value),
       );
@@ -134,7 +136,7 @@ const ArchetypesField: React.FC<{
 //       {archetypes
 //         // TODO - make more performent
 //         .filter((arch) => {
-//           if (modalMode === ModalMode.View) {
+//           if (modalMode === 'MODAL_VIEW') {
 //             return tags.includes(arch.id as string);
 //           } else {
 //             return true;
