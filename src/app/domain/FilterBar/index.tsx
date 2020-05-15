@@ -1,6 +1,5 @@
 ﻿import React from 'react';
-
-import { useFilterState, useFilterDispatch } from 'context/FilterContext';
+import { useSelector, useDispatch } from 'store';
 
 import ArchetypeList from './ArchetypeList';
 import FilterInput from './FilterInput';
@@ -12,15 +11,15 @@ import { Archetype } from 'types/types';
 const FilterBar: React.FC<{
   archetypeList: Archetype[] | null;
 }> = ({ archetypeList }) => {
-  const filterState = useFilterState();
-  const filterDispatch = useFilterDispatch();
+  const filter = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
 
   const filterRef = React.useRef<HTMLDivElement>(null);
 
   function handleFilterModeOff(e: any) {
-    if (filterState.active) {
+    if (filter.active) {
       if (!filterRef?.current?.contains(e.target)) {
-        filterDispatch({ type: 'FILTER_MODE_OFF' });
+        dispatch({ type: 'FILTER_OFF' });
       }
     }
   }
@@ -33,16 +32,15 @@ const FilterBar: React.FC<{
     };
   });
 
-  const filtering =
-    filterState.value.length > 0 || filterState.archs.length > 0;
+  const filtering = filter.value.length > 0 || filter.tags.length > 0;
 
   return (
     <FilterBarContainer
-      active={filterState.active}
+      active={filter.active}
       filtering={filtering}
       ref={filterRef}
     >
-      {filterState.active && <ArchetypeList archetypeList={archetypeList} />}
+      {filter.active && <ArchetypeList archetypeList={archetypeList} />}
       <FilterInput />
     </FilterBarContainer>
   );

@@ -1,17 +1,15 @@
 ﻿import React from 'react';
-import styled, { ThemeContext } from 'styled-components';
-
-import { useFilterDispatch } from 'context/FilterContext';
+import { useDispatch } from 'store';
 
 import Button from 'components/Button';
 
 import Icon from 'icons';
 
 const ClearFilterButton: React.FC = () => {
-  const filterDispatch = useFilterDispatch();
+  const dispatch = useDispatch();
 
   function clearFilter() {
-    filterDispatch({ type: 'FILTER_RESET' });
+    dispatch({ type: 'FILTER_RESET' });
   }
 
   return (
@@ -20,13 +18,5 @@ const ClearFilterButton: React.FC = () => {
     </Button>
   );
 };
-
-// const StyledClearFilterButton = styled(Button)`
-//   &:hover {
-//     svg path {
-//       fill: ${(props) => props.theme.mode.background[200]};
-//     }
-//   }
-// `;
 
 export default ClearFilterButton;

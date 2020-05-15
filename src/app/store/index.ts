@@ -8,11 +8,11 @@ import {
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { themeReducer } from './theme/reducers';
-// import { chatReducer } from './chat/reducers';
+import { filterReducer } from './filter/reducers';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
-  // chat: chatReducer,
+  filter: filterReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

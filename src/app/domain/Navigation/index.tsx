@@ -92,11 +92,11 @@ const NavBarAuth: React.FC<{ color: string }> = ({ color }) => {
           <a>Admin</a>
         </Link>
       </li> */}
-        <li>
+        {/* <li>
           <button onClick={() => setNotification('this is just a test')}>
             NotificationBanner
           </button>
-        </li>
+        </li> */}
         <li>
           <SignOutButton />
         </li>

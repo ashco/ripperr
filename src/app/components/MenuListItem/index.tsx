@@ -1,8 +1,7 @@
 ﻿import React from 'react';
-
+import { useSelector, useDispatch } from 'store';
 import { useModalDispatch } from 'context/ModalContext';
 import { useMoveDispatch } from 'context/MoveContext';
-import { useFilterState, useFilterDispatch } from 'context/FilterContext';
 import { useAddMoveMode } from 'context/AddMoveModeContext';
 
 import ColorBarWrapper from 'components/ColorBarWrapper';
@@ -14,10 +13,11 @@ import { Movement } from 'types/types';
 import { MovementType } from 'types/enums';
 
 const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
+  const filter = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
+
   const modalDispatch = useModalDispatch();
   const moveDispatch = useMoveDispatch();
-  const filterState = useFilterState();
-  const filterDispatch = useFilterDispatch();
   const [addMoveMode, setAddMoveMode] = useAddMoveMode();
 
   const btnRef = React.useRef<HTMLDivElement>(null);
@@ -27,7 +27,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
   switch (movement.type) {
     case MovementType.Archetype: {
       // TODO Make more efficient by lifting up. Do not loop through array for each component.
-      const active = filterState.archs.includes(movement.id as string);
+      const active = filter.tags.includes(movement.id as string);
       color = active ? 'orange' : 'neutral';
       break;
     }
@@ -43,7 +43,7 @@ const MenuListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
 
   function toggleActiveArch(e: any) {
     if (!btnRef?.current?.contains(e.target)) {
-      filterDispatch({ type: 'FILTER_TOGGLE_ARCH', value: movement.id });
+      dispatch({ type: 'FILTER_TOGGLE_TAG', payload: movement.id });
     }
   }
 
