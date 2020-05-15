@@ -1,20 +1,23 @@
 ﻿import React from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-
-import { useThemeMode } from 'context/ThemeModeContext';
+// import { useThemeMode } from 'context/ThemeModeContext';
+import { useSelector, useDispatch } from 'store';
 
 import Button from 'components/Button';
 
 const DarkModeButton = () => {
-  const [theme, setTheme] = useThemeMode();
+  // const [theme, setTheme] = useThemeMode();
+  const theme = useSelector((state) => state.themeMode);
+  const dispatch = useDispatch();
 
   const buttonText = theme.mode.type === 'Light' ? 'Dark' : 'Light';
 
   function toggleThemeMode() {
     if (theme.mode.type === 'Light') {
-      setTheme('DARK');
+      dispatch({ type: 'DARK_MODE' });
     } else if (theme.mode.type === 'Dark') {
-      setTheme('LIGHT');
+      dispatch({ type: 'LIGHT_MODE' });
     }
   }
 

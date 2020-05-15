@@ -25,6 +25,7 @@ module.exports = withImages({
     config.resolve.alias['icons'] = path.join(__dirname, 'icons');
     config.resolve.alias['pages'] = path.join(__dirname, 'pages');
     config.resolve.alias['static'] = path.join(__dirname, 'static');
+    config.resolve.alias['store'] = path.join(__dirname, 'store');
     config.resolve.alias['styles'] = path.join(__dirname, 'styles');
     config.resolve.alias['types'] = path.join(__dirname, 'types');
     config.resolve.alias['utils'] = path.join(__dirname, 'utils');
