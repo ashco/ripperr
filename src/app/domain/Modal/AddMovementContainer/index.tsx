@@ -1,31 +1,32 @@
 ﻿import React from 'react';
-
-import { useModalDispatch } from 'context/ModalContext';
+import { useSelector, useDispatch } from 'store';
+// import { usedispatch } from 'context/ModalContext';
 import { useMoveDispatch } from 'context/MoveContext';
 
-import StyledAddMovementContainer from '../../../components/NewMovementMenu/style';
+import StyledAddMovementContainer from 'domain/ModalRouter/AddMovementModal/style';
 import Button from 'components/Button';
 
 // DELETE ME
 
 const AddMovementContainer: React.FC<{}> = () => {
-  const modalDispatch = useModalDispatch();
+  // const dispatch = usedispatch();
+  const dispatch = useDispatch();
   const moveDispatch = useMoveDispatch();
 
   function addArchetype(): void {
-    modalDispatch({ type: 'MODAL_EDIT' });
+    dispatch({ type: 'MODAL_EDIT' });
     moveDispatch({ type: 'MOVE_RESET_AR' });
   }
   function addExercise(): void {
-    modalDispatch({ type: 'MODAL_EDIT' });
+    dispatch({ type: 'MODAL_EDIT' });
     moveDispatch({ type: 'MOVE_RESET_EX' });
   }
   function addWorkout(): void {
-    modalDispatch({ type: 'MODAL_EDIT' });
+    dispatch({ type: 'MODAL_EDIT' });
     moveDispatch({ type: 'MOVE_RESET_WO' });
   }
   function closeModal(): void {
-    modalDispatch({ type: 'MODAL_CLOSE' });
+    dispatch({ type: 'MODAL_CLOSE' });
   }
 
   return (

@@ -1,14 +1,13 @@
 ﻿import styled from 'styled-components';
 
 import { sizes } from 'styles/sizes';
-import { MovementType } from 'types/enums';
 
 // DELETE ME
-const ModalRoot = styled.div<{ type?: MovementType; modalWidth?: string }>`
+const ModalRoot = styled.div<{ modalWidth?: string }>`
   position: relative;
   z-index: 999;
   .background {
-    background-color: ${(props) => props.theme.mode.backgroundOpacity[100]};
+    background-color: ${(p) => p.theme.mode.backgroundOpacity[100]};
     position: fixed;
     height: 100%;
     width: 100%;
@@ -23,17 +22,17 @@ const ModalRoot = styled.div<{ type?: MovementType; modalWidth?: string }>`
     > div {
       padding: 1rem;
       width: 100vw;
-      max-width: ${(props) => props.modalWidth || 'auto'};
+      max-width: ${(p) => p.modalWidth || 'auto'};
     }
 
     .modal-container {
       display: grid;
       gap: 1rem;
-      background: ${(props) => props.theme.mode.background[300]};
+      background: ${(p) => p.theme.mode.background[300]};
 
       padding: 1rem;
-      color: ${(props) => props.theme.mode.color[100]};
-      box-shadow: ${(props) => props.theme.shadow[2]};
+      color: ${(p) => p.theme.mode.color[100]};
+      box-shadow: ${(p) => p.theme.shadow[2]};
       h1.header {
         font-size: 22px;
         font-weight: 600;
@@ -45,7 +44,7 @@ const ModalRoot = styled.div<{ type?: MovementType; modalWidth?: string }>`
     .wrapper {
       > div {
         padding: 2rem;
-        width: ${(props) => props.modalWidth || 'auto'};
+        width: ${(p) => p.modalWidth || 'auto'};
       }
       .modal-container {
         padding: 2rem;

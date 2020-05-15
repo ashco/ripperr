@@ -1,10 +1,11 @@
 ﻿import React, { useContext } from 'react';
+import { useSelector, useDispatch } from 'store';
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
 import { AuthUserContext } from 'context';
 import { useAddMoveMode } from 'context/AddMoveModeContext';
-import { useModalDispatch } from 'context/ModalContext';
+// import { useModalDispatch } from 'context/ModalContext';
 
 import NotificationBanner from 'components/NotificationBanner';
 import Button from 'components/Button';
@@ -36,11 +37,12 @@ const NavBar: React.FC = () => {
 
 const NavLogo: React.FC<{ color: string }> = ({ color }) => {
   const [addMoveMode, setAddMoveMode] = useAddMoveMode();
-  const modalDispatch = useModalDispatch();
+  // const modalDispatch = useModalDispatch();
+  const dispatch = useDispatch();
 
   function handleCancel(e: any) {
     // Find way to determine if edit or add.
-    modalDispatch({ type: 'MODAL_EDIT' });
+    dispatch({ type: 'MODAL_EDIT' });
     setAddMoveMode(false);
   }
 

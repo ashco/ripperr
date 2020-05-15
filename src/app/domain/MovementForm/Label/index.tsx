@@ -1,7 +1,8 @@
 ﻿import React from 'react';
+import { useSelector, useDispatch } from 'store';
 import styled from 'styled-components';
 
-import { useModalState } from 'context/ModalContext';
+// import { useModalState } from 'context/ModalContext';
 
 import { sizes } from 'styles/sizes';
 import { ModalMode } from 'types/enums';
@@ -10,8 +11,9 @@ const Label: React.FC<{
   text: string;
   display: 'inline' | 'block' | 'none';
 }> = ({ text, display, children }) => {
-  const modalState = useModalState();
-  const showLabel = modalState.mode === ModalMode.Edit;
+  // const modal = useModalState();
+  const { modal } = useSelector((state) => state);
+  const showLabel = modal.mode === ModalMode.Edit;
 
   return (
     <LabelWrapper className={display} showLabel={showLabel}>

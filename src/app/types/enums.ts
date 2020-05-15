@@ -1,7 +1,7 @@
 ﻿// ========== MODAL ==========
 
 export enum ModalMode {
-  AddSelect = 'ADD_SELECT',
+  Add = 'ADD',
   Delete = 'DELETE',
   Edit = 'EDIT',
   View = 'VIEW',

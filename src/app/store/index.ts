@@ -7,12 +7,14 @@ import {
 // import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { themeReducer } from './theme/reducers';
 import { filterReducer } from './filter/reducers';
+import { modalReducer } from './modal/reducers';
+import { themeReducer } from './theme/reducers';
 
 const rootReducer = combineReducers({
-  theme: themeReducer,
   filter: filterReducer,
+  modal: modalReducer,
+  theme: themeReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

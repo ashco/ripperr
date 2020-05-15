@@ -19,8 +19,8 @@ const Portal: React.FC = ({ children }) => {
   return ReactDOM.createPortal(children, el.current);
 };
 
-const ModalWrapper: React.FC<{ isOpen: boolean }> = ({ isOpen, children }) => {
+const Modal: React.FC<{ isOpen: boolean }> = ({ isOpen, children }) => {
   return isOpen ? <Portal>{children}</Portal> : null;
 };
 
-export default ModalWrapper;
+export default Modal;

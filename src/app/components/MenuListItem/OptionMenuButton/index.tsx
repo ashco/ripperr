@@ -1,10 +1,11 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useSelector, useDispatch } from 'store';
 import styled, { ThemeContext } from 'styled-components';
 
 import Button from 'components/Button';
 
 import { useMoveDispatch } from 'context/MoveContext';
-import { useModalDispatch } from 'context/ModalContext';
+// import { usedispatch } from 'context/ModalContext';
 import { usePointerEvents } from 'context/PointerEventsContext';
 
 // import TimesSolid from 'icons/times-solid.svg';
@@ -17,27 +18,28 @@ import { Movement } from 'types/types';
 const OptionMenuButton: React.FC<{
   movement: Movement;
 }> = ({ movement }) => {
+  const dispatch = useDispatch();
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
 
   const moveDispatch = useMoveDispatch();
-  const modalDispatch = useModalDispatch();
   const setPointerEvents = usePointerEvents()[1];
 
   function handleView(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    modalDispatch({ type: 'MODAL_VIEW' });
+    dispatch({ type: 'MODAL_VIEW' });
   }
 
   function handleEdit(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    modalDispatch({ type: 'MODAL_EDIT' });
+    dispatch({ type: 'MODAL_EDIT' });
   }
 
   function handleDelete(): void {
     moveDispatch({ type: 'MOVE_SET', value: movement });
-    modalDispatch({ type: 'MODAL_DELETE' });
+    dispatch({ type: 'MODAL_DELETE' });
   }
 
   function openMenu(): void {

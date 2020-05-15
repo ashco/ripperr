@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { useModalState, useModalDispatch } from 'context/ModalContext';
+import { useSelector, useDispatch } from 'store';
+// import { useModalState, useModalDispatch } from 'context/ModalContext';
 import { useMoveState } from 'context/MoveContext';
 
 import ColorBarWrapper from 'components/ColorBarWrapper';
@@ -14,14 +15,16 @@ import ModalRoot from './style';
 
 import { ModalMode, MovementType } from 'types/enums';
 import { Movement } from 'types/types';
-import singleCapString from '@/utils/single-cap-string';
+import singleCapString from 'utils/single-cap-string';
 
 // DELETE ME
 
 const Modal: React.FC = () => {
-  const modalState = useModalState();
+  const { modal } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  // const modalState = useModalState();
   const moveState = useMoveState();
-  const modalDispatch = useModalDispatch();
+  // const modalDispatch = useModalDispatch();
 
   const bgRef = React.useRef<HTMLDivElement>(null);
 
@@ -31,8 +34,8 @@ const Modal: React.FC = () => {
   let modalWidth;
 
   // Determine modalContent
-  switch (modalState.mode) {
-    case ModalMode.AddSelect:
+  switch (modal.mode) {
+    case ModalMode.Add:
       modalContent = <AddMovementContainer />;
       break;
 
@@ -42,7 +45,7 @@ const Modal: React.FC = () => {
 
     case ModalMode.Edit:
     case ModalMode.View:
-      modalContent = <MovementContainer mode={modalState.mode} />;
+      modalContent = <MovementContainer mode={modal.mode} />;
       break;
 
     default:
@@ -50,8 +53,8 @@ const Modal: React.FC = () => {
   }
 
   // Determine headerText
-  switch (modalState.mode) {
-    case ModalMode.AddSelect:
+  switch (modal.mode) {
+    case ModalMode.Add:
       headerText = 'Create Movement';
       break;
 
@@ -61,7 +64,7 @@ const Modal: React.FC = () => {
       break;
 
     case ModalMode.Edit:
-      headerText = `${singleCapString(modalState.mode)} ${singleCapString(
+      headerText = `${singleCapString(modal.mode)} ${singleCapString(
         (moveState as Movement).type,
       )}`;
       break;
@@ -70,8 +73,8 @@ const Modal: React.FC = () => {
       break;
   }
 
-  switch (modalState.mode) {
-    case ModalMode.AddSelect:
+  switch (modal.mode) {
+    case ModalMode.Add:
       barColor = 'green';
       modalWidth = '28rem';
       break;
@@ -103,8 +106,8 @@ const Modal: React.FC = () => {
 
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
-      if (modalState.mode !== ModalMode.Edit) {
-        modalDispatch({ type: 'MODAL_CLOSE' });
+      if (modal.mode !== ModalMode.Edit) {
+        dispatch({ type: 'MODAL_CLOSE' });
       }
     }
   }
@@ -116,8 +119,8 @@ const Modal: React.FC = () => {
   });
 
   return (
-    <ModalRoot type={moveState?.type} modalWidth={modalWidth}>
-      {modalState.open && (
+    <ModalRoot modalWidth={modalWidth}>
+      {modal.open && (
         <div className="background" ref={bgRef}>
           <div className="wrapper">
             <ColorBarWrapper color={barColor}>

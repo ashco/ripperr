@@ -1,9 +1,9 @@
 ﻿import React from 'react';
-
-import { useModalDispatch } from 'context/ModalContext';
+import { useSelector, useDispatch } from 'store';
+// import { useModalDispatch } from 'context/ModalContext';
 import { useMoveState } from 'context/MoveContext';
 
-import ModalBackground from 'domain/Modal/ModalBackground';
+import ModalBackground from 'components/ModalBackground';
 
 import DeleteMovementContainer from './style';
 
@@ -11,9 +11,11 @@ import { AuthUserContext, FirebaseContext } from 'context';
 import ButtonRow from 'components/ButtonRow';
 
 import { MovementType } from 'types/enums';
+import ColorBarWrapper from 'components/ColorBarWrapper';
 
-const DeleteMovementMenu = () => {
-  const modalDispatch = useModalDispatch();
+const DeleteMovementModal = () => {
+  // const dispatch = useModalDispatch();
+  const dispatch = useDispatch();
   const moveState = useMoveState();
 
   const authUser = React.useContext(AuthUserContext);
@@ -49,13 +51,13 @@ const DeleteMovementMenu = () => {
 
   function onDelete(): void {
     handleDelete();
-    modalDispatch({ type: 'MODAL_CLOSE' });
+    dispatch({ type: 'MODAL_CLOSE' });
   }
 
   const btnConfig = {
     cancelBtn: {
       text: 'Cancel',
-      onClick: (): void => modalDispatch({ type: 'MODAL_CLOSE' }),
+      onClick: () => dispatch({ type: 'MODAL_CLOSE' }),
     },
     actionBtn: {
       text: 'Delete',
@@ -81,15 +83,17 @@ const DeleteMovementMenu = () => {
 
   return (
     <ModalBackground>
-      <DeleteMovementContainer>
-        <h1 className="header">{moveState?.name}</h1>
-        <div className="content">
-          <p>Do you want to delete this {moveText}?</p>
-          <ButtonRow config={btnConfig} />
-        </div>
-      </DeleteMovementContainer>
+      <ColorBarWrapper color="red">
+        <DeleteMovementContainer width="32rem">
+          <h1 className="header">{moveState?.name}</h1>
+          <div className="content">
+            <p>Do you want to delete this {moveText}?</p>
+            <ButtonRow config={btnConfig} />
+          </div>
+        </DeleteMovementContainer>
+      </ColorBarWrapper>
     </ModalBackground>
   );
 };
 
-export default DeleteMovementMenu;
+export default DeleteMovementModal;

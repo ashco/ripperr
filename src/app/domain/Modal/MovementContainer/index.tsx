@@ -9,6 +9,8 @@ import { useMoveState } from 'context/MoveContext';
 import { Movement } from 'types/types';
 import { ModalMode, MovementType } from 'types/enums';
 
+// DELETE ME
+
 const MovementContainer: React.FC<{
   mode: ModalMode.Edit | ModalMode.View;
 }> = ({ mode }) => {
@@ -16,7 +18,7 @@ const MovementContainer: React.FC<{
 
   return (
     <StyledMovementContainer type={(moveState as Movement).type}>
-      <MovementForm mode={mode} />
+      <MovementForm />
     </StyledMovementContainer>
   );
 };

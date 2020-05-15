@@ -1,7 +1,7 @@
 ﻿import styled from 'styled-components';
-import ModalContainer from 'domain/Modal/ModalContainer';
+import ModalContainer from 'components/ModalContainer';
 
-const NewMovementMenuContainer = styled(ModalContainer)`
+const AddMovementModalContainer = styled(ModalContainer)`
   .content {
     gap: 0.5rem;
     .btn-container {
@@ -14,4 +14,4 @@ const NewMovementMenuContainer = styled(ModalContainer)`
   }
 `;
 
-export default NewMovementMenuContainer;
+export default AddMovementModalContainer;

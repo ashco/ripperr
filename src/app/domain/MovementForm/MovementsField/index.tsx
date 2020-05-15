@@ -12,7 +12,7 @@ import Icon from 'icons';
 
 import { MovementListItemWrapper, MovementListWrapper } from './style';
 
-import arrayMove from '@/utils/array-move';
+import arrayMove from 'utils/array-move';
 import { IMovementRefs } from 'types/types';
 import { WorkoutMode, ModalMode } from 'types/enums';
 

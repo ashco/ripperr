@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'store';
 
 import { useAddMoveMode } from 'context/AddMoveModeContext';
-import { useModalDispatch } from 'context/ModalContext';
+// import { useModalDispatch } from 'context/ModalContext';
 
 import AddMovementButton from '../AddMovementButton';
 import ClearFilterButton from '../ClearFilterButton';
@@ -13,14 +13,14 @@ const FilterInput: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.filter);
 
-  const modalDispatch = useModalDispatch();
+  // const modalDispatch = useModalDispatch();
 
   const addMoveMode = useAddMoveMode()[0];
 
   const filtering = filter.value.length > 0 || filter.tags.length > 0;
 
   function openModal(): void {
-    modalDispatch({ type: 'MODAL_ADD_SELECT' });
+    dispatch({ type: 'MODAL_ADD' });
   }
 
   return (

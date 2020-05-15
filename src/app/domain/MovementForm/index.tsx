@@ -1,12 +1,12 @@
 ﻿import React from 'react';
-
+import { useSelector, useDispatch } from 'store';
 import { useForm, Controller } from 'react-hook-form';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { AuthUserContext, FirebaseContext, MovementListContext } from 'context';
 import { useMoveState, useMoveDispatch } from 'context/MoveContext';
-import { useModalDispatch } from 'context/ModalContext';
+// import { usedispatch, usemodal } from 'context/ModalContext';
 
 import MovementFormWrapper from './style';
 
@@ -19,7 +19,7 @@ import RestField from './RestField';
 import ButtonRow from 'components/ButtonRow';
 
 import useCurrentWidth from 'hooks/useCurrentWidth';
-import singleCapString from '@/utils/single-cap-string';
+import singleCapString from 'utils/single-cap-string';
 
 import {
   Movement,
@@ -37,15 +37,19 @@ type FormData = {
 };
 
 const MovementForm: React.FC<{
-  mode: ModalMode.Edit | ModalMode.View;
-}> = ({ mode }) => {
+  // mode: ModalMode.Edit | ModalMode.View;
+}> = () => {
   const firebase = React.useContext(FirebaseContext);
   const authUser = React.useContext(AuthUserContext);
   const movementList = React.useContext(MovementListContext);
 
   const moveState = useMoveState();
   const moveDispatch = useMoveDispatch();
-  const modalDispatch = useModalDispatch();
+  const dispatch = useDispatch();
+  const { modal } = useSelector((state) => state);
+  // const dispatch = usedispatch();
+  // const modal = usemodal();
+  const mode = modal.mode as ModalMode;
 
   const defaultValues: any = {
     name: (moveState as Movement).name,
@@ -118,7 +122,7 @@ const MovementForm: React.FC<{
           console.log(moveData);
           console.log(watch());
 
-          modalDispatch({ type: 'MODAL_VIEW' });
+          dispatch({ type: 'MODAL_VIEW' });
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -158,7 +162,7 @@ const MovementForm: React.FC<{
           console.log(
             `${singleCapString(moveData.type)} Added: ${moveData.name}`,
           );
-          modalDispatch({ type: 'MODAL_VIEW' });
+          dispatch({ type: 'MODAL_VIEW' });
           moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
@@ -171,7 +175,7 @@ const MovementForm: React.FC<{
 
   function onSubmit(formData: FormData) {
     if (mode === ModalMode.View) {
-      modalDispatch({ type: 'MODAL_EDIT' });
+      dispatch({ type: 'MODAL_EDIT' });
     } else if (mode === ModalMode.Edit) {
       const moveData = {
         ...(moveState as Movement),
@@ -195,10 +199,10 @@ const MovementForm: React.FC<{
 
   function handleClose(): void {
     if (mode === ModalMode.View || isNewEntry) {
-      modalDispatch({ type: 'MODAL_CLOSE' });
+      dispatch({ type: 'MODAL_CLOSE' });
       moveDispatch({ type: 'MOVE_CLEAR' });
     } else if (mode === ModalMode.Edit) {
-      modalDispatch({ type: 'MODAL_VIEW' });
+      dispatch({ type: 'MODAL_VIEW' });
       resetForm();
     } else {
       throw Error('Unsupported ModalMode provided.');

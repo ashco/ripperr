@@ -1,8 +1,9 @@
 ﻿import React, { useContext } from 'react';
 
+import { useSelector, useDispatch } from 'store';
 import StyledDeleteMovementContainer from './style';
 
-import { useModalDispatch } from 'context/ModalContext';
+// import { useModalDispatch } from 'context/ModalContext';
 import { useMoveState } from 'context/MoveContext';
 import { AuthUserContext, FirebaseContext } from 'context';
 import ButtonRow from 'components/ButtonRow';
@@ -12,7 +13,8 @@ import { MovementType } from 'types/enums';
 // DELETE ME
 
 const DeleteMovementContainer: React.FC = () => {
-  const modalDispatch = useModalDispatch();
+  // const dispatch = useModalDispatch();
+  const dispatch = useDispatch();
   const moveState = useMoveState();
 
   const authUser = useContext(AuthUserContext);
@@ -48,13 +50,13 @@ const DeleteMovementContainer: React.FC = () => {
 
   function onDelete(): void {
     handleDelete();
-    modalDispatch({ type: 'MODAL_CLOSE' });
+    dispatch({ type: 'MODAL_CLOSE' });
   }
 
   const btnConfig = {
     cancelBtn: {
       text: 'Cancel',
-      onClick: (): void => modalDispatch({ type: 'MODAL_CLOSE' }),
+      onClick: () => dispatch({ type: 'MODAL_CLOSE' }),
     },
     actionBtn: {
       text: 'Delete',
