@@ -1,6 +1,7 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch } from 'store';
+import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
+import { setActiveMove, clearActiveMove } from 'store/moves';
 import { useForm, Controller } from 'react-hook-form';
 
 import TextareaAutosize from 'react-textarea-autosize';
@@ -44,7 +45,7 @@ const MovementForm: React.FC<{}> = () => {
   const movementList = React.useContext(MovementListContext);
 
   const moveState = useMoveState();
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
   const dispatch = useDispatch();
   const { modalMode } = useSelector((state) => state.ui);
   // const dispatch = usedispatch();
@@ -122,7 +123,7 @@ const MovementForm: React.FC<{}> = () => {
           console.log(watch());
 
           dispatch(setModalMode('VIEW'));
-          moveDispatch({ type: 'MOVE_SET', value: moveData });
+          // moveDispatch({ type: 'MOVE_SET', value: moveData });
         })
         .catch((err) => {
           console.error(err);
@@ -164,8 +165,11 @@ const MovementForm: React.FC<{}> = () => {
           console.log(
             `${singleCapString(moveData.type)} Added: ${moveData.name}`,
           );
-          dispatch(setModalMode('VIEW'));
-          moveDispatch({ type: 'MOVE_SET', value: moveData });
+          batch(() => {
+            dispatch(setModalMode('VIEW'));
+            dispatch(setActiveMove(docRef.id)); // set newly created id as active
+            // moveDispatch({ type: 'MOVE_SET', value: moveData });
+          });
         })
         .catch((err) => {
           console.error(err);
@@ -201,8 +205,11 @@ const MovementForm: React.FC<{}> = () => {
 
   function handleClose(): void {
     if (modalMode === 'VIEW' || isNewEntry) {
-      dispatch(setModalMode(null));
-      moveDispatch({ type: 'MOVE_CLEAR' });
+      batch(() => {
+        dispatch(setModalMode(null));
+        dispatch(clearActiveMove());
+        // moveDispatch({ type: 'MOVE_CLEAR' });
+      });
     } else if (modalMode === 'EDIT') {
       dispatch(setModalMode('VIEW'));
       resetForm();

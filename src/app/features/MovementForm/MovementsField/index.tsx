@@ -33,17 +33,17 @@ const MovementItem = SortableElement(
     isDisabled: boolean;
     mode?: WorkoutMode;
   }) => {
-    const moveDispatch = useMoveDispatch();
+    // const moveDispatch = useMoveDispatch();
 
     const { modalMode } = useSelector((state) => state.ui);
 
     function handleDelete(e: any) {
       e.preventDefault();
 
-      moveDispatch({
-        type: 'MOVE_DELETE_MOVE',
-        index: otherIndex,
-      });
+      // moveDispatch({
+      //   type: 'MOVE_DELETE_MOVE',
+      //   index: otherIndex,
+      // });
     }
 
     const DragHandle = SortableHandle(() => (
@@ -69,12 +69,13 @@ const MovementItem = SortableElement(
                       min="0"
                       max="999"
                       value={movement.reps}
-                      onChange={(e) =>
-                        moveDispatch({
-                          type: 'MOVE_CHANGE_MOVE_EX_REPS',
-                          value: e.currentTarget.value,
-                          index: otherIndex,
-                        })
+                      onChange={
+                        (e) => console.log('hie')
+                        // moveDispatch({
+                        //   type: 'MOVE_CHANGE_MOVE_EX_REPS',
+                        //   value: e.currentTarget.value,
+                        //   index: otherIndex,
+                        // })
                       }
                       disabled={isDisabled}
                     />
@@ -87,12 +88,13 @@ const MovementItem = SortableElement(
                       min="0"
                       max="999"
                       value={movement.sets}
-                      onChange={(e) =>
-                        moveDispatch({
-                          type: 'MOVE_CHANGE_MOVE_EX_SETS',
-                          value: e.currentTarget.value,
-                          index: otherIndex,
-                        })
+                      onChange={
+                        (e) => console.log('weee')
+                        // moveDispatch({
+                        //   type: 'MOVE_CHANGE_MOVE_EX_SETS',
+                        //   value: e.currentTarget.value,
+                        //   index: otherIndex,
+                        // })
                       }
                       disabled={isDisabled}
                     />
@@ -108,12 +110,13 @@ const MovementItem = SortableElement(
                     min="0"
                     max="999"
                     value={movement.duration}
-                    onChange={(e) =>
-                      moveDispatch({
-                        type: 'MOVE_CHANGE_MOVE_EX_DURATION',
-                        value: e.currentTarget.value,
-                        index: otherIndex,
-                      })
+                    onChange={
+                      (e) => console.log('oo')
+                      // moveDispatch({
+                      //   type: 'MOVE_CHANGE_MOVE_EX_DURATION',
+                      //   value: e.currentTarget.value,
+                      //   index: otherIndex,
+                      // })
                     }
                     disabled={isDisabled}
                   />
@@ -166,7 +169,7 @@ const MovementSortableComponent: React.FC<{
   mode?: WorkoutMode;
   isDisabled: boolean;
 }> = ({ movements, isDisabled, mode }) => {
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
 
   function onSortEnd({
     oldIndex,
@@ -177,7 +180,7 @@ const MovementSortableComponent: React.FC<{
   }): void {
     const sortedArr = arrayMove(movements, oldIndex, newIndex);
 
-    moveDispatch({ type: 'MOVE_SORT_MOVE', value: sortedArr });
+    // moveDispatch({ type: 'MOVE_SORT_MOVE', value: sortedArr });
   }
 
   return (

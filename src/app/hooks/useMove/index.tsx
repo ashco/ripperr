@@ -20,6 +20,8 @@ function lookupMove(id: string): { move: Movement; type: MovementType } {
   } else if (Object.keys(tags.byId).includes(id)) {
     move = tags.byId[id];
     type = 'tag';
+  } else {
+    throw Error('id not recognized!');
   }
 
   return { move, type };

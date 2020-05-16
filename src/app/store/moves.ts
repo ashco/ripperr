@@ -76,7 +76,7 @@ interface Tags {
 }
 
 interface MovesState {
-  active: ID | null;
+  activeId: ID | null;
   workouts: Workouts;
   exercises: Exercises;
   tags: Tags;
@@ -91,7 +91,7 @@ interface GetMovesSuccess {
 }
 
 const initialState: MovesState = {
-  active: null,
+  activeId: null,
   workouts: {
     byId: {},
     allIds: [],
@@ -131,10 +131,10 @@ const movesSlice = createSlice({
       state.error = action.payload;
     },
     setActiveMove(state, action: PayloadAction<ID>) {
-      state.active = action.payload;
+      state.activeId = action.payload;
     },
     clearActiveMove(state) {
-      state.active = null;
+      state.activeId = null;
     },
   },
 });
@@ -143,6 +143,8 @@ export const {
   getMovesStart,
   getMovesSuccess,
   getMovesFailure,
+  setActiveMove,
+  clearActiveMove,
 } = movesSlice.actions;
 
 export default movesSlice.reducer;

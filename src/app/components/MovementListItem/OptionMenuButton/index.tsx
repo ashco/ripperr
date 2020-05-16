@@ -1,6 +1,8 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useSelector, useDispatch } from 'store';
+import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsPointerDisabled } from 'store/ui';
+import { setActiveMove } from 'store/moves';
+
 import styled, { ThemeContext } from 'styled-components';
 
 import Button from 'components/Button';
@@ -14,8 +16,9 @@ import Modal from 'components/Modal';
 import ModalBackground from 'components/ModalBackground';
 
 const OptionMenuButton: React.FC<{
-  movement: Movement;
-}> = ({ movement }) => {
+  // movement: Movement;
+  id: string;
+}> = ({ id }) => {
   const dispatch = useDispatch();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,17 +29,26 @@ const OptionMenuButton: React.FC<{
 
   function handleView(): void {
     // moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode('VIEW'));
+    batch(() => {
+      dispatch(setActiveMove(id));
+      dispatch(setModalMode('VIEW'));
+    });
   }
 
   function handleEdit(): void {
     // moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode('EDIT'));
+    batch(() => {
+      dispatch(setActiveMove(id));
+      dispatch(setModalMode('EDIT'));
+    });
   }
 
   function handleDelete(): void {
     // moveDispatch({ type: 'MOVE_SET', value: movement });
-    dispatch(setModalMode('DELETE'));
+    batch(() => {
+      dispatch(setActiveMove(id));
+      dispatch(setModalMode('DELETE'));
+    });
   }
 
   function openMenu(): void {

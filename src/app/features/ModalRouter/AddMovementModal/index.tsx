@@ -14,19 +14,20 @@ import ColorBarWrapper from 'components/ColorBarWrapper';
 const AddMovementModal = () => {
   // const dispatch = useModalDispatch();
   const dispatch = useDispatch();
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
 
   function addArchetype(): void {
     dispatch(setModalMode('EDIT'));
-    moveDispatch({ type: 'MOVE_RESET_AR' });
+    // * might need to reset moves.active in redux store, but might not
+    // moveDispatch({ type: 'MOVE_RESET_AR' });
   }
   function addExercise(): void {
     dispatch(setModalMode('EDIT'));
-    moveDispatch({ type: 'MOVE_RESET_EX' });
+    // moveDispatch({ type: 'MOVE_RESET_EX' });
   }
   function addWorkout(): void {
     dispatch(setModalMode('EDIT'));
-    moveDispatch({ type: 'MOVE_RESET_WO' });
+    // moveDispatch({ type: 'MOVE_RESET_WO' });
   }
   function closeModal(): void {
     dispatch(setModalMode(null));

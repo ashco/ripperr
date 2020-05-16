@@ -14,37 +14,38 @@ import ButtonRow from 'components/ButtonRow';
 
 import { MovementType } from 'types/enums';
 import ColorBarWrapper from 'components/ColorBarWrapper';
+import lookupMove from 'hooks/useMove';
+import singleCapString from 'utils/single-cap-string';
 
 const DeleteMovementModal = () => {
   // const dispatch = useModalDispatch();
   const dispatch = useDispatch();
-  const moveState = useMoveState();
+  // const moveState = useMoveState();
+
+  const { activeId } = useSelector((state) => state.moves);
+  if (activeId === null) throw Error('activeId is not set!');
+
+  const { move, type } = lookupMove(activeId);
 
   const authUser = React.useContext(AuthUserContext);
   const firebase = React.useContext(FirebaseContext);
 
-  if (moveState === null) {
-    throw Error('moveState === null!');
-  }
-
   function handleDelete(): void {
-    console.log(moveState);
-
     let firebaseFnc;
-    if (moveState?.type === MovementType.Archetype) {
+    if (type === 'tag') {
       firebaseFnc = firebase.archetype;
-    } else if (moveState?.type === MovementType.Exercise) {
+    } else if (type === 'exercise') {
       firebaseFnc = firebase.exercise;
-    } else if (moveState?.type === MovementType.Workout) {
+    } else if (type === 'workout') {
       firebaseFnc = firebase.workout;
     } else {
-      throw Error('moveState type is not recognized!');
+      throw Error('activeId type is not recognized!');
     }
 
-    if (authUser && moveState.id) {
-      firebaseFnc(authUser.uid, moveState.id)
+    if (authUser && activeId) {
+      firebaseFnc(authUser.uid, activeId)
         .delete()
-        .then(() => console.log(`${moveState.type} Deleted: ${moveState.name}`))
+        .then(() => console.log(`${type} Deleted: ${move.name}`))
         .catch((err) => console.error(err));
     } else {
       throw Error('No authUser && moveState.id!');
@@ -68,28 +69,13 @@ const DeleteMovementModal = () => {
     },
   };
 
-  let moveText;
-  switch (moveState.type) {
-    case 'ARCHETYPE':
-      moveText = 'Archetype';
-      break;
-    case 'EXERCISE':
-      moveText = 'Exercise';
-      break;
-    case 'WORKOUT':
-      moveText = 'Workout';
-      break;
-    default:
-      break;
-  }
-
   return (
     <ModalBackground>
       <ColorBarWrapper color="red">
         <DeleteMovementContainer width="32rem">
-          <h1 className="header">{moveState?.name}</h1>
+          <h1 className="header">{move.name}</h1>
           <div className="content">
-            <p>Do you want to delete this {moveText}?</p>
+            <p>Do you want to delete this {type}?</p>
             <ButtonRow config={btnConfig} />
           </div>
         </DeleteMovementContainer>

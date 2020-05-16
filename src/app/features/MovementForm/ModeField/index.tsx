@@ -9,7 +9,7 @@ const ModeField: React.FC<{ value?: WorkoutMode; isDisabled: boolean }> = ({
   value,
   isDisabled,
 }) => {
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
 
   return (
     <ModeFieldWrapper isDisabled={isDisabled}>
@@ -20,11 +20,12 @@ const ModeField: React.FC<{ value?: WorkoutMode; isDisabled: boolean }> = ({
           id="mode-reps"
           checked={value === 'REPS'}
           value="REPS"
-          onChange={(e) =>
-            moveDispatch({
-              type: 'MOVE_CHANGE_MODE',
-              value: e.currentTarget.value,
-            })
+          onChange={
+            (e) => console.log('whoa')
+            // moveDispatch({
+            //   type: 'MOVE_CHANGE_MODE',
+            //   value: e.currentTarget.value,
+            // })
           }
           disabled={isDisabled}
         />
@@ -37,11 +38,12 @@ const ModeField: React.FC<{ value?: WorkoutMode; isDisabled: boolean }> = ({
           id="mode-timed"
           checked={value === 'TIMED'}
           value="TIMED"
-          onChange={(e) =>
-            moveDispatch({
-              type: 'MOVE_CHANGE_MODE',
-              value: e.currentTarget.value,
-            })
+          onChange={
+            (e) => console.log('i')
+            // moveDispatch({
+            //   type: 'MOVE_CHANGE_MODE',
+            //   value: e.currentTarget.value,
+            // })
           }
           disabled={isDisabled}
         />

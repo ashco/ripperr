@@ -1,6 +1,7 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch } from 'store';
+import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
+import { setActiveMove } from 'store/moves';
 import { useMoveDispatch } from 'context/MoveContext';
 
 import ColorBarWrapper from 'components/ColorBarWrapper';
@@ -13,9 +14,10 @@ import { Movement } from 'types/types';
 import { MovementType } from 'types/enums';
 
 const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
+  const dispatch = useDispatch();
+
   const filter = useSelector((state) => state.filter);
   const { isAddMoveMode } = useSelector((state) => state.ui);
-  const dispatch = useDispatch();
 
   // const moveDispatch = useMoveDispatch();
 
@@ -46,17 +48,22 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
 
   function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
-      dispatch(setModalMode('VIEW'));
+      batch(() => {
+        dispatch(setModalMode('VIEW'));
+        dispatch(setActiveMove(id));
+      });
       // moveDispatch({ type: 'MOVE_SET', value: move });
     }
   }
 
   function addMoveToWorkout(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
-      console.log('Adding movement to workout');
-      // moveDispatch({ type: 'MOVE_ADD_MOVE', value: move });
-      dispatch(setModalMode('EDIT'));
-      dispatch(setIsAddMoveMode(false));
+      batch(() => {
+        console.log('Adding movement to workout');
+        // moveDispatch({ type: 'MOVE_ADD_MOVE', value: move });
+        dispatch(setModalMode('EDIT'));
+        dispatch(setIsAddMoveMode(false));
+      });
     }
   }
 
@@ -100,7 +107,7 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
         <div className="right">
           {!isAddMoveMode && (
             <div ref={btnRef} className="option-menu-btn-wrapper">
-              <OptionMenuButton movement={move} />
+              <OptionMenuButton id={id} />
             </div>
           )}
         </div>

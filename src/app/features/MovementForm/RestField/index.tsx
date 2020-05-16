@@ -9,7 +9,7 @@ const RestField: React.FC<{
   rest: IWorkoutRest;
   isDisabled: boolean;
 }> = ({ rest, isDisabled }) => {
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
 
   return (
     <RestFieldWrapper isDisabled={isDisabled}>
@@ -18,11 +18,12 @@ const RestField: React.FC<{
           <input
             type="checkbox"
             name="auto"
-            onChange={(e) =>
-              moveDispatch({
-                type: 'MOVE_CHANGE_REST_AUTO',
-                value: e.currentTarget.checked,
-              })
+            onChange={
+              (e) => console.log('heie')
+              // moveDispatch({
+              //   type: 'MOVE_CHANGE_REST_AUTO',
+              //   value: e.currentTarget.checked,
+              // })
             }
             checked={rest.auto}
             disabled={isDisabled}
@@ -36,11 +37,12 @@ const RestField: React.FC<{
             type="number"
             name="inner"
             min="0"
-            onChange={(e) =>
-              moveDispatch({
-                type: 'MOVE_CHANGE_REST_INNER',
-                value: e.currentTarget.value,
-              })
+            onChange={
+              (e) => console.log('yaya')
+              // moveDispatch({
+              //   type: 'MOVE_CHANGE_REST_INNER',
+              //   value: e.currentTarget.value,
+              // })
             }
             value={rest.inner}
             disabled={isDisabled}
@@ -52,11 +54,12 @@ const RestField: React.FC<{
             type="number"
             name="outer"
             min="0"
-            onChange={(e) =>
-              moveDispatch({
-                type: 'MOVE_CHANGE_REST_OUTER',
-                value: e.currentTarget.value,
-              })
+            onChange={
+              (e) => console.log('chacha')
+              // moveDispatch({
+              //   type: 'MOVE_CHANGE_REST_OUTER',
+              //   value: e.currentTarget.value,
+              // })
             }
             value={rest.outer}
             disabled={isDisabled}
