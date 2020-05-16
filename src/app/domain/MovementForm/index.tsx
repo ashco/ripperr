@@ -5,9 +5,10 @@ import { useForm, Controller } from 'react-hook-form';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { AuthUserContext, FirebaseContext, MovementListContext } from 'context';
+import AuthUserContext from 'context/AuthUserContext';
+import FirebaseContext from 'context/FirebaseContext';
+import MovementListContext from 'context/MovementListContext';
 import { useMoveState, useMoveDispatch } from 'context/MoveContext';
-// import { usedispatch, usemodal } from 'context/ModalContext';
 
 import MovementFormWrapper from './style';
 

@@ -12,8 +12,8 @@ import Meta from '../Meta';
 import NavBar from 'domain/Navigation';
 
 const Page: React.FC = (props) => {
-  const { theme, isPointerDisabled } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
+  const { theme, isPointerDisabled } = useSelector((state) => state.ui);
 
   useEffect(() => {
     const prevThemeMode = localStorage.getItem('theme');

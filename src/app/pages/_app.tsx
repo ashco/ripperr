@@ -3,7 +3,7 @@ import App from 'next/app';
 import { Provider } from 'react-redux';
 
 import Page from '../components/Page';
-import { withAuthentication } from 'context';
+import withAuthentication from 'context/withAuthentication';
 
 import configureStore from 'store';
 

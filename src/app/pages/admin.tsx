@@ -1,7 +1,8 @@
 ﻿import React, { useState, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
 
-import { FirebaseContext, withAuthorization } from '../context';
+import FirebaseContext from 'context/FirebaseContext';
+import withAuthorization from 'context/withAuthorization';
 
 import UserList from '../domain/Admin/UserList';
 

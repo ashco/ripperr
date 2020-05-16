@@ -3,8 +3,9 @@ import { useSelector } from 'store';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { MovementListContext } from 'context';
-import { withAuthorization, withMovements } from 'context';
+import MovementListContext from 'context/MovementListContext';
+import withAuthorization from 'context/withAuthorization';
+import withMovements from 'context/withMovements';
 
 import Filter from 'domain/Filter';
 

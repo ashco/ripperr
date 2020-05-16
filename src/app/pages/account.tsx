@@ -2,7 +2,8 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { AuthUserContext, withAuthorization } from 'context';
+import AuthUserContext from 'context/AuthUserContext';
+import withAuthorization from 'context/withAuthorization';
 
 import AuthFormContainer from 'domain/Auth/AuthFormContainer';
 import PasswordForgotForm from 'domain/Auth/PasswordForgotForm';

@@ -1,7 +1,8 @@
 ﻿import React, { useState, useEffect, useContext } from 'react';
 
-import { AuthUserContext, FirebaseContext } from '.';
-import { MovementListContext } from './index';
+import AuthUserContext from 'context/AuthUserContext';
+import FirebaseContext from 'context/FirebaseContext';
+import MovementListContext from './MovementListContext';
 
 import {
   Archetype,

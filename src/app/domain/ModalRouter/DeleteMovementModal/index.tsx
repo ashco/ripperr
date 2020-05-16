@@ -8,7 +8,8 @@ import ModalBackground from 'components/ModalBackground';
 
 import DeleteMovementContainer from './style';
 
-import { AuthUserContext, FirebaseContext } from 'context';
+import AuthUserContext from 'context/AuthUserContext';
+import FirebaseContext from 'context/FirebaseContext';
 import ButtonRow from 'components/ButtonRow';
 
 import { MovementType } from 'types/enums';

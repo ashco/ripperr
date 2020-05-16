@@ -1,7 +1,8 @@
 ﻿import React, { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { AuthUserContext, FirebaseContext } from './index';
+import AuthUserContext from './AuthUserContext';
+import FirebaseContext from './FirebaseContext';
 
 const withAuthorization = (condition: any) => (Component: any) => {
   const WithAuthorization = (props: any) => {

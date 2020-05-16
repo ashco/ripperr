@@ -1,6 +1,7 @@
 ﻿import React, { useState, useContext, useEffect } from 'react';
 
-import { AuthUserContext, FirebaseContext } from './index';
+import AuthUserContext from './AuthUserContext';
+import FirebaseContext from './FirebaseContext';
 
 import { IAuthUserContext } from '../types/types';
 

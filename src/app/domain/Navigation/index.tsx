@@ -4,7 +4,7 @@ import { setModalMode, setIsAddMoveMode, IsAddMoveMode } from 'store/ui';
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
-import { AuthUserContext } from 'context';
+import AuthUserContext from 'context/AuthUserContext';
 // import { useAddMoveMode } from 'context/AddMoveModeContext';
 // import { useModalDispatch } from 'context/ModalContext';
 

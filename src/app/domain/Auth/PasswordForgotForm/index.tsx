@@ -5,7 +5,7 @@ import { Formik, Form } from 'formik';
 import Button from 'components/Button';
 import InputField from 'domain/MovementForm/InputField';
 import { passwordForgotVal } from 'domain/MovementForm/validationSchema';
-import { FirebaseContext } from 'context';
+import FirebaseContext from 'context/FirebaseContext';
 import { IAuthError } from 'types/types';
 
 interface IPasswordForgotForm {

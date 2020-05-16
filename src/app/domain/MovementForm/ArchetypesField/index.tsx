@@ -5,7 +5,7 @@ import { setModalMode } from 'store/ui';
 import { Controller } from 'react-hook-form';
 import { ThemeContext } from 'styled-components';
 
-import { MovementListContext } from 'context';
+import MovementListContext from 'context/MovementListContext';
 import { useMoveDispatch } from 'context/MoveContext';
 
 // import { ArchFormListItem } from 'components/ListItems';

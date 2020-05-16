@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import InputField from '../../domain/MovementForm/InputField';
 import { passwordChangeVal } from '../../domain/MovementForm/validationSchema';
 import Button from 'components/Button';
-import { FirebaseContext } from '../../context';
+import FirebaseContext from '../../context/FirebaseContext';
 // import { IError } from '../Signup/SignUpForm';
 
 interface IPasswordChangeForm {

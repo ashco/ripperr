@@ -8,7 +8,7 @@ import { signInVal } from 'domain/MovementForm/validationSchema';
 import FormError from 'components/FormError';
 import Button from 'components/Button';
 
-import { FirebaseContext } from 'context';
+import FirebaseContext from 'context/FirebaseContext';
 import { IAuthError } from 'types/types';
 
 export interface ISignInFormValues {
