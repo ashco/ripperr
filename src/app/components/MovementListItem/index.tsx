@@ -17,7 +17,7 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
   const { isAddMoveMode } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
 
   const btnRef = React.useRef<HTMLDivElement>(null);
 
@@ -47,14 +47,14 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
   function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
       dispatch(setModalMode('VIEW'));
-      moveDispatch({ type: 'MOVE_SET', value: move });
+      // moveDispatch({ type: 'MOVE_SET', value: move });
     }
   }
 
   function addMoveToWorkout(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
       console.log('Adding movement to workout');
-      moveDispatch({ type: 'MOVE_ADD_MOVE', value: move });
+      // moveDispatch({ type: 'MOVE_ADD_MOVE', value: move });
       dispatch(setModalMode('EDIT'));
       dispatch(setIsAddMoveMode(false));
     }

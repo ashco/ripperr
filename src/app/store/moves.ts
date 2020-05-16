@@ -76,6 +76,7 @@ interface Tags {
 }
 
 interface MovesState {
+  active: ID | null;
   workouts: Workouts;
   exercises: Exercises;
   tags: Tags;
@@ -90,6 +91,7 @@ interface GetMovesSuccess {
 }
 
 const initialState: MovesState = {
+  active: null,
   workouts: {
     byId: {},
     allIds: [],
@@ -127,6 +129,12 @@ const movesSlice = createSlice({
     getMovesFailure(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
+    },
+    setActiveMove(state, action: PayloadAction<ID>) {
+      state.active = action.payload;
+    },
+    clearActiveMove(state) {
+      state.active = null;
     },
   },
 });

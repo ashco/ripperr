@@ -22,20 +22,20 @@ const OptionMenuButton: React.FC<{
 
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const moveDispatch = useMoveDispatch();
+  // const moveDispatch = useMoveDispatch();
 
   function handleView(): void {
-    moveDispatch({ type: 'MOVE_SET', value: movement });
+    // moveDispatch({ type: 'MOVE_SET', value: movement });
     dispatch(setModalMode('VIEW'));
   }
 
   function handleEdit(): void {
-    moveDispatch({ type: 'MOVE_SET', value: movement });
+    // moveDispatch({ type: 'MOVE_SET', value: movement });
     dispatch(setModalMode('EDIT'));
   }
 
   function handleDelete(): void {
-    moveDispatch({ type: 'MOVE_SET', value: movement });
+    // moveDispatch({ type: 'MOVE_SET', value: movement });
     dispatch(setModalMode('DELETE'));
   }
 
