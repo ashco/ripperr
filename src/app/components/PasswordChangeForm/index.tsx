@@ -1,8 +1,8 @@
 ﻿import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 
-import InputField from '../../domain/MovementForm/InputField';
-import { passwordChangeVal } from '../../domain/MovementForm/validationSchema';
+import InputField from '../../features/MovementForm/InputField';
+import { passwordChangeVal } from '../../features/MovementForm/validationSchema';
 import Button from 'components/Button';
 import FirebaseContext from '../../context/FirebaseContext';
 // import { IError } from '../Signup/SignUpForm';

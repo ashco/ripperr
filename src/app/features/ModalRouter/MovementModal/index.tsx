@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
-import MovementForm from 'domain/MovementForm';
+import MovementForm from 'features/MovementForm';
 
 import { useMoveState } from 'context/MoveContext';
 import ModalBackground from 'components/ModalBackground';
@@ -12,7 +12,7 @@ import { Movement } from 'types/types';
 import { MovementType } from 'types/enums';
 import ColorBarWrapper from 'components/ColorBarWrapper';
 
-const MovementContainer: React.FC<{}> = () => {
+const MovementModal: React.FC<{}> = () => {
   const moveState = useMoveState();
   const { modalMode } = useSelector((state) => state.ui);
 
@@ -60,4 +60,4 @@ const MovementContainer: React.FC<{}> = () => {
   );
 };
 
-export default MovementContainer;
+export default MovementModal;

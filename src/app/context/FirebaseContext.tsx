@@ -66,6 +66,33 @@ class Firebase {
     this.db.collection('users');
 
   // Archetype API
+  // movement = ({
+  //   uid,
+  //   moveType,
+  //   id,
+  // }: {
+  //   uid: string;
+  //   moveType: 'workout' | 'exercise' | 'tag';
+  //   id: string;
+  // }): firebase.firestore.DocumentReference =>
+  //   this.db.doc(`users/${uid}/movements/${moveType}/${id}`);
+
+  // // movements = (uid: string, moveType: 'workout' | 'exercise' | 'tag'): firebase.firestore.CollectionReference =>
+  // movements = (uid: string): firebase.firestore.CollectionReference =>
+  //   this.db.collection(`users/${uid}/movements`);
+  // movements = ({
+  //   uid,
+  //   type,
+  // }: {
+  //   uid: string;
+  //   type?: 'workout' | 'exercise' | 'tag'; // specify what move type
+  // }): firebase.firestore.CollectionReference =>
+  //   // movements = (uid: string): firebase.firestore.CollectionReference =>
+  //   this.db.collection(`users/${uid}/movements${type && '/active/' + type}`);
+  // users/uid123/movements/_/exercises/exid1/name
+  // col  /doc   /col  /doc      /col  /doc
+
+  // Archetype API
   archetype = (uid: string, id: string): firebase.firestore.DocumentReference =>
     this.db.doc(`users/${uid}/archetypes/${id}`);
 

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Formik, Form } from 'formik';
 
 import Button from 'components/Button';
-import InputField from 'domain/MovementForm/InputField';
-import { passwordForgotVal } from 'domain/MovementForm/validationSchema';
+import InputField from 'features/MovementForm/InputField';
+import { passwordForgotVal } from 'features/MovementForm/validationSchema';
 import FirebaseContext from 'context/FirebaseContext';
 import { IAuthError } from 'types/types';
 

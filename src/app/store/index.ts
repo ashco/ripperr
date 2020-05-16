@@ -10,10 +10,12 @@ import { filterReducer } from './filter/reducers';
 // import modalReducer from './modal';
 // import themeReducer from './theme';
 import uiReducer from './ui';
+import movesReducer from './moves';
 
 const rootReducer = combineReducers({
   filter: filterReducer,
   // modal: modalReducer,
+  moves: movesReducer,
   ui: uiReducer,
   // theme: themeReducer,
 });

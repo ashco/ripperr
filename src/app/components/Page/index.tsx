@@ -6,10 +6,10 @@ import GlobalStyle from 'styles/GlobalStyle';
 
 import StyledPage from './style';
 
-import { MoveProvider } from 'context/MoveContext';
+// import { MoveProvider } from 'context/MoveContext';
 
 import Meta from '../Meta';
-import NavBar from 'domain/Navigation';
+import NavBar from 'features/Navigation';
 
 const Page: React.FC = (props) => {
   const dispatch = useDispatch();
@@ -31,14 +31,14 @@ const Page: React.FC = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <MoveProvider>
-        <StyledPage isPointerDisabled={isPointerDisabled}>
-          <GlobalStyle />
-          <Meta />
-          <NavBar />
-          <div className="main">{props.children}</div>
-        </StyledPage>
-      </MoveProvider>
+      {/* <MoveProvider> */}
+      <StyledPage isPointerDisabled={isPointerDisabled}>
+        <GlobalStyle />
+        <Meta />
+        <NavBar />
+        <div className="main">{props.children}</div>
+      </StyledPage>
+      {/* </MoveProvider> */}
     </ThemeProvider>
   );
 };

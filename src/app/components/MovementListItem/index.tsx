@@ -60,11 +60,22 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
     }
   }
 
+  function toggleActiveArch(e: any) {
+    console.log('trigg');
+    if (!btnRef?.current?.contains(e.target)) {
+      dispatch({ type: 'FILTER_TOGGLE_TAG', payload: move.id });
+    }
+  }
+
   function handleClick(e: any) {
-    if (isAddMoveMode) {
-      addMoveToWorkout(e);
+    if (type === 'tag') {
+      toggleActiveArch(e);
     } else {
-      showModalView(e);
+      if (isAddMoveMode) {
+        addMoveToWorkout(e);
+      } else {
+        showModalView(e);
+      }
     }
   }
 
@@ -89,7 +100,7 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
         <div className="right">
           {!isAddMoveMode && (
             <div ref={btnRef} className="option-menu-btn-wrapper">
-              {/* <OptionMenuButton movement={move} /> */}
+              <OptionMenuButton movement={move} />
             </div>
           )}
         </div>
@@ -97,15 +108,6 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
     </ColorBarWrapper>
   );
 
-  // if (id[0] === 'w') {
-  //   return <WorkoutWrapper>{listItem}</WorkoutWrapper>;
-  // } else if (id[0] === 'e') {
-  //   return <ExerciseWrapper>{listItem}</ExerciseWrapper>;
-  // } else if (id[0] === 't') {
-  //   return <ArchetypeWrapper>{listItem}</ArchetypeWrapper>;
-  // } else {
-  //   return null;
-  // }
   if (type === 'workout') {
     return <WorkoutWrapper>{listItem}</WorkoutWrapper>;
   } else if (type === 'exercise') {

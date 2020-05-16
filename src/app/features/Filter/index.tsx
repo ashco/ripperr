@@ -9,8 +9,8 @@ import FilterContainer from './style';
 import { Archetype } from 'types/types';
 
 const Filter: React.FC<{
-  archetypeList: Archetype[] | null;
-}> = ({ archetypeList }) => {
+  // archetypeList: Archetype[] | null;
+}> = () => {
   const dispatch = useDispatch();
 
   const filter = useSelector((state) => state.filter);
@@ -41,7 +41,7 @@ const Filter: React.FC<{
       filtering={filtering}
       ref={filterRef}
     >
-      {filter.active && <ArchetypeList archetypeList={archetypeList} />}
+      {filter.active && <ArchetypeList />}
       <FilterInput />
     </FilterContainer>
   );

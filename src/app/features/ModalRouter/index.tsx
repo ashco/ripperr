@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'store';
 // import { useModalState } from 'context/ModalContext';
 
 import Modal from 'components/Modal';
-import AddMovementModal from 'domain/ModalRouter/AddMovementModal';
-import DeleteMovementModal from 'domain/ModalRouter/DeleteMovementModal';
-import MovementModal from 'domain/ModalRouter/MovementModal';
+import AddMovementModal from 'features/ModalRouter/AddMovementModal';
+import DeleteMovementModal from 'features/ModalRouter/DeleteMovementModal';
+import MovementModal from 'features/ModalRouter/MovementModal';
 
 const ModalRouter = () => {
   const { modalMode } = useSelector((state) => state.ui);

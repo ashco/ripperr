@@ -110,7 +110,7 @@ const MovementForm: React.FC<{}> = () => {
 
     if (authUser && moveData.id) {
       // const moveObj: Movement = { ...moveData };
-      moveData.lastModified = firebase.getTimestamp();
+      // moveData.lastModified = firebase.getTimestamp();
 
       firebaseFnc(authUser.uid, moveData.id)
         .update(moveData)
@@ -153,7 +153,10 @@ const MovementForm: React.FC<{}> = () => {
       const docRef = firebaseFnc(authUser.uid).doc();
       // TODO Check that name is unique
 
-      moveData.lastModified = firebase.getTimestamp();
+      // moveData.lastModified = firebase.getTimestamp();
+
+      console.log(moveData);
+      const data = {};
 
       docRef
         .set(moveData)

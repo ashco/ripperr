@@ -4,7 +4,7 @@ import { NextPage } from 'next';
 import FirebaseContext from 'context/FirebaseContext';
 import withAuthorization from 'context/withAuthorization';
 
-import UserList from '../domain/Admin/UserList';
+import UserList from '../features/Admin/UserList';
 
 import { IAuthUserContext, IUser } from '../types/types';
 
