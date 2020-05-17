@@ -7,9 +7,8 @@ import styled, { ThemeContext } from 'styled-components';
 
 import Button from 'components/Button';
 
-import { useMoveDispatch } from 'context/MoveContext';
 import Icon from 'icons';
-import { MovementType } from 'types/enums';
+import { MovementType } from 'types/types';
 import { Movement } from 'store/moves';
 // import { Movement } from 'types/types';
 import Modal from 'components/Modal';
@@ -18,7 +17,8 @@ import ModalBackground from 'components/ModalBackground';
 const OptionMenuButton: React.FC<{
   // movement: Movement;
   id: string;
-}> = ({ id }) => {
+  type: MovementType;
+}> = ({ id, type }) => {
   const dispatch = useDispatch();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ const OptionMenuButton: React.FC<{
     // moveDispatch({ type: 'MOVE_SET', value: movement });
     batch(() => {
       dispatch(setActiveMove(id));
-      dispatch(setModalMode('VIEW'));
+      dispatch(setModalMode({ modalMode: 'VIEW' }));
     });
   }
 
@@ -39,7 +39,7 @@ const OptionMenuButton: React.FC<{
     // moveDispatch({ type: 'MOVE_SET', value: movement });
     batch(() => {
       dispatch(setActiveMove(id));
-      dispatch(setModalMode('EDIT'));
+      dispatch(setModalMode({ modalMode: 'EDIT' }));
     });
   }
 
@@ -47,7 +47,7 @@ const OptionMenuButton: React.FC<{
     // moveDispatch({ type: 'MOVE_SET', value: movement });
     batch(() => {
       dispatch(setActiveMove(id));
-      dispatch(setModalMode('DELETE'));
+      dispatch(setModalMode({ modalMode: 'DELETE' }));
     });
   }
 

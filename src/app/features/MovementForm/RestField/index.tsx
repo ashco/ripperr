@@ -1,8 +1,6 @@
 ﻿import React from 'react';
 import RestFieldWrapper from './style';
 
-import { useMoveDispatch } from 'context/MoveContext';
-
 import { IWorkoutRest } from 'types/types';
 
 const RestField: React.FC<{

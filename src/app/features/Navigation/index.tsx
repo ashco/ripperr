@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import { useSelector, useDispatch } from 'store';
+import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode, IsAddMoveMode } from 'store/ui';
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
@@ -60,8 +60,10 @@ const CancelButton: React.FC<{
 
   function handleCancel(e: any) {
     // Find way to determine if edit or add.
-    dispatch(setModalMode('EDIT'));
-    dispatch(setIsAddMoveMode(false));
+    batch(() => {
+      dispatch(setModalMode({ modalMode: 'EDIT' }));
+      dispatch(setIsAddMoveMode(false));
+    });
   }
 
   return (

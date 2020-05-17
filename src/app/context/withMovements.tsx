@@ -1,201 +1,193 @@
-﻿import React, { useState, useEffect, useContext } from 'react';
+﻿// import React, { useState, useEffect, useContext } from 'react';
 
-import AuthUserContext from 'context/AuthUserContext';
-import FirebaseContext from 'context/FirebaseContext';
-import MovementListContext from './MovementListContext';
+export const filler = '';
 
-import {
-  Archetype,
-  Exercise,
-  Workout,
-  IArchetypesFirebaseQuery,
-  IExercisesFirebaseQuery,
-  IWorkoutsFirebaseQuery,
-  IMovementState,
-} from '../types/types';
-import { sortArchetypes } from '../utils/sort-movements';
+// import AuthUserContext from 'context/AuthUserContext';
+// import FirebaseContext from 'context/FirebaseContext';
 
-export const INITIAL_ARCHETYPE_STATE: IArchetypesFirebaseQuery = {
-  loading: true,
-  archetypes: [],
-};
+// import { sortArchetypes } from '../utils/sort-movements';
 
-export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
-  loading: true,
-  exercises: [],
-};
+// export const INITIAL_ARCHETYPE_STATE: IArchetypesFirebaseQuery = {
+//   loading: true,
+//   archetypes: [],
+// };
 
-export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
-  loading: true,
-  workouts: [],
-};
+// export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
+//   loading: true,
+//   exercises: [],
+// };
 
-export const INITIAL_MOVEMENT_STATE: IMovementState = {
-  loading: true,
-  archetypes: [],
-  exercises: [],
-  workouts: [],
-};
+// export const INITIAL_WORKOUT_STATE: IWorkoutsFirebaseQuery = {
+//   loading: true,
+//   workouts: [],
+// };
 
-const withMovements = (Component: any) => {
-  const WithMovements = (props: any) => {
-    const firebase = useContext(FirebaseContext);
-    const authUser = useContext(AuthUserContext);
+// export const INITIAL_MOVEMENT_STATE: IMovementState = {
+//   loading: true,
+//   archetypes: [],
+//   exercises: [],
+//   workouts: [],
+// };
 
-    const [archetypeState, setArchetypeState] = useState(
-      INITIAL_ARCHETYPE_STATE,
-    );
-    const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
-    const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
+// const withMovements = (Component: any) => {
+//   const WithMovements = (props: any) => {
+//     const firebase = useContext(FirebaseContext);
+//     const authUser = useContext(AuthUserContext);
 
-    // ARCHETYPE EFFECT
-    useEffect(() => {
-      setArchetypeState({ ...archetypeState, loading: true });
+//     const [archetypeState, setArchetypeState] = useState(
+//       INITIAL_ARCHETYPE_STATE,
+//     );
+//     const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
+//     const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
 
-      if (authUser) {
-        const unsubscribe = firebase
-          .archetypes(authUser.uid)
-          .onSnapshot((snapshot) => {
-            const archetypeList: Archetype[] = [];
+//     // ARCHETYPE EFFECT
+//     useEffect(() => {
+//       setArchetypeState({ ...archetypeState, loading: true });
 
-            snapshot.forEach((doc) => {
-              const {
-                lastModified,
-                type,
-                name,
-                description,
-                // history,
-              } = doc.data();
-              const obj: Archetype = {
-                id: doc.id,
-                lastModified,
-                type,
-                name,
-                description,
-                // history,
-              };
+//       if (authUser) {
+//         const unsubscribe = firebase
+//           .archetypes(authUser.uid)
+//           .onSnapshot((snapshot) => {
+//             const archetypeList: Archetype[] = [];
 
-              archetypeList.push(obj);
-            });
+//             snapshot.forEach((doc) => {
+//               const {
+//                 lastModified,
+//                 type,
+//                 name,
+//                 description,
+//                 // history,
+//               } = doc.data();
+//               const obj: Archetype = {
+//                 id: doc.id,
+//                 lastModified,
+//                 type,
+//                 name,
+//                 description,
+//                 // history,
+//               };
 
-            setArchetypeState({
-              loading: false,
-              archetypes: archetypeList.sort((a, b) => sortArchetypes(a, b)),
-            });
+//               archetypeList.push(obj);
+//             });
 
-            return (): void => unsubscribe();
-          });
-      }
-    }, []);
+//             setArchetypeState({
+//               loading: false,
+//               archetypes: archetypeList.sort((a, b) => sortArchetypes(a, b)),
+//             });
 
-    // EXERCISE EFFECT
-    useEffect(() => {
-      setExerciseState({ ...exerciseState, loading: true });
+//             return (): void => unsubscribe();
+//           });
+//       }
+//     }, []);
 
-      if (authUser) {
-        const unsubscribe = firebase
-          .exercises(authUser.uid)
-          .onSnapshot((snapshot) => {
-            const exerciseList: Exercise[] = [];
+//     // EXERCISE EFFECT
+//     useEffect(() => {
+//       setExerciseState({ ...exerciseState, loading: true });
 
-            snapshot.forEach((doc) => {
-              const {
-                lastModified,
-                type,
-                name,
-                description,
-                tags,
-                // history,
-              } = doc.data();
-              const obj: Exercise = {
-                id: doc.id,
-                lastModified,
-                type,
-                name,
-                description,
-                tags,
-                // history,
-              };
+//       if (authUser) {
+//         const unsubscribe = firebase
+//           .exercises(authUser.uid)
+//           .onSnapshot((snapshot) => {
+//             const exerciseList: Exercise[] = [];
 
-              exerciseList.push(obj);
-            });
+//             snapshot.forEach((doc) => {
+//               const {
+//                 lastModified,
+//                 type,
+//                 name,
+//                 description,
+//                 tags,
+//                 // history,
+//               } = doc.data();
+//               const obj: Exercise = {
+//                 id: doc.id,
+//                 lastModified,
+//                 type,
+//                 name,
+//                 description,
+//                 tags,
+//                 // history,
+//               };
 
-            setExerciseState({
-              loading: false,
-              exercises: exerciseList,
-            });
+//               exerciseList.push(obj);
+//             });
 
-            return (): void => unsubscribe();
-          });
-      }
-    }, []);
+//             setExerciseState({
+//               loading: false,
+//               exercises: exerciseList,
+//             });
 
-    // WORKOUT EFFECT
-    useEffect(() => {
-      setWorkoutState({ ...workoutState, loading: true });
+//             return (): void => unsubscribe();
+//           });
+//       }
+//     }, []);
 
-      if (authUser) {
-        const unsubscribe = firebase
-          .workouts(authUser.uid)
-          .onSnapshot((snapshot) => {
-            const workoutList: Workout[] = [];
+//     // WORKOUT EFFECT
+//     useEffect(() => {
+//       setWorkoutState({ ...workoutState, loading: true });
 
-            snapshot.forEach((doc) => {
-              const {
-                lastModified,
-                type,
-                name,
-                description,
-                tags,
-                // history,
-                mode,
-                movements,
-                rest,
-                config,
-              } = doc.data();
+//       if (authUser) {
+//         const unsubscribe = firebase
+//           .workouts(authUser.uid)
+//           .onSnapshot((snapshot) => {
+//             const workoutList: Workout[] = [];
 
-              const obj: Workout = {
-                id: doc.id,
-                lastModified,
-                type,
-                name,
-                description,
-                tags,
-                // history,
-                mode,
-                movements,
-                rest,
-                config,
-              };
+//             snapshot.forEach((doc) => {
+//               const {
+//                 lastModified,
+//                 type,
+//                 name,
+//                 description,
+//                 tags,
+//                 // history,
+//                 mode,
+//                 movements,
+//                 rest,
+//                 config,
+//               } = doc.data();
 
-              workoutList.push(obj);
-            });
+//               const obj: Workout = {
+//                 id: doc.id,
+//                 lastModified,
+//                 type,
+//                 name,
+//                 description,
+//                 tags,
+//                 // history,
+//                 mode,
+//                 movements,
+//                 rest,
+//                 config,
+//               };
 
-            setWorkoutState({
-              loading: false,
-              workouts: workoutList,
-            });
+//               workoutList.push(obj);
+//             });
 
-            return (): void => unsubscribe();
-          });
-      }
-    }, []);
+//             setWorkoutState({
+//               loading: false,
+//               workouts: workoutList,
+//             });
 
-    const moveState: IMovementState = {
-      archetypes: archetypeState.archetypes,
-      exercises: exerciseState.exercises,
-      workouts: workoutState.workouts,
-      loading: exerciseState.loading || workoutState.loading,
-    };
+//             return (): void => unsubscribe();
+//           });
+//       }
+//     }, []);
 
-    return (
-      <MovementListContext.Provider value={moveState}>
-        <Component {...props} />
-      </MovementListContext.Provider>
-    );
-  };
+//     const moveState: IMovementState = {
+//       archetypes: archetypeState.archetypes,
+//       exercises: exerciseState.exercises,
+//       workouts: workoutState.workouts,
+//       loading: exerciseState.loading || workoutState.loading,
+//     };
 
-  return WithMovements;
-};
+//     return (
+//       <MovementListContext.Provider value={moveState}>
+//         <Component {...props} />
+//       </MovementListContext.Provider>
+//     );
+//   };
 
-export default withMovements;
+//   return WithMovements;
+// };
+
+// export default withMovements;

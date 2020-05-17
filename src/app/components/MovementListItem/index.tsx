@@ -1,55 +1,55 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
-import { setActiveMove } from 'store/moves';
-import { useMoveDispatch } from 'context/MoveContext';
+import { FilterState } from 'store/filter/types';
+import { setActiveMove, MovesState } from 'store/moves';
 
 import ColorBarWrapper from 'components/ColorBarWrapper';
 import OptionMenuButton from 'components/MovementListItem/OptionMenuButton';
 
 import { WorkoutWrapper, ExerciseWrapper, ArchetypeWrapper } from './style';
-import lookupMove from 'hooks/useMove';
+import { lookupMove } from 'utils/lookup-move';
 
-import { Movement } from 'types/types';
-import { MovementType } from 'types/enums';
-
-const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
+const MovementListItem: React.FC<{
+  filter?: FilterState;
+  id: string;
+  isAddMoveMode: boolean;
+  moves: MovesState;
+}> = ({ filter, id, isAddMoveMode, moves }) => {
   const dispatch = useDispatch();
 
-  const filter = useSelector((state) => state.filter);
-  const { isAddMoveMode } = useSelector((state) => state.ui);
-
-  // const moveDispatch = useMoveDispatch();
+  const move = lookupMove(moves, id);
+  if (!move) throw Error('No move found!');
+  const { data, type } = move;
 
   const btnRef = React.useRef<HTMLDivElement>(null);
 
-  const { move, type } = lookupMove(id);
-  console.log(move, type);
-
   // Determine ColorBar color
-  let color;
-  switch (type) {
-    case 'tag': {
-      // TODO
-      // Make more efficient by lifting up. Do not loop through array for each component.
-      const active = filter.tags.includes(move.id as string);
-      color = active ? 'orange' : 'neutral';
-      break;
+  function getColor(): string {
+    let color = '';
+    switch (type) {
+      case 'TAG': {
+        // Make more efficient by lifting up. Do not loop through array for each component.
+        const active = filter?.tags.includes(data.id as string);
+        color = active ? 'orange' : 'neutral';
+        break;
+      }
+      case 'EXERCISE':
+        color = 'purple';
+        break;
+      case 'WORKOUT':
+        color = 'blue';
+        break;
+      default:
+        break;
     }
-    case 'exercise':
-      color = 'purple';
-      break;
-    case 'workout':
-      color = 'blue';
-      break;
-    default:
-      break;
+    return color;
   }
 
   function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
       batch(() => {
-        dispatch(setModalMode('VIEW'));
+        dispatch(setModalMode({ modalMode: 'VIEW' }));
         dispatch(setActiveMove(id));
       });
       // moveDispatch({ type: 'MOVE_SET', value: move });
@@ -61,28 +61,27 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
       batch(() => {
         console.log('Adding movement to workout');
         // moveDispatch({ type: 'MOVE_ADD_MOVE', value: move });
-        dispatch(setModalMode('EDIT'));
+        dispatch(setModalMode({ modalMode: 'VIEW' }));
         dispatch(setIsAddMoveMode(false));
       });
     }
   }
 
   function toggleActiveArch(e: any) {
-    console.log('trigg');
     if (!btnRef?.current?.contains(e.target)) {
-      dispatch({ type: 'FILTER_TOGGLE_TAG', payload: move.id });
+      dispatch({ type: 'FILTER_TOGGLE_TAG', payload: data.id });
     }
   }
 
   function handleClick(e: any) {
-    if (type === 'tag') {
-      toggleActiveArch(e);
-    } else {
+    if (type === 'WORKOUT' || type === 'EXERCISE') {
       if (isAddMoveMode) {
         addMoveToWorkout(e);
       } else {
         showModalView(e);
       }
+    } else if (type === 'TAG') {
+      toggleActiveArch(e);
     }
   }
 
@@ -97,17 +96,18 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
 
   // const nameLength = type === 'tag' ? 10 : Infinity;
   const nameLength = 12;
+  const color = getColor();
 
   const listItem = (
     <ColorBarWrapper color={color} height="5px">
       <div className="menu-list-item-container" onClick={handleClick}>
         <div className="left">
-          <p className="name">{stringShortener(move.name, nameLength)}</p>
+          <p className="name">{stringShortener(data.name, nameLength)}</p>
         </div>
         <div className="right">
           {!isAddMoveMode && (
             <div ref={btnRef} className="option-menu-btn-wrapper">
-              <OptionMenuButton id={id} />
+              <OptionMenuButton id={id} type={type} />
             </div>
           )}
         </div>
@@ -115,11 +115,11 @@ const MovementListItem: React.FC<{ id: string }> = ({ id }) => {
     </ColorBarWrapper>
   );
 
-  if (type === 'workout') {
+  if (type === 'WORKOUT') {
     return <WorkoutWrapper>{listItem}</WorkoutWrapper>;
-  } else if (type === 'exercise') {
+  } else if (type === 'EXERCISE') {
     return <ExerciseWrapper>{listItem}</ExerciseWrapper>;
-  } else if (type === 'tag') {
+  } else if (type === 'TAG') {
     return <ArchetypeWrapper>{listItem}</ArchetypeWrapper>;
   } else {
     return null;

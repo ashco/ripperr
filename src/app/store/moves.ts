@@ -1,6 +1,6 @@
 ﻿import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type ID = string; // make this specific length;
+export type ID = string; // make this specific length;
 
 export interface Tag {
   readonly id: ID;
@@ -75,7 +75,7 @@ interface Tags {
   allIds: string[];
 }
 
-interface MovesState {
+export interface MovesState {
   activeId: ID | null;
   workouts: Workouts;
   exercises: Exercises;

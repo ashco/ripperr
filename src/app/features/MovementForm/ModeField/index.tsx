@@ -1,8 +1,6 @@
 ﻿import React from 'react';
 import styled from 'styled-components';
 
-import { useMoveDispatch } from '../../../context/MoveContext';
-
 import { WorkoutMode } from '../../../types/enums';
 
 const ModeField: React.FC<{ value?: WorkoutMode; isDisabled: boolean }> = ({

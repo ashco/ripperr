@@ -3,34 +3,36 @@
 import { useSelector, useDispatch } from 'store';
 import { setModalMode } from 'store/ui';
 
-import { useMoveDispatch } from 'context/MoveContext';
-
 import AddMovementModalContainer from './style';
 import Button from 'components/Button';
 
 import ModalBackground from 'components/ModalBackground';
 import ColorBarWrapper from 'components/ColorBarWrapper';
 
-const AddMovementModal = () => {
-  // const dispatch = useModalDispatch();
+const AddMovementModal: React.FC<{
+  setAddMoveType: any;
+}> = ({ setAddMoveType }) => {
   const dispatch = useDispatch();
-  // const moveDispatch = useMoveDispatch();
 
   function addArchetype(): void {
-    dispatch(setModalMode('EDIT'));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
+    setAddMoveType('TAG');
     // * might need to reset moves.active in redux store, but might not
     // moveDispatch({ type: 'MOVE_RESET_AR' });
   }
   function addExercise(): void {
-    dispatch(setModalMode('EDIT'));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
+    setAddMoveType('EXERCISE');
     // moveDispatch({ type: 'MOVE_RESET_EX' });
   }
   function addWorkout(): void {
-    dispatch(setModalMode('EDIT'));
+    dispatch(setModalMode({ modalMode: 'EDIT' }));
+    setAddMoveType('WORKOUT');
     // moveDispatch({ type: 'MOVE_RESET_WO' });
   }
   function closeModal(): void {
-    dispatch(setModalMode(null));
+    dispatch(setModalMode({ modalMode: 'CLOSED' }));
+    setAddMoveType(null);
   }
 
   return (

@@ -1,19 +1,24 @@
 ﻿import React from 'react';
-
+import { useDispatch, useSelector } from 'store';
 import MovementMenuWrapper from './style';
 
 import Loading from 'components/Loading';
 import MovementListItem from '../MovementListItem';
 
-import { Movement } from '../../types/types';
-import { MovementType } from '../../types/enums';
-
 // TODO - RENAME TO MovementList
 const MovementMenu: React.FC<{
   // moveList: Movement[] | null;
-  moveList: string[];
   filterActive: boolean;
-}> = ({ moveList }) => {
+}> = () => {
+  const { isAddMoveMode } = useSelector((state) => state.ui);
+  const filter = useSelector((state) => state.filter);
+  const moves = useSelector((state) => state.moves);
+
+  const moveList = [
+    ...Object.keys(moves.workouts.byId),
+    ...Object.keys(moves.exercises.byId),
+  ];
+
   // function renderListItem(id: string) {
   //   // if (
   //   //   move.type === MovementType.Exercise ||
@@ -32,7 +37,13 @@ const MovementMenu: React.FC<{
       ) : (
         <ul>
           {moveList.map((id) => (
-            <MovementListItem key={id} id={id} />
+            <MovementListItem
+              filter={filter}
+              key={id}
+              id={id}
+              isAddMoveMode={isAddMoveMode}
+              moves={moves}
+            />
           ))}
         </ul>
       )}

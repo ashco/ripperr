@@ -5,13 +5,12 @@ import { setModalMode } from 'store/ui';
 import { Controller } from 'react-hook-form';
 import { ThemeContext } from 'styled-components';
 
-import MovementListContext from 'context/MovementListContext';
-import { useMoveDispatch } from 'context/MoveContext';
+// import MovementListContext from 'context/MovementListContext';
+// import { useMoveDispatch } from 'context/MoveContext';
 
 // import { ArchFormListItem } from 'components/ListItems';
 import { ArchetypesFieldWrapper, ArchetypeListItemWrapper } from './style';
 
-import { Archetype } from 'types/types';
 import { string } from 'yup';
 
 interface SelectOption {
@@ -26,76 +25,78 @@ const ArchetypesField: React.FC<{
   setValue: any;
   watch: any;
 }> = ({ tags, isDisabled, control, setValue, watch }) => {
-  const { modalMode } = useSelector((state) => state.ui);
+  return null;
 
-  // Generate select option list
-  const { archetypes } = React.useContext(MovementListContext);
-  const options = archetypes.map((arch) => {
-    return { value: arch.id as string, label: arch.name };
-  });
+  // const { modalMode } = useSelector((state) => state.ui);
 
-  // Determine initial select values
-  const initialSelectedOptions = options.filter((opt) =>
-    tags.includes(opt.value),
-  );
-  const [selectedOptions, setSelectedOptions] = React.useState<SelectOption[]>(
-    initialSelectedOptions,
-  );
+  // // Generate select option list
+  // const { archetypes } = React.useContext(MovementListContext);
+  // const options = archetypes.map((arch) => {
+  //   return { value: arch.id as string, label: arch.name };
+  // });
 
-  function handleMultiChange(selectedOpts: any) {
-    // Update state which sets select field display
-    setSelectedOptions(selectedOpts);
-    // create new array for form field + moveState
-    const tagsValue = (selectedOpts || []).map(
-      (opt: SelectOption) => opt.value,
-    );
-    setValue('tags', tagsValue);
-  }
+  // // Determine initial select values
+  // const initialSelectedOptions = options.filter((opt) =>
+  //   tags.includes(opt.value),
+  // );
+  // const [selectedOptions, setSelectedOptions] = React.useState<SelectOption[]>(
+  //   initialSelectedOptions,
+  // );
 
-  React.useEffect(() => {
-    // reset field state to current tags when going from EDIT to VIEW
-    if (modalMode === 'VIEW') {
-      const currentSelectedOptions = options.filter((opt) =>
-        tags.includes(opt.value),
-      );
-      setSelectedOptions(currentSelectedOptions);
-    }
-  }, [modalMode]);
+  // function handleMultiChange(selectedOpts: any) {
+  //   // Update state which sets select field display
+  //   setSelectedOptions(selectedOpts);
+  //   // create new array for form field + moveState
+  //   const tagsValue = (selectedOpts || []).map(
+  //     (opt: SelectOption) => opt.value,
+  //   );
+  //   setValue('tags', tagsValue);
+  // }
 
-  return (
-    // <Controller
-    //   as={<Select options={options} value={selectedOptions} />}
-    //   control={control}
-    //   name="tags"
-    //   placeholder="Tags"
-    //   onChange={handleMultiChange}
-    //   isDisabled={isDisabled}
-    //   isMulti
-    // />
+  // React.useEffect(() => {
+  //   // reset field state to current tags when going from EDIT to VIEW
+  //   if (modalMode === 'VIEW') {
+  //     const currentSelectedOptions = options.filter((opt) =>
+  //       tags.includes(opt.value),
+  //     );
+  //     setSelectedOptions(currentSelectedOptions);
+  //   }
+  // }, [modalMode]);
 
-    <Select
-      name="tags"
-      placeholder="Tags"
-      options={options}
-      value={selectedOptions}
-      onChange={handleMultiChange}
-      isDisabled={isDisabled}
-      isMulti
-    />
-    // <ArchetypesFieldWrapper>
-    //   {archetypes.map((arch, index) => (
-    //     <ArchetypeListItem
-    //       key={arch.id}
-    //       // index={index}
-    //       archetype={arch}
-    //       active={tags[arch.id as string]}
-    //       // active={tags.includes(arch.id as string)}
-    //       // isDisabled={isDisabled}
-    //       register={register}
-    //     />
-    //   ))}
-    // </ArchetypesFieldWrapper>
-  );
+  // return (
+  //   // <Controller
+  //   //   as={<Select options={options} value={selectedOptions} />}
+  //   //   control={control}
+  //   //   name="tags"
+  //   //   placeholder="Tags"
+  //   //   onChange={handleMultiChange}
+  //   //   isDisabled={isDisabled}
+  //   //   isMulti
+  //   // />
+
+  //   <Select
+  //     name="tags"
+  //     placeholder="Tags"
+  //     options={options}
+  //     value={selectedOptions}
+  //     onChange={handleMultiChange}
+  //     isDisabled={isDisabled}
+  //     isMulti
+  //   />
+  //   // <ArchetypesFieldWrapper>
+  //   //   {archetypes.map((arch, index) => (
+  //   //     <ArchetypeListItem
+  //   //       key={arch.id}
+  //   //       // index={index}
+  //   //       archetype={arch}
+  //   //       active={tags[arch.id as string]}
+  //   //       // active={tags.includes(arch.id as string)}
+  //   //       // isDisabled={isDisabled}
+  //   //       register={register}
+  //   //     />
+  //   //   ))}
+  //   // </ArchetypesFieldWrapper>
+  // );
 };
 
 // const ArchetypeListItem: React.FC<{

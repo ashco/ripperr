@@ -1,4 +1,8 @@
-﻿import { WorkoutMode, MovementType, FormActionType } from './enums';
+﻿import { WorkoutMode, FormActionType } from './enums';
+
+import { Tag, Exercise, Workout } from 'store/moves';
+
+export type MovementType = 'WORKOUT' | 'EXERCISE' | 'TAG';
 
 // =============== ERRORS ===============
 export interface IFormError {
@@ -20,27 +24,27 @@ export interface IUser {
 // =============== FIREBASE QUERIES ===============
 export type IAuthUserContext = firebase.User | null;
 
-export interface IArchetypesFirebaseQuery {
-  loading: boolean;
-  archetypes: Archetype[];
-}
+// export interface IArchetypesFirebaseQuery {
+//   loading: boolean;
+//   archetypes: Tag[];
+// }
 
-export interface IExercisesFirebaseQuery {
-  loading: boolean;
-  exercises: Exercise[];
-}
+// export interface IExercisesFirebaseQuery {
+//   loading: boolean;
+//   exercises: Exercise[];
+// }
 
-export interface IWorkoutsFirebaseQuery {
-  loading: boolean;
-  workouts: Workout[];
-}
+// export interface IWorkoutsFirebaseQuery {
+//   loading: boolean;
+//   workouts: Workout[];
+// }
 
-export interface IMovementState {
-  loading: boolean;
-  archetypes: Archetype[];
-  exercises: Exercise[];
-  workouts: Workout[];
-}
+// export interface IMovementState {
+//   loading: boolean;
+//   archetypes: Tag[];
+//   exercises: Exercise[];
+//   workouts: Workout[];
+// }
 
 // =============== FORM HELPERS ===============
 export interface IHandleChange {
@@ -54,28 +58,28 @@ export interface IHandleChange {
 //   description: string;
 // }
 // =============== DATA OBJECT STRUCTURES ===============
-export type Movement = Archetype | Exercise | Workout;
+// export type Movement = Archetype | Exercise | Workout;
 
-export interface Archetype {
-  // id and lastModified are ? because id is not assigned during initial form creation process
-  readonly type: MovementType;
-  readonly id?: string;
-  lastModified?: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
-  name: string;
-  description: string;
-  // history?: any;
-}
+// export interface Archetype {
+//   // id and lastModified are ? because id is not assigned during initial form creation process
+//   readonly type: MovementType;
+//   readonly id?: string;
+//   lastModified?: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
+//   name: string;
+//   description: string;
+//   // history?: any;
+// }
 
-export interface Exercise extends Archetype {
-  tags: string[];
-}
+// export interface Exercise extends Archetype {
+//   tags: string[];
+// }
 
-export interface Workout extends Exercise {
-  mode?: WorkoutMode;
-  movements: IMovementRefs[];
-  rest: IWorkoutRest;
-  config: IWorkoutConfig;
-}
+// export interface Workout extends Exercise {
+//   mode?: WorkoutMode;
+//   movements: IMovementRefs[];
+//   rest: IWorkoutRest;
+//   config: IWorkoutConfig;
+// }
 
 // ==================== FORM STATES ====================
 // export type MovementFormState =

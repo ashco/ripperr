@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from 'store';
 import ArchetypeListWrapper from './style';
 
 import MovementListItem from 'components/MovementListItem';
-
-import { Archetype } from 'types/types';
+import { FilterState } from 'store/filter/types';
 
 const ArchetypeList: React.FC<{
-  // archetypeList: Archetype[] | null;
-}> = () => {
-  const { tags } = useSelector((state) => state.moves);
+  filter: FilterState;
+}> = ({ filter }) => {
+  const { isAddMoveMode } = useSelector((state) => state.ui);
+  const moves = useSelector((state) => state.moves);
+  const { tags } = moves;
 
   return (
     <ArchetypeListWrapper>
@@ -18,8 +19,15 @@ const ArchetypeList: React.FC<{
         <div>No archetypes yet!</div>
       ) : (
         Object.keys(tags.byId).map((id) => {
-          console.log(tags.byId[id]);
-          return <MovementListItem key={id} id={id} />;
+          return (
+            <MovementListItem
+              filter={filter}
+              key={id}
+              id={id}
+              isAddMoveMode={isAddMoveMode}
+              moves={moves}
+            />
+          );
         })
       )}
 

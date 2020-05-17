@@ -6,8 +6,6 @@ import FilterInput from './FilterInput';
 
 import FilterContainer from './style';
 
-import { Archetype } from 'types/types';
-
 const Filter: React.FC<{
   // archetypeList: Archetype[] | null;
 }> = () => {
@@ -41,7 +39,7 @@ const Filter: React.FC<{
       filtering={filtering}
       ref={filterRef}
     >
-      {filter.active && <ArchetypeList />}
+      {filter.active && <ArchetypeList filter={filter} />}
       <FilterInput />
     </FilterContainer>
   );

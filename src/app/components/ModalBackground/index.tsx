@@ -12,7 +12,7 @@ const ModalBackground: React.FC = ({ children }) => {
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
       if (modal.modalMode !== 'EDIT') {
-        dispatch(setModalMode(null));
+        dispatch(setModalMode({ modalMode: 'CLOSED' }));
       }
     }
   }

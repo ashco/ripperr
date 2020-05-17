@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'store';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import MovementListContext from 'context/MovementListContext';
+// import MovementListContext from 'context/MovementListContext';
 import withAuthorization from 'context/withAuthorization';
 import AuthUserContext from 'context/AuthUserContext';
-import withMovements from 'context/withMovements';
+// import withMovements from 'context/withMovements';
 import FirebaseContext from 'context/FirebaseContext';
 
 import { getMovesStart, getMovesSuccess, getMovesFailure } from 'store/moves';
@@ -22,12 +22,13 @@ import { IAuthUserContext } from 'types/types';
 import ModalRouter from 'features/ModalRouter';
 
 const MovesPage: NextPage = () => {
-  const firebase = useContext(FirebaseContext);
-  const authUser = useContext(AuthUserContext);
   const dispatch = useDispatch();
 
+  const firebase = useContext(FirebaseContext);
+  const authUser = useContext(AuthUserContext);
+
   const filter = useSelector((state) => state.filter);
-  const movements = useSelector((state) => state.moves);
+  // const moves = useSelector((state) => state.moves);
 
   // const movements = useContext(MovementListContext);
   // const moveList = movements.loading
@@ -42,11 +43,6 @@ const MovesPage: NextPage = () => {
   //           return filter.tags.every((arch) => move.tags.includes(arch));
   //         }
   //       }, []);
-
-  const moveList = [
-    ...Object.keys(movements.workouts.byId),
-    ...Object.keys(movements.exercises.byId),
-  ];
 
   // ARCHETYPE EFFECT
   React.useEffect(() => {
@@ -118,7 +114,7 @@ const MovesPage: NextPage = () => {
 
   return (
     <MovementsPageWrapper>
-      <MovementMenu moveList={moveList} filterActive={filter.active} />
+      <MovementMenu filterActive={filter.active} />
       <Filter />
       <ModalRouter />
     </MovementsPageWrapper>
@@ -133,5 +129,4 @@ const MovementsPageWrapper = styled.div`
 
 const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
 
-// export default withAuthorization(condition)(withMovements(MovesPage));
 export default withAuthorization(condition)(MovesPage);

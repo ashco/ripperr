@@ -6,17 +6,13 @@ import styled from 'styled-components';
 
 import Button from 'components/Button';
 
-// import { useModalDispatch } from 'context/ModalContext';
-// import { useAddMoveMode } from 'context/AddMoveModeContext';
-
 const AddMovementButton: React.FC = () => {
-  // const modalDispatch = useModalDispatch();
   const dispatch = useDispatch();
 
   function handleClick(e: any) {
     e.preventDefault();
 
-    dispatch(setModalMode(null));
+    dispatch(setModalMode({ modalMode: 'CLOSED' }));
     dispatch(setIsAddMoveMode(true));
   }
 

@@ -3,16 +3,26 @@
 import { DefaultTheme } from 'styled-components';
 import { lightTheme, darkTheme } from 'styles/theme';
 
+import { MovementType } from 'types/types';
+
 interface ThemeMode {
   themeMode: 'LIGHT' | 'DARK';
 }
 
-type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | null;
+// type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | 'CLOSED';
+type ActiveMoveType = MovementType | null;
+export type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | 'CLOSED';
 export type IsAddMoveMode = boolean;
 export type IsPointerDisabled = boolean;
 
+interface SetModalMode {
+  // activeMoveType?: ActiveMoveType;
+  modalMode: ModalMode;
+}
+
 interface UIState {
   theme: DefaultTheme;
+  // activeMoveType: ActiveMoveType;
   modalMode: ModalMode;
   isAddMoveMode: IsAddMoveMode;
   isPointerDisabled: IsPointerDisabled;
@@ -20,7 +30,8 @@ interface UIState {
 
 const initialState: UIState = {
   theme: darkTheme,
-  modalMode: null,
+  //
+  modalMode: 'CLOSED',
   isAddMoveMode: false,
   isPointerDisabled: false,
 };
@@ -38,8 +49,12 @@ const uiSlice = createSlice({
       }
     },
 
-    setModalMode(state, action: PayloadAction<ModalMode>) {
-      state.modalMode = action.payload;
+    // setModalMode(state, action: PayloadAction<ModalMode>) {
+    //   state.modalMode = action.payload;
+    // },
+    setModalMode(state, action: PayloadAction<SetModalMode>) {
+      // state.activeMoveType = action.payload.activeMoveType;
+      state.modalMode = action.payload.modalMode;
     },
 
     setIsAddMoveMode(state, action: PayloadAction<IsAddMoveMode>) {

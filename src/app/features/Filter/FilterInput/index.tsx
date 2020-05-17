@@ -15,7 +15,7 @@ const FilterInput: React.FC<{}> = () => {
   const filtering = filter.value.length > 0 || filter.tags.length > 0;
 
   function openModal(): void {
-    dispatch(setModalMode('ADD'));
+    dispatch(setModalMode({ modalMode: 'ADD' }));
   }
 
   return (

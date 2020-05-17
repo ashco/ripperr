@@ -10,7 +10,6 @@ import {
 } from 'react-sortable-hoc';
 
 import ColorBarWrapper from 'components/ColorBarWrapper';
-import { useMoveDispatch } from 'context/MoveContext';
 import Icon from 'icons';
 
 import { MovementListItemWrapper, MovementListWrapper } from './style';
