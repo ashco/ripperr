@@ -13,7 +13,7 @@ const withAuthorization = (condition: any) => (Component: any) => {
     useEffect(() => {
       const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
         if (!condition(authUser)) {
-          router.push('/signin');
+          router.push('/login');
         }
       });
 

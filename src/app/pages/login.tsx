@@ -3,23 +3,23 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import AuthFormContainer from 'features/Auth/AuthFormContainer';
-import SignInForm from 'features/Auth/SignInForm';
+import LoginForm from 'features/Auth/LoginForm';
 import { PasswordForgotLink } from 'features/Auth/PasswordForgotForm';
 import SignUpLink from 'components/SignUpLink';
 
-const SignInPage: NextPage<{ userAgent: string }> = () => (
-  <SignInPageWrapper>
+const LoginPage: NextPage<{ userAgent: string }> = () => (
+  <LoginPageWrapper>
     <AuthFormContainer>
-      <SignInForm />
+      <LoginForm />
       <div className="links">
         <SignUpLink />
         <PasswordForgotLink />
       </div>
     </AuthFormContainer>
-  </SignInPageWrapper>
+  </LoginPageWrapper>
 );
 
-const SignInPageWrapper = styled.div`
+const LoginPageWrapper = styled.div`
   display: grid;
   justify-content: center;
   margin-top: 2rem;
@@ -28,4 +28,4 @@ const SignInPageWrapper = styled.div`
   }
 `;
 
-export default SignInPage;
+export default LoginPage;

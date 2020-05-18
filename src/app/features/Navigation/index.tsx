@@ -123,7 +123,7 @@ const NavBarNonAuth: React.FC<{ color: string }> = ({ color }) => (
     <div className="list-group center"></div>
     <div className="list-group right">
       <li>
-        <Link href="/signin">
+        <Link href="/login">
           <a>Sign In</a>
         </Link>
       </li>

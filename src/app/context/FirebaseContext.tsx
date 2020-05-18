@@ -35,7 +35,7 @@ class Firebase {
   ): Promise<firebase.auth.UserCredential> =>
     this.auth.createUserWithEmailAndPassword(email, password);
 
-  doSignInWithEmailAndPassword = (
+  doLoginWithEmailAndPassword = (
     email: string,
     password: string,
   ): Promise<firebase.auth.UserCredential> =>

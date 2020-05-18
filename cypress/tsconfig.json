@@ -4,8 +4,9 @@
     "baseUrl": "../node_modules",
     "target": "es5",
     "lib": ["es5", "dom"],
-    "types": ["cypress"]
+    "types": ["cypress", "@types/testing-library__cypress"]
   },
   // "extends": "../tsconfig.json",
-  "include": ["**/*.ts", "support/index.ts"]
+  "include": ["**/*.ts"]
+  // "include": ["**/*.ts", "support/index.ts"]
 }

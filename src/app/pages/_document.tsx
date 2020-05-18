@@ -1,4 +1,12 @@
-﻿import React from 'react';
+﻿// TODO - set up react dev tools to work with cypress
+// need to run this before react loads to set up dev tools in cypress
+// import '../react-devtools-hook'
+// if (window.Cypress) {
+//   window.__REACT_DEVTOOLS_GLOBAL_HOOK__ =
+//     window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+// }
+
+import React from 'react';
 import Document, { DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 

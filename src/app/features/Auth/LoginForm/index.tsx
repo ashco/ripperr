@@ -11,17 +11,17 @@ import Button from 'components/Button';
 import FirebaseContext from 'context/FirebaseContext';
 import { IAuthError } from 'types/types';
 
-export interface ISignInFormValues {
+export interface ILoginFormValues {
   email: string;
   password: string;
 }
 
-const INITIAL_VALUES: ISignInFormValues = {
+const INITIAL_VALUES: ILoginFormValues = {
   email: '',
   password: '',
 };
 
-const SignInForm = () => {
+const LoginForm = () => {
   const firebase = useContext(FirebaseContext);
   const router = useRouter();
 
@@ -33,7 +33,7 @@ const SignInForm = () => {
       validationSchema={signInVal}
       onSubmit={({ email, password }, { resetForm }) => {
         firebase
-          .doSignInWithEmailAndPassword(email, password)
+          .doLoginWithEmailAndPassword(email, password)
           .then(() => {
             resetForm();
             router.push('/');
@@ -66,4 +66,4 @@ const StyledForm = styled(Form)`
   } */
 `;
 
-export default SignInForm;
+export default LoginForm;
