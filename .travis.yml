@@ -1,8 +1,13 @@
 ﻿sudo: false
 language: node_js
-# cache:
-#   directories:
-#     - ~/.npm
+addons:
+  apt:
+    packages:
+      - libgconf-2-4 # this is a package that cypress depends on, need to add
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache # adds directory that cypress is cached into, don't have to wait now that it's included
 notifications:
   email: false
 node_js: '10'

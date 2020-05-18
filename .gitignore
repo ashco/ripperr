@@ -76,3 +76,6 @@ lib/
 next/
 
 serviceAccount.json
+
+cypress/videos
+cypress/screenshots

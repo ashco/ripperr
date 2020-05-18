@@ -1,7 +1,7 @@
 {
   "name": "ripperr",
   "version": "1.0.0",
-  "author": "AshCo (https://ashco.io)",
+  "author": "Ashton Christie <ash@ashchristie.dev> (https://ashchristie.dev/)",
   "license": "MIT",
   "scripts": {
     "dev": "cd src/app && next -p 9999",
@@ -19,13 +19,19 @@
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
     "format": "yarn prettier -- --write",
     "check-format": "yarn prettier -- --list-different",
-    "validate": "npm-run-all --parallel check-types check-format test:coverage build",
+    "validate": "npm-run-all --parallel check-types check-format test:coverage test:e2e build",
     "install:all": "yarn install && cd src/functions && yarn install",
     "setup": "yarn install:all && yarn validate",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch"
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test:e2e": "is-ci \"test:e2e:run\" \"test:e2e:dev\"",
+    "pretest:e2e:run": "npm run build",
+    "test:e2e:run": "start-server-and-test start http://localhost:9999 cy:run",
+    "test:e2e:dev": "start-server-and-test dev http://localhost:9999 cy:open"
   },
   "jest-runner-eslint": {
     "cliOptions": {
@@ -62,6 +68,8 @@
     "yup": "^0.28.0"
   },
   "devDependencies": {
+    "@jackfranklin/test-data-bot": "^1.3.0",
+    "@testing-library/cypress": "^6.0.0",
     "@testing-library/jest-dom": "^5.7.0",
     "@testing-library/react": "^10.0.4",
     "@types/jest": "^25.2.1",
@@ -75,9 +83,11 @@
     "@types/yup": "^0.26.27",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
+    "cypress": "^4.5.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-jest": "^3.0.0",
+    "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.5",
@@ -90,6 +100,7 @@
     "lint-staged": "^10.2.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
+    "start-server-and-test": "^1.11.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.2"
   }
