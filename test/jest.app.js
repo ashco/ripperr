@@ -3,6 +3,8 @@
 // which contains the path mapping (ie the `compilerOptions.paths` option):
 const { compilerOptions } = require('../src/app/tsconfig.json');
 
+console.log(pathsToModuleNameMapper(compilerOptions.paths));
+
 module.exports = {
   ...require('../jest.config'),
   displayName: 'app',

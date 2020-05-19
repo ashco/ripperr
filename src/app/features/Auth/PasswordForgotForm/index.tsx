@@ -9,6 +9,7 @@ import Button from 'components/Button';
 import Input from 'components/Input';
 
 import { AuthError } from 'types/types';
+import { passwordForgotSchema } from 'utils/validation-schema';
 
 interface PasswordForgotForm {
   email: string;
@@ -25,7 +26,9 @@ const PasswordForgotForm: React.FC = () => {
 
   const { register, handleSubmit, reset, errors } = useForm<PasswordForgotForm>(
     {
+      mode: 'onBlur',
       defaultValues,
+      validationSchema: passwordForgotSchema,
     },
   );
 
@@ -35,21 +38,23 @@ const PasswordForgotForm: React.FC = () => {
       .then(() => {
         reset();
       })
-      .catch((authError) => {
-        setAuthError(authError);
-        console.error(authError);
+      .catch((err) => {
+        setAuthError(err);
+        console.error(err);
       });
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        name="email"
-        type="email"
-        label="Email:"
-        register={register({ required: 'Email is required!' })}
-        error={errors.email}
-      />
+    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="input-container">
+        <Input
+          name="email"
+          type="email"
+          label="Email:"
+          register={register({ required: 'Email is required!' })}
+          error={errors.email}
+        />
+      </div>
       <Button type="submit">Submit</Button>
       {authError && <p>{authError.message}</p>}
     </Form>

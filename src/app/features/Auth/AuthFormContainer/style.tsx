@@ -3,7 +3,8 @@
 const AuthFormContainerWrapper = styled.div`
   display: grid;
   gap: 1rem;
-  max-width: 32rem;
+  max-width: 90vw;
+  width: 24rem;
   box-shadow: ${(props) => props.theme.shadow[1]};
   padding: 24px;
   background: ${(props) => props.theme.mode.background[300]};

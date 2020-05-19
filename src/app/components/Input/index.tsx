@@ -25,7 +25,6 @@ const Input: React.FC<{
   register: any;
   error?: FieldError;
 }> = ({ name, type, label, register, error }) => {
-  console.log(error);
   return (
     <InputWrapper>
       <label htmlFor={name} role={error?.message && 'alert'}>

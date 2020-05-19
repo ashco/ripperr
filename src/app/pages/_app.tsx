@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import Page from '../components/Page';
 import withAuthentication from 'context/withAuthentication';
 
-import configureStore from 'store';
+import createStore from 'store';
 
 // import 'react-toastify/dist/ReactToastify.css';
 
-const store = configureStore();
+const store = createStore();
 
 class MyApp extends App {
   render() {

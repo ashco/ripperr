@@ -9,6 +9,7 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 
 import { AuthError } from 'types/types';
+import { passwordChangeSchema } from 'utils/validation-schema';
 
 interface PasswordChangeForm {
   password: string;
@@ -27,7 +28,9 @@ const PasswordChangeForm: React.FC = () => {
 
   const { register, handleSubmit, reset, errors } = useForm<PasswordChangeForm>(
     {
+      mode: 'onBlur',
       defaultValues,
+      validationSchema: passwordChangeSchema,
     },
   );
 
@@ -44,21 +47,23 @@ const PasswordChangeForm: React.FC = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        name="password"
-        type="password"
-        label="Password:"
-        register={register({ required: 'Password is required!' })}
-        error={errors.password}
-      />
-      <Input
-        name="passwordConfirm"
-        type="password"
-        label="Confirm Password:"
-        register={register({ required: 'Password is required!' })}
-        error={errors.passwordConfirm}
-      />
+    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="input-container">
+        <Input
+          name="password"
+          type="password"
+          label="Password:"
+          register={register()}
+          error={errors.password}
+        />
+        <Input
+          name="passwordConfirm"
+          type="password"
+          label="Confirm Password:"
+          register={register()}
+          error={errors.passwordConfirm}
+        />
+      </div>
       <Button type="submit">Submit</Button>
       {authError && <FormError>{authError.message}</FormError>}
     </Form>

@@ -54,9 +54,9 @@ const SignupForm: React.FC = () => {
         reset();
         router.push('/moves');
       })
-      .catch((authError) => {
-        setAuthError(authError);
-        console.log(authError);
+      .catch((err) => {
+        setAuthError(err);
+        console.log(err);
       });
   }
 

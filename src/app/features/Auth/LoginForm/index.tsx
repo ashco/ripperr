@@ -10,6 +10,8 @@ import FormError from 'components/FormError';
 import FirebaseContext from 'context/FirebaseContext';
 import { AuthError } from 'types/types';
 
+import { loginSchema } from 'utils/validation-schema';
+
 interface LoginForm {
   email: string;
   password: string;
@@ -20,14 +22,16 @@ const defaultValues: LoginForm = {
   password: '',
 };
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const firebase = React.useContext(FirebaseContext);
   const router = useRouter();
 
   const [authError, setAuthError] = React.useState<AuthError | false>(false);
 
   const { register, handleSubmit, reset, errors } = useForm<LoginForm>({
+    mode: 'onBlur',
     defaultValues,
+    validationSchema: loginSchema,
   });
 
   function onSubmit({ email, password }: LoginForm) {
@@ -37,27 +41,28 @@ const LoginForm = () => {
         reset();
         router.push('/moves');
       })
-      .catch((authError) => {
-        setAuthError(authError);
-        console.log(authError);
+      .catch((err) => {
+        setAuthError(err);
+        console.log(err);
       });
   }
 
+  console.log(errors);
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="input-container">
         <Input
           name="email"
           type="email"
           label="Email:"
-          register={register({ required: 'Email is required!' })}
+          register={register()}
           error={errors.email}
         />
         <Input
           name="password"
           type="password"
           label="Password:"
-          register={register({ required: 'Password is required!' })}
+          register={register()}
           error={errors.password}
         />
       </div>

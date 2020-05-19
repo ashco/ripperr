@@ -3,7 +3,7 @@
 const Form = styled.form`
   display: grid;
   gap: 2rem;
-  width: 24rem;
+  /* width: 24rem; */
 
   .input-container {
     display: grid;

@@ -1,13 +1,11 @@
 ﻿import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-// import { useThemeMode } from 'context/ThemeModeContext';
 import { useSelector, useDispatch } from 'store';
 import { setTheme } from 'store/ui';
 
 import Button from 'components/Button';
 
-const DarkModeButton = () => {
+const ToggleThemeButton = () => {
   const { theme } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
@@ -22,15 +20,15 @@ const DarkModeButton = () => {
   }
 
   return (
-    <StyledDarkModeButton onClick={toggleThemeMode}>
+    <StyledToggleThemeButton onClick={toggleThemeMode}>
       {buttonText} Mode
-    </StyledDarkModeButton>
+    </StyledToggleThemeButton>
   );
 };
 
-const StyledDarkModeButton = styled(Button)`
+const StyledToggleThemeButton = styled(Button)`
   color: ${(props) => props.theme.mode.background[100]};
   background: ${(props) => props.theme.mode.color[100]};
 `;
 
-export default DarkModeButton;
+export default ToggleThemeButton;

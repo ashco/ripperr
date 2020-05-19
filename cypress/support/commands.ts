@@ -35,3 +35,57 @@ Cypress.Commands.add('checkReqValidation', (label) => {
   cy.findByLabelText(re).focus().blur();
   cy.findByRole('alert').should('be.visible').contains(reReq);
 });
+
+Cypress.Commands.add('validateUsernameField', (username) => {
+  // username is required
+  cy.checkReqValidation('username');
+  // username error alert dismisses
+  cy.findByLabelText(/username/i).type(username);
+  cy.findByRole('alert').should('not.be.visible');
+});
+
+Cypress.Commands.add('validateEmailField', (email) => {
+  // email is required
+  cy.checkReqValidation('email');
+  // email must be a valid email
+  cy.findByLabelText(/email/i).type('bad-format');
+  cy.findByRole('alert')
+    .should('be.visible')
+    .contains(/email must be a valid email/i);
+  // email error alert dismisses
+  cy.findByLabelText(/email/i).clear().type(email);
+  cy.findByRole('alert').should('not.be.visible');
+});
+
+Cypress.Commands.add(
+  'validatePasswordField',
+  (password, includeVerify = false) => {
+    // Password is required
+    cy.checkReqValidation('password');
+    // Password must be at least 6 characters
+    cy.findByLabelText(/^password/i).type('12345');
+    cy.findByRole('alert')
+      .should('be.visible')
+      .contains(/password must be at least 6 characters/i);
+    // password error alert dismisses
+    cy.findByLabelText(/^password/i)
+      .clear()
+      .type(password);
+    cy.findByRole('alert').should('not.be.visible');
+
+    if (includeVerify) {
+      // Passwords must match
+      cy.findByLabelText(/confirm password/i)
+        .type('no-match')
+        .blur();
+      cy.findByRole('alert')
+        .should('be.visible')
+        .contains(/passwords must match/i);
+      // password confirm error alert dismisses
+      cy.findByLabelText(/passwords must match/i)
+        .clear()
+        .type(password);
+      cy.findByRole('alert').should('not.be.visible');
+    }
+  },
+);

@@ -8,8 +8,8 @@ import withAuthorization from 'context/withAuthorization';
 import AuthFormContainer from 'features/Auth/AuthFormContainer';
 import PasswordForgotForm from 'features/Auth/PasswordForgotForm';
 
-import DarkModeButton from 'components/DarkModeButton';
-import PasswordChangeForm from 'components/PasswordChangeForm';
+import ToggleThemeButton from 'components/ToggleThemeButton';
+import PasswordChangeForm from 'features/Auth/PasswordChangeForm';
 
 import { AuthUser } from 'types/types';
 
@@ -21,13 +21,10 @@ const AccountPage: NextPage = () => {
       <div aria-label="account-email">
         {authUser && `Email: ${authUser.email}`}
       </div>
-      <AuthFormContainer title="Forgot Password?">
-        <PasswordForgotForm />
-      </AuthFormContainer>
       <AuthFormContainer title="Change Password">
         <PasswordChangeForm />
       </AuthFormContainer>
-      <DarkModeButton />
+      <ToggleThemeButton />
     </AccountPageWrapper>
   );
 };
