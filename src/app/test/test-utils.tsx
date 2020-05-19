@@ -1,15 +1,37 @@
 ﻿import React from 'react';
+import { Provider } from 'react-redux';
 import { render as rtlRender } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
-// import { useThemeModeState } from 'context/ThemeModeContext';
+import { ThemeProvider, DefaultTheme } from 'styled-components';
+
+import createStore from 'store';
 import { darkTheme } from 'styles/theme';
 
-function render(ui: any, { theme = darkTheme, ...options } = {}) {
-  function Wrapper({ children }: any) {
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-  }
+interface RenderOptions {
+  store?: any;
+  theme?: DefaultTheme;
+  rtlOptions?: any;
+}
 
-  return rtlRender(ui, { wrapper: Wrapper, ...options });
+function render<Render>(
+  ui: any,
+  {
+    store = createStore(),
+    theme = darkTheme,
+    ...rtlOptions
+  }: RenderOptions = {},
+): any {
+  const Wrapper: React.FC = ({ children }) => {
+    return (
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </Provider>
+    );
+  };
+
+  return {
+    ...rtlRender(ui, { wrapper: Wrapper, ...rtlOptions }),
+    store,
+  };
 }
 
 export * from '@testing-library/react';

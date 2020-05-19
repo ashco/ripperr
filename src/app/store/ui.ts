@@ -47,13 +47,10 @@ const uiSlice = createSlice({
       } else if (themeMode === 'DARK') {
         state.theme = darkTheme;
       }
+      localStorage.setItem('theme', themeMode);
     },
 
-    // setModalMode(state, action: PayloadAction<ModalMode>) {
-    //   state.modalMode = action.payload;
-    // },
     setModalMode(state, action: PayloadAction<SetModalMode>) {
-      // state.activeMoveType = action.payload.activeMoveType;
       state.modalMode = action.payload.modalMode;
     },
 

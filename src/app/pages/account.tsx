@@ -6,7 +6,6 @@ import AuthUserContext from 'context/AuthUserContext';
 import withAuthorization from 'context/withAuthorization';
 
 import AuthFormContainer from 'features/Auth/AuthFormContainer';
-import PasswordForgotForm from 'features/Auth/PasswordForgotForm';
 
 import ToggleThemeButton from 'components/ToggleThemeButton';
 import PasswordChangeForm from 'features/Auth/PasswordChangeForm';
@@ -18,12 +17,13 @@ const AccountPage: NextPage = () => {
 
   return (
     <AccountPageWrapper>
-      <div aria-label="account-email">
+      <p className="text" aria-label="account-email">
         {authUser && `Email: ${authUser.email}`}
-      </div>
+      </p>
       <AuthFormContainer title="Change Password">
         <PasswordChangeForm />
       </AuthFormContainer>
+      <p className="text">Toggle Theme</p>
       <ToggleThemeButton />
     </AccountPageWrapper>
   );
@@ -33,7 +33,7 @@ const AccountPageWrapper = styled.div`
   display: grid;
   justify-content: center;
   gap: 2rem;
-  [aria-label='account-email'] {
+  .text {
     text-align: center;
     font-size: 20px;
     margin-top: 2rem;

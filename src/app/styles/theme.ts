@@ -88,7 +88,7 @@
 };
 
 const lightMode = {
-  type: 'Light',
+  type: 'LIGHT',
   background: {
     100: 'hsl(180, 6.2%, 93%)',
     200: 'hsl(300, 14.3%, 98.6%)',
@@ -109,7 +109,7 @@ const lightMode = {
 };
 
 const darkMode = {
-  type: 'Dark',
+  type: 'DARK',
   background: {
     100: 'hsl(0, 0%, 7%)',
     200: 'hsl(0, 0%, 9%)',

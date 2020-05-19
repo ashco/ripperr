@@ -31,14 +31,12 @@ const Page: React.FC = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <MoveProvider> */}
       <StyledPage isPointerDisabled={isPointerDisabled}>
         <GlobalStyle />
         <Meta />
         <NavBar />
         <div className="main">{props.children}</div>
       </StyledPage>
-      {/* </MoveProvider> */}
     </ThemeProvider>
   );
 };
