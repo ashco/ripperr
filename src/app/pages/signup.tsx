@@ -3,22 +3,22 @@ import styled from 'styled-components';
 import { NextPage } from 'next';
 
 import AuthFormContainer from 'features/Auth/AuthFormContainer';
-import SignUpForm from 'features/Auth/SignUpForm';
+import SignupForm from 'features/Auth/SignupForm';
 
-const SignUpPage: NextPage = () => {
+const SignupPage: NextPage = () => {
   return (
-    <SignUpPageWrapper>
-      <AuthFormContainer>
-        <SignUpForm />
+    <SignupPageWrapper>
+      <AuthFormContainer title="Sign Up">
+        <SignupForm />
       </AuthFormContainer>
-    </SignUpPageWrapper>
+    </SignupPageWrapper>
   );
 };
 
-const SignUpPageWrapper = styled.div`
+const SignupPageWrapper = styled.div`
   display: grid;
   justify-content: center;
   margin-top: 2rem;
 `;
 
-export default SignUpPage;
+export default SignupPage;

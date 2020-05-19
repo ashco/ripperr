@@ -5,11 +5,8 @@ import { Tag, Exercise, Workout } from 'store/moves';
 export type MovementType = 'WORKOUT' | 'EXERCISE' | 'TAG';
 
 // =============== ERRORS ===============
-export interface IFormError {
-  message: string;
-}
 
-export interface IAuthError {
+export interface AuthError {
   code: string;
   message: string;
 }
@@ -22,7 +19,7 @@ export interface IUser {
 }
 
 // =============== FIREBASE QUERIES ===============
-export type IAuthUserContext = firebase.User | null;
+export type AuthUser = firebase.User | null;
 
 // export interface IArchetypesFirebaseQuery {
 //   loading: boolean;

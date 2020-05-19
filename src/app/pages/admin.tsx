@@ -6,7 +6,7 @@ import withAuthorization from 'context/withAuthorization';
 
 import UserList from '../features/Admin/UserList';
 
-import { IAuthUserContext, IUser } from '../types/types';
+import { AuthUser, IUser } from '../types/types';
 
 interface IState {
   uLoading: boolean;
@@ -59,7 +59,7 @@ const AdminPage: NextPage = () => {
   );
 };
 
-const condition = (authUser: IAuthUserContext): boolean => {
+const condition = (authUser: AuthUser): boolean => {
   return authUser !== null;
 };
 

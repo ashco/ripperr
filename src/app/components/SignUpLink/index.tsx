@@ -2,10 +2,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-const SignUpLink = () => (
+const SignupLink = () => (
   <Link href="/signup">
     <a>You don't have an account?</a>
   </Link>
 );
 
-export default SignUpLink;
+export default SignupLink;

@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import AuthFormContainer from 'features/Auth/AuthFormContainer';
 import LoginForm from 'features/Auth/LoginForm';
 import { PasswordForgotLink } from 'features/Auth/PasswordForgotForm';
-import SignUpLink from 'components/SignUpLink';
+import SignupLink from 'components/SignupLink';
 
 const LoginPage: NextPage<{ userAgent: string }> = () => (
   <LoginPageWrapper>
-    <AuthFormContainer>
+    <AuthFormContainer title="Login">
       <LoginForm />
       <div className="links">
-        <SignUpLink />
+        <SignupLink />
         <PasswordForgotLink />
       </div>
     </AuthFormContainer>
@@ -23,9 +23,6 @@ const LoginPageWrapper = styled.div`
   display: grid;
   justify-content: center;
   margin-top: 2rem;
-  .links {
-    margin-top: 1rem;
-  }
 `;
 
 export default LoginPage;

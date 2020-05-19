@@ -1,48 +1,58 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
-import { Formik, Form } from 'formik';
+import { useForm } from 'react-hook-form';
 
-import Button from 'components/Button';
-import InputField from 'features/MovementForm/InputField';
-import { passwordForgotVal } from 'features/MovementForm/validationSchema';
 import FirebaseContext from 'context/FirebaseContext';
-import { IAuthError } from 'types/types';
 
-interface IPasswordForgotForm {
+import Form from 'components/Form';
+import Button from 'components/Button';
+import Input from 'components/Input';
+
+import { AuthError } from 'types/types';
+
+interface PasswordForgotForm {
   email: string;
 }
 
-const INITIAL_VALUES: IPasswordForgotForm = {
+const defaultValues: PasswordForgotForm = {
   email: '',
 };
 
 const PasswordForgotForm: React.FC = () => {
-  const firebase = useContext(FirebaseContext);
+  const firebase = React.useContext(FirebaseContext);
 
-  const [error, setError] = useState<IAuthError | false>(false);
+  const [authError, setAuthError] = React.useState<AuthError | false>(false);
+
+  const { register, handleSubmit, reset, errors } = useForm<PasswordForgotForm>(
+    {
+      defaultValues,
+    },
+  );
+
+  function onSubmit({ email }: PasswordForgotForm) {
+    firebase
+      .doPasswordReset(email)
+      .then(() => {
+        reset();
+      })
+      .catch((authError) => {
+        setAuthError(authError);
+        console.error(authError);
+      });
+  }
 
   return (
-    <Formik
-      initialValues={INITIAL_VALUES}
-      validationSchema={passwordForgotVal}
-      onSubmit={({ email }, { resetForm }) => {
-        firebase
-          .doPasswordReset(email)
-          .then(() => {
-            resetForm();
-          })
-          .catch((error) => {
-            setError(error);
-            console.error(error);
-          });
-      }}
-    >
-      <Form>
-        <InputField name="email" type="email" placeholder="Email" />
-        <Button type="submit">Reset Password</Button>
-        {error && <p>{error.message}</p>}
-      </Form>
-    </Formik>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Input
+        name="email"
+        type="email"
+        label="Email:"
+        register={register({ required: 'Email is required!' })}
+        error={errors.email}
+      />
+      <Button type="submit">Submit</Button>
+      {authError && <p>{authError.message}</p>}
+    </Form>
   );
 };
 

@@ -17,7 +17,7 @@ import MovementMenu from 'components/MovementMenu';
 
 import { sortMovements } from 'utils/sort-movements';
 
-import { IAuthUserContext } from 'types/types';
+import { AuthUser } from 'types/types';
 
 import ModalRouter from 'features/ModalRouter';
 
@@ -127,6 +127,6 @@ const MovementsPageWrapper = styled.div`
   height: 100%;
 `;
 
-const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
+const condition = (authUser: AuthUser): boolean => authUser !== null;
 
 export default withAuthorization(condition)(MovesPage);

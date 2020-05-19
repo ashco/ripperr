@@ -1,91 +1,101 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React from 'react';
 import { useRouter } from 'next/router';
-import { Formik, Form } from 'formik';
+import { useForm } from 'react-hook-form';
 
-import InputField from 'features/MovementForm/InputField';
-import { signUpVal } from 'features/MovementForm/validationSchema';
-import FormError from 'components/FormError';
+import Input from 'components/Input';
+import Form from 'components/Form';
 import Button from 'components/Button';
+import FormError from 'components/FormError';
 
 import FirebaseContext from 'context/FirebaseContext';
-import { IAuthError } from 'types/types';
+import { AuthError } from 'types/types';
 
-interface ISignUpFormValues {
+import { signupSchema } from 'utils/validation-schema';
+
+interface SignupForm {
   username: string;
   email: string;
-  passwordOne: string;
-  passwordTwo: string;
+  password: string;
+  passwordConfirm: string;
 }
 
-const INITIAL_VALUES: ISignUpFormValues = {
+const defaultValues: SignupForm = {
   username: '',
   email: '',
-  passwordOne: '',
-  passwordTwo: '',
+  password: '',
+  passwordConfirm: '',
 };
 
-const SignUpForm: React.FC = () => {
-  const firebase = useContext(FirebaseContext);
+const SignupForm: React.FC = () => {
+  const firebase = React.useContext(FirebaseContext);
   const router = useRouter();
 
-  const [error, setError] = useState<IAuthError | false>(false);
+  const [authError, setAuthError] = React.useState<AuthError | false>(false);
+
+  const { register, handleSubmit, reset, errors } = useForm<SignupForm>({
+    mode: 'onBlur',
+    defaultValues,
+    validationSchema: signupSchema,
+  });
+
+  function onSubmit({ username, email, password }: SignupForm) {
+    firebase
+      .doCreateUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        // Create a user in your Firebase realtime database
+        if (authUser.user) {
+          return firebase.user(authUser.user.uid).set({
+            username,
+            email,
+          });
+        }
+      })
+      .then(() => {
+        reset();
+        router.push('/moves');
+      })
+      .catch((authError) => {
+        setAuthError(authError);
+        console.log(authError);
+      });
+  }
 
   return (
-    <Formik
-      initialValues={INITIAL_VALUES}
-      validationSchema={signUpVal}
-      onSubmit={({ username, email, passwordOne }, { resetForm }) => {
-        firebase
-          .doCreateUserWithEmailAndPassword(email, passwordOne)
-          .then((authUser) => {
-            // Create a user in your Firebase realtime database
-            if (authUser.user) {
-              return firebase.user(authUser.user.uid).set({
-                username,
-                email,
-              });
-            }
-          })
-          .then(() => {
-            resetForm();
-            router.push('/');
-          })
-          .catch((error) => {
-            setError(error);
-            console.log(error);
-          });
-      }}
-    >
-      <Form>
-        <InputField
-          // label="Username"
+    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="input-container">
+        <Input
           name="username"
           type="text"
-          placeholder="Username"
+          label="Username:"
+          register={register()}
+          error={errors.username}
         />
-        <InputField
-          // label="Email"
+        <Input
           name="email"
           type="email"
-          placeholder="Email"
+          label="Email:"
+          register={register()}
+          error={errors.email}
         />
-        <InputField
-          // label="Password"
-          name="passwordOne"
+        <Input
+          name="password"
           type="password"
-          placeholder="Password"
+          label="Password:"
+          register={register()}
+          error={errors.password}
         />
-        <InputField
-          // label="Confirm Password"
-          name="passwordTwo"
+        <Input
+          name="passwordConfirm"
           type="password"
-          placeholder="Confirm Password"
+          label="Confirm Password:"
+          register={register()}
+          error={errors.passwordConfirm}
         />
-        <Button type="submit">Sign Up</Button>
-        {error && <FormError>{error.message}</FormError>}
-      </Form>
-    </Formik>
+      </div>
+      <Button type="submit">Submit</Button>
+      {authError && <FormError>{authError.message}</FormError>}
+    </Form>
   );
 };
 
-export default SignUpForm;
+export default SignupForm;

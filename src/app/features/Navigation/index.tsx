@@ -1,12 +1,10 @@
-﻿import React, { useContext } from 'react';
+﻿import React from 'react';
 import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode, IsAddMoveMode } from 'store/ui';
 import { ThemeContext } from 'styled-components';
 import Link from 'next/link';
 
 import AuthUserContext from 'context/AuthUserContext';
-// import { useAddMoveMode } from 'context/AddMoveModeContext';
-// import { useModalDispatch } from 'context/ModalContext';
 
 import NotificationBanner from 'components/NotificationBanner';
 import Button from 'components/Button';
@@ -16,11 +14,10 @@ import SignOutButton from './SignOutButton';
 import NavBarWrapper from './style';
 
 import Icon from 'icons';
-import useNotification from 'hooks/useNotification';
 
 const NavBar: React.FC = () => {
-  const authUser = useContext(AuthUserContext);
-  const themeContext = useContext(ThemeContext);
+  const authUser = React.useContext(AuthUserContext);
+  const themeContext = React.useContext(ThemeContext);
 
   const { isAddMoveMode } = useSelector((state) => state.ui);
 
@@ -124,7 +121,7 @@ const NavBarNonAuth: React.FC<{ color: string }> = ({ color }) => (
     <div className="list-group right">
       <li>
         <Link href="/login">
-          <a>Sign In</a>
+          <a>Login</a>
         </Link>
       </li>
     </div>

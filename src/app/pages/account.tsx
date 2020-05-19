@@ -1,4 +1,4 @@
-﻿import React, { useContext } from 'react';
+﻿import React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
@@ -11,17 +11,20 @@ import PasswordForgotForm from 'features/Auth/PasswordForgotForm';
 import DarkModeButton from 'components/DarkModeButton';
 import PasswordChangeForm from 'components/PasswordChangeForm';
 
-import { IAuthUserContext } from 'types/types';
+import { AuthUser } from 'types/types';
 
 const AccountPage: NextPage = () => {
-  const authUser = useContext(AuthUserContext);
+  const authUser = React.useContext(AuthUserContext);
+
   return (
     <AccountPageWrapper>
-      <h1>{authUser ? `Account: ${authUser.email}` : `Account Page`}</h1>
-      <AuthFormContainer>
+      <div aria-label="account-email">
+        {authUser && `Email: ${authUser.email}`}
+      </div>
+      <AuthFormContainer title="Forgot Password?">
         <PasswordForgotForm />
       </AuthFormContainer>
-      <AuthFormContainer>
+      <AuthFormContainer title="Change Password">
         <PasswordChangeForm />
       </AuthFormContainer>
       <DarkModeButton />
@@ -33,13 +36,14 @@ const AccountPageWrapper = styled.div`
   display: grid;
   justify-content: center;
   gap: 2rem;
-  h1 {
+  [aria-label='account-email'] {
+    text-align: center;
     font-size: 20px;
     margin-top: 2rem;
-    color: ${(props) => props.theme.mode.color[100]};
+    color: ${(p) => p.theme.mode.color[100]};
   }
 `;
 
-const condition = (authUser: IAuthUserContext): boolean => authUser !== null;
+const condition = (authUser: AuthUser): boolean => authUser !== null;
 
 export default withAuthorization(condition)(AccountPage);

@@ -1,69 +1,70 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React from 'react';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
-import { Formik, Form } from 'formik';
+import { useForm } from 'react-hook-form';
 
-import InputField from 'features/MovementForm/InputField';
-import { signInVal } from 'features/MovementForm/validationSchema';
-import FormError from 'components/FormError';
+import Input from 'components/Input';
 import Button from 'components/Button';
+import Form from 'components/Form';
+import FormError from 'components/FormError';
 
 import FirebaseContext from 'context/FirebaseContext';
-import { IAuthError } from 'types/types';
+import { AuthError } from 'types/types';
 
-export interface ILoginFormValues {
+interface LoginForm {
   email: string;
   password: string;
 }
 
-const INITIAL_VALUES: ILoginFormValues = {
+const defaultValues: LoginForm = {
   email: '',
   password: '',
 };
 
 const LoginForm = () => {
-  const firebase = useContext(FirebaseContext);
+  const firebase = React.useContext(FirebaseContext);
   const router = useRouter();
 
-  const [error, setError] = useState<IAuthError | false>(false);
+  const [authError, setAuthError] = React.useState<AuthError | false>(false);
+
+  const { register, handleSubmit, reset, errors } = useForm<LoginForm>({
+    defaultValues,
+  });
+
+  function onSubmit({ email, password }: LoginForm) {
+    firebase
+      .doLoginWithEmailAndPassword(email, password)
+      .then(() => {
+        reset();
+        router.push('/moves');
+      })
+      .catch((authError) => {
+        setAuthError(authError);
+        console.log(authError);
+      });
+  }
 
   return (
-    <Formik
-      initialValues={INITIAL_VALUES}
-      validationSchema={signInVal}
-      onSubmit={({ email, password }, { resetForm }) => {
-        firebase
-          .doLoginWithEmailAndPassword(email, password)
-          .then(() => {
-            resetForm();
-            router.push('/');
-          })
-          .catch((error) => {
-            setError(error);
-            console.log(error);
-          });
-      }}
-    >
-      <StyledForm>
-        <InputField name="email" type="email" placeholder="Email" />
-        <InputField name="password" type="password" placeholder="Password" />
-        <Button type="submit">Sign In</Button>
-        {error && <FormError>{error.message}</FormError>}
-      </StyledForm>
-    </Formik>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <div className="input-container">
+        <Input
+          name="email"
+          type="email"
+          label="Email:"
+          register={register({ required: 'Email is required!' })}
+          error={errors.email}
+        />
+        <Input
+          name="password"
+          type="password"
+          label="Password:"
+          register={register({ required: 'Password is required!' })}
+          error={errors.password}
+        />
+      </div>
+      <Button type="submit">Submit</Button>
+      {authError && <FormError>{authError.message}</FormError>}
+    </Form>
   );
 };
-
-const StyledForm = styled(Form)`
-  /* border: black 4px solid; */
-  display: grid;
-  grid-template-rows: auto auto auto;
-  /* * {
-    margin-bottom: 4px;
-  } */
-  /* input {
-    height: 2rem;
-  } */
-`;
 
 export default LoginForm;
