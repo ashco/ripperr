@@ -7,8 +7,7 @@ import PasswordForgotForm from '../features/Auth/PasswordForgotForm';
 
 const PasswordForgotPage: NextPage = () => (
   <ForgotPageWrapper>
-    <AuthFormContainer>
-      <h1>Forgot Password?</h1>
+    <AuthFormContainer title="Forgot Password?">
       <PasswordForgotForm />
     </AuthFormContainer>
   </ForgotPageWrapper>

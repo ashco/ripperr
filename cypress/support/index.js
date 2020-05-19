@@ -16,4 +16,5 @@
 // adds in testing-library specific commands
 import '@testing-library/cypress/add-commands';
 // Import commands.js using ES2015 syntax:
+import './firebase';
 import './commands';

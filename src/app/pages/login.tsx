@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import AuthFormContainer from 'features/Auth/AuthFormContainer';
 import LoginForm from 'features/Auth/LoginForm';
 import { PasswordForgotLink } from 'features/Auth/PasswordForgotForm';
-import SignupLink from 'components/SignupLink';
+import SignUpLink from 'components/SignUpLink';
 
 const LoginPage: NextPage<{ userAgent: string }> = () => (
   <LoginPageWrapper>
     <AuthFormContainer title="Login">
       <LoginForm />
       <div className="links">
-        <SignupLink />
+        <SignUpLink />
         <PasswordForgotLink />
       </div>
     </AuthFormContainer>
