@@ -14,7 +14,7 @@ module.exports = {
   // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
   globals: {
     'ts-jest': {
-      tsConfig: './test/tsconfig.jest.json',
+      tsConfig: './cypress/tsconfig.json',
     },
   },
 };
