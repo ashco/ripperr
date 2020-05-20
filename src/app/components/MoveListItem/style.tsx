@@ -65,6 +65,6 @@ const MoveListItemContainer = styled(Container)<Props>`
 
 // export const ExerciseWrapper = styled(MenuListItemWrapper)``;
 
-// export const ArchetypeWrapper = styled(MenuListItemWrapper)``;
+// export const TagWrapper = styled(MenuListItemWrapper)``;
 
 export default MoveListItemContainer;

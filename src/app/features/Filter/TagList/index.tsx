@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 import { useSelector } from 'store';
 
-import ArchetypeListWrapper from './style';
+import TagListWrapper from './style';
 
 import MoveListItem from 'components/MoveListItem';
-import { FilterState } from 'store/filter/types';
+import { FilterState } from 'store/filter';
 
-const ArchetypeList: React.FC<{
+const TagList: React.FC<{
   filter: FilterState;
 }> = ({ filter }) => {
   const { isAddMoveMode } = useSelector((state) => state.ui);
@@ -14,9 +14,9 @@ const ArchetypeList: React.FC<{
   const { tags } = moves;
 
   return (
-    <ArchetypeListWrapper>
+    <TagListWrapper>
       {Object.keys(tags.byId).length === 0 ? (
-        <div>No archetypes yet!</div>
+        <div>No tags yet!</div>
       ) : (
         Object.keys(tags.byId).map((id) => {
           return (
@@ -31,19 +31,19 @@ const ArchetypeList: React.FC<{
         })
       )}
 
-      {/* {archetypeList ? (
-        archetypeList.length === 0 ? (
-          <div>No archetypes yet!</div>
+      {/* {tagList ? (
+        tagList.length === 0 ? (
+          <div>No tags yet!</div>
         ) : (
-          archetypeList.map((arch) => {
+          tagList.map((arch) => {
             return <MoveListItem key={arch.id} movement={arch} />;
           })
         )
       ) : (
         <div>Loading ...</div>
       )} */}
-    </ArchetypeListWrapper>
+    </TagListWrapper>
   );
 };
 
-export default ArchetypeList;
+export default TagList;

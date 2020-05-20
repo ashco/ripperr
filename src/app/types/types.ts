@@ -21,9 +21,9 @@ export interface IUser {
 // =============== FIREBASE QUERIES ===============
 export type AuthUser = firebase.User | null;
 
-// export interface IArchetypesFirebaseQuery {
+// export interface ITagsFirebaseQuery {
 //   loading: boolean;
-//   archetypes: Tag[];
+//   tags: Tag[];
 // }
 
 // export interface IExercisesFirebaseQuery {
@@ -38,7 +38,7 @@ export type AuthUser = firebase.User | null;
 
 // export interface IMovementState {
 //   loading: boolean;
-//   archetypes: Tag[];
+//   tags: Tag[];
 //   exercises: Exercise[];
 //   workouts: Workout[];
 // }
@@ -49,15 +49,15 @@ export interface IHandleChange {
 }
 
 // =============== STATES ===============
-// export interface ArchetypeFormState {
+// export interface TagFormState {
 //   [key: string]: any;
 //   name: string;
 //   description: string;
 // }
 // =============== DATA OBJECT STRUCTURES ===============
-// export type Movement = Archetype | Exercise | Workout;
+// export type Movement = Tag | Exercise | Workout;
 
-// export interface Archetype {
+// export interface Tag {
 //   // id and lastModified are ? because id is not assigned during initial form creation process
 //   readonly type: MovementType;
 //   readonly id?: string;
@@ -67,7 +67,7 @@ export interface IHandleChange {
 //   // history?: any;
 // }
 
-// export interface Exercise extends Archetype {
+// export interface Exercise extends Tag {
 //   tags: string[];
 // }
 
@@ -80,18 +80,18 @@ export interface IHandleChange {
 
 // ==================== FORM STATES ====================
 // export type MovementFormState =
-//   | ArchetypeFormState
+//   | TagFormState
 //   | ExerciseFormState
 //   | WorkoutFormState;
 
-// export interface ArchetypeFormState {
+// export interface TagFormState {
 //   [key: string]: any;
 //   readonly type: MovementType;
 //   name: string;
 //   description: string;
 // }
 
-// export interface ExerciseFormState extends ArchetypeFormState {
+// export interface ExerciseFormState extends TagFormState {
 //   tags: string[];
 // }
 
@@ -102,7 +102,7 @@ export interface IHandleChange {
 //   config: IWorkoutConfig;
 // }
 
-export interface IArchetypeFormErrors {
+export interface ITagFormErrors {
   name: string;
   description: string;
 }
@@ -158,7 +158,7 @@ export interface ButtonRowProps {
   actionBtn: ButtonRowActionBtn;
 }
 
-// export interface Archetype {
+// export interface Tag {
 //   readonly id: string;
 //   lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
 //   readonly type: MovementType;

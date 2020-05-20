@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-const ArchetypeListWrapper = styled.ul`
+const TagListWrapper = styled.ul`
   margin: 0 1rem;
   display: grid;
   gap: 1rem;
@@ -10,4 +10,4 @@ const ArchetypeListWrapper = styled.ul`
   justify-content: center;
 `;
 
-export default ArchetypeListWrapper;
+export default TagListWrapper;

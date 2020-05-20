@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { useDispatch } from 'store';
+import { resetFilter } from 'store/filter';
 
 import Button from 'components/Button';
 
@@ -9,7 +10,7 @@ const ClearFilterButton: React.FC = () => {
   const dispatch = useDispatch();
 
   function clearFilter() {
-    dispatch({ type: 'FILTER_RESET' });
+    dispatch(resetFilter());
   }
 
   return (

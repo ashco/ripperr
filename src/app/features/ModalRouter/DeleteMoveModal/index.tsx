@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
 import { setModalMode } from 'store/ui';
-import { MovesState } from 'store/moves';
+import { MovesState, clearActiveMove } from 'store/moves';
 
 import ModalBackground from 'components/ModalBackground';
 
@@ -26,7 +26,7 @@ const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
   function handleDelete(): void {
     let firebaseFnc;
     if (type === 'TAG') {
-      firebaseFnc = firebase.archetype;
+      firebaseFnc = firebase.tag;
     } else if (type === 'EXERCISE') {
       firebaseFnc = firebase.exercise;
     } else if (type === 'WORKOUT') {
@@ -48,6 +48,7 @@ const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
   function onDelete(): void {
     handleDelete();
     dispatch(setModalMode({ modalMode: 'CLOSED' }));
+    dispatch(clearActiveMove());
   }
 
   const btnConfig = {

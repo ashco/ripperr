@@ -1,12 +1,12 @@
 ﻿import styled from 'styled-components';
 
-export const ArchetypesFieldWrapper = styled.ul`
+export const TagsFieldWrapper = styled.ul`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
 `;
 
-export const ArchetypeListItemWrapper = styled.li<{
+export const TagListItemWrapper = styled.li<{
   isDisabled?: boolean;
   active?: boolean;
 }>`
@@ -28,7 +28,7 @@ export const ArchetypeListItemWrapper = styled.li<{
   }
 `;
 
-// export const ArchetypeListItemWrapper = styled.label<{ active?: boolean }>`
+// export const TagListItemWrapper = styled.label<{ active?: boolean }>`
 //   input {
 //     /* display: none; */
 //   }

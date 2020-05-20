@@ -34,8 +34,8 @@ export const test = '';
 // type MoveState = Movement | null;
 // type MoveProviderProps = { children: React.ReactNode };
 
-// const INITIAL_MOVE_STATE_AR: Archetype = {
-//   type: MovementType.Archetype,
+// const INITIAL_MOVE_STATE_AR: Tag = {
+//   type: MovementType.Tag,
 //   name: '',
 //   description: '',
 // };

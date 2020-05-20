@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'store';
 import { setModalMode } from 'store/ui';
+import { setFilterValue, toggleFilter } from 'store/filter';
 
 import AddMoveButton from '../AddMoveButton';
 import ClearFilterButton from '../ClearFilterButton';
@@ -26,12 +27,13 @@ const FilterInput: React.FC<{}> = () => {
         placeholder="Filter..."
         value={filter.value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch({
-            type: 'FILTER_UPDATE_VALUE',
-            payload: e.target.value,
-          })
+          // dispatch({
+          //   type: 'FILTER_UPDATE_VALUE',
+          //   payload: e.target.value,
+          // })
+          dispatch(setFilterValue(e.target.value))
         }
-        onFocus={() => dispatch({ type: 'FILTER_ON' })}
+        onFocus={() => dispatch(toggleFilter({ active: true }))}
       />
       {filtering ? (
         <ClearFilterButton />

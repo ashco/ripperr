@@ -66,7 +66,9 @@ const LoginForm: React.FC = () => {
           error={errors.password}
         />
       </div>
-      <Button type="submit">Submit</Button>
+      <Button primary={true} type="submit">
+        Submit
+      </Button>
       {authError && <FormError>{authError.message}</FormError>}
     </AuthForm>
   );

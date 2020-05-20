@@ -16,5 +16,9 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
-  projects: ['./test/jest.lint.js', './test/jest.app.js'],
+  projects: [
+    './test/jest.lint.js',
+    // './test/jest.cypress.js',
+    './test/jest.app.js',
+  ],
 };

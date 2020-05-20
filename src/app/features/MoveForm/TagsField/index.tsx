@@ -9,7 +9,7 @@ import { ThemeContext } from 'styled-components';
 // import { useMoveDispatch } from 'context/MoveContext';
 
 // import { ArchFormListItem } from 'components/ListItems';
-import { ArchetypesFieldWrapper, ArchetypeListItemWrapper } from './style';
+import { TagsFieldWrapper, TagListItemWrapper } from './style';
 
 import { string } from 'yup';
 
@@ -18,7 +18,7 @@ interface SelectOption {
   label: string;
 }
 
-const ArchetypesField: React.FC<{
+const TagsField: React.FC<{
   tags: any;
   isDisabled: boolean;
   control: any;
@@ -30,8 +30,8 @@ const ArchetypesField: React.FC<{
   // const { modalMode } = useSelector((state) => state.ui);
 
   // // Generate select option list
-  // const { archetypes } = React.useContext(MovementListContext);
-  // const options = archetypes.map((arch) => {
+  // const { tags } = React.useContext(MovementListContext);
+  // const options = tags.map((arch) => {
   //   return { value: arch.id as string, label: arch.name };
   // });
 
@@ -83,46 +83,46 @@ const ArchetypesField: React.FC<{
   //     isDisabled={isDisabled}
   //     isMulti
   //   />
-  //   // <ArchetypesFieldWrapper>
-  //   //   {archetypes.map((arch, index) => (
-  //   //     <ArchetypeListItem
+  //   // <TagsFieldWrapper>
+  //   //   {tags.map((arch, index) => (
+  //   //     <TagListItem
   //   //       key={arch.id}
   //   //       // index={index}
-  //   //       archetype={arch}
+  //   //       tag={arch}
   //   //       active={tags[arch.id as string]}
   //   //       // active={tags.includes(arch.id as string)}
   //   //       // isDisabled={isDisabled}
   //   //       register={register}
   //   //     />
   //   //   ))}
-  //   // </ArchetypesFieldWrapper>
+  //   // </TagsFieldWrapper>
   // );
 };
 
-// const ArchetypeListItem: React.FC<{
+// const TagListItem: React.FC<{
 //   // index: number;
-//   archetype: Archetype;
+//   tag: Tag;
 //   active: boolean;
 //   // isDisabled: boolean;
 //   register: any;
-// }> = ({ archetype, register }) => {
+// }> = ({ tag, register }) => {
 //   const moveDispatch = useMoveDispatch();
 
 //   return (
-//     <ArchetypeListItemWrapper htmlFor={`tags[${archetype.id}]`} active={false}>
+//     <TagListItemWrapper htmlFor={`tags[${tag.id}]`} active={false}>
 //       <input
 //         type="checkbox"
-//         name={`tags[${archetype.id}]`}
-//         id={`tags[${archetype.id}]`}
+//         name={`tags[${tag.id}]`}
+//         id={`tags[${tag.id}]`}
 //         // defaultChecked={}
 //         ref={register}
 //       />
-//       <span>{archetype.name}</span>
-//     </ArchetypeListItemWrapper>
+//       <span>{tag.name}</span>
+//     </TagListItemWrapper>
 //   );
 // };
 
-// const ArchetypesField: React.FC<{
+// const TagsField: React.FC<{
 //   tags: string[];
 //   fields: any;
 //   isDisabled: boolean;
@@ -130,11 +130,11 @@ const ArchetypesField: React.FC<{
 //   register: any;
 //   setValue: any;
 // }> = ({ tags, fields, isDisabled, modalMode, register, setValue }) => {
-//   const { archetypes } = React.useContext(MovementListContext);
+//   const { tags } = React.useContext(MovementListContext);
 
 //   return (
-//     <ArchetypesFieldWrapper>
-//       {archetypes
+//     <TagsFieldWrapper>
+//       {tags
 //         // TODO - make more performent
 //         .filter((arch) => {
 //           if (modalMode === 'VIEW') {
@@ -144,55 +144,55 @@ const ArchetypesField: React.FC<{
 //           }
 //         })
 //         .map((arch, index) => (
-//           <ArchetypeListItem
+//           <TagListItem
 //             key={arch.id}
 //             index={index}
-//             archetype={arch}
+//             tag={arch}
 //             active={tags.includes(arch.id as string)}
 //             isDisabled={isDisabled}
 //             register={register}
 //             setValue={setValue}
 //           />
 //         ))}
-//     </ArchetypesFieldWrapper>
+//     </TagsFieldWrapper>
 //   );
 // };
 
-// const ArchetypeListItem: React.FC<{
+// const TagListItem: React.FC<{
 //   index: number;
-//   archetype: Archetype;
+//   tag: Tag;
 //   active: boolean;
 //   isDisabled: boolean;
 //   register: any;
 //   setValue: any;
-// }> = ({ index, archetype, active, isDisabled, register, setValue }) => {
+// }> = ({ index, tag, active, isDisabled, register, setValue }) => {
 //   const themeContext = React.useContext(ThemeContext);
 //   const moveDispatch = useMoveDispatch();
 
 //   // function toggleArch() {
 //   //   moveDispatch({
 //   //     type: 'MOVE_CHANGE_ARCH',
-//   //     value: archetype.id,
+//   //     value: tag.id,
 //   //   });
 //   // }
 
 //   function toggleArch() {
-//     console.log(archetype.id);
-//     setValue('tags', archetype.id);
+//     console.log(tag.id);
+//     setValue('tags', tag.id);
 //   }
 
 //   return (
-//     // <ArchetypeListItemWrapper htmlFor={`tags[${archetype.id}]`} active={active}>
+//     // <TagListItemWrapper htmlFor={`tags[${tag.id}]`} active={active}>
 //     //   <input
 //     //     type="checkbox"
-//     //     name={`tags[${archetype.id}]`}
-//     //     id={`tags[${archetype.id}]`}
+//     //     name={`tags[${tag.id}]`}
+//     //     id={`tags[${tag.id}]`}
 //     //     defaultChecked={active}
 //     //     ref={register}
 //     //   />
-//     //   <span>{archetype.name}</span>
-//     // </ArchetypeListItemWrapper>
-//     <ArchetypeListItemWrapper
+//     //   <span>{tag.name}</span>
+//     // </TagListItemWrapper>
+//     <TagListItemWrapper
 //       color={
 //         active
 //           ? themeContext.color.orange[500]
@@ -202,9 +202,9 @@ const ArchetypesField: React.FC<{
 //       active={active}
 //       // isDisabled={isDisabled}
 //     >
-//       <p className="name">{archetype.name}</p>
-//     </ArchetypeListItemWrapper>
+//       <p className="name">{tag.name}</p>
+//     </TagListItemWrapper>
 //   );
 // };
 
-export default ArchetypesField;
+export default TagsField;

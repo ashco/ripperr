@@ -18,7 +18,7 @@ export function sortMovements(a: Movement, b: Movement): number {
 }
 
 // sort alphabetically
-export function sortArchetypes(a: Tag, b: Tag): number {
+export function sortTags(a: Tag, b: Tag): number {
   if (a.name > b.name) {
     return 1;
   } else if (a.name < b.name) {

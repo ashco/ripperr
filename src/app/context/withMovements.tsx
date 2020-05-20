@@ -5,11 +5,11 @@ export const filler = '';
 // import AuthUserContext from 'context/AuthUserContext';
 // import FirebaseContext from 'context/FirebaseContext';
 
-// import { sortArchetypes } from '../utils/sort-movements';
+// import { sortTags } from '../utils/sort-movements';
 
-// export const INITIAL_ARCHETYPE_STATE: IArchetypesFirebaseQuery = {
+// export const INITIAL_ARCHETYPE_STATE: ITagsFirebaseQuery = {
 //   loading: true,
-//   archetypes: [],
+//   tags: [],
 // };
 
 // export const INITIAL_EXERCISE_STATE: IExercisesFirebaseQuery = {
@@ -24,7 +24,7 @@ export const filler = '';
 
 // export const INITIAL_MOVEMENT_STATE: IMovementState = {
 //   loading: true,
-//   archetypes: [],
+//   tags: [],
 //   exercises: [],
 //   workouts: [],
 // };
@@ -34,7 +34,7 @@ export const filler = '';
 //     const firebase = useContext(FirebaseContext);
 //     const authUser = useContext(AuthUserContext);
 
-//     const [archetypeState, setArchetypeState] = useState(
+//     const [tagState, setTagState] = useState(
 //       INITIAL_ARCHETYPE_STATE,
 //     );
 //     const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
@@ -42,13 +42,13 @@ export const filler = '';
 
 //     // ARCHETYPE EFFECT
 //     useEffect(() => {
-//       setArchetypeState({ ...archetypeState, loading: true });
+//       setTagState({ ...tagState, loading: true });
 
 //       if (authUser) {
 //         const unsubscribe = firebase
-//           .archetypes(authUser.uid)
+//           .tags(authUser.uid)
 //           .onSnapshot((snapshot) => {
-//             const archetypeList: Archetype[] = [];
+//             const tagList: Tag[] = [];
 
 //             snapshot.forEach((doc) => {
 //               const {
@@ -58,7 +58,7 @@ export const filler = '';
 //                 description,
 //                 // history,
 //               } = doc.data();
-//               const obj: Archetype = {
+//               const obj: Tag = {
 //                 id: doc.id,
 //                 lastModified,
 //                 type,
@@ -67,12 +67,12 @@ export const filler = '';
 //                 // history,
 //               };
 
-//               archetypeList.push(obj);
+//               tagList.push(obj);
 //             });
 
-//             setArchetypeState({
+//             setTagState({
 //               loading: false,
-//               archetypes: archetypeList.sort((a, b) => sortArchetypes(a, b)),
+//               tags: tagList.sort((a, b) => sortTags(a, b)),
 //             });
 
 //             return (): void => unsubscribe();
@@ -174,7 +174,7 @@ export const filler = '';
 //     }, []);
 
 //     const moveState: IMovementState = {
-//       archetypes: archetypeState.archetypes,
+//       tags: tagState.tags,
 //       exercises: exerciseState.exercises,
 //       workouts: workoutState.workouts,
 //       loading: exerciseState.loading || workoutState.loading,

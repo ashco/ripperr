@@ -97,7 +97,9 @@ const SignupForm: React.FC = () => {
           error={errors.passwordConfirm}
         />
       </div>
-      <Button type="submit">Submit</Button>
+      <Button primary={true} type="submit">
+        Submit
+      </Button>
       {authError && <FormError>{authError.message}</FormError>}
     </AuthForm>
   );

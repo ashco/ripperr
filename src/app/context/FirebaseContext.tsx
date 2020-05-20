@@ -65,7 +65,7 @@ class Firebase {
   users = (): firebase.firestore.CollectionReference =>
     this.db.collection('users');
 
-  // Archetype API
+  // Tag API
   // movement = ({
   //   uid,
   //   moveType,
@@ -92,12 +92,12 @@ class Firebase {
   // users/uid123/movements/_/exercises/exid1/name
   // col  /doc   /col  /doc      /col  /doc
 
-  // Archetype API
-  archetype = (uid: string, id: string): firebase.firestore.DocumentReference =>
-    this.db.doc(`users/${uid}/archetypes/${id}`);
+  // Tag API
+  tag = (uid: string, id: string): firebase.firestore.DocumentReference =>
+    this.db.doc(`users/${uid}/tags/${id}`);
 
-  archetypes = (uid: string): firebase.firestore.CollectionReference =>
-    this.db.collection(`users/${uid}/archetypes`);
+  tags = (uid: string): firebase.firestore.CollectionReference =>
+    this.db.collection(`users/${uid}/tags`);
 
   // Exercise API
   exercise = (uid: string, id: string): firebase.firestore.DocumentReference =>

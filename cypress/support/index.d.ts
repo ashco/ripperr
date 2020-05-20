@@ -1,6 +1,5 @@
 ﻿// load type definitions that come with Cypress module
 /// <reference types="cypress" />
-
 declare namespace Cypress {
   interface Chainable {
     /**
@@ -46,5 +45,22 @@ declare namespace Cypress {
      * @example cy.checkStoreForDeepEqual(testObj, 'moves.tags.byId')
      */
     checkStoreForDeepEqual(path: string, expectedVal: any): Chainable<Element>;
+    /**
+     * Custom command that runs a deep equal comparison for an expected value on the store's path.
+     * @example cy.checkStoreForDeepEqual(testObj, 'moves.tags.byId')
+     */
+    createNewMove(
+      type: 'tag' | 'exercise' | 'workout',
+      data: any,
+    ): Chainable<Element>;
+    /**
+     * Custom command that runs a deep equal comparison for an expected value on the store's path.
+     * @example cy.checkStoreForDeepEqual(testObj, 'moves.tags.byId')
+     */
+    openMove(
+      type: 'tag' | 'exercise' | 'workout',
+      name: string,
+      mode: 'view' | 'edit' | 'delete',
+    ): Chainable<Element>;
   }
 }

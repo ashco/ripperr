@@ -55,7 +55,9 @@ const PasswordForgotForm: React.FC = () => {
           error={errors.email}
         />
       </div>
-      <Button type="submit">Submit</Button>
+      <Button primary={true} type="submit">
+        Submit
+      </Button>
       {authError && <p>{authError.message}</p>}
     </AuthForm>
   );

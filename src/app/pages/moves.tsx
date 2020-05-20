@@ -47,21 +47,19 @@ const MovesPage: NextPage = () => {
   // ARCHETYPE EFFECT
   React.useEffect(() => {
     if (authUser) {
-      const unsubscribe = firebase
-        .archetypes(authUser.uid)
-        .onSnapshot((snapshot) => {
-          const tags: any = {};
+      const unsubscribe = firebase.tags(authUser.uid).onSnapshot((snapshot) => {
+        const tags: any = {};
 
-          snapshot.forEach((doc) => {
-            tags[doc.id] = doc.data();
-          });
-
-          dispatch(
-            getMovesSuccess({
-              tags,
-            }),
-          );
+        snapshot.forEach((doc) => {
+          tags[doc.id] = doc.data();
         });
+
+        dispatch(
+          getMovesSuccess({
+            tags,
+          }),
+        );
+      });
 
       return (): void => unsubscribe();
     }

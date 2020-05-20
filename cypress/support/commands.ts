@@ -89,15 +89,46 @@ Cypress.Commands.add(
     }
   },
 );
+
 Cypress.Commands.add('resetDb', (uid = Cypress.env('TEST_UID')) => {
   cy.callFirestore('delete', `users/${uid}/workouts`);
   cy.callFirestore('delete', `users/${uid}/exercises`);
-  cy.callFirestore('delete', `users/${uid}/archetypes`);
+  cy.callFirestore('delete', `users/${uid}/tags`);
 });
+
 Cypress.Commands.add('checkStoreForDeepEqual', (path, expectedVal) => {
   cy.window()
     .its('store')
     .invoke('getState')
     .its(path)
     .should('deep.equal', expectedVal);
+});
+
+Cypress.Commands.add('createNewMove', (type, data) => {
+  cy.findByRole('button', { name: 'Add Move' }).click();
+  cy.findByText(new RegExp(`add ${type}`, 'i')).click();
+  cy.findByText(new RegExp(`create new ${type}`, 'i'));
+  cy.findByLabelText(/name/i).type(data.name);
+  cy.findByLabelText(/description/i).type(data.description);
+  cy.findByText(/create/i, { selector: 'button' }).click();
+  cy.findByText(/close/i).click();
+});
+
+Cypress.Commands.add('openMove', (type, name, mode) => {
+  // open via clicking modal
+  if (type === 'exercise' || type === 'workout') {
+    cy.findByText(new RegExp(name, 'i')).click();
+    if (mode === 'edit') {
+      cy.findByText(/edit/i).click();
+      cy.findByText(/cancel/i).click();
+    }
+    cy.findByText(/close/i).click();
+  }
+
+  // open via options menu
+  if (type === 'tag') {
+    cy.findByLabelText('filter-bar').click();
+  }
+  cy.findByLabelText(new RegExp(`${name} ${type} option menu`, 'i')).click();
+  cy.findByText(new RegExp(mode, 'i')).click();
 });

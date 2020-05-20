@@ -1,7 +1,9 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch } from 'store';
+import { useSelector, useDispatch, batch } from 'store';
+import { toggleFilter } from 'store/filter';
+import { setIsPointerDisabled } from 'store/ui';
 
-import ArchetypeList from './ArchetypeList';
+import TagList from './TagList';
 import FilterInput from './FilterInput';
 
 import FilterContainer from './style';
@@ -16,7 +18,10 @@ const Filter: React.FC<{}> = () => {
   function handleFilterModeOff(e: any) {
     if (filter.active) {
       if (!filterRef?.current?.contains(e.target)) {
-        dispatch({ type: 'FILTER_OFF' });
+        batch(() => {
+          dispatch(setIsPointerDisabled(false));
+          dispatch(toggleFilter({ active: false }));
+        });
       }
     }
   }
@@ -37,7 +42,7 @@ const Filter: React.FC<{}> = () => {
       filtering={filtering}
       ref={filterRef}
     >
-      {filter.active && <ArchetypeList filter={filter} />}
+      {filter.active && <TagList filter={filter} />}
       <FilterInput />
     </FilterContainer>
   );

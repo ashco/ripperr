@@ -14,7 +14,7 @@ import FirebaseContext from 'context/FirebaseContext';
 
 import MoveFormWrapper from './style';
 
-import ArchetypesField from './ArchetypesField';
+import TagsField from './TagsField';
 import Label from './Label';
 import ModeField from './ModeField';
 import MovementsField from './MovementsField';
@@ -30,7 +30,7 @@ import { ButtonRowProps, MovementType } from 'types/types';
 import { Movement } from 'store/moves';
 import Input from 'components/Input';
 
-type FormData = {
+export type FormData = {
   name: string;
   description: string;
 };
@@ -92,8 +92,8 @@ const MoveForm: React.FC<{
   //   let firebaseFnc;
 
   //   switch (moveData.type) {
-  //     case MovementType.Archetype:
-  //       firebaseFnc = firebase.archetype;
+  //     case MovementType.Tag:
+  //       firebaseFnc = firebase.tag;
   //       break;
   //     case MovementType.Exercise:
   //       firebaseFnc = firebase.exercise;
@@ -146,7 +146,7 @@ const MoveForm: React.FC<{
     if (mode === 'CREATE') {
       switch (type) {
         case 'TAG':
-          firebaseFnc = firebase.archetypes;
+          firebaseFnc = firebase.tags;
           break;
         case 'EXERCISE':
           firebaseFnc = firebase.exercises;
@@ -160,7 +160,7 @@ const MoveForm: React.FC<{
     } else if (mode === 'UPDATE') {
       switch (type) {
         case 'TAG':
-          firebaseFnc = firebase.archetype;
+          firebaseFnc = firebase.tag;
           break;
         case 'EXERCISE':
           firebaseFnc = firebase.exercise;
@@ -211,7 +211,7 @@ const MoveForm: React.FC<{
 
     // switch (type) {
     //   case 'TAG':
-    //     firebaseFnc = firebase.archetypes;
+    //     firebaseFnc = firebase.tags;
     //     break;
     //   case 'EXERCISE':
     //     firebaseFnc = firebase.exercises;
@@ -458,7 +458,7 @@ const MoveForm: React.FC<{
               : 'block'
           }
         >
-          <ArchetypesField
+          <TagsField
             tags={watch().tags}
             setValue={setValue}
             isDisabled={isDisabled}

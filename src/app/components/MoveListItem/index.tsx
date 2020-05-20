@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
-import { FilterState } from 'store/filter/types';
 import { setActiveMove, MovesState } from 'store/moves';
+import { toggleFilterTag, FilterState } from 'store/filter';
 
 // import ColorBarWrapper from 'components/ColorBarWrapper';
 import OptionMenuButton from 'components/MoveListItem/OptionMenuButton';
@@ -69,7 +69,7 @@ const MoveListItem: React.FC<{
 
   function toggleActiveArch(e: any) {
     if (!btnRef?.current?.contains(e.target)) {
-      dispatch({ type: 'FILTER_TOGGLE_TAG', payload: data.id });
+      dispatch(toggleFilterTag(data.id));
     }
   }
 
@@ -125,7 +125,7 @@ const MoveListItem: React.FC<{
   // } else if (type === 'EXERCISE') {
   //   return <ExerciseWrapper>{listItem}</ExerciseWrapper>;
   // } else if (type === 'TAG') {
-  //   return <ArchetypeWrapper>{listItem}</ArchetypeWrapper>;
+  //   return <TagWrapper>{listItem}</TagWrapper>;
   // } else {
   //   return null;
   // }
@@ -142,7 +142,7 @@ const MoveListItem: React.FC<{
       <div className="right">
         {!isAddMoveMode && (
           <div ref={btnRef} className="option-menu-btn-wrapper">
-            <OptionMenuButton id={id} type={type} />
+            <OptionMenuButton data={data} type={type} />
           </div>
         )}
       </div>
@@ -165,7 +165,7 @@ export default MoveListItem;
 //   // Determine ColorBar color
 //   let color;
 //   switch (movement.type) {
-//     case MovementType.Archetype: {
+//     case MovementType.Tag: {
 //       // TODO
 //       // Make more efficient by lifting up. Do not loop through array for each component.
 //       const active = filter.tags.includes(movement.id as string);
@@ -205,7 +205,7 @@ export default MoveListItem;
 //   }
 
 //   function handleClick(e: any) {
-//     if (movement.type === MovementType.Archetype) {
+//     if (movement.type === MovementType.Tag) {
 //       toggleActiveArch(e);
 //     } else {
 //       if (isAddMoveMode) {
@@ -225,7 +225,7 @@ export default MoveListItem;
 //     return shortStr;
 //   }
 
-//   const nameLength = movement.type === MovementType.Archetype ? 10 : Infinity;
+//   const nameLength = movement.type === MovementType.Tag ? 10 : Infinity;
 
 //   const listItem = (
 //     <ColorBarWrapper color={color} height="5px">
@@ -248,8 +248,8 @@ export default MoveListItem;
 //     return <WorkoutWrapper>{listItem}</WorkoutWrapper>;
 //   } else if (movement.type === MovementType.Exercise) {
 //     return <ExerciseWrapper>{listItem}</ExerciseWrapper>;
-//   } else if (movement.type === MovementType.Archetype) {
-//     return <ArchetypeWrapper>{listItem}</ArchetypeWrapper>;
+//   } else if (movement.type === MovementType.Tag) {
+//     return <TagWrapper>{listItem}</TagWrapper>;
 //   } else {
 //     return null;
 //   }

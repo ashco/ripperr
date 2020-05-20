@@ -10,25 +10,21 @@ import Button from 'components/Button';
 import Icon from 'icons';
 import { MovementType } from 'types/types';
 import { Movement } from 'store/moves';
-// import { Movement } from 'types/types';
-import Modal from 'components/Modal';
-import ModalBackground from 'components/ModalBackground';
 
 const OptionMenuButton: React.FC<{
   // movement: Movement;
-  id: string;
+  data: Movement;
   type: MovementType;
-}> = ({ id, type }) => {
+}> = ({ data, type }) => {
   const dispatch = useDispatch();
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // const moveDispatch = useMoveDispatch();
+  const { id, name } = data;
 
   function handleView(): void {
-    // moveDispatch({ type: 'MOVE_SET', value: movement });
     batch(() => {
       dispatch(setActiveMove(id));
       dispatch(setModalMode({ modalMode: 'VIEW' }));
@@ -36,7 +32,6 @@ const OptionMenuButton: React.FC<{
   }
 
   function handleEdit(): void {
-    // moveDispatch({ type: 'MOVE_SET', value: movement });
     batch(() => {
       dispatch(setActiveMove(id));
       dispatch(setModalMode({ modalMode: 'EDIT' }));
@@ -44,7 +39,6 @@ const OptionMenuButton: React.FC<{
   }
 
   function handleDelete(): void {
-    // moveDispatch({ type: 'MOVE_SET', value: movement });
     batch(() => {
       dispatch(setActiveMove(id));
       dispatch(setModalMode({ modalMode: 'DELETE' }));
@@ -52,18 +46,18 @@ const OptionMenuButton: React.FC<{
   }
 
   function openMenu(): void {
-    setMenuOpen(true);
+    setIsOpen(true);
     dispatch(setIsPointerDisabled(true));
   }
 
   function closeMenu(): void {
-    setMenuOpen(false);
+    setIsOpen(false);
     dispatch(setIsPointerDisabled(false));
     document.removeEventListener('click', closeMenu);
   }
 
   useEffect(() => {
-    if (menuOpen) {
+    if (isOpen) {
       console.log('menu open');
       document.addEventListener('click', closeMenu);
 
@@ -101,37 +95,26 @@ const OptionMenuButton: React.FC<{
       }
       return () => document.removeEventListener('click', closeMenu);
     }
-  }, [menuOpen]);
+  }, [isOpen]);
 
   return (
     <>
-      <StyledOptionButton onClick={openMenu}>
+      <StyledOptionButton
+        onClick={openMenu}
+        aria-label={`${name} ${type.toLowerCase()} option menu`}
+      >
         <Icon name="bars" />
       </StyledOptionButton>
-      <ListItemMenuWrapper ref={menuRef} isOpen={menuOpen}>
-        {/* {movement.type === MovementType.Workout && (
-          <Button onClick={() => console.log('Starting!!')}>Start</Button>
-        )} */}
-        <Button onClick={handleView}>View</Button>
-        <Button onClick={handleEdit}>Edit</Button>
-        <Button onClick={handleDelete}>Delete</Button>
-      </ListItemMenuWrapper>
+      {isOpen && (
+        <ListItemMenuWrapper ref={menuRef}>
+          <Button onClick={handleView}>View</Button>
+          <Button onClick={handleEdit}>Edit</Button>
+          <Button onClick={handleDelete}>Delete</Button>
+        </ListItemMenuWrapper>
+      )}
     </>
   );
 };
-// <>
-//   <StyledOptionButton onClick={openMenu}>
-//     <Icon name="bars" />
-//   </StyledOptionButton>
-//   <ListItemMenuWrapper ref={menuRef} open={menuOpen}>
-//     {movement.type === MovementType.Workout && (
-//       <Button onClick={() => console.log('Starting!!')}>Start</Button>
-//     )}
-//     <Button onClick={handleView}>View</Button>
-//     <Button onClick={handleEdit}>Edit</Button>
-//     <Button onClick={handleDelete}>Delete</Button>
-//   </ListItemMenuWrapper>
-// </>
 
 const StyledOptionButton = styled.button`
   border: none;
@@ -150,11 +133,11 @@ const StyledOptionButton = styled.button`
   }
 `;
 
-const ListItemMenuWrapper = styled.div<{ isOpen: boolean }>`
+const ListItemMenuWrapper = styled.div`
   pointer-events: all;
   position: fixed;
   opacity: 0;
-  display: ${(p) => (p.isOpen ? 'grid' : 'none')};
+  display: grid;
   grid-auto-rows: auto;
   background-color: ${(p) => p.theme.mode.background[200]};
   box-shadow: ${(p) => p.theme.shadow[2]};

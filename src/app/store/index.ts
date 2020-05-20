@@ -5,7 +5,7 @@ import {
   TypedUseSelectorHook,
 } from 'react-redux';
 
-import { filterReducer } from './filter/reducers';
+import filterReducer from './filter';
 import uiReducer from './ui';
 import movesReducer from './moves';
 
