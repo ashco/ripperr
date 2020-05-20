@@ -2,15 +2,16 @@
 import styled from 'styled-components';
 import { NextPage } from 'next';
 
-import AuthFormContainer from 'features/Auth/AuthFormContainer';
+import AuthContainer from 'components/AuthContainer';
 import SignUpForm from 'features/Auth/SignUpForm';
 
 const SignupPage: NextPage = () => {
   return (
     <SignupPageWrapper>
-      <AuthFormContainer title="Sign Up">
+      <AuthContainer>
+        <h1>Sign Up</h1>
         <SignUpForm />
-      </AuthFormContainer>
+      </AuthContainer>
     </SignupPageWrapper>
   );
 };

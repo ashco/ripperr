@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import FirebaseContext from 'context/FirebaseContext';
 
-import Form from 'components/Form';
+import AuthForm from 'components/AuthForm';
 import Button from 'components/Button';
 import Input from 'components/Input';
 
@@ -45,7 +45,7 @@ const PasswordForgotForm: React.FC = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <AuthForm onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="input-container">
         <Input
           name="email"
@@ -57,7 +57,7 @@ const PasswordForgotForm: React.FC = () => {
       </div>
       <Button type="submit">Submit</Button>
       {authError && <p>{authError.message}</p>}
-    </Form>
+    </AuthForm>
   );
 };
 

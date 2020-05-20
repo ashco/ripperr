@@ -4,15 +4,17 @@ import { setModalMode } from 'store/ui';
 import { setActiveMove, clearActiveMove, ID } from 'store/moves';
 import { useForm, Controller } from 'react-hook-form';
 
+import styled from 'styled-components';
+
 import TextareaAutosize from 'react-textarea-autosize';
+import Textarea from 'components/Textarea';
 
 import AuthUserContext from 'context/AuthUserContext';
 import FirebaseContext from 'context/FirebaseContext';
 
-import MovementFormWrapper from './style';
+import MoveFormWrapper from './style';
 
 import ArchetypesField from './ArchetypesField';
-import AddMovementButton from './AddMovementButton';
 import Label from './Label';
 import ModeField from './ModeField';
 import MovementsField from './MovementsField';
@@ -26,14 +28,14 @@ import { ModalMode } from 'store/ui';
 
 import { ButtonRowProps, MovementType } from 'types/types';
 import { Movement } from 'store/moves';
+import Input from 'components/Input';
 
 type FormData = {
   name: string;
   description: string;
-  // tags: ID[];
 };
 
-const MovementForm: React.FC<{
+const MoveForm: React.FC<{
   activeId: string | null;
   modalMode: ModalMode;
   move: {
@@ -61,7 +63,9 @@ const MovementForm: React.FC<{
     defaultValues.description = data.description;
   }
 
-  const { register, handleSubmit } = useForm<FormData>({ defaultValues });
+  const { register, control, handleSubmit, errors, watch } = useForm<FormData>({
+    defaultValues,
+  });
   // const defaultValues: any = {
   // name: (moveState as Movement).name,
   // description: (moveState as Movement).description,
@@ -187,12 +191,12 @@ const MovementForm: React.FC<{
       docRef
         .set(postData)
         .then(() => {
-          console.log(`${singleCapString(type)} Added: ${formData.name}`);
-          dispatch(setModalMode({ modalMode: 'VIEW' }));
-          dispatch(setActiveMove(postData.id)); // set newly created id as active
-          // batch(() => {
-          //   // moveDispatch({ type: 'MOVE_SET', value: moveData });
-          // });
+          batch(() => {
+            console.log(`${singleCapString(type)} Added: ${formData.name}`);
+            dispatch(setModalMode({ modalMode: 'VIEW' }));
+            dispatch(setActiveMove(postData.id)); // set newly created id as active
+            //   // moveDispatch({ type: 'MOVE_SET', value: moveData });
+          });
         })
         .catch((err) => {
           console.error(err);
@@ -244,7 +248,26 @@ const MovementForm: React.FC<{
     // }
   }
 
+  function updateMovement(formData: FormData): void {
+    const firebaseFnc = getFirebaseFnc({ mode: 'UPDATE' }) as FBUpdateFnc;
+    if (authUser && activeId) {
+      firebaseFnc(authUser.uid, activeId)
+        .update(formData)
+        .then(() => {
+          console.log(`${singleCapString(type)} Updated: ${formData.name}`);
+          dispatch(setModalMode({ modalMode: 'VIEW' }));
+          // moveDispatch({ type: 'MOVE_SET', value: moveData });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      throw Error('There is no authUser && moveData.id!');
+    }
+  }
+
   function onSubmit(formData: FormData) {
+    console.log(formData);
     if (modalMode === 'VIEW') {
       dispatch(setModalMode({ modalMode: 'EDIT' }));
     } else if (modalMode === 'EDIT') {
@@ -253,10 +276,7 @@ const MovementForm: React.FC<{
       //   ...formData,
       // };
 
-      console.log(formData);
-
-      // activeId ? updateMovement(formData) : createMovement(formData);
-      createMovement(formData);
+      activeId ? updateMovement(formData) : createMovement(formData);
     } else {
       throw Error('Unsupported modalMode provided.');
     }
@@ -322,9 +342,42 @@ const MovementForm: React.FC<{
   //   return () => unregister('tags');
   // }, [register]);
 
+  console.log(watch());
+
   return (
-    <MovementFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
-      <Label
+    <MoveFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="text-fields">
+        <Input
+          name="name"
+          type="text"
+          label="Name:"
+          register={register()}
+          error={errors.name}
+          disabled={isDisabled}
+        />
+        <Textarea
+          name="description"
+          label="Description:"
+          control={control}
+          error={errors.description}
+          maxRows={4}
+          disabled={isDisabled}
+        />
+        {/* <Controller
+          as={<Textarea maxRows={4} />}
+          name="description"
+          control={control}
+          // disabled={isDisabled}
+        /> */}
+        {/* <Input
+          name="description"
+          type="text"
+          label="Description:"
+          register={register()}
+          error={errors.description}
+        /> */}
+      </div>
+      {/* <Label
         text="Name:"
         display={modalMode === 'VIEW' ? 'none' : isMobile ? 'block' : 'inline'}
       >
@@ -337,7 +390,7 @@ const MovementForm: React.FC<{
           disabled={isDisabled}
           autoFocus
         />
-      </Label>
+      </Label> */}
       {/* <Label
         text="Description:"
         display={
@@ -385,7 +438,7 @@ const MovementForm: React.FC<{
                     isDisabled={isDisabled}
                   />
                 )}
-                {modalMode === 'EDIT' && <AddMovementButton />}
+                {modalMode === 'EDIT' && <AddMoveButton />}
               </Label>
             </>
           )}
@@ -411,8 +464,8 @@ const MovementForm: React.FC<{
         </Label>
       )} */}
       <ButtonRow config={btnConfig} />
-    </MovementFormWrapper>
+    </MoveFormWrapper>
   );
 };
 
-export default MovementForm;
+export default MoveForm;

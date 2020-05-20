@@ -136,6 +136,11 @@ const movesSlice = createSlice({
     clearActiveMove(state) {
       state.activeId = null;
     },
+    clearAllMoves(state) {
+      state.workouts.byId = {};
+      state.exercises.byId = {};
+      state.tags.byId = {};
+    },
   },
 });
 
@@ -145,6 +150,7 @@ export const {
   getMovesFailure,
   setActiveMove,
   clearActiveMove,
+  clearAllMoves,
 } = movesSlice.actions;
 
 export default movesSlice.reducer;

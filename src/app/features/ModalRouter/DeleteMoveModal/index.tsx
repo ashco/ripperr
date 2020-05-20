@@ -5,18 +5,16 @@ import { MovesState } from 'store/moves';
 
 import ModalBackground from 'components/ModalBackground';
 
-import DeleteMovementContainer from './style';
+import DeleteMoveModalContainer from './style';
 
 import AuthUserContext from 'context/AuthUserContext';
 import FirebaseContext from 'context/FirebaseContext';
 import ButtonRow from 'components/ButtonRow';
 
 // import { MovementType } from 'types/enums';
-import ColorBarWrapper from 'components/ColorBarWrapper';
 import { lookupMove } from 'utils/lookup-move';
-import singleCapString from 'utils/single-cap-string';
 
-const DeleteMovementModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
+const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
   const dispatch = useDispatch();
   const authUser = React.useContext(AuthUserContext);
   const firebase = React.useContext(FirebaseContext);
@@ -66,17 +64,15 @@ const DeleteMovementModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
 
   return (
     <ModalBackground>
-      <ColorBarWrapper color="red">
-        <DeleteMovementContainer width="32rem">
-          <h1 className="header">{data.name}</h1>
-          <div className="content">
-            <p>Do you want to delete this {type}?</p>
-            <ButtonRow config={btnConfig} />
-          </div>
-        </DeleteMovementContainer>
-      </ColorBarWrapper>
+      <DeleteMoveModalContainer color="red">
+        <h1>{data.name}</h1>
+        <div className="content">
+          <p>Do you want to delete this {type.toLowerCase()}?</p>
+          <ButtonRow config={btnConfig} />
+        </div>
+      </DeleteMoveModalContainer>
     </ModalBackground>
   );
 };
 
-export default DeleteMovementModal;
+export default DeleteMoveModal;

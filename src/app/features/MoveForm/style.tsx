@@ -1,6 +1,13 @@
 ﻿import styled from 'styled-components';
+import Form from 'components/Form';
 
-const MovementFormWrapper = styled.form`
+const MoveFormWrapper = styled(Form)`
+  .text-fields {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  /*
   display: grid;
   gap: 1.25rem;
   input,
@@ -37,7 +44,6 @@ const MovementFormWrapper = styled.form`
   select {
     padding: 0.5rem;
   }
-  /* Remove input arrows */
   input[type='number']::-webkit-outer-spin-button,
   input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -45,10 +51,7 @@ const MovementFormWrapper = styled.form`
   }
   input[type='number'] {
     -moz-appearance: textfield;
-  }
-  /* .sortableHelper {
-    z-index: 10000;
   } */
 `;
 
-export default MovementFormWrapper;
+export default MoveFormWrapper;

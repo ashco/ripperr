@@ -24,15 +24,15 @@ const ToggleThemeButton = () => {
   }
 
   return (
-    <StyledToggleThemeButton onClick={toggleThemeMode}>
+    <Button primary={true} onClick={toggleThemeMode}>
       {buttonText} Mode
-    </StyledToggleThemeButton>
+    </Button>
   );
 };
 
-const StyledToggleThemeButton = styled(Button)`
-  color: ${(props) => props.theme.mode.background[100]};
-  background: ${(props) => props.theme.mode.color[100]};
-`;
+// const StyledToggleThemeButton = styled(Button)`
+//   color: ${(props) => props.theme.mode.background[100]};
+//   background: ${(props) => props.theme.mode.color[100]};
+// `;
 
 export default ToggleThemeButton;

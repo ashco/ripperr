@@ -1,22 +1,15 @@
 ﻿import { buildUser } from '../support/generate';
-import { auth } from 'firebase';
+
+const user = buildUser();
+
+after(() => {
+  const opts = { recursive: true };
+  // uid is added to global Cypress object in app
+  cy.callFirestore('delete', `users/${(Cypress as any).uid}`, opts);
+});
 
 describe('sign up', () => {
-  it('should navigate to the login and signup pages by clicking the correct buttons', () => {
-    cy.visit('/');
-
-    // navigate to login page
-    cy.findByText(/login/i).click();
-    cy.assertUrl('/login');
-
-    // navigate to signup page
-    cy.findByText(/don't have an account/i).click();
-    cy.assertUrl('/signup');
-  });
-
-  it('should create a new user, logout, and log back in again', () => {
-    const user = buildUser();
-
+  it('should create a new user and logout', () => {
     cy.visit('/signup');
 
     // fill in form
@@ -42,13 +35,28 @@ describe('sign up', () => {
     // check for redirect because no user
     cy.visit('/moves');
     cy.assertUrl('/login');
-    // log back in
+  });
+
+  it('should be able to log back in with previously created user', () => {
+    cy.visit('/login');
 
     cy.findByLabelText(/email/i).type(user.email);
     cy.findByLabelText(/^password/i).type(user.password);
     cy.findByText(/submit/i).click();
 
     cy.assertUrl('/moves');
+  });
+
+  it('should navigate to the login and signup pages by clicking the correct buttons', () => {
+    cy.visit('/');
+
+    // navigate to login page
+    cy.findByText(/login/i).click();
+    cy.assertUrl('/login');
+
+    // navigate to signup page
+    cy.findByText(/don't have an account/i).click();
+    cy.assertUrl('/signup');
   });
 
   it.skip('should show an error message when Firebase returns an error', () => {
@@ -69,8 +77,6 @@ describe('sign up', () => {
   });
 
   it('should show validation error messages when incorrect information is provided', () => {
-    const user = buildUser();
-
     cy.visit('/signup');
 
     cy.validateUsernameField(user.username);

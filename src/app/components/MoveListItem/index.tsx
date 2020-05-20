@@ -4,13 +4,13 @@ import { setModalMode, setIsAddMoveMode } from 'store/ui';
 import { FilterState } from 'store/filter/types';
 import { setActiveMove, MovesState } from 'store/moves';
 
-import ColorBarWrapper from 'components/ColorBarWrapper';
-import OptionMenuButton from 'components/MovementListItem/OptionMenuButton';
+// import ColorBarWrapper from 'components/ColorBarWrapper';
+import OptionMenuButton from 'components/MoveListItem/OptionMenuButton';
 
-import { WorkoutWrapper, ExerciseWrapper, ArchetypeWrapper } from './style';
+import MoveListItemContainer from './style';
 import { lookupMove } from 'utils/lookup-move';
 
-const MovementListItem: React.FC<{
+const MoveListItem: React.FC<{
   filter?: FilterState;
   id: string;
   isAddMoveMode: boolean;
@@ -74,6 +74,8 @@ const MovementListItem: React.FC<{
   }
 
   function handleClick(e: any) {
+    console.log(e);
+
     if (type === 'WORKOUT' || type === 'EXERCISE') {
       if (isAddMoveMode) {
         addMoveToWorkout(e);
@@ -98,36 +100,58 @@ const MovementListItem: React.FC<{
   const nameLength = 12;
   const color = getColor();
 
-  const listItem = (
-    <ColorBarWrapper color={color} height="5px">
-      <div className="menu-list-item-container" onClick={handleClick}>
-        <div className="left">
-          <p className="name">{stringShortener(data.name, nameLength)}</p>
-        </div>
-        <div className="right">
-          {!isAddMoveMode && (
-            <div ref={btnRef} className="option-menu-btn-wrapper">
-              <OptionMenuButton id={id} type={type} />
-            </div>
-          )}
-        </div>
-      </div>
-    </ColorBarWrapper>
-  );
+  // const listItem = (
+  //   <Container color={color} onClick={handleClick}>
+  //     {/* <ColorBarWrapper color={color} height="5px"> */}
 
-  if (type === 'WORKOUT') {
-    return <WorkoutWrapper>{listItem}</WorkoutWrapper>;
-  } else if (type === 'EXERCISE') {
-    return <ExerciseWrapper>{listItem}</ExerciseWrapper>;
-  } else if (type === 'TAG') {
-    return <ArchetypeWrapper>{listItem}</ArchetypeWrapper>;
-  } else {
-    return null;
-  }
+  //     {/* <div className="menu-list-item-container" onClick={handleClick}> */}
+  //     <div className="left">
+  //       <p className="name">{stringShortener(data.name, nameLength)}</p>
+  //     </div>
+  //     <div className="right">
+  //       {!isAddMoveMode && (
+  //         <div ref={btnRef} className="option-menu-btn-wrapper">
+  //           <OptionMenuButton id={id} type={type} />
+  //         </div>
+  //       )}
+  //     </div>
+  //     {/* </div> */}
+  //     {/* </ColorBarWrapper> */}
+  //   </Container>
+  // );
+
+  // if (type === 'WORKOUT') {
+  //   return <WorkoutWrapper>{listItem}</WorkoutWrapper>;
+  // } else if (type === 'EXERCISE') {
+  //   return <ExerciseWrapper>{listItem}</ExerciseWrapper>;
+  // } else if (type === 'TAG') {
+  //   return <ArchetypeWrapper>{listItem}</ArchetypeWrapper>;
+  // } else {
+  //   return null;
+  // }
+  return (
+    <MoveListItemContainer
+      color={color}
+      barHeight="5px"
+      onClick={handleClick}
+      type={type}
+    >
+      <div className="left">
+        <p className="name">{stringShortener(data.name, nameLength)}</p>
+      </div>
+      <div className="right">
+        {!isAddMoveMode && (
+          <div ref={btnRef} className="option-menu-btn-wrapper">
+            <OptionMenuButton id={id} type={type} />
+          </div>
+        )}
+      </div>
+    </MoveListItemContainer>
+  );
 };
 
-export default MovementListItem;
-// const MovementListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
+export default MoveListItem;
+// const MoveListItem: React.FC<{ movement: Movement }> = ({ movement }) => {
 //   const filter = useSelector((state) => state.filter);
 //   const { isAddMoveMode } = useSelector((state) => state.ui);
 //   const dispatch = useDispatch();
@@ -231,4 +255,4 @@ export default MovementListItem;
 //   }
 // };
 
-// export default MovementListItem;
+// export default MoveListItem;

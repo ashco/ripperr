@@ -3,11 +3,22 @@ import { ThemeContext } from 'styled-components';
 
 import StyledColorBarWrapper from './style';
 
-const ColorBarWrapper: React.FC<{
+interface Props {
+  className?: string;
   color?: string;
-  height?: string;
-  width?: string;
-}> = ({ color, height, width, children }) => {
+  barHeight?: string;
+  // width?: string;
+  onClick?: (e: any) => void;
+}
+
+const ColorBarWrapper: React.FC<Props> = ({
+  className,
+  color = 'neutral',
+  barHeight = '8px',
+  // width,
+  children,
+  onClick,
+}) => {
   const theme = React.useContext(ThemeContext);
 
   let barColor;
@@ -28,7 +39,13 @@ const ColorBarWrapper: React.FC<{
   }
 
   return (
-    <StyledColorBarWrapper color={barColor} height={height} width={width}>
+    <StyledColorBarWrapper
+      className={className}
+      color={barColor}
+      barHeight={barHeight}
+      // width={width}
+      onClick={onClick}
+    >
       <div className="color-bar" />
       {children}
     </StyledColorBarWrapper>

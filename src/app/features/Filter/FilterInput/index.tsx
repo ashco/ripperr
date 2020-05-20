@@ -2,9 +2,9 @@
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'store';
-import { setModalMode, setIsAddMoveMode } from 'store/ui';
+import { setModalMode } from 'store/ui';
 
-import AddMovementButton from '../AddMovementButton';
+import AddMoveButton from '../AddMoveButton';
 import ClearFilterButton from '../ClearFilterButton';
 
 const FilterInput: React.FC<{}> = () => {
@@ -36,7 +36,7 @@ const FilterInput: React.FC<{}> = () => {
       {filtering ? (
         <ClearFilterButton />
       ) : (
-        !isAddMoveMode && <AddMovementButton openModal={openModal} />
+        !isAddMoveMode && <AddMoveButton openModal={openModal} />
       )}
     </FilterInputWrapper>
   );

@@ -6,9 +6,7 @@ import FilterInput from './FilterInput';
 
 import FilterContainer from './style';
 
-const Filter: React.FC<{
-  // archetypeList: Archetype[] | null;
-}> = () => {
+const Filter: React.FC<{}> = () => {
   const dispatch = useDispatch();
 
   const filter = useSelector((state) => state.filter);

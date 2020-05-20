@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'store';
 // import { useModalState } from 'context/ModalContext';
 
 import Modal from 'components/Modal';
-import AddMovementModal from 'features/ModalRouter/AddMovementModal';
-import DeleteMovementModal from 'features/ModalRouter/DeleteMovementModal';
-import MovementModal from 'features/ModalRouter/MovementModal';
+import AddMoveModal from 'features/ModalRouter/AddMoveModal';
+import DeleteMoveModal from 'features/ModalRouter/DeleteMoveModal';
+import MoveModal from 'features/ModalRouter/MoveModal';
 
 import { MovementType } from 'types/types';
 
@@ -21,15 +21,15 @@ const ModalRouter = () => {
 
   switch (modalMode) {
     case 'ADD':
-      content = <AddMovementModal setAddMoveType={setAddMoveType} />;
+      content = <AddMoveModal setAddMoveType={setAddMoveType} />;
       break;
     case 'DELETE':
-      content = <DeleteMovementModal moves={moves} />;
+      content = <DeleteMoveModal moves={moves} />;
       break;
     case 'EDIT':
     case 'VIEW':
       content = (
-        <MovementModal
+        <MoveModal
           addMoveType={addMoveType}
           modalMode={modalMode}
           moves={moves}

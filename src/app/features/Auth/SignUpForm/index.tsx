@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import Input from 'components/Input';
-import Form from 'components/Form';
+import AuthForm from 'components/AuthForm';
 import Button from 'components/Button';
 import FormError from 'components/FormError';
 
@@ -42,6 +42,11 @@ const SignupForm: React.FC = () => {
     firebase
       .doCreateUserWithEmailAndPassword(email, password)
       .then((authUser) => {
+        // adding in for database cleanup
+        if ((window as any).Cypress) {
+          (window as any).Cypress.uid = authUser?.user?.uid;
+        }
+
         // Create a user in your Firebase realtime database
         if (authUser.user) {
           return firebase.user(authUser.user.uid).set({
@@ -61,7 +66,7 @@ const SignupForm: React.FC = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <AuthForm onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="input-container">
         <Input
           name="username"
@@ -94,7 +99,7 @@ const SignupForm: React.FC = () => {
       </div>
       <Button type="submit">Submit</Button>
       {authError && <FormError>{authError.message}</FormError>}
-    </Form>
+    </AuthForm>
   );
 };
 

@@ -14,6 +14,11 @@ const store = createStore();
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
+
+    if (typeof window !== `undefined` && (window as any).Cypress) {
+      (window as any).store = store;
+    }
+
     return (
       <Provider store={store}>
         <Page>

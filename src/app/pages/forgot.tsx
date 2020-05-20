@@ -2,14 +2,15 @@
 import styled from 'styled-components';
 import { NextPage } from 'next';
 
-import AuthFormContainer from '../features/Auth/AuthFormContainer';
+import AuthContainer from 'components/AuthContainer';
 import PasswordForgotForm from '../features/Auth/PasswordForgotForm';
 
 const PasswordForgotPage: NextPage = () => (
   <ForgotPageWrapper>
-    <AuthFormContainer title="Forgot Password?">
+    <AuthContainer>
+      <h1>Forgot Password</h1>
       <PasswordForgotForm />
-    </AuthFormContainer>
+    </AuthContainer>
   </ForgotPageWrapper>
 );
 

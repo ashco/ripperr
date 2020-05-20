@@ -1,9 +1,9 @@
 ﻿import React from 'react';
-import { useDispatch, useSelector } from 'store';
+import { useSelector } from 'store';
 import MovementMenuWrapper from './style';
 
 import Loading from 'components/Loading';
-import MovementListItem from '../MovementListItem';
+import MoveListItem from '../MoveListItem';
 
 // TODO - RENAME TO MovementList
 const MovementMenu: React.FC<{
@@ -37,7 +37,7 @@ const MovementMenu: React.FC<{
       ) : (
         <ul>
           {moveList.map((id) => (
-            <MovementListItem
+            <MoveListItem
               filter={filter}
               key={id}
               id={id}

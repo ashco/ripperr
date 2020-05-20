@@ -16,6 +16,7 @@ const ButtonRow: React.FC<{ config: ButtonRowProps }> = ({ config }) => {
         type="submit"
         onClick={actionBtn.onClick}
         className={actionBtn.className}
+        primary={true}
       >
         {actionBtn.text}
       </Button>

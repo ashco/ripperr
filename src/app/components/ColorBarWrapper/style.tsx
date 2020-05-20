@@ -1,16 +1,20 @@
 ﻿import styled from 'styled-components';
 
-const StyledColorBarWrapper = styled.div<{
+interface Props {
+  className?: string;
   color: string;
-  height?: string;
-  width?: string;
-}>`
+  barHeight: string;
+  onClick?: (e: any) => void;
+}
+
+const StyledColorBarWrapper = styled.div<Props>`
   display: grid;
-  grid-template-rows: ${(props) => (props.height ? props.height : '8px')} auto;
+  grid-template-rows: ${(p) => p.barHeight} auto;
+  max-width: 90vw;
   .color-bar {
-    width: ${(props) => (props.width ? props.width : '90%')};
+    width: 90%;
     margin: 0 auto;
-    background: ${(props) => props.color};
+    background: ${(p) => p.color};
   }
 `;
 

@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 
-import { useSelector, useDispatch } from 'store';
+import { useDispatch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
 import styled from 'styled-components';
 
 import Button from 'components/Button';
 
-const AddMovementButton: React.FC = () => {
+const AddMoveButton: React.FC = () => {
   const dispatch = useDispatch();
 
   function handleClick(e: any) {
@@ -28,4 +28,4 @@ const StyledAddMovementButton = styled(Button)`
   justify-self: center;
 `;
 
-export default AddMovementButton;
+export default AddMoveButton;

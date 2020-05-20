@@ -1,8 +1,11 @@
 ﻿import styled from 'styled-components';
-import ModalContainer from 'components/ModalContainer';
+import Container from 'components/Container';
 
-const AddMovementModalContainer = styled(ModalContainer)`
+const AddMoveModalContainer = styled(Container)`
+  width: 24rem;
+
   .content {
+    width: 100%;
     gap: 0.5rem;
     .btn-container {
       display: grid;
@@ -14,4 +17,4 @@ const AddMovementModalContainer = styled(ModalContainer)`
   }
 `;
 
-export default AddMovementModalContainer;
+export default AddMoveModalContainer;

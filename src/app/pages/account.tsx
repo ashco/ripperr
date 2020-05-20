@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import AuthUserContext from 'context/AuthUserContext';
 import withAuthorization from 'context/withAuthorization';
 
-import AuthFormContainer from 'features/Auth/AuthFormContainer';
-
+import AuthContainer from 'components/AuthContainer';
 import ToggleThemeButton from 'components/ToggleThemeButton';
 import PasswordChangeForm from 'features/Auth/PasswordChangeForm';
 
@@ -20,11 +19,14 @@ const AccountPage: NextPage = () => {
       <p className="text" aria-label="account-email">
         {authUser && `Email: ${authUser.email}`}
       </p>
-      <AuthFormContainer title="Change Password">
+      <AuthContainer>
+        <h1>Change Password</h1>
         <PasswordChangeForm />
-      </AuthFormContainer>
-      <p className="text">Toggle Theme</p>
-      <ToggleThemeButton />
+      </AuthContainer>
+      <AuthContainer>
+        <h1>Toggle Theme</h1>
+        <ToggleThemeButton />
+      </AuthContainer>
     </AccountPageWrapper>
   );
 };

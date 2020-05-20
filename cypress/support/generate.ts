@@ -6,6 +6,11 @@ interface User {
   password: string;
 }
 
+interface Tag {
+  name: string;
+  description: string;
+}
+
 const buildUser = build<User>('User', {
   fields: {
     username: fake((f) => f.internet.userName()),
@@ -14,4 +19,11 @@ const buildUser = build<User>('User', {
   },
 });
 
-export { buildUser };
+const buildTag = build<Tag>('Tag', {
+  fields: {
+    name: fake((f) => f.random.word()),
+    description: fake((f) => f.lorem.sentences()),
+  },
+});
+
+export { buildUser, buildTag };

@@ -2,20 +2,21 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import AuthFormContainer from 'features/Auth/AuthFormContainer';
+import AuthContainer from 'components/AuthContainer';
 import LoginForm from 'features/Auth/LoginForm';
 import { PasswordForgotLink } from 'features/Auth/PasswordForgotForm';
 import SignUpLink from 'components/SignUpLink';
 
 const LoginPage: NextPage<{ userAgent: string }> = () => (
   <LoginPageWrapper>
-    <AuthFormContainer title="Login">
+    <AuthContainer>
+      <h1>Login</h1>
       <LoginForm />
-      <div className="links">
+      <div className="footer-links">
         <SignUpLink />
         <PasswordForgotLink />
       </div>
-    </AuthFormContainer>
+    </AuthContainer>
   </LoginPageWrapper>
 );
 

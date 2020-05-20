@@ -1,9 +1,9 @@
 ﻿import React from 'react';
-import { useDispatch, useSelector } from 'store';
+import { useSelector } from 'store';
 
 import ArchetypeListWrapper from './style';
 
-import MovementListItem from 'components/MovementListItem';
+import MoveListItem from 'components/MoveListItem';
 import { FilterState } from 'store/filter/types';
 
 const ArchetypeList: React.FC<{
@@ -20,7 +20,7 @@ const ArchetypeList: React.FC<{
       ) : (
         Object.keys(tags.byId).map((id) => {
           return (
-            <MovementListItem
+            <MoveListItem
               filter={filter}
               key={id}
               id={id}
@@ -36,7 +36,7 @@ const ArchetypeList: React.FC<{
           <div>No archetypes yet!</div>
         ) : (
           archetypeList.map((arch) => {
-            return <MovementListItem key={arch.id} movement={arch} />;
+            return <MoveListItem key={arch.id} movement={arch} />;
           })
         )
       ) : (

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import FirebaseContext from 'context/FirebaseContext';
 
-import Form from 'components/Form';
+import AuthForm from 'components/AuthForm';
 import FormError from 'components/FormError';
 import Input from 'components/Input';
 import Button from 'components/Button';
@@ -47,7 +47,7 @@ const PasswordChangeForm: React.FC = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <AuthForm onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="input-container">
         <Input
           name="password"
@@ -64,9 +64,11 @@ const PasswordChangeForm: React.FC = () => {
           error={errors.passwordConfirm}
         />
       </div>
-      <Button type="submit">Submit</Button>
+      <Button type="submit" primary={true}>
+        Submit
+      </Button>
       {authError && <FormError>{authError.message}</FormError>}
-    </Form>
+    </AuthForm>
   );
 };
 

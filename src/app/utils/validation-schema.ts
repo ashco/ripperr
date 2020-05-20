@@ -1,37 +1,36 @@
 ﻿import * as yup from 'yup';
 
-// error messages
-const usernameReq = 'Username is required';
-const emailReq = 'Email is required';
-const emailValid = 'Email must be a valid email';
-const passwordReq = 'Password is required';
-const passwordMin = 'Password must be at least 6 characters';
-const passwordConfirmReq = 'Confirm password is required';
-const passwordConfirmMatch = 'Passwords must match';
+const username = () => yup.string().required('Username is required');
+const email = () =>
+  yup.string().required('Email is required').email('Email is not valid');
+const password = () =>
+  yup
+    .string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters');
+const passwordConfirm = () =>
+  yup
+    .string()
+    .required('Confirm password is required')
+    .oneOf([yup.ref('password'), null], 'Passwords must match');
 
 export const signupSchema = yup.object().shape({
-  username: yup.string().required(usernameReq),
-  email: yup.string().required(emailReq).email(emailValid),
-  password: yup.string().required(passwordReq).min(6, passwordMin),
-  passwordConfirm: yup
-    .string()
-    .required(passwordConfirmReq)
-    .oneOf([yup.ref('password'), null], passwordConfirmMatch),
+  username: username(),
+  email: email(),
+  password: password(),
+  passwordConfirm: passwordConfirm(),
 });
 
 export const loginSchema = yup.object().shape({
-  email: yup.string().required(emailReq).email(emailValid),
-  password: yup.string().required(passwordReq).min(6, passwordMin),
+  email: email(),
+  password: password(),
 });
 
 export const passwordForgotSchema = yup.object().shape({
-  email: yup.string().required(emailReq).email(emailValid),
+  email: email(),
 });
 
 export const passwordChangeSchema = yup.object({
-  password: yup.string().required(passwordReq).min(6, passwordMin),
-  passwordConfirm: yup
-    .string()
-    .required(passwordConfirmReq)
-    .oneOf([yup.ref('password'), null], passwordConfirmMatch),
+  password: password(),
+  passwordConfirm: passwordConfirm(),
 });

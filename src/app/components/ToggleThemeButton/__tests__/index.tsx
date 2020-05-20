@@ -42,14 +42,12 @@ test('should match snapshot', () => {
   expect(container).toMatchInlineSnapshot(`
     .c0 {
       border: 2px solid hsl(0,0%,100%);
-      color: hsl(0,0%,100%);
-      background: none;
+      color: hsl(0,0%,7%);
+      background: hsl(0,0%,100%);
       font-size: 16px;
       padding: 0.5rem;
       width: 100%;
       cursor: pointer;
-      color: hsl(0,0%,7%);
-      background: hsl(0,0%,100%);
     }
 
     .c0.btn-delete {
@@ -65,17 +63,17 @@ test('should match snapshot', () => {
     }
 
     .c0:hover {
-      background: hsl(0,0%,100%);
-      color: hsl(0,0%,9%);
+      background: none;
+      color: hsl(0,0%,100%);
     }
 
     .c0:hover svg path {
-      fill: hsl(0,0%,9%);
+      fill: hsl(0,0%,100%);
     }
 
     <div>
       <button
-        class="sc-AxjAm c0"
+        class="c0"
       >
         Light
          Mode

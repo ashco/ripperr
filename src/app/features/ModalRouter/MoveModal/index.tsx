@@ -1,19 +1,19 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch } from 'store';
-import MovementForm from 'features/MovementForm';
+import MoveForm from 'features/MoveForm';
 
 import ModalBackground from 'components/ModalBackground';
-import ModalContainer from 'components/ModalContainer';
+import Container from 'components/Container';
 
 import singleCapString from 'utils/single-cap-string';
-
+import MoveModalContainer from './style';
 import { MovementType } from 'types/types';
 import ColorBarWrapper from 'components/ColorBarWrapper';
 import { lookupMove, MoveDataType } from 'utils/lookup-move';
 import { Movement, MovesState } from 'store/moves';
 import { ModalMode } from 'store/ui';
 
-const MovementModal: React.FC<{
+const MoveModal: React.FC<{
   addMoveType: MovementType | null;
   modalMode: ModalMode;
   moves: MovesState;
@@ -49,7 +49,11 @@ const MovementModal: React.FC<{
     if (modalMode === 'VIEW') {
       headerText = data?.name || '';
     } else if (modalMode === 'EDIT') {
-      headerText = `${singleCapString(modalMode)} ${singleCapString(type)}`;
+      if (move.data) {
+        headerText = `${singleCapString(modalMode)} ${singleCapString(type)}`;
+      } else {
+        headerText = `Create New ${singleCapString(type)}`;
+      }
     } else {
       throw Error('modalMode does not match!');
     }
@@ -76,22 +80,20 @@ const MovementModal: React.FC<{
 
   return move.type ? (
     <ModalBackground>
-      <ColorBarWrapper color={style.color}>
-        <ModalContainer width={style.width}>
-          <h1 className="header">{style.headerText}</h1>
-          <MovementForm
-            activeId={moves.activeId}
-            modalMode={modalMode}
-            move={
-              move as
-                | MoveDataType
-                | { data: null; type: 'WORKOUT' | 'EXERCISE' | 'TAG' }
-            }
-          />
-        </ModalContainer>
-      </ColorBarWrapper>
+      <MoveModalContainer color={style.color} width={style.width}>
+        <h1>{style.headerText}</h1>
+        <MoveForm
+          activeId={moves.activeId}
+          modalMode={modalMode}
+          move={
+            move as
+              | MoveDataType
+              | { data: null; type: 'WORKOUT' | 'EXERCISE' | 'TAG' }
+          }
+        />
+      </MoveModalContainer>
     </ModalBackground>
   ) : null;
 };
 
-export default MovementModal;
+export default MoveModal;
