@@ -140,6 +140,7 @@ const movesSlice = createSlice({
       state.workouts.byId = {};
       state.exercises.byId = {};
       state.tags.byId = {};
+      console.log(state);
     },
   },
 });

@@ -89,3 +89,15 @@ Cypress.Commands.add(
     }
   },
 );
+Cypress.Commands.add('resetDb', (uid = Cypress.env('TEST_UID')) => {
+  cy.callFirestore('delete', `users/${uid}/workouts`);
+  cy.callFirestore('delete', `users/${uid}/exercises`);
+  cy.callFirestore('delete', `users/${uid}/archetypes`);
+});
+Cypress.Commands.add('checkStoreForDeepEqual', (path, expectedVal) => {
+  cy.window()
+    .its('store')
+    .invoke('getState')
+    .its(path)
+    .should('deep.equal', expectedVal);
+});

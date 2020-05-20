@@ -35,5 +35,16 @@ declare namespace Cypress {
       password: string,
       includeVerify?: boolean,
     ): Chainable<Element>;
+
+    /**
+     * Custom command that deletes all  firestore move records for a user.
+     * @example cy.validateEmailField('babbs@tabbs.net')
+     */
+    resetDb(uid?: string): Chainable<Element>;
+    /**
+     * Custom command that runs a deep equal comparison for an expected value on the store's path.
+     * @example cy.checkStoreForDeepEqual(testObj, 'moves.tags.byId')
+     */
+    checkStoreForDeepEqual(path: string, expectedVal: any): Chainable<Element>;
   }
 }

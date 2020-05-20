@@ -6,7 +6,7 @@ interface User {
   password: string;
 }
 
-interface Tag {
+interface Move {
   name: string;
   description: string;
 }
@@ -19,11 +19,11 @@ const buildUser = build<User>('User', {
   },
 });
 
-const buildTag = build<Tag>('Tag', {
+const buildMove = build<Move>('Move', {
   fields: {
     name: fake((f) => f.random.word()),
-    description: fake((f) => f.lorem.sentences()),
+    description: fake((f) => f.lorem.sentence()),
   },
 });
 
-export { buildUser, buildTag };
+export { buildUser, buildMove };

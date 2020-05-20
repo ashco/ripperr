@@ -187,6 +187,10 @@ const MoveForm: React.FC<{
         id: docRef.id,
         ...formData,
       };
+      // adding in for database cleanup
+      if ((window as any).Cypress) {
+        (window as any).postData = postData;
+      }
 
       docRef
         .set(postData)
@@ -342,7 +346,7 @@ const MoveForm: React.FC<{
   //   return () => unregister('tags');
   // }, [register]);
 
-  console.log(watch());
+  // console.log(watch());
 
   return (
     <MoveFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>

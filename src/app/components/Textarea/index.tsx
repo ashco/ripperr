@@ -28,6 +28,7 @@ const Textarea: React.FC<Props> = ({
         {error?.message || label}
       </label>
       <Controller
+        id={name}
         as={<TextareaAutosize maxRows={maxRows} />}
         name={name}
         control={control}

@@ -21,7 +21,7 @@ const FilterInput: React.FC<{}> = () => {
   return (
     <FilterInputWrapper>
       <input
-        className="filter-bar"
+        aria-label="filter-bar"
         type="text"
         placeholder="Filter..."
         value={filter.value}
