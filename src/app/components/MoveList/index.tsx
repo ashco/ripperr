@@ -25,7 +25,6 @@ const MoveList: React.FC = () => {
           <ul>
             {moveList.map((id) => (
               <MoveListItem
-                filter={filter}
                 key={id}
                 id={id}
                 isAddMoveMode={isAddMoveMode}

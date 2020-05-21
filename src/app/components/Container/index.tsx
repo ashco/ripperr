@@ -8,6 +8,7 @@ interface Props {
   className?: string;
   color?: string;
   barHeight?: string;
+  labelAccess?: string;
   // width?: string;
 }
 
@@ -18,6 +19,7 @@ const ColorBarContainer: React.FC<Props> = ({
   // width,
   children,
   onClick,
+  labelAccess,
 }) => (
   <ColorBarWrapper
     className={className}
@@ -25,6 +27,7 @@ const ColorBarContainer: React.FC<Props> = ({
     barHeight={barHeight}
     // width={width}
     onClick={onClick}
+    labelAccess={labelAccess}
   >
     <Container className="container">{children}</Container>
   </ColorBarWrapper>

@@ -7,8 +7,8 @@ const FilterContainer = styled.div<{ active: boolean }>`
   border-top: solid
     ${(props) =>
       props.active
-        ? props.theme.color.orange[500] + '5px'
-        : props.theme.mode.colorOpacity[200] + '2px'};
+        ? props.theme.color.orange[500] + ' 5px'
+        : props.theme.mode.colorOpacity[200] + ' 2px'};
   background-color: ${(props) => props.theme.mode.background[200]};
 `;
 

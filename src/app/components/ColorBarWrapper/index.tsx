@@ -8,6 +8,7 @@ interface Props {
   color?: string;
   barHeight?: string;
   // width?: string;
+  labelAccess?: string;
   onClick?: (e: any) => void;
 }
 
@@ -16,6 +17,7 @@ const ColorBarWrapper: React.FC<Props> = ({
   color = 'neutral',
   barHeight = '8px',
   // width,
+  labelAccess,
   children,
   onClick,
 }) => {
@@ -40,6 +42,7 @@ const ColorBarWrapper: React.FC<Props> = ({
 
   return (
     <StyledColorBarWrapper
+      aria-label={labelAccess}
       className={className}
       color={barColor}
       barHeight={barHeight}

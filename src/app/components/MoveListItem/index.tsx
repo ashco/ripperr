@@ -10,11 +10,12 @@ import MoveListItemContainer from './style';
 import { lookupMove } from 'utils/lookup-move';
 
 const MoveListItem: React.FC<{
-  filter?: FilterState;
+  // filter?: FilterState;
+  active?: boolean;
   id: string;
   isAddMoveMode: boolean;
   moves: MovesState;
-}> = ({ filter, id, isAddMoveMode, moves }) => {
+}> = ({ active, id, isAddMoveMode, moves }) => {
   const dispatch = useDispatch();
 
   const move = lookupMove(moves, id);
@@ -28,8 +29,6 @@ const MoveListItem: React.FC<{
     let color = '';
     switch (type) {
       case 'TAG': {
-        // Make more efficient by lifting up. Do not loop through array for each component.
-        const active = filter?.tags.includes(data.id as string);
         color = active ? 'orange' : 'neutral';
         break;
       }
@@ -73,8 +72,6 @@ const MoveListItem: React.FC<{
   }
 
   function handleClick(e: any) {
-    console.log(e);
-
     if (type === 'WORKOUT' || type === 'EXERCISE') {
       if (isAddMoveMode) {
         addMoveToWorkout(e);
@@ -105,6 +102,7 @@ const MoveListItem: React.FC<{
       barHeight="5px"
       onClick={handleClick}
       type={type}
+      labelAccess={active ? 'active tag' : ''}
     >
       <div className="left">
         <p className="name">{stringShortener(data.name, nameLength)}</p>

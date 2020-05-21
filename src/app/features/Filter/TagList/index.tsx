@@ -23,9 +23,11 @@ const TagList: React.FC<{
         tagList.length > 0 ? (
           <ul>
             {tagList.map((id) => {
+              const active = filter.tags.includes(id);
+
               return (
                 <MoveListItem
-                  filter={filter}
+                  active={active}
                   key={id}
                   id={id}
                   isAddMoveMode={isAddMoveMode}

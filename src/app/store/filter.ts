@@ -28,14 +28,20 @@ const filterSlice = createSlice({
     showFilter(state, action: PayloadAction<ToggleFilter>) {
       state.open = action.payload.open;
     },
+
     setFilterValue(state, action: PayloadAction<FilterValue>) {
       state.value = action.payload;
 
       state.active = state.tags.length > 0 || state.value.length > 0;
     },
+
     resetFilter(state) {
-      state = initialState;
+      state.active = false;
+      state.open = false;
+      state.tags = [];
+      state.value = '';
     },
+
     toggleFilterTag(state, action: PayloadAction<string>) {
       const newTags = [...state.tags];
       const index = newTags.indexOf(action.payload);

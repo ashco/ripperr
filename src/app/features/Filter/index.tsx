@@ -8,7 +8,7 @@ import FilterInput from './FilterInput';
 
 import FilterContainer from './style';
 
-const Filter: React.FC<{}> = () => {
+const Filter: React.FC = () => {
   const dispatch = useDispatch();
 
   const filter = useSelector((state) => state.filter);
