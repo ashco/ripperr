@@ -3,17 +3,14 @@ import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'store';
 import { setModalMode } from 'store/ui';
-import { setFilterValue, toggleFilter } from 'store/filter';
+import { setFilterValue, showFilter, FilterState } from 'store/filter';
 
 import AddMoveButton from '../AddMoveButton';
 import ClearFilterButton from '../ClearFilterButton';
 
-const FilterInput: React.FC<{}> = () => {
+const FilterInput: React.FC<{ filter: FilterState }> = ({ filter }) => {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.filter);
   const { isAddMoveMode } = useSelector((state) => state.ui);
-
-  const filtering = filter.value.length > 0 || filter.tags.length > 0;
 
   function openModal(): void {
     dispatch(setModalMode({ modalMode: 'ADD' }));
@@ -27,15 +24,11 @@ const FilterInput: React.FC<{}> = () => {
         placeholder="Filter..."
         value={filter.value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          // dispatch({
-          //   type: 'FILTER_UPDATE_VALUE',
-          //   payload: e.target.value,
-          // })
           dispatch(setFilterValue(e.target.value))
         }
-        onFocus={() => dispatch(toggleFilter({ active: true }))}
+        onFocus={() => dispatch(showFilter({ open: true }))}
       />
-      {filtering ? (
+      {filter.active ? (
         <ClearFilterButton />
       ) : (
         !isAddMoveMode && <AddMoveButton openModal={openModal} />

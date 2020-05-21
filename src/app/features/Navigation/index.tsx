@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 import AuthUserContext from 'context/AuthUserContext';
 
-import NotificationBanner from 'components/NotificationBanner';
 import Button from 'components/Button';
 
 import SignOutButton from './SignOutButton';
@@ -24,16 +23,13 @@ const NavBar: React.FC = () => {
   const color = themeContext.mode.color[100];
 
   return (
-    <>
-      {/* <NotificationBanner /> */}
-      <NavBarWrapper>
-        {authUser ? (
-          <NavBarAuth color={color} isAddMoveMode={isAddMoveMode} />
-        ) : (
-          <NavBarNonAuth color={color} />
-        )}
-      </NavBarWrapper>
-    </>
+    <NavBarWrapper>
+      {authUser ? (
+        <NavBarAuth color={color} isAddMoveMode={isAddMoveMode} />
+      ) : (
+        <NavBarNonAuth color={color} />
+      )}
+    </NavBarWrapper>
   );
 };
 

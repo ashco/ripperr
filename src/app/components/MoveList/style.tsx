@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-const MovementMenuWrapper = styled.div`
+const MoveListWrapper = styled.div`
   padding: 1rem 1rem 0;
   overflow-y: auto;
   color: ${(props) => props.theme.mode.color[100]};
@@ -27,4 +27,4 @@ const MovementMenuWrapper = styled.div`
   }
 `;
 
-export default MovementMenuWrapper;
+export default MoveListWrapper;

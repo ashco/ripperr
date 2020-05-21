@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch, batch } from 'store';
-import { toggleFilter } from 'store/filter';
+import { showFilter } from 'store/filter';
 import { setIsPointerDisabled } from 'store/ui';
 
 import TagList from './TagList';
@@ -16,11 +16,11 @@ const Filter: React.FC<{}> = () => {
   const filterRef = React.useRef<HTMLDivElement>(null);
 
   function handleFilterModeOff(e: any) {
-    if (filter.active) {
+    if (filter.open) {
       if (!filterRef?.current?.contains(e.target)) {
         batch(() => {
           dispatch(setIsPointerDisabled(false));
-          dispatch(toggleFilter({ active: false }));
+          dispatch(showFilter({ open: false }));
         });
       }
     }
@@ -34,16 +34,10 @@ const Filter: React.FC<{}> = () => {
     };
   });
 
-  const filtering = filter.value.length > 0 || filter.tags.length > 0;
-
   return (
-    <FilterContainer
-      active={filter.active}
-      filtering={filtering}
-      ref={filterRef}
-    >
-      {filter.active && <TagList filter={filter} />}
-      <FilterInput />
+    <FilterContainer active={filter.active} ref={filterRef}>
+      {filter.open && <TagList filter={filter} />}
+      <FilterInput filter={filter} />
     </FilterContainer>
   );
 };

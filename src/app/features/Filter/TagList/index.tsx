@@ -11,29 +11,35 @@ const TagList: React.FC<{
 }> = ({ filter }) => {
   const { isAddMoveMode } = useSelector((state) => state.ui);
   const moves = useSelector((state) => state.moves);
-  const { tags } = moves;
+
+  let tagList = null;
+  if (moves.tags) {
+    tagList = [...Object.keys(moves.tags.byId)];
+  }
 
   return (
     <TagListWrapper>
-      {Object.keys(tags.byId).length === 0 ? (
-        <p className="message">Filter tags show up here when created.</p>
+      {tagList ? (
+        tagList.length > 0 ? (
+          <ul>
+            {tagList.map((id) => {
+              return (
+                <MoveListItem
+                  filter={filter}
+                  key={id}
+                  id={id}
+                  isAddMoveMode={isAddMoveMode}
+                  moves={moves}
+                />
+              );
+            })}
+          </ul>
+        ) : (
+          <p className="message">Filter tags show up here when created.</p>
+        )
       ) : (
-        <ul>
-          {Object.keys(tags.byId).map((id) => {
-            return (
-              <MoveListItem
-                filter={filter}
-                key={id}
-                id={id}
-                isAddMoveMode={isAddMoveMode}
-                moves={moves}
-              />
-            );
-          })}
-        </ul>
+        <p className="message">Loading tags...</p>
       )}
-
-      {/* <div>Loading ...</div> */}
     </TagListWrapper>
   );
 };

@@ -62,7 +62,7 @@ const MoveModal: React.FC<{
   }
 
   const move = lookupMove(moves) || { data: null, type: addMoveType };
-
+  if (!move) throw Error('lookup move by id failed!');
   // const move = lookupMove('fBk6nw3ZtW7Vf5aXFw1D') || {
   //   data: null,
   //   type: addMoveType,

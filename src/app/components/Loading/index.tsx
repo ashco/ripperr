@@ -2,7 +2,7 @@
 import LoadingWrapper from './style';
 
 const Loading = () => (
-  <LoadingWrapper>
+  <LoadingWrapper aria-label="Loading">
     <div></div>
     <div></div>
     <div></div>

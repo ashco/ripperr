@@ -21,9 +21,10 @@ export type RootState = ReturnType<typeof rootReducer>;
 export const useSelector: TypedUseSelectorHook<RootState> = useRRSelector;
 export * from 'react-redux';
 
-const createStore = () => {
+const createStore = (state?: any) => {
   const store = configureStore({
     reducer: rootReducer,
+    preloadedState: state,
   });
 
   return store;

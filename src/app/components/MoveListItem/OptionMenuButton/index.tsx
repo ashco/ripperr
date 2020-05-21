@@ -58,16 +58,12 @@ const OptionMenuButton: React.FC<{
 
   useEffect(() => {
     if (isOpen) {
-      console.log('menu open');
       document.addEventListener('click', closeMenu);
-
-      // const isNumber = (arg) => typeof arg === 'number';
 
       const offsetHeight = menuRef?.current?.offsetHeight;
       const offsetWidth = menuRef?.current?.offsetWidth;
       const offsetTop = menuRef?.current?.offsetTop;
       const offsetLeft = menuRef?.current?.offsetLeft;
-      // console.log({ offsetHeight, offsetWidth, offsetTop, offsetLeft });
       if (
         offsetHeight &&
         offsetWidth &&

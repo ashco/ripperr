@@ -4,7 +4,6 @@ import { setModalMode, setIsAddMoveMode } from 'store/ui';
 import { setActiveMove, MovesState } from 'store/moves';
 import { toggleFilterTag, FilterState } from 'store/filter';
 
-// import ColorBarWrapper from 'components/ColorBarWrapper';
 import OptionMenuButton from 'components/MoveListItem/OptionMenuButton';
 
 import MoveListItemContainer from './style';
@@ -19,7 +18,7 @@ const MoveListItem: React.FC<{
   const dispatch = useDispatch();
 
   const move = lookupMove(moves, id);
-  if (!move) throw Error('No move found!');
+  if (!move) throw Error('lookup move by id failed!');
   const { data, type } = move;
 
   const btnRef = React.useRef<HTMLDivElement>(null);

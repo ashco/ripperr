@@ -20,7 +20,7 @@ const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
   const firebase = React.useContext(FirebaseContext);
 
   const move = lookupMove(moves);
-  if (!move) throw Error('id did not find move!');
+  if (!move) throw Error('lookup move by id failed!');
   const { data, type } = move;
 
   function handleDelete(): void {

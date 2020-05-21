@@ -61,29 +61,25 @@ export interface WorkoutDict {
 }
 
 interface Workouts {
-  isLoading: boolean;
   byId: WorkoutDict;
   allIds: string[];
 }
 
 interface Exercises {
-  isLoading: boolean;
   byId: ExerciseDict;
   allIds: string[];
 }
 
 interface Tags {
-  isLoading: boolean;
   byId: TagDict;
   allIds: string[];
 }
 
 export interface MovesState {
   activeId: ID | null;
-  workouts: Workouts;
-  exercises: Exercises;
-  tags: Tags;
-  isLoading: boolean;
+  workouts: Workouts | null;
+  exercises: Exercises | null;
+  tags: Tags | null;
   error: string | null;
 }
 
@@ -93,24 +89,11 @@ interface SetMoves {
   tags?: TagDict;
 }
 
-const initialState: MovesState = {
+export const initialState: MovesState = {
   activeId: null,
-  workouts: {
-    isLoading: false,
-    byId: {},
-    allIds: [],
-  },
-  exercises: {
-    isLoading: false,
-    byId: {},
-    allIds: [],
-  },
-  tags: {
-    isLoading: false,
-    byId: {},
-    allIds: [],
-  },
-  isLoading: false,
+  workouts: null,
+  exercises: null,
+  tags: null,
   error: null,
 };
 
@@ -118,51 +101,24 @@ const movesSlice = createSlice({
   name: 'moves',
   initialState,
   reducers: {
-    // getMovesStart(state) {
-    //   state.isLoading = true;
-    //   state.error = null;
-    // },
-    setMovesLoading(state, action: PayloadAction<boolean>) {
-      state.isLoading = action.payload;
-    },
     setMoves(state, action: PayloadAction<SetMoves>) {
       const { workouts, exercises, tags } = action.payload;
 
-      if (workouts) state.workouts.byId = workouts;
-      if (exercises) state.exercises.byId = exercises;
-      if (tags) state.tags.byId = tags;
-
-      // state.loading = false;
-      // state.error = null;
+      if (workouts) state.workouts = { byId: workouts, allIds: [] };
+      if (exercises) state.exercises = { byId: exercises, allIds: [] };
+      if (tags) state.tags = { byId: tags, allIds: [] };
     },
 
-    // getMovesFailure(state, action: PayloadAction<string>) {
-    //   state.loading = false;
-    //   state.error = action.payload;
-    // },
     setActiveMove(state, action: PayloadAction<ID>) {
       state.activeId = action.payload;
     },
     clearActiveMove(state) {
       state.activeId = null;
     },
-    clearAllMoves(state) {
-      state.workouts.byId = {};
-      state.exercises.byId = {};
-      state.tags.byId = {};
-    },
   },
 });
 
-export const {
-  // getMovesStart,
-  setMoves,
-  setMovesLoading,
-  // getMovesFailure,
-  setActiveMove,
-  clearActiveMove,
-  clearAllMoves,
-} = movesSlice.actions;
+export const { setMoves, setActiveMove, clearActiveMove } = movesSlice.actions;
 
 export default movesSlice.reducer;
 

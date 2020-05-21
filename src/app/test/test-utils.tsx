@@ -7,6 +7,7 @@ import createStore from 'store';
 import { darkTheme } from 'styles/theme';
 
 interface RenderOptions {
+  state?: any;
   store?: any;
   theme?: DefaultTheme;
   rtlOptions?: any;
@@ -15,7 +16,8 @@ interface RenderOptions {
 function render<Render>(
   ui: any,
   {
-    store = createStore(),
+    state,
+    store = createStore(state),
     theme = darkTheme,
     ...rtlOptions
   }: RenderOptions = {},
