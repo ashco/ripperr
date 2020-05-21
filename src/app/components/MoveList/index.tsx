@@ -5,7 +5,6 @@ import MoveListWrapper from './style';
 import Loading from 'components/Loading';
 import MoveListItem from '../MoveListItem';
 
-// TODO - RENAME TO MovementList
 const MoveList: React.FC = () => {
   const { isAddMoveMode } = useSelector((state) => state.ui);
   const filter = useSelector((state) => state.filter);

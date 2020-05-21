@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import { useSelector, useDispatch, batch } from 'store';
+import { useDispatch, batch } from 'store';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 

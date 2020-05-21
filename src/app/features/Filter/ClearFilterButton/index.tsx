@@ -4,7 +4,7 @@ import { resetFilter } from 'store/filter';
 
 import Button from 'components/Button';
 
-import Icon from 'icons';
+import Icon from 'components/Icon';
 
 const ClearFilterButton: React.FC = () => {
   const dispatch = useDispatch();

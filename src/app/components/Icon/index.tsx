@@ -6,11 +6,15 @@ import Logo from './Logo';
 import Plus from './Plus';
 import Times from './Times';
 
-import { IIcon } from 'types/types';
+import { ISVG } from 'types/types';
 
 type IconName = 'bars' | 'grip' | 'grip-lines' | 'logo' | 'plus' | 'times';
 
-const Icon: React.FC<IIcon<IconName>> = (props) => {
+interface Props<N> extends ISVG {
+  name: N;
+}
+
+const Icon: React.FC<Props<IconName>> = (props) => {
   switch (props.name) {
     case 'bars':
       return <Bars {...props} />;

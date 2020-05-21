@@ -10,7 +10,7 @@ import {
 } from 'react-sortable-hoc';
 
 import ColorBarWrapper from 'components/ColorBarWrapper';
-import Icon from 'icons';
+import Icon from 'components/Icon';
 
 import { MovementListItemWrapper, MovementListWrapper } from './style';
 

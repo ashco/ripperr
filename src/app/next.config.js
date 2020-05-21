@@ -22,7 +22,6 @@ module.exports = withImages({
     config.resolve.alias['context'] = path.join(__dirname, 'context');
     config.resolve.alias['domain'] = path.join(__dirname, 'domain');
     config.resolve.alias['hooks'] = path.join(__dirname, 'hooks');
-    config.resolve.alias['icons'] = path.join(__dirname, 'icons');
     config.resolve.alias['pages'] = path.join(__dirname, 'pages');
     config.resolve.alias['static'] = path.join(__dirname, 'static');
     config.resolve.alias['store'] = path.join(__dirname, 'store');

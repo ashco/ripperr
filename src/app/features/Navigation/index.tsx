@@ -12,7 +12,7 @@ import SignOutButton from './SignOutButton';
 
 import NavBarWrapper from './style';
 
-import Icon from 'icons';
+import Icon from 'components/Icon';
 
 const NavBar: React.FC = () => {
   const authUser = React.useContext(AuthUserContext);

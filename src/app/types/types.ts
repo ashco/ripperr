@@ -225,7 +225,3 @@ export interface ISVG {
   className?: string;
   viewBox?: string;
 }
-
-export interface IIcon<N> extends ISVG {
-  name: N;
-}

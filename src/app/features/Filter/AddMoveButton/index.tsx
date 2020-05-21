@@ -2,7 +2,7 @@
 
 import Button from 'components/Button';
 
-import Icon from 'icons';
+import Icon from 'components/Icon';
 
 const AddMoveButton: React.FC<{ openModal: () => void }> = ({ openModal }) => {
   return (

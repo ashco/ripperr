@@ -7,7 +7,7 @@ import styled, { ThemeContext } from 'styled-components';
 
 import Button from 'components/Button';
 
-import Icon from 'icons';
+import Icon from 'components/Icon';
 import { MovementType } from 'types/types';
 import { Movement } from 'store/moves';
 
