@@ -9,6 +9,7 @@ const MoveListWrapper = styled.div`
 
   p.message {
     justify-self: center;
+    align-self: center;
   }
   ul {
     padding-bottom: 1rem;

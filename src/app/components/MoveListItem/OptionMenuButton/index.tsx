@@ -99,7 +99,7 @@ const OptionMenuButton: React.FC<{
         onClick={openMenu}
         aria-label={`${name} ${type.toLowerCase()} option menu`}
       >
-        <Icon name="bars" />
+        <Icon name="bars" title="this is a title" />
       </StyledOptionButton>
       {isOpen && (
         <ListItemMenuWrapper ref={menuRef}>

@@ -24,7 +24,6 @@ const initState = {
     byId: {},
     allIds: [],
   },
-  loading: false,
   error: null,
 };
 
@@ -39,7 +38,7 @@ before(() => {
 
 describe('create new moves', () => {
   it('should start with no moves', () => {
-    cy.findByText(/no moves are available/i);
+    cy.findByText(/no moves have been created/i);
     cy.checkStoreForDeepEqual('moves', initState);
   });
 

@@ -217,11 +217,3 @@ export interface IFormReducerAction {
   type: FormActionType;
   value: string;
 }
-
-export interface ISVG {
-  style?: any;
-  fill?: string;
-  width?: string;
-  className?: string;
-  viewBox?: string;
-}

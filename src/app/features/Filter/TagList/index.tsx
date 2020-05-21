@@ -35,7 +35,7 @@ const TagList: React.FC<{
             })}
           </ul>
         ) : (
-          <p className="message">Filter tags show up here when created.</p>
+          <p className="message">Tags show up here when created.</p>
         )
       ) : (
         <p className="message">Loading tags...</p>
