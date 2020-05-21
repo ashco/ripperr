@@ -48,29 +48,32 @@ export interface Workout extends Exercise {
 
 export type Movement = Workout | Exercise | Tag;
 
-interface TagDict {
+export interface TagDict {
   [key: string]: Tag;
 }
 
-interface ExerciseDict {
+export interface ExerciseDict {
   [key: string]: Exercise;
 }
 
-interface WorkoutDict {
+export interface WorkoutDict {
   [key: string]: Workout;
 }
 
 interface Workouts {
+  isLoading: boolean;
   byId: WorkoutDict;
   allIds: string[];
 }
 
 interface Exercises {
+  isLoading: boolean;
   byId: ExerciseDict;
   allIds: string[];
 }
 
 interface Tags {
+  isLoading: boolean;
   byId: TagDict;
   allIds: string[];
 }
@@ -80,11 +83,11 @@ export interface MovesState {
   workouts: Workouts;
   exercises: Exercises;
   tags: Tags;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 }
 
-interface GetMovesSuccess {
+interface SetMoves {
   workouts?: WorkoutDict;
   exercises?: ExerciseDict;
   tags?: TagDict;
@@ -93,18 +96,21 @@ interface GetMovesSuccess {
 const initialState: MovesState = {
   activeId: null,
   workouts: {
+    isLoading: false,
     byId: {},
     allIds: [],
   },
   exercises: {
+    isLoading: false,
     byId: {},
     allIds: [],
   },
   tags: {
+    isLoading: false,
     byId: {},
     allIds: [],
   },
-  loading: false,
+  isLoading: false,
   error: null,
 };
 
@@ -112,24 +118,28 @@ const movesSlice = createSlice({
   name: 'moves',
   initialState,
   reducers: {
-    getMovesStart(state) {
-      state.loading = true;
-      state.error = null;
+    // getMovesStart(state) {
+    //   state.isLoading = true;
+    //   state.error = null;
+    // },
+    setMovesLoading(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload;
     },
-    getMovesSuccess(state, action: PayloadAction<GetMovesSuccess>) {
+    setMoves(state, action: PayloadAction<SetMoves>) {
       const { workouts, exercises, tags } = action.payload;
 
       if (workouts) state.workouts.byId = workouts;
       if (exercises) state.exercises.byId = exercises;
       if (tags) state.tags.byId = tags;
 
-      state.loading = false;
-      state.error = null;
+      // state.loading = false;
+      // state.error = null;
     },
-    getMovesFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
+
+    // getMovesFailure(state, action: PayloadAction<string>) {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // },
     setActiveMove(state, action: PayloadAction<ID>) {
       state.activeId = action.payload;
     },
@@ -140,15 +150,15 @@ const movesSlice = createSlice({
       state.workouts.byId = {};
       state.exercises.byId = {};
       state.tags.byId = {};
-      console.log(state);
     },
   },
 });
 
 export const {
-  getMovesStart,
-  getMovesSuccess,
-  getMovesFailure,
+  // getMovesStart,
+  setMoves,
+  setMovesLoading,
+  // getMovesFailure,
   setActiveMove,
   clearActiveMove,
   clearAllMoves,

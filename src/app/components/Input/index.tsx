@@ -3,14 +3,25 @@ import styled from 'styled-components';
 import { FieldError } from 'react-hook-form';
 import FieldWrapper from 'components/FieldWrapper';
 
-const Input: React.FC<{
+interface Props {
   name: string;
   type: string;
   label: string;
+  autoFocus?: boolean;
   register: any;
   error?: FieldError;
   disabled?: boolean;
-}> = ({ name, type, label, register, error, disabled }) => {
+}
+
+const Input: React.FC<Props> = ({
+  autoFocus,
+  name,
+  type,
+  label,
+  register,
+  error,
+  disabled,
+}) => {
   return (
     <FieldWrapper disabled={disabled}>
       {/* TODO - update to use aria-describedby for error message */}
@@ -18,6 +29,7 @@ const Input: React.FC<{
         {error?.message || label}
       </label>
       <input
+        autoFocus={autoFocus}
         id={name}
         type={type}
         name={name}

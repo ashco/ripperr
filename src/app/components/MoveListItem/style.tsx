@@ -8,6 +8,7 @@ interface Props {
 
 const MoveListItemContainer = styled(Container)<Props>`
   .container {
+    gap: 0;
     padding: 0rem;
     grid-template-columns: 1fr auto;
     cursor: pointer;

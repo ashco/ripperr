@@ -47,137 +47,137 @@ describe('create new moves', () => {
     // create
     cy.createNewMove('tag', tag);
     // confirm move is saved in store
-    // cy.window().should('have.property', 'postData');
-    // cy.window().then((win) => {
-    //   const id = (win as any).postData.id;
-    //   const tagObj = {
-    //     [id]: {
-    //       id: id,
-    //       name: tag.name,
-    //       description: tag.description,
-    //     },
-    //   };
+    cy.window().should('have.property', 'postData');
+    cy.window().then((win) => {
+      const id = (win as any).postData.id;
+      const tagObj = {
+        [id]: {
+          id: id,
+          name: tag.name,
+          description: tag.description,
+        },
+      };
 
-    //   cy.checkStoreForDeepEqual('moves.tags.byId', tagObj);
+      cy.checkStoreForDeepEqual('moves.tags.byId', tagObj);
 
-    //   // read
-    //   cy.openMove('tag', tag.name, 'view');
-    //   cy.findByText(/close/i).click();
+      // read
+      cy.openMove('tag', tag.name, 'view');
+      cy.findByText(/close/i).click();
 
-    //   // edit
-    //   cy.openMove('tag', tag.name, 'edit');
-    //   cy.findByLabelText(/name/i).clear().type(tagUpdate.name);
-    //   cy.findByLabelText(/description/i)
-    //     .clear()
-    //     .type(tagUpdate.description);
-    //   cy.findByText(/update/i, { selector: 'button' }).click();
-    //   cy.findByText(/close/i)
-    //     .click()
-    //     .then(() => {
-    //       // check store for update
-    //       tagObj[id].name = tagUpdate.name;
-    //       tagObj[id].description = tagUpdate.description;
-    //       cy.checkStoreForDeepEqual('moves.tags.byId', tagObj);
+      // edit
+      cy.openMove('tag', tag.name, 'edit');
+      cy.findByLabelText(/name/i).clear().type(tagUpdate.name);
+      cy.findByLabelText(/description/i)
+        .clear()
+        .type(tagUpdate.description);
+      cy.findByText(/update/i, { selector: 'button' }).click();
+      cy.findByText(/close/i)
+        .click()
+        .then(() => {
+          // check store for update
+          tagObj[id].name = tagUpdate.name;
+          tagObj[id].description = tagUpdate.description;
+          cy.checkStoreForDeepEqual('moves.tags.byId', tagObj);
 
-    //       // delete
-    //       cy.openMove('tag', tagUpdate.name, 'delete');
-    //       cy.findByText(/do you want to delete this tag?/i);
-    //       cy.findByText(/delete/i, { selector: 'button' }).click();
-    //       cy.checkStoreForDeepEqual('moves.tags.byId', {});
-    //     });
-    // });
+          // delete
+          cy.openMove('tag', tagUpdate.name, 'delete');
+          cy.findByText(/do you want to delete this tag?/i);
+          cy.findByText(/delete/i, { selector: 'button' }).click();
+          cy.checkStoreForDeepEqual('moves.tags.byId', {});
+        });
+    });
   });
 
   it('should be able to create, read, edit, and delete an exercise without using menu list buttons', () => {
     cy.createNewMove('exercise', exercise);
 
-    // // confirm move is saved in store
-    // cy.window().should('have.property', 'postData');
-    // cy.window().then((win) => {
-    //   const id = (win as any).postData.id;
+    // confirm move is saved in store
+    cy.window().should('have.property', 'postData');
+    cy.window().then((win) => {
+      const id = (win as any).postData.id;
 
-    //   const exerciseObj = {
-    //     [id]: {
-    //       id: id,
-    //       name: exercise.name,
-    //       description: exercise.description,
-    //     },
-    //   };
+      const exerciseObj = {
+        [id]: {
+          id: id,
+          name: exercise.name,
+          description: exercise.description,
+        },
+      };
 
-    //   cy.checkStoreForDeepEqual('moves.exercises.byId', exerciseObj);
+      cy.checkStoreForDeepEqual('moves.exercises.byId', exerciseObj);
 
-    //   // read
-    //   cy.openMove('exercise', exercise.name, 'view');
-    //   cy.findByText(/close/i).click();
+      // read
+      cy.openMove('exercise', exercise.name, 'view');
+      cy.findByText(/close/i).click();
 
-    //   // edit
-    //   cy.openMove('exercise', exercise.name, 'edit');
-    //   cy.findByLabelText(/name/i).clear().type(exerciseUpdate.name);
-    //   cy.findByLabelText(/description/i)
-    //     .clear()
-    //     .type(exerciseUpdate.description);
-    //   cy.findByText(/update/i, { selector: 'button' }).click();
-    //   cy.findByText(/close/i)
-    //     .click()
-    //     .then(() => {
-    //       // check store for update
-    //       exerciseObj[id].name = exerciseUpdate.name;
-    //       exerciseObj[id].description = exerciseUpdate.description;
-    //       cy.checkStoreForDeepEqual('moves.exercises.byId', exerciseObj);
+      // edit
+      cy.openMove('exercise', exercise.name, 'edit');
+      cy.findByLabelText(/name/i).clear().type(exerciseUpdate.name);
+      cy.findByLabelText(/description/i)
+        .clear()
+        .type(exerciseUpdate.description);
+      cy.findByText(/update/i, { selector: 'button' }).click();
+      cy.findByText(/close/i)
+        .click()
+        .then(() => {
+          // check store for update
+          exerciseObj[id].name = exerciseUpdate.name;
+          exerciseObj[id].description = exerciseUpdate.description;
+          cy.checkStoreForDeepEqual('moves.exercises.byId', exerciseObj);
 
-    //       // delete
-    //       cy.openMove('exercise', exerciseUpdate.name, 'delete');
-    //       cy.findByText(/do you want to delete this exercise?/i);
-    //       cy.findByText(/delete/i, { selector: 'button' }).click();
-    //       cy.checkStoreForDeepEqual('moves.exercises.byId', {});
-    //     });
-    // });
+          // delete
+          cy.openMove('exercise', exerciseUpdate.name, 'delete');
+          cy.findByText(/do you want to delete this exercise?/i);
+          cy.findByText(/delete/i, { selector: 'button' }).click();
+          cy.checkStoreForDeepEqual('moves.exercises.byId', {});
+        });
+    });
   });
 
   it('should be able to create, read, edit, and delete a workout without using menu list buttons', () => {
     cy.createNewMove('workout', workout);
 
     // confirm move is saved in store
-    // cy.window().should('have.property', 'postData');
-    // cy.window().then((win) => {
-    //   const id = (win as any).postData.id;
+    cy.window().should('have.property', 'postData');
+    cy.window().then((win) => {
+      const id = (win as any).postData.id;
 
-    //   const workoutObj = {
-    //     [id]: {
-    //       id: id,
-    //       name: workout.name,
-    //       description: workout.description,
-    //     },
-    //   };
+      const workoutObj = {
+        [id]: {
+          id: id,
+          name: workout.name,
+          description: workout.description,
+        },
+      };
 
-    //   cy.checkStoreForDeepEqual('moves.workouts.byId', workoutObj);
+      cy.checkStoreForDeepEqual('moves.workouts.byId', workoutObj);
 
-    //   // read
-    //   cy.openMove('workout', workout.name, 'view');
-    //   cy.findByText(/close/i).click();
+      // read
+      cy.openMove('workout', workout.name, 'view');
+      cy.findByText(/close/i).click();
 
-    //   // edit
-    //   cy.openMove('workout', workout.name, 'edit');
-    //   cy.findByLabelText(/name/i).clear().type(workoutUpdate.name);
-    //   cy.findByLabelText(/description/i)
-    //     .clear()
-    //     .type(workoutUpdate.description);
-    //   cy.findByText(/update/i, { selector: 'button' }).click();
-    //   cy.findByText(/close/i)
-    //     .click()
-    //     .then(() => {
-    //       // check store for update
-    //       workoutObj[id].name = workoutUpdate.name;
-    //       workoutObj[id].description = workoutUpdate.description;
-    //       cy.checkStoreForDeepEqual('moves.workouts.byId', workoutObj);
+      // edit
+      cy.openMove('workout', workout.name, 'edit');
+      cy.findByLabelText(/name/i).clear().type(workoutUpdate.name);
+      cy.findByLabelText(/description/i)
+        .clear()
+        .type(workoutUpdate.description);
+      cy.findByText(/update/i, { selector: 'button' }).click();
+      cy.findByText(/close/i)
+        .click()
+        .then(() => {
+          // check store for update
+          workoutObj[id].name = workoutUpdate.name;
+          workoutObj[id].description = workoutUpdate.description;
+          cy.checkStoreForDeepEqual('moves.workouts.byId', workoutObj);
 
-    //       // delete
-    //       cy.openMove('workout', workoutUpdate.name, 'delete');
-    //       cy.findByText(/do you want to delete this workout?/i);
-    //       cy.findByText(/delete/i, { selector: 'button' }).click();
-    //       cy.checkStoreForDeepEqual('moves.workouts.byId', {});
-    //     });
-    // });
+          // delete
+          cy.openMove('workout', workoutUpdate.name, 'delete');
+          cy.findByText(/do you want to delete this workout?/i);
+          cy.findByText(/delete/i, { selector: 'button' }).click();
+          cy.checkStoreForDeepEqual('moves.workouts.byId', {});
+        });
+    });
   });
 
   // it('should properly validate tag form fields', () => {});

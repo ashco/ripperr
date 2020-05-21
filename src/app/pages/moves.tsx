@@ -9,7 +9,16 @@ import AuthUserContext from 'context/AuthUserContext';
 // import withMovements from 'context/withMovements';
 import FirebaseContext from 'context/FirebaseContext';
 
-import { getMovesStart, getMovesSuccess, getMovesFailure } from 'store/moves';
+import {
+  // getMovesStart,
+  setMoves,
+  setMovesLoading,
+  // getMovesFailure,
+  // Tags,
+  TagDict,
+  ExerciseDict,
+  WorkoutDict,
+} from 'store/moves';
 
 import Filter from 'features/Filter';
 
@@ -30,6 +39,11 @@ const MovesPage: NextPage = () => {
   const filter = useSelector((state) => state.filter);
   // const moves = useSelector((state) => state.moves);
 
+  const [loading, setLoading] = React.useState({
+    tags: false,
+    exercises: false,
+    workouts: false,
+  });
   // const movements = useContext(MovementListContext);
   // const moveList = movements.loading
   //   ? null
@@ -44,30 +58,38 @@ const MovesPage: NextPage = () => {
   //         }
   //       }, []);
 
-  // ARCHETYPE EFFECT
+  // React.useLayoutEffect(() => {
+  //   dispatch(setMovesLoading(true));
+  // }, []);
+
+  // TAG EFFECT
   React.useEffect(() => {
     if (authUser) {
+      setLoading({ ...loading, tags: true });
+
       const unsubscribe = firebase.tags(authUser.uid).onSnapshot((snapshot) => {
         const tags: any = {};
-
         snapshot.forEach((doc) => {
           tags[doc.id] = doc.data();
         });
 
         dispatch(
-          getMovesSuccess({
+          setMoves({
             tags,
           }),
         );
-      });
 
-      return (): void => unsubscribe();
+        setLoading({ ...loading, tags: false });
+        return (): void => unsubscribe();
+      });
     }
   }, []);
 
   // EXERCISE EFFECT
   React.useEffect(() => {
     if (authUser) {
+      setLoading({ ...loading, exercises: true });
+
       const unsubscribe = firebase
         .exercises(authUser.uid)
         .onSnapshot((snapshot) => {
@@ -78,10 +100,12 @@ const MovesPage: NextPage = () => {
           });
 
           dispatch(
-            getMovesSuccess({
+            setMoves({
               exercises,
             }),
           );
+
+          setLoading({ ...loading, exercises: false });
           return (): void => unsubscribe();
         });
     }
@@ -90,6 +114,8 @@ const MovesPage: NextPage = () => {
   // WORKOUT EFFECT
   React.useEffect(() => {
     if (authUser) {
+      setLoading({ ...loading, workouts: true });
+      console.log('t');
       const unsubscribe = firebase
         .workouts(authUser.uid)
         .onSnapshot((snapshot) => {
@@ -100,15 +126,24 @@ const MovesPage: NextPage = () => {
           });
 
           dispatch(
-            getMovesSuccess({
+            setMoves({
               workouts,
             }),
           );
 
+          setLoading({ ...loading, workouts: false });
           return (): void => unsubscribe();
         });
     }
   }, []);
+
+  // Loading Effect
+  React.useEffect(() => {
+    console.log(loading);
+    dispatch(
+      setMovesLoading(loading.tags || loading.exercises || loading.workouts),
+    );
+  }, [loading]);
 
   return (
     <MovementsPageWrapper>

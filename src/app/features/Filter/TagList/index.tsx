@@ -16,32 +16,24 @@ const TagList: React.FC<{
   return (
     <TagListWrapper>
       {Object.keys(tags.byId).length === 0 ? (
-        <div>No tags yet!</div>
+        <p className="message">Filter tags show up here when created.</p>
       ) : (
-        Object.keys(tags.byId).map((id) => {
-          return (
-            <MoveListItem
-              filter={filter}
-              key={id}
-              id={id}
-              isAddMoveMode={isAddMoveMode}
-              moves={moves}
-            />
-          );
-        })
+        <ul>
+          {Object.keys(tags.byId).map((id) => {
+            return (
+              <MoveListItem
+                filter={filter}
+                key={id}
+                id={id}
+                isAddMoveMode={isAddMoveMode}
+                moves={moves}
+              />
+            );
+          })}
+        </ul>
       )}
 
-      {/* {tagList ? (
-        tagList.length === 0 ? (
-          <div>No tags yet!</div>
-        ) : (
-          tagList.map((arch) => {
-            return <MoveListItem key={arch.id} movement={arch} />;
-          })
-        )
-      ) : (
-        <div>Loading ...</div>
-      )} */}
+      {/* <div>Loading ...</div> */}
     </TagListWrapper>
   );
 };

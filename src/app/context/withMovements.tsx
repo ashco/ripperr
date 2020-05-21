@@ -7,7 +7,7 @@ export const filler = '';
 
 // import { sortTags } from '../utils/sort-movements';
 
-// export const INITIAL_ARCHETYPE_STATE: ITagsFirebaseQuery = {
+// export const INITIAL_TAG_STATE: ITagsFirebaseQuery = {
 //   loading: true,
 //   tags: [],
 // };
@@ -35,12 +35,12 @@ export const filler = '';
 //     const authUser = useContext(AuthUserContext);
 
 //     const [tagState, setTagState] = useState(
-//       INITIAL_ARCHETYPE_STATE,
+//       INITIAL_TAG_STATE,
 //     );
 //     const [exerciseState, setExerciseState] = useState(INITIAL_EXERCISE_STATE);
 //     const [workoutState, setWorkoutState] = useState(INITIAL_WORKOUT_STATE);
 
-//     // ARCHETYPE EFFECT
+//     // TAG EFFECT
 //     useEffect(() => {
 //       setTagState({ ...tagState, loading: true });
 

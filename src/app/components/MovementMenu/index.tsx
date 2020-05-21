@@ -19,20 +19,17 @@ const MovementMenu: React.FC<{
     ...Object.keys(moves.exercises.byId),
   ];
 
-  // function renderListItem(id: string) {
-  //   // if (
-  //   //   move.type === MovementType.Exercise ||
-  //   //   move.type === MovementType.Workout
-  //   // ) {
-  //   console.log(id);
-  //   return ;
-  //   // } else {
-  //   //   return null;
-  // }
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setIsLoading(moves.isLoading);
+  }, [moves.isLoading]);
 
   return (
     <MovementMenuWrapper>
-      {moveList.length === 0 ? (
+      {isLoading ? (
+        <Loading />
+      ) : moveList.length === 0 ? (
         <p className="message">No moves are available..</p>
       ) : (
         <ul>

@@ -3,10 +3,7 @@ import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
 import { setActiveMove, clearActiveMove, ID } from 'store/moves';
 import { useForm, Controller } from 'react-hook-form';
-
-import styled from 'styled-components';
-
-import TextareaAutosize from 'react-textarea-autosize';
+import * as yup from 'yup';
 import Textarea from 'components/Textarea';
 
 import AuthUserContext from 'context/AuthUserContext';
@@ -29,6 +26,12 @@ import { ModalMode } from 'store/ui';
 import { ButtonRowProps, MovementType } from 'types/types';
 import { Movement } from 'store/moves';
 import Input from 'components/Input';
+
+import {
+  tagSchema,
+  exerciseSchema,
+  workoutSchema,
+} from 'utils/validation-schema';
 
 export type FormData = {
   name: string;
@@ -63,8 +66,23 @@ const MoveForm: React.FC<{
     defaultValues.description = data.description;
   }
 
+  function getValidationSchema(): yup.ObjectSchema {
+    let validationSchema: yup.ObjectSchema;
+    if (type === 'TAG') {
+      validationSchema = tagSchema;
+    } else if (type === 'EXERCISE') {
+      validationSchema = exerciseSchema;
+    } else if (type === 'WORKOUT') {
+      validationSchema = workoutSchema;
+    } else {
+      throw Error('Unexpected move type!');
+    }
+    return validationSchema;
+  }
+
   const { register, control, handleSubmit, errors, watch } = useForm<FormData>({
     defaultValues,
+    validationSchema: getValidationSchema(),
   });
   // const defaultValues: any = {
   // name: (moveState as Movement).name,
@@ -275,11 +293,6 @@ const MoveForm: React.FC<{
     if (modalMode === 'VIEW') {
       dispatch(setModalMode({ modalMode: 'EDIT' }));
     } else if (modalMode === 'EDIT') {
-      // const moveData = {
-      //   ...(moveState as Movement),
-      //   ...formData,
-      // };
-
       activeId ? updateMovement(formData) : createMovement(formData);
     } else {
       throw Error('Unsupported modalMode provided.');
@@ -355,6 +368,7 @@ const MoveForm: React.FC<{
           name="name"
           type="text"
           label="Name:"
+          autoFocus={true}
           register={register()}
           error={errors.name}
           disabled={isDisabled}

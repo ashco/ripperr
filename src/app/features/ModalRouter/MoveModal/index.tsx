@@ -35,7 +35,7 @@ const MoveModal: React.FC<{
 
     if (type === 'WORKOUT') {
       color = 'blue';
-      width = '48rem';
+      width = '40rem';
     } else if (type === 'EXERCISE') {
       color = 'purple';
       width = '36rem';

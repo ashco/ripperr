@@ -3,13 +3,8 @@
     "strict": true,
     "baseUrl": "../node_modules",
     "target": "es5",
-    "lib": ["es5", "dom", "ES2020"],
-    "types": ["cypress", "@types/testing-library__cypress"],
-
-    // "esModuleInterop": true,
-    // "target": "es6",
-    // "module": "es6",
-    // "allowJs": true,
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "@types/testing-library__cypress"]
   },
   // "extends": "../tsconfig.json",
   "include": ["**/*.ts"]
