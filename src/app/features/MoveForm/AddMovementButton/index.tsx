@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { useDispatch } from 'store';
+import { useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
 import styled from 'styled-components';
 
@@ -9,11 +9,13 @@ import Button from 'components/Button';
 const AddMoveButton: React.FC = () => {
   const dispatch = useDispatch();
 
-  function handleClick(e: any) {
+  function handleClick(e: any): void {
     e.preventDefault();
 
-    dispatch(setModalMode({ modalMode: 'CLOSED' }));
-    dispatch(setIsAddMoveMode(true));
+    batch(() => {
+      dispatch(setModalMode({ modalMode: 'CLOSED' }));
+      dispatch(setIsAddMoveMode(true));
+    });
   }
 
   return (

@@ -1,15 +1,13 @@
 ﻿import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'store';
-import { ThemeProvider } from 'styled-components';
 import { setTheme } from 'store/ui';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'styles/GlobalStyle';
 
-import StyledPage from './style';
-
-// import { MoveProvider } from 'context/MoveContext';
-
-import Meta from '../Meta';
+import Meta from 'components/Meta';
 import NavBar from 'features/Navigation';
+
+import StyledPage from './style';
 
 const Page: React.FC = (props) => {
   const dispatch = useDispatch();
@@ -35,7 +33,7 @@ const Page: React.FC = (props) => {
         <GlobalStyle />
         <Meta />
         <NavBar />
-        <div className="main">{props.children}</div>
+        <main>{props.children}</main>
       </StyledPage>
     </ThemeProvider>
   );

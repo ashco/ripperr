@@ -2,15 +2,16 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import FirebaseContext from 'context/FirebaseContext';
+
 import Input from 'components/Input';
 import Button from 'components/Button';
 import AuthForm from 'components/AuthForm';
 import FormError from 'components/FormError';
 
-import FirebaseContext from 'context/FirebaseContext';
-import { AuthError } from 'types/types';
-
 import { loginSchema } from 'utils/validation-schema';
+
+import { AuthError } from 'types';
 
 interface LoginForm {
   email: string;
@@ -34,7 +35,7 @@ const LoginForm: React.FC = () => {
     validationSchema: loginSchema,
   });
 
-  function onSubmit({ email, password }: LoginForm) {
+  function onSubmit({ email, password }: LoginForm): void {
     firebase
       .doLoginWithEmailAndPassword(email, password)
       .then(() => {
@@ -43,11 +44,10 @@ const LoginForm: React.FC = () => {
       })
       .catch((err) => {
         setAuthError(err);
-        console.log(err);
+        console.error(err);
       });
   }
 
-  console.log(errors);
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="input-container">

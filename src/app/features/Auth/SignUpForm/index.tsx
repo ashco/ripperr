@@ -8,7 +8,7 @@ import Button from 'components/Button';
 import FormError from 'components/FormError';
 
 import FirebaseContext from 'context/FirebaseContext';
-import { AuthError } from 'types/types';
+import { AuthError } from 'types';
 
 import { signupSchema } from 'utils/validation-schema';
 
@@ -38,7 +38,7 @@ const SignupForm: React.FC = () => {
     validationSchema: signupSchema,
   });
 
-  function onSubmit({ username, email, password }: SignupForm) {
+  function onSubmit({ username, email, password }: SignupForm): void {
     firebase
       .doCreateUserWithEmailAndPassword(email, password)
       .then((authUser) => {
@@ -61,7 +61,7 @@ const SignupForm: React.FC = () => {
       })
       .catch((err) => {
         setAuthError(err);
-        console.log(err);
+        console.error(err);
       });
   }
 

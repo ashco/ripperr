@@ -1,26 +1,34 @@
 ﻿import * as yup from 'yup';
 
-const username = () => yup.string().required('Username is required');
-const email = () =>
+const username = (): yup.StringSchema<string> =>
+  yup.string().required('Username is required');
+
+const email = (): yup.StringSchema<string> =>
   yup
     .string()
     .required('Email is required')
     .email('Email must be a valid email');
-const password = () =>
+
+const password = (): yup.StringSchema<string> =>
   yup
     .string()
     .required('Password is required')
     .min(6, 'Password must be at least 6 characters');
-const passwordConfirm = () =>
+
+const passwordConfirm = (): yup.StringSchema<string> =>
   yup
     .string()
     .required('Confirm password is required')
     .oneOf([yup.ref('password'), null], 'Passwords must match');
 
-const id = () => yup.string().required().length(20);
-const moveName = () => yup.string().required('Name is required');
-const description = () => yup.string();
-const tags = () => yup.array().of(id());
+const id = (): yup.StringSchema<string> => yup.string().required().length(20);
+
+const moveName = (): yup.StringSchema<string> =>
+  yup.string().required('Name is required');
+
+const description = (): yup.StringSchema<string> => yup.string();
+
+const tags = (): yup.ArraySchema<string> => yup.array().of(id());
 
 export const signupSchema = yup.object().shape({
   username: username(),

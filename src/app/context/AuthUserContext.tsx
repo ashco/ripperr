@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { AuthUser } from '../types/types';
+import { AuthUser } from '../types';
 
 const AuthUserContext = React.createContext<AuthUser>(null);
 

@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext, useEffect } from 'react';
+﻿import React from 'react';
 import { NextPage } from 'next';
 
 import FirebaseContext from 'context/FirebaseContext';
@@ -6,7 +6,7 @@ import withAuthorization from 'context/withAuthorization';
 
 import UserList from '../features/Admin/UserList';
 
-import { AuthUser, IUser } from '../types/types';
+import { AuthUser, IUser } from 'types';
 
 interface IState {
   uLoading: boolean;
@@ -19,12 +19,12 @@ const INITIAL_STATE: IState = {
 };
 
 const AdminPage: NextPage = () => {
-  const firebase = useContext(FirebaseContext);
-  const [state, setState] = useState(INITIAL_STATE);
+  const firebase = React.useContext(FirebaseContext);
+  const [state, setState] = React.useState(INITIAL_STATE);
 
   const { uLoading, users } = state;
 
-  useEffect(() => {
+  React.useEffect(() => {
     setState({ ...state, uLoading: true });
 
     const unsubscribe = firebase.users().onSnapshot((snapshot) => {

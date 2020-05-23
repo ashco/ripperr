@@ -1,4 +1,4 @@
-﻿import { Movement, Tag } from 'store/moves';
+﻿import { Movement, Tag } from 'types';
 
 // sort by newest modified first
 export function sortMovements(a: Movement, b: Movement): number {

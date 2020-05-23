@@ -1,14 +1,5 @@
 ﻿import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-type FilterValue = string;
-type Tags = string[];
-
-export interface FilterState {
-  active: boolean;
-  open: boolean;
-  tags: Tags;
-  value: FilterValue;
-}
+import { FilterState } from 'types';
 
 interface ToggleFilter {
   open: boolean;
@@ -29,7 +20,7 @@ const filterSlice = createSlice({
       state.open = action.payload.open;
     },
 
-    setFilterValue(state, action: PayloadAction<FilterValue>) {
+    setFilterValue(state, action: PayloadAction<string>) {
       state.value = action.payload;
 
       state.active = state.tags.length > 0 || state.value.length > 0;

@@ -1,5 +1,5 @@
 ﻿import { combineReducers } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import {
   useSelector as useRRSelector,
   TypedUseSelectorHook,
@@ -21,7 +21,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 export const useSelector: TypedUseSelectorHook<RootState> = useRRSelector;
 export * from 'react-redux';
 
-const createStore = (state?: any) => {
+const createStore = (state?: any): EnhancedStore<any> => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: state,

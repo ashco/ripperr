@@ -15,7 +15,7 @@ const Filter: React.FC = () => {
 
   const filterRef = React.useRef<HTMLDivElement>(null);
 
-  function handleFilterModeOff(e: any) {
+  function handleFilterModeOff(e: any): void {
     if (filter.open) {
       if (!filterRef?.current?.contains(e.target)) {
         batch(() => {

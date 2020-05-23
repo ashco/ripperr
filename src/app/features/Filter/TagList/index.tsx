@@ -4,7 +4,7 @@ import { useSelector } from 'store';
 import TagListWrapper from './style';
 
 import MoveListItem from 'components/MoveListItem';
-import { FilterState } from 'store/filter';
+import { FilterState } from 'types';
 
 const TagList: React.FC<{
   filter: FilterState;
@@ -23,11 +23,11 @@ const TagList: React.FC<{
         tagList.length > 0 ? (
           <ul>
             {tagList.map((id) => {
-              const active = filter.tags.includes(id);
+              const isDisabled = !filter.tags.includes(id);
 
               return (
                 <MoveListItem
-                  active={active}
+                  isDisabled={isDisabled}
                   key={id}
                   id={id}
                   isAddMoveMode={isAddMoveMode}

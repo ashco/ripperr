@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
-import { setActiveMove, clearActiveMove, ID } from 'store/moves';
+import { setActiveMove, clearActiveMove } from 'store/moves';
 import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import Textarea from 'components/Textarea';
@@ -12,19 +12,17 @@ import FirebaseContext from 'context/FirebaseContext';
 import MoveFormWrapper from './style';
 
 import TagsField from './TagsField';
-import Label from './Label';
-import ModeField from './ModeField';
-import MovementsField from './MovementsField';
-import RestField from './RestField';
+// import Label from './Label';
+// import ModeField from './ModeField';
+// import MovementsField from './MovementsField';
+// import RestField from './RestField';
 import ButtonRow from 'components/ButtonRow';
 
 import useCurrentWidth from 'hooks/useCurrentWidth';
 import singleCapString from 'utils/single-cap-string';
-import { MoveDataType } from 'utils/lookup-move';
-import { ModalMode } from 'store/ui';
+// import { MoveDataType } from 'utils/lookup-move@';
 
-import { ButtonRowProps, MovementType } from 'types/types';
-import { Movement } from 'store/moves';
+import { Movement, ButtonRowProps, MovementType, ModalMode } from 'types';
 import Input from 'components/Input';
 
 import {
@@ -32,6 +30,7 @@ import {
   exerciseSchema,
   workoutSchema,
 } from 'utils/validation-schema';
+import assertNever from 'utils/assert-never';
 
 export type FormData = {
   name: string;
@@ -64,23 +63,27 @@ const MoveForm: React.FC<{
   if (data) {
     defaultValues.name = data.name;
     defaultValues.description = data.description;
+    if (type === 'EXERCISE' || type === 'WORKOUT') {
+      // defaultValues.tags = data.tags;
+    }
   }
 
   function getValidationSchema(): yup.ObjectSchema {
-    let validationSchema: yup.ObjectSchema;
-    if (type === 'TAG') {
-      validationSchema = tagSchema;
-    } else if (type === 'EXERCISE') {
-      validationSchema = exerciseSchema;
-    } else if (type === 'WORKOUT') {
-      validationSchema = workoutSchema;
-    } else {
-      throw Error('Unexpected move type!');
+    switch (type) {
+      case 'WORKOUT':
+        return workoutSchema;
+      case 'EXERCISE':
+        return exerciseSchema;
+      case 'TAG':
+        return tagSchema;
+      default:
+        assertNever(type);
     }
-    return validationSchema;
   }
 
-  const { register, control, handleSubmit, errors, watch } = useForm<FormData>({
+  const { register, control, handleSubmit, errors, watch, setValue } = useForm<
+    FormData
+  >({
     defaultValues,
     validationSchema: getValidationSchema(),
   });
@@ -105,48 +108,6 @@ const MoveForm: React.FC<{
   //   defaultValues,
   // });
 
-  // ========= MOVEMENT FUNCTIONS =========
-  // function updateMovement(moveData: Movement): void {
-  //   let firebaseFnc;
-
-  //   switch (moveData.type) {
-  //     case MovementType.Tag:
-  //       firebaseFnc = firebase.tag;
-  //       break;
-  //     case MovementType.Exercise:
-  //       firebaseFnc = firebase.exercise;
-  //       break;
-  //     case MovementType.Workout:
-  //       firebaseFnc = firebase.workout;
-  //       break;
-  //     default:
-  //       throw Error('moveData type is not recognized');
-  //   }
-
-  //   if (authUser && moveData.id) {
-  //     // const moveObj: Movement = { ...moveData };
-  //     // moveData.lastModified = firebase.getTimestamp();
-
-  //     firebaseFnc(authUser.uid, moveData.id)
-  //       .update(moveData)
-  //       .then(() => {
-  //         console.log(
-  //           `${singleCapString(moveData.type)} Updated: ${moveData.name}`,
-  //         );
-  //         console.log(moveData);
-  //         console.log(watch());
-
-  //         dispatch(setModalMode('VIEW'));
-  //         // moveDispatch({ type: 'MOVE_SET', value: moveData });
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //       });
-  //   } else {
-  //     throw Error('There is no authUser && moveData.id!');
-  //   }
-  // }
-
   type FBCreateFnc = (
     uid: string,
   ) => firebase.firestore.CollectionReference<firebase.firestore.DocumentData>;
@@ -155,48 +116,25 @@ const MoveForm: React.FC<{
     id: string,
   ) => firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
 
-  function getFirebaseFnc({
-    mode,
-  }: {
-    mode: 'CREATE' | 'UPDATE';
-  }): FBCreateFnc | FBUpdateFnc {
-    let firebaseFnc;
-    if (mode === 'CREATE') {
-      switch (type) {
-        case 'TAG':
-          firebaseFnc = firebase.tags;
-          break;
-        case 'EXERCISE':
-          firebaseFnc = firebase.exercises;
-          break;
-        case 'WORKOUT':
-          firebaseFnc = firebase.workouts;
-          break;
-        default:
-          throw Error('type is not recognized');
-      }
-    } else if (mode === 'UPDATE') {
-      switch (type) {
-        case 'TAG':
-          firebaseFnc = firebase.tag;
-          break;
-        case 'EXERCISE':
-          firebaseFnc = firebase.exercise;
-          break;
-        case 'WORKOUT':
-          firebaseFnc = firebase.workout;
-          break;
-        default:
-          throw Error('type is not recognized');
-      }
-    } else {
-      throw Error('I really cant help anymore');
+  function getFirebaseFnc(
+    mode: 'CREATE' | 'UPDATE',
+  ): FBCreateFnc | FBUpdateFnc {
+    const isCreate = mode === 'CREATE';
+
+    switch (type) {
+      case 'WORKOUT':
+        return isCreate ? firebase.workouts : firebase.workout;
+      case 'EXERCISE':
+        return isCreate ? firebase.exercises : firebase.exercise;
+      case 'TAG':
+        return isCreate ? firebase.tags : firebase.tag;
+      default:
+        return assertNever(type);
     }
-    return firebaseFnc;
   }
 
   function createMovement(formData: FormData): void {
-    const firebaseFnc = getFirebaseFnc({ mode: 'CREATE' }) as FBCreateFnc;
+    const firebaseFnc = getFirebaseFnc('CREATE') as FBCreateFnc;
 
     if (authUser) {
       const docRef = firebaseFnc(authUser.uid).doc();
@@ -217,7 +155,6 @@ const MoveForm: React.FC<{
             console.log(`${singleCapString(type)} Added: ${formData.name}`);
             dispatch(setModalMode({ modalMode: 'VIEW' }));
             dispatch(setActiveMove(postData.id)); // set newly created id as active
-            //   // moveDispatch({ type: 'MOVE_SET', value: moveData });
           });
         })
         .catch((err) => {
@@ -226,52 +163,10 @@ const MoveForm: React.FC<{
     } else {
       throw Error('There is no authUser!');
     }
-
-    // switch (type) {
-    //   case 'TAG':
-    //     firebaseFnc = firebase.tags;
-    //     break;
-    //   case 'EXERCISE':
-    //     firebaseFnc = firebase.exercises;
-    //     break;
-    //   case 'WORKOUT':
-    //     firebaseFnc = firebase.workouts;
-    //     break;
-    //   default:
-    //     throw Error('type is not recognized');
-    // }
-
-    // if (authUser) {
-    //   const docRef = firebaseFnc(authUser.uid).doc();
-    //   // TODO Check that name is unique
-
-    //   // moveData.lastModified = firebase.getTimestamp();
-
-    //   console.log(moveData);
-    //   const data = {};
-
-    //   docRef
-    //     .set(moveData)
-    //     .then(() => {
-    //       console.log(
-    //         `${singleCapString(moveData.type)} Added: ${moveData.name}`,
-    //       );
-    //       batch(() => {
-    //         dispatch(setModalMode('VIEW'));
-    //         dispatch(setActiveMove(docRef.id)); // set newly created id as active
-    //         // moveDispatch({ type: 'MOVE_SET', value: moveData });
-    //       });
-    //     })
-    //     .catch((err) => {
-    //       console.error(err);
-    //     });
-    // } else {
-    //   throw Error('There is no authUser!');
-    // }
   }
 
   function updateMovement(formData: FormData): void {
-    const firebaseFnc = getFirebaseFnc({ mode: 'UPDATE' }) as FBUpdateFnc;
+    const firebaseFnc = getFirebaseFnc('UPDATE') as FBUpdateFnc;
     if (authUser && activeId) {
       firebaseFnc(authUser.uid, activeId)
         .update(formData)
@@ -288,8 +183,7 @@ const MoveForm: React.FC<{
     }
   }
 
-  function onSubmit(formData: FormData) {
-    console.log(formData);
+  function onSubmit(formData: FormData): void {
     if (modalMode === 'VIEW') {
       dispatch(setModalMode({ modalMode: 'EDIT' }));
     } else if (modalMode === 'EDIT') {
@@ -313,7 +207,6 @@ const MoveForm: React.FC<{
       batch(() => {
         dispatch(setModalMode({ modalMode: 'CLOSED' }));
         dispatch(clearActiveMove());
-        // moveDispatch({ type: 'MOVE_CLEAR' });
       });
     } else if (modalMode === 'EDIT') {
       if (activeId) {
@@ -340,6 +233,7 @@ const MoveForm: React.FC<{
       text: '',
     },
   };
+
   switch (modalMode) {
     case 'VIEW':
       btnConfig.cancelBtn.text = 'Close';
@@ -462,6 +356,13 @@ const MoveForm: React.FC<{
           )}
         </>
       )} */}
+      <TagsField
+        // tags={watch().tags}
+        setValue={setValue}
+        isDisabled={isDisabled}
+        control={control}
+        watch={watch}
+      />
       {/* {(moveState?.type === MovementType.Exercise ||
         moveState?.type === MovementType.Workout) && (
         <Label

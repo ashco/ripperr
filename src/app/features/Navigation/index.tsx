@@ -1,18 +1,16 @@
 ﻿import React from 'react';
+import Link from 'next/link';
+import { ThemeContext } from 'styled-components';
 import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode, IsAddMoveMode } from 'store/ui';
-import { ThemeContext } from 'styled-components';
-import Link from 'next/link';
 
 import AuthUserContext from 'context/AuthUserContext';
 
 import Button from 'components/Button';
+import Icon from 'components/Icon';
 
 import SignOutButton from './SignOutButton';
-
 import NavBarWrapper from './style';
-
-import Icon from 'components/Icon';
 
 const NavBar: React.FC = () => {
   const authUser = React.useContext(AuthUserContext);
@@ -51,7 +49,7 @@ const CancelButton: React.FC<{
 }> = ({ color }) => {
   const dispatch = useDispatch();
 
-  function handleCancel(e: any) {
+  function handleCancel(e: any): void {
     // Find way to determine if edit or add.
     batch(() => {
       dispatch(setModalMode({ modalMode: 'EDIT' }));

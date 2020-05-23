@@ -10,11 +10,11 @@ import React from 'react';
 import Document, { DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-interface IProps {
+interface Props {
   styleTags: any;
 }
 
-export default class MyDocument extends Document<IProps> {
+export default class MyDocument extends Document<Props> {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;

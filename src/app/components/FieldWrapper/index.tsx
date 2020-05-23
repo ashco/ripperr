@@ -24,7 +24,6 @@ const FieldWrapper = styled.div<{ disabled?: boolean }>`
   }
   input:disabled,
   textarea:disabled {
-    /* border-bottom: none; */
     border-color: gray;
   }
 `;

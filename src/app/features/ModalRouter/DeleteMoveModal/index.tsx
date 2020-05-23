@@ -1,7 +1,7 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch } from 'store';
+import { useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
-import { MovesState, clearActiveMove } from 'store/moves';
+import { clearActiveMove } from 'store/moves';
 
 import ModalBackground from 'components/ModalBackground';
 
@@ -11,11 +11,14 @@ import AuthUserContext from 'context/AuthUserContext';
 import FirebaseContext from 'context/FirebaseContext';
 import ButtonRow from 'components/ButtonRow';
 
-// import { MovementType } from 'types/enums';
-import { lookupMove } from 'utils/lookup-move';
+import lookupMove from 'utils/lookup-move';
+import assertNever from 'utils/assert-never';
+
+import { MovesState } from 'types';
 
 const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
   const dispatch = useDispatch();
+
   const authUser = React.useContext(AuthUserContext);
   const firebase = React.useContext(FirebaseContext);
 
@@ -25,14 +28,18 @@ const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
 
   function handleDelete(): void {
     let firebaseFnc;
-    if (type === 'TAG') {
-      firebaseFnc = firebase.tag;
-    } else if (type === 'EXERCISE') {
-      firebaseFnc = firebase.exercise;
-    } else if (type === 'WORKOUT') {
-      firebaseFnc = firebase.workout;
-    } else {
-      throw Error('type is not recognized!');
+    switch (type) {
+      case 'WORKOUT':
+        firebaseFnc = firebase.workout;
+        break;
+      case 'EXERCISE':
+        firebaseFnc = firebase.exercise;
+        break;
+      case 'TAG':
+        firebaseFnc = firebase.tag;
+        break;
+      default:
+        assertNever(type);
     }
 
     if (authUser && moves.activeId) {
@@ -47,14 +54,18 @@ const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
 
   function onDelete(): void {
     handleDelete();
-    dispatch(setModalMode({ modalMode: 'CLOSED' }));
-    dispatch(clearActiveMove());
+    batch(() => {
+      dispatch(setModalMode({ modalMode: 'CLOSED' }));
+      dispatch(clearActiveMove());
+    });
   }
 
   const btnConfig = {
     cancelBtn: {
       text: 'Cancel',
-      onClick: () => dispatch(setModalMode({ modalMode: 'CLOSED' })),
+      onClick: (): void => {
+        dispatch(setModalMode({ modalMode: 'CLOSED' }));
+      },
     },
     actionBtn: {
       text: 'Delete',

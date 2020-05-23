@@ -3,13 +3,13 @@ import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode, setIsPointerDisabled } from 'store/ui';
 import { setActiveMove } from 'store/moves';
 
-import styled, { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 
 import Button from 'components/Button';
 
 import Icon from 'components/Icon';
-import { MovementType } from 'types/types';
-import { Movement } from 'store/moves';
+import { MovementType } from 'types';
+import { Movement } from 'types';
 
 const OptionMenuButton: React.FC<{
   // movement: Movement;

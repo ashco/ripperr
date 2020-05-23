@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import styled from 'styled-components';
 import { useSelector, useDispatch } from 'store';
 import { setTheme } from 'store/ui';
 
@@ -15,12 +14,10 @@ const ToggleThemeButton = () => {
     theme.mode.type === 'LIGHT' ? 'DARK' : 'LIGHT',
   );
 
-  function toggleThemeMode() {
-    if (theme.mode.type === 'LIGHT') {
-      dispatch(setTheme({ themeMode: 'DARK' }));
-    } else if (theme.mode.type === 'DARK') {
-      dispatch(setTheme({ themeMode: 'LIGHT' }));
-    }
+  function toggleThemeMode(): void {
+    theme.mode.type === 'LIGHT'
+      ? dispatch(setTheme({ themeMode: 'DARK' }))
+      : dispatch(setTheme({ themeMode: 'LIGHT' }));
   }
 
   return (
@@ -29,10 +26,5 @@ const ToggleThemeButton = () => {
     </Button>
   );
 };
-
-// const StyledToggleThemeButton = styled(Button)`
-//   color: ${(props) => props.theme.mode.background[100]};
-//   background: ${(props) => props.theme.mode.color[100]};
-// `;
 
 export default ToggleThemeButton;

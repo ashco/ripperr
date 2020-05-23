@@ -6,13 +6,15 @@ import Logo from './paths/Logo';
 import Plus from './paths/Plus';
 import Times from './paths/Times';
 
-type IconName = 'bars' | 'grip' | 'grip-lines' | 'logo' | 'plus' | 'times';
+import assertNever from 'utils/assert-never';
+
+type IconName = 'bars' | 'grip-lines' | 'logo' | 'plus' | 'times';
 
 export interface PathProps {
   fill?: string;
 }
 
-export interface IconProps extends PathProps {
+interface IconProps extends PathProps {
   name: IconName;
   title?: string;
   desc?: string;
@@ -32,26 +34,21 @@ const Icon: React.FC<IconProps> = ({
   className = '',
   viewBox = '0 0 448 512',
 }) => {
-  let path;
-
-  switch (name) {
-    case 'bars':
-      path = <Bars fill={fill} />;
-      break;
-    case 'grip-lines':
-      path = <GripLines fill={fill} />;
-      break;
-    case 'logo':
-      path = <Logo fill={fill} />;
-      break;
-    case 'plus':
-      path = <Plus fill={fill} />;
-      break;
-    case 'times':
-      path = <Times fill={fill} />;
-      break;
-    default:
-      break;
+  function getPath() {
+    switch (name) {
+      case 'bars':
+        return <Bars fill={fill} />;
+      case 'grip-lines':
+        return <GripLines fill={fill} />;
+      case 'logo':
+        return <Logo fill={fill} />;
+      case 'plus':
+        return <Plus fill={fill} />;
+      case 'times':
+        return <Times fill={fill} />;
+      default:
+        return assertNever(name);
+    }
   }
 
   return (
@@ -73,7 +70,7 @@ const Icon: React.FC<IconProps> = ({
         </title>
       )}
       {desc && <desc id="desc">{desc}</desc>}
-      {path}
+      {getPath()}
     </svg>
   );
 };

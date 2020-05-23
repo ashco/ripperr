@@ -1,87 +1,6 @@
 ﻿import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type ID = string; // make this specific length;
-
-export interface Tag {
-  readonly id: ID;
-  // lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
-  // lastModified: number; // changing to this for now
-  name: string;
-  description: string;
-}
-
-export interface Exercise extends Tag {
-  tags: string[];
-}
-
-type WorkoutMode1 = 'SETS' | 'CIRCUIT' | null;
-type WorkoutMode2 = 'REPS' | 'TIMED' | null;
-
-interface WorkoutRest {
-  auto: boolean;
-  inner: number | null;
-  outer: number | null;
-}
-
-interface WorkoutConfig {
-  rounds: number | null;
-  rest: WorkoutRest;
-}
-
-interface MoveRefConfig {
-  reps: number | null;
-  weight: number | null;
-  interval: number | null;
-}
-
-interface MoveRef {
-  type: 'EXERCISE' | 'WORKOUT';
-  id: ID;
-  config: MoveRefConfig[];
-}
-
-export interface Workout extends Exercise {
-  mode: [WorkoutMode1, WorkoutMode2];
-  config: WorkoutConfig;
-  movements: MoveRef[];
-}
-
-export type Movement = Workout | Exercise | Tag;
-
-export interface TagDict {
-  [key: string]: Tag;
-}
-
-export interface ExerciseDict {
-  [key: string]: Exercise;
-}
-
-export interface WorkoutDict {
-  [key: string]: Workout;
-}
-
-interface Workouts {
-  byId: WorkoutDict;
-  allIds: string[];
-}
-
-interface Exercises {
-  byId: ExerciseDict;
-  allIds: string[];
-}
-
-interface Tags {
-  byId: TagDict;
-  allIds: string[];
-}
-
-export interface MovesState {
-  activeId: ID | null;
-  workouts: Workouts | null;
-  exercises: Exercises | null;
-  tags: Tags | null;
-  error: string | null;
-}
+import { WorkoutDict, ExerciseDict, TagDict, MovesState } from 'types';
 
 interface SetMoves {
   workouts?: WorkoutDict;
@@ -109,7 +28,7 @@ const movesSlice = createSlice({
       if (tags) state.tags = { byId: tags, allIds: [] };
     },
 
-    setActiveMove(state, action: PayloadAction<ID>) {
+    setActiveMove(state, action: PayloadAction<string>) {
       state.activeId = action.payload;
     },
     clearActiveMove(state) {

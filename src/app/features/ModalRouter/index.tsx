@@ -1,13 +1,13 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch } from 'store';
-// import { useModalState } from 'context/ModalContext';
+import { useSelector } from 'store';
 
-import Modal from 'components/Modal';
 import AddMoveModal from 'features/ModalRouter/AddMoveModal';
 import DeleteMoveModal from 'features/ModalRouter/DeleteMoveModal';
 import MoveModal from 'features/ModalRouter/MoveModal';
 
-import { MovementType } from 'types/types';
+import Modal from 'components/Modal';
+
+import { MovementType } from 'types';
 
 const ModalRouter = () => {
   const { modalMode } = useSelector((state) => state.ui);

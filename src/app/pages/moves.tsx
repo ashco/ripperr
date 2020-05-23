@@ -13,7 +13,15 @@ import Filter from 'features/Filter';
 
 import MoveList from 'components/MoveList';
 
-import { AuthUser } from 'types/types';
+import {
+  AuthUser,
+  TagDict,
+  Tag,
+  ExerciseDict,
+  Exercise,
+  WorkoutDict,
+  Workout,
+} from 'types';
 
 import ModalRouter from 'features/ModalRouter';
 
@@ -27,9 +35,9 @@ const MovesPage: NextPage = () => {
   React.useEffect(() => {
     if (authUser) {
       const unsubscribe = firebase.tags(authUser.uid).onSnapshot((snapshot) => {
-        const tags: any = {};
+        const tags: TagDict = {};
         snapshot.forEach((doc) => {
-          tags[doc.id] = doc.data();
+          tags[doc.id] = doc.data() as Tag;
         });
 
         batch(() => {
@@ -50,10 +58,10 @@ const MovesPage: NextPage = () => {
       const unsubscribe = firebase
         .exercises(authUser.uid)
         .onSnapshot((snapshot) => {
-          const exercises: any = {};
+          const exercises: ExerciseDict = {};
 
           snapshot.forEach((doc) => {
-            exercises[doc.id] = doc.data();
+            exercises[doc.id] = doc.data() as Exercise;
           });
 
           batch(() => {
@@ -75,10 +83,10 @@ const MovesPage: NextPage = () => {
       const unsubscribe = firebase
         .workouts(authUser.uid)
         .onSnapshot((snapshot) => {
-          const workouts: any = {};
+          const workouts: WorkoutDict = {};
 
           snapshot.forEach((doc) => {
-            workouts[doc.id] = doc.data();
+            workouts[doc.id] = doc.data() as Workout;
           });
 
           batch(() => {

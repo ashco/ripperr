@@ -1,18 +1,13 @@
 ﻿import React from 'react';
 import styled, { ThemeContext, DefaultTheme } from 'styled-components';
-
 import { useSelector, useDispatch } from 'store';
 import { setModalMode } from 'store/ui';
-import {
-  setFilterValue,
-  showFilter,
-  resetFilter,
-  FilterState,
-} from 'store/filter';
+import { setFilterValue, showFilter, resetFilter } from 'store/filter';
 
 import Button from 'components/Button';
-
 import Icon from 'components/Icon';
+
+import { FilterState } from 'types';
 
 interface BtnProps {
   onClick: () => void;
@@ -60,7 +55,9 @@ const FilterInput: React.FC<{ filter: FilterState }> = ({ filter }) => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           dispatch(setFilterValue(e.target.value))
         }
-        onFocus={() => dispatch(showFilter({ open: true }))}
+        onFocus={() => {
+          dispatch(showFilter({ open: true }));
+        }}
       />
       {!isAddMoveMode && filter.active ? (
         <ClearFilterButton onClick={clearFilter} theme={theme} />

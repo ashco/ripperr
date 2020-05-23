@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect } from 'react';
+﻿import React from 'react';
 import { useRouter } from 'next/router';
 
 import AuthUserContext from './AuthUserContext';
@@ -6,18 +6,18 @@ import FirebaseContext from './FirebaseContext';
 
 const withAuthorization = (condition: any) => (Component: any) => {
   const WithAuthorization = (props: any) => {
-    const firebase = useContext(FirebaseContext);
-    const authUser = useContext(AuthUserContext);
+    const firebase = React.useContext(FirebaseContext);
+    const authUser = React.useContext(AuthUserContext);
     const router = useRouter();
 
-    useEffect(() => {
+    React.useEffect(() => {
       const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
         if (!condition(authUser)) {
           router.push('/login');
         }
       });
 
-      return () => unsubscribe();
+      return (): void => unsubscribe();
     }, []);
 
     return condition(authUser) ? (

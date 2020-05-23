@@ -9,14 +9,12 @@ interface Props {
   color?: string;
   barHeight?: string;
   labelAccess?: string;
-  // width?: string;
 }
 
 const ColorBarContainer: React.FC<Props> = ({
   className,
   color = 'green',
   barHeight,
-  // width,
   children,
   onClick,
   labelAccess,
@@ -25,7 +23,6 @@ const ColorBarContainer: React.FC<Props> = ({
     className={className}
     color={color}
     barHeight={barHeight}
-    // width={width}
     onClick={onClick}
     labelAccess={labelAccess}
   >
@@ -39,8 +36,6 @@ const Container = styled.div`
   background: ${(p) => p.theme.mode.background[300]};
   box-shadow: ${(p) => p.theme.shadow[1]};
   padding: 1rem;
-  /* max-width: 90vw; */
-
   p,
   a,
   h1 {

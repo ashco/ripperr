@@ -41,6 +41,12 @@ module.exports = {
       rules: {
         '@typescript-eslint/interface-name-prefix': 0,
         'react/prop-types': 0,
+        '@typescript-eslint/explicit-function-return-type': [
+          1,
+          {
+            allowExpressions: true,
+          },
+        ],
       },
     },
     {

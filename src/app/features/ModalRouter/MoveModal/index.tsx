@@ -1,75 +1,70 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch } from 'store';
-import MoveForm from 'features/MoveForm';
 
 import ModalBackground from 'components/ModalBackground';
-import Container from 'components/Container';
+import MoveForm from 'features/MoveForm';
 
 import singleCapString from 'utils/single-cap-string';
+import lookupMove, { MoveDataType } from 'utils/lookup-move';
+import getColor from 'utils/get-color';
+import assertNever from 'utils/assert-never';
+
+import { MovementType, MovesState, ModalMode } from 'types';
+
 import MoveModalContainer from './style';
-import { MovementType } from 'types/types';
-import ColorBarWrapper from 'components/ColorBarWrapper';
-import { lookupMove, MoveDataType } from 'utils/lookup-move';
-import { Movement, MovesState } from 'store/moves';
-import { ModalMode } from 'store/ui';
+
+interface Style {
+  color: string;
+  headerText: string;
+  width: string;
+}
 
 const MoveModal: React.FC<{
   addMoveType: MovementType | null;
   modalMode: ModalMode;
   moves: MovesState;
 }> = ({ addMoveType, modalMode, moves }) => {
-  const [style, setStyle] = React.useState({
+  const [style, setStyle] = React.useState<Style>({
     color: '',
-    width: '',
     headerText: '',
+    width: '',
   });
 
-  function getStyles(
-    move: MoveDataType | { data: null; type: MovementType | null },
-  ) {
-    let color;
-    let width;
-    let headerText;
-
-    const { data, type } = move;
-
-    if (type === 'WORKOUT') {
-      color = 'blue';
-      width = '40rem';
-    } else if (type === 'EXERCISE') {
-      color = 'purple';
-      width = '36rem';
-    } else if (type === 'TAG') {
-      color = 'orange';
-      width = '32rem';
-    } else {
-      throw Error('moveData.type not found!');
+  function getWidth(type: MovementType): string {
+    switch (type) {
+      case 'WORKOUT':
+        return '40rem';
+      case 'EXERCISE':
+        return '36rem';
+      case 'TAG':
+        return '32rem';
+      default:
+        assertNever(type);
     }
+  }
 
+  function getHeaderText(move: MoveDataType): string {
     if (modalMode === 'VIEW') {
-      headerText = data?.name || '';
+      return move.data?.name || '';
     } else if (modalMode === 'EDIT') {
       if (move.data) {
-        headerText = `${singleCapString(modalMode)} ${singleCapString(type)}`;
+        return `${singleCapString(modalMode)} ${singleCapString(move.type)}`;
       } else {
-        headerText = `Create New ${singleCapString(type)}`;
+        return `Create New ${singleCapString(move.type)}`;
       }
     } else {
       throw Error('modalMode does not match!');
     }
-
-    return { color, width, headerText };
   }
 
   const move = lookupMove(moves) || { data: null, type: addMoveType };
-  if (!move) throw Error('lookup move by id failed!');
-  // const move = lookupMove('fBk6nw3ZtW7Vf5aXFw1D') || {
-  //   data: null,
-  //   type: addMoveType,
-  // };
+  if (!move || !move.type) throw Error('lookup move by id failed!');
 
   React.useLayoutEffect(() => {
-    const { color, width, headerText } = getStyles(move);
+    if (!move || !move.data || !move.type) throw Error('whoops');
+
+    const color = getColor(move.type);
+    const width = getWidth(move.type);
+    const headerText = getHeaderText(move);
 
     setStyle({
       color,
@@ -85,11 +80,7 @@ const MoveModal: React.FC<{
         <MoveForm
           activeId={moves.activeId}
           modalMode={modalMode}
-          move={
-            move as
-              | MoveDataType
-              | { data: null; type: 'WORKOUT' | 'EXERCISE' | 'TAG' }
-          }
+          move={move as MoveDataType | { data: null; type: MovementType }}
         />
       </MoveModalContainer>
     </ModalBackground>

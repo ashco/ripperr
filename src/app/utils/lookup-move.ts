@@ -1,13 +1,11 @@
-﻿import { Movement, MovesState } from 'store/moves';
-
-import { MovementType } from 'types/types';
+﻿import { MovementType, Movement, MovesState } from 'types';
 
 export interface MoveDataType {
   data: Movement;
   type: MovementType;
 }
 
-export function lookupMove(
+function lookupMove(
   moves: MovesState,
   id: string | null = moves.activeId,
 ): MoveDataType | null {
@@ -33,3 +31,5 @@ export function lookupMove(
 
   return { data, type };
 }
+
+export default lookupMove;

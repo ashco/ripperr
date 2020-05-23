@@ -106,18 +106,18 @@ test('Filter should be set to active when filter text is typed or tags are activ
   // open + toggle tag = active
   user.click(filterInput);
   user.click(getByText(/push/i));
-  expect(getByLabelText(/active tag/i)).toContainElement(getByText(/push/i));
+  expect(queryByLabelText(/disabled/i)).toBeFalsy();
   expect(store.getState().filter.active).toBeTruthy();
 
   // untoggle tag = inactive
   user.click(getByText(/push/i));
-  expect(queryByLabelText(/active tag/i)).toBeFalsy();
+  expect(getByLabelText(/disabled/i)).toContainElement(getByText(/push/i));
   expect(store.getState().filter.active).toBeFalsy();
 
   // filter value + toggle tag = active
   await user.type(filterInput, 'Filter text');
   user.click(getByText(/push/i));
-  expect(getByLabelText(/active tag/i)).toContainElement(getByText(/push/i));
+  expect(queryByLabelText(/disabled/i)).toBeFalsy();
   expect(store.getState().filter.active).toBeTruthy();
 
   // remove filter value, untoggle tag, inactive

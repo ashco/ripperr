@@ -8,7 +8,7 @@ import AuthForm from 'components/AuthForm';
 import Button from 'components/Button';
 import Input from 'components/Input';
 
-import { AuthError } from 'types/types';
+import { AuthError } from 'types';
 import { passwordForgotSchema } from 'utils/validation-schema';
 
 interface PasswordForgotForm {
@@ -32,7 +32,7 @@ const PasswordForgotForm: React.FC = () => {
     },
   );
 
-  function onSubmit({ email }: PasswordForgotForm) {
+  function onSubmit({ email }: PasswordForgotForm): void {
     firebase
       .doPasswordReset(email)
       .then(() => {

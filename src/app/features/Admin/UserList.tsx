@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { IUser } from '../../types/types';
+import { IUser } from 'types';
 
 const UserList: React.FC<{ users: IUser[] }> = ({ users }) => (
   <ul>

@@ -5,9 +5,6 @@ import { setModalMode } from 'store/ui';
 import { Controller } from 'react-hook-form';
 import { ThemeContext } from 'styled-components';
 
-// import MovementListContext from 'context/MovementListContext';
-// import { useMoveDispatch } from 'context/MoveContext';
-
 // import { ArchFormListItem } from 'components/ListItems';
 import { TagsFieldWrapper, TagListItemWrapper } from './style';
 
@@ -19,84 +16,85 @@ interface SelectOption {
 }
 
 const TagsField: React.FC<{
-  tags: any;
   isDisabled: boolean;
   control: any;
   setValue: any;
   watch: any;
-}> = ({ tags, isDisabled, control, setValue, watch }) => {
-  return null;
+}> = ({ isDisabled, control, setValue, watch }) => {
+  const dispatch = useDispatch();
+  const { modalMode } = useSelector((state) => state.ui);
+  const { tags } = useSelector((state) => state.moves);
 
-  // const { modalMode } = useSelector((state) => state.ui);
-
-  // // Generate select option list
+  // Generate select option list
   // const { tags } = React.useContext(MovementListContext);
-  // const options = tags.map((arch) => {
-  //   return { value: arch.id as string, label: arch.name };
-  // });
+  if (!tags) return null;
 
-  // // Determine initial select values
-  // const initialSelectedOptions = options.filter((opt) =>
-  //   tags.includes(opt.value),
-  // );
-  // const [selectedOptions, setSelectedOptions] = React.useState<SelectOption[]>(
-  //   initialSelectedOptions,
-  // );
+  const options = Object.keys(tags.byId).map((id) => {
+    return { value: tags.byId[id].id, label: tags.byId[id].name };
+  });
 
-  // function handleMultiChange(selectedOpts: any) {
-  //   // Update state which sets select field display
-  //   setSelectedOptions(selectedOpts);
-  //   // create new array for form field + moveState
-  //   const tagsValue = (selectedOpts || []).map(
-  //     (opt: SelectOption) => opt.value,
-  //   );
-  //   setValue('tags', tagsValue);
-  // }
+  // Determine initial select values
+  const initialSelectedOptions = options.filter((opt) =>
+    Object.keys(tags.byId).includes(opt.value),
+  );
+  const [selectedOptions, setSelectedOptions] = React.useState<SelectOption[]>(
+    initialSelectedOptions,
+  );
 
-  // React.useEffect(() => {
-  //   // reset field state to current tags when going from EDIT to VIEW
-  //   if (modalMode === 'VIEW') {
-  //     const currentSelectedOptions = options.filter((opt) =>
-  //       tags.includes(opt.value),
-  //     );
-  //     setSelectedOptions(currentSelectedOptions);
-  //   }
-  // }, [modalMode]);
+  function handleMultiChange(selectedOpts: any) {
+    // Update state which sets select field display
+    setSelectedOptions(selectedOpts);
+    // create new array for form field + moveState
+    const tagsValue = (selectedOpts || []).map(
+      (opt: SelectOption) => opt.value,
+    );
+    setValue('tags', tagsValue);
+  }
 
-  // return (
-  //   // <Controller
-  //   //   as={<Select options={options} value={selectedOptions} />}
-  //   //   control={control}
-  //   //   name="tags"
-  //   //   placeholder="Tags"
-  //   //   onChange={handleMultiChange}
-  //   //   isDisabled={isDisabled}
-  //   //   isMulti
-  //   // />
+  React.useEffect(() => {
+    // reset field state to current tags when going from EDIT to VIEW
+    if (modalMode === 'VIEW') {
+      const currentSelectedOptions = options.filter((opt) =>
+        Object.keys(tags.byId).includes(opt.value),
+      );
+      setSelectedOptions(currentSelectedOptions);
+    }
+  }, [modalMode]);
 
-  //   <Select
-  //     name="tags"
-  //     placeholder="Tags"
-  //     options={options}
-  //     value={selectedOptions}
-  //     onChange={handleMultiChange}
-  //     isDisabled={isDisabled}
-  //     isMulti
-  //   />
-  //   // <TagsFieldWrapper>
-  //   //   {tags.map((arch, index) => (
-  //   //     <TagListItem
-  //   //       key={arch.id}
-  //   //       // index={index}
-  //   //       tag={arch}
-  //   //       active={tags[arch.id as string]}
-  //   //       // active={tags.includes(arch.id as string)}
-  //   //       // isDisabled={isDisabled}
-  //   //       register={register}
-  //   //     />
-  //   //   ))}
-  //   // </TagsFieldWrapper>
-  // );
+  return (
+    // <Controller
+    //   as={<Select options={options} value={selectedOptions} />}
+    //   control={control}
+    //   name="tags"
+    //   placeholder="Tags"
+    //   onChange={handleMultiChange}
+    //   isDisabled={isDisabled}
+    //   isMulti
+    // />
+
+    <Select
+      name="tags"
+      placeholder="Tags"
+      options={options}
+      value={selectedOptions}
+      onChange={handleMultiChange}
+      isDisabled={isDisabled}
+      isMulti
+    />
+    // <TagsFieldWrapper>
+    //   {tags.map((arch, index) => (
+    //     <TagListItem
+    //       key={arch.id}
+    //       // index={index}
+    //       tag={arch}
+    //       active={tags[arch.id as string]}
+    //       // active={tags.includes(arch.id as string)}
+    //       // isDisabled={isDisabled}
+    //       register={register}
+    //     />
+    //   ))}
+    // </TagsFieldWrapper>
+  );
 };
 
 // const TagListItem: React.FC<{

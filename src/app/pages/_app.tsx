@@ -1,13 +1,10 @@
 ﻿import React from 'react';
 import App from 'next/app';
 import { Provider } from 'react-redux';
-
-import Page from '../components/Page';
-import withAuthentication from 'context/withAuthentication';
-
 import createStore from 'store';
 
-// import 'react-toastify/dist/ReactToastify.css';
+import Page from 'components/Page';
+import withAuthentication from 'context/withAuthentication';
 
 const store = createStore();
 

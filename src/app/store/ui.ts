@@ -1,17 +1,14 @@
 ﻿import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 import { DefaultTheme } from 'styled-components';
+
 import { lightTheme, darkTheme } from 'styles/theme';
 
-import { MovementType } from 'types/types';
+import { ModalMode, ThemeModeType } from 'types';
 
 interface ThemeMode {
-  themeMode: 'LIGHT' | 'DARK';
+  themeMode: ThemeModeType;
 }
 
-// type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | 'CLOSED';
-type ActiveMoveType = MovementType | null;
-export type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | 'CLOSED';
 export type IsAddMoveMode = boolean;
 export type IsPointerDisabled = boolean;
 
@@ -22,7 +19,6 @@ interface SetModalMode {
 
 interface UIState {
   theme: DefaultTheme;
-  // activeMoveType: ActiveMoveType;
   modalMode: ModalMode;
   isAddMoveMode: IsAddMoveMode;
   isPointerDisabled: IsPointerDisabled;
@@ -30,7 +26,6 @@ interface UIState {
 
 const initialState: UIState = {
   theme: darkTheme,
-  //
   modalMode: 'CLOSED',
   isAddMoveMode: false,
   isPointerDisabled: false,
@@ -42,11 +37,9 @@ const uiSlice = createSlice({
   reducers: {
     setTheme(state, action: PayloadAction<ThemeMode>) {
       const { themeMode } = action.payload;
-      if (themeMode === 'LIGHT') {
-        state.theme = lightTheme;
-      } else if (themeMode === 'DARK') {
-        state.theme = darkTheme;
-      }
+
+      state.theme = themeMode === 'LIGHT' ? lightTheme : darkTheme;
+
       localStorage.setItem('theme', themeMode);
     },
 

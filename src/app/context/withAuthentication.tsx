@@ -1,16 +1,16 @@
-﻿import React, { useState, useContext, useEffect } from 'react';
+﻿import React from 'react';
 
 import AuthUserContext from './AuthUserContext';
 import FirebaseContext from './FirebaseContext';
 
-import { AuthUser } from '../types/types';
+import { AuthUser } from '../types';
 
 const withAuthentication = (Component: any) => {
   const WithAuthentication = (props: any) => {
-    const firebase = useContext(FirebaseContext);
-    const [authUser, setAuthUser] = useState<AuthUser>(null);
+    const firebase = React.useContext(FirebaseContext);
+    const [authUser, setAuthUser] = React.useState<AuthUser>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
       const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
         authUser ? setAuthUser(authUser) : setAuthUser(null);
       });

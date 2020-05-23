@@ -1,9 +1,11 @@
 ﻿import styled from 'styled-components';
 import Container from 'components/Container';
 
+import { MovementType } from 'types';
+
 interface Props {
   onClick: (e: any) => void;
-  type: 'WORKOUT' | 'EXERCISE' | 'TAG';
+  type: MovementType;
 }
 
 const MoveListItemContainer = styled(Container)<Props>`

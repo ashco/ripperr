@@ -5,11 +5,12 @@ import styled from 'styled-components';
 import AuthUserContext from 'context/AuthUserContext';
 import withAuthorization from 'context/withAuthorization';
 
-import AuthContainer from 'components/AuthContainer';
-import ToggleThemeButton from 'components/ToggleThemeButton';
 import PasswordChangeForm from 'features/Auth/PasswordChangeForm';
 
-import { AuthUser } from 'types/types';
+import AuthContainer from 'components/AuthContainer';
+import ToggleThemeButton from 'components/ToggleThemeButton';
+
+import { AuthUser } from 'types';
 
 const AccountPage: NextPage = () => {
   const authUser = React.useContext(AuthUserContext);

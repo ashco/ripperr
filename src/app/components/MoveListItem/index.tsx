@@ -1,21 +1,23 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch, batch } from 'store';
+import { useDispatch, batch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
-import { setActiveMove, MovesState } from 'store/moves';
-import { toggleFilterTag, FilterState } from 'store/filter';
+import { setActiveMove } from 'store/moves';
+import { toggleFilterTag } from 'store/filter';
 
 import OptionMenuButton from 'components/MoveListItem/OptionMenuButton';
 
 import MoveListItemContainer from './style';
-import { lookupMove } from 'utils/lookup-move';
+import lookupMove from 'utils/lookup-move';
+import getColor from 'utils/get-color';
+
+import { MovesState } from 'types';
 
 const MoveListItem: React.FC<{
-  // filter?: FilterState;
-  active?: boolean;
+  isDisabled?: boolean;
   id: string;
   isAddMoveMode: boolean;
   moves: MovesState;
-}> = ({ active, id, isAddMoveMode, moves }) => {
+}> = ({ isDisabled, id, isAddMoveMode, moves }) => {
   const dispatch = useDispatch();
 
   const move = lookupMove(moves, id);
@@ -24,41 +26,18 @@ const MoveListItem: React.FC<{
 
   const btnRef = React.useRef<HTMLDivElement>(null);
 
-  // Determine ColorBar color
-  function getColor(): string {
-    let color = '';
-    switch (type) {
-      case 'TAG': {
-        color = active ? 'orange' : 'neutral';
-        break;
-      }
-      case 'EXERCISE':
-        color = 'purple';
-        break;
-      case 'WORKOUT':
-        color = 'blue';
-        break;
-      default:
-        break;
-    }
-    return color;
-  }
-
   function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
       batch(() => {
         dispatch(setModalMode({ modalMode: 'VIEW' }));
         dispatch(setActiveMove(id));
       });
-      // moveDispatch({ type: 'MOVE_SET', value: move });
     }
   }
 
   function addMoveToWorkout(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
       batch(() => {
-        console.log('Adding movement to workout');
-        // moveDispatch({ type: 'MOVE_ADD_MOVE', value: move });
         dispatch(setModalMode({ modalMode: 'VIEW' }));
         dispatch(setIsAddMoveMode(false));
       });
@@ -94,7 +73,7 @@ const MoveListItem: React.FC<{
 
   const nameLength = type === 'TAG' ? 10 : Infinity;
   // const nameLength = 16;
-  const color = getColor();
+  const color = isDisabled ? 'default' : getColor(type);
 
   return (
     <MoveListItemContainer
@@ -102,7 +81,7 @@ const MoveListItem: React.FC<{
       barHeight="5px"
       onClick={handleClick}
       type={type}
-      labelAccess={active ? 'active tag' : ''}
+      labelAccess={isDisabled ? 'disabled' : ''}
     >
       <div className="left">
         <p className="name">{stringShortener(data.name, nameLength)}</p>

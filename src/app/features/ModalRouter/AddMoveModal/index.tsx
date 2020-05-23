@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { useSelector, useDispatch } from 'store';
+import { useDispatch } from 'store';
 import { setModalMode } from 'store/ui';
 
 import Button from 'components/Button';
@@ -8,28 +8,26 @@ import AddMoveModalContainer from './style';
 
 import ModalBackground from 'components/ModalBackground';
 
+import { MovementType } from 'types';
+
 const AddMoveModal: React.FC<{
-  setAddMoveType: any;
+  setAddMoveType: React.Dispatch<React.SetStateAction<MovementType | null>>;
 }> = ({ setAddMoveType }) => {
   const dispatch = useDispatch();
 
   function addTag(): void {
     dispatch(setModalMode({ modalMode: 'EDIT' }));
     setAddMoveType('TAG');
-    // * might need to reset moves.active in redux store, but might not
-    // moveDispatch({ type: 'MOVE_RESET_AR' });
   }
 
   function addExercise(): void {
     dispatch(setModalMode({ modalMode: 'EDIT' }));
     setAddMoveType('EXERCISE');
-    // moveDispatch({ type: 'MOVE_RESET_EX' });
   }
 
   function addWorkout(): void {
     dispatch(setModalMode({ modalMode: 'EDIT' }));
     setAddMoveType('WORKOUT');
-    // moveDispatch({ type: 'MOVE_RESET_WO' });
   }
 
   function closeModal(): void {

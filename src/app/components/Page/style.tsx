@@ -12,7 +12,7 @@ const StyledPage = styled.div<{ isPointerDisabled?: boolean }>`
     'main';
 
   pointer-events: ${(p) => (p.isPointerDisabled ? 'none' : 'auto')};
-  .main {
+  main {
     grid-area: main;
     overflow-y: auto;
   }

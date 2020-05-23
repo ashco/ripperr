@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { Provider } from 'react-redux';
+import { EnhancedStore } from '@reduxjs/toolkit';
 import { render as rtlRender } from '@testing-library/react';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 
@@ -7,8 +8,8 @@ import createStore from 'store';
 import { darkTheme } from 'styles/theme';
 
 interface RenderOptions {
-  state?: any;
-  store?: any;
+  state?: object;
+  store?: EnhancedStore<any>;
   theme?: DefaultTheme;
   rtlOptions?: any;
 }

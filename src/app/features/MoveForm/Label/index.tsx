@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { sizes } from 'styles/sizes';
 
+// DELETE ME
+
 const Label: React.FC<{
   text: string;
   display: 'inline' | 'block' | 'none';

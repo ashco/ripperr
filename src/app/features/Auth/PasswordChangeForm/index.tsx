@@ -8,8 +8,9 @@ import FormError from 'components/FormError';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
-import { AuthError } from 'types/types';
 import { passwordChangeSchema } from 'utils/validation-schema';
+
+import { AuthError } from 'types';
 
 interface PasswordChangeForm {
   password: string;
@@ -34,7 +35,7 @@ const PasswordChangeForm: React.FC = () => {
     },
   );
 
-  function onSubmit({ password }: PasswordChangeForm) {
+  function onSubmit({ password }: PasswordChangeForm): void {
     firebase
       .doPasswordUpdate(password)
       .then(() => {
