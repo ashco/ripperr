@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
-import { setActiveMove, clearActiveMove } from 'store/moves';
-import { useForm, Controller } from 'react-hook-form';
+import { setActiveMove, clearActiveMove, initialState } from 'store/moves';
+import { useForm, Controller, FieldElement } from 'react-hook-form';
 import * as yup from 'yup';
 import Textarea from 'components/Textarea';
 
@@ -22,7 +22,16 @@ import useCurrentWidth from 'hooks/useCurrentWidth';
 import singleCapString from 'utils/single-cap-string';
 // import { MoveDataType } from 'utils/lookup-move@';
 
-import { Movement, ButtonRowProps, MovementType, ModalMode } from 'types';
+import {
+  MovementId,
+  ButtonRowProps,
+  MovementType,
+  ModalMode,
+  Tag,
+  Exercise,
+  Workout,
+  Movement,
+} from 'types';
 import Input from 'components/Input';
 
 import {
@@ -32,16 +41,70 @@ import {
 } from 'utils/validation-schema';
 import assertNever from 'utils/assert-never';
 
-export type FormData = {
-  name: string;
-  description: string;
-};
+// export type FormData = {
+//   name: string;
+//   description: string;
+// };
+
+// interface TagFormData {
+//   name: string;
+//   description: string;
+// }
+
+// interface ExerciseFormData extends TagFormData{
+//   tags: string[];
+// }
+
+// interface WorkoutFormData extends ExerciseFormData{
+//   mode:
+// }
+
+function isExercise(data: Movement): data is Exercise {
+  return (data as Exercise).tags !== undefined;
+}
+function isWorkout(data: Movement): data is Workout {
+  return (data as Workout).mode !== undefined;
+}
+
+// function generateDefaultValues(type: 'TAG'): Tag;
+// function generateDefaultValues(type: 'EXERCISE'): Exercise;
+// function generateDefaultValues(type: 'WORKOUT'): Workout;
+function generateDefaultValues(type: MovementType): Movement {
+  switch (type) {
+    case 'TAG':
+      return {
+        name: '',
+        description: '',
+      };
+    case 'EXERCISE':
+      return {
+        name: '',
+        description: '',
+        tags: [],
+      };
+    case 'WORKOUT':
+      return {
+        name: '',
+        description: '',
+        tags: [],
+        mode: [null, null],
+        rounds: null,
+        rest: {
+          auto: false,
+          inner: null,
+          outer: null,
+        },
+        movements: [],
+      };
+    default:
+      assertNever(type);
+  }
+}
 
 const MoveForm: React.FC<{
-  // activeId: string | null;
   modalMode: ModalMode;
   move: {
-    data: Movement | null;
+    data: MovementId | null;
     type: MovementType;
   };
 }> = ({ modalMode, move: { data, type } }) => {
@@ -50,21 +113,29 @@ const MoveForm: React.FC<{
   const firebase = React.useContext(FirebaseContext);
   const authUser = React.useContext(AuthUserContext);
 
+  const { tags } = useSelector((state) => state.moves);
+
   const isMobile = false;
   // const isMobile = useCurrentWidth() < 600;
   const isDisabled = modalMode === 'VIEW';
-  // const isNewEntry = !data;
 
-  const defaultValues: FormData = {
-    name: '',
-    description: '',
-  };
+  // const defaultValues: FormData = {
+  //   name: '',
+  //   description: '',
+  // };
+  const defaultValues = generateDefaultValues(type);
 
   if (data) {
     defaultValues.name = data.name;
     defaultValues.description = data.description;
-    if (type === 'EXERCISE' || type === 'WORKOUT') {
-      // defaultValues.tags = data.tags;
+    if (isExercise(defaultValues) && isExercise(data)) {
+      defaultValues.tags = data.tags;
+      if (isWorkout(defaultValues) && isWorkout(data)) {
+        defaultValues.mode = data.mode;
+        defaultValues.rounds = data.rounds;
+        defaultValues.rest = data.rest;
+        defaultValues.movements = data.movements;
+      }
     }
   }
 
@@ -81,9 +152,15 @@ const MoveForm: React.FC<{
     }
   }
 
-  const { register, control, handleSubmit, errors, watch, setValue } = useForm<
-    FormData
-  >({
+  const {
+    register,
+    unregister,
+    control,
+    handleSubmit,
+    errors,
+    watch,
+    setValue,
+  } = useForm<Movement>({
     defaultValues,
     validationSchema: getValidationSchema(),
   });
@@ -133,7 +210,7 @@ const MoveForm: React.FC<{
     }
   }
 
-  function createMovement(formData: FormData): void {
+  function createMovement(formData: Movement): void {
     const firebaseFnc = getFirebaseFnc('CREATE') as FBCreateFnc;
 
     if (authUser) {
@@ -165,7 +242,7 @@ const MoveForm: React.FC<{
     }
   }
 
-  function updateMovement(formData: FormData): void {
+  function updateMovement(formData: Movement): void {
     const firebaseFnc = getFirebaseFnc('UPDATE') as FBUpdateFnc;
     if (authUser && data) {
       firebaseFnc(authUser.uid, data.id)
@@ -183,7 +260,7 @@ const MoveForm: React.FC<{
     }
   }
 
-  function onSubmit(formData: FormData): void {
+  function onSubmit(formData: Movement): void {
     if (modalMode === 'VIEW') {
       dispatch(setModalMode({ modalMode: 'EDIT' }));
     } else if (modalMode === 'EDIT') {
@@ -247,13 +324,17 @@ const MoveForm: React.FC<{
       break;
   }
 
-  // React.useEffect(() => {
-  //   register({ name: 'tags' });
-
-  //   return () => unregister('tags');
-  // }, [register]);
+  React.useEffect(() => {
+    if (type === 'EXERCISE' || type === 'WORKOUT') {
+      /// TS_IGNORE
+      register({ name: 'tags' });
+      /// TS_IGNORE
+      return () => unregister('tags');
+    }
+  }, [register]);
 
   // console.log(watch());
+  console.log(watch());
 
   return (
     <MoveFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -275,6 +356,16 @@ const MoveForm: React.FC<{
           maxRows={4}
           disabled={isDisabled}
         />
+        {isExercise(defaultValues) && (
+          <TagsField
+            tags={tags}
+            initTags={defaultValues.tags}
+            setValue={setValue}
+            isDisabled={isDisabled}
+            control={control}
+            watch={watch}
+          />
+        )}
         {/* <Controller
           as={<Textarea maxRows={4} />}
           name="description"
@@ -356,13 +447,7 @@ const MoveForm: React.FC<{
           )}
         </>
       )} */}
-      <TagsField
-        // tags={watch().tags}
-        setValue={setValue}
-        isDisabled={isDisabled}
-        control={control}
-        watch={watch}
-      />
+
       {/* {(moveState?.type === MovementType.Exercise ||
         moveState?.type === MovementType.Workout) && (
         <Label

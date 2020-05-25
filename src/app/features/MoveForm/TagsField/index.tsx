@@ -1,14 +1,64 @@
 ﻿import React from 'react';
-import Select from 'react-select';
+import { ThemeContext, DefaultTheme } from 'styled-components';
+import { FieldError } from 'react-hook-form';
+import Select, { Styles, Props } from 'react-select';
 import { useSelector, useDispatch } from 'store';
-import { setModalMode } from 'store/ui';
-import { Controller } from 'react-hook-form';
-import { ThemeContext } from 'styled-components';
 
+import FieldWrapper from 'components/FieldWrapper';
+
+import { Tags } from 'types';
 // import { ArchFormListItem } from 'components/ListItems';
-import { TagsFieldWrapper, TagListItemWrapper } from './style';
 
-import { string } from 'yup';
+function getCustomStyles(theme: DefaultTheme): object {
+  const customStyles = {
+    control: (styles: Styles, state: Props) => ({
+      ...styles,
+      backgroundColor: theme.mode.background[300],
+      border: state.isDisabled
+        ? '2px solid gray'
+        : `2px solid ${theme.mode.color[100]}`,
+      borderRadius: '0px',
+    }),
+    menu: (styles: Styles, state: Props) => ({
+      ...styles,
+      backgroundColor: theme.mode.background[100],
+      border: state.isDisabled
+        ? '2px solid gray'
+        : `2px solid ${theme.mode.color[100]}`,
+      borderRadius: '0px',
+    }),
+    option: (styles: Styles) => ({
+      ...styles,
+      backgroundColor: 'none',
+      color: theme.mode.color[100],
+
+      '&:hover': {
+        backgroundColor: theme.mode.background[300],
+      },
+    }),
+    multiValue: (styles: Styles) => {
+      return {
+        ...styles,
+        backgroundColor: theme.mode.color[100],
+        color: theme.mode.background[200],
+      };
+    },
+    multiValueLabel: (styles, { data }) => ({
+      ...styles,
+      color: theme.mode.background[200],
+    }),
+    multiValueRemove: (styles: Styles) => ({
+      ...styles,
+      ':hover': {
+        color: theme.mode.color[100],
+        backgroundColor: theme.color.orange[500],
+        cursor: 'pointer',
+      },
+    }),
+  };
+
+  return customStyles;
+}
 
 interface SelectOption {
   value: string;
@@ -16,27 +66,27 @@ interface SelectOption {
 }
 
 const TagsField: React.FC<{
+  tags: Tags | null;
+  initTags: string[];
   isDisabled: boolean;
   control: any;
   setValue: any;
   watch: any;
-}> = ({ isDisabled, control, setValue, watch }) => {
-  const dispatch = useDispatch();
-  const { modalMode } = useSelector((state) => state.ui);
-  const { tags } = useSelector((state) => state.moves);
+}> = ({ isDisabled, setValue, watch, tags, initTags }) => {
+  const theme = React.useContext(ThemeContext);
 
-  // Generate select option list
-  // const { tags } = React.useContext(MovementListContext);
-  if (!tags) return null;
-
-  const options = Object.keys(tags.byId).map((id) => {
-    return { value: tags.byId[id].id, label: tags.byId[id].name };
-  });
-
-  // Determine initial select values
+  // create options list
+  const options = tags
+    ? Object.keys(tags.byId).map((id) => ({
+        value: id,
+        label: tags.byId[id].name,
+      }))
+    : [];
   const initialSelectedOptions = options.filter((opt) =>
-    Object.keys(tags.byId).includes(opt.value),
+    initTags.includes(opt.value),
   );
+  const { modalMode } = useSelector((state) => state.ui);
+
   const [selectedOptions, setSelectedOptions] = React.useState<SelectOption[]>(
     initialSelectedOptions,
   );
@@ -44,7 +94,7 @@ const TagsField: React.FC<{
   function handleMultiChange(selectedOpts: any) {
     // Update state which sets select field display
     setSelectedOptions(selectedOpts);
-    // create new array for form field + moveState
+    // // create new array for form field + moveState
     const tagsValue = (selectedOpts || []).map(
       (opt: SelectOption) => opt.value,
     );
@@ -55,45 +105,27 @@ const TagsField: React.FC<{
     // reset field state to current tags when going from EDIT to VIEW
     if (modalMode === 'VIEW') {
       const currentSelectedOptions = options.filter((opt) =>
-        Object.keys(tags.byId).includes(opt.value),
+        initTags.includes(opt.value),
       );
       setSelectedOptions(currentSelectedOptions);
     }
   }, [modalMode]);
 
-  return (
-    // <Controller
-    //   as={<Select options={options} value={selectedOptions} />}
-    //   control={control}
-    //   name="tags"
-    //   placeholder="Tags"
-    //   onChange={handleMultiChange}
-    //   isDisabled={isDisabled}
-    //   isMulti
-    // />
+  const customStyles = getCustomStyles(theme);
 
-    <Select
-      name="tags"
-      placeholder="Tags"
-      options={options}
-      value={selectedOptions}
-      onChange={handleMultiChange}
-      isDisabled={isDisabled}
-      isMulti
-    />
-    // <TagsFieldWrapper>
-    //   {tags.map((arch, index) => (
-    //     <TagListItem
-    //       key={arch.id}
-    //       // index={index}
-    //       tag={arch}
-    //       active={tags[arch.id as string]}
-    //       // active={tags.includes(arch.id as string)}
-    //       // isDisabled={isDisabled}
-    //       register={register}
-    //     />
-    //   ))}
-    // </TagsFieldWrapper>
+  return (
+    <FieldWrapper disabled={isDisabled}>
+      <label htmlFor="tags">Tags:</label>
+      <Select
+        name="tags"
+        styles={customStyles}
+        options={options}
+        value={selectedOptions}
+        onChange={handleMultiChange}
+        isDisabled={isDisabled}
+        isMulti
+      />
+    </FieldWrapper>
   );
 };
 

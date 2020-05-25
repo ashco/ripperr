@@ -9,11 +9,10 @@ import Button from 'components/Button';
 
 import Icon from 'components/Icon';
 import { MovementType } from 'types';
-import { Movement } from 'types';
+import { MovementId } from 'types';
 
 const OptionMenuButton: React.FC<{
-  // movement: Movement;
-  data: Movement;
+  data: MovementId;
   type: MovementType;
 }> = ({ data, type }) => {
   const dispatch = useDispatch();

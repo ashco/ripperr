@@ -16,11 +16,11 @@ import MoveList from 'components/MoveList';
 import {
   AuthUser,
   TagDict,
-  Tag,
+  TagId,
   ExerciseDict,
-  Exercise,
+  ExerciseId,
   WorkoutDict,
-  Workout,
+  WorkoutId,
 } from 'types';
 
 import ModalRouter from 'features/ModalRouter';
@@ -37,7 +37,7 @@ const MovesPage: NextPage = () => {
       const unsubscribe = firebase.tags(authUser.uid).onSnapshot((snapshot) => {
         const tags: TagDict = {};
         snapshot.forEach((doc) => {
-          tags[doc.id] = doc.data() as Tag;
+          tags[doc.id] = doc.data() as TagId;
         });
 
         batch(() => {
@@ -61,7 +61,7 @@ const MovesPage: NextPage = () => {
           const exercises: ExerciseDict = {};
 
           snapshot.forEach((doc) => {
-            exercises[doc.id] = doc.data() as Exercise;
+            exercises[doc.id] = doc.data() as ExerciseId;
           });
 
           batch(() => {
@@ -86,7 +86,7 @@ const MovesPage: NextPage = () => {
           const workouts: WorkoutDict = {};
 
           snapshot.forEach((doc) => {
-            workouts[doc.id] = doc.data() as Workout;
+            workouts[doc.id] = doc.data() as WorkoutId;
           });
 
           batch(() => {

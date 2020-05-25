@@ -1,7 +1,7 @@
-﻿import { Movement, Tag } from 'types';
+﻿import { MovementId, Tag } from 'types';
 
 // sort by newest modified first
-export function sortMovements(a: Movement, b: Movement): number {
+export function sortMovements(a: MovementId, b: MovementId): number {
   // if (a.lastModified !== null && b.lastModified !== null) {
   //   const aTime = (a.lastModified as firebase.firestore.Timestamp)
   //     .toDate()

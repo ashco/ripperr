@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { useSelector } from 'store';
 
-import { MovementType, Movement, Move } from 'types';
+import { Move } from 'types';
 
 function useLookupMove(id: string | null): Move | null {
   const { workouts, exercises, tags } = useSelector((state) => state.moves);

@@ -10,8 +10,6 @@ import MoveListItemContainer from './style';
 import useLookupMove from 'hooks/useLookupMove';
 import getColor from 'utils/get-color';
 
-import { MovesState, Movement, MovementType } from 'types';
-
 const MoveListItem: React.FC<{
   isDisabled?: boolean;
   id: string;

@@ -13,11 +13,6 @@ interface WorkoutRest {
   outer: number | null;
 }
 
-interface WorkoutConfig {
-  rounds: number | null;
-  rest: WorkoutRest;
-}
-
 interface MoveRefConfig {
   reps: number | null;
   weight: number | null;
@@ -30,8 +25,12 @@ interface MoveRef {
   config: MoveRefConfig[];
 }
 
-export interface Tag {
+export interface Id {
   readonly id: string;
+}
+
+export interface Tag {
+  // readonly id: string;
   // lastModified: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
   // lastModified: number; // changing to this for now
   name: string;
@@ -44,20 +43,25 @@ export interface Exercise extends Tag {
 
 export interface Workout extends Exercise {
   mode: [WorkoutMode1, WorkoutMode2];
-  config: WorkoutConfig;
+  rounds: number | null;
+  rest: WorkoutRest;
   movements: MoveRef[];
 }
 
+export type TagId = Tag & Id;
+export type ExerciseId = Exercise & Id;
+export type WorkoutId = Workout & Id;
+
 export interface TagDict {
-  [key: string]: Tag;
+  [key: string]: TagId;
 }
 
 export interface ExerciseDict {
-  [key: string]: Exercise;
+  [key: string]: ExerciseId;
 }
 
 export interface WorkoutDict {
-  [key: string]: Workout;
+  [key: string]: WorkoutId;
 }
 
 interface Workouts {
@@ -70,12 +74,13 @@ interface Exercises {
   allIds: string[];
 }
 
-interface Tags {
+export interface Tags {
   byId: TagDict;
   allIds: string[];
 }
 
 export type Movement = Workout | Exercise | Tag;
+export type MovementId = WorkoutId | ExerciseId | TagId;
 
 export interface MovesState {
   activeId: string | null;
@@ -85,7 +90,7 @@ export interface MovesState {
 }
 
 export interface Move {
-  data: Movement | null;
+  data: MovementId | null;
   type: MovementType;
 }
 
