@@ -50,7 +50,7 @@ const MovesPage: NextPage = () => {
         return (): void => unsubscribe();
       });
     }
-  }, []);
+  }, [authUser]);
 
   // EXERCISE EFFECT
   React.useEffect(() => {
@@ -75,7 +75,7 @@ const MovesPage: NextPage = () => {
           return (): void => unsubscribe();
         });
     }
-  }, []);
+  }, [authUser]);
 
   // WORKOUT EFFECT
   React.useEffect(() => {
@@ -99,7 +99,7 @@ const MovesPage: NextPage = () => {
           return (): void => unsubscribe();
         });
     }
-  }, []);
+  }, [authUser]);
 
   return (
     <MovementsPageWrapper>

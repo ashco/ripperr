@@ -1,6 +1,7 @@
 ﻿import React from 'react';
-import { useSelector, useDispatch } from 'store';
+import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
+import { clearActiveMove } from 'store/moves';
 import styled from 'styled-components';
 
 const ModalBackground: React.FC = ({ children }) => {
@@ -12,7 +13,10 @@ const ModalBackground: React.FC = ({ children }) => {
   function handleClose(e: any): void {
     if (e.target === bgRef.current) {
       if (modal.modalMode !== 'EDIT') {
-        dispatch(setModalMode({ modalMode: 'CLOSED' }));
+        batch(() => {
+          dispatch(setModalMode({ modalMode: null }));
+          // dispatch(clearActiveMove());
+        });
       }
     }
   }

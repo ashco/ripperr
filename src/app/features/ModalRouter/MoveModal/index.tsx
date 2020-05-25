@@ -4,11 +4,10 @@ import ModalBackground from 'components/ModalBackground';
 import MoveForm from 'features/MoveForm';
 
 import singleCapString from 'utils/single-cap-string';
-import lookupMove, { MoveDataType } from 'utils/lookup-move';
 import getColor from 'utils/get-color';
 import assertNever from 'utils/assert-never';
 
-import { MovementType, MovesState, ModalMode } from 'types';
+import { MovementType, MovesState, ModalMode, Move } from 'types';
 
 import MoveModalContainer from './style';
 
@@ -18,11 +17,12 @@ interface Style {
   width: string;
 }
 
-const MoveModal: React.FC<{
-  addMoveType: MovementType | null;
-  modalMode: ModalMode;
-  moves: MovesState;
-}> = ({ addMoveType, modalMode, moves }) => {
+interface Props {
+  modalMode: 'VIEW' | 'EDIT';
+  move: Move;
+}
+
+const MoveModal: React.FC<Props> = ({ modalMode, move }) => {
   const [style, setStyle] = React.useState<Style>({
     color: '',
     headerText: '',
@@ -42,7 +42,7 @@ const MoveModal: React.FC<{
     }
   }
 
-  function getHeaderText(move: MoveDataType): string {
+  function getHeaderText(move: Move): string {
     if (modalMode === 'VIEW') {
       return move.data?.name || '';
     } else if (modalMode === 'EDIT') {
@@ -56,12 +56,7 @@ const MoveModal: React.FC<{
     }
   }
 
-  const move = lookupMove(moves) || { data: null, type: addMoveType };
-  if (!move || !move.type) throw Error('lookup move by id failed!');
-
   React.useLayoutEffect(() => {
-    if (!move || !move.data || !move.type) throw Error('whoops');
-
     const color = getColor(move.type);
     const width = getWidth(move.type);
     const headerText = getHeaderText(move);
@@ -71,20 +66,16 @@ const MoveModal: React.FC<{
       width,
       headerText,
     });
-  }, [moves.activeId, addMoveType]);
+  }, [move]);
 
-  return move.type ? (
+  return (
     <ModalBackground>
       <MoveModalContainer color={style.color} width={style.width}>
         <h1>{style.headerText}</h1>
-        <MoveForm
-          activeId={moves.activeId}
-          modalMode={modalMode}
-          move={move as MoveDataType | { data: null; type: MovementType }}
-        />
+        <MoveForm modalMode={modalMode} move={move} />
       </MoveModalContainer>
     </ModalBackground>
-  ) : null;
+  );
 };
 
 export default MoveModal;

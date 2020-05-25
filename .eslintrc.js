@@ -37,6 +37,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         // disables rules that are covered by prettier
         'eslint-config-prettier/@typescript-eslint',
+        'plugin:react-hooks/recommended',
       ],
       rules: {
         '@typescript-eslint/interface-name-prefix': 0,
@@ -47,6 +48,8 @@ module.exports = {
             allowExpressions: true,
           },
         ],
+        // 'react-hooks/rules-of-hooks': 'error',
+        // 'react-hooks/exhaustive-deps': 'warn',
       },
     },
     {

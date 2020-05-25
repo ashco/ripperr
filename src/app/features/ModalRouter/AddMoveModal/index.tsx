@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 
-import { useDispatch } from 'store';
+import { useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
+import { clearActiveMove } from 'store/moves';
 
 import Button from 'components/Button';
 import AddMoveModalContainer from './style';
@@ -31,7 +32,10 @@ const AddMoveModal: React.FC<{
   }
 
   function closeModal(): void {
-    dispatch(setModalMode({ modalMode: 'CLOSED' }));
+    batch(() => {
+      dispatch(setModalMode({ modalMode: null }));
+      // dispatch(clearActiveMove());
+    });
     setAddMoveType(null);
   }
 

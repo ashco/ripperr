@@ -11,20 +11,18 @@ import AuthUserContext from 'context/AuthUserContext';
 import FirebaseContext from 'context/FirebaseContext';
 import ButtonRow from 'components/ButtonRow';
 
-import lookupMove from 'utils/lookup-move';
 import assertNever from 'utils/assert-never';
 
-import { MovesState } from 'types';
+import { Move } from 'types';
 
-const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
+const DeleteMoveModal: React.FC<{ move: Move }> = ({ move }) => {
   const dispatch = useDispatch();
 
   const authUser = React.useContext(AuthUserContext);
   const firebase = React.useContext(FirebaseContext);
 
-  const move = lookupMove(moves);
-  if (!move) throw Error('lookup move by id failed!');
   const { data, type } = move;
+  if (!data) throw new Error('No data!');
 
   function handleDelete(): void {
     let firebaseFnc;
@@ -42,21 +40,21 @@ const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
         assertNever(type);
     }
 
-    if (authUser && moves.activeId) {
-      firebaseFnc(authUser.uid, moves.activeId)
+    if (authUser && data) {
+      firebaseFnc(authUser.uid, data.id)
         .delete()
         .then(() => console.log(`${type} Deleted: ${data.name}`))
         .catch((err) => console.error(err));
     } else {
-      throw Error('No authUser && moveState.id!');
+      throw Error('No authUser!');
     }
   }
 
   function onDelete(): void {
     handleDelete();
     batch(() => {
-      dispatch(setModalMode({ modalMode: 'CLOSED' }));
-      dispatch(clearActiveMove());
+      dispatch(setModalMode({ modalMode: null }));
+      // dispatch(clearActiveMove());
     });
   }
 
@@ -64,7 +62,10 @@ const DeleteMoveModal: React.FC<{ moves: MovesState }> = ({ moves }) => {
     cancelBtn: {
       text: 'Cancel',
       onClick: (): void => {
-        dispatch(setModalMode({ modalMode: 'CLOSED' }));
+        batch(() => {
+          dispatch(setModalMode({ modalMode: null }));
+          // dispatch(clearActiveMove());
+        });
       },
     },
     actionBtn: {

@@ -7,7 +7,6 @@ import MoveListItem from '../MoveListItem';
 
 const MoveList: React.FC = () => {
   const { isAddMoveMode } = useSelector((state) => state.ui);
-  const filter = useSelector((state) => state.filter);
   const moves = useSelector((state) => state.moves);
 
   let moveList = null;
@@ -24,12 +23,7 @@ const MoveList: React.FC = () => {
         moveList.length > 0 ? (
           <ul>
             {moveList.map((id) => (
-              <MoveListItem
-                key={id}
-                id={id}
-                isAddMoveMode={isAddMoveMode}
-                moves={moves}
-              />
+              <MoveListItem key={id} id={id} isAddMoveMode={isAddMoveMode} />
             ))}
           </ul>
         ) : (

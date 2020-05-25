@@ -5,13 +5,8 @@ export interface MoveDataType {
   type: MovementType;
 }
 
-function lookupMove(
-  moves: MovesState,
-  id: string | null = moves.activeId,
-): MoveDataType | null {
+function lookupMove(moves: MovesState, id: string): MoveDataType {
   const { workouts, exercises, tags } = moves;
-
-  if (!id) return null;
 
   let data: Movement;
   let type: MovementType;
@@ -26,10 +21,36 @@ function lookupMove(
     data = tags.byId[id];
     type = 'TAG';
   } else {
-    return null;
+    throw new Error('Move not found by provided ID!');
   }
 
   return { data, type };
 }
+// function lookupMove(
+//   moves: MovesState,
+//   id: string | null = moves.activeId,
+// ): MoveDataType | null {
+//   const { workouts, exercises, tags } = moves;
+
+//   if (!id) return null;
+
+//   let data: Movement;
+//   let type: MovementType;
+
+//   if (workouts && Object.keys(workouts.byId).includes(id)) {
+//     data = workouts.byId[id];
+//     type = 'WORKOUT';
+//   } else if (exercises && Object.keys(exercises.byId).includes(id)) {
+//     data = exercises.byId[id];
+//     type = 'EXERCISE';
+//   } else if (tags && Object.keys(tags.byId).includes(id)) {
+//     data = tags.byId[id];
+//     type = 'TAG';
+//   } else {
+//     return null;
+//   }
+
+//   return { data, type };
+// }
 
 export default lookupMove;

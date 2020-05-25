@@ -31,7 +31,6 @@ const TagList: React.FC<{
                   key={id}
                   id={id}
                   isAddMoveMode={isAddMoveMode}
-                  moves={moves}
                 />
               );
             })}

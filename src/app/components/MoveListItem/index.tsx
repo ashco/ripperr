@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { useDispatch, batch } from 'store';
+import { useDispatch, useSelector, batch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
 import { setActiveMove } from 'store/moves';
 import { toggleFilterTag } from 'store/filter';
@@ -7,24 +7,22 @@ import { toggleFilterTag } from 'store/filter';
 import OptionMenuButton from 'components/MoveListItem/OptionMenuButton';
 
 import MoveListItemContainer from './style';
-import lookupMove from 'utils/lookup-move';
+import useLookupMove from 'hooks/useLookupMove';
 import getColor from 'utils/get-color';
 
-import { MovesState } from 'types';
+import { MovesState, Movement, MovementType } from 'types';
 
 const MoveListItem: React.FC<{
   isDisabled?: boolean;
   id: string;
   isAddMoveMode: boolean;
-  moves: MovesState;
-}> = ({ isDisabled, id, isAddMoveMode, moves }) => {
+}> = ({ isDisabled, id, isAddMoveMode }) => {
   const dispatch = useDispatch();
-
-  const move = lookupMove(moves, id);
-  if (!move) throw Error('lookup move by id failed!');
-  const { data, type } = move;
-
   const btnRef = React.useRef<HTMLDivElement>(null);
+
+  const move = useLookupMove(id);
+  if (!move || !move.data) throw Error(`useLookupMove failed! ID: ${id}`);
+  const { data, type } = move;
 
   function showModalView(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {

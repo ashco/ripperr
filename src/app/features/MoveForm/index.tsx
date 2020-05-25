@@ -38,13 +38,13 @@ export type FormData = {
 };
 
 const MoveForm: React.FC<{
-  activeId: string | null;
+  // activeId: string | null;
   modalMode: ModalMode;
   move: {
     data: Movement | null;
     type: MovementType;
   };
-}> = ({ activeId, modalMode, move: { data, type } }) => {
+}> = ({ modalMode, move: { data, type } }) => {
   const dispatch = useDispatch();
 
   const firebase = React.useContext(FirebaseContext);
@@ -167,8 +167,8 @@ const MoveForm: React.FC<{
 
   function updateMovement(formData: FormData): void {
     const firebaseFnc = getFirebaseFnc('UPDATE') as FBUpdateFnc;
-    if (authUser && activeId) {
-      firebaseFnc(authUser.uid, activeId)
+    if (authUser && data) {
+      firebaseFnc(authUser.uid, data.id)
         .update(formData)
         .then(() => {
           console.log(`${singleCapString(type)} Updated: ${formData.name}`);
@@ -187,7 +187,7 @@ const MoveForm: React.FC<{
     if (modalMode === 'VIEW') {
       dispatch(setModalMode({ modalMode: 'EDIT' }));
     } else if (modalMode === 'EDIT') {
-      activeId ? updateMovement(formData) : createMovement(formData);
+      data ? updateMovement(formData) : createMovement(formData);
     } else {
       throw Error('Unsupported modalMode provided.');
     }
@@ -205,16 +205,16 @@ const MoveForm: React.FC<{
   function handleClose(): void {
     if (modalMode === 'VIEW') {
       batch(() => {
-        dispatch(setModalMode({ modalMode: 'CLOSED' }));
-        dispatch(clearActiveMove());
+        dispatch(setModalMode({ modalMode: null }));
+        // dispatch(clearActiveMove());
       });
     } else if (modalMode === 'EDIT') {
-      if (activeId) {
+      if (data) {
         dispatch(setModalMode({ modalMode: 'VIEW' }));
       } else {
         batch(() => {
-          dispatch(setModalMode({ modalMode: 'CLOSED' }));
-          dispatch(clearActiveMove());
+          dispatch(setModalMode({ modalMode: null }));
+          // dispatch(clearActiveMove());
           // resetForm();
         });
       }
@@ -241,7 +241,7 @@ const MoveForm: React.FC<{
       break;
     case 'EDIT':
       btnConfig.cancelBtn.text = 'Cancel';
-      btnConfig.actionBtn.text = activeId ? 'Update' : 'Create';
+      btnConfig.actionBtn.text = data ? 'Update' : 'Create';
       break;
     default:
       break;

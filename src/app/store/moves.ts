@@ -13,7 +13,6 @@ export const initialState: MovesState = {
   workouts: null,
   exercises: null,
   tags: null,
-  error: null,
 };
 
 const movesSlice = createSlice({

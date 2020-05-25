@@ -1,6 +1,6 @@
 ﻿// =============== UNION TYPES ===============
 export type MovementType = 'WORKOUT' | 'EXERCISE' | 'TAG';
-export type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE' | 'CLOSED';
+export type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE';
 export type ThemeModeType = 'LIGHT' | 'DARK';
 
 // =============== MOVES ===============
@@ -82,7 +82,11 @@ export interface MovesState {
   workouts: Workouts | null;
   exercises: Exercises | null;
   tags: Tags | null;
-  error: string | null;
+}
+
+export interface Move {
+  data: Movement | null;
+  type: MovementType;
 }
 
 // =============== FILTER ===============

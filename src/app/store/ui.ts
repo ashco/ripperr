@@ -14,19 +14,19 @@ export type IsPointerDisabled = boolean;
 
 interface SetModalMode {
   // activeMoveType?: ActiveMoveType;
-  modalMode: ModalMode;
+  modalMode: ModalMode | null;
 }
 
 interface UIState {
   theme: DefaultTheme;
-  modalMode: ModalMode;
+  modalMode: ModalMode | null;
   isAddMoveMode: IsAddMoveMode;
   isPointerDisabled: IsPointerDisabled;
 }
 
 const initialState: UIState = {
   theme: darkTheme,
-  modalMode: 'CLOSED',
+  modalMode: null,
   isAddMoveMode: false,
   isPointerDisabled: false,
 };
