@@ -34,6 +34,8 @@ const MoveListItem: React.FC<{
   function addMoveToWorkout(e: any): void {
     if (!btnRef?.current?.contains(e.target)) {
       batch(() => {
+        // add new move to workout here
+        // todo
         dispatch(setModalMode({ modalMode: 'VIEW' }));
         dispatch(setIsAddMoveMode(false));
       });
@@ -49,6 +51,7 @@ const MoveListItem: React.FC<{
   function handleClick(e: any) {
     if (type === 'WORKOUT' || type === 'EXERCISE') {
       if (isAddMoveMode) {
+        console.log('triger');
         addMoveToWorkout(e);
       } else {
         showModalView(e);

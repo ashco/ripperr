@@ -14,10 +14,11 @@ import MoveFormWrapper from './style';
 import TagsField from './TagsField';
 // import Label from './Label';
 import ModeField from './ModeField';
-// import MovementsField from './MovementsField';
 import RestField from './RestField';
 import ButtonRow from 'components/ButtonRow';
 import FieldWrapper from 'components/FieldWrapper';
+import AddMoveButton from './AddMoveButton';
+import MovesField from './MovesField';
 
 import useCurrentWidth from 'hooks/useCurrentWidth';
 import singleCapString from 'utils/single-cap-string';
@@ -294,9 +295,6 @@ const MoveForm: React.FC<{
     }
   }, [register]);
 
-  // console.log(watch());
-  console.log(watch());
-
   return (
     <MoveFormWrapper onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="text-fields">
@@ -330,6 +328,17 @@ const MoveForm: React.FC<{
               isDisabled={isDisabled}
               error={errors.rest}
             />
+            {/* <Label text="Movements:" display="block"> */}
+            {/* {(moveState as Workout).movements.length > 0 && ( */}
+            <MovesField
+              // movements={(moveState as Workout).movements}
+              movements={watch().movements}
+              mode={[watch()['mode[0]'], watch()['mode[1]']]}
+              isDisabled={isDisabled}
+            />
+            {/* )} */}
+            {modalMode === 'EDIT' && <AddMoveButton />}
+            {/* </Label> */}
           </>
         )}
 
@@ -346,25 +355,13 @@ const MoveForm: React.FC<{
       </div>
       {/* {moveState?.type === MovementType.Workout && (
         <>
-          <Label text="Mode:" display={isMobile ? 'block' : 'inline'}>
-            <ModeField
-              value={(moveState as Workout).mode}
-              isDisabled={isDisabled}
-            />
-          </Label>
 
           {(moveState as Workout).mode && (
             <>
-              <Label text="Rest:" display={isMobile ? 'block' : 'inline'}>
-                <RestField
-                  rest={(moveState as Workout).rest}
-                  isDisabled={isDisabled}
-                />
-              </Label>
 
               <Label text="Movements:" display="block">
                 {(moveState as Workout).movements.length > 0 && (
-                  <MovementsField
+                  <MovesField
                     movements={(moveState as Workout).movements}
                     mode={(moveState as Workout).mode}
                     modalMode={modalMode}

@@ -1,6 +1,6 @@
 ﻿import styled from 'styled-components';
 
-export const MovementListItemWrapper = styled.li<{ isDisabled: boolean }>`
+export const MoveListItemWrapper = styled.li<{ isDisabled: boolean }>`
   z-index: 999999;
   list-style: none;
 
@@ -86,7 +86,7 @@ export const MovementListItemWrapper = styled.li<{ isDisabled: boolean }>`
   }
 `;
 
-export const MovementListWrapper = styled.ul`
+export const MoveListWrapper = styled.ul`
   display: grid;
   gap: 0.5rem;
 `;

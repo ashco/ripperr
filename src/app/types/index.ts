@@ -13,16 +13,18 @@ interface WorkoutRest {
   outer: number | null;
 }
 
-interface MoveRefConfig {
+// interface MoveRefConfig {
+//   reps: number | null;
+//   weight: number | null;
+//   interval: number | null;
+// }
+
+export interface MoveRef {
+  type: 'EXERCISE' | 'WORKOUT';
+  id: string;
   reps: number | null;
   weight: number | null;
   interval: number | null;
-}
-
-interface MoveRef {
-  type: 'EXERCISE' | 'WORKOUT';
-  id: string;
-  config: MoveRefConfig[];
 }
 
 export interface Id {

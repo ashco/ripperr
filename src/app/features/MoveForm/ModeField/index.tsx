@@ -12,18 +12,16 @@ const ModeField: React.FC<{
   register: any;
   error?: FieldError;
 }> = ({ isDisabled, error, register, formValue }) => {
-  // const moveDispatch = useMoveDispatch();
-
   return (
     <ModeFieldWrapper
       disabled={isDisabled}
-      modeHidden={formValue['mode[0]'] === ''}
+      // modeHidden={formValue['mode[0]'] === ''}
     >
       <label htmlFor="mode" role={error?.message && 'alert'}>
         {error?.message || 'Mode:'}
       </label>
       <div className="row">
-        <label>
+        <ButtonLabel disabled={isDisabled}>
           <input
             type="radio"
             name="mode[0]"
@@ -32,8 +30,8 @@ const ModeField: React.FC<{
             disabled={isDisabled}
           />
           <span>Reps</span>
-        </label>
-        <label>
+        </ButtonLabel>
+        <ButtonLabel disabled={isDisabled}>
           <input
             type="radio"
             name="mode[0]"
@@ -42,10 +40,10 @@ const ModeField: React.FC<{
             disabled={isDisabled}
           />
           <span>Circuit</span>
-        </label>
+        </ButtonLabel>
       </div>
       <div className="row row-2">
-        <label>
+        <ButtonLabel disabled={isDisabled}>
           <input
             type="radio"
             name="mode[1]"
@@ -54,8 +52,8 @@ const ModeField: React.FC<{
             disabled={isDisabled}
           />
           <span>Sets</span>
-        </label>
-        <label>
+        </ButtonLabel>
+        <ButtonLabel disabled={isDisabled}>
           <input
             type="radio"
             name="mode[1]"
@@ -64,11 +62,31 @@ const ModeField: React.FC<{
             disabled={isDisabled}
           />
           <span>Timed</span>
-        </label>
+        </ButtonLabel>
       </div>
     </ModeFieldWrapper>
   );
 };
+
+export const ButtonLabel = styled.label<{ disabled?: boolean }>`
+  border: 2px solid ${(p) => (p.disabled ? 'gray' : p.theme.mode.color[100])};
+  cursor: ${(p) => (p.disabled ? 'auto' : 'pointer')};
+  display: grid;
+  input {
+    display: none;
+  }
+  span {
+    padding: 0.5rem;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    color: ${(p) => (p.disabled ? 'gray' : p.theme.mode.color[100])};
+  }
+  input:checked + span {
+    background-color: ${(p) => (p.disabled ? 'gray' : p.theme.mode.color[100])};
+    color: ${(p) => p.theme.mode.background[300]};
+  }
+`;
 
 const ModeFieldWrapper = styled(FieldWrapper)<{ modeHidden: boolean }>`
   grid-template-rows: auto 1fr;
@@ -77,26 +95,6 @@ const ModeFieldWrapper = styled(FieldWrapper)<{ modeHidden: boolean }>`
     grid-template-columns: 1fr 1fr;
     gap: 0.25rem;
     height: 2rem;
-    label {
-      border: 2px solid ${(p) =>
-        p.disabled ? 'gray' : p.theme.mode.color[100]};
-      cursor: ${(p) => (p.disabled ? 'auto' : 'pointer')};
-      display: grid;
-    }
-    label input {
-      display: none;
-    }
-    label span {
-      padding: 0.5rem;
-      font-size: 16px;
-      width: 100%;
-      text-align: center;
-    }
-    input:checked + span {
-      background-color: ${(p) =>
-        p.disabled ? 'gray' : p.theme.mode.color[100]};
-      color: ${(p) => p.theme.mode.background[300]};
-    }
   }
   .row-2 {
     /* display: ${(p) => (p.modeHidden ? 'none' : 'auto')}; */

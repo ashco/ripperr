@@ -19,13 +19,13 @@ const AddMoveButton: React.FC = () => {
   }
 
   return (
-    <StyledAddMovementButton onClick={handleClick}>
+    <StyledAddMoveButton onClick={handleClick}>
       Add Movement
-    </StyledAddMovementButton>
+    </StyledAddMoveButton>
   );
 };
 
-const StyledAddMovementButton = styled(Button)`
+const StyledAddMoveButton = styled(Button)`
   width: 12rem;
   justify-self: center;
 `;

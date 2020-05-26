@@ -7,10 +7,9 @@ const RestFieldWrapper = styled(FieldWrapper)`
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
 
-    .checkbox-container {
+    /* .checkbox-container {
       label {
         border: 2px solid ${(props) => props.theme.mode.color[100]};
-        /* height: 100%; */
         cursor: ${(props) => (props.isDisabled ? 'auto' : 'pointer')};
         input {
           display: none;
@@ -26,7 +25,7 @@ const RestFieldWrapper = styled(FieldWrapper)`
           padding: 0.5rem;
         }
       }
-    }
+    } */
     .number-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
