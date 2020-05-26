@@ -4,8 +4,8 @@ export type ModalMode = 'ADD' | 'EDIT' | 'VIEW' | 'DELETE';
 export type ThemeModeType = 'LIGHT' | 'DARK';
 
 // =============== MOVES ===============
-type WorkoutMode1 = 'SETS' | 'CIRCUIT' | null;
-type WorkoutMode2 = 'REPS' | 'TIMED' | null;
+export type WorkoutMode1 = 'SETS' | 'CIRCUIT' | null;
+export type WorkoutMode2 = 'REPS' | 'TIMED' | null;
 
 interface WorkoutRest {
   auto: boolean;

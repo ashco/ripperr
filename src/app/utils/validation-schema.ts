@@ -30,6 +30,8 @@ const description = (): yup.StringSchema<string> => yup.string();
 
 const tags = (): yup.ArraySchema<string> => yup.array().of(id());
 
+// const mode = (): yup.ArraySchema<string> => yup.array().isType();
+
 export const signupSchema = yup.object().shape({
   username: username(),
   email: email(),
@@ -66,4 +68,5 @@ export const workoutSchema = yup.object({
   name: moveName(),
   description: description(),
   tags: tags(),
+  // mode: mode(),
 });

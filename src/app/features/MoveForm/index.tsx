@@ -13,10 +13,11 @@ import MoveFormWrapper from './style';
 
 import TagsField from './TagsField';
 // import Label from './Label';
-// import ModeField from './ModeField';
+import ModeField from './ModeField';
 // import MovementsField from './MovementsField';
-// import RestField from './RestField';
+import RestField from './RestField';
 import ButtonRow from 'components/ButtonRow';
+import FieldWrapper from 'components/FieldWrapper';
 
 import useCurrentWidth from 'hooks/useCurrentWidth';
 import singleCapString from 'utils/single-cap-string';
@@ -40,24 +41,6 @@ import {
   workoutSchema,
 } from 'utils/validation-schema';
 import assertNever from 'utils/assert-never';
-
-// export type FormData = {
-//   name: string;
-//   description: string;
-// };
-
-// interface TagFormData {
-//   name: string;
-//   description: string;
-// }
-
-// interface ExerciseFormData extends TagFormData{
-//   tags: string[];
-// }
-
-// interface WorkoutFormData extends ExerciseFormData{
-//   mode:
-// }
 
 function isExercise(data: Movement): data is Exercise {
   return (data as Exercise).tags !== undefined;
@@ -119,10 +102,6 @@ const MoveForm: React.FC<{
   // const isMobile = useCurrentWidth() < 600;
   const isDisabled = modalMode === 'VIEW';
 
-  // const defaultValues: FormData = {
-  //   name: '',
-  //   description: '',
-  // };
   const defaultValues = generateDefaultValues(type);
 
   if (data) {
@@ -164,26 +143,8 @@ const MoveForm: React.FC<{
     defaultValues,
     validationSchema: getValidationSchema(),
   });
-  // const defaultValues: any = {
-  // name: (moveState as Movement).name,
-  // description: (moveState as Movement).description,
-  // tags: [...(moveState as Exercise | Workout).tags],
-  // };
 
   // TODO - update useCurrentWidth to listen on window resize, no setTimeout usage
-
-  // const {
-  //   control,
-  //   register,
-  //   unregister,
-  //   reset,
-  //   watch,
-  //   errors,
-  //   handleSubmit,
-  //   setValue,
-  // } = useForm<FormData>({
-  //   defaultValues,
-  // });
 
   type FBCreateFnc = (
     uid: string,
@@ -356,6 +317,22 @@ const MoveForm: React.FC<{
           maxRows={4}
           disabled={isDisabled}
         />
+        {isWorkout(defaultValues) && (
+          <>
+            <ModeField
+              register={register()}
+              formValue={watch()}
+              isDisabled={isDisabled}
+              error={errors.mode}
+            />
+            <RestField
+              register={register()}
+              isDisabled={isDisabled}
+              error={errors.rest}
+            />
+          </>
+        )}
+
         {isExercise(defaultValues) && (
           <TagsField
             tags={tags}
@@ -366,54 +343,7 @@ const MoveForm: React.FC<{
             watch={watch}
           />
         )}
-        {/* <Controller
-          as={<Textarea maxRows={4} />}
-          name="description"
-          control={control}
-          // disabled={isDisabled}
-        /> */}
-        {/* <Input
-          name="description"
-          type="text"
-          label="Description:"
-          register={register()}
-          error={errors.description}
-        /> */}
       </div>
-      {/* <Label
-        text="Name:"
-        display={modalMode === 'VIEW' ? 'none' : isMobile ? 'block' : 'inline'}
-      >
-        <input
-          name="name"
-          placeholder="Name"
-          ref={register({
-            required: true,
-          })}
-          disabled={isDisabled}
-          autoFocus
-        />
-      </Label> */}
-      {/* <Label
-        text="Description:"
-        display={
-          isDisabled && !moveState.description.length
-            ? 'none'
-            : isMobile
-            ? 'block'
-            : isDisabled
-            ? 'block'
-            : 'inline'
-        }
-      >
-        <Controller
-          as={<TextareaAutosize maxRows={4} />}
-          name="description"
-          control={control}
-          placeholder="Enter a description..."
-          disabled={isDisabled}
-        />
-      </Label> */}
       {/* {moveState?.type === MovementType.Workout && (
         <>
           <Label text="Mode:" display={isMobile ? 'block' : 'inline'}>
@@ -446,26 +376,6 @@ const MoveForm: React.FC<{
             </>
           )}
         </>
-      )} */}
-
-      {/* {(moveState?.type === MovementType.Exercise ||
-        moveState?.type === MovementType.Workout) && (
-        <Label
-          text="Tags:"
-          display={
-            isDisabled && !(moveState as Exercise | Workout).tags.length
-              ? 'none'
-              : 'block'
-          }
-        >
-          <TagsField
-            tags={watch().tags}
-            setValue={setValue}
-            isDisabled={isDisabled}
-            control={control}
-            watch={watch}
-          />
-        </Label>
       )} */}
       <ButtonRow config={btnConfig} />
     </MoveFormWrapper>
