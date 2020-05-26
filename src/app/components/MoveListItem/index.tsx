@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { useDispatch, useSelector, batch } from 'store';
 import { setModalMode, setIsAddMoveMode } from 'store/ui';
-import { setActiveMove } from 'store/moves';
+import { setActiveMove, setNewMoveListItem } from 'store/moves';
 import { toggleFilterTag } from 'store/filter';
 
 import OptionMenuButton from 'components/MoveListItem/OptionMenuButton';
@@ -35,8 +35,8 @@ const MoveListItem: React.FC<{
     if (!btnRef?.current?.contains(e.target)) {
       batch(() => {
         // add new move to workout here
-        // todo
-        dispatch(setModalMode({ modalMode: 'VIEW' }));
+        dispatch(setNewMoveListItem(data.id));
+        dispatch(setModalMode({ modalMode: 'EDIT' }));
         dispatch(setIsAddMoveMode(false));
       });
     }
@@ -51,7 +51,6 @@ const MoveListItem: React.FC<{
   function handleClick(e: any) {
     if (type === 'WORKOUT' || type === 'EXERCISE') {
       if (isAddMoveMode) {
-        console.log('triger');
         addMoveToWorkout(e);
       } else {
         showModalView(e);

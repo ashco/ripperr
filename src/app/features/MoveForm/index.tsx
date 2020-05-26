@@ -1,7 +1,12 @@
 ﻿import React from 'react';
 import { useSelector, useDispatch, batch } from 'store';
 import { setModalMode } from 'store/ui';
-import { setActiveMove, clearActiveMove, initialState } from 'store/moves';
+import {
+  setActiveMove,
+  clearActiveMove,
+  initialState,
+  clearNewMoveListItem,
+} from 'store/moves';
 import { useForm, Controller, FieldElement } from 'react-hook-form';
 import * as yup from 'yup';
 import Textarea from 'components/Textarea';
@@ -33,6 +38,7 @@ import {
   Exercise,
   Workout,
   Movement,
+  MoveRef,
 } from 'types';
 import Input from 'components/Input';
 
@@ -47,7 +53,7 @@ function isExercise(data: Movement): data is Exercise {
   return (data as Exercise).tags !== undefined;
 }
 function isWorkout(data: Movement): data is Workout {
-  return (data as Workout).mode !== undefined;
+  return (data as Workout).movements !== undefined;
 }
 
 // function generateDefaultValues(type: 'TAG'): Tag;
@@ -72,11 +78,11 @@ function generateDefaultValues(type: MovementType): Movement {
         description: '',
         tags: [],
         mode: [null, null],
-        rounds: null,
+        rounds: 0,
         rest: {
           auto: false,
-          inner: null,
-          outer: null,
+          inner: 0,
+          outer: 0,
         },
         movements: [],
       };
@@ -97,7 +103,9 @@ const MoveForm: React.FC<{
   const firebase = React.useContext(FirebaseContext);
   const authUser = React.useContext(AuthUserContext);
 
-  const { tags } = useSelector((state) => state.moves);
+  const { tags, exercises, newMoveListItem } = useSelector(
+    (state) => state.moves,
+  );
 
   const isMobile = false;
   // const isMobile = useCurrentWidth() < 600;
@@ -114,7 +122,7 @@ const MoveForm: React.FC<{
         defaultValues.mode = data.mode;
         defaultValues.rounds = data.rounds;
         defaultValues.rest = data.rest;
-        defaultValues.movements = data.movements;
+        defaultValues.movements = data.movements || [];
       }
     }
   }
@@ -139,11 +147,32 @@ const MoveForm: React.FC<{
     handleSubmit,
     errors,
     watch,
+    getValues,
     setValue,
   } = useForm<Movement>({
     defaultValues,
     validationSchema: getValidationSchema(),
   });
+
+  const values = getValues();
+  console.log(values);
+
+  React.useEffect(() => {
+    if (newMoveListItem && isWorkout(values)) {
+      const newMove: MoveRef = {
+        id: newMoveListItem,
+        reps: 0,
+        sets: 0,
+        weight: 0,
+        interval: 0,
+      };
+      console.log(values);
+
+      setValue('movements', [...values.movements, newMove]);
+      console.log(values);
+      dispatch(clearNewMoveListItem());
+    }
+  }, [newMoveListItem]);
 
   // TODO - update useCurrentWidth to listen on window resize, no setTimeout usage
 
@@ -186,6 +215,8 @@ const MoveForm: React.FC<{
       if ((window as any).Cypress) {
         (window as any).postData = postData;
       }
+
+      console.log(postData);
 
       docRef
         .set(postData)
@@ -287,11 +318,13 @@ const MoveForm: React.FC<{
   }
 
   React.useEffect(() => {
-    if (type === 'EXERCISE' || type === 'WORKOUT') {
-      /// TS_IGNORE
+    if (type === 'EXERCISE') {
       register({ name: 'tags' });
-      /// TS_IGNORE
-      return () => unregister('tags');
+      return () => unregister(['tags']);
+    } else if (type === 'WORKOUT') {
+      register({ name: 'tags' });
+      register({ name: 'movements' });
+      return () => unregister(['tags', 'movements']);
     }
   }, [register]);
 
@@ -319,7 +352,6 @@ const MoveForm: React.FC<{
           <>
             <ModeField
               register={register()}
-              formValue={watch()}
               isDisabled={isDisabled}
               error={errors.mode}
             />
@@ -328,17 +360,14 @@ const MoveForm: React.FC<{
               isDisabled={isDisabled}
               error={errors.rest}
             />
-            {/* <Label text="Movements:" display="block"> */}
-            {/* {(moveState as Workout).movements.length > 0 && ( */}
             <MovesField
-              // movements={(moveState as Workout).movements}
-              movements={watch().movements}
-              mode={[watch()['mode[0]'], watch()['mode[1]']]}
+              register={register()}
+              moves={(values as Workout).movements}
+              mode={[(values as any)['mode[0]'], (values as any)['mode[1]']]}
               isDisabled={isDisabled}
+              exercises={exercises}
             />
-            {/* )} */}
             {modalMode === 'EDIT' && <AddMoveButton />}
-            {/* </Label> */}
           </>
         )}
 

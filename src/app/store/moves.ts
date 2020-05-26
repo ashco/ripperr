@@ -10,6 +10,7 @@ interface SetMoves {
 
 export const initialState: MovesState = {
   activeId: null,
+  newMoveListItem: null,
   workouts: null,
   exercises: null,
   tags: null,
@@ -33,10 +34,22 @@ const movesSlice = createSlice({
     clearActiveMove(state) {
       state.activeId = null;
     },
+    setNewMoveListItem(state, action: PayloadAction<string>) {
+      state.newMoveListItem = action.payload;
+    },
+    clearNewMoveListItem(state) {
+      state.newMoveListItem = null;
+    },
   },
 });
 
-export const { setMoves, setActiveMove, clearActiveMove } = movesSlice.actions;
+export const {
+  setMoves,
+  setActiveMove,
+  clearActiveMove,
+  setNewMoveListItem,
+  clearNewMoveListItem,
+} = movesSlice.actions;
 
 export default movesSlice.reducer;
 

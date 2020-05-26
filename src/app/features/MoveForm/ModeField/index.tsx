@@ -7,16 +7,12 @@ import FieldWrapper from 'components/FieldWrapper';
 import { WorkoutMode1, WorkoutMode2 } from 'types';
 
 const ModeField: React.FC<{
-  formValue: any;
   isDisabled: boolean;
   register: any;
   error?: FieldError;
-}> = ({ isDisabled, error, register, formValue }) => {
+}> = ({ isDisabled, error, register }) => {
   return (
-    <ModeFieldWrapper
-      disabled={isDisabled}
-      // modeHidden={formValue['mode[0]'] === ''}
-    >
+    <ModeFieldWrapper disabled={isDisabled}>
       <label htmlFor="mode" role={error?.message && 'alert'}>
         {error?.message || 'Mode:'}
       </label>
@@ -26,10 +22,10 @@ const ModeField: React.FC<{
             type="radio"
             name="mode[0]"
             ref={register}
-            value="REPS"
+            value="SETS"
             disabled={isDisabled}
           />
-          <span>Reps</span>
+          <span>Sets</span>
         </ButtonLabel>
         <ButtonLabel disabled={isDisabled}>
           <input
@@ -48,10 +44,10 @@ const ModeField: React.FC<{
             type="radio"
             name="mode[1]"
             ref={register}
-            value="SETS"
+            value="REPS"
             disabled={isDisabled}
           />
-          <span>Sets</span>
+          <span>Reps</span>
         </ButtonLabel>
         <ButtonLabel disabled={isDisabled}>
           <input
@@ -88,7 +84,7 @@ export const ButtonLabel = styled.label<{ disabled?: boolean }>`
   }
 `;
 
-const ModeFieldWrapper = styled(FieldWrapper)<{ modeHidden: boolean }>`
+const ModeFieldWrapper = styled(FieldWrapper)`
   grid-template-rows: auto 1fr;
   .row {
     display: grid;

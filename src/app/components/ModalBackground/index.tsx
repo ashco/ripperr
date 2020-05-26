@@ -4,7 +4,10 @@ import { setModalMode } from 'store/ui';
 import { clearActiveMove } from 'store/moves';
 import styled from 'styled-components';
 
-const ModalBackground: React.FC = ({ children }) => {
+const ModalBackground: React.FC<{ isHidden?: boolean }> = ({
+  isHidden,
+  children,
+}) => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.ui);
 
@@ -27,10 +30,14 @@ const ModalBackground: React.FC = ({ children }) => {
     return (): void => document.removeEventListener('click', handleClose);
   });
 
-  return <StyledModalBackground ref={bgRef}>{children}</StyledModalBackground>;
+  return (
+    <StyledModalBackground isHidden={isHidden} ref={bgRef}>
+      {children}
+    </StyledModalBackground>
+  );
 };
 
-const StyledModalBackground = styled.div`
+const StyledModalBackground = styled.div<{ isHidden?: boolean }>`
   z-index: 100;
   background-color: ${(props) => props.theme.mode.backgroundOpacity[100]};
   position: fixed;
@@ -38,7 +45,7 @@ const StyledModalBackground = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  display: grid;
+  display: ${(p) => (p.isHidden ? 'none' : 'grid')};
   align-content: center;
   justify-content: center;
 `;

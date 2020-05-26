@@ -1,105 +1,20 @@
-﻿import React, { useContext } from 'react';
-import { useDispatch, batch } from 'store';
+﻿import React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import withAuthorization from 'context/withAuthorization';
-import AuthUserContext from 'context/AuthUserContext';
-import FirebaseContext from 'context/FirebaseContext';
-
-import { setMoves } from 'store/moves';
 
 import Filter from 'features/Filter';
 
 import MoveList from 'components/MoveList';
+import useLoadFirebaseMoves from 'hooks/useLoadFirebaseMoves';
 
-import {
-  AuthUser,
-  TagDict,
-  TagId,
-  ExerciseDict,
-  ExerciseId,
-  WorkoutDict,
-  WorkoutId,
-} from 'types';
+import { AuthUser } from 'types';
 
 import ModalRouter from 'features/ModalRouter';
 
 const MovesPage: NextPage = () => {
-  const dispatch = useDispatch();
-
-  const firebase = useContext(FirebaseContext);
-  const authUser = useContext(AuthUserContext);
-
-  // TAG EFFECT
-  React.useEffect(() => {
-    if (authUser) {
-      const unsubscribe = firebase.tags(authUser.uid).onSnapshot((snapshot) => {
-        const tags: TagDict = {};
-        snapshot.forEach((doc) => {
-          tags[doc.id] = doc.data() as TagId;
-        });
-
-        batch(() => {
-          dispatch(
-            setMoves({
-              tags,
-            }),
-          );
-        });
-        return (): void => unsubscribe();
-      });
-    }
-  }, [authUser]);
-
-  // EXERCISE EFFECT
-  React.useEffect(() => {
-    if (authUser) {
-      const unsubscribe = firebase
-        .exercises(authUser.uid)
-        .onSnapshot((snapshot) => {
-          const exercises: ExerciseDict = {};
-
-          snapshot.forEach((doc) => {
-            exercises[doc.id] = doc.data() as ExerciseId;
-          });
-
-          batch(() => {
-            dispatch(
-              setMoves({
-                exercises,
-              }),
-            );
-          });
-
-          return (): void => unsubscribe();
-        });
-    }
-  }, [authUser]);
-
-  // WORKOUT EFFECT
-  React.useEffect(() => {
-    if (authUser) {
-      const unsubscribe = firebase
-        .workouts(authUser.uid)
-        .onSnapshot((snapshot) => {
-          const workouts: WorkoutDict = {};
-
-          snapshot.forEach((doc) => {
-            workouts[doc.id] = doc.data() as WorkoutId;
-          });
-
-          batch(() => {
-            dispatch(
-              setMoves({
-                workouts,
-              }),
-            );
-          });
-          return (): void => unsubscribe();
-        });
-    }
-  }, [authUser]);
+  useLoadFirebaseMoves();
 
   return (
     <MovementsPageWrapper>

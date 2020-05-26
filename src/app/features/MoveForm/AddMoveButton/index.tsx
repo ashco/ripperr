@@ -13,7 +13,7 @@ const AddMoveButton: React.FC = () => {
     e.preventDefault();
 
     batch(() => {
-      dispatch(setModalMode({ modalMode: null }));
+      // dispatch(setModalMode({ modalMode: null }));
       dispatch(setIsAddMoveMode(true));
     });
   }

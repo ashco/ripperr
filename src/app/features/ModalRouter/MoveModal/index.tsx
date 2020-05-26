@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 
+import { useSelector } from 'store';
 import ModalBackground from 'components/ModalBackground';
 import MoveForm from 'features/MoveForm';
 
@@ -23,6 +24,8 @@ interface Props {
 }
 
 const MoveModal: React.FC<Props> = ({ modalMode, move }) => {
+  const { isAddMoveMode } = useSelector((state) => state.ui);
+
   const [style, setStyle] = React.useState<Style>({
     color: '',
     headerText: '',
@@ -69,7 +72,7 @@ const MoveModal: React.FC<Props> = ({ modalMode, move }) => {
   }, [move]);
 
   return (
-    <ModalBackground>
+    <ModalBackground isHidden={isAddMoveMode}>
       <MoveModalContainer color={style.color} width={style.width}>
         <h1>{style.headerText}</h1>
         <MoveForm modalMode={modalMode} move={move} />

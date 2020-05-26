@@ -15,7 +15,7 @@ import useLookupMove from 'hooks/useLookupMove';
 import { MovementType } from 'types';
 
 const ModalRouter = () => {
-  const { modalMode } = useSelector((state) => state.ui);
+  const { modalMode, isAddMoveMode } = useSelector((state) => state.ui);
   const { activeId } = useSelector((state) => state.moves);
 
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const ModalRouter = () => {
   );
 
   React.useEffect(() => {
-    if (modalMode === null) {
+    if (modalMode === null && !isAddMoveMode) {
       setAddMoveType(null);
       dispatch(clearActiveMove());
     }
@@ -50,58 +50,6 @@ const ModalRouter = () => {
       );
     }
   }
-
-  // switch (modalMode) {
-  //   case 'ADD':
-  //     content = <AddMoveModal setAddMoveType={setAddMoveType} />;
-  //     break;
-  //   case 'DELETE':
-  //     content = move ? <DeleteMoveModal move={move} /> : null;
-  //     break;
-  //   case 'VIEW':
-  //     content = move ? <MoveModal modalMode="VIEW" move={move} /> : null;
-  //     break;
-  //   case 'EDIT':
-  //     {
-  //       if (addMoveType) {
-  //         // new
-  //         content = (
-  //           <MoveModal
-  //             modalMode="EDIT"
-  //             move={{ data: null, type: addMoveType }}
-  //           />
-  //         );
-  //       } else {
-  //         // edit
-  //         content = <MoveModal modalMode="EDIT" move={move} />;
-  //       }
-  //     }
-
-  //     break;
-  //   case null:
-  //     content = null;
-  //     break;
-  //   default:
-  //     assertNever(modalMode);
-  // }
-  // switch (modalMode) {
-  //   case 'ADD':
-  //     content = <AddMoveModal setAddMoveType={setAddMoveType} />;
-  //     break;
-  //   case 'DELETE':
-  //     content = moves.activeId ? <DeleteMoveModal id={moves.activeId} /> : null;
-  //     break;
-  //   case 'EDIT':
-  //   case 'VIEW':
-  //     content = (
-  //       <MoveModal
-  //         addMoveType={addMoveType}
-  //         modalMode={modalMode}
-  //         moves={moves}
-  //       />
-  //     );
-  //     break;
-  // }
 
   return <Modal isOpen={modalMode !== null}>{content}</Modal>;
 };

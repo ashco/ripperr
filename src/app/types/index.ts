@@ -9,8 +9,8 @@ export type WorkoutMode2 = 'REPS' | 'TIMED' | null;
 
 interface WorkoutRest {
   auto: boolean;
-  inner: number | null;
-  outer: number | null;
+  inner: number;
+  outer: number;
 }
 
 // interface MoveRefConfig {
@@ -20,11 +20,12 @@ interface WorkoutRest {
 // }
 
 export interface MoveRef {
-  type: 'EXERCISE' | 'WORKOUT';
-  id: string;
-  reps: number | null;
-  weight: number | null;
-  interval: number | null;
+  // type: 'EXERCISE' | 'WORKOUT';
+  readonly id: string;
+  reps: number;
+  sets: number;
+  weight: number;
+  interval: number;
 }
 
 export interface Id {
@@ -45,7 +46,7 @@ export interface Exercise extends Tag {
 
 export interface Workout extends Exercise {
   mode: [WorkoutMode1, WorkoutMode2];
-  rounds: number | null;
+  rounds: number;
   rest: WorkoutRest;
   movements: MoveRef[];
 }
@@ -71,7 +72,7 @@ interface Workouts {
   allIds: string[];
 }
 
-interface Exercises {
+export interface Exercises {
   byId: ExerciseDict;
   allIds: string[];
 }
@@ -86,6 +87,7 @@ export type MovementId = WorkoutId | ExerciseId | TagId;
 
 export interface MovesState {
   activeId: string | null;
+  newMoveListItem: string | null;
   workouts: Workouts | null;
   exercises: Exercises | null;
   tags: Tags | null;

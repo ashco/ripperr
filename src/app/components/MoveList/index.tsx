@@ -11,10 +11,12 @@ const MoveList: React.FC = () => {
 
   let moveList = null;
   if (moves.workouts && moves.exercises) {
-    moveList = [
-      ...Object.keys(moves.workouts.byId),
-      ...Object.keys(moves.exercises.byId),
-    ];
+    moveList = isAddMoveMode
+      ? [...Object.keys(moves.exercises.byId)]
+      : [
+          ...Object.keys(moves.workouts.byId),
+          ...Object.keys(moves.exercises.byId),
+        ];
   }
 
   return (
