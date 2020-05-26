@@ -20,6 +20,17 @@ import arrayMove from 'utils/array-move';
 import { MoveRef, WorkoutMode1, WorkoutMode2, Exercises } from 'types';
 // import { IMoveRefs } from 'types/types';
 
+const DragHandleWrapper = styled.div`
+  svg path {
+    fill: ${(p) => p.theme.mode.color[200]};
+  }
+  &:hover {
+    svg path {
+      fill: ${(p) => p.theme.mode.color[100]};
+    }
+  }
+`;
+
 const MoveItem = SortableElement(
   ({
     move,
@@ -52,9 +63,9 @@ const MoveItem = SortableElement(
     }
 
     const DragHandle = SortableHandle(() => (
-      <div className="drag-icon">
+      <DragHandleWrapper className="drag-icon">
         {!isDisabled && <Icon name="grip-lines" />}
-      </div>
+      </DragHandleWrapper>
     ));
 
     return (

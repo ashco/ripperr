@@ -85,7 +85,7 @@ export const ButtonLabel = styled.label<{ disabled?: boolean }>`
 `;
 
 const ModeFieldWrapper = styled(FieldWrapper)`
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr 1fr;
   .row {
     display: grid;
     grid-template-columns: 1fr 1fr;

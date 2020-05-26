@@ -2,10 +2,11 @@
 import FieldWrapper from 'components/FieldWrapper';
 
 const RestFieldWrapper = styled(FieldWrapper)`
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+  grid-template-rows: auto 1fr 1fr;
+  /* .row { */
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem; */
 
     /* .checkbox-container {
       label {

@@ -350,16 +350,18 @@ const MoveForm: React.FC<{
         />
         {isWorkout(defaultValues) && (
           <>
-            <ModeField
-              register={register()}
-              isDisabled={isDisabled}
-              error={errors.mode}
-            />
-            <RestField
-              register={register()}
-              isDisabled={isDisabled}
-              error={errors.rest}
-            />
+            <div className="row">
+              <ModeField
+                register={register()}
+                isDisabled={isDisabled}
+                error={errors.mode}
+              />
+              <RestField
+                register={register()}
+                isDisabled={isDisabled}
+                error={errors.rest}
+              />
+            </div>
             <MovesField
               register={register()}
               moves={(values as Workout).movements}
@@ -382,27 +384,6 @@ const MoveForm: React.FC<{
           />
         )}
       </div>
-      {/* {moveState?.type === MovementType.Workout && (
-        <>
-
-          {(moveState as Workout).mode && (
-            <>
-
-              <Label text="Movements:" display="block">
-                {(moveState as Workout).movements.length > 0 && (
-                  <MovesField
-                    movements={(moveState as Workout).movements}
-                    mode={(moveState as Workout).mode}
-                    modalMode={modalMode}
-                    isDisabled={isDisabled}
-                  />
-                )}
-                {modalMode === 'EDIT' && <AddMoveButton />}
-              </Label>
-            </>
-          )}
-        </>
-      )} */}
       <ButtonRow config={btnConfig} />
     </MoveFormWrapper>
   );

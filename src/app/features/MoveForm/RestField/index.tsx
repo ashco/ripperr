@@ -15,41 +15,41 @@ const RestField: React.FC<{
       <label htmlFor="rest" role={error?.message && 'alert'}>
         {error?.message || 'Rest:'}
       </label>
-      <div className="row">
-        <div className="checkbox-container">
-          <ButtonLabel disabled={isDisabled}>
-            <input
-              type="checkbox"
-              name="rest.auto"
-              ref={register}
-              disabled={isDisabled}
-            />
-            <span>Automatic</span>
-          </ButtonLabel>
-        </div>
-        <div className="number-container">
-          <label>
-            <input
-              type="number"
-              name="rest.inner"
-              min="0"
-              ref={register}
-              disabled={isDisabled}
-            />
-            Inner
-          </label>
-          <label>
-            <input
-              type="number"
-              name="rest.outer"
-              min="0"
-              ref={register}
-              disabled={isDisabled}
-            />
-            Outer
-          </label>
-        </div>
+      {/* <div className="row"> */}
+      <ButtonLabel disabled={isDisabled}>
+        <input
+          type="checkbox"
+          name="rest.auto"
+          ref={register}
+          disabled={isDisabled}
+        />
+        <span>Automatic</span>
+      </ButtonLabel>
+      {/* </div> */}
+      {/* <div className="row"> */}
+      <div className="row number-container">
+        <label>
+          <input
+            type="number"
+            name="rest.inner"
+            min="0"
+            ref={register}
+            disabled={isDisabled}
+          />
+          Inner
+        </label>
+        <label>
+          <input
+            type="number"
+            name="rest.outer"
+            min="0"
+            ref={register}
+            disabled={isDisabled}
+          />
+          Outer
+        </label>
       </div>
+      {/* </div> */}
     </RestFieldWrapper>
   );
 };
